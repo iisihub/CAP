@@ -1,0 +1,8 @@
+cap-web/work
+bin*
+target*
+.project
+.settings
+.classpath
+.tomcatplugin
+.tmp*
