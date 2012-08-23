@@ -1,0 +1,322 @@
+/** override jqeury ui css end **/
+body {
+  font-size: 12px;
+  background-attachment: scroll;
+  background-color: #D1EFDF;
+  background-image: url("../images/system/body_bg002.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  font-family: "SimSun";
+  margin: 0 auto;
+  padding-bottom: 0;
+  padding-top: 0;
+  text-align: left;
+}
+
+.mainBody {
+  margin: auto;
+  width: 950px;
+  background-color: #FFF;
+  background-image: url("../images/system/body_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+input {
+  height: 20px;
+  border: #CCCCCC 1px solid;
+}
+input[disabled] {
+  background-color: #FFF;
+  border: 0px;
+  color: #000;
+}
+
+select, textarea {
+  border: #CCCCCC 1px solid;
+}
+
+input.date {
+  width: 85px;
+}
+
+.clear {
+  clear: both;
+}
+
+nav.top {
+  border: 0px;
+  position: relative;
+}
+
+.ui-datepicker {
+  font-size: 14px;
+}
+
+/** override jqeury ui css start **/
+.tabs .ui-tabs-nav li a {
+  font-size: 14px;
+  padding: .3em 1em;
+}
+
+button.ui-widget {
+  font-size: 12px;
+}
+
+.r-grid {
+  margin-top: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+/* row data css*/
+table.row-data {
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid #AAAAAA;
+  margin: 5px 0px 5px;
+  padding: 3px;
+}
+table.row-data tr th {
+  border: #AAA 1px solid;
+  padding: 5px 10px 5px 0px;
+  text-align: right;
+  width: 30%;
+  background-color: #fafafa;
+}
+table.row-data.column-4 th {
+  width: 20%;
+}
+table.row-data tr {
+  border: #AAA 1px solid;
+  padding: 5px 10px 5px 0px;
+  text-align: right;
+}
+table.row-data tr td {
+  border: #AAA 1px solid;
+  padding: 3px 10px;
+  text-align: left;
+}
+
+fieldset.row .row-tr .row-td.c2 {
+  display: inline-block;
+  text-align: left;
+}
+
+.numeric {
+  text-align: right;
+  padding-right: 2px;
+}
+
+/** menu **/
+nav.top {
+  position: relative;
+  font-size: 14px;
+  font-weight: bold;
+}
+nav ul {
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}
+nav.top ul {
+  margin: auto;
+  list-style-type: none;
+}
+nav.top ul.block {
+  height: 35px;
+  width: 278px;
+}
+nav.top ul.navmenu {
+  position: absolute;
+  right: 0px;
+}
+nav.top ul.navmenu li {
+  background-image: url("../images/system/first_menu_up_bg.png");
+  float: left;
+  position: relative;
+  border-right: #CCC 1px solid;
+  line-height: 35px;
+  min-width: 95px;
+}
+nav.top ul.navmenu li a {
+  padding: 0px;
+  margin: 0px;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: #777;
+  /*最外面字体颜色*/
+}
+nav.top ul.navmenu li a:hover {
+  color: #005CA1;
+}
+nav.top ul.navmenu li a.select {
+  font-size: 1.1em;
+  color: #005CA1;
+  /*上面字体背景颜色*/
+}
+nav.top ul.navmenu li ul {
+  display: none;
+}
+nav.top ul.navmenu li:hover ul {
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 0;
+}
+nav.top ul.navmenu li:hover ul li a {
+  display: block;
+  color: #ffffff;
+  width: 90px;
+  text-align: center;
+  border-bottom: 1px solid #f2f2f2;
+  /*底线的白色*/
+}
+
+/*图片相接位置的白色*/
+.top {
+  border-top: 1px solid #f2f2f2;
+}
+
+/*menu button设置*/
+.menu .button {
+  width: 176px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  background-image: url(../pic/buttonBackground.jpg);
+  border: 0px;
+}
+.menu .button.select, .menu .button:hover {
+  color: #0000C7;
+  font-weight: bold;
+}
+
+.menu .button.select, .menu .button a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.menu .button.select, .menu .button a:hover, .menu .button.select, .menu .button:hover a{
+  color: #0000C7;
+  font-weight: bold;
+}
+
+.menu .button.select, .menu .button a:hover, .menu .button.select, .menu .button.select a{
+  color: #0000C7;
+  font-weight: bold;
+}
+
+/*左下DIV设置*/
+.leftDiv {
+  width: 180px;
+  height: 450px;
+  float: left;
+  left: 0px;
+}
+
+/*右边的DIV*/
+.rightDiv {
+  width: 740px;
+  float: left;
+  padding-left: 10px;
+}
+
+/*最下面的DIV*/
+.main {
+  background: #ffffff;
+  padding: 12px 0 0 10px;
+  min-height: 400px;
+}
+
+.headerarea {
+  width: 100%;
+  height: 50px;
+}
+
+.menuspan {
+  display: inline-block;
+  text-align: left;
+  width: 20%;
+}
+
+.border-change {
+  border: 0px;
+}
+
+/** override jqGrid **/
+.r-grid .ui-jqgrid-title {
+  line-height: 25px;
+}
+.r-grid .ui-jqgrid {
+  font-size: 12px;
+}
+.r-grid .ui-jqgrid-view tr {
+  height: 25px;
+}
+.r-grid .ui-th-div-ie {
+  line-height: 20px;
+}
+.r-grid .ui-state-default, .r-grid .ui-widget-content .ui-state-default, .r-grid .ui-widget-header .ui-state-default {
+  background: url("../images/system/centercontent_tr001.jpg");
+  background-repeat: repeat-x;
+}
+.r-grid .ui-jqgrid tr.ui-row-ltr td, .r-grid .ui-jqgrid tr.jqgrow td {
+  border-color: #CCC;
+}
+.r-grid .ui-jqgrid tr.ui-row-ltr.ui-state-hover td, .r-grid .ui-jqgrid tr.jqgrow.ui-state-hover td {
+  font-weight: bolder;
+}
+
+.ui-state-hover td {
+  font-weight: bolder;
+}
+
+/** button **/
+.btn1, .ui-dialog-buttonset .ui-button {
+  background: url("../images/system/button001.jpg") scroll center center no-repeat !important;
+}
+
+.btn1.ui-button-text-only .ui-button-text, .ui-dialog-buttonset button.ui-button-text-only .ui-button-text {
+  padding: 0px;
+  font-size: 12px;
+}
+
+.btn1.ui-button, .ui-dialog-buttonset button.ui-button {
+  width: 65px;
+  height: 24px;
+  line-height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  color: #005BA1;
+  cursor: pointer;
+  border: #AAA 1px solid;
+}
+
+.btn1:hover, .ui-dialog-buttonset button:hover {
+  color: #333333;
+}
+
+/** dialog **/
+.ui-dialog {
+  padding: 0px;
+  background: #fafafa;
+}
+.ui-dialog .ui-dialog-buttonpane {
+  border: 0px;
+  background: #fafafa;
+}
+
+.defDialogCss .ui-dialog-titlebar {
+  background: #005BA1;
+  border: 1px solid #005BA1;
+}
+
+.errorDialogCss .ui-dialog-titlebar {
+  background: #CC0000;
+  border: 1px solid #E3A1A1;
+}

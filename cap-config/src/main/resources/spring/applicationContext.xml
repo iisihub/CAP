@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+	<context:annotation-config />
+	<util:list id="propList">
+		<value>classpath:/spring/hibernate-config.properties</value>
+		<value>classpath:/config.properties</value>
+	</util:list>
+	<bean id="placeholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="locations" ref="propList" />
+	</bean>
+
+	<!-- application -->
+	<bean class="com.iisi.cap.utils.AppContext" />
+	<!-- Security context -->
+	<bean id="capSecurityContext" class="com.bqd.mci.security.CapSecurityContext"
+		scope="session" />
+	<!-- Syste config -->
+	<bean id="systemConfig" class="com.iisi.cap.utils.CapSystemConfigUtil">
+		<property name="props" ref="propList"  />
+	</bean>
+	<!-- messageSource -->
+    <bean id="messageSource"
+		class="com.bqd.mci.mvc.MCIReloadableResourceBundleMessageSource" >
+	</bean>
+
+	<import resource="classpath:spring/springDatasource.xml" />
+	<!-- hg service -->
+	<import resource="classpath:spring/springHGService.xml" />
+	<import resource="classpath:spring/userDefineSQL.xml" />
+
+	<!-- @Dao -->
+	<context:component-scan base-package="com.**.dao.impl" />
+	<!-- @Controller -->
+	<context:component-scan base-package="com.iisi.cap.plugin" />
+	<context:component-scan base-package="com.iisi.cap.handler" />
+	<context:component-scan base-package="com.**.handler.**" />
+	<context:component-scan base-package="com.**.gridhandler.**" />
+	<!-- @Service -->
+	<context:component-scan base-package="com.**.service.impl" />
+	<!-- @API -->
+	<context:component-scan base-package="com.**.api.impl" />
+	<!-- @ESB ACTION -->
+	<context:component-scan base-package="com.bqd.mci.**.step.action" />
+	<!-- @Page Report -->
+	<context:component-scan base-package="com.**.page.report" />
+	<!-- BTT Config Loader -->
+	<bean id="BTTConfigLoader" class="com.bqd.mci.btt.BTTConfigLoader" />
+
+</beans>

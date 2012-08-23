@@ -1,0 +1,454 @@
+<FindBugsFilter>
+	<!-- 規則請參考http://findbugs.sourceforge.net/manual/filter.html -->
+	<!--********Category  Bad practice********-->
+	<!-- Bug code  BC -->
+	<Match>
+		<Bug
+			pattern="BC_EQUALS_METHOD_SHOULD_WORK_FOR_ALL_OBJECTS,DMI_RANDOM_USED_ONLY_ONCE" />
+	</Match>
+
+	<!-- Bug code  BIT -->
+	<Match>
+		<Bug pattern="BIT_SIGNED_CHECK" />
+	</Match>
+
+	<!-- Bug code  CN -->
+	<Match>
+		<Bug pattern="CN_IDIOM,CN_IDIOM_NO_SUPER_CALL,CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE" />
+	</Match>
+
+	<!-- Bug code  Co -->
+	<Match>
+		<Bug pattern="CO_ABSTRACT_SELF,CO_SELF_NO_OBJECT" />
+	</Match>
+
+	<!-- Bug code  DE -->
+	<Match>
+		<Bug pattern="DE_MIGHT_DROP,DE_MIGHT_IGNORE" />
+	</Match>
+
+	<!-- Bug code  Dm -->
+	<Match>
+		<Bug pattern="DM_EXIT,DM_RUN_FINALIZERS_ON_EXIT" />
+	</Match>
+
+	<!-- Bug code  DMI -->
+	<Match>
+		<Bug pattern="DMI_USING_REMOVEALL_TO_CLEAR_COLLECTION" />
+	</Match>
+
+	<!-- Bug code  DP -->
+	<Match>
+		<Bug pattern="DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED,DP_DO_INSIDE_DO_PRIVILEGED" />
+	</Match>
+
+	<!-- Bug code  Eq -->
+	<Match>
+		<Bug pattern="EQ_ABSTRACT_SELF,EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS,EQ_COMPARETO_USE_OBJECT_EQUALS,EQ_GETCLASS_AND_CLASS_CONSTANT,EQ_SELF_NO_OBJECT" />
+	</Match>
+
+	<!-- Bug code  ES -->
+	<Match>
+		<Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ,ES_COMPARING_STRINGS_WITH_EQ" />
+	</Match>
+
+	<!-- Bug code  FI -->
+	<Match>
+		<Bug pattern="FI_EMPTY,FI_EXPLICIT_INVOCATION,FI_FINALIZER_NULLS_FIELDS,FI_FINALIZER_ONLY_NULLS_FIELDS,FI_MISSING_SUPER_CALL,FI_NULLIFY_SUPER,FI_USELESS" />
+	</Match>
+
+	<!-- Bug code  GC -->
+	<Match>
+		<Bug pattern="GC_UNCHECKED_TYPE_IN_GENERIC_CALL,HE_EQUALS_NO_HASHCODE,HE_EQUALS_USE_HASHCODE,HE_HASHCODE_NO_EQUALS,HE_HASHCODE_USE_OBJECT_EQUALS,HE_INHERITS_EQUALS_USE_HASHCODE" />
+	</Match>
+
+	<!-- Bug code  IC -->
+	<Match>
+		<Bug pattern="IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION" />
+	</Match>
+
+	<!-- Bug code  IMSE -->
+	<Match>
+		<Bug pattern="IMSE_DONT_CATCH_IMSE" />
+	</Match>
+
+	<!-- Bug code  ISC -->
+	<Match>
+		<Bug pattern="ISC_INSTANTIATE_STATIC_CLASS" />
+	</Match>
+
+	<!-- Bug code  It -->
+	<Match>
+		<Bug pattern="IT_NO_SUCH_ELEMENT" />
+	</Match>
+
+	<!-- Bug code  J2EE -->
+	<Match>
+		<Bug pattern="J2EE_STORE_OF_NON_SERIALIZABLE_OBJECT_INTO_SESSION" />
+	</Match>
+
+	<!-- Bug code  JCIP -->
+	<Match>
+		<Bug pattern="JCIP_FIELD_ISNT_FINAL_IN_IMMUTABLE_CLASS" />
+	</Match>
+
+	<!-- Bug code  Nm -->
+	<Match>
+		<Bug pattern="NM_CLASS_NAMING_CONVENTION,NM_CLASS_NOT_EXCEPTION,NM_CONFUSING,NM_FIELD_NAMING_CONVENTION,NM_FUTURE_KEYWORD_USED_AS_IDENTIFIER,NM_FUTURE_KEYWORD_USED_AS_MEMBER_IDENTIFIER,NM_METHOD_NAMING_CONVENTION,NM_SAME_SIMPLE_NAME_AS_INTERFACE,NM_SAME_SIMPLE_NAME_AS_SUPERCLASS,NM_VERY_CONFUSING_INTENTIONAL,NM_WRONG_PACKAGE_INTENTIONAL" />
+	</Match>
+
+	<!-- Bug code  NP -->
+	<Match>
+		<Bug pattern="NP_BOOLEAN_RETURN_NULL,NP_CLONE_COULD_RETURN_NULL,NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT,NP_TOSTRING_COULD_RETURN_NULL" />
+	</Match>
+
+	<!-- Bug code  ODR -->
+	<Match>
+		<Bug pattern="ODR_OPEN_DATABASE_RESOURCE,ODR_OPEN_DATABASE_RESOURCE_EXCEPTION_PATH" />
+	</Match>
+
+	<!-- Bug code  OS -->
+	<Match>
+		<Bug pattern="OS_OPEN_STREAM,OS_OPEN_STREAM_EXCEPTION_PATH" />
+	</Match>
+
+	<!-- Bug code  RC -->
+	<Match>
+		<Bug pattern="RC_REF_COMPARISON_BAD_PRACTICE,RC_REF_COMPARISON_BAD_PRACTICE_BOOLEAN" />
+	</Match>
+
+	<!-- Bug code  RR -->
+	<Match>
+		<Bug pattern="RR_NOT_CHECKED,SR_NOT_CHECKED" />
+	</Match>
+
+	<!-- Bug code  RV -->
+	<Match>
+		<Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+	</Match>
+
+	<!-- Bug code  SE -->
+	<Match>
+		<Bug pattern="SE_BAD_FIELD,SE_BAD_FIELD_INNER_CLASS,SE_BAD_FIELD_STORE,SE_COMPARATOR_SHOULD_BE_SERIALIZABLE,SE_INNER_CLASS,SE_NONFINAL_SERIALVERSIONID,SE_NONLONG_SERIALVERSIONID,SE_NONSTATIC_SERIALVERSIONID,SE_NO_SUITABLE_CONSTRUCTOR,SE_NO_SUITABLE_CONSTRUCTOR_FOR_EXTERNALIZATION,SE_READ_RESOLVE_MUST_RETURN_OBJECT,SE_TRANSIENT_FIELD_NOT_RESTORED" />
+	</Match>
+
+	<!-- Bug code  SI -->
+	<Match>
+		<Bug pattern="SI_INSTANCE_BEFORE_FINALS_ASSIGNED" />
+	</Match>
+
+	<!-- Bug code  SnVI -->
+	<Match>
+		<Bug pattern="SE_NO_SERIALVERSIONID" />
+	</Match>
+
+	<!-- Bug code  SW -->
+	<Match>
+		<Bug pattern="SW_SWING_METHODS_INVOKED_IN_SWING_THREAD" />
+	</Match>
+
+	<!-- Bug code  UI -->
+	<Match>
+		<Bug pattern="UI_INHERITANCE_UNSAFE_GETRESOURCE" />
+	</Match>
+
+
+	<!--********Category Correctness********-->
+	<!-- Bug code  BC -->
+	<Match>
+		<Bug pattern="BC_IMPOSSIBLE_CAST,BC_IMPOSSIBLE_DOWNCAST,BC_IMPOSSIBLE_DOWNCAST_OF_TOARRAY,BC_IMPOSSIBLE_INSTANCEOF" />
+	</Match>
+	
+	<!-- Bug code  BIT -->
+	<Match>
+		<Bug pattern="BIT_ADD_OF_SIGNED_BYTE,BIT_AND,BIT_AND_ZZ,BIT_IOR,BIT_IOR_OF_SIGNED_BYTE,BIT_SIGNED_CHECK_HIGH_BIT" />
+	</Match>
+	
+	<!-- Bug code  BOA -->
+	<Match>
+		<Bug pattern="BOA_BADLY_OVERRIDDEN_ADAPTER" />
+	</Match>
+	
+	<!-- Bug code  BSHIFT -->
+	<Match>
+		<Bug pattern="ICAST_BAD_SHIFT_AMOUNT" />
+	</Match>
+	
+	<!-- Bug code  Bx -->
+	<Match>
+		<Bug pattern="BX_UNBOXED_AND_COERCED_FOR_TERNARY_OPERATOR" />
+	</Match>
+	
+	<!-- Bug code  DLS -->
+	<Match>
+		<Bug pattern="DLS_DEAD_STORE_OF_CLASS_LITERAL,DLS_OVERWRITTEN_INCREMENT" />
+	</Match>
+	
+	<!-- Bug code  Dm -->
+	<Match>
+		<Bug pattern="DMI_ANNOTATION_IS_NOT_VISIBLE_TO_REFLECTION,DMI_FUTILE_ATTEMPT_TO_CHANGE_MAXPOOL_SIZE_OF_SCHEDULED_THREAD_POOL_EXECUTOR,DMI_SCHEDULED_THREAD_POOL_EXECUTOR_WITH_ZERO_CORE_THREADS,DMI_VACUOUS_CALL_TO_EASYMOCK_METHOD" />
+	</Match>
+	
+	<!-- Bug code  DMI -->
+	<Match>
+		<Bug pattern="DMI_BAD_MONTH,DMI_CALLING_NEXT_FROM_HASNEXT,DMI_COLLECTIONS_SHOULD_NOT_CONTAIN_THEMSELVES,DMI_INVOKING_HASHCODE_ON_ARRAY,DMI_LONG_BITS_TO_DOUBLE_INVOKED_ON_INT,DMI_VACUOUS_SELF_COLLECTION_CALL" />
+	</Match>
+	
+	<!-- Bug code  EC -->
+	<Match>
+		<Bug pattern="EC_ARRAY_AND_NONARRAY,EC_BAD_ARRAY_COMPARE,EC_NULL_ARG,EC_UNRELATED_CLASS_AND_INTERFACE,EC_UNRELATED_INTERFACES,EC_UNRELATED_TYPES,EC_UNRELATED_TYPES_USING_POINTER_EQUALITY" />
+	</Match>
+	
+	<!-- Bug code  Eq -->
+	<Match>
+		<Bug pattern="EQ_ALWAYS_FALSE,EQ_ALWAYS_TRUE,EQ_COMPARING_CLASS_NAMES,EQ_DONT_DEFINE_EQUALS_FOR_ENUM,EQ_OTHER_NO_OBJECT,EQ_OTHER_USE_OBJECT,EQ_OVERRIDING_EQUALS_NOT_SYMMETRIC,EQ_SELF_USE_OBJECT" />
+	</Match>
+	
+	<!-- Bug code  FE -->
+	<Match>
+		<Bug pattern="FE_TEST_IF_EQUAL_TO_NOT_A_NUMBER,VA_FORMAT_STRING_BAD_ARGUMENT,VA_FORMAT_STRING_BAD_CONVERSION,VA_FORMAT_STRING_EXPECTED_MESSAGE_FORMAT_SUPPLIED,VA_FORMAT_STRING_EXTRA_ARGUMENTS_PASSED,VA_FORMAT_STRING_ILLEGAL,VA_FORMAT_STRING_MISSING_ARGUMENT,VA_FORMAT_STRING_NO_PREVIOUS_ARGUMENT" />
+	</Match>
+	
+	<!-- Bug code  GC -->
+	<Match>
+		<Bug pattern="GC_UNRELATED_TYPES" />
+	</Match>
+	
+	<!-- Bug code  HE -->
+	<Match>
+		<Bug pattern="HE_SIGNATURE_DECLARES_HASHING_OF_UNHASHABLE_CLASS,HE_USE_OF_UNHASHABLE_CLASS" />
+	</Match>
+	
+	<!-- Bug code  ICAST -->
+	<Match>
+		<Bug pattern="ICAST_INT_CAST_TO_DOUBLE_PASSED_TO_CEIL,ICAST_INT_CAST_TO_FLOAT_PASSED_TO_ROUND" />
+	</Match>
+	
+	<!-- Bug code  IL -->
+	<Match>
+		<Bug pattern="IL_CONTAINER_ADDED_TO_ITSELF,IL_INFINITE_LOOP,IL_INFINITE_RECURSIVE_LOOP" />
+	</Match>
+	
+	<!-- Bug code  INT -->
+	<Match>
+		<Bug pattern="INT_BAD_COMPARISON_WITH_NONNEGATIVE_VALUE" />
+	</Match>
+	
+	<!-- Bug code  IO -->
+	<Match>
+		<Bug pattern="IO_APPENDING_TO_OBJECT_OUTPUT_STREAM" />
+	</Match>
+	
+	<!-- Bug code  Nm -->
+	<Match>
+		<Bug pattern="NM_BAD_EQUAL,NM_LCASE_HASHCODE,NM_LCASE_TOSTRING,NM_METHOD_CONSTRUCTOR_CONFUSION,NM_VERY_CONFUSING,NM_WRONG_PACKAGE" />
+	</Match>
+	
+	<!-- Bug code  NP -->
+	<Match>
+		<Bug pattern="NP_CLOSING_NULL,NP_GUARANTEED_DEREF" />
+	</Match>
+	
+	<!-- Bug code  RpC -->
+	<Match>
+		<Bug pattern="RpC_REPEATED_CONDITIONAL_TEST" />
+	</Match>
+	
+	<!-- Bug code  RV -->
+	<Match>
+		<Bug pattern="RV_RETURN_VALUE_IGNORED" />
+	</Match>
+	
+	<!-- Bug code  SA -->
+	<Match>
+		<Bug pattern="SA_FIELD_DOUBLE_ASSIGNMENT,SA_FIELD_SELF_ASSIGNMENT,SA_FIELD_SELF_COMPARISON,SA_FIELD_SELF_COMPUTATION,SA_LOCAL_SELF_COMPARISON,SA_LOCAL_SELF_COMPUTATION" />
+	</Match>
+	
+	<!-- Bug code  SIC -->
+	<Match>
+		<Bug pattern="SIC_THREADLOCAL_DEADLY_EMBRACE" />
+	</Match>
+	
+	<!-- Bug code  SIO -->
+	<Match>
+		<Bug pattern="SIO_SUPERFLUOUS_INSTANCEOF" />
+	</Match>
+	
+	<!-- Bug code  SQL -->
+	<Match>
+		<Bug pattern="SQL_BAD_PREPARED_STATEMENT_ACCESS,SQL_BAD_RESULTSET_ACCESS" />
+	</Match>
+	
+	<!-- Bug code  UMAC -->
+	<Match>
+		<Bug pattern="UMAC_UNCALLABLE_METHOD_OF_ANONYMOUS_CLASS" />
+	</Match>
+	
+	<!-- Bug code  UR -->
+	<Match>
+		<Bug pattern="UR_UNINIT_READ,UR_UNINIT_READ_CALLED_FROM_SUPER_CONSTRUCTOR" />
+	</Match>
+	
+	
+	
+	<!-- ********Category  Dodgy******** -->
+	<!-- Bug code  BC -->
+	<Match>
+		<Bug pattern="BC_VACUOUS_INSTANCEOF" />
+	</Match>
+	
+	<!-- Bug code  DB -->
+	<Match>
+		<Bug pattern="DB_DUPLICATE_BRANCHES,DB_DUPLICATE_SWITCH_CLAUSES" />
+	</Match>
+	
+	<!-- Bug code  DLS -->
+	<Match>
+		<Bug pattern="DLS_DEAD_LOCAL_STORE,DLS_DEAD_LOCAL_STORE_OF_NULL" />
+	</Match>
+	
+	<!-- Bug code  DMI -->
+	<Match>
+		<Bug pattern="DMI_NONSERIALIZABLE_OBJECT_WRITTEN" />
+	</Match>
+	
+	<!-- Bug code  FS -->
+	<Match>
+		<Bug pattern="VA_FORMAT_STRING_BAD_CONVERSION_TO_BOOLEAN" />
+	</Match>
+	
+	<!-- Bug code  ICAST -->
+	<Match>
+		<Bug pattern="ICAST_IDIV_CAST_TO_DOUBLE,ICAST_INTEGER_MULTIPLY_CAST_TO_LONG" />
+	</Match>
+	
+	<!-- Bug code  IM -->
+	<Match>
+		<Bug pattern="IM_BAD_CHECK_FOR_ODD" />
+	</Match>
+	
+	<!-- Bug code  INT -->
+	<Match>
+		<Bug pattern="INT_BAD_REM_BY_1,INT_VACUOUS_COMPARISON" />
+	</Match>
+	
+	<!-- Bug code  NP -->
+	<Match>
+		<Bug pattern="NP_DEREFERENCE_OF_READLINE_VALUE" />
+	</Match>
+	
+	<!-- Bug code  QF -->
+	<Match>
+		<Bug pattern="QF_QUESTIONABLE_FOR_LOOP" />
+	</Match>
+	
+	<!-- Bug code  RCN -->
+	<Match>
+		<Bug pattern="RCN_REDUNDANT_COMPARISON_OF_NULL_AND_NONNULL_VALUE,RCN_REDUNDANT_COMPARISON_TWO_NULL_VALUES,RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE,RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE" />
+	</Match>
+	
+	<!-- Bug code  REC 
+	<Match>
+		<Bug pattern="REC_CATCH_EXCEPTION" />
+	</Match>
+	-->
+	<!-- Bug code  RI -->
+	<Match>
+		<Bug pattern="RI_REDUNDANT_INTERFACES" />
+	</Match>
+	
+	<!-- Bug code  SA -->
+	<Match>
+		<Bug pattern="SA_LOCAL_DOUBLE_ASSIGNMENT,SA_LOCAL_SELF_ASSIGNMENT" />
+	</Match>
+	
+	<!-- Bug code  UCF -->
+	<Match>
+		<Bug pattern="UCF_USELESS_CONTROL_FLOW,UCF_USELESS_CONTROL_FLOW_NEXT_LINE" />
+	</Match>
+	
+	<!-- ********Category  Malicious code vulnerability******** -->
+	<!-- Bug code  FI -->
+	<Match>
+		<Bug pattern="FI_PUBLIC_SHOULD_BE_PROTECTED" />
+	</Match>
+	
+	<!-- ********Category  Multithreaded correctness******** -->
+	<!-- Bug code  DC -->
+	<Match>
+		<Bug pattern="DC_DOUBLECHECK" />
+	</Match>
+	
+	<!-- Bug code  ESync -->
+	<Match>
+		<Bug pattern="ESync_EMPTY_SYNC" />
+	</Match>
+	
+	<!-- Bug code  MWN -->
+	<Match>
+		<Bug pattern="MWN_MISMATCHED_NOTIFY,MWN_MISMATCHED_WAIT" />
+	</Match>
+	
+	<!-- Bug code  SWL -->
+	<Match>
+		<Bug pattern="SWL_SLEEP_WITH_LOCK_HELD" />
+	</Match>
+	
+	<!-- Bug code  TLW -->
+	<Match>
+		<Bug pattern="TLW_TWO_LOCK_WAIT" />
+	</Match>
+	
+	<!-- Bug code  UG -->
+	<Match>
+		<Bug pattern="UG_SYNC_SET_UNSYNC_GET" />
+	</Match>
+	
+	<!-- ********Category  Performance******** -->
+	<!-- Bug code  Bx -->
+	<Match>
+		<Bug pattern="BX_BOXING_IMMEDIATELY_UNBOXED,BX_BOXING_IMMEDIATELY_UNBOXED_TO_PERFORM_COERCION,DM_BOXED_PRIMITIVE_TOSTRING,DM_FP_NUMBER_CTOR,DM_NUMBER_CTOR" />
+	</Match>
+	
+	<!-- Bug code  Dm -->
+	<Match>
+		<Bug pattern="DM_BOOLEAN_CTOR,DM_STRING_CTOR,DM_STRING_TOSTRING" />
+	</Match>
+	
+	<!-- Bug code  HSC -->
+	<Match>
+		<Bug pattern="HSC_HUGE_SHARED_STRING_CONSTANT" />
+	</Match>
+	
+	<!-- Bug code  ITA -->
+	<Match>
+		<Bug pattern="ITA_INEFFICIENT_TO_ARRAY" />
+	</Match>
+	
+	<!-- Bug code  SBSC -->
+	<Match>
+		<Bug pattern="SBSC_USE_STRINGBUFFER_CONCATENATION" />
+	</Match>
+	
+	<!-- Bug code  UPM -->
+	<Match>
+		<Bug pattern="UPM_UNCALLED_PRIVATE_METHOD" />
+	</Match>
+	
+	<!-- Bug code  UrF -->
+	<Match>
+		<Bug pattern="URF_UNREAD_FIELD,UUF_UNUSED_FIELD" />
+	</Match>
+	
+	<!-- ********Category  Security******** -->
+	<!-- Bug code  Dm -->
+	<Match>
+		<Bug pattern="DMI_CONSTANT_DB_PASSWORD,DMI_EMPTY_DB_PASSWORD" />
+	</Match>
+	
+	<!-- Bug code  SQL -->
+	<Match>
+		<Bug pattern="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE,SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING" />
+	</Match>
+
+</FindBugsFilter>

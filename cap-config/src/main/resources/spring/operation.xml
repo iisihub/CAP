@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="simpleOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation"
+		scope="prototype">
+		<property name="result" ref="formResult" />
+		<property name="name" value="simpleOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<entry key="doActionStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="eloanOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation"
+		scope="prototype">
+		<property name="result" ref="formResult" />
+		<property name="name" value="eloanOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<!-- <entry key="docCheckOpenerStep" value-ref="docCheckOpenerStep" /> -->
+				<!--<entry key="docCheckStatusStep" value-ref="docCheckStatusStep" /> -->
+				<entry key="doActionStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- <bean id="fileUploadOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation"
+		scope="prototype">
+		<property name="result" ref="formResult" />
+		<property name="name" value="fileUploadOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<entry key="fileUploadStep" value-ref="fileUploadStep" />
+				<entry key="afterUploadStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean> -->
+
+	<bean id="fileDownloadOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation"
+		scope="prototype">
+		<property name="result" ref="docFileDwnResult" />
+		<property name="name" value="fileDownloadOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<entry key="fileDownloadStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- <bean id="megaPDFOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation"
+		scope="prototype">
+		<property name="result" ref="megaPdfResult" />
+		<property name="name" value="megaPDFOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<entry key="fileDownloadStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean> -->
+
+	<!-- <bean id="docCheckStatusStep" class="com.mega.eloan.common.op.step.CheckOpenDocStatusOpStep" 
+		scope="request" /> <bean id="docCheckOpenerStep" class="com.mega.eloan.common.op.step.CheckOpenerOpStep" 
+		scope="request" /> -->
+	<bean id="doActionStep" class="com.iisigroup.cap.operation.step.CapFormHandleOpStep"
+		scope="request" />
+
+	<!-- <bean id="fileUploadStep" class="com.iisigroup.cap.operation.step.CapFileUploadOpStep"
+		scope="request" /> -->
+
+	<bean id="formResult" class="com.iisigroup.cap.response.AjaxFormResult"
+		scope="prototype" />
+
+	<bean id="docFileDwnResult" class="com.iisigroup.cap.response.ByteArrayDownloadResult"
+		scope="prototype" />
+
+
+	<!-- <bean id="megaPdfResult" class="com.iisigroup.cap.response.CapPDFResult"
+		scope="prototype" /> -->
+</beans>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- 日誌配置文件 -->
+
+	<context-param>
+		<description>log4j配置文件路徑</description>
+		<param-name>log4jConfigLocation</param-name>
+		<!-- 日誌配置文件存放路徑 -->
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>classpath:spring/applicationContext.xml</param-value> -->
+		<param-value>classpath:spring/h2/applicationContext.xml</param-value>
+	</context-param>
+
+	<context-param>
+		<description>設置環境變量根目錄名稱</description>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webapp.root</param-value>
+	</context-param>
+
+	<context-param>
+		<description>編碼格式</description>
+		<param-name>encoding</param-name>
+		<!-- 採用utf-8 編碼 -->
+		<param-value>UTF-8</param-value>
+	</context-param>
+
+	<listener>
+		<description>log4j</description>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<listener>
+		<description>spring</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Filter -->
+	<!--lazy load -->
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>set log4j MDC for SessionId</filter-name>
+		<filter-class>com.iisigroup.cap.log.LogContextFilter</filter-class>
+	</filter>
+	<!-- cap Filter -->
+	<filter>
+		<filter-name>capForwardFilter</filter-name>
+		<filter-class>com.iisigroup.cap.web.filter.ForwardFilter</filter-class>
+		<!-- webroot root for js -->
+		<init-param>
+			<param-name>/webroot.*</param-name>
+			<param-value>/.</param-value>
+		</init-param>
+		<!-- i18n path -->
+		<init-param>
+			<param-name>/i18njs</param-name>
+			<param-value>/handler/basehandler/queryJsI18N</param-value>
+		</init-param>
+
+	</filter>
+	<!--使用spring 內建 -->
+	<filter>
+		<description>encoding filter</description>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>set log4j MDC for SessionId</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>capForwardFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+
+
+
+
+
+	<!-- servlet -->
+	<servlet>
+		<servlet-name>dispatcher-handler</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/mvc/handler.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>dispatcher-page</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/mvc/page.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher-handler</servlet-name>
+		<url-pattern>/handler/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>dispatcher-page</servlet-name>
+		<url-pattern>/page/*</url-pattern>
+	</servlet-mapping>
+	<!-- resource -->
+	<resource-ref>
+		<description>BQD MCI datasource</description>
+		<res-ref-name>jdbc/capdb</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+
+	<welcome-file-list>
+		<welcome-file>page/index</welcome-file>
+	</welcome-file-list>
+
+</web-app>

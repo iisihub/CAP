@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+ http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="50000000" />
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+
+	<!-- ①：對web包中的所有類進行掃描，以完成Bean創建和自動依賴注入的功能 -->
+	<!--<context:component-scan base-package="com.bqd.mci.base.page"/> -->
+	<bean class="com.iisigroup.cap.mvc.action.PageAction" />
+	<!-- ②：啓動Spring MVC的註解功能，完成請求和註解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<!-- ③：對模型視圖名稱的解析，即在模型視圖名稱添加前後綴 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/viewpage/" p:suffix=".jsp" />
+
+	<!--配置國際化i18N信息 -->
+	<bean id="messageSource"
+		class="com.iisigroup.cap.mvc.message.CapReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	<bean id="localeResolver"
+		class="com.iisigroup.cap.mvc.Interceptor.SessionLocaleResolver">
+		<property name="defaultLocale" value="zh_TW" />
+	</bean>
+
+	<bean id="localeChangeInterceptor" class="com.iisigroup.cap.mvc.Interceptor.LocaleChangeInterceptor">
+		<property name="paramName" value="language" />
+	</bean>
+	<bean id="userSecurityInterceptor" class="com.iisigroup.cap.mvc.Interceptor.CapUserSecurityInterceptor">
+	</bean>
+	
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<util:list>
+				<ref bean="userSecurityInterceptor" />
+				<ref bean="localeChangeInterceptor" />
+			</util:list>
+		</property>
+	</bean>
+</beans>
