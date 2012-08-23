@@ -31,9 +31,9 @@ import org.springframework.util.ReflectionUtils;
 
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.utils.DateUtil;
-import com.iisigroup.cap.utils.MathUtil;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapMath;
+import com.iisigroup.cap.utils.CapString;
 
 
 /**
@@ -77,7 +77,7 @@ public class BeanUtil {
 			GenericBean s = (GenericBean) source;
 			GenericBean d = (GenericBean) destination;
 			for (String col : columns) {
-				if (!StringUtil.isEmpty(col)) {
+				if (!CapString.isEmpty(col)) {
 					d.set(col, s.get(col));
 				}
 			}
@@ -360,13 +360,13 @@ public class BeanUtil {
 					if (field.getType() != String.class && "".equals(value)) {
 						value = null;
 					} else if (field.getType() == BigDecimal.class) {
-						value =  MathUtil.getBigDecimal(String.valueOf(value));
+						value =  CapMath.getBigDecimal(String.valueOf(value));
 					} else if (value instanceof String) {
 						if (field.getType() == java.util.Date.class
 								|| field.getType() == java.sql.Date.class) {
-							value = DateUtil.parseDate((String) value);
+							value = CapDate.parseDate((String) value);
 						} else if (field.getType() == Timestamp.class) {
-							value = DateUtil
+							value = CapDate
 									.convertStringToTimestamp1((String) value);
 						}
 					}

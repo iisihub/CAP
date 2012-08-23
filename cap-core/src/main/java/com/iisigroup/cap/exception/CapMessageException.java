@@ -12,7 +12,7 @@
  */
 package com.iisigroup.cap.exception;
 
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <p>
@@ -100,7 +100,7 @@ public class CapMessageException extends CapException {
 
 	@Override
 	public String getMessage() {
-		return StringUtil.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
+		return CapString.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
 	}
 
 	/**

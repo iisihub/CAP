@@ -24,8 +24,8 @@ import com.iisigroup.cap.response.ByteArrayDownloadResult;
 import com.iisigroup.cap.response.ErrorResult;
 import com.iisigroup.cap.response.IErrorResult;
 import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.utils.AppContext;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -74,7 +74,7 @@ public class HandlerAction extends BaseActionController {
 		try {
 
 			request.setParameter(FormHandler.FORM_ACTION, action);
-			PluginManager pluginMgr = (PluginManager) AppContext.getBean("CapPluginManager");
+			PluginManager pluginMgr = (PluginManager) CapAppContext.getBean("CapPluginManager");
 
 			logger.debug("handler:" + handler + " -receive data:" + request.toString());
 
@@ -105,7 +105,7 @@ public class HandlerAction extends BaseActionController {
 			ByteArrayDownloadResult file = (ByteArrayDownloadResult) result;
 			response.setContentType(file.getContentType());
 			response.setContentLength(file.getByteArray().length);
-			if (!StringUtil.isEmpty(file.getOutputName())) {
+			if (!CapString.isEmpty(file.getOutputName())) {
 				response.setHeader("Content-Disposition", "attachment;filename=\"" + file.getOutputName() + "\"");
 			}
 			FileCopyUtils.copy(file.getByteArray(), response.getOutputStream());
@@ -120,11 +120,11 @@ public class HandlerAction extends BaseActionController {
 	}
 
 	private IErrorResult getDefaultErrorResult() {
-		return AppContext.getBean("defaultErrorResult");
+		return CapAppContext.getBean("defaultErrorResult");
 	}
 
 	private IRequest getDefaultRequest() {
-		IRequest cr = AppContext.getBean("CapDefaultRequest");
+		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
 		return cr != null ? cr : new SpringMVCRequest();
 	}
 

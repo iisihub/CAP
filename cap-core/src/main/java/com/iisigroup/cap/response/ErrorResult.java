@@ -17,8 +17,8 @@ import com.iisigroup.cap.exception.CapClosePageException;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.exception.CapSessioniExpireException;
-import com.iisigroup.cap.utils.AppContext;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapString;
 
 
 /**
@@ -72,22 +72,22 @@ public class ErrorResult implements IErrorResult {
 		if (e instanceof CapMessageException) {
 			CapMessageException ce = (CapMessageException) e;
 			logMessage = ce.getMessage();
-			if (!StringUtil.isEmpty(ce.getMessageKey())) {
-				logMessage = AppContext.getMessage(ce.getMessageKey());
+			if (!CapString.isEmpty(ce.getMessageKey())) {
+				logMessage = CapAppContext.getMessage(ce.getMessageKey());
 			}
 			errorMessage.put(AJAX_MESSAGE_HANDLER_EXCEPTION, logMessage);
 		} else if (e instanceof CapClosePageException) {
 			CapClosePageException ce = (CapClosePageException) e;
 			logMessage = ce.getMessage();
-			if (!StringUtil.isEmpty(ce.getMessageKey())) {
-				logMessage = AppContext.getMessage(ce.getMessageKey());
+			if (!CapString.isEmpty(ce.getMessageKey())) {
+				logMessage = CapAppContext.getMessage(ce.getMessageKey());
 			}
 			errorMessage.put(AJAX_CLOSE_PAGE_HANDLER_EXCEPTION, logMessage);
 		} else if (e instanceof CapSessioniExpireException) {
 			CapSessioniExpireException ce = (CapSessioniExpireException) e;
 			logMessage = ce.getMessage();
-			if (!StringUtil.isEmpty(ce.getMessageKey())) {
-				logMessage = AppContext.getMessage(ce.getMessageKey());
+			if (!CapString.isEmpty(ce.getMessageKey())) {
+				logMessage = CapAppContext.getMessage(ce.getMessageKey());
 			}
 			errorMessage.put(AJAX_SESSION_EXPIRE_EXCEPTION, logMessage);
 		} else if (e instanceof CapException) {

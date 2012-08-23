@@ -23,7 +23,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 
 /**
@@ -65,7 +65,7 @@ public class LogContextFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession(false);
-		LogContext.setUUID(StringUtil.getUUIDString());
+		LogContext.setUUID(CapString.getUUIDString());
 		//CapLogContext.setIp(req.getLocalAddr());
 		if (session == null) {
 			LogContext.setLogin(DEFAULT_LOGIN);
@@ -77,9 +77,9 @@ public class LogContextFilter implements Filter {
 			LogContext.setRequestURL(getRequestURL(req));
 			// User相關資訊
 			String userId = (String) session.getAttribute(LOGIN_USERNAME);
-			userId = StringUtil.isEmpty(userId) ? (String) request
+			userId = CapString.isEmpty(userId) ? (String) request
 					.getParameter("j_username") : userId;
-			if (StringUtil.isEmpty(userId)) {
+			if (CapString.isEmpty(userId)) {
 				LogContext.setLogin(DEFAULT_LOGIN);
 			} else {
 				LogContext.setLogin(userId);
@@ -106,7 +106,7 @@ public class LogContextFilter implements Filter {
 		if (f > -1) {
 			url = url.substring(f + 4);
 		}
-		if (!StringUtil.isEmpty(req.getParameter("_pa"))) {
+		if (!CapString.isEmpty(req.getParameter("_pa"))) {
 			url = "/" + req.getParameter("_pa");
 //		} else {
 //			String queryString = req.getQueryString();

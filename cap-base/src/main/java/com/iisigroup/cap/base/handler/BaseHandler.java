@@ -15,7 +15,7 @@ import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.utils.AppContext;
+import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -26,6 +26,7 @@ import com.iisigroup.cap.utils.AppContext;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/11/28,rodeschen,new
+ *          <li>2012/8/23,RodesChen,add default locale
  *          </ul>
  */
 @Scope("request")
@@ -53,13 +54,16 @@ public class BaseHandler extends MFormHandler {
 		Locale locale = null;
 		try {
 			locale = CapSecurityContext.getLocale();
+			if(locale == null){
+				locale = Locale.getDefault();
+			}
 		} catch (Exception e) {
 			locale = Locale.getDefault();
 		}
 		String i18nFile = null;
 		try {
 			i18nFile = new StringBuffer("classpath:/i18n/").append(request.get("f").replaceAll("/?webroot/page", "")).append("_").append(locale.toString()).append(".properties").toString();
-			prop.load(AppContext.getApplicationContext().getResource(i18nFile).getInputStream());
+			prop.load(CapAppContext.getApplicationContext().getResource(i18nFile).getInputStream());
 			for (Entry<Object, Object> entry : prop.entrySet()) {
 				result.set((String) entry.getKey(), (String) entry.getValue());
 			}

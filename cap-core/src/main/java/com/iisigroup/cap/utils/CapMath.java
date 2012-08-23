@@ -25,7 +25,7 @@ import com.iisigroup.cap.Constants;
  * @author iristu
  * 
  */
-public class MathUtil implements Constants {
+public class CapMath implements Constants {
 
 	final static int[] DEFAULT_DIVIDE_ROUNDING_MODE = { BigDecimal.ROUND_HALF_UP,
 			BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP };

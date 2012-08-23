@@ -30,9 +30,9 @@ import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CodeTypeService;
-import com.iisigroup.cap.utils.AppContext;
-import com.iisigroup.cap.utils.BeanUtil;
-import com.iisigroup.cap.utils.DateUtil;
+import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapBeanUtil;
+import com.iisigroup.cap.utils.CapDate;
 
 /**
  * <pre>
@@ -87,7 +87,7 @@ public class CodeTypeHandler extends MFormHandler {
 			if (code != null) {
 				// codetype.0001 代碼重覆!
 				throw new CapMessageException(
-						AppContext.getMessage("codetype.0001"), getClass());
+						CapAppContext.getMessage("codetype.0001"), getClass());
 			}
 			code = new CodeType();
 		} else {
@@ -95,18 +95,18 @@ public class CodeTypeHandler extends MFormHandler {
 					&& !code.getOid().equals(request.get("oid"))) {
 				// codetype.0001 代碼重覆!
 				throw new CapMessageException(
-						AppContext.getMessage("codetype.0001"), getClass());
+						CapAppContext.getMessage("codetype.0001"), getClass());
 			} else if (code == null) {
 				code = codeTypeService.getCodeTypeById(request
 						.get("oid"));
 			}
 		}
-		BeanUtil.map2Bean(request, code, CodeType.class);
+		CapBeanUtil.map2Bean(request, code, CodeType.class);
 		if ("A".equals(type)) {
 			code.setOid(null);
 		}
 		code.setLastModBy(CapSecurityContext.getUserId());
-		code.setLastModTm(DateUtil.getCurrentTimestamp());
+		code.setLastModTm(CapDate.getCurrentTimestamp());
 		codeTypeService.saveCodeType(code);
 		return result;
 	}

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.hg.enums.ConnStatusEnum;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -246,7 +246,7 @@ public class CapHttpService extends AbstractHGservice {
 			if (this.sendData instanceof Map) {
 				setRequestParams((Map<String, String>) this.sendData);
 			} else if (this.sendData instanceof String
-					&& !StringUtil.isEmpty((String) this.sendData)) {
+					&& !CapString.isEmpty((String) this.sendData)) {
 				setRequestBody((String) this.sendData);
 			}
 		} catch (UnsupportedEncodingException e) {

@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.component.SpringMVCRequest;
 import com.iisigroup.cap.mvc.page.report.IPageReport;
-import com.iisigroup.cap.utils.AppContext;
+import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -55,7 +55,7 @@ public class PageAction extends BaseActionController {
 		String path = request.getPathInfo();
 		ModelAndView model = new ModelAndView(path);
 		Map<String, Object> datas = new HashMap<String, Object>();
-		IPageReport service = AppContext.getBean(reportService);
+		IPageReport service = CapAppContext.getBean(reportService);
 		if (service != null) {
 			IRequest capRequest = getDefaultRequest();
 			capRequest.setRequestObject(request);
@@ -73,7 +73,7 @@ public class PageAction extends BaseActionController {
 	}
 
 	private IRequest getDefaultRequest() {
-		IRequest cr = AppContext.getBean("CapDefaultRequest");
+		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
 		return cr != null ? cr : new SpringMVCRequest();
 	}
 

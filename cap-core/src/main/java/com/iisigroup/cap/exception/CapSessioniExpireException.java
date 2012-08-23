@@ -12,7 +12,7 @@
  */
 package com.iisigroup.cap.exception;
 
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -91,7 +91,7 @@ public class CapSessioniExpireException extends CapException {
 
 	@Override
 	public String getMessage() {
-		return StringUtil.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
+		return CapString.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
 	}
 
 	/**

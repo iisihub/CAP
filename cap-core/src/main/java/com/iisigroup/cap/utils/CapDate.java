@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public class DateUtil {
+public class CapDate {
 
 	protected final static GregorianCalendar GC = new GregorianCalendar();
 
@@ -265,7 +265,7 @@ public class DateUtil {
 		Date currentDate = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		String theDate = df.format(currentDate);
-		return DateUtil.formatyyyyMMddToDateFormat(theDate, dateFormat);
+		return CapDate.formatyyyyMMddToDateFormat(theDate, dateFormat);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class DateUtil {
 					hasMinus = true;
 					tmpDate = tmpDate.substring(1);
 				}
-				tmpDate = StringUtil.fillZeroHead(tmpDate, 7);
+				tmpDate = CapString.fillZeroHead(tmpDate, 7);
 				y = Integer.parseInt((hasMinus ? "-" : "")
 						+ tmpDate.substring(0, 3))
 						+ 1911 + (hasMinus ? 1 : 0);
@@ -482,7 +482,7 @@ public class DateUtil {
 			if (tmpDate.length() > 7 || tmpDate.length() < 5) {
 				return date;
 			}
-			tmpDate = StringUtil.fillZeroHead(tmpDate, 7);
+			tmpDate = CapString.fillZeroHead(tmpDate, 7);
 			tempValue = (Integer.parseInt((hasMinus ? "-" : "")
 					+ tmpDate.substring(0, 3)) + 1911 + (hasMinus ? 1 : 0))
 					+ tmpDate.substring(3, 5) + tmpDate.substring(5);
@@ -518,7 +518,7 @@ public class DateUtil {
 	public static String formatDate(Date date, String dateFormat) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		String theDate = df.format(date);
-		return DateUtil.formatyyyyMMddToDateFormat(theDate, dateFormat);
+		return CapDate.formatyyyyMMddToDateFormat(theDate, dateFormat);
 	}
 
 	/**
@@ -543,7 +543,7 @@ public class DateUtil {
 		String tempValue = "";
 		try {
 			if ("YYYMMDD".equals(dateFormat)) {
-				tempValue = StringUtil.fillZeroHead(
+				tempValue = CapString.fillZeroHead(
 						convertDateToTaiwanYear(date.substring(0, 4)) + "", 3)
 						+ date.substring(4, 6) + date.substring(6);
 			} else if ("YYY/MM/DD".equals(dateFormat)) {
@@ -572,7 +572,7 @@ public class DateUtil {
 	 */
 	public static String convertDateToTaiwanYear(String year) {
 		int fixYear = Integer.parseInt(year) - 1911;
-		return StringUtil.fillZeroHead(
+		return CapString.fillZeroHead(
 				String.valueOf((fixYear < 1) ? fixYear - 1 : fixYear), 3);
 	}
 
@@ -669,9 +669,9 @@ public class DateUtil {
 		}
 		StringBuffer bRegEx = new StringBuffer();
 		boolean hasSign = (type.indexOf("/") != -1);
-		boolean isYYYY = StringUtil.checkRegularMatch(type, "YYYY");
-		boolean yyFirst = StringUtil.checkRegularMatch(type, "^Y");
-		boolean mmFirst = StringUtil.checkRegularMatch(type, "MM/?DD");
+		boolean isYYYY = CapString.checkRegularMatch(type, "YYYY");
+		boolean yyFirst = CapString.checkRegularMatch(type, "^Y");
+		boolean mmFirst = CapString.checkRegularMatch(type, "MM/?DD");
 
 		if (mmFirst) {
 			bRegEx.append(hasSign ? mm_dd : mmdd);
@@ -700,7 +700,7 @@ public class DateUtil {
 
 		String match;
 		// 因確保不會找錯所以每次都重找一次
-		while (!StringUtil.isEmpty(match = StringUtil.getRegularMatch(str, regEx))) {
+		while (!CapString.isEmpty(match = CapString.getRegularMatch(str, regEx))) {
 			StringBuffer date = new StringBuffer(match.trim());
 			StringBuffer twDate = new StringBuffer();
 			int year;
@@ -712,21 +712,21 @@ public class DateUtil {
 						date.length()));
 				date.insert(date.length() - 2, (year < 50) ? "20" : "19");
 			}
-			twDate.append(StringUtil.checkRegularMatch(match, "^ ") ? " " : "");
-			twDate.append(DateUtil.formatyyyyMMddToDateFormat(DateUtil
+			twDate.append(CapString.checkRegularMatch(match, "^ ") ? " " : "");
+			twDate.append(CapDate.formatyyyyMMddToDateFormat(CapDate
 					.formatDateFromF1ToF2(date.toString(), type, "yyyyMMdd"),
 					"YYY/MM/DD"));
-			twDate.append(StringUtil.checkRegularMatch(match, " $") ? " " : "");
-			if (StringUtil.checkRegularMatch(twDate.toString(), "^8088")) {
+			twDate.append(CapString.checkRegularMatch(match, " $") ? " " : "");
+			if (CapString.checkRegularMatch(twDate.toString(), "^8088")) {
 				twDate.replace(0, 4, "999");
-			} else if (StringUtil.checkRegularMatch(twDate.toString(), "^ 8088")) {
+			} else if (CapString.checkRegularMatch(twDate.toString(), "^ 8088")) {
 				twDate.replace(0, 5, " 999");
 			}
 			boolean hasMinus = (twDate.charAt(0) == '-');
 			str = str.replace(
 					match,
 					(hasMinus ? "-" : "")
-							+ StringUtil.fillZeroHead(
+							+ CapString.fillZeroHead(
 									twDate.substring((hasMinus) ? 1 : 0), 9));
 		}
 
@@ -790,7 +790,7 @@ public class DateUtil {
 	 * @param dateFormat
 	 *            String of dateFormat
 	 * @return a Date with firstMinute
-	 * @see com.DateUtil.cap.utils.CapDate#getDate
+	 * @see com.CapDate.cap.utils.CapDate#getDate
 	 */
 	public static Date getFirstMinuteDate(String date, String dateFormat) {
 
@@ -813,7 +813,7 @@ public class DateUtil {
 	 * @param dateFormat
 	 *            String of dateFormat
 	 * @return a Date with lastMinute
-	 * @see com.DateUtil.cap.utils.CapDate#getDate
+	 * @see com.CapDate.cap.utils.CapDate#getDate
 	 */
 	public static Date getLastMinuteDate(String date, String dateFormat) {
 
@@ -849,7 +849,7 @@ public class DateUtil {
 	 */
 	public static Date parseDate(String date) {
 		Date result = null;
-		if (!"".equals(StringUtil.trimNull(date))) {
+		if (!"".equals(CapString.trimNull(date))) {
 			if (validDate(date, "yyyy-MM-dd")) {
 				result = getDate(date, "yyyy-MM-dd");
 			} else if (validDate(date, "yyyy/MM/dd")) {

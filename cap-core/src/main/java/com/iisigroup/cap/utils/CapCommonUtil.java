@@ -26,7 +26,7 @@ import com.iisigroup.cap.Constants;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public class CommonUtil {
+public class CapCommonUtil {
 
 	/**
 	 * <pre>
@@ -41,7 +41,7 @@ public class CommonUtil {
 	 */
 	public static String toChineseUpperAmount(String amount, boolean nonDollar) {
 		if (!nonDollar) {
-			amount = MathUtil.getBigDecimal(amount).setScale(3, BigDecimal.ROUND_HALF_UP).toString();
+			amount = CapMath.getBigDecimal(amount).setScale(3, BigDecimal.ROUND_HALF_UP).toString();
 		}
 		String[] digit = { "零", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖" };
 		String[] aa = { "", "拾", "佰", "仟" };
@@ -104,7 +104,7 @@ public class CommonUtil {
 							if (!nonDollar) {
 								result.append(cc[(j) % 4]);
 							}
-						} else if (nonDollar && MathUtil.compare(amtFraction.substring(j, length), "0") != 0) {
+						} else if (nonDollar && CapMath.compare(amtFraction.substring(j, length), "0") != 0) {
 							result.append("零");
 						}
 					}

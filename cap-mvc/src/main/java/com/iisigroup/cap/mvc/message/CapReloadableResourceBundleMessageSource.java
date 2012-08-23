@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -46,7 +46,7 @@ public class CapReloadableResourceBundleMessageSource extends org.springframewor
 				//File f = r.getFile();
 				if (f.isFile()) {
 					String path = f.getAbsolutePath();
-					if (StringUtil.checkRegularMatch(path, i18nFileREG)) {
+					if (CapString.checkRegularMatch(path, i18nFileREG)) {
 						path = path.replaceAll(i18nFileREG, "").replaceAll(".*/i18n/", "classpath:/i18n/")
 						// for windows
 								.replaceAll(".*\\\\i18n\\\\", "classpath:\\\\i18n\\\\").replaceAll("\\\\", "/");

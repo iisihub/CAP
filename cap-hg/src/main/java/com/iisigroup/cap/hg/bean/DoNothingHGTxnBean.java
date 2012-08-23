@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -56,7 +56,7 @@ public class DoNothingHGTxnBean implements IHGTxnBean {
 	@Override
 	public void setSendData(Object requestData) {
 
-		if (requestData instanceof String && !StringUtil.isEmpty((String) requestData)) {
+		if (requestData instanceof String && !CapString.isEmpty((String) requestData)) {
 			try {
 				this.sendData = DocumentHelper.parseText((String) requestData);
 			} catch (DocumentException e) {

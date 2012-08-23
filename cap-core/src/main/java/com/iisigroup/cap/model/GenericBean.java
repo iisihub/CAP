@@ -31,8 +31,8 @@ import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
 import com.iisigroup.cap.formatter.IBeanFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
-import com.iisigroup.cap.utils.BeanUtil;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapBeanUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <p>
@@ -66,7 +66,7 @@ public class GenericBean {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T set(String field, Object value) throws CapException {
-		if (StringUtil.isEmpty(field)) {
+		if (CapString.isEmpty(field)) {
 			return (T) this;
 		}
 		try {
@@ -92,7 +92,7 @@ public class GenericBean {
 	 * @return Object
 	 */
 	public Object get(String fieldId) throws CapException {
-		if (StringUtil.isEmpty(fieldId)) {
+		if (CapString.isEmpty(fieldId)) {
 			throw new CapException("field [" + fieldId + "] is empty!!", getClass());
 		}
 		try {
@@ -184,7 +184,7 @@ public class GenericBean {
 	public JSONObject toJSONObject(String[] columns, Map<String, IFormatter> reformat) throws CapException {
 		JSONObject json = new JSONObject();
 		if (columns == null) {
-			Field[] cols = BeanUtil.getField(this.getClass(), true);// this.getClass().getDeclaredFields();
+			Field[] cols = CapBeanUtil.getField(this.getClass(), true);// this.getClass().getDeclaredFields();
 			columns = new String[cols.length];
 			for (int i = 0; i < columns.length; i++) {
 				columns[i] = cols[i].getName();

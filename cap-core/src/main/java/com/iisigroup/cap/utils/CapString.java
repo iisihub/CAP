@@ -35,7 +35,7 @@ import com.iisigroup.cap.Constants;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public class StringUtil {
+public class CapString {
 
 	public final static char[] hexChar = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
@@ -276,7 +276,7 @@ public class StringUtil {
 	 * @return boolean
 	 */
 	public static boolean checkRegularMatch(String str, String regEx) {
-		if (StringUtil.isEmpty(str)) {
+		if (CapString.isEmpty(str)) {
 			return false;
 		}
 		Pattern p = Pattern.compile(regEx);

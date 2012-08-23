@@ -28,12 +28,12 @@ import com.iisigroup.cap.Constants;
  *          <li>2011/12/26,rodeschen,new
  *          </ul>
  */
-public class CapSystemConfigUtil {
-	private static CapSystemConfigUtil util;
+public class CapSystemConfig {
+	private static CapSystemConfig util;
 
-	private static CapSystemConfigUtil getSystemConfigUtil() {
+	private static CapSystemConfig getSystemConfigUtil() {
 		if (util == null) {
-			util = AppContext.getBean(Constants.SYSTEM_CONFIG);
+			util = CapAppContext.getBean(Constants.SYSTEM_CONFIG);
 		}
 		return util;
 	}
@@ -47,7 +47,7 @@ public class CapSystemConfigUtil {
 	public void setProps(List<String> properties) {
 		for (Object prod : properties) {
 			try {
-				this.properties.load(AppContext.getApplicationContext().getResource(String.valueOf(prod)).getInputStream());
+				this.properties.load(CapAppContext.getApplicationContext().getResource(String.valueOf(prod)).getInputStream());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

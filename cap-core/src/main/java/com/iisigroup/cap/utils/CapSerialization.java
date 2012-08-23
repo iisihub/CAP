@@ -29,22 +29,22 @@ import java.util.zip.GZIPOutputStream;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public class SerializationUtil {
+public class CapSerialization {
 
 	private boolean compress = false;
 
-	SerializationUtil(boolean compress) {
+	CapSerialization(boolean compress) {
 		this.compress = compress;
 	}
 
-	private static SerializationUtil inst = new SerializationUtil(false);
-	private static SerializationUtil compressInst = new SerializationUtil(true);
+	private static CapSerialization inst = new CapSerialization(false);
+	private static CapSerialization compressInst = new CapSerialization(true);
 
-	public static SerializationUtil newInstance() {
+	public static CapSerialization newInstance() {
 		return inst;
 	}
 
-	public static SerializationUtil newCompressInstance() {
+	public static CapSerialization newCompressInstance() {
 		return compressInst;
 	}
 
@@ -108,7 +108,7 @@ public class SerializationUtil {
 	 * @return the original data
 	 */
 	public Object loadData(String in) {
-		return loadDataFromByteArray(StringUtil.hexStrToByteArray(in), compress);
+		return loadDataFromByteArray(CapString.hexStrToByteArray(in), compress);
 	}
 
 	public Object loadDataFromByteArray(byte[] in, boolean compress) {
@@ -149,7 +149,7 @@ public class SerializationUtil {
 	 * @return the object's serialized string
 	 */
 	public String saveData(Object o) {
-		return StringUtil.byteArrayToHexString(saveDataToByteArray(o, compress));
+		return CapString.byteArrayToHexString(saveDataToByteArray(o, compress));
 	}
 
 	public byte[] saveDataToByteArray(Object o, boolean compress) {

@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:lang="http://www.springframework.org/schema/lang"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 	<context:annotation-config />
+
+
+
+	<!-- TESTING H2 DB SERVER -->
+	<bean id="org.h2.tools.tcpServer" class="org.h2.tools.Server"
+		factory-method="createTcpServer" init-method="start" destroy-method="stop">
+		<constructor-arg value="-tcp,-tcpAllowOthers,true,-tcpPort,51043" />
+	</bean>
+
+	<bean id="org.h2.tools.webServer" class="org.h2.tools.Server"
+		factory-method="createWebServer" init-method="start" destroy-method="stop">
+		<constructor-arg value="-web,-webAllowOthers,true,-webPort,51044" />
+	</bean>
+
+
+
 	<util:list id="propList">
-		<value>classpath:/spring/hibernate-config.properties</value>
+		<value>classpath:/spring/hibernate.properties</value>
+		<!-- H2 config -->
+		<value>classpath:/spring/h2/hibernate.properties</value>
 		<value>classpath:/config.properties</value>
 	</util:list>
+
 	<bean id="placeholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="false" />
@@ -25,40 +38,42 @@
 	</bean>
 
 	<!-- application -->
-	<bean class="com.iisi.cap.utils.AppContext" />
+	<bean class="com.iisigroup.cap.utils.CapAppContext" />
+
 	<!-- Security context -->
-	<bean id="capSecurityContext" class="com.bqd.mci.security.CapSecurityContext"
+	<bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
 		scope="session" />
-	<!-- Syste config -->
-	<bean id="systemConfig" class="com.iisi.cap.utils.CapSystemConfigUtil">
-		<property name="props" ref="propList"  />
-	</bean>
+
 	<!-- messageSource -->
-    <bean id="messageSource"
-		class="com.bqd.mci.mvc.MCIReloadableResourceBundleMessageSource" >
+	<bean id="messageSource"
+		class="com.iisigroup.cap.mvc.message.CapReloadableResourceBundleMessageSource">
 	</bean>
 
-	<import resource="classpath:spring/springDatasource.xml" />
-	<!-- hg service -->
-	<import resource="classpath:spring/springHGService.xml" />
-	<import resource="classpath:spring/userDefineSQL.xml" />
+	<!-- Syste config -->
+	<bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
+		<property name="props" ref="propList" />
+	</bean>
 
+	<import resource="classpath:spring/datasource.xml" />
+	<!-- hg service -->
+	<!--<import resource="classpath:spring/HGService.xml" />-->
+	<!-- user defined sql -->
+	<import resource="classpath:spring/operation.xml" />
+	<import resource="classpath:spring/userDefineSQL.xml" />
 	<!-- @Dao -->
-	<context:component-scan base-package="com.**.dao.impl" />
+	<context:component-scan base-package="com.iisigroup.cap.**.dao.impl" />
 	<!-- @Controller -->
-	<context:component-scan base-package="com.iisi.cap.plugin" />
-	<context:component-scan base-package="com.iisi.cap.handler" />
-	<context:component-scan base-package="com.**.handler.**" />
-	<context:component-scan base-package="com.**.gridhandler.**" />
+	<context:component-scan base-package="com.iisigroup.cap.**.plugin" />
+	<context:component-scan base-package="com.iisigroup.cap.**.handler" />
 	<!-- @Service -->
-	<context:component-scan base-package="com.**.service.impl" />
-	<!-- @API -->
-	<context:component-scan base-package="com.**.api.impl" />
-	<!-- @ESB ACTION -->
-	<context:component-scan base-package="com.bqd.mci.**.step.action" />
+	<context:component-scan base-package="com.iisigroup.cap.**.service.impl" />
 	<!-- @Page Report -->
-	<context:component-scan base-package="com.**.page.report" />
-	<!-- BTT Config Loader -->
-	<bean id="BTTConfigLoader" class="com.bqd.mci.btt.BTTConfigLoader" />
+	<context:component-scan base-package="com.iisigroup.cap.**.page.report" />
+
+
+
+
+
+
 
 </beans>

@@ -28,7 +28,7 @@ import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -77,7 +77,7 @@ public abstract class MFormHandler extends FormHandler {
 		public IResult doWork(IRequest params) throws CapException {
 			IResult rtn = null;
 			String methodId = params.get(FORM_ACTION);
-			if (StringUtil.isEmpty(methodId)) {
+			if (CapString.isEmpty(methodId)) {
 				methodId = "doWork";
 			}
 			boolean hasMethod = false;
@@ -129,7 +129,7 @@ public abstract class MFormHandler extends FormHandler {
 		} else {
 			result.setPage(0);
 		}
-		boolean sort = params.containsParamsKey(IGridEnum.SORTCOLUMN.getCode()) && !StringUtil.isEmpty(params.get(IGridEnum.SORTCOLUMN.getCode()));
+		boolean sort = params.containsParamsKey(IGridEnum.SORTCOLUMN.getCode()) && !CapString.isEmpty(params.get(IGridEnum.SORTCOLUMN.getCode()));
 		if (sort) {
 			String[] sortBy = params.get(IGridEnum.SORTCOLUMN.getCode()).split("\\|");
 			String[] isAscAry = params.get(IGridEnum.SORTTYPE.getCode(), "asc").split("\\|");

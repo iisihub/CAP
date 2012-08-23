@@ -26,7 +26,7 @@ import com.iisigroup.cap.security.dao.IUserDao;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.model.IUser;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <p>
@@ -50,7 +50,7 @@ public class CapUserDetailsService implements UserDetailsService {
 	 * loadUserByUsername(java.lang.String)
 	 */
 	public UserDetails loadUserByUsername(String username) {
-		if (StringUtil.isEmpty(username)) {
+		if (CapString.isEmpty(username)) {
 			throw new UsernameNotFoundException("Empty login");
 		}
 

@@ -17,7 +17,7 @@ import org.springframework.core.io.Resource;
  *          <li>2011/11/4,rodeschen,new
  *          </ul>
  */
-public class AppContext implements ApplicationContextAware {
+public class CapAppContext implements ApplicationContextAware {
 
 	@Override
 	public void setApplicationContext(ApplicationContext ctx) {

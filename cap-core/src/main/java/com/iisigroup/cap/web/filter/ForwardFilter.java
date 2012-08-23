@@ -16,7 +16,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -81,10 +81,10 @@ public class ForwardFilter implements Filter {
 		while (rules.hasNext()) {
 			filterPath = rules.next();
 			distPath = filterRules.get(filterPath);
-			if (StringUtil.checkRegularMatch(url, filterPath)) {
+			if (CapString.checkRegularMatch(url, filterPath)) {
 				forward = true;
-				if (StringUtil.checkRegularMatch(filterPath, "(\\*|\\+|\\?)$")) {
-					url = StringUtil.getRegularMatch(
+				if (CapString.checkRegularMatch(filterPath, "(\\*|\\+|\\?)$")) {
+					url = CapString.getRegularMatch(
 							url,
 							"(?<="
 									+ filterPath.replaceAll("(\\*|\\.|\\*)$",

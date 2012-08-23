@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -57,7 +57,7 @@ public class FileDownloadResult implements IResult {
 	public FileDownloadResult(IRequest request, String file, String outputName, String contentType) {
 		this._request = request;
 		this._file = file;
-		this._outputName = StringUtil.isEmpty(outputName) ? FilenameUtils.getName(_file) : outputName;
+		this._outputName = CapString.isEmpty(outputName) ? FilenameUtils.getName(_file) : outputName;
 		this._contentType = contentType;
 	}
 

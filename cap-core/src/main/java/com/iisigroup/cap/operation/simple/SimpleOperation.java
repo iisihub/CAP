@@ -25,7 +25,7 @@ import com.iisigroup.cap.handler.FormHandler;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
 import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <p>
@@ -69,7 +69,7 @@ public class SimpleOperation implements Operation {
 					result = step.handleException(e);
 					throw e;
 				}
-				if (!StringUtil.isEmpty(result)) {
+				if (!CapString.isEmpty(result)) {
 					if (OperationStep.NEXT.equals(result)) {
 						step = getNextStep(step.getName());
 					} else if (OperationStep.RETURN.equals(result) || OperationStep.ERROR.equals(result)) {
