@@ -3,9 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
 	<!-- 日誌配置文件 -->
-
 	<context-param>
 		<description>log4j配置文件路徑</description>
 		<param-name>log4jConfigLocation</param-name>
@@ -34,38 +32,15 @@
 		<description>log4j</description>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
-
 	<listener>
 		<description>spring</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	<listener>
+		<description>spring-request-listener</description>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
 	<!-- Filter -->
-	<!--lazy load -->
-	<filter>
-		<filter-name>OpenSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-	</filter>
-	<filter>
-		<filter-name>set log4j MDC for SessionId</filter-name>
-		<filter-class>com.iisigroup.cap.log.LogContextFilter</filter-class>
-	</filter>
-	<!-- cap Filter -->
-	<filter>
-		<filter-name>capForwardFilter</filter-name>
-		<filter-class>com.iisigroup.cap.web.filter.ForwardFilter</filter-class>
-		<!-- webroot root for js -->
-		<init-param>
-			<param-name>/webroot.*</param-name>
-			<param-value>/.</param-value>
-		</init-param>
-		<!-- i18n path -->
-		<init-param>
-			<param-name>/i18njs</param-name>
-			<param-value>/handler/basehandler/queryJsI18N</param-value>
-		</init-param>
-
-	</filter>
 	<!--使用spring 內建 -->
 	<filter>
 		<description>encoding filter</description>
@@ -81,22 +56,50 @@
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>OpenSessionInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!--lazy load -->
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<!--lazy load -->
+	<!-- log4j MDC -->
+	<filter>
+		<filter-name>set log4j MDC for SessionId</filter-name>
+		<filter-class>com.iisigroup.cap.log.LogContextFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>set log4j MDC for SessionId</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- log4j MDC -->
+	<filter>
+		<description><![CDATA[
+			Url rewrite engine that acts as a mod_rewrite, uses the configuration located at WEB-INF/urlrewrite.xml
+			see http://tuckey.org/urlrewrite/
+ 		]]></description>
+		<description></description>
+		<filter-name>rewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	</filter>
 	<filter-mapping>
-		<filter-name>capForwardFilter</filter-name>
+		<filter-name>rewriteFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
-
+	<!-- cap Filter <filter> <filter-name>capForwardFilter</filter-name> <filter-class>com.iisigroup.cap.web.filter.ForwardFilter</filter-class> 
+		webroot root for js <init-param> <param-name>/webroot.*</param-name> <param-value>/.</param-value> 
+		</init-param> i18n path <init-param> <param-name>/i18njs</param-name> <param-value>/handler/basehandler/queryJsI18N</param-value> 
+		</init-param> </filter> <filter-mapping> <filter-name>capForwardFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 
 
@@ -120,6 +123,10 @@
 			<param-value>classpath:spring/mvc/page.xml</param-value>
 		</init-param>
 	</servlet>
+	<servlet>
+		<servlet-name>handler</servlet-name>
+		<servlet-class>com.iisigroup.cap.servlet.CapHandlerServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher-handler</servlet-name>
 		<url-pattern>/handler/*</url-pattern>
@@ -127,6 +134,10 @@
 	<servlet-mapping>
 		<servlet-name>dispatcher-page</servlet-name>
 		<url-pattern>/page/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>handler</servlet-name>
+		<url-pattern>/handler/*</url-pattern>
 	</servlet-mapping>
 	<!-- resource -->
 	<resource-ref>

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.component.SpringMVCRequest;
+import com.iisigroup.cap.component.CapSpringMVCRequest;
 import com.iisigroup.cap.mvc.page.report.IPageReport;
 import com.iisigroup.cap.utils.CapAppContext;
 
@@ -74,7 +74,7 @@ public class PageAction extends BaseActionController {
 
 	private IRequest getDefaultRequest() {
 		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
-		return cr != null ? cr : new SpringMVCRequest();
+		return cr != null ? cr : new CapSpringMVCRequest();
 	}
 
 }

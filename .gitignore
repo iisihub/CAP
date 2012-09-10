@@ -6,3 +6,5 @@ target*
 .classpath
 .tomcatplugin
 .tmp*
+h2db/capdb.h2.db
+h2db/capdb.lock.db

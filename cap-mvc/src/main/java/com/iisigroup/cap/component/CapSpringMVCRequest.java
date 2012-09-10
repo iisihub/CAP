@@ -36,7 +36,7 @@ import com.iisigroup.cap.component.IRequest;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class SpringMVCRequest extends HashMap<String, Object> implements IRequest {
+public class CapSpringMVCRequest extends HashMap<String, Object> implements IRequest {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 

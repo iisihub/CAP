@@ -7,9 +7,7 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 	<context:annotation-config />
 
-
-
-	<!-- TESTING H2 DB SERVER -->
+	<!-- ************** TESTING H2 DB SERVER *********************** -->
 	<bean id="org.h2.tools.tcpServer" class="org.h2.tools.Server"
 		factory-method="createTcpServer" init-method="start" destroy-method="stop">
 		<constructor-arg value="-tcp,-tcpAllowOthers,true,-tcpPort,51043" />
@@ -19,13 +17,10 @@
 		factory-method="createWebServer" init-method="start" destroy-method="stop">
 		<constructor-arg value="-web,-webAllowOthers,true,-webPort,51044" />
 	</bean>
-
-
-
+	<!-- ************** TESTING H2 DB SERVER *********************** -->
+    
 	<util:list id="propList">
 		<value>classpath:/spring/hibernate.properties</value>
-		<!-- H2 config -->
-		<value>classpath:/spring/h2/hibernate.properties</value>
 		<value>classpath:/config.properties</value>
 	</util:list>
 
@@ -48,11 +43,14 @@
 	<bean id="messageSource"
 		class="com.iisigroup.cap.mvc.message.CapReloadableResourceBundleMessageSource">
 	</bean>
+	
 
 	<!-- Syste config -->
 	<bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
 		<property name="props" ref="propList" />
 	</bean>
+
+	<bean id="CapDefaultRequest" class="com.iisigroup.cap.component.CapSpringMVCRequest" />
 
 	<import resource="classpath:spring/datasource.xml" />
 	<!-- hg service -->

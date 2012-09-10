@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.component.SpringMVCRequest;
+import com.iisigroup.cap.component.CapSpringMVCRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.handler.FormHandler;
@@ -125,7 +125,7 @@ public class HandlerAction extends BaseActionController {
 
 	private IRequest getDefaultRequest() {
 		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
-		return cr != null ? cr : new SpringMVCRequest();
+		return cr != null ? cr : new CapSpringMVCRequest();
 	}
 
 }

@@ -166,8 +166,8 @@ public class CapHttpService extends AbstractHGservice {
 		if (entity != null) {
 			InputStream instream = entity.getContent();
 			try {
-				responseData = StringUtils.join(IOUtils.readLines(instream)
-						.toArray());
+				responseData = StringUtils.join(IOUtils.readLines(instream,
+						defaultEncode).toArray());
 
 			} catch (RuntimeException ex) {
 				httpPost.abort();
