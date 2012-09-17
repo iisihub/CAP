@@ -6,7 +6,8 @@ pageEncoding="UTF-8" %>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=7" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>BDQ青岛银行</title>
+        <meta name="decorator" content="none">
+        <title>cap login</title>
     </head>
     <body class="claro">
         <div style="margin: auto; width: 960px;">

@@ -38,9 +38,11 @@
 		Assignment of decorators
 	-->
 	<decorator-mappers>
+		<!-- 
 		<mapper class="com.opensymphony.module.sitemesh.mapper.ParameterDecoratorMapper">
 			<param name="decorator.parameter" value="decorator" />
 		</mapper>
+		 -->
 		<!--
 			parameter.name / parameter.value: The name and value of the request parameter to be
 			used for informing SiteMesh that we want a printable page.
@@ -54,11 +56,12 @@
 			<param name="parameter.name" value="printable" />
 			<param name="parameter.value" value="true" />
 		</mapper>
+		 -->
 		<mapper class="com.opensymphony.module.sitemesh.mapper.PageDecoratorMapper">
 			<param name="property.1" value="meta.decorator" />
-			<param name="property.2" value="decorator" />
+			<!-- <param name="property.2" value="decorator" />-->
 		</mapper>
-		 -->
+		 
 		<!--
 			ConfigDecoratorMapper is the default implementation of DecoratorMapper.
 			Reads decorators and mappings from the config

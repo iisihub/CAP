@@ -10,8 +10,9 @@
 	<decorator name="minimal" page="minimal.jsp" />
 	<decorator name="none" page="none.jsp" />
 	<decorator name="default" page="default.jsp">
-		<pattern>*</pattern>
+		<pattern>/*</pattern>
 	</decorator>
+	
 	<excludes>
 		<pattern>*.html*</pattern>
 		<pattern>*.json*</pattern>
