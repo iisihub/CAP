@@ -9,11 +9,11 @@
         <title><decorator:title default="CapWebMVC" /></title><decorator:head/><!--
         <link rel="stylesheet" href="webroot/static/lib/css/yui_reset.css" />--><!--<link rel="stylesheet" href="webroot/static/lib/js/jquery/ui/css/custom-theme/jquery-ui-1.8.16.custom.css" />--><!--<link rel="stylesheet" href="webroot/static/lib/js/jquery/plugin/jquery.jqGrid-4.2.0/css/ui.jqgrid.css" />--><!--<link rel="stylesheet" href="webroot/static/lib/js/jquery/plugin/formValidator/css/validationEngine.jquery.css" />-->
         <link rel="stylesheet" href="webroot/static/css/main.css" />
-        <!--[if lt IE 9]>
+        <!--[if lt IE 9]>jquery-ui-1.8.23.custom.min.js
             <script src="webroot/js/html5.js"></script>
         <![endif]--><script src="webroot/static/lib/js/json3.min.js"></script>
         <script src="webroot/static/lib/js/jquery/jquery-1.8.1.min.js"></script>
-        <script src="webroot/static/lib/js/jquery/ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script src="webroot/static/lib/js/jquery/ui/js/jquery-ui-1.8.23.custom.min.js"></script>
         <script src="webroot/static/lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/i18n/grid.locale-cn.js"></script>
         <script src="webroot/static/lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/jquery.jqGrid.min.js"></script>
         <script src="webroot/static/lib/js/jquery/plugin/formValidator/languages/jquery.validationEngine-zh_CN.js"></script>

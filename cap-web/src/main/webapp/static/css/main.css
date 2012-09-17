@@ -2596,27 +2596,11 @@ body {
   margin: 0;
 }
 
-.bg-left {
-  background: url(../images/bg-left.png) right top no-repeat;
-  left: -10px;
-  top: 0;
-  width: 10px;
-  height: 460px;
-  position: absolute;
-}
-
-.bg-right {
-  top: 0;
-  width: 10px;
-  height: 460px;
-  position: absolute;
-}
-
 .mainBody {
   margin: auto;
   width: 950px;
   /*background-color: #FFF;*/
-  background-image: url("../images/body_bg.jpg");
+  background-image: url("webroot/static/images/body_bg.jpg");
   background-repeat: no-repeat;
   background-position: center top;
   position: relative;
@@ -2734,7 +2718,7 @@ nav.top ul.navmenu {
   right: 0px;
 }
 nav.top ul.navmenu li {
-  background-image: url("../images/first_menu_up_bg.png");
+  background-image: url("webroot/static/images/first_menu_up_bg.png");
   float: left;
   position: relative;
   border-right: #CCC 1px solid;
@@ -2787,7 +2771,7 @@ nav.top ul.navmenu li:hover ul li a {
   height: 28px;
   cursor: pointer;
   font-size: 14px;
-  background-image: url(../pic/buttonBackground.jpg);
+  background-image: url(webroot/static/pic/buttonBackground.jpg);
   border: 0px;
 }
 .menu .button.select, .menu .button:hover {
@@ -2842,7 +2826,7 @@ header div {
 
 /* footer */
 footer {
-  background: url(../images/bg-foot.png) top no-repeat;
+  background: url(webroot/static/images/bg-foot.png) top no-repeat;
   padding: 16px 0;
   color: #8B8B8B;
   text-align: right;
@@ -2887,7 +2871,7 @@ footer {
   line-height: 20px;
 }
 .r-grid .ui-state-default, .r-grid .ui-widget-content .ui-state-default, .r-grid .ui-widget-header .ui-state-default {
-  background: url("../images/centercontent_tr001.jpg");
+  background: url("webroot/static/images/centercontent_tr001.jpg");
   background-repeat: repeat-x;
 }
 .r-grid .ui-jqgrid tr.ui-row-ltr td, .r-grid .ui-jqgrid tr.jqgrow td {
@@ -2903,7 +2887,7 @@ footer {
 
 /** button **/
 .btn1, .ui-dialog-buttonset .ui-button {
-  background: url("../images/button001.jpg") scroll center center no-repeat !important;
+  background: url("webroot/static/images/button001.jpg") scroll center center no-repeat !important;
 }
 
 .btn1.ui-button-text-only .ui-button-text, .ui-dialog-buttonset button.ui-button-text-only .ui-button-text {
