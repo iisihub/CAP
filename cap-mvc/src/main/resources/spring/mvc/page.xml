@@ -23,7 +23,7 @@
 	<!-- ③：對模型視圖名稱的解析，即在模型視圖名稱添加前後綴 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/viewpage/" p:suffix=".jsp" />
+		p:prefix="/WEB-INF/viewpage/" p:suffix=".jsp" />
 
 	<!--配置國際化i18N信息 -->
 	<bean id="messageSource"
@@ -31,17 +31,18 @@
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="useCodeAsDefaultMessage" value="true" />
 	</bean>
-	<bean id="localeResolver"
-		class="com.iisigroup.cap.mvc.Interceptor.SessionLocaleResolver">
+	<bean id="localeResolver" class="com.iisigroup.cap.mvc.Interceptor.SessionLocaleResolver">
 		<property name="defaultLocale" value="zh_TW" />
 	</bean>
 
-	<bean id="localeChangeInterceptor" class="com.iisigroup.cap.mvc.Interceptor.LocaleChangeInterceptor">
+	<bean id="localeChangeInterceptor"
+		class="com.iisigroup.cap.mvc.Interceptor.LocaleChangeInterceptor">
 		<property name="paramName" value="language" />
 	</bean>
-	<bean id="userSecurityInterceptor" class="com.iisigroup.cap.mvc.Interceptor.CapUserSecurityInterceptor">
+	<bean id="userSecurityInterceptor"
+		class="com.iisigroup.cap.mvc.Interceptor.CapUserSecurityInterceptor">
 	</bean>
-	
+
 	<bean id="handlerMapping"
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">

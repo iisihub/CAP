@@ -16,7 +16,7 @@
 	</rule>
 	<rule match-type="regex">
 		<note>Serve static content directly from the filesystem and add caching instruction</note>
-		<from>/static/(.*)</from>
+		<from>.*/webroot/static/(.*)</from>
 		<set type="expires">5 days</set>
 		<to last="true">/static/$1</to>
 	</rule>

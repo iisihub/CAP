@@ -95,26 +95,26 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
+		<filter>
+		<description><![CDATA[
+			Decorates the output view given the configuration found in WEB-INF/sitemesh.xml
+			see http://www.opensymphony.com/sitemesh/ for more details
+		]]></description>
+		<filter-name>sitemeshFilter</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemeshFilter</filter-name>
+		<url-pattern>/page/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
 	<!-- cap Filter <filter> <filter-name>capForwardFilter</filter-name> <filter-class>com.iisigroup.cap.web.filter.ForwardFilter</filter-class> 
 		webroot root for js <init-param> <param-name>/webroot.*</param-name> <param-value>/.</param-value> 
 		</init-param> i18n path <init-param> <param-name>/i18njs</param-name> <param-value>/handler/basehandler/queryJsI18N</param-value> 
 		</init-param> </filter> <filter-mapping> <filter-name>capForwardFilter</filter-name> 
 		<url-pattern>/*</url-pattern> </filter-mapping> -->
-
-
-
-
-
-
 	<!-- servlet -->
-	<servlet>
-		<servlet-name>dispatcher-handler</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:spring/mvc/handler.xml</param-value>
-		</init-param>
-	</servlet>
 	<servlet>
 		<servlet-name>dispatcher-page</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -127,10 +127,6 @@
 		<servlet-name>handler</servlet-name>
 		<servlet-class>com.iisigroup.cap.servlet.CapHandlerServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>dispatcher-handler</servlet-name>
-		<url-pattern>/handler/*</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>dispatcher-page</servlet-name>
 		<url-pattern>/page/*</url-pattern>
