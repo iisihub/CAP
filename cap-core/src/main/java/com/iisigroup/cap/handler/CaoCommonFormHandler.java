@@ -26,14 +26,13 @@ import com.iisigroup.cap.response.IResult;
  * </pre>
  * @since  2011/3/22
  * @author RodesChen
- * @version $Id$
  * @version <ul>
  *           <li>2011/3/22,RodesChen,new
  *          </ul>
  */
 @Scope("request")
 @Controller("commonformhandler")
-public class TgmCommonFormHandler extends MFormHandler {
+public class CaoCommonFormHandler extends MFormHandler {
 
 
 	/**

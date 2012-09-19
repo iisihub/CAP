@@ -1,3 +1,12 @@
+/* 
+ * Copyright (c) 2009-2012 International Integrated System, Inc. 
+ * All Rights Reserved.
+ * 
+ * Licensed Materials - Property of International Integrated System, Inc.
+ * 
+ * This software is confidential and proprietary information of 
+ * International Integrated System, Inc. (&quot;Confidential Information&quot;).
+ */
 package com.iisigroup.cap.mvc.action;
 
 import java.util.Locale;
@@ -29,7 +38,7 @@ import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
- * HGServiceAction
+ * HandlerAction
  * </pre>
  * 
  * @since 2011/11/2
@@ -57,28 +66,31 @@ public class HandlerAction extends BaseActionController {
 	 * @throws Exception
 	 */
 	@RequestMapping
-	public void defaultAction(@PathVariable String handler, @PathVariable String action, Locale locale, HttpServletRequest servletRequest, HttpServletResponse response) throws Exception {
+	public void defaultAction(@PathVariable String handler,
+			@PathVariable String action, Locale locale,
+			HttpServletRequest servletRequest, HttpServletResponse response)
+			throws Exception {
 		long st = System.currentTimeMillis();
 		handler += "handler";
 		if (logger.isTraceEnabled()) {
-			logger.trace("Request Data: " + JSONObject.fromObject(servletRequest.getParameterMap()).toString());
+			logger.trace("Request Data: "
+					+ JSONObject.fromObject(servletRequest.getParameterMap())
+							.toString());
 		}
 		IResult result = null;
-
-		// String version = params.getString(PARAM_VERSION_KEY, "1.0.0");
-		String version = "1.0.0";
-
 		Logger pluginlogger = logger;
 		IRequest request = getDefaultRequest();
 		request.setRequestObject(servletRequest);
 		try {
 
 			request.setParameter(FormHandler.FORM_ACTION, action);
-			PluginManager pluginMgr = (PluginManager) CapAppContext.getBean("CapPluginManager");
+			PluginManager pluginMgr = (PluginManager) CapAppContext
+					.getBean("CapPluginManager");
 
-			logger.debug("handler:" + handler + " -receive data:" + request.toString());
+			logger.debug("handler:" + handler + " -receive data:"
+					+ request.toString());
 
-			HandlerPlugin plugin = pluginMgr.getPlugin(handler, version);
+			HandlerPlugin plugin = pluginMgr.getPlugin(handler);
 			result = plugin.execute(request);
 			pluginlogger = LoggerFactory.getLogger(plugin.getClass());
 		} catch (Exception e) {
@@ -106,7 +118,8 @@ public class HandlerAction extends BaseActionController {
 			response.setContentType(file.getContentType());
 			response.setContentLength(file.getByteArray().length);
 			if (!CapString.isEmpty(file.getOutputName())) {
-				response.setHeader("Content-Disposition", "attachment;filename=\"" + file.getOutputName() + "\"");
+				response.setHeader("Content-Disposition",
+						"attachment;filename=\"" + file.getOutputName() + "\"");
 			}
 			FileCopyUtils.copy(file.getByteArray(), response.getOutputStream());
 		} else {
@@ -116,7 +129,8 @@ public class HandlerAction extends BaseActionController {
 		if (logger.isTraceEnabled()) {
 			logger.trace("response data : " + result.getLogMessage());
 		}
-		logger.info("total spand time : " + (System.currentTimeMillis() - st) + "ms");
+		logger.info("total spand time : " + (System.currentTimeMillis() - st)
+				+ "ms");
 	}
 
 	private IErrorResult getDefaultErrorResult() {

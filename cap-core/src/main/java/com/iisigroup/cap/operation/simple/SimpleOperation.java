@@ -51,8 +51,8 @@ public class SimpleOperation implements Operation {
 	 * 
 	 * @see tw.com.iisi.cap.flow.Operation#execute()
 	 */
-	public IResult execute(IRequest params,
-			FormHandler handler) throws CapException {
+	public IResult execute(IRequest params, FormHandler handler)
+			throws CapException {
 		OperationStep step = getStartStep();
 		IResult formResult = result;
 		long startOperation = System.currentTimeMillis();
@@ -72,7 +72,8 @@ public class SimpleOperation implements Operation {
 				if (!CapString.isEmpty(result)) {
 					if (OperationStep.NEXT.equals(result)) {
 						step = getNextStep(step.getName());
-					} else if (OperationStep.RETURN.equals(result) || OperationStep.ERROR.equals(result)) {
+					} else if (OperationStep.RETURN.equals(result)
+							|| OperationStep.ERROR.equals(result)) {
 						step = null;
 					} else {
 						step = getStep(step.getRuleMap().get(result));
@@ -80,13 +81,13 @@ public class SimpleOperation implements Operation {
 				}
 			}
 			return formResult;
-		} catch(CapException ce){
+		} catch (CapException ce) {
 			throw ce;
 		} catch (Exception e) {
 			throw new CapException(e, getClass());
 		} finally {
 			SimpleContextHolder.resetContext();
-			logger.debug("Total cost : "
+			logger.debug("Operation cost : "
 					+ (System.currentTimeMillis() - startOperation));
 		}
 	}
@@ -154,7 +155,7 @@ public class SimpleOperation implements Operation {
 	public void setRuleMap(final Map<String, OperationStep> ruleMap) {
 		this.ruleMap = ruleMap;
 	}
-	
+
 	public void setResult(IResult result) {
 		this.result = result;
 	}

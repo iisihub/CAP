@@ -24,10 +24,9 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * set log4j MDC for log user information..
  * </p>
+ * 
  * @author gabriellalau
- * @version<ul>
- *            <li>2011-11-23,gabriella,new
- *         </ul>
+ * @version<ul> <li>2011-11-23,gabriella,new </ul>
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class LogContext extends InheritableThreadLocal {
@@ -41,11 +40,11 @@ public class LogContext extends InheritableThreadLocal {
 	public static final String LOGIN = "login";
 
 	public static final String SESSION_ID = "sessionId";
+
+	public static final String HOST = "host";
 	
-	public static final String IP = "ip";
-	
-	public static final String UUID = "uuid";
-	
+	public static final String CLIENT_ADDR = "clientAddr";
+
 	public static final String REQUEST_URI = "reqURI";
 
 	static {
@@ -170,13 +169,13 @@ public class LogContext extends InheritableThreadLocal {
 	/**
 	 * set the given IP in the map
 	 * 
-	 * @param ip
-	 *            the user IP
+	 * @param host
+	 *            the host
 	 */
-	public static void setIp(String ip) {
-		put(IP, ip);
+	public static void setHost(String host) {
+		put(HOST, host);
 	}
-	
+
 	/**
 	 * set the given web session in the map
 	 * 
@@ -187,12 +186,12 @@ public class LogContext extends InheritableThreadLocal {
 		put(SESSION_ID, sessionId);
 	}
 
-	public static void setRequestURL(String url) {
-		put(REQUEST_URI, url);
+	public static void seClientAddr(String addr) {
+		put(CLIENT_ADDR, addr);
 	}
 	
-	public static void setUUID(String uuid){
-		put(UUID,uuid);
+	public static void setRequestURL(String url) {
+		put(REQUEST_URI, url);
 	}
 
 }

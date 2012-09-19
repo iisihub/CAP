@@ -1,7 +1,7 @@
-/**
+/*
  * ContextHolder.java
  *
- * Copyright (c) 2009 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *
@@ -19,7 +19,6 @@ import com.iisigroup.cap.component.IRequest;
 /**<p> ContextHolder.</p>
  *
  * @author iristu
- * @version $Revision: 372 $
  * @version <ul>
  *           <li>2010/7/22,iristu,new
  *          </ul>

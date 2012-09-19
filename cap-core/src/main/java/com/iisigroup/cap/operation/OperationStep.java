@@ -1,7 +1,7 @@
-/**
+/*
  * OperationStep.java
  *
- * Copyright (c) 2009 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *

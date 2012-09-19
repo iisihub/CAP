@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="jpa" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!-- dialect -->
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<!-- enable auto DDL export -->
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.enabled}</prop>
+
+				<prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
+
+				<!-- 2d level cache -->
+				<prop key="hibernate.cache.use_query_cache">${hibernate.use.query.cache}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.use.second.level.cache}</prop>
+
+				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.ehcache.configuration.file}</prop>
+				<prop key="hibernate.cache.use_structured_entries">true</prop>
+
+				<!-- misc -->
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+				<prop key="hibernate.jdbc.use_scrollable_resultset">${hibernate.jdbc.use_scrollable_resultset}</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+				<prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+
+				<!-- logging debug information -->
+				<prop key="hibernate.show_sql">${hibernate.show.sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format.sql}</prop>
+				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+				<prop key="hibernate.use_sql_comments">${hibernate.use_sql_comments}</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- setup spring support Clob and Blob -->
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
+
+	<!-- Enable exception translation for beans annotated with @Repository <bean 
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<!--設置service层交易處理的方法 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- all methods below are read-only -->
+			<tx:method name="getNew*" timeout="45" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="send" propagation="REQUIRES_NEW" />
+			<tx:method name="saveSeq" timeout="45" rollback-for="Throwable"
+				propagation="REQUIRES_NEW" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" timeout="45" rollback-for="Throwable"
+				propagation="REQUIRED" />
+			<!-- timeout in seconds -->
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="CapServicePointcut" expression="execution(* com..service.*.*(..))" />
+
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="CapServicePointcut" />
+	</aop:config>
+</beans>

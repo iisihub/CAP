@@ -16,13 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.iisigroup.cap.component.IRequest;
 
 /**
  * <pre>
@@ -36,11 +35,12 @@ import com.iisigroup.cap.component.IRequest;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class CapSpringMVCRequest extends HashMap<String, Object> implements IRequest {
+public class CapSpringMVCRequest extends HashMap<String, Object> implements
+		IRequest {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private HttpServletRequest request;
+	private ServletRequest request;
 
 	// Map<String, Object> custParams = new HashMap<String, Object>();
 
@@ -66,7 +66,7 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
 	 * @return Map 前頁傳過來的參數值
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> getReqParameter(HttpServletRequest req) {
+	public Map<String, Object> getReqParameter(ServletRequest req) {
 		Enumeration<String> fids = req.getParameterNames();
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		while (fids.hasMoreElements()) {
@@ -96,7 +96,8 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
 	@Override
 	public String get(String key, String defaultValue) {
 		Object value = null;
-		value = super.containsKey(key) ? super.get(key) : request.getParameter(key);
+		value = super.containsKey(key) ? super.get(key) : request
+				.getParameter(key);
 
 		if (value == null) {
 			logger.trace("can't find request parameter :" + key);
@@ -126,7 +127,7 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
 	 * @see tw.com.iisi.cap.component.ICapRequest#getServletRequest()
 	 */
 	@Override
-	public HttpServletRequest getServletRequest() {
+	public ServletRequest getServletRequest() {
 		return request;
 	}
 
@@ -197,7 +198,8 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
 	@Override
 	public Object getObject(String key) {
 		Object value = null;
-		value = super.containsKey(key) ? super.get(key) : request.getParameter(key);
+		value = super.containsKey(key) ? super.get(key) : request
+				.getParameter(key);
 
 		if (value == null) {
 			logger.debug("can't find request parameter :" + key);

@@ -5,73 +5,43 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-	<context:annotation-config />
-
-	<!-- ************** TESTING H2 DB SERVER *********************** -->
-	<bean id="org.h2.tools.tcpServer" class="org.h2.tools.Server"
-		factory-method="createTcpServer" init-method="start" destroy-method="stop">
-		<constructor-arg value="-tcp,-tcpAllowOthers,true,-tcpPort,51043" />
-	</bean>
-
-	<bean id="org.h2.tools.webServer" class="org.h2.tools.Server"
-		factory-method="createWebServer" init-method="start" destroy-method="stop">
-		<constructor-arg value="-web,-webAllowOthers,true,-webPort,51044" />
-	</bean>
-	<!-- ************** TESTING H2 DB SERVER *********************** -->
-    
-	<util:list id="propList">
-		<value>classpath:/spring/hibernate.properties</value>
-		<value>classpath:/config.properties</value>
-	</util:list>
 
 	<bean id="placeholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="false" />
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		<property name="ignoreResourceNotFound" value="false" />
-		<property name="locations" ref="propList" />
+		<property name="locations">
+            <list>
+                <value>classpath:config/database.properties</value>
+				<value>classpath:config/hibernate.properties</value>
+            </list>
+        </property>
 	</bean>
 
 	<!-- application -->
 	<bean class="com.iisigroup.cap.utils.CapAppContext" />
-
-	<!-- Security context -->
-	<bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
-		scope="session" />
 
 	<!-- messageSource -->
 	<bean id="messageSource"
 		class="com.iisigroup.cap.mvc.message.CapReloadableResourceBundleMessageSource">
 	</bean>
 	
-
 	<!-- Syste config -->
 	<bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
-		<property name="props" ref="propList" />
+		<constructor-arg index="0">
+			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+				<property name="location">
+					<value>classpath:config.properties</value>
+				</property>
+			</bean>
+		</constructor-arg>
 	</bean>
-
-	<bean id="CapDefaultRequest" class="com.iisigroup.cap.component.CapSpringMVCRequest" />
-
+	
 	<import resource="classpath:spring/datasource.xml" />
-	<!-- hg service -->
-	<!--<import resource="classpath:spring/HGService.xml" />-->
-	<!-- user defined sql -->
+	<import resource="classpath:spring/jpa.xml" />
+	<import resource="classpath:spring/component.xml"/>
+	<!-- <import resource="classpath:spring/security.xml" />-->
 	<import resource="classpath:spring/operation.xml" />
-	<import resource="classpath:spring/userDefineSQL.xml" />
-	<!-- @Dao -->
-	<context:component-scan base-package="com.iisigroup.cap.**.dao.impl" />
-	<!-- @Controller -->
-	<context:component-scan base-package="com.iisigroup.cap.**.plugin" />
-	<context:component-scan base-package="com.iisigroup.cap.**.handler" />
-	<!-- @Service -->
-	<context:component-scan base-package="com.iisigroup.cap.**.service.impl" />
-	<!-- @Page Report -->
-	<context:component-scan base-package="com.iisigroup.cap.**.page.report" />
-
-
-
-
-
-
-
+	
 </beans>

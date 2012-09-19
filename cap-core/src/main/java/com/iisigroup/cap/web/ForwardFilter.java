@@ -1,4 +1,4 @@
-package com.iisigroup.cap.web.filter;
+package com.iisigroup.cap.web;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -44,6 +44,7 @@ public class ForwardFilter implements Filter {
 	 *            FilterConfig
 	 * @throws ServletException
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		filterRules = new LinkedHashMap<String, String>();

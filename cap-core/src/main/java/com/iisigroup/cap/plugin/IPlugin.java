@@ -29,12 +29,6 @@ public interface IPlugin extends InitializingBean{
 	/** The Constant PLUGIN_NOT_FOUND_MSG. */
 	public static final String PLUGIN_NOT_FOUND_MSG = "cap.core.pluginNotFound"; 
 	
-	/**
-	 * Version.
-	 * 
-	 * @return the string
-	 */
-	public String version();
 	
 	/**
 	 * Gets the plugin name.

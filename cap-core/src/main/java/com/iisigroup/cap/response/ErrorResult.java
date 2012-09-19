@@ -10,6 +10,8 @@
  */
 package com.iisigroup.cap.response;
 
+import org.apache.commons.lang.CharEncoding;
+
 import net.sf.json.JSONObject;
 
 import com.iisigroup.cap.component.IRequest;
@@ -105,6 +107,16 @@ public class ErrorResult implements IErrorResult {
 		JSONObject json = JSONObject.fromObject(result);
 		this.errorMessage.putAll(json);
 		this.logMessage = result.getLogMessage();
+	}
+
+	@Override
+	public String getContextType() {
+		return "text/plain;charset=UTF-8";
+	}
+	
+	@Override
+	public String getEncoding() {
+		return CharEncoding.UTF_8;
 	}
 
 }

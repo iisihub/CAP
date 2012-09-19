@@ -1,7 +1,7 @@
-/**
+/*
  * CapAjaxFormResult.java
  *
- * Copyright (c) 2009-2011 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *
@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.CharEncoding;
+
 import net.sf.json.JSONObject;
 
 
@@ -28,7 +30,6 @@ import net.sf.json.JSONObject;
  * 
  * @since 2010/7/21
  * @author iristu
- * @version $Id$
  * @version <ul>
  *          <li>2010/7/21,iristu,new
  *          <li>2011/2/14,RodesChen,增加add判斷
@@ -254,6 +255,16 @@ public class AjaxFormResult implements IResult {
 			JSONObject json = JSONObject.fromObject(result.getResult());
 			resultMap.putAll(json);
 		}
+	}
+
+	@Override
+	public String getContextType() {
+		return "text/plain;charset=UTF-8";
+	}
+
+	@Override
+	public String getEncoding() {
+		return CharEncoding.UTF_8;
 	}
 
 }

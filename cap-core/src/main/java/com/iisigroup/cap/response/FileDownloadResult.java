@@ -12,11 +12,6 @@
  */
 package com.iisigroup.cap.response;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +35,7 @@ import com.iisigroup.cap.utils.CapString;
 public class FileDownloadResult implements IResult {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	protected String _file;
 	protected String _outputName;
 	protected String _contentType;
@@ -54,11 +49,18 @@ public class FileDownloadResult implements IResult {
 		this(request, file, null, contentType);
 	}
 
-	public FileDownloadResult(IRequest request, String file, String outputName, String contentType) {
+	public FileDownloadResult(IRequest request, String file, String outputName,
+			String contentType) {
 		this._request = request;
 		this._file = file;
-		this._outputName = CapString.isEmpty(outputName) ? FilenameUtils.getName(_file) : outputName;
+		this._outputName = CapString.isEmpty(outputName) ? FilenameUtils
+				.getName(_file) : outputName;
 		this._contentType = contentType;
+	}
+
+	@Override
+	public String getContextType() {
+		return this._contentType;
 	}
 
 	/*
@@ -72,34 +74,13 @@ public class FileDownloadResult implements IResult {
 	}// ;
 
 	@Override
-	public String getLogMessage() {
-		return new StringBuffer("Download file:").append(_file).toString();
+	public String getEncoding() {
+		return null;
 	}
 
-	/**
-	 * 下載檔名中文依IE及FireFox做區分
-	 * 
-	 * @param fileName
-	 *            String
-	 * @return String
-	 */
-	protected String encodeFileName(String fileName) {
-		try {
-			fileName = URLDecoder.decode(fileName, "utf-8");
-			String agent = _request.getServletRequest().getHeader("USER-AGENT");
-
-			if (null != agent && -1 != agent.indexOf("MSIE")) {
-
-				return URLEncoder.encode(fileName, "UTF8");
-
-			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
-				return "=?UTF-8?B?" + (new String(Base64.encodeBase64(fileName.getBytes("UTF-8")))) + "?=";
-			} else {
-				return fileName;
-			}
-		} catch (UnsupportedEncodingException e) {
-			return fileName;
-		}
+	@Override
+	public String getLogMessage() {
+		return new StringBuffer("Download file:").append(_file).toString();
 	}
 
 	@Override

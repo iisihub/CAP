@@ -12,10 +12,9 @@
 package com.iisigroup.cap.utils;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
-import com.iisigroup.cap.Constants;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <pre>
@@ -28,33 +27,35 @@ import com.iisigroup.cap.Constants;
  *          <li>2011/12/26,rodeschen,new
  *          </ul>
  */
-public class CapSystemConfig {
-	private static CapSystemConfig util;
-
-	private static CapSystemConfig getSystemConfigUtil() {
-		if (util == null) {
-			util = CapAppContext.getBean(Constants.SYSTEM_CONFIG);
-		}
-		return util;
-	}
-
-	public static String getProperty(String key) {
-		return getSystemConfigUtil().getProperties().getProperty(key);
-	}
+public class CapSystemConfig implements InitializingBean {
 
 	private Properties properties = new Properties();
 
-	public void setProps(List<String> properties) {
-		for (Object prod : properties) {
-			try {
-				this.properties.load(CapAppContext.getApplicationContext().getResource(String.valueOf(prod)).getInputStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	public CapSystemConfig() {
 	}
+
+	public CapSystemConfig(Properties properties) throws IOException {
+		this.properties = properties;
+	}
+
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
+
+	public String getProperty(String key, String defValue) {
+		return properties.getProperty(key, defValue);
+	}// ;
+
+	public boolean containsKey(String key) {
+		return properties.containsKey(key);
+	}// ;
 
 	public Properties getProperties() {
 		return properties;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+
 	}
 }

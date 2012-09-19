@@ -12,6 +12,7 @@
 package com.iisigroup.cap.response;
 
 import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <pre>
@@ -35,25 +36,30 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 	public ByteArrayDownloadResult() {
 	}// ;
 
-	public ByteArrayDownloadResult(IRequest request, byte[] byteArray, String contentType, String outputName) {
+	public ByteArrayDownloadResult(IRequest request, byte[] byteArray,
+			String contentType, String outputName) {
 		this._request = request;
 		this._byteArray = byteArray;
 		this._contentType = contentType;
-		this._outputName = encodeFileName(outputName);
+		this._outputName = CapWebUtil.encodeFileName(_request, outputName);
 	}// ;
-	
-	public ByteArrayDownloadResult(IRequest request, byte[] byteArray, String contentType) {
+
+	public ByteArrayDownloadResult(IRequest request, byte[] byteArray,
+			String contentType) {
 		this._request = request;
 		this._byteArray = byteArray;
 		this._contentType = contentType;
-		//this._outputName = encodeFileName(outputName);
 	}// ;
 
 	@Override
 	public String getLogMessage() {
-		return new StringBuffer("Download file:").append(_outputName).toString();
+		if (_outputName == null) {
+			return _contentType + " byteArrayDownload complete!!";
+		} else {
+			return new StringBuffer("Download file:").append(_outputName)
+					.toString();
+		}
 	}
-
 
 	public byte[] getByteArray() {
 		return _byteArray;
@@ -74,7 +80,8 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 			this._request = r._request;
 			this._contentType = r._contentType;
 			this._byteArray = r._byteArray;
-			this._outputName = encodeFileName(r._outputName);
+			this._outputName = CapWebUtil.encodeFileName(_request,
+					r._outputName);
 		}
 	}// ;
 

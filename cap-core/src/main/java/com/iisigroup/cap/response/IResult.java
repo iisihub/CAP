@@ -33,7 +33,9 @@ public interface IResult extends Serializable {
 	String getLogMessage();
 
 	void add(IResult result);
-
-//	ICapRequest getRequestTarget();
+	
+	String getContextType();
+	
+	String getEncoding();
 
 }

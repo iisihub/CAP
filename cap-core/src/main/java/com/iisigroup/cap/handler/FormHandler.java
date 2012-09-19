@@ -12,15 +12,13 @@
  */
 package com.iisigroup.cap.handler;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -60,20 +58,9 @@ public abstract class FormHandler extends HandlerPlugin {
 
 	public abstract String getOperationName();
 
-	@Autowired
-	private ApplicationContext context;
-
 	public Operation getOperation() {
-		return (Operation) context.getBean(getOperationName());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.plugin.ICapPlugin#version()
-	 */
-	public String version() {
-		return "1.0.0";
+		return (Operation) CapAppContext.getApplicationContext().getBean(
+				getOperationName());
 	}
 
 	/*

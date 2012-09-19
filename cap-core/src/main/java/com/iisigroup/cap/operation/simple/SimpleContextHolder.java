@@ -1,7 +1,7 @@
-/**
- * FlowContextHolder.java
+/*
+ * SimpleContextHolder.java
  *
- * Copyright (c) 2009 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *
@@ -21,7 +21,6 @@ import java.util.Map;
  * </p>
  * 
  * @author iristu
- * @version $Revision: 372 $
  * @version <ul>
  *          <li>2010/7/22,iristu,new
  *          </ul>
@@ -90,7 +89,10 @@ public class SimpleContextHolder extends InheritableThreadLocal {
 	 * Remove all the object put in this thread context.
 	 */
 	public static void resetContext() {
-		getContext().clear();
+		if (keepContext.get() != null) {
+			keepContext.get().clear();
+			keepContext.remove();
+		}
 	}
 
 }// ~

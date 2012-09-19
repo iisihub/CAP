@@ -1,6 +1,7 @@
-/*_
- * Copyright (c) 2009-2011 International Integrated System, Inc. 
- * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
+/* 
+ * MapGridResult.java
+ * 
+ * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
  * 
  * Licensed Materials - Property of International Integrated System, Inc.
@@ -8,9 +9,10 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-
 package com.iisigroup.cap.response;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,48 +25,49 @@ import org.apache.commons.lang.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ibm.icu.util.Calendar;
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
+import com.iisigroup.cap.formatter.ADDateFormatter;
+import com.iisigroup.cap.formatter.ADDateTimeFormatter;
+import com.iisigroup.cap.formatter.IBeanFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
-import com.iisigroup.cap.model.GenericBean;
 
 /**
  * <pre>
  * Grid Result
  * </pre>
  * 
- * @since 2010/11/25
+ * @since 2011/10/26
  * @author iristu
  * @version <ul>
- *          <li>2010/11/25,iristu,new
- *          <li>2011/6/21,RodesChen,增加method 供 MGridHandler 使用
- *          <li>2011/11/1,rodeschen,from cap
- *          <li>2011/11/1,rodeschen,modify for criteria
- *          <li>2012/09/18,iristu,改implements IGridResult
+ *          <li>2011/10/26,iristu,new
+ *          <li>2011/03/28,sunkist,update callback
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class GridResult implements IGridResult<GridResult, GenericBean> {
+public class MapGridResult implements
+		IGridResult<MapGridResult, Map<String, Object>> {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	private JSONObject resultMap;
 
-	private List<? extends GenericBean> rowData;
+	private List<? extends Map<String, Object>> rowData;
 
 	private String[] columns;
 
 	private Map<String, IFormatter> dataReformatter;
 
-	public GridResult() {
+	public MapGridResult() {
 		resultMap = new JSONObject();
 	}
 
-	public GridResult(List<? extends GenericBean> rowData, int records) {
+	public MapGridResult(List<Map<String, Object>> rowData, int records) {
 		this(rowData, records, null);
 	}
 
-	public GridResult(List<? extends GenericBean> rowData, int records,
+	public MapGridResult(List<Map<String, Object>> rowData, int records,
 			Map<String, IFormatter> dataReformatter) {
 		resultMap = new JSONObject();
 		setRowData(rowData);
@@ -81,7 +84,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 *            頁碼
 	 * @return this
 	 */
-	public GridResult setPage(int page) {
+	public MapGridResult setPage(int page) {
 		resultMap.put(IGridEnum.PAGE.getCode(), page);
 		return this;
 	}// ;
@@ -106,7 +109,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 *            一頁筆數
 	 * @return this
 	 */
-	public GridResult setPageCount(int rowCount, int pageRows) {
+	public MapGridResult setPageCount(int rowCount, int pageRows) {
 		resultMap.put(IGridEnum.TOTAL.getCode(), rowCount / pageRows
 				+ (rowCount % pageRows > 0 ? 1 : 0));
 		resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
@@ -132,7 +135,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 *            總筆數
 	 * @return this
 	 */
-	public GridResult setRecords(int rowCount) {
+	public MapGridResult setRecords(int rowCount) {
 		resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
 		return this;
 	}// ;
@@ -158,7 +161,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 *            資料
 	 * @return this
 	 */
-	public GridResult setRowData(List<? extends GenericBean> rowData) {
+	public MapGridResult setRowData(List<? extends Map<String, Object>> rowData) {
 		this.rowData = rowData;
 		return this;
 	}
@@ -186,7 +189,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		resultMap.putAll(json);
 	}
 
-	public GridResult addReformatData(String key, IFormatter formatter)
+	public MapGridResult addReformatData(String key, IFormatter formatter)
 			throws CapException {
 		if (dataReformatter == null) {
 			dataReformatter = new HashMap<String, IFormatter>();
@@ -199,7 +202,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		this.columns = columns;
 	}
 
-	public List<? extends GenericBean> getRowData() {
+	public List<? extends Map<String, Object>> getRowData() {
 		return this.rowData;
 	}
 
@@ -211,17 +214,52 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		JSONArray rows = new JSONArray();
 		Map<String, Object> row = new HashMap<String, Object>();
 		if (rowData != null && !rowData.isEmpty()) {
-			for (GenericBean data : rowData) {
+			for (Map<String, Object> data : rowData) {
 				try {
-					row.put(IGridEnum.CELL.getCode(),
-							data.toJSONString(this.columns, dataReformatter));
+					row.put(IGridEnum.CELL.getCode(), dataToJsonString(data));
 				} catch (CapException e) {
-					logger.error(e.getMessage(), e);
+					e.printStackTrace();
 				}
 				rows.add(row);
 			}
 		}
 		return rows;
+	}// ;
+
+	/** column split regularre char **/
+	private static String SPLIT = "\\|";
+
+	protected String dataToJsonString(Map<String, Object> data)
+			throws CapException {
+		JSONArray row = new JSONArray();
+		for (String str : columns) {
+			Object val = null;
+			try {
+				try {
+					String[] s = str.split(SPLIT);
+					val = s.length == 1 ? data.get(s[0]) : data.get(s[1]);
+					str = s[0];
+				} catch (Exception e) {
+					val = "";
+				}
+				if (dataReformatter != null && dataReformatter.containsKey(str)) {
+					IFormatter callback = dataReformatter.get(str);
+					if (callback instanceof IBeanFormatter) {
+						val = callback.reformat(data);
+					} else {
+						val = callback.reformat(val);
+					}
+				} else if (val instanceof Timestamp) {
+					val = new ADDateTimeFormatter().reformat(val);
+				} else if (val instanceof Date || val instanceof Calendar) {
+					val = new ADDateFormatter().reformat(val);
+				}
+				row.add(String.valueOf(val));
+			} catch (Exception e) {
+				throw new CapException(e.getMessage(), e, getClass());
+			}
+		}
+		return row.toString();
 	}
 
 	/**
@@ -251,7 +289,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 *            the order by
 	 * @return SearchSetting
 	 */
-	public GridResult addOrderBy(String orderBy) {
+	public MapGridResult addOrderBy(String orderBy) {
 		if (this.orderBy == null) {
 			this.orderBy = new LinkedHashMap<String, Boolean>();
 		}
@@ -269,7 +307,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 *            是否要降羃排序
 	 * @return SearchSetting
 	 */
-	public GridResult addOrderBy(String orderBy, boolean orderDesc) {
+	public MapGridResult addOrderBy(String orderBy, boolean orderDesc) {
 		if (this.orderBy == null) {
 			this.orderBy = new LinkedHashMap<String, Boolean>();
 		}
@@ -277,7 +315,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		return this;
 	}
 
-	public GridResult setOrderBy(Map<String, Boolean> orderBy) {
+	public MapGridResult setOrderBy(Map<String, Boolean> orderBy) {
 		this.orderBy = orderBy;
 		return this;
 	}
@@ -301,4 +339,4 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		return this.dataReformatter;
 	}
 
-}// ~
+}

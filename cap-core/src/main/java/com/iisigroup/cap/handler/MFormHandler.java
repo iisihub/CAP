@@ -27,6 +27,7 @@ import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.response.GridResult;
+import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapString;
 
@@ -83,11 +84,15 @@ public abstract class MFormHandler extends FormHandler {
 			boolean hasMethod = false;
 			try {
 
-				for (Method method : ReflectionUtils.getAllDeclaredMethods(executeHandler.getClass())) {
+				for (Method method : ReflectionUtils
+						.getAllDeclaredMethods(executeHandler.getClass())) {
 					if (methodId.equals(method.getName())) {
-						HandlerType type = method.getAnnotation(HandlerType.class);
-						if (type == null || HandlerTypeEnum.FORM.equals(type.value())) {
-							rtn = (IResult) method.invoke(executeHandler, params);
+						HandlerType type = method
+								.getAnnotation(HandlerType.class);
+						if (type == null
+								|| HandlerTypeEnum.FORM.equals(type.value())) {
+							rtn = (IResult) method.invoke(executeHandler,
+									params);
 						} else if (HandlerTypeEnum.GRID.equals(type.value())) {
 							rtn = execute(method, params);
 						}
@@ -102,7 +107,8 @@ public abstract class MFormHandler extends FormHandler {
 				} else if (e.getCause() instanceof CapException) {
 					throw (CapException) e.getCause();
 				} else {
-					throw new CapException(e.getCause(), executeHandler.getClass());
+					throw new CapException(e.getCause(),
+							executeHandler.getClass());
 				}
 			} catch (Throwable t) {
 				throw new CapException(t, executeHandler.getClass());
@@ -115,8 +121,9 @@ public abstract class MFormHandler extends FormHandler {
 
 	}// ;
 
+	@SuppressWarnings("rawtypes")
 	private IResult execute(Method method, IRequest params) throws CapException {
-		GridResult result = new GridResult();
+		IGridResult result = new GridResult();
 
 		beforeExcute(params);
 		boolean pages = params.containsParamsKey(IGridEnum.PAGE.getCode());
@@ -129,19 +136,24 @@ public abstract class MFormHandler extends FormHandler {
 		} else {
 			result.setPage(0);
 		}
-		boolean sort = params.containsParamsKey(IGridEnum.SORTCOLUMN.getCode()) && !CapString.isEmpty(params.get(IGridEnum.SORTCOLUMN.getCode()));
+		boolean sort = params.containsParamsKey(IGridEnum.SORTCOLUMN.getCode())
+				&& !CapString
+						.isEmpty(params.get(IGridEnum.SORTCOLUMN.getCode()));
 		if (sort) {
-			String[] sortBy = params.get(IGridEnum.SORTCOLUMN.getCode()).split("\\|");
-			String[] isAscAry = params.get(IGridEnum.SORTTYPE.getCode(), "asc").split("\\|");
+			String[] sortBy = params.get(IGridEnum.SORTCOLUMN.getCode()).split(
+					"\\|");
+			String[] isAscAry = params.get(IGridEnum.SORTTYPE.getCode(), "asc")
+					.split("\\|");
 			for (int i = 0; i < sortBy.length; i++) {
 				String isAsc = (i < isAscAry.length) ? isAscAry[i] : "asc";
-				result.addOrderBy(sortBy[i], !IGridEnum.SORTASC.getCode().equals(isAsc));
+				result.addOrderBy(sortBy[i], !IGridEnum.SORTASC.getCode()
+						.equals(isAsc));
 			}
 		}
 
 		result.setColumns(getColumns(params.get(IGridEnum.COL_PARAM.getCode())));
 		try {
-			result = (GridResult) method.invoke(this, result, params);
+			result = (IGridResult) method.invoke(this, result, params);
 
 			// refresh page count
 			result.setPageCount(result.getRecords(), pageRows);
@@ -187,7 +199,11 @@ public abstract class MFormHandler extends FormHandler {
 			// colNames[i] = m.containsKey(IGridEnum.COL_INDEX.getCode()) ?
 			// m.get(IGridEnum.COL_INDEX.getCode()) :
 			// m.get(IGridEnum.COL_NAME.getCode());
-			colNames[i] = m.containsKey(IGridEnum.COL_INDEX.getCode()) ? m.get(IGridEnum.COL_NAME.getCode()) + "|" + m.get(IGridEnum.COL_INDEX.getCode()) : m.get(IGridEnum.COL_NAME.getCode());
+			colNames[i] = m.containsKey(IGridEnum.COL_INDEX.getCode()) ? m
+					.get(IGridEnum.COL_NAME.getCode())
+					+ "|"
+					+ m.get(IGridEnum.COL_INDEX.getCode()) : m
+					.get(IGridEnum.COL_NAME.getCode());
 		}
 		return colNames;
 	};
@@ -205,7 +221,9 @@ public abstract class MFormHandler extends FormHandler {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.iisi.cap.handler.FormHandler#getOperationName()
 	 */
 	@Override

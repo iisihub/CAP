@@ -31,7 +31,6 @@ import com.iisigroup.cap.operation.OperationStep;
  * </pre>
  * @since  2010/11/24
  * @author iristu
- * @version $Id$
  * @version <ul>
  *           <li>2010/11/24,iristu,new
  *          </ul>

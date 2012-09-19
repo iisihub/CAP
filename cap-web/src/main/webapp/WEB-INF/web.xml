@@ -95,7 +95,7 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
-		<filter>
+	<filter>
 		<description><![CDATA[
 			Decorates the output view given the configuration found in WEB-INF/sitemesh.xml
 			see http://www.opensymphony.com/sitemesh/ for more details
@@ -126,6 +126,18 @@
 	<servlet>
 		<servlet-name>handler</servlet-name>
 		<servlet-class>com.iisigroup.cap.servlet.CapHandlerServlet</servlet-class>
+		<init-param>
+			<param-name>pluginManager</param-name>
+			<param-value>CapPluginManager</param-value>
+		</init-param>
+		<init-param>
+			<param-name>defaultRequest</param-name>
+			<param-value>CapDefaultRequest</param-value>
+		</init-param>
+		<init-param>
+			<param-name>errorResult</param-name>
+			<param-value>CapDefaultErrorResult</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher-page</servlet-name>
@@ -137,7 +149,7 @@
 	</servlet-mapping>
 	<!-- resource -->
 	<resource-ref>
-		<description>BQD MCI datasource</description>
+		<description>cap datasource</description>
 		<res-ref-name>jdbc/capdb</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>

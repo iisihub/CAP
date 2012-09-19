@@ -72,14 +72,20 @@ public class GenericBean {
 		try {
 			Field f = ReflectionUtils.findField(getClass(), field);
 			if (f != null) {
-				String setter = new StringBuffer("set").append(String.valueOf(f.getName().charAt(0)).toUpperCase()).append(f.getName().substring(1)).toString();
-				Method method = ReflectionUtils.findMethod(this.getClass(), setter, new Class[] { f.getType() });
+				String setter = new StringBuffer("set")
+						.append(String.valueOf(f.getName().charAt(0))
+								.toUpperCase())
+						.append(f.getName().substring(1)).toString();
+				Method method = ReflectionUtils.findMethod(this.getClass(),
+						setter, new Class[] { f.getType() });
 				if (method != null) {
 					method.invoke(this, value);
 				}
 			}
 		} catch (Exception e) {
-			throw new CapException(new StringBuffer("field:").append(field).append(" ").append(e.getMessage()).toString(), e, getClass());
+			throw new CapException(new StringBuffer("field:").append(field)
+					.append(" ").append(e.getMessage()).toString(), e,
+					getClass());
 		}
 		return (T) this;
 	}
@@ -93,7 +99,8 @@ public class GenericBean {
 	 */
 	public Object get(String fieldId) throws CapException {
 		if (CapString.isEmpty(fieldId)) {
-			throw new CapException("field [" + fieldId + "] is empty!!", getClass());
+			throw new CapException("field [" + fieldId + "] is empty!!",
+					getClass());
 		}
 		try {
 			String field = fieldId;
@@ -102,10 +109,13 @@ public class GenericBean {
 				field = fieldId.substring(0, index);
 				Object keyClazz = get(field);
 				if (keyClazz instanceof GenericBean) {
-					return ((GenericBean) keyClazz).get(fieldId.substring(index + 1));
+					return ((GenericBean) keyClazz).get(fieldId
+							.substring(index + 1));
 				}
 			} else {
-				String getter = new StringBuffer("get").append(String.valueOf(field.charAt(0)).toUpperCase()).append(field.substring(1)).toString();
+				String getter = new StringBuffer("get")
+						.append(String.valueOf(field.charAt(0)).toUpperCase())
+						.append(field.substring(1)).toString();
 				Method method = ReflectionUtils.findMethod(getClass(), getter);
 				if (method == null) {
 					getter = "is" + getter.substring(3);
@@ -121,7 +131,8 @@ public class GenericBean {
 					}
 				}
 			}
-			throw new CapException(new StringBuffer("field:").append(field).append(" is not exist!!").toString(), getClass());
+			throw new CapException(new StringBuffer("field:").append(field)
+					.append(" is not exist!!").toString(), getClass());
 
 		} catch (Exception e) {
 			throw new CapException(e, getClass());
@@ -140,7 +151,8 @@ public class GenericBean {
 	 *            Map<String, IFormatter>
 	 * @return String JsonString
 	 */
-	public String toJSONString(String[] columns, Map<String, IFormatter> reformat) throws CapException {
+	public String toJSONString(String[] columns,
+			Map<String, IFormatter> reformat) throws CapException {
 		JSONArray row = new JSONArray();
 		for (String str : columns) {
 			Object val = null;
@@ -181,7 +193,8 @@ public class GenericBean {
 	 *            Map<String, IFormatter>
 	 * @return String JsonString
 	 */
-	public JSONObject toJSONObject(String[] columns, Map<String, IFormatter> reformat) throws CapException {
+	public JSONObject toJSONObject(String[] columns,
+			Map<String, IFormatter> reformat) throws CapException {
 		JSONObject json = new JSONObject();
 		if (columns == null) {
 			Field[] cols = CapBeanUtil.getField(this.getClass(), true);// this.getClass().getDeclaredFields();
@@ -224,7 +237,8 @@ public class GenericBean {
 	 * @return string
 	 */
 	public String toString() {
-		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE, false, false);
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE, false, false);
 	}
 
 }

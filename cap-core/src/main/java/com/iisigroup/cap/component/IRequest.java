@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletRequest;
 
 /**
  * <pre>
@@ -41,9 +41,9 @@ public interface IRequest extends Map<String, Object>, Serializable {
 	/**
 	 * get ServletRequest
 	 * 
-	 * @return HttpServletRequest
+	 * @return ServletRequest
 	 */
-	HttpServletRequest getServletRequest();
+	ServletRequest getServletRequest();
 
 	/**
 	 * get request parameter

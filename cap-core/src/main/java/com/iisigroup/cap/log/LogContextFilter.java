@@ -25,7 +25,6 @@ import javax.servlet.http.HttpSession;
 
 import com.iisigroup.cap.utils.CapString;
 
-
 /**
  * <p>
  * set log4j MDC for log user information.
@@ -33,14 +32,10 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @author gabriellalau
  * @version <ul>
- *              <li>2011-11-23,gabriella,new
+ *          <li>2011-11-23,gabriella,new
  *          </ul>
  */
 public class LogContextFilter implements Filter {
-
-	//private static final Logger log = Logger.getLogger(CapLogContextFilter.class);
-	// private static final Logger logger =
-	// Logger.getLogger(CapLogContextFilter.class);
 
 	public final static String LOGIN_USERNAME = "LOGIN_USERNAME";
 
@@ -65,13 +60,14 @@ public class LogContextFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession(false);
-		LogContext.setUUID(CapString.getUUIDString());
-		//CapLogContext.setIp(req.getLocalAddr());
+		// Host IP
+		LogContext.setHost(req.getLocalAddr());
+
 		if (session == null) {
 			LogContext.setLogin(DEFAULT_LOGIN);
 		} else {
 			// 用戶端IP
-			LogContext.put("clientAddr", req.getRemoteAddr());
+			LogContext.seClientAddr(req.getRemoteAddr());
 			// Session ID
 			LogContext.setSessionId(session.getId());
 			LogContext.setRequestURL(getRequestURL(req));
@@ -85,11 +81,8 @@ public class LogContextFilter implements Filter {
 				LogContext.setLogin(userId);
 			}
 		}
-		//log.info("test for MDC");
 		chain.doFilter(request, response);
-		LogContext.remove("reqURI");
-		LogContext.remove(LogContext.SESSION_ID);
-		LogContext.remove(LogContext.LOGIN);
+		LogContext.resetLogContext();
 	}// ;
 
 	/**
@@ -106,31 +99,8 @@ public class LogContextFilter implements Filter {
 		if (f > -1) {
 			url = url.substring(f + 4);
 		}
-		if (!CapString.isEmpty(req.getParameter("_pa"))) {
-			url = "/" + req.getParameter("_pa");
-//		} else {
-//			String queryString = req.getQueryString();
-//			if (!StringUtil.isEmpty(queryString)) {
-//				StringBuffer newQueryString = new StringBuffer();
-//				String[] query = queryString.split("&");
-//				for (String q : query) {
-//					if (q.startsWith("x=") || q.startsWith("jsessionid=")
-//							|| "_pa=".equals(q) || "_=".equals(q)) {
-//						continue;
-//					} else {
-//						newQueryString.append(q).append('&');
-//					}
-//				}
-//				if (newQueryString.length() > 0) {
-//					newQueryString.deleteCharAt(newQueryString.length() - 1);
-//				}
-//				if (newQueryString.indexOf("_pa=") > -1) {
-//					return newQueryString.toString();
-//				} else if (newQueryString.length() > 0) {
-//					return new StringBuffer(url).append("?")
-//							.append(newQueryString.toString()).toString();
-//				}
-//			}
+		if (!CapString.isEmpty(req.getParameter("_handler"))) {
+			url = "/" + req.getParameter("_handler");
 		}
 		return url;
 	}

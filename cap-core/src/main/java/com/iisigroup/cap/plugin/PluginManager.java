@@ -1,7 +1,7 @@
 /*
  * CapPluginManager.java 2009/9/9 上午 04:34:00
  * 
- * Copyright (c) 2009-2011 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.exception.CapPlugInNotFoundException;
 
@@ -32,13 +31,17 @@ import com.iisigroup.cap.exception.CapPlugInNotFoundException;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-@Service("CapPluginManager")
 public class PluginManager implements InitializingBean {
 
-	private final static Logger logger = LoggerFactory.getLogger(PluginManager.class);
+	private final static Logger logger = LoggerFactory
+			.getLogger(PluginManager.class);
+
+	private ApplicationContext context;
 
 	@Autowired
-	private ApplicationContext context;
+	public void setContext(ApplicationContext context) {
+		this.context = context;
+	}
 
 	/**
 	 * User Spring Bean Name to find Bean Class
@@ -47,24 +50,24 @@ public class PluginManager implements InitializingBean {
 	 *            T
 	 * @param plugInBeanName
 	 *            plugInBeanName
-	 * @param version
-	 *            version
 	 * @return T
 	 * @throws CapPlugInNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getPlugin(String plugInBeanName, String version) throws CapPlugInNotFoundException {
+	public <T> T getPlugin(String plugInBeanName)
+			throws CapPlugInNotFoundException {
 		T plugin = null;
 
 		long start = System.currentTimeMillis();
 		plugin = (T) context.getBean(plugInBeanName, IPlugin.class);
 		if (logger.isTraceEnabled()) {
-			logger.trace("Spring Find " + plugInBeanName + " executed time: " + (System.currentTimeMillis() - start));
+			logger.trace("Spring Find {} executed time: {}", plugInBeanName,
+					(System.currentTimeMillis() - start));
 		}
 		if (plugin != null) {
 			return plugin;
 		} else {
-			throw new CapPlugInNotFoundException(plugInBeanName, plugInBeanName, version);
+			throw new CapPlugInNotFoundException(plugInBeanName, plugInBeanName);
 		}
 	}
 

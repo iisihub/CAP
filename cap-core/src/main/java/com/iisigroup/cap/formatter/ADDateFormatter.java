@@ -12,6 +12,7 @@
  */
 package com.iisigroup.cap.formatter;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -46,14 +47,16 @@ public class ADDateFormatter implements IFormatter {
      */
     @SuppressWarnings("unchecked")
 	public String reformat(Object in) throws CapFormatException {
-    	if(in != null){
-    		if (in instanceof Calendar) {
-                in = ((Calendar) in).getTime();
-            }
-            return df.format(in);
-    	}else{
-    		return Constants.EMPTY_STRING;
-    	}
+    	if (in != null && !"".equals(in)) {
+			if (in instanceof Calendar) {
+				in = ((Calendar) in).getTime();
+			} else if (in instanceof String) {
+				return df.format(df.parse((String) in, new ParsePosition(0)));
+			}
+			return df.format(in);
+		} else {
+			return Constants.EMPTY_STRING;
+		}
     }
 
 }
