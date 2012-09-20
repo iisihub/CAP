@@ -11,28 +11,29 @@
 package com.iisigroup.cap.base.handler;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
 
-import com.iisigroup.cap.annotation.HandlerType;
-import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CodeTypeService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -55,21 +56,6 @@ public class CodeTypeHandler extends MFormHandler {
 	private CodeTypeService codeTypeService;
 
 	/**
-	 * get datas by grid
-	 * 
-	 * @param capGridResult
-	 *            capgridResult
-	 * @param request
-	 *            request
-	 * @return CapGridResult
-	 */
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(GridResult capGridResult, IRequest request) {
-		codeTypeService.getPage(capGridResult);
-		return capGridResult;
-	}
-
-	/**
 	 * modify codetype
 	 * 
 	 * @param request
@@ -79,9 +65,9 @@ public class CodeTypeHandler extends MFormHandler {
 	public IResult modify(IRequest request) throws CapException {
 		AjaxFormResult result = new AjaxFormResult();
 		String type = request.get("type");
-		CodeType code = codeTypeService
-				.getCodeTypeByCodeTypeAndValue(request.get("cdeType"),
-						request.get("cdeVal"));
+		String locale = CapSecurityContext.getLocale().toString();
+		CodeType code = codeTypeService.getByCodeTypeAndValue(
+				request.get("cdeType"), request.get("cdeVal"), locale);
 
 		if ("A".equals(type)) {
 			if (code != null) {
@@ -91,22 +77,20 @@ public class CodeTypeHandler extends MFormHandler {
 			}
 			code = new CodeType();
 		} else {
-			if (code != null
-					&& !code.getOid().equals(request.get("oid"))) {
+			if (code != null && !code.getOid().equals(request.get("oid"))) {
 				// codetype.0001 代碼重覆!
 				throw new CapMessageException(
 						CapAppContext.getMessage("codetype.0001"), getClass());
 			} else if (code == null) {
-				code = codeTypeService.getCodeTypeById(request
-						.get("oid"));
+				code = codeTypeService.getById(request.get("oid"));
 			}
 		}
 		CapBeanUtil.map2Bean(request, code, CodeType.class);
 		if ("A".equals(type)) {
 			code.setOid(null);
 		}
-		code.setLastModBy(CapSecurityContext.getUserId());
-		code.setLastModTm(CapDate.getCurrentTimestamp());
+		code.setLastModifyBy(CapSecurityContext.getUserId());
+		code.setLastModifyTime(CapDate.getCurrentTimestamp());
 		codeTypeService.saveCodeType(code);
 		return result;
 	}
@@ -120,7 +104,7 @@ public class CodeTypeHandler extends MFormHandler {
 	 */
 	public IResult delete(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
-		codeTypeService.deleteCodeTypeById(request.get("oid"));
+		codeTypeService.deleteById(request.get("oid"));
 		return result;
 	}
 
@@ -133,18 +117,23 @@ public class CodeTypeHandler extends MFormHandler {
 	 */
 	@SuppressWarnings("rawtypes")
 	public IResult queryByKeys(IRequest request) {
+		String locale = CapSecurityContext.getLocale().toString();
 		String[] keys = request.getParamsAsStringArray("keys");
 		String[] aKeys = request.getParamsAsStringArray("akeys");
 		AjaxFormResult mresult = new AjaxFormResult();
-		if (keys.length > 0) {
-			Map<String, AjaxFormResult> m = codeTypeService
-					.getCodeTypeByTypes(keys);
+		if (keys.length > 0 && !CapString.isEmpty(keys[0])) {
+			Set<String> k = new HashSet<String>(Arrays.asList(keys));// 排除重覆的key
+			Map<String, AjaxFormResult> m = codeTypeService.getCodeTypeByTypes(
+					k.toArray(new String[k.size()]), locale);
 			mresult.setResultMap(m);
 		}
-		if (aKeys.length > 0) {
+		if (aKeys.length > 0 && !CapString.isEmpty(aKeys[0])) {
 			Class[] paramTypes = { IRequest.class };
 			IResult rtn = null;
 			for (String key : aKeys) {
+				if (mresult.containsKey(key)) {
+					continue;
+				}
 				Method method = ReflectionUtils.findMethod(this.getClass(),
 						key, paramTypes);
 				if (method != null) {
@@ -159,6 +148,5 @@ public class CodeTypeHandler extends MFormHandler {
 		}
 		return mresult;
 	}
-
 
 }

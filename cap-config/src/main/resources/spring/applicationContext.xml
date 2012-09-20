@@ -13,8 +13,7 @@
 		<property name="ignoreResourceNotFound" value="false" />
 		<property name="locations">
             <list>
-                <value>classpath:config/database.properties</value>
-				<value>classpath:config/hibernate.properties</value>
+                <value>classpath:db/database.properties</value>
             </list>
         </property>
 	</bean>
@@ -38,8 +37,9 @@
 		</constructor-arg>
 	</bean>
 	
-	<import resource="classpath:spring/datasource.xml" />
-	<import resource="classpath:spring/jpa.xml" />
+	<import resource="classpath:db/datasource.xml" />
+	<import resource="classpath:db/jdbcTemplate.xml" />
+	<import resource="classpath:db/jpa.xml" />
 	<import resource="classpath:spring/component.xml"/>
 	<!-- <import resource="classpath:spring/security.xml" />-->
 	<import resource="classpath:spring/operation.xml" />

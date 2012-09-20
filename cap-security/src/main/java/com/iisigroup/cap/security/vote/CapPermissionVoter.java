@@ -45,7 +45,7 @@ public class CapPermissionVoter extends RoleVoter {
 			Collection<ConfigAttribute> attributes) {
 		int result = ACCESS_ABSTAIN;
 		Iterator iter = attributes.iterator();
-		Collection<GrantedAuthority> authorities = authentication
+		Collection<? extends GrantedAuthority> authorities = authentication
 				.getAuthorities();
 
 		while (iter.hasNext()) {

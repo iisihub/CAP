@@ -48,7 +48,8 @@ public class CapSecurityContext {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends UserDetails> T getUserDetails() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 
 		if (auth != null && auth.getPrincipal() instanceof UserDetails) {
 			return ((T) auth.getPrincipal());
@@ -66,7 +67,8 @@ public class CapSecurityContext {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends IUser> T getUser() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 
 		if (auth != null && auth.getPrincipal() instanceof IUser) {
 			return ((T) auth.getPrincipal());
@@ -123,11 +125,12 @@ public class CapSecurityContext {
 		IUser user = getUser();
 		if (user != null) {
 			return user.getLocale();
+		} else {
+			return Locale.getDefault();
 		}
-		return null;
 	}
 
-	public static Collection<GrantedAuthority> getAuthorities() {
+	public static Collection<? extends GrantedAuthority> getAuthorities() {
 		UserDetails user = getUserDetails();
 		if (user != null) {
 			return user.getAuthorities();
@@ -137,9 +140,10 @@ public class CapSecurityContext {
 
 	public static Set<String> getRoleIds() {
 		Set<String> roleOids = new HashSet<String>();
-		Collection<GrantedAuthority> auths = getAuthorities();
+		Collection<? extends GrantedAuthority> auths = getAuthorities();
 		for (GrantedAuthority auth : auths) {
-			if (AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY.equals(auth.getAuthority())) {
+			if (AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY.equals(auth
+					.getAuthority())) {
 				continue;
 			}
 			roleOids.add(auth.getAuthority());

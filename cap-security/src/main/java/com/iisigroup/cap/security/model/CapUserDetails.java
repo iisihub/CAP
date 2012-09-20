@@ -20,7 +20,7 @@ import java.util.Map;
 import net.sf.json.JSONArray;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -64,7 +64,7 @@ public class CapUserDetails implements UserDetails, IUser {
 	protected void setAuthorities(Map<String, String> roles) {
 		authorities = new ArrayList<GrantedAuthority>();
 		for (String roleOid : roles.keySet()) {
-			authorities.add(new GrantedAuthorityImpl(roleOid));
+			authorities.add(new SimpleGrantedAuthority(roleOid));
 		}
 	}
 

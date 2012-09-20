@@ -1,4 +1,14 @@
-
+/* 
+ * CodeType.java
+ * 
+ * Copyright (c) 2009-2012 International Integrated System, Inc. 
+ * All Rights Reserved.
+ * 
+ * Licensed Materials - Property of International Integrated System, Inc.
+ * 
+ * This software is confidential and proprietary information of 
+ * International Integrated System, Inc. (&quot;Confidential Information&quot;).
+ */
 package com.iisigroup.cap.base.model;
 
 import java.sql.Timestamp;
@@ -6,65 +16,58 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
+import javax.validation.constraints.NotNull;
 
 import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.IDataObject;
 
 /**
  * <pre>
- * 字典代码表
+ * CodeType
  * </pre>
  * 
- * @since 2010/12/8
+ * @since 2012/9/20
  * @author iristu
  * @version <ul>
- *          <li>2010/12/8,iristu,new
- *          <li>2010/11/8/20,RodesChen,from cap
- *          <li>2011-12-19,Gabriella,修改column
+ *          <li>2012/9/20,iristu,new
  *          </ul>
  */
 @SuppressWarnings("serial")
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "CODETYPE", uniqueConstraints = @UniqueConstraint(columnNames = { "cdeType", "cdeVal" }))
+@Table(name = "CODETYPE", uniqueConstraints = @UniqueConstraint(columnNames = {
+		"codeType", "codeValue" }))
 public class CodeType extends GenericBean implements IDataObject {
 
 	@Id
-	@GeneratedValue(generator = "strategy-uuid")
-	@GenericGenerator(name = "strategy-uuid", strategy = "uuid")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, length = 32)
 	private String oid;
 
-	/** 代码 */
-	@Column(nullable = false, length = 32)
-	private String cdeType;
+	@NotNull
+	@Column(length = 32, nullable = false)
+	private String codeType;
 
-	/** 值 */
-	@Column(nullable = false, length = 48)
-	private String cdeVal;
+	@Column(length = 32)
+	private String codeValue;
 
-	/** 描述 */
-	@Column(length = 100)
-	private String cdeDesc;
+	@Column(length = 300)
+	private String codeDesc;
 
-	/** 排序 */
 	@Column(nullable = false, length = 3)
-	private Integer cdeOrd;
+	private Integer codeOrder;
 
-	/** 修改操作者 */
-	@Column(nullable = false, length = 10)
-	private String lastModBy;
+	@Column(length = 6)
+	private String lastModifyBy;
 
-	/** 修改时间 */
-	@Column(nullable = false)
-	private Timestamp lastModTm;
+	@Column
+	private Timestamp lastModifyTime;
+
+	@Column(length = 5)
+	private String locale;
 
 	public String getOid() {
 		return oid;
@@ -74,52 +77,60 @@ public class CodeType extends GenericBean implements IDataObject {
 		this.oid = oid;
 	}
 
-	public String getCdeType() {
-		return cdeType;
+	public String getCodeType() {
+		return codeType;
 	}
 
-	public void setCdeType(String cdeType) {
-		this.cdeType = cdeType;
+	public void setCodeType(String codeType) {
+		this.codeType = codeType;
 	}
 
-	public String getCdeVal() {
-		return cdeVal;
+	public String getCodeValue() {
+		return codeValue;
 	}
 
-	public void setCdeVal(String cdeVal) {
-		this.cdeVal = cdeVal;
+	public void setCodeValue(String codeValue) {
+		this.codeValue = codeValue;
 	}
 
-	public String getCdeDesc() {
-		return cdeDesc;
+	public String getCodeDesc() {
+		return codeDesc;
 	}
 
-	public void setCdeDesc(String cdeDesc) {
-		this.cdeDesc = cdeDesc;
+	public void setCodeDesc(String codeDesc) {
+		this.codeDesc = codeDesc;
 	}
 
-	public Integer getCdeOrd() {
-		return cdeOrd;
+	public Integer getCodeOrder() {
+		return codeOrder;
 	}
 
-	public void setCdeOrd(Integer cdeOrd) {
-		this.cdeOrd = cdeOrd;
+	public void setCodeOrder(Integer codeOrder) {
+		this.codeOrder = codeOrder;
 	}
 
-	public String getLastModBy() {
-		return lastModBy;
+	public String getLastModifyBy() {
+		return lastModifyBy;
 	}
 
-	public void setLastModBy(String lastModBy) {
-		this.lastModBy = lastModBy;
+	public void setLastModifyBy(String lastModifyBy) {
+		this.lastModifyBy = lastModifyBy;
 	}
 
-	public Timestamp getLastModTm() {
-		return lastModTm;
+	public Timestamp getLastModifyTime() {
+		return lastModifyTime;
 	}
 
-	public void setLastModTm(Timestamp lastModTm) {
-		this.lastModTm = lastModTm;
+	public void setLastModifyTime(Timestamp lastModifyTime) {
+		this.lastModifyTime = lastModifyTime;
+	}
+
+	public String getLocale() {
+		return locale;
+	}
+
+	public void setLocale(String locale) {
+		this.locale = locale;
 	}
 
 }

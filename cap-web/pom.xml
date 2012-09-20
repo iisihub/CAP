@@ -3,46 +3,51 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>cap</artifactId>
-		<groupId>com.iisigroup</groupId>
+		<groupId>com.iisigroup.cap</groupId>
 		<version>2.0.0</version>
 	</parent>
-	<groupId>com.iisigroup</groupId>
+	<groupId>com.iisigroup.cap</groupId>
 	<artifactId>cap-web</artifactId>
 	<version>2.0.0</version>
 	<packaging>war</packaging>
+	<properties>
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<hibernate.version>4.1.5.Final</hibernate.version>
+	</properties>
 	<dependencies>
+		
 		<dependency>
-			<groupId>com.iisigroup</groupId>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-core</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.iisigroup</groupId>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-security</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.iisigroup</groupId>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-mvc</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.iisigroup</groupId>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-config</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.iisigroup</groupId>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-hg</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.iisigroup</groupId>
-			<artifactId>cap-jpa</artifactId>
+			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-db</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.iisigroup</groupId>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-base</artifactId>
 			<version>2.0.0</version>
 		</dependency>
@@ -51,10 +56,47 @@
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.3</version>
 		</dependency>
+		<!-- HIBERNATE DEPENDENCIES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId> 
+			<version>2.2.0</version> </dependency> -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- H2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.153</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
@@ -63,6 +105,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
 			</plugin>
 		</plugins>
 	</build>

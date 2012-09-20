@@ -5,13 +5,10 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.IDataObject;
@@ -28,29 +25,29 @@ import com.iisigroup.cap.model.IDataObject;
  *          </ul>
  */
 @SuppressWarnings("serial")
-@Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parm"))
+//@Entity
+//@Table(name = "SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parm"))
 public class SysParm extends GenericBean implements IDataObject {
 
 	@Id
-	@GeneratedValue(generator = "strategy-uuid")
-	@GenericGenerator(name = "strategy-uuid", strategy = "uuid")
+//	@GeneratedValue(generator = "strategy-uuid")
+//	@GenericGenerator(name = "strategy-uuid", strategy = "uuid")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-hex")
 	@Column(length = 32)
 	private String oid;
-	/** 参数id */
+	/** 參數id */
 	@Column(length = 30, nullable = false)
 	private String parm;
-	/** 参数数值 */
+	/** 參數數值 */
 	@Column(length = 10, nullable = false)
 	private String parmValue;
-	/** 参数描述 */
+	/** 參數描述 */
 	@Column(length = 100)
 	private String parmDesc;
 	/** 修改操作者 */
 	@Column(length = 10, nullable = false)
 	private String lastModBy;
-	/** 修改时间 */
+	/** 修改時間 */
 	@Column(nullable = false)
 	private Timestamp lastModTm;
 

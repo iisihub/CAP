@@ -15,10 +15,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
-import com.iisigroup.cap.response.GridResult;
+import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.model.Page;
 
 /**
  * <p>
@@ -36,8 +34,6 @@ import com.iisigroup.cap.response.GridResult;
  */
 public interface IGenericDao<T> {
 
-	public Session getSession();
-
 	/**
 	 * Insert.
 	 * 
@@ -45,8 +41,9 @@ public interface IGenericDao<T> {
 	 *            the entity
 	 */
 	void save(T entity);
-
+	
 	void save(List<T> entries);
+	
 
 	/**
 	 * Delete.
@@ -55,8 +52,8 @@ public interface IGenericDao<T> {
 	 *            the entity
 	 */
 	void delete(T entity);
-
-	void delete(List<T> entries);
+	
+	void delete (List<T> entries);
 
 	/**
 	 * Find.
@@ -67,26 +64,37 @@ public interface IGenericDao<T> {
 	 * @return the t
 	 */
 	T find(Serializable pk);
-
+			
 	T find(T entity);
-
-	T findUniqueOrNone(Criteria criteria);
-
-	// List<T> find(ISearch search);
+	
+	T findUniqueOrNone(ISearch search);
+		
+	List<T> find(ISearch search);
+	
 
 	/**
 	 * Count.
 	 * 
-	 * @param criteria
-	 *            criteria
+	 * @param search SearchSetting
 	 * @return the int
 	 */
-	int count(Criteria criteria);
-
+	int count(ISearch search);
+	
 	Iterator<T> list(int first, int count);
-
-	GridResult findPage(Criteria criteria, GridResult gridResult);
-
-	GridResult findPage(GridResult gridResult);
+	
+	Page<T> findPage(ISearch search);
+	
+	<S> Page<S> findPage(Class<S> clazz, ISearch search);
+	
+	/**
+	 * create new search requirement
+	 * @return ISearch
+	 */
+	ISearch createSearchTemplete();
+	
+	/**
+	 * flush
+	 */
+	void flush();
 
 }

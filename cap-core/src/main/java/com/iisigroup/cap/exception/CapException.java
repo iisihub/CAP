@@ -32,7 +32,7 @@ package com.iisigroup.cap.exception;
  *          </ul>
  */
 @SuppressWarnings({ "serial" })
-public class CapException extends Exception {
+public class CapException extends RuntimeException {
 
 	@SuppressWarnings("rawtypes")
 	Class causeClass;

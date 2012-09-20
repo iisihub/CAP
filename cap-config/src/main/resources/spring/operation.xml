@@ -34,7 +34,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 	</bean>
 
 	<bean id="doActionStep" class="com.iisigroup.cap.operation.step.CapFormHandleOpStep"
-		scope="request" />
+		scope="prototype" />
 
 	<bean id="formResult" class="com.iisigroup.cap.response.AjaxFormResult"
 		scope="prototype" />

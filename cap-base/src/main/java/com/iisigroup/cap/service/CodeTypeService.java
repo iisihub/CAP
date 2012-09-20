@@ -9,12 +9,10 @@
  */
 package com.iisigroup.cap.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
 
 /**
  * <pre>
@@ -39,32 +37,27 @@ public interface CodeTypeService {
 	void saveCodeType(CodeType codeType);
 
 	/**
-	 * get CodeType by type
+	 * get Map by code type
 	 * 
-	 * @param type
-	 *            typeName
-	 * @return List
+	 * @param codeType
+	 *            代碼類型
+	 * @param locale
+	 *            語系
+	 * @return Map
+	 * 
 	 */
-	List<CodeType> getCodeTypeByType(String type);
+	Map<String, String> findByCodeType(String codeType, String locale);
 
 	/**
-	 * get codeType by type
-	 * 
-	 * @param type
-	 *            type key
-	 * @return Map<String, String>
-	 */
-	Map<String, String> queryCodeTypeByType(String type);
-	
-	/**
 	 * get codeType by types
+	 * 
 	 * @param types
-	 * 		types
-	 * @return
-	 * 		Map<String, Map<String,String>>
+	 *            types
+	 * @return Map<String, Map<String,String>>
 	 */
-	public Map<String, Map<String,String>> queryCodeTypeByTypes(String[] types);
-	
+	Map<String, Map<String, String>> findByCodeTypes(String[] types,
+			String locale);
+
 	/**
 	 * get codeType by types
 	 * 
@@ -72,7 +65,7 @@ public interface CodeTypeService {
 	 *            type keys
 	 * @return Map<String, CapAjaxFormResult>
 	 */
-	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types);
+	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types, String locale);
 
 	/**
 	 * get CodeType by type and value
@@ -83,7 +76,7 @@ public interface CodeTypeService {
 	 *            value
 	 * @return CodeType
 	 */
-	CodeType getCodeTypeByCodeTypeAndValue(String type, String value);
+	CodeType getByCodeTypeAndValue(String type, String value, String locale);
 
 	/**
 	 * get CodeType by oid
@@ -93,21 +86,14 @@ public interface CodeTypeService {
 	 * 
 	 * @return CodeType
 	 */
-	CodeType getCodeTypeById(String oid);
+	CodeType getById(String oid);
 
 	/**
 	 * delete CodeType By Oid
-	 * @param oid oid
-	 */
-	void deleteCodeTypeById(String oid);
-
-	/**
-	 * 取得Grid 所需資料
 	 * 
-	 * @param capGridresult
-	 *            settings
-	 * @return capGridResult
+	 * @param oid
+	 *            oid
 	 */
-	GridResult getPage(GridResult capGridresult);
-	
+	void deleteById(String oid);
+
 }

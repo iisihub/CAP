@@ -125,7 +125,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>handler</servlet-name>
-		<servlet-class>com.iisigroup.cap.servlet.CapHandlerServlet</servlet-class>
+		<servlet-class>com.iisigroup.cap.web.CapHandlerServlet</servlet-class>
 		<init-param>
 			<param-name>pluginManager</param-name>
 			<param-value>CapPluginManager</param-value>

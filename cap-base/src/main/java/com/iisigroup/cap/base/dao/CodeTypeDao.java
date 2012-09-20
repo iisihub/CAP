@@ -29,53 +29,62 @@ import com.iisigroup.cap.dao.IGenericDao;
  */
 public interface CodeTypeDao extends IGenericDao<CodeType> {
 
+	/**
+	 * find by codetype.
+	 * 
+	 * @param codetype
+	 *            代碼類型
+	 * @param locale
+	 *            語言別
+	 * @return T
+	 */
+	public List<CodeType> findByCodeType(String codetype, String locale);
 
 	/**
-	 * <pre>
-	 * 使用codeType及codeValue取得CBCLCODE
-	 * </pre>
+	 * find by CodeType and CodeValue
 	 * 
-	 * @param codeType
-	 *            key
-	 * @param codeValue
-	 *            value
+	 * @param cType
+	 *            代碼類型
+	 * @param cValue
+	 *            代碼值
+	 * @param locale
+	 *            語言別
+	 * @return T
+	 */
+	public CodeType findByCodeTypeAndCodeValue(String cType,
+			String cValue, String locale);
+
+	/**
+	 * find by codetype.
+	 * 
+	 * @param codetypes
+	 *            多個代碼類型
+	 * @param locale
+	 *            語言別
+	 * @return T List
+	 */
+	public List<CodeType> findByCodeType(String[] codetypes, String locale);
+
+	/**
+	 * find by code Desc
+	 * 
+	 * @param cType
+	 *            代碼類型
+	 * @param codeDesc
+	 *            代碼內容
+	 * @param locale
+	 *            語言別
 	 * @return CodeType
-	 * @throws Exception
 	 */
-	public CodeType getByCodeTypeAndValue(String codeType, String codeValue);
+	public List<CodeType> findByCodeTypeAndCodeDesc(String cType,
+			String codeDesc, String locale);
 
-
+	
 	/**
-	 * <pre>
-	 * 使用codeType取得CBCLCODE
-	 * </pre>
-	 * 
-	 * @param codeType
-	 *            codeType
-	 * @return list
+	 * 查詢OID
+	 * @param oid OID
+	 * @return
 	 */
-     List<CodeType> findByCodeType(String codeType);
-     
-     /**
- 	 * <pre>
- 	 * 使用codeType取得CBCLCODE
- 	 * </pre>
- 	 * 
- 	 * @param codeType
- 	 *            codeType
- 	 * @return list
- 	 * @throws Exception
- 	 */
- 	public List<CodeType> findByCodeType(String[] codeType);
- 	
- 	/**
- 	 * <pre>
- 	 * 使用codeval查询codetype的讯息
- 	 * </pre>
- 	 * @param codeVal
- 	 *        codeVal
- 	 * @return
- 	 *        CodeType
- 	 */
- 	public CodeType findByCodeVal(String codeVal);
+	public CodeType findByOid(String oid);
+
 }
