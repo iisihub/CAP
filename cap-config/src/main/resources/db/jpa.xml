@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="cap-db" />
+		<property name="persistenceUnitName" value="pu-cap" />
+		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence-cap.xml" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<value>classpath:/db/hibernate.properties</value>
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="hibernate.dialect" value="${hibernate.dialect}" />
+				<entry key="hibernate.default_schema" value="${hibernate.default_schema}" />
+			</map>
+		</property>
+	</bean>
+	<!-- setup spring support Clob and Blob -->
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
+
+	<!-- Enable exception translation for beans annotated with @Repository <bean 
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<!--設置service层交易處理的方法 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- all methods below are read-only -->
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="getNew*" propagation="REQUIRES_NEW" />
+			<tx:method name="saveSeq" timeout="45" rollback-for="Throwable"
+				propagation="REQUIRES_NEW" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" timeout="45" rollback-for="Throwable"
+				propagation="REQUIRED" />
+			<!-- timeout in seconds -->
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="CapServicePointcut" expression="execution(* com..service.*.*(..))" />
+
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="CapServicePointcut" />
+	</aop:config>
+</beans>
