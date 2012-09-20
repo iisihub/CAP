@@ -44,6 +44,12 @@ public class PageAction extends BaseActionController {
 ////		return new RedirectView("home");
 //	}
 
+	
+	private IRequest getDefaultRequest() {
+		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
+		return cr != null ? cr : new CapSpringMVCRequest();
+	}
+
 	@RequestMapping("/logout")
 	public RedirectView logout(Locale locale, HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().invalidate();
@@ -65,16 +71,12 @@ public class PageAction extends BaseActionController {
 		return model;
 	}
 
-	@RequestMapping
+
+	@RequestMapping("/**")
 	public ModelAndView handleRequestInternal(Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String path = request.getPathInfo();
 		ModelAndView model = new ModelAndView(path);
 		return model;
-	}
-
-	private IRequest getDefaultRequest() {
-		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
-		return cr != null ? cr : new CapSpringMVCRequest();
 	}
 
 }

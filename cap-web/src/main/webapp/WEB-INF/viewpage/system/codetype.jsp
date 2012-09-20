@@ -3,11 +3,12 @@
  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <script type="text/javascript" src="webroot/js/page/codetype.js">
-            //require(['webroot/js/page/codetype']);
-        </script>
+        
     </head>
     <body>
+    <script type="text/javascript" src="webroot/static/js/page/codetype.js">
+            //require(['webroot/js/page/codetype']);
+        </script>
         <div ng-controller="codetypeCtrl">
             <form id="mform" onsubmit="return false;">
                 <!--<fieldset class="row">--><input type="text" id="oid" name="oid" class="hide" /><input type="text" id="mtype" name="mtype" class="hide" />
