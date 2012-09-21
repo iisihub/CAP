@@ -15,8 +15,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -24,6 +23,7 @@ import javax.validation.constraints.NotNull;
 
 import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -38,12 +38,12 @@ import com.iisigroup.cap.model.IDataObject;
  */
 @SuppressWarnings("serial")
 @Entity
+@EntityListeners({CapOidGeneratorListener.class})
 @Table(name = "CODETYPE", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"codeType", "codeValue" }))
 public class CodeType extends GenericBean implements IDataObject {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, length = 32)
 	private String oid;
 

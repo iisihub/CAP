@@ -19,4 +19,10 @@
 	<bean id="SequenceService" class="com.iisigroup.cap.service.impl.SequenceServiceImpl">
 		<property name="jdbc" ref="capJdbcTemplate" />
 	</bean>
+	<bean id="CommonBeanService" class="com.iisigroup.cap.service.impl.CommonServiceImpl">
+		<property name="commonDao" ref="CommonBeanDao" />
+	</bean>
+	<bean id="CommonBeanDao" class="com.iisigroup.cap.dao.impl.CommonDao">
+		<property name="entityManager" ref="capEntityManager"/>
+	</bean>
 </beans>

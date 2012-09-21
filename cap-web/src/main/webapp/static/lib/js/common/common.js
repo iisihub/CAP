@@ -14,7 +14,7 @@ $.ajaxSetup({
 // i18n plugin
 (function($){
     var s = {
-        url: "./webroot/i18njs"
+        url: "../i18njs"
     };
     window['i18n'] = {
         load: function(f, st){

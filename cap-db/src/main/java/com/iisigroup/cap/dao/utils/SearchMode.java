@@ -72,4 +72,9 @@ public enum SearchMode {
 		return EQUALS; // default
 	}
 
+	@Override
+	public String toString() {
+		return code;
+	}
+	
 }

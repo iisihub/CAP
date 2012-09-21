@@ -34,16 +34,15 @@ import com.iisigroup.cap.model.Page;
  */
 public interface IGenericDao<T> {
 
+	void save(Object models);
+
 	/**
 	 * Insert.
 	 * 
-	 * @param entity
+	 * @param models
 	 *            the entity
 	 */
-	void save(T entity);
-	
-	void save(List<T> entries);
-	
+	void save(List<?> models);
 
 	/**
 	 * Delete.
@@ -51,9 +50,9 @@ public interface IGenericDao<T> {
 	 * @param entity
 	 *            the entity
 	 */
-	void delete(T entity);
-	
-	void delete (List<T> entries);
+	void delete(Object entity);
+
+	void delete(List<?> entries);
 
 	/**
 	 * Find.
@@ -64,34 +63,35 @@ public interface IGenericDao<T> {
 	 * @return the t
 	 */
 	T find(Serializable pk);
-			
+
 	T find(T entity);
-	
+
 	T findUniqueOrNone(ISearch search);
-		
+
 	List<T> find(ISearch search);
-	
 
 	/**
 	 * Count.
 	 * 
-	 * @param search SearchSetting
+	 * @param search
+	 *            SearchSetting
 	 * @return the int
 	 */
 	int count(ISearch search);
-	
+
 	Iterator<T> list(int first, int count);
-	
+
 	Page<T> findPage(ISearch search);
-	
+
 	<S> Page<S> findPage(Class<S> clazz, ISearch search);
-	
+
 	/**
 	 * create new search requirement
+	 * 
 	 * @return ISearch
 	 */
 	ISearch createSearchTemplete();
-	
+
 	/**
 	 * flush
 	 */

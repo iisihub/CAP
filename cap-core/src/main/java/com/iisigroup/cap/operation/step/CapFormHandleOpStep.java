@@ -32,7 +32,8 @@ import com.iisigroup.cap.response.IResult;
 public class CapFormHandleOpStep extends AbstractCustomizeOpStep {
 
 	@Override
-	public String execute(IRequest params, FormHandler handler, IResult result) throws CapException {
+	public String execute(IRequest params, FormHandler handler, IResult result)
+			throws CapException {
 		IResult rtn = null;
 		@SuppressWarnings("static-access")
 		String actionType = params.get(handler.FORM_ACTION);

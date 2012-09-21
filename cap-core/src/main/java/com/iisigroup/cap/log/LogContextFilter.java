@@ -95,12 +95,22 @@ public class LogContextFilter implements Filter {
 	 */
 	private String getRequestURL(HttpServletRequest req) {
 		String url = req.getRequestURI().replaceFirst(req.getContextPath(), "");
-		int f = url.indexOf("/app");
+		int f = url.indexOf("/webroot");
 		if (f > -1) {
-			url = url.substring(f + 4);
+			url = url.substring(f + 8);
 		}
 		if (!CapString.isEmpty(req.getParameter("_handler"))) {
 			url = "/" + req.getParameter("_handler");
+		} else if (!CapString.isEmpty((String) req.getAttribute("_handler"))) {
+			url = "/" + req.getAttribute("_handler");
+		}
+		f = url.indexOf("/handler");
+		if (f > -1) {
+			url = url.substring(f + 8);
+		}
+		f = url.indexOf("/page");
+		if (f > -1) {
+			url = url.substring(f + 5);
 		}
 		return url;
 	}

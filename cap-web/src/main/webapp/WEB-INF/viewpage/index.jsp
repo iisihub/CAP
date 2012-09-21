@@ -9,5 +9,12 @@ pageEncoding="UTF-8" %>
     </head>
     <body>
         index
+        <input type="file" id="ufile" name="ufile" />
+        <button id="upload" type="button" class="btn1">
+             <spring:message code="btn.upload">
+                 <!--上傳-->
+             </spring:message>
+         </button>
+         <script type="text/javascript" src="../static/js/page/ss.js"></script>
     </body>
 </html>

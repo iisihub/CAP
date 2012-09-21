@@ -17,8 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springframework.util.Assert;
 
 
 
@@ -158,7 +157,7 @@ public abstract class AbstractSearchSetting implements ISearch {
 	 * @return
 	 */
 	public AbstractSearchSetting setMaxResults(int maxResults) {
-		Validate.isTrue(maxResults > 0, "maxResults must be > 0");
+		Assert.isTrue(maxResults > 0, "maxResults must be > 0");
 		//this.maxResults = Math.min(maxResults, maxResultsLimit);
 		this.maxResults = maxResults;
 		return this;
@@ -178,7 +177,7 @@ public abstract class AbstractSearchSetting implements ISearch {
 	 * @return
 	 */
 	public AbstractSearchSetting setFirstResult(int firstResult) {
-		Validate.isTrue(firstResult >= 0, "maxResults must be >= 0");
+		Assert.isTrue(firstResult >= 0, "maxResults must be >= 0");
 		this.firstResult = firstResult;
 		return this;
 	}
@@ -198,7 +197,7 @@ public abstract class AbstractSearchSetting implements ISearch {
 
 	public AbstractSearchSetting addSearchModeParameters(SearchMode searchMode,
 			Object key, Object value) {
-		Validate.notNull(searchMode, "search mode must not be null");
+		Assert.notNull(searchMode, "search mode must not be null");
 		searchModeParameters
 				.add(new SearchModeParameter(searchMode, key, value));
 		return this;
@@ -209,8 +208,4 @@ public abstract class AbstractSearchSetting implements ISearch {
 		return this;
 	}
 	
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
 }

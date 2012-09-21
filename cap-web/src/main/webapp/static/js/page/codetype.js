@@ -49,6 +49,12 @@ $(document).ready(function(){
 //    var fModify = function(){
 //    
 //    }
+	$("#qry").click(function(){
+		grid.jqGrid('setGridParam',{
+			postData:{
+				locale:mform.find("#locale").val(),codeType:mform.find("#codeType").val()}});
+		grid.trigger("reloadGrid");
+	});
     //新增
     $("#add").click(function(){
     	mform.validationEngine('validate') &&

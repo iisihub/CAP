@@ -1,5 +1,5 @@
 /* 
- * ICommonDao.java
+ * UUIDGenerator.java
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -9,27 +9,24 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.dao;
+package com.iisigroup.cap.utils;
 
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.Page;
+import java.util.UUID;
 
 /**
  * <pre>
- *  Common Dao
+ * UUID Generator
  * </pre>
  * 
- * @since 2011/11/30
+ * @since 2011/7/8
  * @author iristu
  * @version <ul>
- *          <li>2011/11/30,iristu,new
+ *          <li>2011/7/8,iristu,new
  *          </ul>
  */
-public interface ICommonDao extends IGenericDao<IDataObject> {
+public class UUIDGenerator {
 
-	<T> Page<T> findPage(Class<T> clazz, ISearch search);
-
-	<T> T findByOid(Class<T> clazz, String oid);
-
+	public static String getUUID() {
+		return UUID.randomUUID().toString().replace("-", "");
+	}
 }

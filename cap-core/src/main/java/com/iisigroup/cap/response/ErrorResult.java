@@ -48,6 +48,9 @@ public class ErrorResult implements IErrorResult {
 	JSONObject errorMessage = new JSONObject();
 
 	String logMessage = "";
+	private String contentType;
+	private String encoding;
+
 
 	public ErrorResult() {
 	}
@@ -111,12 +114,30 @@ public class ErrorResult implements IErrorResult {
 
 	@Override
 	public String getContextType() {
-		return "text/plain;charset=UTF-8";
+		if (contentType != null) {
+			return this.contentType;
+		} else {
+			return "text/plain;charset=UTF-8";
+		}
 	}
-	
+
 	@Override
 	public String getEncoding() {
-		return CharEncoding.UTF_8;
+		if (encoding != null) {
+			return this.encoding;
+		} else {
+			return CharEncoding.UTF_8;
+		}
+	}
+
+	@Override
+	public void setContextType(String cxtType) {
+		this.contentType = cxtType;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 }

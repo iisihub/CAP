@@ -15,6 +15,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import net.sf.json.JSONArray;
 
 import org.springframework.util.ReflectionUtils;
@@ -23,12 +25,17 @@ import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.context.CapParameter;
+import com.iisigroup.cap.dao.utils.AbstractSearchSetting;
+import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
+import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -43,9 +50,13 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2010/12/8,iristu,new
  *          <li>2011/11/1,rodeschen,from cap marge from and grid
  *          <li>2012/3/8,rodeschen,add column marge index and name
+ *          <li>2012/9/20,iristu,改由HandlerType來判斷取得Operation
  *          </ul>
  */
 public abstract class MFormHandler extends FormHandler {
+
+	@Resource(name = "handlerOpMapping")
+	private CapParameter handlerOp;
 
 	/**
 	 * <pre>
@@ -83,23 +94,34 @@ public abstract class MFormHandler extends FormHandler {
 			}
 			boolean hasMethod = false;
 			try {
-
-				for (Method method : ReflectionUtils
-						.getAllDeclaredMethods(executeHandler.getClass())) {
-					if (methodId.equals(method.getName())) {
-						HandlerType type = method
-								.getAnnotation(HandlerType.class);
-						if (type == null
-								|| HandlerTypeEnum.FORM.equals(type.value())) {
-							rtn = (IResult) method.invoke(executeHandler,
-									params);
-						} else if (HandlerTypeEnum.GRID.equals(type.value())) {
-							rtn = execute(method, params);
-						}
-						hasMethod = true;
-						break;
+				Method method = ReflectionUtils.findMethod(
+						executeHandler.getClass(), methodId, null);
+				if (method != null) {
+					HandlerType type = method.getAnnotation(HandlerType.class);
+					if (type != null
+							&& HandlerTypeEnum.GRID.equals(type.value())) {
+						rtn = getGridData(method, params);
+					} else {
+						rtn = (IResult) method.invoke(executeHandler, params);
 					}
+					hasMethod = true;
 				}
+				// for (Method method : ReflectionUtils
+				// .getAllDeclaredMethods(executeHandler.getClass())) {
+				// if (methodId.equals(method.getName())) {
+				// HandlerType type = method
+				// .getAnnotation(HandlerType.class);
+				// if (type == null
+				// || HandlerTypeEnum.FORM.equals(type.value())) {
+				// rtn = (IResult) method.invoke(executeHandler,
+				// params);
+				// } else if (HandlerTypeEnum.GRID.equals(type.value())) {
+				// rtn = execute(method, params);
+				// }
+				// hasMethod = true;
+				// break;
+				// }
+				// }
 
 			} catch (InvocationTargetException e) {
 				if (e.getCause() instanceof CapMessageException) {
@@ -121,20 +143,17 @@ public abstract class MFormHandler extends FormHandler {
 
 	}// ;
 
-	@SuppressWarnings("rawtypes")
-	private IResult execute(Method method, IRequest params) throws CapException {
-		IGridResult result = new GridResult();
-
-		beforeExcute(params);
+	@SuppressWarnings({ "rawtypes" })
+	private IResult getGridData(Method method, IRequest params)
+			throws CapException {
+		ISearch search = createSearchTemplete();
 		boolean pages = params.containsParamsKey(IGridEnum.PAGE.getCode());
-		int page = 0, pageRows = 0, rowCount = 0;// , startRow = 0;
+		int page = 0, pageRows = 0, startRow = 0;
 		if (pages) {
 			page = params.getParamsAsInteger(IGridEnum.PAGE.getCode());
 			pageRows = params.getParamsAsInteger(IGridEnum.PAGEROWS.getCode());
-			result.setPage(page);
-			result.setPageCount(rowCount, pageRows);
-		} else {
-			result.setPage(0);
+			startRow = (page - 1) * pageRows;
+			search.setFirstResult(startRow).setMaxResults(pageRows);
 		}
 		boolean sort = params.containsParamsKey(IGridEnum.SORTCOLUMN.getCode())
 				&& !CapString
@@ -146,18 +165,18 @@ public abstract class MFormHandler extends FormHandler {
 					.split("\\|");
 			for (int i = 0; i < sortBy.length; i++) {
 				String isAsc = (i < isAscAry.length) ? isAscAry[i] : "asc";
-				result.addOrderBy(sortBy[i], !IGridEnum.SORTASC.getCode()
+				search.addOrderBy(sortBy[i], !IGridEnum.SORTASC.getCode()
 						.equals(isAsc));
 			}
 		}
-
+		IGridResult result = new GridResult();
 		result.setColumns(getColumns(params.get(IGridEnum.COL_PARAM.getCode())));
 		try {
-			result = (IGridResult) method.invoke(this, result, params);
-
-			// refresh page count
+			result = (IGridResult) method.invoke(this, search, params);
+			result.setColumns(getColumns(params.get(IGridEnum.COL_PARAM
+					.getCode())));
+			result.setPage(page);
 			result.setPageCount(result.getRecords(), pageRows);
-
 		} catch (InvocationTargetException e) {
 			if (e.getCause() instanceof CapMessageException) {
 				throw (CapMessageException) e.getCause();
@@ -169,19 +188,8 @@ public abstract class MFormHandler extends FormHandler {
 		} catch (Throwable t) {
 			throw new CapException(t, this.getClass());
 		}
-
 		return result;
-	}
-
-	/**
-	 * before execute
-	 * 
-	 * @param params
-	 *            PageParameters
-	 */
-	public void beforeExcute(IRequest params) throws CapException {
-		// customize
-	}
+	}// ;
 
 	/**
 	 * 取得iGrid中的Column Name
@@ -191,19 +199,20 @@ public abstract class MFormHandler extends FormHandler {
 	 * @return String string[]
 	 */
 	@SuppressWarnings("unchecked")
-	public String[] getColumns(String params) throws CapException {
+	protected String[] getColumns(String params) throws CapException {
 		JSONArray arr = JSONArray.fromObject(params);
 		String[] colNames = new String[arr.size()];
 		for (int i = 0; i < arr.size(); i++) {
 			Map<String, String> m = (Map<String, String>) arr.get(i);
-			// colNames[i] = m.containsKey(IGridEnum.COL_INDEX.getCode()) ?
-			// m.get(IGridEnum.COL_INDEX.getCode()) :
-			// m.get(IGridEnum.COL_NAME.getCode());
-			colNames[i] = m.containsKey(IGridEnum.COL_INDEX.getCode()) ? m
-					.get(IGridEnum.COL_NAME.getCode())
-					+ "|"
-					+ m.get(IGridEnum.COL_INDEX.getCode()) : m
-					.get(IGridEnum.COL_NAME.getCode());
+			if (m.containsKey(IGridEnum.COL_INDEX.getCode())) {
+				colNames[i] = new StringBuffer()
+						.append(m.get(IGridEnum.COL_NAME.getCode()))
+						.append("|")
+						.append(m.get(IGridEnum.COL_INDEX.getCode()))
+						.toString();
+			} else {
+				colNames[i] = m.get(IGridEnum.COL_NAME.getCode());
+			}
 		}
 		return colNames;
 	};
@@ -231,4 +240,48 @@ public abstract class MFormHandler extends FormHandler {
 		return SIMPLE_OPERATION;
 	}
 
-}
+	@Override
+	public IResult execute(IRequest params) throws CapException {
+		IResult result = null;
+		Operation oper = getOperation(params);
+		if (oper != null) {
+			result = oper.execute(params, this);
+		}
+		return result;
+	}// ;
+
+	protected String getOperationName(IRequest params) {
+		String methodId = params.get(FORM_ACTION);
+		Method method = ReflectionUtils.findMethod(this.getClass(), methodId,
+				null);
+		if (method != null) {
+			HandlerType type = method.getAnnotation(HandlerType.class);
+			if (type != null) {
+				return handlerOp
+						.getValue(type.value().name(), SIMPLE_OPERATION);
+			}
+		}
+		return SIMPLE_OPERATION;
+	}// ;
+
+	protected Operation getOperation(IRequest params) {
+		return (Operation) CapAppContext.getApplicationContext().getBean(
+				getOperationName(params));
+	}// ;
+
+	private ISearch createSearchTemplete() {
+		return new GridSearch();
+	}
+
+	/**
+	 * <pre>
+	 * GridSearch extends AbstractSearchSetting
+	 * </pre>
+	 */
+	private class GridSearch extends AbstractSearchSetting {
+
+		private static final long serialVersionUID = 1L;
+
+	}
+
+}// ~

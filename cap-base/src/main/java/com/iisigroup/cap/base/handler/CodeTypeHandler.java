@@ -16,20 +16,28 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
 
+import com.iisigroup.cap.annotation.HandlerType;
+import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.utils.SearchMode;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CodeTypeService;
+import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
@@ -52,8 +60,29 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("codetypehandler")
 public class CodeTypeHandler extends MFormHandler {
 
-	@Autowired
+	@Resource
 	private CodeTypeService codeTypeService;
+
+	@Resource(name = "CommonBeanService")
+	private ICommonService commonService;
+
+	@HandlerType(HandlerTypeEnum.GRID)
+	public GridResult query(ISearch search, IRequest params) {
+		if (params.containsKey("locale")) {
+			search.addSearchModeParameters(SearchMode.EQUALS, "locale",
+					params.get("locale"));
+		}
+		if (params.containsKey("codeType")) {
+			search.addSearchModeParameters(SearchMode.EQUALS, "codeType",
+					params.get("codeType"));
+		}
+		if (!search.hasOrderBy()) {
+			search.addOrderBy("codeType");
+			search.addOrderBy("codeOrder");
+		}
+		Page<CodeType> page = commonService.findPage(CodeType.class, search);
+		return new GridResult(page.getContent(), page.getTotalRow());
+	}// ;
 
 	/**
 	 * modify codetype
@@ -147,6 +176,6 @@ public class CodeTypeHandler extends MFormHandler {
 			}
 		}
 		return mresult;
-	}
+	}// ;
 
-}
+}// ~

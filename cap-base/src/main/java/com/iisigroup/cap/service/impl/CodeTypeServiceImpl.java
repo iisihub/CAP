@@ -14,7 +14,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeTypeDao;
@@ -38,7 +39,7 @@ import com.iisigroup.cap.service.CodeTypeService;
 public class CodeTypeServiceImpl extends AbstractService implements
 		CodeTypeService {
 
-	@Autowired
+	@Resource
 	private CodeTypeDao dao;
 
 	/*

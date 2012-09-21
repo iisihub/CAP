@@ -12,7 +12,6 @@
 package com.iisigroup.cap.response;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +54,10 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	private String[] columns;
 
 	private Map<String, IFormatter> dataReformatter;
+
+	private String contentType;
+
+	private String encoding;
 
 	public GridResult() {
 		resultMap = new JSONObject();
@@ -203,10 +206,6 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		return this.rowData;
 	}
 
-	public Map<String, IFormatter> getdataReformatter() {
-		return this.dataReformatter;
-	}
-
 	private JSONArray getRowDataToJSON() {
 		JSONArray rows = new JSONArray();
 		Map<String, Object> row = new HashMap<String, Object>();
@@ -234,66 +233,32 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		this.dataReformatter = dataReformatter;
 	}
 
-	// -----------------------------------
-	// Order by support
-	// -----------------------------------
-	private Map<String, Boolean> orderBy;
-
-	public boolean hasOrderBy() {
-		return !(orderBy == null || orderBy.isEmpty());
-	}
-
-	/**
-	 * Specify that results must be ordered by the passed column Null by
-	 * default. 預設為升羃排序
-	 * 
-	 * @param orderBy
-	 *            the order by
-	 * @return SearchSetting
-	 */
-	public GridResult addOrderBy(String orderBy) {
-		if (this.orderBy == null) {
-			this.orderBy = new LinkedHashMap<String, Boolean>();
-		}
-		this.orderBy.put(orderBy, false);
-		return this;
-	}
-
-	/**
-	 * Specify that results must be ordered by the passed column Null by
-	 * default.
-	 * 
-	 * @param orderBy
-	 *            orderBy
-	 * @param orderDesc
-	 *            是否要降羃排序
-	 * @return SearchSetting
-	 */
-	public GridResult addOrderBy(String orderBy, boolean orderDesc) {
-		if (this.orderBy == null) {
-			this.orderBy = new LinkedHashMap<String, Boolean>();
-		}
-		this.orderBy.put(orderBy, orderDesc);
-		return this;
-	}
-
-	public GridResult setOrderBy(Map<String, Boolean> orderBy) {
-		this.orderBy = orderBy;
-		return this;
-	}
-
-	public Map<String, Boolean> getOrderBy() {
-		return this.orderBy;
-	}
-
 	@Override
 	public String getContextType() {
-		return "text/plain;charset=UTF-8";
+		if (contentType != null) {
+			return this.contentType;
+		} else {
+			return "text/plain;charset=UTF-8";
+		}
 	}
 
 	@Override
 	public String getEncoding() {
-		return CharEncoding.UTF_8;
+		if (encoding != null) {
+			return this.encoding;
+		} else {
+			return CharEncoding.UTF_8;
+		}
+	}
+
+	@Override
+	public void setContextType(String cxtType) {
+		this.contentType = cxtType;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 	@Override

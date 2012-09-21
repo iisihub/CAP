@@ -34,9 +34,9 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 import com.iisigroup.cap.dao.IGenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
@@ -86,22 +86,22 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	 * @param entry
 	 *            the entry
 	 */
-	public void save(T entity) {
-		Validate.notNull(entity, "The entity to save cannot be null element");
+	public void save(Object entity) {
+		Assert.notNull(entity, "The entity to save cannot be null element");
 		if (!getEntityManager().contains(entity)) {
 			getEntityManager().persist(entity);
 		}
 	}// ;
 
-	public void save(List<T> entries) {
-		for (T entity : entries) {
-			Validate.notNull(entity, "The List must not contain null element");
+	public void save(List<?> entries) {
+		for (Object entity : entries) {
+			Assert.notNull(entity, "The List must not contain null element");
 			save(entity);
 		}
 	}// ;
 
 	public void merge(T entity) {
-		Validate.notNull(entity, "The entity to save cannot be null element");
+		Assert.notNull(entity, "The entity to save cannot be null element");
 		getEntityManager().merge(entity);
 	}// ;
 
@@ -111,7 +111,7 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	 * @param entry
 	 *            the entry
 	 */
-	public void delete(T entity) {
+	public void delete(Object entity) {
 		if (getEntityManager().contains(entity)) {
 			getEntityManager().remove(entity);
 		} else {
@@ -125,16 +125,9 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 		}
 	}// ;
 
-	public void delete(List<T> entries) {
-		for (T entity : entries) {
-			T modelRef = find(entity);
-
-			if (modelRef != null) {
-				delete(modelRef);
-			} else if (logger.isWarnEnabled()) {
-				logger.warn("It is not present in the database: "
-						+ entity.toString());
-			}
+	public void delete(List<?> entries) {
+		for (Object entity : entries) {
+			delete(entity);
 		}
 	}// ;
 
@@ -150,7 +143,7 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 		return getEntityManager().find(type, pk);
 	}// ;
 
-	public Serializable getPrimaryKey(T model) {
+	public Serializable getPrimaryKey(Object model) {
 		if (model instanceof IDataObject) {
 			return (Serializable) ((IDataObject) model).getOid();
 		} else {

@@ -7,7 +7,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<import resource="classpath:sql/baseSQL.xml" />
 	
-	<bean id="userSqlStatement" class="com.iisigroup.cap.context.CapParameter">
+	<bean id="userSqlStatement" class="com.iisigroup.cap.utils.CapSqlStatement">
 		<constructor-arg>
 			<util:set value-type="java.util.HashMap">
 				<ref bean="baseSql" />

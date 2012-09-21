@@ -18,7 +18,7 @@ import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.jdbc.support.rowset.SqlRowSetMetaData;
 
-import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapDbUtil;
 
 /**
  * <pre>
@@ -54,7 +54,7 @@ public class CapColumnMapRowSetMapper {
 			}
 			Object obj = getColumnValue(rs, i);
 			if (obj instanceof String) {
-				obj = CapString.trimNull(obj);
+				obj = CapDbUtil.trimNull(obj);
 			}
 			mapOfColValues.put(key, obj);
 		}
@@ -66,7 +66,7 @@ public class CapColumnMapRowSetMapper {
 		if (obj instanceof String) {
 			String str = (String) obj;
 			str = str.trim();
-			obj = CapString.trimFullSpace(str);
+			obj = CapDbUtil.trimFullSpace(str);
 		}
 		return obj;
 	}// ;

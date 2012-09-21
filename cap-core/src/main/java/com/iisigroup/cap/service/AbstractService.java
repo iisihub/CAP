@@ -11,9 +11,6 @@
 
 package com.iisigroup.cap.service;
 
-import javax.annotation.Resource;
-
-import com.iisigroup.cap.context.CapParameter;
 
 /**
  * <pre>
@@ -28,15 +25,6 @@ import com.iisigroup.cap.context.CapParameter;
  *          </ul>
  */
 public abstract class AbstractService implements IService {
-	@Resource
-	CapParameter sqlParameter;
-
-	public CapParameter getSqlParameter() {
-		return sqlParameter;
-	}
-
-	public String getSql(String sqlId) {
-		return getSqlParameter().getValue(sqlId, sqlId);
-	}
+	
 
 }

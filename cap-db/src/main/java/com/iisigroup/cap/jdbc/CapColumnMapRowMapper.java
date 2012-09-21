@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 
-import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapDbUtil;
 
 /**
  * <pre>
@@ -54,8 +54,8 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
 				key = key.replaceFirst(removePrefix, "");
 			}
 			Object obj = getColumnValue(rs, i);
-			if (obj instanceof String){
-				obj = CapString.trimNull(obj);
+			if (obj instanceof String) {
+				obj = CapDbUtil.trimNull(obj);
 			}
 			mapOfColValues.put(key, obj);
 		}
@@ -69,7 +69,7 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
 		if (obj instanceof String) {
 			String str = (String) obj;
 			str = str.trim();
-			obj = CapString.trimFullSpace(str);
+			obj = CapDbUtil.trimFullSpace(str);
 		}
 		return obj;
 	}// ;

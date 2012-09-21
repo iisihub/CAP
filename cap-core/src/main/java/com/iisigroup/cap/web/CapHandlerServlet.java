@@ -52,7 +52,8 @@ import com.iisigroup.cap.utils.CapString;
 @SuppressWarnings("serial")
 public class CapHandlerServlet extends HttpServlet {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected final Logger logger = LoggerFactory
+			.getLogger(CapHandlerServlet.class);
 	public final String HANDLER = "_handler";
 	public final String ACTION = "_action";
 
@@ -104,8 +105,6 @@ public class CapHandlerServlet extends HttpServlet {
 		IRequest request = getDefaultRequest(req);
 		try {
 			request.setParameter(FormHandler.FORM_ACTION, action);
-			logger.debug("handler: {} -receive data: {}", handler,
-					request.toString());
 			HandlerPlugin plugin = pluginMgr.getPlugin(handler);
 			pluginlogger = LoggerFactory.getLogger(plugin.getClass());
 			result = plugin.execute(request);
@@ -133,7 +132,7 @@ public class CapHandlerServlet extends HttpServlet {
 			logger.debug("total spend time : {} ms",
 					(System.currentTimeMillis() - st));
 			if (logger.isTraceEnabled()) {
-				logger.trace("response data : " + result.getLogMessage());
+				logger.trace("Response Data : " + result.getLogMessage());
 			}
 		}
 	}// ;

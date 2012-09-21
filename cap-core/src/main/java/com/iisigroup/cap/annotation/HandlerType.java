@@ -33,6 +33,6 @@ public @interface HandlerType {
 	 *          </ul>
 	 */
 	public enum HandlerTypeEnum {
-		FORM, GRID
+		FORM, GRID, FileUpload, FileDownload;
 	}
 }

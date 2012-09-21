@@ -1,7 +1,7 @@
 /*
- * CapFileDownloadResult.java
+ * FileDownloadResult.java
  * 
- * Copyright (c) 2009 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *
@@ -40,6 +40,8 @@ public class FileDownloadResult implements IResult {
 	protected String _outputName;
 	protected String _contentType;
 	protected IRequest _request;
+	private String encoding;
+
 
 	public FileDownloadResult() {
 		super();
@@ -58,11 +60,6 @@ public class FileDownloadResult implements IResult {
 		this._contentType = contentType;
 	}
 
-	@Override
-	public String getContextType() {
-		return this._contentType;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -72,11 +69,6 @@ public class FileDownloadResult implements IResult {
 	public String getResult() {
 		return "";
 	}// ;
-
-	@Override
-	public String getEncoding() {
-		return null;
-	}
 
 	@Override
 	public String getLogMessage() {
@@ -92,6 +84,26 @@ public class FileDownloadResult implements IResult {
 			this._file = r._file;
 			this._outputName = r._outputName;
 		}
+	}
+	
+	@Override
+	public String getContextType() {
+		return this._contentType;
+	}
+
+	@Override
+	public String getEncoding() {
+		return this.encoding;
+	}
+
+	@Override
+	public void setContextType(String cxtType) {
+		this._contentType = cxtType;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 }

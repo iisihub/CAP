@@ -6,13 +6,6 @@
  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="50000000" />
-		<property name="defaultEncoding" value="utf-8" />
-	</bean>
-
-
 	<!-- ①：對web包中的所有類進行掃描，以完成Bean創建和自動依賴注入的功能 -->
 	<!--<context:component-scan base-package="com.bqd.mci.base.page"/> -->
 	<bean class="com.iisigroup.cap.mvc.action.PageAction" />

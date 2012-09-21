@@ -1,12 +1,18 @@
 package com.iisigroup.cap.base.handler;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
@@ -54,7 +60,7 @@ public class BaseHandler extends MFormHandler {
 		Locale locale = null;
 		try {
 			locale = CapSecurityContext.getLocale();
-			if(locale == null){
+			if (locale == null) {
 				locale = Locale.getDefault();
 			}
 		} catch (Exception e) {
@@ -62,8 +68,12 @@ public class BaseHandler extends MFormHandler {
 		}
 		String i18nFile = null;
 		try {
-			i18nFile = new StringBuffer("classpath:/i18n/").append(request.get("f").replaceAll("/?webroot/page", "")).append("_").append(locale.toString()).append(".properties").toString();
-			prop.load(CapAppContext.getApplicationContext().getResource(i18nFile).getInputStream());
+			i18nFile = new StringBuffer("classpath:/i18n/")
+					.append(request.get("f").replaceAll("/?webroot/page", ""))
+					.append("_").append(locale.toString())
+					.append(".properties").toString();
+			prop.load(CapAppContext.getApplicationContext()
+					.getResource(i18nFile).getInputStream());
 			for (Entry<Object, Object> entry : prop.entrySet()) {
 				result.set((String) entry.getKey(), (String) entry.getValue());
 			}
@@ -72,6 +82,23 @@ public class BaseHandler extends MFormHandler {
 			// throw new CapException(e, getClass());
 		}
 		return result;
-	}
-	
+	}// ;
+
+	@HandlerType(HandlerTypeEnum.FileUpload)
+	public IResult upload(IRequest request) throws CapException {
+		AjaxFormResult result = new AjaxFormResult();
+		String str = request.get("testStr");
+		MultipartFile f = request.getFile("ufile");
+		try {
+			FileUtils.writeByteArrayToFile(new File("xxxx.txt"), f.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String fileName = f.getOriginalFilename();
+		result.set(Constants.AJAX_NOTIFY_MESSAGE, fileName
+				+ " upload file success!!");
+		return result;
+	}// ;
+
 }

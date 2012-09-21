@@ -225,10 +225,6 @@ public class CapString {
 		}
 	}// ;
 
-	static final char[] fullSpace = "　".toCharArray();
-
-	static char[] space = " ".toCharArray();
-
 	/**
 	 * <pre>
 	 * trim全形空白
@@ -242,16 +238,7 @@ public class CapString {
 		if (isEmpty(in)) {
 			return "";
 		}
-		char[] tempValue = in.trim().toCharArray();
-		StringBuffer sb = new StringBuffer(in.trim());
-		for (int i = tempValue.length - 1; i >= 0; i--) {
-			if (tempValue[i] == fullSpace[0] || tempValue[i] == space[0]) {
-				sb.deleteCharAt(i);
-			} else {
-				break;
-			}
-		}
-		return sb.toString();
+		return in.replaceAll("^[　 ]+", "").replaceAll("[　 ]+$", "");
 	}// ;
 
 	/**

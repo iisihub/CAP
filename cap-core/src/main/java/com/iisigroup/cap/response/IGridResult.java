@@ -93,9 +93,5 @@ public interface IGridResult<T, E> extends IResult {
 	void setDataReformatter(Map<String, IFormatter> dataReformatter);
 
 	Map<String, IFormatter> getDataReformatter();
-	
-	T addOrderBy(String orderBy);
-	
-	T addOrderBy(String orderBy, boolean orderDesc);
 
 }

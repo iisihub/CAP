@@ -43,6 +43,10 @@ import net.sf.json.JSONObject;
 public class AjaxFormResult implements IResult {
 
 	private JSONObject resultMap;
+	
+	private String contentType;
+	private String encoding;
+
 
 	/**
 	 * 建構子
@@ -268,12 +272,30 @@ public class AjaxFormResult implements IResult {
 
 	@Override
 	public String getContextType() {
-		return "text/plain;charset=UTF-8";
+		if (contentType != null) {
+			return this.contentType;
+		} else {
+			return "text/plain;charset=UTF-8";
+		}
 	}
 
 	@Override
 	public String getEncoding() {
-		return CharEncoding.UTF_8;
+		if (encoding != null) {
+			return this.encoding;
+		} else {
+			return CharEncoding.UTF_8;
+		}
+	}
+
+	@Override
+	public void setContextType(String cxtType) {
+		this.contentType = cxtType;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 }

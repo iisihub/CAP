@@ -14,7 +14,6 @@ package com.iisigroup.cap.response;
 
 import java.io.Serializable;
 
-
 /**
  * <p>
  * IResult.
@@ -33,9 +32,13 @@ public interface IResult extends Serializable {
 	String getLogMessage();
 
 	void add(IResult result);
-	
+
 	String getContextType();
-	
+
+	void setContextType(String cxtType);
+
 	String getEncoding();
+
+	void setEncoding(String encoding);
 
 }
