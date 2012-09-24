@@ -12,7 +12,7 @@
         <!--[if lt IE 9]>jquery-ui-1.8.23.custom.min.js
             <script src="webroot/js/html5.js"></script>
         <![endif]--><script src="webroot/static/lib/js/json3.min.js"></script>
-        <script src="webroot/static/lib/js/jquery/jquery-1.8.1.min.js"></script>
+        <script src="webroot/static/lib/js/jquery/jquery-1.8.2.min.js"></script>
         <script src="webroot/static/lib/js/jquery/ui/js/jquery-ui-1.8.23.custom.min.js"></script>
         <script src="webroot/static/lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/i18n/grid.locale-cn.js"></script>
         <script src="webroot/static/lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/jquery.jqGrid.min.js"></script>
