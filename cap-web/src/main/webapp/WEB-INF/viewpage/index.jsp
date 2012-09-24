@@ -15,6 +15,11 @@ pageEncoding="UTF-8" %>
                  <!--上傳-->
              </spring:message>
          </button>
-         <script type="text/javascript" src="../static/js/page/ss.js"></script>
+         <button id="dwnload" type="button" class="btn1">
+             <spring:message code="btn.dwnload">
+                 <!--下載-->
+             </spring:message>
+         </button>
+         <script type="text/javascript" src="../static/js/page/ifile.js"></script>
     </body>
 </html>

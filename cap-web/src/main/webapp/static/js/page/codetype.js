@@ -3,44 +3,19 @@ $(document).ready(function(){
 	console.debug
     grid = $("#gridview").jqGrid({
         url: 'webroot/codetypehandler/query',
-        colModel: [{
-            name: 'oid',
-            width: 90,
-            align: "center",
-            hidden: true
-        }, {
-            name: 'cdeType',
-            width: 110,
-            align: "center"
-        }, {
-            name: 'cdeVal',
-            width: 80,
-            align: "center"
-        }, {
-            name: 'cdeDesc',
-            width: 80,
-            align: "center"
-        }, {
-            name: 'cdeOrd',
-            width: 80,
-            align: "center"
-        }, {
-            header: i18n.def.lastModBy,
-            name: 'lastModBy',
-            width: 80,
-            align: "center"
-        }, {
-            header: i18n.def.lastModTm,
-            name: 'lastModTm',
-            width: 80,
-            align: "center"
-        }],
-        //localFirst: true,
-        multiselect: false,
-        sortname: 'cdeType',
-        sortorder: "desc",
+      //localFirst: true,
+        multiselect: false,sortname: 'codeType',sortorder: "desc",height: 200,
         /*  caption: i18n.MCI061229S10["codetype.codeList"],*/
-        height: 200,
+        colModel: [{name: 'oid',width: 90,align: "center",hidden: true
+        }, {name: 'codeType',width: 110,align:"center"
+        }, {name: 'codeValue',width: 80,align:"center"
+        }, {name: 'codeDesc',width: 80,align:"center"
+        }, {name: 'codeOrd',width: 80,align:"center"
+        }, {header: i18n.def.lastModBy,
+            name: 'lastModifyBy',width: 80,align:"center"
+        }, {header: i18n.def.lastModTm,
+            name: 'lastModifyTime',width: 80,align:"center"
+        }],
         onSelectRow: function(){
             var ret = grid.getSelRowDatas();
             ret && mform.injectData(ret);

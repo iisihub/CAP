@@ -12,8 +12,8 @@
                 <table class="row-data">
                     <tr>
                         <th>
-                            <spring:message code="codetype.codeType">
-                                <!--代碼-->
+                            <spring:message code="codetype.local">
+                                <!--語系-->
                             </spring:message>
                         </th>
                         <td colspan="3">
