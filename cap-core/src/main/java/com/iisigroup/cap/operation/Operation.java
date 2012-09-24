@@ -16,8 +16,7 @@ import java.util.Map;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.FormHandler;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.handler.IHandler;
 
 /**
  * <p>
@@ -39,7 +38,6 @@ public interface Operation {
 
 	void setRuleMap(Map<String, OperationStep> ruleMap);
 
-	IResult execute(IRequest params, FormHandler handler)
+	void execute(OpStepContext ctx, IRequest params, IHandler handler)
 			throws CapException;
-
 }

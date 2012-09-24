@@ -10,6 +10,8 @@
  */
 package com.iisigroup.cap.response;
 
+import javax.servlet.ServletResponse;
+
 import org.apache.commons.lang.CharEncoding;
 
 import net.sf.json.JSONObject;
@@ -21,7 +23,6 @@ import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.exception.CapSessioniExpireException;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
-
 
 /**
  * <pre>
@@ -50,7 +51,6 @@ public class ErrorResult implements IErrorResult {
 	String logMessage = "";
 	private String contentType;
 	private String encoding;
-
 
 	public ErrorResult() {
 	}
@@ -97,7 +97,8 @@ public class ErrorResult implements IErrorResult {
 			errorMessage.put(AJAX_SESSION_EXPIRE_EXCEPTION, logMessage);
 		} else if (e instanceof CapException) {
 			CapException ce = (CapException) e;
-			logMessage = new StringBuffer(ce.getCauseClass().getName()).append(":").append(e.getMessage()).toString();
+			logMessage = new StringBuffer(ce.getCauseClass().getName())
+					.append(":").append(e.getMessage()).toString();
 			errorMessage.put(AJAX_HANDLER_EXCEPTION, logMessage);
 		} else {
 			logMessage = e.getLocalizedMessage();
@@ -117,7 +118,7 @@ public class ErrorResult implements IErrorResult {
 		if (contentType != null) {
 			return this.contentType;
 		} else {
-			return "text/plain;charset=UTF-8";
+			return "text/plain";
 		}
 	}
 
@@ -139,5 +140,11 @@ public class ErrorResult implements IErrorResult {
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
+
+	@Override
+	public void respondResult(ServletResponse response) {
+		new StringResponse(getContextType(), getEncoding(), getResult())
+				.respond(response);
+	}// ;
 
 }

@@ -21,11 +21,10 @@ import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.FormHandler;
+import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.utils.CapString;
 
 /**
  * <p>
@@ -44,33 +43,31 @@ public class SimpleOperation implements Operation {
 
 	String operName;
 	Map<String, OperationStep> ruleMap;
-	IResult result;
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see tw.com.iisi.cap.flow.Operation#execute()
 	 */
-	public IResult execute(IRequest params, FormHandler handler)
+	public void execute(OpStepContext ctx, IRequest params, IHandler handler)
 			throws CapException {
 		OperationStep step = getStartStep();
-		IResult formResult = result;
 		long startOperation = System.currentTimeMillis();
 		try {
 			SimpleContextHolder.resetContext();
 			while (step != null) {
-				String result = null;
+				OpStepContext result = ctx;
 				try {
 					long startStep = System.currentTimeMillis();
-					result = step.execute(params, handler, formResult);
-					logger.debug(step.getName() + " cost : "
-							+ (System.currentTimeMillis() - startStep));
+					result = step.execute(result, params, handler);
+					logger.debug("{} cost : {} ms", step.getName(),
+							(System.currentTimeMillis() - startStep));
 				} catch (CapException e) {
-					result = step.handleException(e);
+					result = step.handleException(result, e);
 					throw e;
 				}
-				if (!CapString.isEmpty(result)) {
-					if (OperationStep.NEXT.equals(result)) {
+				if (result != null) {
+					if (OperationStep.NEXT.equals(result.getGoToStep())) {
 						step = getNextStep(step.getName());
 					} else if (OperationStep.RETURN.equals(result)
 							|| OperationStep.ERROR.equals(result)) {
@@ -80,15 +77,14 @@ public class SimpleOperation implements Operation {
 					}
 				}
 			}
-			return formResult;
 		} catch (CapException ce) {
 			throw ce;
 		} catch (Exception e) {
 			throw new CapException(e, getClass());
 		} finally {
 			SimpleContextHolder.resetContext();
-			logger.debug("Operation cost : "
-					+ (System.currentTimeMillis() - startOperation));
+			logger.debug("Operation cost : {} ms",
+					(System.currentTimeMillis() - startOperation));
 		}
 	}
 
@@ -154,10 +150,6 @@ public class SimpleOperation implements Operation {
 
 	public void setRuleMap(final Map<String, OperationStep> ruleMap) {
 		this.ruleMap = ruleMap;
-	}
-
-	public void setResult(IResult result) {
-		this.result = result;
 	}
 
 }

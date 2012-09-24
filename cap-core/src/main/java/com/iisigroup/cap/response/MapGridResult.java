@@ -18,6 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletResponse;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -329,7 +331,7 @@ public class MapGridResult implements
 		if (contentType != null) {
 			return this.contentType;
 		} else {
-			return "text/plain;charset=UTF-8";
+			return "text/plain";
 		}
 	}
 
@@ -356,5 +358,11 @@ public class MapGridResult implements
 	public Map<String, IFormatter> getDataReformatter() {
 		return this.dataReformatter;
 	}
+	
+	@Override
+	public void respondResult(ServletResponse response) {
+		new StringResponse(getContextType(), getEncoding(), getResult())
+				.respond(response);
+	}// ;
 
 }

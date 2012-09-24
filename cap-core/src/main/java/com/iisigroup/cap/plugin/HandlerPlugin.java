@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
+import com.iisigroup.cap.handler.IHandler;
 import com.iisigroup.cap.response.IResult;
-
 
 /**
  * <pre>
@@ -33,7 +33,7 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public abstract class HandlerPlugin implements IPlugin {
+public abstract class HandlerPlugin implements IPlugin, IHandler {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -69,5 +69,15 @@ public abstract class HandlerPlugin implements IPlugin {
 	 * @return IAction
 	 */
 	public abstract IAction getAction(String formAction);
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+	 */
+	public void afterPropertiesSet() throws Exception {
+		// do nothing
+	}
 
 }

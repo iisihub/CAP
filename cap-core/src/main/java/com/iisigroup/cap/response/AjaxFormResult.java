@@ -18,10 +18,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.CharEncoding;
+import javax.servlet.ServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.CharEncoding;
 
 /**
  * <pre>
@@ -43,10 +44,9 @@ import net.sf.json.JSONObject;
 public class AjaxFormResult implements IResult {
 
 	private JSONObject resultMap;
-	
+
 	private String contentType;
 	private String encoding;
-
 
 	/**
 	 * 建構子
@@ -186,13 +186,14 @@ public class AjaxFormResult implements IResult {
 		resultMap.putAll(map);
 		return this;
 	}
-	
+
 	/**
 	 * 比對是否存在此key
+	 * 
 	 * @param key
 	 * @return
 	 */
-	public boolean containsKey(String key){
+	public boolean containsKey(String key) {
 		return resultMap.containsKey(key);
 	}
 
@@ -256,7 +257,6 @@ public class AjaxFormResult implements IResult {
 		return resultMap.toString();
 	}
 
-
 	@Override
 	public String getLogMessage() {
 		return getResult();
@@ -275,7 +275,7 @@ public class AjaxFormResult implements IResult {
 		if (contentType != null) {
 			return this.contentType;
 		} else {
-			return "text/plain;charset=UTF-8";
+			return "text/plain";
 		}
 	}
 
@@ -297,5 +297,11 @@ public class AjaxFormResult implements IResult {
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
+
+	@Override
+	public void respondResult(ServletResponse response) {
+		new StringResponse(getContextType(), getEncoding(), getResult())
+				.respond(response);
+	}// ;
 
 }

@@ -11,12 +11,22 @@
  */
 package com.iisigroup.cap.response;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <pre>
  * 資料下載
+ * 當outputName有值時，browser會以檔案下載的方式呈現
+ * 當outputName無值時，browser則會先以直接開始檔案的方式呈現
  * </pre>
  * 
  * @since 2011/11/15
@@ -85,4 +95,36 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 		}
 	}// ;
 
+	@Override
+	public void respondResult(ServletResponse response) {
+		int length = -1;
+		InputStream in = null;
+		try {
+			if (getOutputName() != null
+					&& response instanceof HttpServletResponse) {
+				((HttpServletResponse) response).setHeader(
+						"Content-Disposition", "attachment;filename=\""
+								+ getOutputName() + "\"");
+			}
+			OutputStream output = response.getOutputStream();
+
+			// Stream to the requester.
+			byte[] bbuf = new byte[1024 * 1024];
+
+			in = new ByteArrayInputStream(_byteArray);
+			while ((in != null) && ((length = in.read(bbuf)) != -1)) {
+				output.write(bbuf, 0, length);
+			}
+			output.flush();
+		} catch (IOException e) {
+			e.getMessage();
+		} finally {
+			try {
+				in.close();
+				// output.close();
+			} catch (IOException e) {
+				e.getMessage();
+			}
+		}
+	}// ;
 }// ~

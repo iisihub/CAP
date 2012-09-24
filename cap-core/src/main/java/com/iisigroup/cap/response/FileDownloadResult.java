@@ -12,11 +12,21 @@
  */
 package com.iisigroup.cap.response;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -41,7 +51,6 @@ public class FileDownloadResult implements IResult {
 	protected String _contentType;
 	protected IRequest _request;
 	private String encoding;
-
 
 	public FileDownloadResult() {
 		super();
@@ -85,7 +94,7 @@ public class FileDownloadResult implements IResult {
 			this._outputName = r._outputName;
 		}
 	}
-	
+
 	@Override
 	public String getContextType() {
 		return this._contentType;
@@ -105,5 +114,38 @@ public class FileDownloadResult implements IResult {
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
+
+	@Override
+	public void respondResult(ServletResponse response) {
+		InputStream in = null;
+		try {
+			if (_outputName != null && response instanceof HttpServletResponse) {
+				((HttpServletResponse) response).setHeader(
+						"Content-Disposition", "attachment;filename=\""
+								+ _outputName + "\"");
+			}
+			OutputStream output = response.getOutputStream();
+			File file = new File(_file);
+			int length = -1;
+			// Stream to the requester.
+			byte[] bbuf = new byte[1024 * 1024];
+
+			in = new FileInputStream(file);
+			while ((in != null) && ((length = in.read(bbuf)) != -1)) {
+				output.write(bbuf, 0, length);
+			}
+			output.flush();
+
+		} catch (Exception e) {
+			throw new CapException(e, getClass());
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.getMessage();
+			}
+		}
+
+	}// ;
 
 }

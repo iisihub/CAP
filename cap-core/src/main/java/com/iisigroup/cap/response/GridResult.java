@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletResponse;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -238,7 +240,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		if (contentType != null) {
 			return this.contentType;
 		} else {
-			return "text/plain;charset=UTF-8";
+			return "text/plain";
 		}
 	}
 
@@ -265,5 +267,11 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	public Map<String, IFormatter> getDataReformatter() {
 		return this.dataReformatter;
 	}
+	
+	@Override
+	public void respondResult(ServletResponse response) {
+		new StringResponse(getContextType(), getEncoding(), getResult())
+				.respond(response);
+	}// ;
 
 }// ~

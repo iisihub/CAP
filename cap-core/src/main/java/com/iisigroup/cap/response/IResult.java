@@ -14,6 +14,8 @@ package com.iisigroup.cap.response;
 
 import java.io.Serializable;
 
+import javax.servlet.ServletResponse;
+
 /**
  * <p>
  * IResult.
@@ -28,6 +30,8 @@ import java.io.Serializable;
 public interface IResult extends Serializable {
 
 	String getResult();
+	
+	void respondResult(ServletResponse response);
 
 	String getLogMessage();
 

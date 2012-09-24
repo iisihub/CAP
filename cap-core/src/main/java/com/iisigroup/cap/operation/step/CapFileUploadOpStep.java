@@ -26,8 +26,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.handler.FormHandler;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.utils.CapMath;
 
 /**
@@ -59,22 +59,6 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 		this.fileSizeLimitErrorCode = fileSizeLimitErrorCode;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.iisigroup.cap.operation.OperationStep#execute(com.iisigroup.cap.component
-	 * .IRequest, com.iisigroup.cap.handler.FormHandler,
-	 * com.iisigroup.cap.response.IResult)
-	 */
-	@Override
-	public String execute(IRequest params, FormHandler handler, IResult result)
-			throws CapException {
-		MultipartHttpServletRequest req = uploadFile(params);
-		params.setRequestObject(req);
-		return NEXT;
-	}// ;
-
 	protected MultipartHttpServletRequest uploadFile(IRequest params) {
 		if (params.containsKey("limitSize")) {
 			multipartResolver.setMaxUploadSize(params
@@ -104,4 +88,17 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 		}
 
 	}// ;
+
+	@Override
+	public OpStepContext execute(OpStepContext ctx, IRequest params,
+			IHandler handler) throws CapException {
+		try {
+			MultipartHttpServletRequest req = uploadFile(params);
+			params.setRequestObject(req);
+			return ctx.setGoToStep(NEXT);
+		} catch (Exception e) {
+			return ctx.setGoToStep(ERROR);
+		}
+
+	}
 }

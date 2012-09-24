@@ -10,7 +10,6 @@
 package com.iisigroup.cap.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -22,7 +21,6 @@ import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.FileCopyUtils;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
@@ -30,7 +28,6 @@ import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.handler.FormHandler;
 import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.plugin.PluginManager;
-import com.iisigroup.cap.response.ByteArrayDownloadResult;
 import com.iisigroup.cap.response.ErrorResult;
 import com.iisigroup.cap.response.IErrorResult;
 import com.iisigroup.cap.response.IResult;
@@ -128,7 +125,7 @@ public class CapHandlerServlet extends HttpServlet {
 				resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
 		} finally {
-			respond(resp, result);
+			result.respondResult(resp);
 			logger.debug("total spend time : {} ms",
 					(System.currentTimeMillis() - st));
 			if (logger.isTraceEnabled()) {
@@ -146,31 +143,5 @@ public class CapHandlerServlet extends HttpServlet {
 		cr.setRequestObject(req);
 		return cr;
 	}
-
-	public void respond(HttpServletResponse response, IResult result) {
-		try {
-			if (result instanceof ByteArrayDownloadResult) {
-				ByteArrayDownloadResult file = (ByteArrayDownloadResult) result;
-				response.setContentType(file.getContentType());
-				response.setContentLength(file.getByteArray().length);
-				if (!CapString.isEmpty(file.getOutputName())) {
-					response.setHeader("Content-Disposition",
-							"attachment;filename=\"" + file.getOutputName()
-									+ "\"");
-				}
-				FileCopyUtils.copy(file.getByteArray(),
-						response.getOutputStream());
-			} else {
-				String string = result.getResult();
-				response.setContentType(result.getContextType());
-				response.setContentLength(string.getBytes(result.getEncoding()).length);
-				PrintWriter out = response.getWriter();
-				out.write(string);
-				out.flush();
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-	}// ;
 
 }

@@ -15,7 +15,9 @@ package com.iisigroup.cap.handler;
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
+import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
+import com.iisigroup.cap.operation.OperationStep;
 import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -34,24 +36,15 @@ import com.iisigroup.cap.utils.CapAppContext;
  */
 public abstract class FormHandler extends HandlerPlugin {
 
-	public static final String FORM_ACTION = "formAction";
-
-	public static final String SIMPLE_OPERATION = "simpleOperation";
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seetw.com.iisi.cap.plugin.AjaxHandlerPlugin#execute(org.apache.wicket.
-	 * PageParameters, org.apache.wicket.Component)
-	 */
 	@Override
 	public IResult execute(IRequest params) throws CapException {
-		IResult result = null;
 		Operation oper = getOperation();
 		if (oper != null) {
-			result = oper.execute(params, this);
+			OpStepContext ctx = new OpStepContext(OperationStep.NEXT);
+			oper.execute(ctx, params, this);
+			return ctx.getResult();
 		}
-		return result;
+		return null;
 	}
 
 	public abstract IAction getAction(String formAction);
@@ -63,14 +56,9 @@ public abstract class FormHandler extends HandlerPlugin {
 				getOperationName());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	public void afterPropertiesSet() throws Exception {
-		// do nothing
+	@Override
+	public String getHandlerName() {
+		return getPluginName();
 	}
 
 }// ~

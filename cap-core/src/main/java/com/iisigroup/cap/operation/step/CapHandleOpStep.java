@@ -15,7 +15,8 @@ package com.iisigroup.cap.operation.step;
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.FormHandler;
+import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.response.IResult;
 
 /**
@@ -29,23 +30,20 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2010/7/23,iristu,new
  *          </ul>
  */
-public class CapFormHandleOpStep extends AbstractCustomizeOpStep {
+public class CapHandleOpStep extends AbstractCustomizeOpStep {
 
 	@Override
-	public String execute(IRequest params, FormHandler handler, IResult result)
-			throws CapException {
+	public OpStepContext execute(OpStepContext ctx, IRequest params,
+			IHandler handler) throws CapException {
 		IResult rtn = null;
 		@SuppressWarnings("static-access")
 		String actionType = params.get(handler.FORM_ACTION);
-		setName(handler.getPluginName() + "." + actionType);
+		setName(handler.getHandlerName() + "." + actionType);
 		IAction action = handler.getAction(actionType);
 		rtn = action.doWork(params);
-		if (result == null) {
-			result = rtn;
-		} else if (rtn != null) {
-			result.add(rtn);
-		}
-		return NEXT;
-	}
+		ctx.setGoToStep(NEXT);
+		ctx.setResult(rtn);
+		return ctx;
+	}// ;
 
 }// ~

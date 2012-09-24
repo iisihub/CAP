@@ -31,7 +31,10 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
+import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
+import com.iisigroup.cap.operation.OperationStep;
+import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
@@ -53,7 +56,7 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2012/9/20,iristu,改由HandlerType來判斷取得Operation
  *          </ul>
  */
-public abstract class MFormHandler extends FormHandler {
+public abstract class MFormHandler extends HandlerPlugin {
 
 	@Resource(name = "handlerOpMapping")
 	private CapParameter handlerOp;
@@ -230,24 +233,15 @@ public abstract class MFormHandler extends FormHandler {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisi.cap.handler.FormHandler#getOperationName()
-	 */
-	@Override
-	public String getOperationName() {
-		return SIMPLE_OPERATION;
-	}
-
 	@Override
 	public IResult execute(IRequest params) throws CapException {
-		IResult result = null;
 		Operation oper = getOperation(params);
 		if (oper != null) {
-			result = oper.execute(params, this);
+			OpStepContext ctx = new OpStepContext(OperationStep.NEXT);
+			oper.execute(ctx, params, this);
+			return ctx.getResult();
 		}
-		return result;
+		return null;
 	}// ;
 
 	protected String getOperationName(IRequest params) {
@@ -282,6 +276,11 @@ public abstract class MFormHandler extends FormHandler {
 
 		private static final long serialVersionUID = 1L;
 
+	}
+
+	@Override
+	public String getHandlerName() {
+		return getPluginName();
 	}
 
 }// ~

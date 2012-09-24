@@ -16,8 +16,7 @@ import java.util.Map;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.FormHandler;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.handler.IHandler;
 
 /**
  * <p>
@@ -32,9 +31,9 @@ import com.iisigroup.cap.response.IResult;
 public interface OperationStep {
 
 	static final String NEXT = "next";
-	
+
 	static final String ERROR = "error";
-	
+
 	static final String RETURN = "return";
 
 	String getName();
@@ -45,9 +44,10 @@ public interface OperationStep {
 
 	void setRuleMap(Map<String, String> ruleMap);
 
-	String execute(IRequest params,
-			FormHandler handler, IResult result) throws CapException;
+	OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler)
+			throws CapException;
 
-	String handleException(Exception e) throws CapException;
+	OpStepContext handleException(OpStepContext ctx, Exception e)
+			throws CapException;
 
 }

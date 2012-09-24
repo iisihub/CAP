@@ -8,7 +8,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
- 
+
 /**
  * Copyright (c) 2009-2011 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
@@ -18,21 +18,24 @@
  *
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
-*/
+ */
 package com.iisigroup.cap.operation.step;
 
 import java.util.Map;
 
 import com.iisigroup.cap.exception.CapException;
+import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.OperationStep;
 
-/**<pre>
+/**
+ * <pre>
  * AbstractCustomizeOpStep
  * </pre>
- * @since  2010/11/24
+ * 
+ * @since 2010/11/24
  * @author iristu
  * @version <ul>
- *           <li>2010/11/24,iristu,new
+ *          <li>2010/11/24,iristu,new
  *          </ul>
  */
 public abstract class AbstractCustomizeOpStep implements OperationStep {
@@ -65,8 +68,10 @@ public abstract class AbstractCustomizeOpStep implements OperationStep {
 	 * @see
 	 * tw.com.iisi.cap.flow.OperationStep#handleException(java.lang.Exception)
 	 */
-	public String handleException(Exception e) throws CapException {
-		return ERROR;
+	public OpStepContext handleException(OpStepContext ctx, Exception e)
+			throws CapException {
+		ctx.setGoToStep(ERROR);
+		return ctx;
 	}
 
 	/*
