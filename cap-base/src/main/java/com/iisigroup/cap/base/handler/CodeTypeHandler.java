@@ -12,6 +12,7 @@ package com.iisigroup.cap.base.handler;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +31,8 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
+import com.iisigroup.cap.formatter.ADDateFormatter;
+import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -81,7 +84,9 @@ public class CodeTypeHandler extends MFormHandler {
 			search.addOrderBy("codeOrder");
 		}
 		Page<CodeType> page = commonService.findPage(CodeType.class, search);
-		return new GridResult(page.getContent(), page.getTotalRow());
+		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+		fmt.put("lastModifyTime", new ADDateFormatter());
+		return new GridResult(page.getContent(), page.getTotalRow(),fmt);
 	}// ;
 
 	/**
@@ -96,7 +101,7 @@ public class CodeTypeHandler extends MFormHandler {
 		String type = request.get("type");
 		String locale = CapSecurityContext.getLocale().toString();
 		CodeType code = codeTypeService.getByCodeTypeAndValue(
-				request.get("cdeType"), request.get("cdeVal"), locale);
+				request.get("codeType"), request.get("codeValue"), locale);
 
 		if ("A".equals(type)) {
 			if (code != null) {

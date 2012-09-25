@@ -12,9 +12,11 @@
 package com.iisigroup.cap.sample.handler;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -28,7 +30,7 @@ import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.FileDownloadResult;
+import com.iisigroup.cap.response.ByteArrayDownloadResult;
 import com.iisigroup.cap.response.IResult;
 
 /**
@@ -67,21 +69,21 @@ public class SampleHandler extends MFormHandler {
 
 	@HandlerType(HandlerTypeEnum.FileDownload)
 	public IResult dwnload(IRequest request) throws CapException {
-		String outputName = request.get("fileName", "CapLog.log");
-//		File file = new File("logs/CapLog.log");
-//		FileInputStream is = null;
-//		try {
-//			is = FileUtils.openInputStream(file);
-//			return new ByteArrayDownloadResult(request,
-//					IOUtils.toByteArray(is), "text/plain", outputName);
-//		} catch (IOException e) {
-//			logger.error(e.getMessage(), e);
-//		} finally {
-//			IOUtils.closeQuietly(is);
-//		}
-//		return null;
-		return new FileDownloadResult(request, "logs/CapLog.log", outputName,
-				"text/plain");
+		//String outputName = request.get("fileName", "CapLog.log");
+		File file = new File("logs/CapLog.log");
+		FileInputStream is = null;
+		try {
+			is = FileUtils.openInputStream(file);
+			return new ByteArrayDownloadResult(request,
+					IOUtils.toByteArray(is), "text/plain");
+		} catch (IOException e) {
+			logger.error(e.getMessage(), e);
+		} finally {
+			IOUtils.closeQuietly(is);
+		}
+		return null;
+//		return new FileDownloadResult(request, "logs/CapLog.log", outputName,
+//				"text/plain");
 	}// ;
 
 }

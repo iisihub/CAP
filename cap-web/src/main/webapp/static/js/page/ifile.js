@@ -4,6 +4,7 @@ $(document).ready(function(){
 	        url: "../handler/samplehandler/upload",
 	        fileElementId: "ufile",
 	        fileCheck: ["jpg", "jpeg", "png", "gif", "txt"],
+	        //limitSize: 5 *1024*1024,
 	        data: {
 	            testStr: "test!!test!!"
 	        },

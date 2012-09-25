@@ -10,7 +10,7 @@ $(document).ready(function(){
         }, {name: 'codeType',width: 110,align:"center"
         }, {name: 'codeValue',width: 80,align:"center"
         }, {name: 'codeDesc',width: 80,align:"center"
-        }, {name: 'codeOrd',width: 80,align:"center"
+        }, {name: 'codeOrder',width: 80,align:"center"
         }, {header: i18n.def.lastModBy,
             name: 'lastModifyBy',width: 80,align:"center"
         }, {header: i18n.def.lastModTm,
