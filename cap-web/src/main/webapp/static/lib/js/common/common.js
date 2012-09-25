@@ -76,7 +76,8 @@ jQuery.extend(window, {
         return window.closeConfirm;
     },
     onbeforeunload: function(){
-        if (getCloseConfirm()) return this.closeWindowMsg;
+        if (getCloseConfirm()) 
+            return this.closeWindowMsg;
     },
     // 關閉視窗或重新整理後的動作
     onunload: Properties.window.onunload,
@@ -249,50 +250,45 @@ var _load = jQuery.fn.load;
 /** over jquery method * */
 jQuery.fn.extend({
     load: function(url, params, callback){
-        if (typeof url !== "string" && window._load) {
+        if (typeof url !== "string" && _load) {
             return _load.apply(this, arguments);
-            
-            // Don't do a request if no elements are being requested
         }
-        else if (!this.length) {
+        
+        // Don't do a request if no elements are being requested
+        if (!this.length) {
             return this;
         }
         
-        var off = url.indexOf(" ");
+        var selector, type, response, self = this, off = url.indexOf(" ");
+        
         if (off >= 0) {
-            var selector = url.slice(off, url.length);
+            selector = url.slice(off, url.length);
             url = url.slice(0, off);
         }
         
-        // Default to a GET request
-        var type = "GET";
+        // If it's a function
+        if (jQuery.isFunction(params)) {
         
-        // If the second parameter was provided
-        if (params) {
-            // If it's a function
-            if (jQuery.isFunction(params)) {
-                // We assume that it's the callback
-                callback = params;
-                params = undefined;
-                
-                // Otherwise, build a param string
-            }
-            else if (typeof params === "object") {
-                params = jQuery.param(params, jQuery.ajaxSettings.traditional);
+            // We assume that it's the callback
+            callback = params;
+            params = undefined;
+            
+            // Otherwise, build a param string
+        }
+        else 
+            if (params && typeof params === "object") {
                 type = "POST";
             }
-        }
-        
         var self = this;
-        
         // Request the remote document
         jQuery.ajax({
             url: url,
+            
+            // if "type" variable is undefined, then "GET" method will be used
             type: type,
             dataType: "html",
             data: params,
-            // Rodes add
-            context: self,
+			context: self,
             converters: {
                 "text html": function(s){
                     return "<script type=\"text/javascript\">$(document).ready(function(){pageInit.call($(\"#" +
@@ -301,23 +297,30 @@ jQuery.fn.extend({
                     s;
                 }
             },
-            complete: function(jqXHR, status, responseText){
-                responseText = jqXHR.responseText;
-                if (jqXHR.isResolved()) {
-                    jqXHR.done(function(r){
-                        responseText = r;
-                    });
-                    self.html(selector ? jQuery("<div>").append(responseText.replace(rscript, "")).find(selector) : responseText);
-                }
-                
+            complete: function(jqXHR, status){
                 if (callback) {
-                    self.each(callback, [responseText, status, jqXHR]);
+                    self.each(callback, response || [jqXHR.responseText, status, jqXHR]);
                 }
             }
+        }).done(function(responseText){
+        
+            // Save response for use in complete callback
+            response = arguments;
+            
+            // See if a selector was specified
+            self.html(selector ?            // Create a dummy div to hold the results
+            jQuery("<div>")            // inject the contents of the document in, removing the scripts
+            // to avoid any 'Permission Denied' errors in IE
+            .append(responseText.replace(rscript, ""))            // Locate the specified elements
+            .find(selector) :            // If not, just inject the full result
+            responseText);
+            
         });
         
         return this;
     },
+    
+    
     __dialog: jQuery.fn.dialog,
     dialog: function(arg1, arg2, arg3){
         if (typeof arg1 !== "string") {
@@ -409,7 +412,7 @@ $.startBlockUI = function(event, xhr){
     $.blockUI({
         fadeIn: 0,
         fadeOut: 0,
-        message: i18n.def.loading + '   <img src="webroot/images/ajax-loader.gif"/>',
+        message: i18n.def.loading + '   <img src="webroot/static/images/ajax-loader.gif"/>',
         css: {
             'z-index': 10010,
             top: '0',
@@ -462,7 +465,8 @@ $.extend($, {
             if (!checkFormErrorAndRequired(form)) {
                 return false;
             }
-            else $.extend(s.data, form.serializeData(s.noHide), s.data);
+            else 
+                $.extend(s.data, form.serializeData(s.noHide), s.data);
         }
         // ---------------------------------------------------------------------------------
         // 移除page 以防server side 無法抓取正確值
@@ -479,9 +483,10 @@ $.extend($, {
                     API.ajaxErrorMessage(data.ERROR_NOTIFY_MESSAGE);
                 }
                 // 如有通知訊息則顯示於畫面上
-                else if (data.NOTIFY_MESSAGE) {
-                    API.ajaxNotifyMessage(data.NOTIFY_MESSAGE);
-                }
+                else 
+                    if (data.NOTIFY_MESSAGE) {
+                        API.ajaxNotifyMessage(data.NOTIFY_MESSAGE);
+                    }
                 s.success && s.success(data, status);
                 data.ERROR_NOTIFY_MESSAGE && s.successError &&
                 s.successError(data, status);
@@ -499,15 +504,18 @@ $.extend($, {
                     // request timeout
                     API.showErrorMessage(i18n.def.timeout);
                 }
-                else if (!xhr.status && statusText) {
-                    API.showErrorMessage(i18n.def.connectError + "-「" + statusText + "」");
-                }
-                else if (xhr.responseText) {
-                    errorCheck(xhr);
-                }
-                else if (xhr.status == 0 || xhr.status && xhr.status != '200') {
-                    API.showErrorMessage("http error code: 「" + xhr.status + "」");
-                }
+                else 
+                    if (!xhr.status && statusText) {
+                        API.showErrorMessage(i18n.def.connectError + "-「" + statusText + "」");
+                    }
+                    else 
+                        if (xhr.responseText) {
+                            errorCheck(xhr);
+                        }
+                        else 
+                            if (xhr.status == 0 || xhr.status && xhr.status != '200') {
+                                API.showErrorMessage("http error code: 「" + xhr.status + "」");
+                            }
             },
             data: $.extend({}, window.responseJSON ? responseJSON : {}, {
                 _pa: s.handler || '',
@@ -515,7 +523,7 @@ $.extend($, {
                 txCode: window.txCode ||
                 window.responseJSON &&
                 responseJSON.txCode ||
-                "" 
+                ""
             }, s.data)
         }));
     }
@@ -923,32 +931,33 @@ jQuery.fn.extend({
                 "'>" +
                 i18n.def.newData +
                 "</option>"));
-                if (!s.data('bindChanged')) s.bind('change', function(){
-                    var value = $(this).val();
-                    if (value == i18n.def.newData) {
-                        CommonAPI.includeID({
-                            needCancel: true,
-                            checkType: s.attr("addCheckType") ||
-                            "",
-                            title: i18n.def.newData +
-                            (s.attr("addTitle") ||
-                            i18n.def.selectOption),
-                            subtitle: s.attr("addTitle") ||
-                            i18n.def.selectOption,
-                            buttonName: i18n.def.sure,
-                            buttonAction: function(){
-                                if ($("#searchForm").valid()) {
-                                    var options = s.data("viewOptions") || {};
-                                    options[$("#sseid").val()] = $("#sseid").val();
-                                    delete options[i18n.def.newData];
-                                    options[i18n.def.newData] = i18n.def.newData;
-                                    s.data("viewOptions", options).setOptions(options).val($("#sseid").val());
-                                    CommonAPI.includeID('close');
+                if (!s.data('bindChanged')) 
+                    s.bind('change', function(){
+                        var value = $(this).val();
+                        if (value == i18n.def.newData) {
+                            CommonAPI.includeID({
+                                needCancel: true,
+                                checkType: s.attr("addCheckType") ||
+                                "",
+                                title: i18n.def.newData +
+                                (s.attr("addTitle") ||
+                                i18n.def.selectOption),
+                                subtitle: s.attr("addTitle") ||
+                                i18n.def.selectOption,
+                                buttonName: i18n.def.sure,
+                                buttonAction: function(){
+                                    if ($("#searchForm").valid()) {
+                                        var options = s.data("viewOptions") || {};
+                                        options[$("#sseid").val()] = $("#sseid").val();
+                                        delete options[i18n.def.newData];
+                                        options[i18n.def.newData] = i18n.def.newData;
+                                        s.data("viewOptions", options).setOptions(options).val($("#sseid").val());
+                                        CommonAPI.includeID('close');
+                                    }
                                 }
-                            }
-                        });
-                    }
-                }).data('bindChanged', true);
+                            });
+                        }
+                    }).data('bindChanged', true);
             }
             return s.html(ops = (((s.attr("space") == "true") ? ("<option value=''>" +
             i18n.def.comboSpace +
@@ -993,52 +1002,53 @@ var CommonAPI = {
         if (action && action === 'close') {
             $("#" + settings).dialog('close');
         }
-        else if (settings === 'close') {
-            $('#' + dialogId).dialog('close');
-        }
-        else {
-            var s = $.extend({
-                title: i18n.def.confirmTitle,
-                closeName: i18n.def.cancel,
-                closeBtnAction: null
-            
-            }, settings);
-            var cDialog = $('#' + s.id);
-            cDialog = ((cDialog.size()) ? cDialog : $("<div style='iConfirmDialog' id='" + dialogId + "' title='" +
-            s.title +
-            "'><span id='" +
-            dialogId +
-            "Message' style='max-width:600px;display:block'>" +
-            s.message +
-            "</span></div>").appendTo("body"));
-            var defaultButton = {};
-            defaultButton[s.closeName] = function(){
-                cDialog.dialog('close');
-            };
-            var tmpClose = s.close ||
-            function(){
-            };
-            delete s['close'];
-            cDialog.dialog($.extend({
-                bgiframe: false,
-                autoOpen: false,
-                modal: true,
-                maxWidth: $.browser.msie7 ? 600 : null
-            }, $.extend(s, {
-                close: function(){
-                    tmpClose();
-                    cDialog.dialog('destroy');
-                }
-            }), {
-                buttons: $.extend(s.buttons, s.noClose === true && {} ||
-                defaultButton)
-            }));
-            cDialog.dialog('open');
-            $.browser.msie7 &&
-            cDialog.dialog('option', 'width', cDialog.find('#' + dialogId + 'Message').width());
-            cDialog.dialog("option", "position", 'center');
-            return cDialog;
-        }
+        else 
+            if (settings === 'close') {
+                $('#' + dialogId).dialog('close');
+            }
+            else {
+                var s = $.extend({
+                    title: i18n.def.confirmTitle,
+                    closeName: i18n.def.cancel,
+                    closeBtnAction: null
+                
+                }, settings);
+                var cDialog = $('#' + s.id);
+                cDialog = ((cDialog.size()) ? cDialog : $("<div style='iConfirmDialog' id='" + dialogId + "' title='" +
+                s.title +
+                "'><span id='" +
+                dialogId +
+                "Message' style='max-width:600px;display:block'>" +
+                s.message +
+                "</span></div>").appendTo("body"));
+                var defaultButton = {};
+                defaultButton[s.closeName] = function(){
+                    cDialog.dialog('close');
+                };
+                var tmpClose = s.close ||
+                function(){
+                };
+                delete s['close'];
+                cDialog.dialog($.extend({
+                    bgiframe: false,
+                    autoOpen: false,
+                    modal: true,
+                    maxWidth: $.browser.msie7 ? 600 : null
+                }, $.extend(s, {
+                    close: function(){
+                        tmpClose();
+                        cDialog.dialog('destroy');
+                    }
+                }), {
+                    buttons: $.extend(s.buttons, s.noClose === true && {} ||
+                    defaultButton)
+                }));
+                cDialog.dialog('open');
+                $.browser.msie7 &&
+                cDialog.dialog('option', 'width', cDialog.find('#' + dialogId + 'Message').width());
+                cDialog.dialog("option", "position", 'center');
+                return cDialog;
+            }
     },
     showConfirmMessage: function(title, message, action, cls){
         var randomID = "sysCMessage" + parseInt(Math.random() * 1000, 10);
@@ -1182,7 +1192,8 @@ var CommonAPI = {
      */
     fillString: function(data, length, rightAlign, ch){
         var inlength = data.length;
-        if (inlength >= length) return data;
+        if (inlength >= length) 
+            return data;
         for (var i = 0; i < (length - inlength); i++) {
             data = (!!rightAlign ? (data + ch || "0") : ((ch || "0") + data));
         }
@@ -1219,12 +1230,12 @@ var CommonAPI = {
         }
         return json;
     },
-    loadPage: function(href,fn){
+    loadPage: function(href, fn){
         $.blockUI.showBG = true;
         $.startBlockUI();
-        var section = $(".rightDiv");
+        var section = $("article");
         section.animate({
-            opacity: 0.01
+            opacity: 0.8
         }, 500, (function(loadHref){
             return function(){
                 i18n.load(href, {
@@ -1235,7 +1246,7 @@ var CommonAPI = {
                         section.animate({
                             opacity: 1
                         }, 800);
-						fn && fn();
+                        fn && fn();
                     });
                     $.blockUI.showBG = false;
                 });
@@ -1290,10 +1301,12 @@ var CommonAPI = {
      *            String} updatekeys reutrn {JSON} comboList
      */
     loadCombos: function(updateKeys, comboaction){
-        if (updateKeys === "") return {};
+        if (updateKeys === "") 
+            return {};
         var nkeys = (typeof updateKeys === 'string') ? [updateKeys] : updateKeys, ukeys = [];
         for (var key in nkeys) {
-            if (!icombos[nkeys[key]]) ukeys.push(nkeys[key]);
+            if (!icombos[nkeys[key]]) 
+                ukeys.push(nkeys[key]);
         }
         (ukeys.length || (comboaction && comboaction.length)) &&
         (function(){
@@ -1332,7 +1345,8 @@ var pageInit = function(isSubPage){
     $_this.find("[commonitem],input[padding]").filter("[commonitem]").each(function(){
         var $cthis = $(this), common = Properties.commonItem &&
         Properties.commonItem[$cthis.attr("commonitem")];
-        if (!common) return;
+        if (!common) 
+            return;
         else {
             if (common.valid) {
                 $cthis.bind("blur.comm", common.valid);
@@ -1389,7 +1403,6 @@ var pageInit = function(isSubPage){
     $_this.find(".date").filter(function(){
         return !$(this).attr('readonly');
     }).datepicker();
-    
     $_this.find("button").addClass("btn1").button();
     
     $_this.find("form").each(function(){
@@ -1436,9 +1449,10 @@ $.extend(window, {
             if (rules[i + 4] === '0' && !(et.val() >= st.val())) {
                 return i18n.def['valid.dateBetweenEq'];
             }
-            else if (rules[i + 4] === '1' && !(et.val() > st.val())) {
-                return i18n.def['valid.dateBetween'];
-            }
+            else 
+                if (rules[i + 4] === '1' && !(et.val() > st.val())) {
+                    return i18n.def['valid.dateBetween'];
+                }
         }
     },
     betweenAge: function(field, rules, i, options){

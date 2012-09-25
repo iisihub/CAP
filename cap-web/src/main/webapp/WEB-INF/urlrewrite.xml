@@ -33,7 +33,7 @@
 	</rule>
 	<rule match-type="regex">
 		<note>redirect handler</note>
-		<from>/([a-zA-Z]+)handler/(.*)</from>
+		<from>^/([a-zA-Z]+)handler/(.*)</from>
 		<set name="Cache-Control" type="response-header">no-cache, no-store, max-age=0</set>
 		<set name="Pragma" type="response-header">no-cache</set>
 		<set name="Expires" type="response-header">0</set>
