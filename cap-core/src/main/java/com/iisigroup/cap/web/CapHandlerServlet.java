@@ -90,7 +90,16 @@ public class CapHandlerServlet extends HttpServlet {
 			HttpServletResponse resp) {
 		String handler = (String) req.getAttribute(HANDLER);
 		String action = (String) req.getAttribute(ACTION);
-
+		if (CapString.isEmpty(handler)){
+			String uri = req.getRequestURI();
+			int f = -1;
+			if ((f=uri.indexOf("/handler"))>-1){
+				uri = uri.substring(f+9);
+				String[] s = uri.split("/");
+				handler = s[0];
+				action = s[1];
+			}
+		}
 		long st = System.currentTimeMillis();
 		if (logger.isTraceEnabled()) {
 			logger.trace("Request Data: {}",
