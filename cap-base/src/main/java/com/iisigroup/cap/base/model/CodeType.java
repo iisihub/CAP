@@ -38,14 +38,18 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  */
 @SuppressWarnings("serial")
 @Entity
-@EntityListeners({CapOidGeneratorListener.class})
+@EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "CODETYPE", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"codeType", "codeValue" }))
+		"locale", "codeType", "codeValue" }))
 public class CodeType extends GenericBean implements IDataObject {
 
 	@Id
 	@Column(nullable = false, length = 32)
 	private String oid;
+
+	@NotNull
+	@Column(length = 5)
+	private String locale;
 
 	@NotNull
 	@Column(length = 32, nullable = false)
@@ -65,9 +69,6 @@ public class CodeType extends GenericBean implements IDataObject {
 
 	@Column
 	private Timestamp lastModifyTime;
-
-	@Column(length = 5)
-	private String locale;
 
 	public String getOid() {
 		return oid;
