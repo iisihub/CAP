@@ -1235,7 +1235,7 @@ var CommonAPI = {
         $.startBlockUI();
         var section = $("article");
         section.animate({
-            opacity: 0.8
+            opacity: 0.01
         }, 500, (function(loadHref){
             return function(){
                 i18n.load(href, {
@@ -1484,3 +1484,5 @@ $.extend(window, {
         }
     }
 });
+
+
