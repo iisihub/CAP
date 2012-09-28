@@ -1,12 +1,10 @@
 /* 專案JS設定檔    */
-Properties = {
+$.extend(Properties || {}, {
 	window : {
 		closeConfirm : false,
 		onunload : function() {
-
 		}
 	},
-	title : window.document.title ,
 	ajaxTimeOut : 60 * 1000 * 3, // timeOut: 1000
 	// 下拉選單handler
 	ComboBoxHandler : 'webroot/handler/codetypehandler/queryByKeys',
@@ -15,4 +13,4 @@ Properties = {
 		rowList : []
 	}
 
-};
+});

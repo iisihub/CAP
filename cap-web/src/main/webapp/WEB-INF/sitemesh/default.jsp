@@ -6,15 +6,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title><decorator:title default="CapWebMVC" /></title><decorator:head/><!--
-        <link rel="stylesheet" href="webroot/static/lib/css/yui_reset.css" />--><!--<link rel="stylesheet" href="webroot/static/lib/js/jquery/ui/css/custom-theme/jquery-ui-1.8.16.custom.css" />--><!--<link rel="stylesheet" href="webroot/static/lib/js/jquery/plugin/jquery.jqGrid-4.2.0/css/ui.jqgrid.css" />--><!--<link rel="stylesheet" href="webroot/static/lib/js/jquery/plugin/formValidator/css/validationEngine.jquery.css" />-->
+        <title><decorator:title default="CapWebMVC" /></title>
         <link rel="stylesheet" href="webroot/static/css/main.css" />
-        <!--[if lt IE 9]>jquery-ui-1.8.23.custom.min.js
-            <script src="webroot/js/html5.js"></script>
+        <!--[if lt IE 9]>
+            <script src="webroot/static/lib/js/html5.js"></script>
         <![endif]--><!--<script data-main="webroot/static/js/main" src="webroot/static/requirejs/2.0.6/require.js"></script>
-        -->
-		<script src="webroot/static/requirejs/2.0.6/require.min.js"></script>
-		<script src="webroot/static/js/main.js"></script>
+        --><script src="webroot/static/requirejs/2.0.6/require.min.js"></script>
+        <script src="webroot/static/js/main.js"></script>
+		<decorator:head/>
     </head>
     <body>
         <div class="mainBody">

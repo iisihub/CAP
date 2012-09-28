@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <!DOCTYPE>
 <html>
     <head>
-         <meta name="decorator" content="none">
+        <meta name="decorator" content="none">
+        <title>xxx</title>
     </head>
     <body>
-        <div ng-controller="codetypeCtrl">
+        <script>
+            loadScript('../static/js/page/codetype.js');
+        </script>
+        <div>
             <form id="mform" onsubmit="return false;">
-                <!--<fieldset class="row">--><input type="text" id="oid" name="oid" class="hide" /><input type="text" id="mtype" name="mtype" class="hide" />
+                <!--<fieldset class="row">
+                --><input type="text" id="oid" name="oid" class="hide" /><input type="text" id="mtype" name="mtype" class="hide" />
                 <table class="row-data">
                     <tr>
                         <th>
@@ -17,7 +22,7 @@
                             </spring:message>
                         </th>
                         <td colspan="3">
-                            <input type="text" id="locale" name="locale" maxlength="5" class="validate[required,funcCall[maxUTF8[5]]]" ng-model="todo" value="zh_TW"/>
+                            <input type="text" id="locale" name="locale" maxlength="5" class="validate[required,funcCall[maxUTF8[5]]]" value="zh_TW" />
                         </td>
                     </tr>
                     <tr>
@@ -27,7 +32,7 @@
                             </spring:message>
                         </th>
                         <td>
-                            <input type="text" id="codeType" name="codeType" maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]" ng-model="todo" value="{{mmm}}"/>
+                            <input type="text" id="codeType" name="codeType" maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]" value="{{mmm}}" />
                         </td>
                         <th>
                             <spring:message code="codetype.codeVal">
@@ -45,7 +50,7 @@
                             </spring:message>
                         </th>
                         <td>
-                            <input type="text" id="codeDesc" name="codeDesc" maxlength="100" class="validate[funcCall[maxUTF8[100]]]"/>
+                            <input type="text" id="codeDesc" name="codeDesc" maxlength="100" class="validate[funcCall[maxUTF8[100]]]" />
                         </td>
                         <th>
                             <spring:message code="codetype.codeOrder">
@@ -58,7 +63,7 @@
                     </tr>
                 </table><!--</fieldset>-->
             </form>
-            <div class="btns" colspan="4" style="text-align:right">
+            <div class="btns" colspan="4" style="text-align: right">
                 <button id="qry" type="button" class="btn1">
                     <spring:message code="btn.query">
                         <!--查詢-->
@@ -85,8 +90,8 @@
                     </spring:message>
                 </button>
             </div>
-            <div id="gridview" />
+            <div id="gridview">
+            </div>
         </div>
-        <script type="text/javascript" src="../static/js/page/codetype.js"></script>
     </body>
 </html>

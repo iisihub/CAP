@@ -7995,7 +7995,7 @@ jQuery.extend({
  * - returns the corresponding response
  */
 function ajaxHandleResponses( s, jqXHR, responses ) {
-
+	
 	var ct, type, finalDataType, firstDataType,
 		contents = s.contents,
 		dataTypes = s.dataTypes,
@@ -8459,7 +8459,7 @@ if ( jQuery.support.ajax ) {
 									if ( xml && xml.documentElement /* #4958 */ ) {
 										responses.xml = xml;
 									}
-
+									
 									// When requesting binary data, IE6-9 will throw an exception
 									// on any attempt to access responseText (#11426)
 									try {

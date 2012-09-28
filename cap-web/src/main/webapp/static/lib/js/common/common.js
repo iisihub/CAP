@@ -1,5 +1,13 @@
 $.browser.msie7 = !!($.browser.msie && parseInt($.browser.version, 10) < 8);
 jQuery.ajaxSettings.traditional = true;
+
+var logDebug = function(){
+    if (window.console && window.console.firebug) {
+        console.log.apply(this, arguments);
+    }
+    
+};
+
 $.ajaxSetup({
     jsonp: null,
     jsonpCallback: null,
@@ -53,13 +61,6 @@ $.ajaxSetup({
     // load default i18n Data
     window['i18n'].load("def");
 })(jQuery);
-
-var logDebug = function(){
-    if (window.console && window.console.firebug) {
-        console.log.apply(this, arguments);
-    }
-    
-};
 
 // windows close confirm
 jQuery.extend(window, {
@@ -288,10 +289,12 @@ jQuery.fn.extend({
             type: type,
             dataType: "html",
             data: params,
-			context: self,
+            context: self,
             converters: {
                 "text html": function(s){
-                    return "<script type=\"text/javascript\">$(document).ready(function(){pageInit.call($(\"#" +
+                    var t = s.match(/<title>(?!<>)(.*)<\/title>/);
+                    t && t[1] && (document.title = Properties.title + ' - ' + t[1]);
+                    return "<script type=\"text/javascript\">$(document).ready(function(){loadPageInit.call($(\"#" +
                     self.attr("id") +
                     "\"), true);})</script>" +
                     s;
@@ -308,12 +311,12 @@ jQuery.fn.extend({
             response = arguments;
             
             // See if a selector was specified
-            self.html(selector ?            // Create a dummy div to hold the results
-            jQuery("<div>")            // inject the contents of the document in, removing the scripts
+            self.html(selector ? // Create a dummy div to hold the results
+ jQuery("<div>") // inject the contents of the document in, removing the scripts
             // to avoid any 'Permission Denied' errors in IE
-            .append(responseText.replace(rscript, ""))            // Locate the specified elements
-            .find(selector) :            // If not, just inject the full result
-            responseText);
+            .append(responseText.replace(rscript, "")) // Locate the specified elements
+.find(selector) : // If not, just inject the full result
+ responseText);
             
         });
         
@@ -1340,7 +1343,7 @@ $.datepicker.setDefaults({
 
 // 下拉選單暫存變數
 var icombos = {};
-var pageInit = function(isSubPage){
+var loadPageInit = function(isSubPage){
     var $_this = $(this);
     $_this.find("[commonitem],input[padding]").filter("[commonitem]").each(function(){
         var $cthis = $(this), common = Properties.commonItem &&
@@ -1431,7 +1434,7 @@ var API = CommonAPI;
 
 // init
 $(document).ready(function(){
-    pageInit.call(document);
+    loadPageInit.call(document);
     
 });
 

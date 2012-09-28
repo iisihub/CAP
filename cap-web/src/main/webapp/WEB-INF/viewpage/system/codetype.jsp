@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
     <head>
+        <meta name="decorator" content="none">
+        <title>xxx</title>
     </head>
     <body>
-    <script type="text/javascript" src="webroot/static/js/page/codetype.js">
-            //require(['webroot/js/page/codetype']);
+        <script>
+            loadScript('js/page/codetype');
         </script>
-        <div ng-controller="codetypeCtrl">
+        <div>
             <form id="mform" onsubmit="return false;">
-                <!--<fieldset class="row">--><input type="text" id="oid" name="oid" class="hide" /><input type="text" id="mtype" name="mtype" class="hide" />
+                <!--<fieldset class="row">
+                --><input type="text" id="oid" name="oid" class="hide" /><input type="text" id="mtype" name="mtype" class="hide" />
                 <table class="row-data">
+                    <tr>
+                        <th>
+                            <spring:message code="codetype.local">
+                                <!--語系-->
+                            </spring:message>
+                        </th>
+                        <td colspan="3">
+                            <input type="text" id="locale" name="locale" maxlength="5" class="validate[required,funcCall[maxUTF8[5]]]" value="zh_TW" />
+                        </td>
+                    </tr>
                     <tr>
                         <th>
                             <spring:message code="codetype.codeType">
@@ -19,7 +32,7 @@
                             </spring:message>
                         </th>
                         <td>
-                            <input type="text" id="cdeType" name="cdeType" maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]" ng-model="todo" value="{{mmm}}"/>
+                            <input type="text" id="codeType" name="codeType" maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]" value="{{mmm}}" />
                         </td>
                         <th>
                             <spring:message code="codetype.codeVal">
@@ -27,7 +40,7 @@
                             </spring:message>
                         </th>
                         <td>
-                            <input type="text" id="cdeVal" maxlength="48" name="cdeVal" class="validate[required,funcCall[maxUTF8[48]]]" />
+                            <input type="text" id="codeValue" maxlength="48" name="codeValue" class="validate[required,funcCall[maxUTF8[48]]]" />
                         </td>
                     </tr>
                     <tr>
@@ -37,7 +50,7 @@
                             </spring:message>
                         </th>
                         <td>
-                            <input type="text" id="cdeDesc" name="cdeDesc" maxlength="100" class="validate[funcCall[maxUTF8[100]]]"/>
+                            <input type="text" id="codeDesc" name="codeDesc" maxlength="100" class="validate[funcCall[maxUTF8[100]]]" />
                         </td>
                         <th>
                             <spring:message code="codetype.codeOrder">
@@ -45,12 +58,17 @@
                             </spring:message>
                         </th>
                         <td>
-                            <input type="text" id="cdeOrd" name="cdeOrd" maxlength="3" size="3" class="validate[required,custom[integer],funcCall[maxUTF8[3]]] numeric" />
+                            <input type="text" id="codeOrder" name="codeOrder" maxlength="3" size="3" class="validate[required,custom[integer],funcCall[maxUTF8[3]]] numeric" />
                         </td>
                     </tr>
                 </table><!--</fieldset>-->
             </form>
-            <div class="btns" colspan="4" style="text-align:right">
+            <div class="btns" colspan="4" style="text-align: right">
+                <button id="qry" type="button" class="btn1">
+                    <spring:message code="btn.query">
+                        <!--查詢-->
+                    </spring:message>
+                </button>
                 <button id="add" type="button" class="btn1">
                     <spring:message code="btn.add">
                         <!--新增-->
@@ -72,7 +90,8 @@
                     </spring:message>
                 </button>
             </div>
-            <div id="gridview" />
+            <div id="gridview">
+            </div>
         </div>
     </body>
 </html>
