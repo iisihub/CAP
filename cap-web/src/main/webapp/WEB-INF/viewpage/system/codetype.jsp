@@ -34,7 +34,7 @@
 						</spring:message></th>
 					<td><input type="text" id="codeType" name="codeType"
 						maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]"
-						value="{{mmm}}" /></td>
+						/></td>
 					<th><spring:message code="codetype.codeVal">
 							<!--值-->
 						</spring:message></th>

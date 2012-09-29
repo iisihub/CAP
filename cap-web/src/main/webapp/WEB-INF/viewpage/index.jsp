@@ -23,5 +23,16 @@
 	<script type="text/javascript">
 		loadScript('../static/js/page/ifile.js');
 	</script>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br /> page-link
+	<input type="text" id="page" name="page" value="system/codetype" />
+	<button id="loadcodetype" type="button" class="bt1">Load</button>
+	<script type="text/javascript">
+		loadScript('../static/js/page/loadPageSample.js');
+	</script>
 </body>
 </html>

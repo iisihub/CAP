@@ -15,18 +15,22 @@ pageInit(function(){
                 align: "center",
                 hidden: true
             }, {
+                header: i18n['codetype']['codetype.codeType'],
                 name: 'codeType',
                 width: 110,
                 align: "center"
             }, {
+                header: i18n['codetype']['codetype.codeValue'],
                 name: 'codeValue',
                 width: 80,
                 align: "center"
             }, {
+                header: i18n['codetype']['codetype.codeDesc'],
                 name: 'codeDesc',
                 width: 80,
                 align: "center"
             }, {
+                header: i18n['codetype']['codetype.codeOrder'],
                 name: 'codeOrder',
                 width: 80,
                 align: "center"
