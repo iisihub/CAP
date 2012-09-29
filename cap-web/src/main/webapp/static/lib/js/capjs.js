@@ -5,7 +5,7 @@ require.config({
 		'commonjs' :'lib/js/common/common'
     },
     shim: {
-        'commonjs': ['libjs', 'common.properties'],
+        'commonjs': ['libjs'],//, 'common.properties'],
         'common.jqgrid': ['commonjs']
     }
 });

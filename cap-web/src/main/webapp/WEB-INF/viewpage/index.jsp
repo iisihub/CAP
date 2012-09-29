@@ -8,7 +8,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </head>
 <body>
-	index
 	<input type="file" id="ufile" name="ufile" />
 	<button id="upload" type="button" class="btn1">
 		<spring:message code="btn.upload">

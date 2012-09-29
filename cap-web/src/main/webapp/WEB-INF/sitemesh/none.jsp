@@ -2,6 +2,7 @@
 <html>
     <head>
         <title><decorator:title/></title>
+        <decorator:getProperty property="i18n" default="" />
     </head>
     <body>
         <decorator:body/>

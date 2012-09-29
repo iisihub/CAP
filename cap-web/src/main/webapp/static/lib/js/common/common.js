@@ -25,6 +25,7 @@ $.ajaxSetup({
         url: "../i18njs"
     };
     window['i18n'] = {
+        keys: [],
         load: function(f, st){
             return $.ajax($.extend({
                 async: st && st.async || false,
@@ -52,6 +53,7 @@ $.ajaxSetup({
                     return msg;
                 };
             })(jsonValue), jsonValue);
+            i18n.keys.push(key);
         },
         
         setup: function(settings){
@@ -65,7 +67,7 @@ $.ajaxSetup({
 // windows close confirm
 jQuery.extend(window, {
     closeConfirm: Properties.window.closeConfirm,
-    closeWindowMsg: i18n.def.closewindows,
+    closeWindowMsg: Properties.window.closeWindowMsg,
     pageChangeMsg: false,
     setCloseWindowMsg: function(msg){
         this.closeWindowMsg = msg;
@@ -1241,19 +1243,19 @@ var CommonAPI = {
             opacity: 0.01
         }, 500, (function(loadHref){
             return function(){
-                i18n.load(href, {
-                    async: true
-                }).done(function(){
-                    section.load(loadHref, function(){
-                        // API.loadInit.call(section);
-                        section.animate({
-                            opacity: 1
-                        }, 800);
-                        fn && fn();
-                    });
-                    $.blockUI.showBG = false;
+                // i18n.load(href, {
+                //     async: true
+                // }).done(function(){
+                section.load(loadHref, function(){
+                    // API.loadInit.call(section);
+                    section.animate({
+                        opacity: 1
+                    }, 800);
+                    fn && fn();
                 });
-                
+                $.blockUI.showBG = false;
+                //});
+            
             };
         })(href));
     },
