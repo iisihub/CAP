@@ -4,12 +4,13 @@ $(document).ready(function(){
 	        url: "../handler/samplehandler/upload",
 	        fileElementId: "ufile",
 	        fileCheck: ["jpg", "jpeg", "png", "gif", "txt"],
+	        successMsg:false,
 	        //limitSize: 5 *1024*1024,
 	        data: {
 	            testStr: "test!!test!!"
 	        },
 	        success: function(data){
-	            showMess(data.mktMatlType, data.mktMatl, $("#showMessage"), data.size);
+	            //API.showMessage(data.mktMatlType, data.mktMatl, $("#showMessage"), data.size);
 	        }
 	    });
 	});

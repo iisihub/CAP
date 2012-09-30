@@ -24,17 +24,17 @@
 					<th><spring:message code="codetype.local">
 							<!--語系-->
 						</spring:message></th>
-					<td colspan="3"><input type="text" id="locale" name="locale"
-						maxlength="5" class="validate[required,funcCall[maxUTF8[5]]]"
-						value="zh_TW" /></td>
+					<td><input type="text" id="locale" name="locale" maxlength="5"
+						class="validate[required,funcCall[maxUTF8[5]]]" value="zh_TW" /></td>
+					<th></th>
+					<td><select id="test_sel" name="test_sel" combokey='4444'> </select></td>
 				</tr>
 				<tr>
 					<th><spring:message code="codetype.codeType">
 							<!--代碼-->
 						</spring:message></th>
 					<td><input type="text" id="codeType" name="codeType"
-						maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]"
-						/></td>
+						maxlength="32" class="validate[required,funcCall[maxUTF8[32]]]" /></td>
 					<th><spring:message code="codetype.codeVal">
 							<!--值-->
 						</spring:message></th>

@@ -20,7 +20,7 @@ pageInit(function(){
                 width: 110,
                 align: "center"
             }, {
-                header: i18n['codetype']['codetype.codeValue'],
+                header: i18n['codetype']['codetype.codeVal'],
                 name: 'codeValue',
                 width: 80,
                 align: "center"
