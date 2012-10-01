@@ -25,5 +25,10 @@
 			<artifactId>cap-db</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-mvc</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 	</dependencies>
 </project>

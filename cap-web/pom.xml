@@ -15,7 +15,6 @@
 		<hibernate.version>4.1.5.Final</hibernate.version>
 	</properties>
 	<dependencies>
-
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-core</artifactId>
