@@ -17,25 +17,37 @@
 		<intercept-url pattern="/app/error/message*" filters="none" />
 		<intercept-url pattern="/page/login*" filters="none" />
 		<intercept-url pattern="/page/home/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/**" access="CAP"/>
+		<intercept-url pattern="/**" access="CAP" />
 
 		<anonymous enabled="false" />
 		<form-login always-use-default-target="true" login-page="/app/login"
 			default-target-url="/app/home/adm" authentication-failure-url="/app/login?error" />
-		<concurrent-session-control max-sessions="1"
-			expired-url="/app/error/message?loginOther" /> <!-- exception-if-maximum-exceeded="true" -->
+		<session-management
+			session-authentication-strategy-ref="sas" />
 		<logout logout-url="/j_spring_security_logout"
 			logout-success-url="/app/login" />
 	</http>
+
+	<beans:bean id="sas"
+		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+		<beans:constructor-arg name="sessionRegistry"
+			ref="sessionRegistry" />
+		<beans:property name="maximumSessions" value="1" />
+	</beans:bean>
+
+	<beans:bean id="sessionRegistry"
+		class="org.springframework.security.core.session.SessionRegistryImpl" />
 
 	<beans:bean id="userDetailsServiceImpl"
 		class="com.iisigroup.cap.security.service.impl.CapUserDetailsService">
 		<beans:property name="userDao" ref="UserDao" />
 	</beans:bean>
 
-	<authentication-provider user-service-ref="userDetailsServiceImpl" />
+	<authentication-manager>
+		<authentication-provider user-service-ref="userDetailsServiceImpl" />
+	</authentication-manager>
 
-	<beans:bean id="capAuthenticationEntryPoint"
+	<beans:bean id="loginEntryPoint"
 		class="com.iisigroup.cap.security.web.CapAuthenticationEntryPoint">
 		<beans:property name="loginFormUrl" value="/app/login" />
 		<beans:property name="forceHttps" value="false" />
@@ -61,9 +73,9 @@
 
 	<beans:bean id="loggerListener"
 		class="org.springframework.security.event.authentication.LoggerListener" />
-		
+
 	<!-- Security context -->
-	<bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
-		scope="session" />
+	<beans:bean id="capSecurityContext"
+		class="com.iisigroup.cap.security.CapSecurityContext" />
 
 </beans:beans>

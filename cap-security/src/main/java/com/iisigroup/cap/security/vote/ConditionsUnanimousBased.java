@@ -43,9 +43,10 @@ import org.springframework.util.Assert;
  *          <li>2011/1/20,iristu,new
  *          </ul>
  */
-public class ConditionsUnanimousBased implements AccessDecisionManager,InitializingBean,
-		MessageSourceAware {
+public class ConditionsUnanimousBased implements AccessDecisionManager,
+		InitializingBean, MessageSourceAware {
 
+	@SuppressWarnings("rawtypes")
 	private Map<String, AccessDecisionVoter> conditionVoters;
 
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource
@@ -63,7 +64,7 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 	 * @param config
 	 *            ConfigAttributeDefinition
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void decide(Authentication authentication, Object object,
 			Collection<ConfigAttribute> configAttributes) {
@@ -80,7 +81,7 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 
 			if (conditionVoters.containsKey(s)) {
 				AccessDecisionVoter voter = conditionVoters.get(s);
-				if (voter instanceof RoleVoter){
+				if (voter instanceof RoleVoter) {
 					((RoleVoter) voter).setRolePrefix(s);
 				}
 				decisionVoters.add(voter);
@@ -134,10 +135,12 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 		return true;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Map<String, AccessDecisionVoter> getConditionVoters() {
 		return conditionVoters;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setConditionVoters(
 			Map<String, AccessDecisionVoter> conditionVoters) {
 		this.conditionVoters = conditionVoters;
@@ -150,7 +153,8 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notEmpty(this.conditionVoters, "AccessDecisionVoters is required");
+		Assert.notEmpty(this.conditionVoters,
+				"AccessDecisionVoters is required");
 	}
 
 }// ~
