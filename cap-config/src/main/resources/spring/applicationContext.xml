@@ -38,10 +38,10 @@
 	</bean>
 	
 	<import resource="classpath:db/datasource.xml" />
-	<import resource="classpath:db/jdbcTemplate.xml" />
+	<!-- <import resource="classpath:db/jdbcTemplate.xml" />-->
 	<import resource="classpath:db/jpa.xml" />
 	<import resource="classpath:spring/component.xml"/>
-	<!-- <import resource="classpath:spring/security.xml" />-->
+	<import resource="classpath:spring/security.xml" />
 	<import resource="classpath:spring/operation.xml" />
 	
 </beans>

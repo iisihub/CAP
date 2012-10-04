@@ -8,6 +8,6 @@
 <title>错误页面</title>
 </head>
 <body>
-	<h2>${ERRMSG}</h2>
+	<h2>${errorMessage}</h2>
 </body>
 </html>

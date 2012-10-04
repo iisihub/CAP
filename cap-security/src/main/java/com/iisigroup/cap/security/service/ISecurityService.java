@@ -28,6 +28,6 @@ import com.iisigroup.cap.security.model.IRole;
  */
 public interface ISecurityService {
 
-	List<IRole> getAuthRolesByUrl(String url);
+	List<? extends IRole> getAuthRolesByUrl(String url);
 
 }

@@ -58,7 +58,7 @@ public class CapPermissionVoter extends RoleVoter {
 
 				String url = getRequestURL(filterInvocation);
 
-				List<IRole> roles = securityService.getAuthRolesByUrl(url);
+				List<? extends IRole> roles = securityService.getAuthRolesByUrl(url);
 
 				if (roles != null && !roles.isEmpty()) {
 

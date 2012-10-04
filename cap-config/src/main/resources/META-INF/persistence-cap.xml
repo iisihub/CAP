@@ -6,6 +6,9 @@
 		<mapping-file>META-INF/orm-cap.xml</mapping-file>
 		<!-- base -->
 		<class>com.iisigroup.cap.base.model.CodeType</class>
+		<class>com.iisigroup.cap.acl.model.CapUser</class>
+		<class>com.iisigroup.cap.acl.model.CapRole</class>
+		<class>com.iisigroup.cap.acl.model.CapFunction</class>
 		<!-- <class>com.iisigroup.cap.base.model.SysParm</class> -->
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 

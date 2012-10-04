@@ -18,9 +18,13 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.util.CollectionUtils;
 
 import com.iisigroup.cap.security.dao.IUserDao;
 import com.iisigroup.cap.security.model.CapUserDetails;
@@ -43,6 +47,8 @@ public class CapUserDetailsService implements UserDetailsService {
 	private static final Log logger = LogFactory
 			.getLog(CapUserDetailsService.class);
 
+	MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,7 +57,10 @@ public class CapUserDetailsService implements UserDetailsService {
 	 */
 	public UserDetails loadUserByUsername(String username) {
 		if (CapString.isEmpty(username)) {
-			throw new UsernameNotFoundException("Empty login");
+			throw new UsernameNotFoundException(
+					messages.getMessage(
+							"AbstractUserDetailsAuthenticationProvider.emptyCredentials",
+							"Empty Credentials"));
 		}
 
 		if (logger.isDebugEnabled()) {
@@ -64,20 +73,25 @@ public class CapUserDetailsService implements UserDetailsService {
 			if (logger.isInfoEnabled()) {
 				logger.info("Account " + username + " could not be found");
 			}
-			throw new UsernameNotFoundException("account " + username
-					+ " could not be found");
+			throw new UsernameNotFoundException(messages.getMessage(
+					"JdbcDaoImpl.notFound", new Object[] { username },
+					"Username {0} not found"), username);
 		}
 
 		String password = obtainPassword(username);
 
 		Map<String, String> roles = obtainRole(user);
+		if (CollectionUtils.isEmpty(roles)) {
+			throw new UsernameNotFoundException(messages.getMessage(
+					"JdbcDaoImpl.noAuthority", new Object[] { username },
+					"User {0} has no GrantedAuthority"), username);
+		}
 		//
 		// boolean enabled = user.isEnabled();
 		// boolean accountNonExpired = true;
 		// boolean credentialsNonExpired = true;
 		// boolean accountNonLocked = true;
 		return obtainUserDetails(user, password, roles);
-
 	}
 
 	public UserDetails obtainUserDetails(IUser user, String password,
@@ -122,6 +136,10 @@ public class CapUserDetailsService implements UserDetailsService {
 	 */
 	protected String obtainPassword(String username) {
 		return "";
+	}
+
+	public void setMessageSource(MessageSource messageSource) {
+		this.messages = new MessageSourceAccessor(messageSource);
 	}
 
 }

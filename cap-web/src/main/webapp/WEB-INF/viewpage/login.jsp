@@ -11,14 +11,15 @@ pageEncoding="UTF-8" %>
     </head>
     <body class="claro">
         <div style="margin: auto; width: 960px;">
-            <form action="loginCheck" method="post">
-                id : <input type="text" id="id" name="id" value="1234567890" />
+            <form action="../j_spring_security_check" method="post">
+                id : <input type="text" id="j_username" name="j_username" value="1234567890" />
                 <br/>
-                password:<input type="password" id="pssword" name="password" />
+                password:<input type="password" id="j_password" name="j_password" />
                 <button type="submit">
                     submit
                 </button>
             </form>
         </div>
+        <h2>${ERRMSG}</h2>
     </body>
 </html>

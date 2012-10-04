@@ -109,6 +109,14 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- <filter> <filter-name>capForwardFilter</filter-name> <filter-class>com.iisigroup.cap.web.ForwardFilter</filter-class> 
 		<init-param> <param-name>/webroot.*</param-name> <param-value>/.</param-value> 
 		</init-param> <init-param> <param-name>/i18njs</param-name> <param-value>/handler/basehandler/queryJsI18N</param-value> 

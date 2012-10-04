@@ -10,7 +10,7 @@
 	<artifactId>cap-security</artifactId>
 	<version>2.0.0</version>
 	<properties>
-		<spring-security.version>3.1.1.RELEASE</spring-security.version>
+		<spring-security.version>3.0.3.RELEASE</spring-security.version>
 	</properties>
 	<dependencies>
 		<!-- Project ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
