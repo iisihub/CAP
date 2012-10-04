@@ -20,6 +20,6 @@ pageEncoding="UTF-8" %>
                 </button>
             </form>
         </div>
-        <h2>${ERRMSG}</h2>
+        <h2>${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</h2>
     </body>
 </html>
