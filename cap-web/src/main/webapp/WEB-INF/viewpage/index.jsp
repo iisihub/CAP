@@ -21,7 +21,9 @@
 	</button>
 	<!-- <script type="text/javascript" src="../static/js/page/ifile.js"></script> -->
 	<script type="text/javascript">
+	
 		loadScript('../static/js/page/ifile.js');
+		loadScript('../static/js/page/loadPageSample.js');
 	</script>
 	<br />
 	<br />
@@ -32,7 +34,7 @@
 	<input type="text" id="page" name="page" value="system/codetype" />
 	<button id="loadcodetype" type="button" class="bt1">Load</button>
 	<script type="text/javascript">
-		loadScript('../static/js/page/loadPageSample.js');
+		
 	</script>
 </body>
 </html>
