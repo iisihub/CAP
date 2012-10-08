@@ -451,19 +451,14 @@
 							opacity : 0.01
 						}, 500, (function(loadHref) {
 							return function() {
-								// i18n.load(href, {
-								//     async: true
-								// }).done(function(){
+								section.html("404");
 								section.load(loadHref, function() {
-									// API.loadInit.call(section);
 									section.animate({
 										opacity : 1
 									}, 800);
 									fn && fn();
 								});
 								$.blockUI.showBG = false;
-								//});
-
 							};
 						})(href));
 					},
