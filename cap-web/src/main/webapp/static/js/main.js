@@ -8,16 +8,16 @@ require.config({
 	urlArgs : 'cache=' + parseInt(Math.random() * 1000),
 	baseUrl : '../static',
 	paths : {
-		'libjs' : 'lib/js/libjs',
-		'capjs' : 'lib/js/capjs',
-		'capjs.properties' : 'lib/js/common/common.properties',
-		'cust-properties' : 'js/common/cust.properties',
-		'cust-common' : 'js/common/cust.common'
+		'libjs' : 'lib/js/libjs',          //third party lib
+		'capjs' : 'lib/js/capjs',          //cap lib
+		'capjs.properties' : 'lib/js/common/common.properties', 
+		'cust-properties' : 'js/common/cust.properties', // 客制化設定檔
+		'cust-common' : 'js/common/cust.common'　 // 客制化 CommonJS檔
 	},
 	shim : {
 		'cust-properties' : ['libjs', 'capjs.properties'],
 		'capjs' : ['libjs', 'cust-properties'],
-		'cust-common' : ['libjs', 'capjs', 'cust-properties']
+		'cust-common' : ['libjs', 'capjs', 'cust-properties'] //客制化lib 載入設定
 	}
 });
 
