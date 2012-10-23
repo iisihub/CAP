@@ -26,7 +26,7 @@
 	// i18n plugin
 	(function($) {
 		var s = {
-			url : "../i18njs"
+			url : "webroot/i18njs"
 		};
 		window['i18n'] = {
 			keys : [],

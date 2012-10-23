@@ -10,40 +10,45 @@
         <link rel="stylesheet" href="webroot/static/css/main.css" />
         <!--[if lt IE 9]>
             <script src="webroot/static/lib/js/html5.js"></script>
-        <![endif]--><!--<script data-main="webroot/static/js/main" src="webroot/static/requirejs/2.0.6/require.js"></script>
-        --><script src="webroot/static/requirejs/2.0.6/require.min.js"></script>
+        <![endif]-->
+        <script src="webroot/static/requirejs/2.0.6/require.min.js"></script>
         <script src="webroot/static/js/main.js"></script>
 		<decorator:head/>
     </head>
     <body>
         <div class="mainBody">
             <header>
-                <div>
+                <div class="logo">
                     <a><img src="webroot/static/images/logo.png"></a>
                 </div>
-            </header><!-- MENU栏 -->
+                <ol style="height:18px;">
+					<li class="lang"><a href="#language">&nbsp;LANGUAGE&nbsp;</a></li>
+					<li>&nbsp;-<a href="/tw/">&nbsp;正體&nbsp;</a></li>
+					<li>&nbsp;-<a href="/cn/">&nbsp;简体&nbsp;</a></li>
+					<li>&nbsp;-<a href="/en/">&nbsp;ENGLISH&nbsp;</a></li>
+				</ol>
+            </header>
             <nav class="top">
-                <ul class="block">
-                </ul>
+                <ul class="block"></ul>
                 <ul class="navmenu">
-                    <!-- top menu space -->
+                	<li><a href="index">關於我們</a></li>
+                	<li><a href="system/system">系統設定</a></li>
+                	<li><a href="sample/sample">範例交易</a></li>
                 </ul>
             </nav>
-            <div class="clear">
-            </div>
+            <div class="clear"></div>
             <div class="main">
                 <nav class="sub">
+                	<decorator:body/>
                 </nav>
                 <article id="article">
-                    <decorator:body/>
+                    
                 </article>
             </div>
             <div class="clear">
             </div>
             <footer>
-                <div class="copyright">
-                    資拓宏宇國際股份有限公司 © 2011 版權所有
-                </div>
+                <div class="copyright">資拓宏宇國際股份有限公司 © 2012 版權所有</div>
             </footer>
             <div class="bg-around right">
                 &nbsp;
