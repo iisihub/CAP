@@ -16,7 +16,7 @@
 	<!-- @Page Report -->
 	<context:component-scan base-package="com.iisigroup.cap.**.page.report" />
 
-	<bean id="SequenceService" class="com.iisigroup.cap.service.impl.SequenceServiceImpl">
+	<bean id="SequenceService" class="com.iisigroup.cap.jdbc.impl.SequenceServiceImpl">
 		<property name="jdbc" ref="capJdbcTemplate" />
 	</bean>
 	<bean id="CommonBeanService" class="com.iisigroup.cap.service.impl.CommonServiceImpl">

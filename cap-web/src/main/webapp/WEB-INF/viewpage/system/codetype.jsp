@@ -11,7 +11,7 @@
 </head>
 <body>
 	<script>
-		loadScript('js/page/codetype');
+		loadScript('js/system/codetype');
 	</script>
 	<div>
 		<form id="mform" onsubmit="return false;">
@@ -24,10 +24,9 @@
 					<th><spring:message code="codetype.local">
 							<!--語系-->
 						</spring:message></th>
-					<td><input type="text" id="locale" name="locale" maxlength="5"
-						class="validate[required,funcCall[maxUTF8[5]]]" value="zh_TW" /></td>
+					<td><select id="locale" name="locale" combokey="lang" class="validate[required]" ></select></td>
 					<th></th>
-					<td><select id="test_sel" name="test_sel" combokey='4444'> </select></td>
+					<td></td>
 				</tr>
 				<tr>
 					<th><spring:message code="codetype.codeType">

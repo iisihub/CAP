@@ -11,9 +11,6 @@
  */
 package com.iisigroup.cap.operation.step;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -75,11 +72,8 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 		} catch (MaxUploadSizeExceededException fe) {
 			CapMessageException me = new CapMessageException(
 					fileSizeLimitErrorCode, getClass());
-			Map<String, String> extra = new HashMap<String, String>();
-			extra.put("fileSize",
-					CapMath.divide(params.get("limitSize"), "1048576", 2));
-			extra.put("actualSize", CapMath.divide(
-					String.valueOf(fe.getMaxUploadSize()), "1048576"));
+			Object[] extra = new Object[] { CapMath.divide(
+					String.valueOf(fe.getMaxUploadSize()), "1048576", 2) };
 			me.setMessageKey(fileSizeLimitErrorCode);
 			me.setExtraInformation(extra);
 			throw me;
@@ -92,13 +86,8 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 	@Override
 	public OpStepContext execute(OpStepContext ctx, IRequest params,
 			IHandler handler) throws CapException {
-		try {
-			MultipartHttpServletRequest req = uploadFile(params);
-			params.setRequestObject(req);
-			return ctx.setGoToStep(NEXT);
-		} catch (Exception e) {
-			return ctx.setGoToStep(ERROR);
-		}
-
+		MultipartHttpServletRequest req = uploadFile(params);
+		params.setRequestObject(req);
+		return ctx.setGoToStep(NEXT);
 	}
 }

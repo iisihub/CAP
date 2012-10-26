@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
+
 /**
  * <pre>
  * ApplicationContext
@@ -32,7 +34,8 @@ public class CapAppContext implements ApplicationContextAware {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName) {
-		return (T) (applicationContext.containsBean(beanName) ? applicationContext.getBean(beanName) : null);
+		return (T) (applicationContext.containsBean(beanName) ? applicationContext
+				.getBean(beanName) : null);
 	}
 
 	public static Resource getResource(String path) {
@@ -46,15 +49,15 @@ public class CapAppContext implements ApplicationContextAware {
 	}
 
 	public static String getMessage(String key) {
-//		IUser user = CapSecurityContext.getUser();
-//		return getMessage(key, null, user == null ? Locale.getDefault() : user.getLocale());
-		return null;
+		Locale locale = (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
+		return getMessage(key, null, locale == null ? Locale.getDefault()
+				: locale);
 	}
 
 	public static String getMessage(String key, Object[] args) {
-//		IUser user = SecurityContext.getUser();
-//		return getMessage(key, args, user == null ? Locale.getDefault() : user.getLocale());
-		return null;
+		Locale locale = (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
+		return getMessage(key, args, locale == null ? Locale.getDefault()
+				: locale);
 	}
 
 	public static String getMessage(String key, Locale locale) {

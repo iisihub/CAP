@@ -55,8 +55,6 @@
 			<tx:method name="query*" read-only="true" />
 			<tx:method name="get*" read-only="true" />
 			<tx:method name="getNew*" propagation="REQUIRES_NEW" />
-			<tx:method name="saveSeq" timeout="45" rollback-for="Throwable"
-				propagation="REQUIRES_NEW" />
 			<!-- other methods use the default transaction settings (see below) -->
 			<tx:method name="*" timeout="45" rollback-for="Throwable"
 				propagation="REQUIRED" />
@@ -66,7 +64,7 @@
 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<aop:config proxy-target-class="true">
-		<aop:pointcut id="CapServicePointcut" expression="execution(* com..service.*.*(..))" />
+		<aop:pointcut id="CapServicePointcut" expression="execution(* com..service.*.*(..)) and !@annotation(com.iisigroup.cap.annotation.NonTransactional)" />
 
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="CapServicePointcut" />
 	</aop:config>

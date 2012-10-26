@@ -26,6 +26,7 @@ import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.handler.FormHandler;
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.plugin.PluginManager;
 import com.iisigroup.cap.response.ErrorResult;
@@ -33,6 +34,7 @@ import com.iisigroup.cap.response.IErrorResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <pre>
@@ -88,25 +90,17 @@ public class CapHandlerServlet extends HttpServlet {
 
 	protected void doHandlerAction(HttpServletRequest req,
 			HttpServletResponse resp) {
+		SimpleContextHolder.resetContext();
 		String handler = (String) req.getAttribute(HANDLER);
 		String action = (String) req.getAttribute(ACTION);
-		if (CapString.isEmpty(handler)){
-			String uri = req.getRequestURI();
-			int f = -1;
-			if ((f=uri.indexOf("/handler"))>-1){
-				uri = uri.substring(f+9);
-				String[] s = uri.split("/");
-				handler = s[0];
-				action = s[1];
-			}
-		}
 		long st = System.currentTimeMillis();
 		if (logger.isTraceEnabled()) {
 			logger.trace("Request Data: {}",
 					JSONObject.fromObject(req.getParameterMap()).toString());
 		}
+		SimpleContextHolder.put(CapWebUtil.localeKey,
+				req.getSession().getAttribute(CapWebUtil.localeKey));
 		IResult result = null;
-
 		Logger pluginlogger = logger;
 		IRequest request = getDefaultRequest(req);
 		try {
@@ -140,6 +134,7 @@ public class CapHandlerServlet extends HttpServlet {
 			if (logger.isTraceEnabled()) {
 				logger.trace("Response Data : " + result.getLogMessage());
 			}
+			SimpleContextHolder.resetContext();
 		}
 	}// ;
 

@@ -7,14 +7,17 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<util:map id="baseSql" map-class="java.util.HashMap"
 		key-type="java.lang.String">
-		<entry key="Sequence.findByNodeName">
-			<value><![CDATA[select * from Sequence where nodeName = :nodeName]]></value>
+		<entry key="Sequence.listAll">
+			<value><![CDATA[select * from Sequence order by seqNode]]></value>
 		</entry>
-		<entry key="Sequence.updateByNodeNameAndNextSeq">
-			<value><![CDATA[update Sequence seq set seq.nextSeq=:nextSeq,seq.rounds=:rounds,seq.lastModifyTime=:lastModifyTime where seq.nodeName=:nodeName and seq.nextSeq=:oldSeq]]></value>
+		<entry key="Sequence.findBySeqNode">
+			<value><![CDATA[select * from Sequence where seqNode = :seqNode]]></value>
+		</entry>
+		<entry key="Sequence.updateByNodeAndNextSeq">
+			<value><![CDATA[update Sequence seq set seq.nextSeq=:nextSeq,seq.rounds=:rounds,seq.lastModifyTime=:lastModifyTime where seq.seqNode=:seqNode and seq.nextSeq=:oldSeq]]></value>
 		</entry>
 		<entry key="Sequence.insert">
-			<value><![CDATA[INSERT INTO SEQUENCE (NODENAME, NEXTSEQ, ROUNDS,LASTMODIFYTIME ) VALUES (:nodeName,:nextSeq,:rounds,:lastModifyTime)]]></value>
+			<value><![CDATA[INSERT INTO SEQUENCE (seqNode, NEXTSEQ, ROUNDS,LASTMODIFYTIME ) VALUES (:seqNode,:nextSeq,:rounds,:lastModifyTime)]]></value>
 		</entry>
 	</util:map>
 

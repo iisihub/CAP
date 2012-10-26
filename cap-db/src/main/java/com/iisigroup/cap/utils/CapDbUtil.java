@@ -122,7 +122,7 @@ public class CapDbUtil {
 		int start;
 		int pos = 0;
 
-		while ((start = pattern.indexOf("${", pos)) != -1) {
+		while ((start = pattern.indexOf(":{", pos)) != -1) {
 			buffer.append(pattern.substring(pos, start));
 			if (pattern.charAt(start + 1) == '$') {
 				buffer.append("$");

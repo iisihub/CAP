@@ -3,56 +3,26 @@ pageInit(function(){
         var grid, mform = $("#mform");
         grid = $("#gridview").jqGrid({
             url: 'webroot/codetypehandler/query',
-            // localFirst: true,
-            multiselect: false,
-            sortname: 'codeType',
-            sortorder: "desc",
-            height: 200,
-            /* caption: i18n.MCI061229S10["codetype.codeList"], */
-            colModel: [{
-                name: 'oid',
-                width: 90,
-                align: "center",
-                hidden: true
-            }, {
-                header: i18n['codetype']['codetype.codeType'],
-                name: 'codeType',
-                width: 110,
-                align: "center"
-            }, {
-                header: i18n['codetype']['codetype.codeVal'],
-                name: 'codeValue',
-                width: 80,
-                align: "center"
-            }, {
-                header: i18n['codetype']['codetype.codeDesc'],
-                name: 'codeDesc',
-                width: 80,
-                align: "center"
-            }, {
-                header: i18n['codetype']['codetype.codeOrder'],
-                name: 'codeOrder',
-                width: 80,
-                align: "center"
-            }, {
-                header: i18n.def.lastModBy,
-                name: 'lastModifyBy',
-                width: 80,
-                align: "center"
-            }, {
-                header: i18n.def.lastModTm,
-                name: 'lastModifyTime',
-                width: 80,
-                align: "center"
+            sortname: 'codeType',sortorder: "desc",height: 250,
+            colModel: [{name: 'oid',hidden: true
+            }, {header: i18n['codetype']['codetype.codeType'],
+                name: 'codeType',width: 110,align: "center"
+            }, {header: i18n['codetype']['codetype.codeVal'],
+                name: 'codeValue',width: 80,align: "center"
+            }, {header: i18n['codetype']['codetype.codeDesc'],
+                name: 'codeDesc',width: 80,align: "center"
+            }, {header: i18n['codetype']['codetype.codeOrder'],
+                name: 'codeOrder',width: 80,align: "center"
+            }, {header: i18n.def.lastModBy,
+                name: 'lastModifyBy',width: 80,align: "center"
+            }, {header: i18n.def.lastModTm,
+                name: 'lastModifyTime',width: 80,align: "center"
             }],
             onSelectRow: function(){
                 var ret = grid.getSelRowDatas();
                 ret && mform.injectData(ret);
             }
         });
-        // var fModify = function(){
-        //
-        // }
         $("#qry").click(function(){
             grid.jqGrid('setGridParam', {
                 postData: {
@@ -68,7 +38,7 @@ pageInit(function(){
             API.showConfirmMessage(i18n.def.actoin_001, function(data){
                 data &&
                 $.ajax({
-                    url: "webroot/handler/codetypehandler/modify",
+                    url: "webroot/codetypehandler/modify",
                     data: $.extend(mform.serializeData(), {
                         type: "A"
                     }),
@@ -85,7 +55,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/handler/codetypehandler/modify",
+                        url: "webroot/codetypehandler/modify",
                         data: $.extend(mform.serializeData(), {
                             type: "M"
                         }),
@@ -105,7 +75,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/handler/codetypehandler/delete",
+                        url: "webroot/codetypehandler/delete",
                         data: {
                             oid: $("#oid").val()
                         },

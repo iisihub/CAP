@@ -191,7 +191,7 @@ public class MessageBundleScriptCreator {
 			prop.load(CapAppContext.getApplicationContext().getResource(i18nFile).getInputStream());
 
 		} catch (Exception e) {
-			logger.error("can't load " + i18nPath, e);
+			logger.error("can't load " + i18nPath);
 		}
 		return prop;
 	}

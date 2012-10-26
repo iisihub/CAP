@@ -23,9 +23,9 @@
                 </div>
                 <ol style="height:18px;">
 					<li class="lang"><a href="#language">&nbsp;LANGUAGE&nbsp;</a></li>
-					<li>&nbsp;-<a href="/tw/">&nbsp;正體&nbsp;</a></li>
-					<li>&nbsp;-<a href="/cn/">&nbsp;简体&nbsp;</a></li>
-					<li>&nbsp;-<a href="/en/">&nbsp;ENGLISH&nbsp;</a></li>
+					<li>&nbsp;-<a href="?lang=zh_TW">&nbsp;正體&nbsp;</a></li>
+					<li>&nbsp;-<a href="?lang=zh_CN">&nbsp;简体&nbsp;</a></li>
+					<li>&nbsp;-<a href="?lang=en">&nbsp;ENGLISH&nbsp;</a></li>
 				</ol>
             </header>
             <nav class="top">

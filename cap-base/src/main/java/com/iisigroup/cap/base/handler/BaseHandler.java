@@ -1,9 +1,5 @@
 package com.iisigroup.cap.base.handler;
 
-import java.util.Locale;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -15,8 +11,6 @@ import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.mvc.i18n.MessageBundleScriptCreator;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>

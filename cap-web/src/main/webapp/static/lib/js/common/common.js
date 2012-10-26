@@ -698,7 +698,7 @@
 							uploadMsg : i18n.def.fileUploading,
 							successMsg : i18n.def.fileUploadSuccess
 						}, setting, {
-							url : setting.url || (__ajaxHandler + "&_pa=" + (setting.handler || ""))
+							url : setting.url + (/[?]/.test(setting.url) ? "&" : "?") +("limitSize="+ (setting.limitSize || 3145728)) + (setting.fileEncoding && ("&fileEncoding=" + setting.fileEncoding) || "")
 						});
 						var telm = $("#" + s.fileElementId), val = telm.val();
 
@@ -723,14 +723,9 @@
 						$.ajaxFileUpload($.extend({}, s, {
 							secureuri : false,
 							complete : function(xhr, status) {
-								// for eloan mark
 								uploadMsg.dialog('close');
-								// for Elaon
-								// $.isFunction(uploadMsg) &&
-								// uploadMsg.dialog('close');
 								try {
 									var json = JSON.parse(xhr.responseText);
-									// ilog.debug(json);
 								} catch (e) {
 									logDebug("ajaxError", e);
 									json = {};
@@ -751,11 +746,8 @@
 								$.isFunction(uploadMsg) && uploadMsg.dialog('close');
 								CommonAPI.showErrorMessage(i18n.def.fileUploadError);
 							},
-							success : function() {
-							},
 							data : $.extend(s.data || {}, {
-								iframe : true
-								// ie error access denied
+								iframe : true // ie error access denied
 							})
 						}));
 

@@ -117,7 +117,7 @@ public class CapNamedJdbcTemplate {
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -159,7 +159,7 @@ public class CapNamedJdbcTemplate {
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -261,7 +261,7 @@ public class CapNamedJdbcTemplate {
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -307,7 +307,7 @@ public class CapNamedJdbcTemplate {
 		String sql = sqlp.getValue(sqlId, sqlId);
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -345,7 +345,7 @@ public class CapNamedJdbcTemplate {
 					}
 					if (logger.isTraceEnabled()) {
 						logger.trace(new StringBuffer("SqlId=")
-								.append(sqlId)
+								.append(sqlp.containsKey(sqlId) ? sqlId : "")
 								.append("\n#")
 								.append((i + 1))
 								.append("\t")
@@ -439,7 +439,7 @@ public class CapNamedJdbcTemplate {
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -465,16 +465,16 @@ public class CapNamedJdbcTemplate {
 				params));
 		sql.append(" ").append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
-		if (logger.isTraceEnabled()) {
-			logger.trace(new StringBuffer("\n\t").append(
-					CapDbUtil.convertToSQLCommand(sql.toString(), args))
-					.toString());
-		}
 		if (args == null) {
 			args = new HashMap<String, Object>();
 		}
 		args.put("startRow", startRow);
 		args.put("endRow", startRow + fetchSize);
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("\n\t").append(
+					CapDbUtil.convertToSQLCommand(sql.toString(), args))
+					.toString());
+		}
 		long cur = System.currentTimeMillis();
 		try {
 			return namedjdbc.queryForList(sql.toString(), args);

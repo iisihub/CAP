@@ -155,7 +155,6 @@
 		<res-auth>Container</res-auth>
 	</resource-ref>
 
-
 	<welcome-file-list>
 		<welcome-file>page/index</welcome-file>
 	</welcome-file-list>

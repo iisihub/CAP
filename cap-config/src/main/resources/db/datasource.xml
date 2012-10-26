@@ -12,5 +12,5 @@
 			<value>java:comp/env/jdbc/capdb</value>
 		</property>
 	</bean>
-	
+		
 </beans>

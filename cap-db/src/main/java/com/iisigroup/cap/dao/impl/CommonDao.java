@@ -43,8 +43,8 @@ public class CommonDao<T extends IDataObject> extends GenericDao<IDataObject>
 
 	@SuppressWarnings("hiding")
 	@Override
-	public <T> T findByOid(Class<T> clazz, String oid) {
-		return getEntityManager().find(clazz, oid);
+	public <T> T findById(Class<T> clazz, String id) {
+		return getEntityManager().find(clazz, id);
 	}
 
 }

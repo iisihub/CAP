@@ -1,11 +1,12 @@
 $(document).ready(function(){
 	$("#upload").click(function(){
     	$.capFileUpload({
-	        url: "../handler/samplehandler/upload",
+	        url: "webroot/samplehandler/upload",
 	        fileElementId: "ufile",
-	        fileCheck: ["jpg", "jpeg", "png", "gif", "txt"],
+	       // fileCheck: ["jpg", "jpeg", "png", "gif", "txt"],
 	        successMsg:false,
-	        //limitSize: 5 *1024*1024,
+	        limitSize: 1*1024*1024,
+	        fileEncoding:'UTF-8',
 	        data: {
 	            testStr: "test!!test!!"
 	        },
@@ -16,7 +17,7 @@ $(document).ready(function(){
 	});
 	$("#dwnload").click(function(){
 		$.capFileDownload({
-			url:"../handler/samplehandler/dwnload",
+			url:"webroot/samplehandler/dwnload",
 			data:{
 				fileName : "我是log.log"
 			}
