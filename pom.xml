@@ -58,6 +58,21 @@
 				</plugins>
 			</build>
 		</profile>
+		<!--deploy 時使用 {mvn goal -P deploy} 相關位置設定於settings.xml or cap/src/site/settings.xml 
+			(需匯入eclipse maven) PS：distributionManagement 只能放至 pom.xml 中 -->
+		<profile>
+			<id>deploy</id>
+			<distributionManagement>
+				<repository>
+					<id>maven-public</id>
+					<url>${maven.deploy.release.url}</url>
+				</repository>
+				<snapshotRepository>
+					<id>maven-snapshots</id>
+					<url>${maven.deploy.snapshots.url}</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
 	</profiles>
 	<dependencies>
 		<!-- SERVLET 2.5 API ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -87,17 +102,6 @@
 					<downloadSources>true</downloadSources>
 				</configuration>
 			</plugin>
-			<!-- 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin> -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.4</version>
