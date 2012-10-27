@@ -8,7 +8,7 @@ $.extend(Properties || {}, {
 	},
 	ajaxTimeOut : 60 * 1000 * 3, // timeOut: 1000
 	// 下拉選單handler
-	ComboBoxHandler : 'webroot/handler/codetypehandler/queryByKeys',
+	ComboBoxHandler : 'webroot/codetypehandler/queryByKeys',
 	Grid : {
 		rowNum : 30,
 		rowList : []
