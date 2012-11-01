@@ -22,6 +22,10 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.ParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
 /**
@@ -111,10 +115,10 @@ public class CapDbUtil {
 	 * 
 	 * String pattern = "An ${key1} a day keeps the ${key2} away!"; Map<String,
 	 * Map<String, Object> params = {key1=Apple,key2=doctor} new
-	 * StrMessageFormatter(String unformatMsg).reformat(params) ;
 	 * 
 	 * return An Apple a day keep the doctor away!
 	 */
+	@Deprecated
 	public static String messageFormat(String pattern,
 			Map<String, Object> params) {
 		final StringBuffer buffer = new StringBuffer();
@@ -122,7 +126,7 @@ public class CapDbUtil {
 		int start;
 		int pos = 0;
 
-		while ((start = pattern.indexOf(":{", pos)) != -1) {
+		while ((start = pattern.indexOf("${", pos)) != -1) {
 			buffer.append(pattern.substring(pos, start));
 			if (pattern.charAt(start + 1) == '$') {
 				buffer.append("$");
@@ -148,6 +152,24 @@ public class CapDbUtil {
 			buffer.append(pattern.substring(pos));
 		}
 		return buffer.toString();
+	}// ;
+
+	/**
+	 * use Spring Expression Language (SpEL) parse
+	 * 
+	 * @param expressionStr
+	 *            expression string
+	 * @param params
+	 * @param parserContext
+	 * @return
+	 */
+	public static String spelParser(String expressionStr,
+			Map<String, Object> params, ParserContext parserContext) {
+		StandardEvaluationContext context = new StandardEvaluationContext(
+				params);
+		ExpressionParser spel = new SpelExpressionParser();
+		return spel.parseExpression(expressionStr, parserContext).getValue(
+				context, String.class);
 	}// ;
 
 	@SuppressWarnings("rawtypes")

@@ -9,12 +9,18 @@
 
 	<import resource="classpath:sql/h2template.xml" />
 	<import resource="classpath:sql/userDefineSQL.xml" />
+	
+	<bean id="sqlParserContext" class="org.springframework.expression.common.TemplateParserContext" >
+		<constructor-arg index="0" value="@{" />
+		<constructor-arg index="1" value="}" />
+	</bean>
 
 	<bean id="capJdbcTemplate" class="com.iisigroup.cap.jdbc.CapNamedJdbcTemplate">
 		<property name="dataSource" ref="cap-db" />
 		<property name="sqltemp">
 			<bean class="com.iisigroup.cap.utils.CapSqlStatement">
 				<constructor-arg index="0" ref="h2template" />
+				<property name="parserContext" ref="sqlParserContext" />
 			</bean>
 		</property>
 		<property name="sqlProvider" ref="userSqlStatement" />

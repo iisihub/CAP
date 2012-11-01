@@ -460,9 +460,9 @@ public class CapNamedJdbcTemplate {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(CapJdbcContants.SQLPaging_SourceSQL,
 				sqlp.getValue(sqlId, sqlId));
-		StringBuffer sql = new StringBuffer().append(CapDbUtil.messageFormat(
+		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
-				params));
+				params, sqltemp.getParserContext()));
 		sql.append(" ").append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (args == null) {
@@ -491,9 +491,9 @@ public class CapNamedJdbcTemplate {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(CapJdbcContants.SQLPaging_SourceSQL,
 				sqlp.getValue(sqlId, sqlId));
-		StringBuffer sql = new StringBuffer().append(CapDbUtil.messageFormat(
+		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
-				params));
+				params, sqlp.getParserContext()));
 		sql.append(" ").append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
