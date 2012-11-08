@@ -14,7 +14,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 	@{['sourceSQL']} ) source ) rows where ROWNM > :startRow and ROWNUM <= :endRow]]></value>
 		</entry>
 		<entry key="paging.totalPage">
-			<value><![CDATA[select count(*) as TOTAL from (@{['sourceSQL']}) rows]]></value>
+			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
 		</entry>
 	</util:map>
 		

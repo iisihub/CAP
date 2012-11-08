@@ -88,7 +88,7 @@ public class CapDbUtil {
 	 * @return String
 	 */
 	public static String convertToSQLCommand(String cmd,
-			Map<String, Object> data) {
+			Map<String, ?> data) {
 		String sql = NamedParameterUtils.parseSqlStatementIntoString(cmd);
 		if (data == null || data.isEmpty())
 			return cmd;

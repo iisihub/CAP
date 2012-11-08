@@ -9,7 +9,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.jdbc;
+package com.iisigroup.cap.jdbc.support;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

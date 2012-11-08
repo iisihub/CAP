@@ -79,4 +79,9 @@ public class CommonServiceImpl implements ICommonService {
 		commonDao.delete(models);
 	}
 
+	@Override
+	public <T> List<T> list(Class<T> clazz) {
+		return commonDao.find(clazz, commonDao.createSearchTemplete());
+	}
+
 }

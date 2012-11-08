@@ -31,5 +31,12 @@ public interface CapJdbcContants {
 	final String SQLPaging_TotalPage = "paging.totalPage";
 	
 	final String SQLPaging_SourceSQL="sourceSQL";
+	
+	final static String EMPTY_STRING = "";
+
+	/**
+	 * a space string.
+	 */
+	final static String SPACE = " ";
 
 }

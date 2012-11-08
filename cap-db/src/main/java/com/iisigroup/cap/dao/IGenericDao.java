@@ -63,7 +63,9 @@ public interface IGenericDao<T> {
 	 * @return the t
 	 */
 	T find(Serializable pk);
-
+	
+	<S> List<S> find(Class<S> clazz, ISearch search);
+	
 	T find(T entity);
 
 	T findUniqueOrNone(ISearch search);
