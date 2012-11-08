@@ -82,25 +82,28 @@ public class ErrorResult implements IErrorResult {
 			CapMessageException ce = (CapMessageException) e;
 			logMessage = ce.getMessage();
 			if (!CapString.isEmpty(ce.getMessageKey())) {
-				logMessage = formatMessage(request, ce.getMessageKey(),
-						ce.getExtraInformation());
+				logMessage = ce.getMessageKey();
 			}
+			logMessage = formatMessage(request, logMessage,
+					ce.getExtraInformation());
 			errorMessage.put(AJAX_MESSAGE_HANDLER_EXCEPTION, logMessage);
 		} else if (e instanceof CapClosePageException) {
 			CapClosePageException ce = (CapClosePageException) e;
 			logMessage = ce.getMessage();
 			if (!CapString.isEmpty(ce.getMessageKey())) {
-				logMessage = formatMessage(request, ce.getMessageKey(),
-						ce.getExtraInformation());
+				logMessage = ce.getMessageKey();
 			}
+			logMessage = formatMessage(request, logMessage,
+					ce.getExtraInformation());
 			errorMessage.put(AJAX_CLOSE_PAGE_HANDLER_EXCEPTION, logMessage);
 		} else if (e instanceof CapSessioniExpireException) {
 			CapSessioniExpireException ce = (CapSessioniExpireException) e;
 			logMessage = ce.getMessage();
 			if (!CapString.isEmpty(ce.getMessageKey())) {
-				logMessage = formatMessage(request, ce.getMessageKey(),
-						ce.getExtraInformation());
+				logMessage = ce.getMessageKey();
 			}
+			logMessage = formatMessage(request, logMessage,
+					ce.getExtraInformation());
 			errorMessage.put(AJAX_SESSION_EXPIRE_EXCEPTION, logMessage);
 		} else if (e instanceof CapException) {
 			CapException ce = (CapException) e;
