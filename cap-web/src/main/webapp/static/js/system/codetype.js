@@ -14,9 +14,9 @@ pageInit(function(){
             }, {header: i18n['codetype']['codetype.codeOrder'],
                 name: 'codeOrder',width: 80,align: "center"
             }, {header: i18n.def.lastModBy,
-                name: 'lastModifyBy',width: 80,align: "center"
+                name: 'updater',width: 80,align: "center"
             }, {header: i18n.def.lastModTm,
-                name: 'lastModifyTime',width: 80,align: "center"
+                name: 'updateTime',width: 80,align: "center"
             }],
             onSelectRow: function(){
                 var ret = grid.getSelRowDatas();

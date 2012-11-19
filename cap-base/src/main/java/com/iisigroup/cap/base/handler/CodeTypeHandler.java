@@ -82,11 +82,19 @@ public class CodeTypeHandler extends MFormHandler {
 		if (!search.hasOrderBy()) {
 			search.addOrderBy("codeType");
 			search.addOrderBy("codeOrder");
+		} else {
+			Map<String, Boolean> m = search.getOrderBy();
+			if (!m.containsKey("codeType")) {
+				search.addOrderBy("codeType");
+			}
+			if (!m.containsKey("codeOrder")) {
+				search.addOrderBy("codeOrder");
+			}
 		}
 		Page<CodeType> page = commonService.findPage(CodeType.class, search);
 		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		fmt.put("lastModifyTime", new ADDateFormatter());
-		return new GridResult(page.getContent(), page.getTotalRow(),fmt);
+		fmt.put("updateTime", new ADDateFormatter());
+		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
 	}// ;
 
 	/**
@@ -123,8 +131,8 @@ public class CodeTypeHandler extends MFormHandler {
 		if ("A".equals(type)) {
 			code.setOid(null);
 		}
-		code.setLastModifyBy(CapSecurityContext.getUserId());
-		code.setLastModifyTime(CapDate.getCurrentTimestamp());
+		code.setUpdater(CapSecurityContext.getUserId());
+		code.setUpdateTime(CapDate.getCurrentTimestamp());
 		codeTypeService.saveCodeType(code);
 		return result;
 	}

@@ -87,8 +87,7 @@ public class CapDbUtil {
 	 *            the parameters
 	 * @return String
 	 */
-	public static String convertToSQLCommand(String cmd,
-			Map<String, ?> data) {
+	public static String convertToSQLCommand(String cmd, Map<String, ?> data) {
 		String sql = NamedParameterUtils.parseSqlStatementIntoString(cmd);
 		if (data == null || data.isEmpty())
 			return cmd;
@@ -180,7 +179,8 @@ public class CapDbUtil {
 		} else {
 			if (o instanceof String) {
 				rtn = (String) o;
-			} else if (o instanceof Number || o instanceof BigDecimal) {
+			} else if (o instanceof Number || o instanceof BigDecimal
+					|| o instanceof StringBuffer) {
 				rtn = o.toString();
 			} else if (o instanceof Timestamp) {
 				rtn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSS")

@@ -34,6 +34,7 @@
                 	<li><a href="index">關於我們</a></li>
                 	<li><a href="system/system">系統設定</a></li>
                 	<li><a href="sample/sample">範例交易</a></li>
+                	<li><a href="batch/batch">排程管理</a></li>
                 </ul>
             </nav>
             <div class="clear"></div>

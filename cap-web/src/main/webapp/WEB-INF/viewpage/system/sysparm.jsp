@@ -12,7 +12,38 @@
 		loadScript('js/system/sysparm');
 	</script>
 	<div>
-		<form id="mform" onsubmit="return false;">
+		<div class="btns">
+			<button id="qry" type="button" class="btn1">
+				<spring:message code="btn.query">
+					<!--查詢-->
+				</spring:message>
+			</button>
+			<button id="add" type="button" class="btn1">
+				<spring:message code="btn.add">
+					<!--新增-->
+				</spring:message>
+			</button>
+			<button id="delete" type="button" class="btn1">
+				<spring:message code="btn.delete">
+					<!--刪除-->
+				</spring:message>
+			</button>
+		</div>
+		<div id="gridview"></div>
+		<div id="qryDailog" class="hide" title="<spring:message code="btn.query" />">
+			<form id="qform" onsubmit="return false;">
+				<table class="row-data">
+					<tr>
+						<th><spring:message code="js.parmId">
+							<!--參數代碼-->
+							</spring:message></th>
+						<td><input type="text" id="parmId" name="parmId" maxlength="30" class="validate[required]" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="editDialog" class="hide" title="<spring:message code="editDialog" />" >
+			<form id="mform" onsubmit="return false;">
 			<table class="row-data">
 				<tr>
 					<th><spring:message code="js.parmId">
@@ -24,7 +55,7 @@
 					<th><spring:message code="js.parmValue">
 							<!--參數值-->
 						</spring:message></th>
-					<td><input type="text" id="parmValue" name="parmValue" size="100" maxlength="300" class="validate[required,funcCall[maxUTF8[300]]]" /></td>
+					<td><input type="text" id="parmValue" name="parmValue" size="70" maxlength="300" class="validate[required,funcCall[maxUTF8[300]]]" /></td>
 				</tr>
 				<tr>
 					<th><spring:message code="js.parmDesc">
@@ -34,27 +65,7 @@
 				</tr>				
 			</table>
 		</form>
-		<div class="btns" style="text-align: right">
-			<button id="qry" type="button" class="btn1">
-				<spring:message code="btn.query">
-					<!--查詢-->
-				</spring:message>
-			</button>
-			<button id="modify" type="button" class="btn1">
-				<spring:message code="btn.add">
-					<!--新增-->
-				</spring:message>/
-				<spring:message code="btn.modify">
-					<!--修改-->
-				</spring:message>
-			</button>
-			<button id="delete" type="button" class="btn1">
-				<spring:message code="btn.delete">
-					<!--刪除-->
-				</spring:message>
-			</button>
 		</div>
-		<div id="gridview"></div>
 	</div>
 </body>
 </html>

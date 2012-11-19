@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 
 import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -89,12 +90,15 @@ public class MessageBundleScriptCreator {
 		if (props != null && !props.isEmpty()) {
 			if (CapString.isEmpty(filterReg)) {
 				for (Entry<Object, Object> entry : props.entrySet()) {
-					result.set((String) entry.getKey(), (String) entry.getValue());
+					result.set((String) entry.getKey(),
+							(String) entry.getValue());
 				}
 			} else {
 				for (Entry<Object, Object> entry : props.entrySet()) {
-					if (CapString.checkRegularMatch((String) entry.getKey(), filterReg)) {
-						result.set(((String) entry.getKey()).replaceAll("js.", ""),
+					if (CapString.checkRegularMatch((String) entry.getKey(),
+							filterReg)) {
+						result.set(
+								((String) entry.getKey()).replaceAll("js.", ""),
 								(String) entry.getValue());
 					}
 				}
@@ -127,7 +131,8 @@ public class MessageBundleScriptCreator {
 	 *            filter字串
 	 * @return String
 	 */
-	public static String createScript(String i18nKeyName, Properties props, Set<String> filterList) {
+	public static String createScript(String i18nKeyName, Properties props,
+			Set<String> filterList) {
 
 		String message = generateJson(props, filterList);
 		if (CapString.isEmpty(message)) {
@@ -136,7 +141,8 @@ public class MessageBundleScriptCreator {
 		StringBuffer script = new StringBuffer();
 		script.append(
 				"<script type='text/javascript'> require(['cust-common'], function(){i18n.set(\"")
-				.append(i18nKeyName).append("\",").append(message).append(");});</script>");
+				.append(i18nKeyName).append("\",").append(message)
+				.append(");});</script>");
 		return script.toString();
 	}// ;
 
@@ -186,9 +192,23 @@ public class MessageBundleScriptCreator {
 		}
 		String i18nFile = null;
 		try {
-			i18nFile = new StringBuffer("classpath:/i18n/").append(i18nPath).append("_")
-					.append(locale.toString()).append(".properties").toString();
-			prop.load(CapAppContext.getApplicationContext().getResource(i18nFile).getInputStream());
+			i18nFile = new StringBuffer("classpath:/i18n/").append(i18nPath)
+					.append("_").append(locale.toString())
+					.append(".properties").toString();
+			Resource rs = CapAppContext.getApplicationContext().getResource(
+					i18nFile);
+			if (rs != null) {
+				prop.load(rs.getInputStream());
+			} else {
+				i18nFile = new StringBuffer("classpath:/i18n/")
+						.append(i18nPath).append("_").append(".properties")
+						.toString();
+				rs = CapAppContext.getApplicationContext()
+						.getResource(i18nFile);
+				if (rs != null) {
+					prop.load(rs.getInputStream());
+				}
+			}
 
 		} catch (Exception e) {
 			logger.error("can't load " + i18nPath);

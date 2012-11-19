@@ -34,7 +34,7 @@ import com.iisigroup.cap.model.IDataObject;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parmId"))
+@Table(name = "CFG_SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parmId"))
 public class SysParm extends GenericBean implements IDataObject {
 
 	/** 參數id */
@@ -49,9 +49,9 @@ public class SysParm extends GenericBean implements IDataObject {
 	private String parmDesc;
 	/** 修改操作者 */
 	@Column(length = 10)
-	private String lastModifyBy;
+	private String updater;
 	/** 修改時間 */
-	private Timestamp lastModifyTime;
+	private Timestamp updateTime;
 
 	public String getParmId() {
 		return parmId;
@@ -77,20 +77,21 @@ public class SysParm extends GenericBean implements IDataObject {
 		this.parmDesc = parmDesc;
 	}
 
-	public String getLastModifyBy() {
-		return lastModifyBy;
+
+	public String getUpdater() {
+		return updater;
 	}
 
-	public void setLastModifyBy(String lastModifyBy) {
-		this.lastModifyBy = lastModifyBy;
+	public void setUpdater(String updater) {
+		this.updater = updater;
 	}
 
-	public Timestamp getLastModifyTime() {
-		return lastModifyTime;
+	public Timestamp getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setLastModifyTime(Timestamp lastModifyTime) {
-		this.lastModifyTime = lastModifyTime;
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	@Override

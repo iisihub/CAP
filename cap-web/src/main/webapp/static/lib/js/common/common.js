@@ -19,7 +19,7 @@
 		showButtonPanel : true,
 		changeMonth : true,
 		changeYear : true,
-		buttonImage : 'webroot/images/icon_date.png',
+		buttonImage : 'webroot/static/images/icon_date.png',
 		showOn : 'both'
 	});
 
@@ -245,9 +245,7 @@
 							defaultButton[s.closeName] = function() {
 								cDialog.dialog('close');
 							};
-							var tmpClose = s.close ||
-							function() {
-							};
+							var tmpClose = s.close ||$.noop;
 							delete s['close'];
 							cDialog.dialog($.extend({
 								bgiframe : false,
@@ -429,7 +427,6 @@
 							// ilog.debug(e);
 						}
 					},
-
 					/**
 					 * 建立i18n or key為變數之 JSON
 					 *
@@ -757,6 +754,19 @@
 
 			// add jQuery prototype method
 			$.fn.extend({
+				//增加val 行為
+			    __val: jQuery.fn.val,
+			    val: function(value){
+			        var res = (this.data("maskRule") && this.data("realValue")) ? this.data("realValue") : (this.is("span,div") ? this.text() : this.__val());
+			        if (value != undefined) {
+			            this.data("realValue", value)[(this.is("span,div") ? "text" : "__val")](value);
+			            if (this.data("maskRule") && this.data("isChange") !== true) {
+			                this.data("isChange", true).trigger("change").data("isChange", false).trigger("mask");
+			            };
+			            res = this;
+			        }
+			        return res;
+			    },
 				____load : $.fn.load,
 				load : function(url, params, callback) {
 					if ( typeof url !== "string" && this.___load) {
@@ -831,7 +841,8 @@
 					if ( typeof arg1 !== "string") {
 						var $this = this;
 						$this.find('form').each(function() {
-							$(this).validate();
+							//$(this).validate();
+							$(this).validationEngine('validate');
 						});
 						var _o = arg1 && arg1.open;
 						arg1 = $.extend({
@@ -1037,8 +1048,48 @@
 						}
 
 					}
-
 				},
+				/**
+			     * 設定 Selector's subitem readonly 狀態
+			     * @param {boolean} b 預設為 true (readOnly)
+			     * @param {String} jquerySelector
+			     */
+			    readOnlyChilds: function(b, excludeSelector){
+			        b = (b == undefined) ? true : b;
+			        $(this).find("input,select,textarea,button").not(excludeSelector || "").each(function(){
+			            $(this).readOnly(b);
+			        });
+			        return $(this);
+			    },
+				/**
+			     * 設定欄位Readonly 狀態
+			     * @param {boolean} f 預設為 true (readOnly)
+			     */
+			    readOnly: function(b){
+			        b = (b == undefined) ? true : b;
+			        var $this = $(this);
+			        $this.each(function(){
+			            switch (this.nodeName.toLowerCase()) {
+			                case 'input':
+			                    switch (this.type.toLowerCase()) {
+			                        case 'text':
+			                            ($(this).is('.date')||$(this).is('.date2')) && (b ? $(this).datepicker('destroy') : $(this).datepicker());
+			                            this.readOnly = b;
+			                            break;
+			                        default:
+			                            this.disabled = b;
+			                    }
+			                    break;
+			                case 'textarea':
+			                	this.readOnly = b;
+			                    break;
+			                case 'select':
+			                    this.disabled = b;
+			            }
+			            this.tabIndex = b ? -1 : "";
+			        });
+					return this;
+			    },
 				/**
 				 * 動態新增Select 選單
 				 *

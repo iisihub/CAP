@@ -67,7 +67,7 @@ public class SysParmHandler extends MFormHandler {
 		}
 		Page<SysParm> page = commonSrv.findPage(SysParm.class, search);
 		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		fmt.put("lastModifyTime", new ADDateFormatter());
+		fmt.put("updateTime", new ADDateFormatter());
 		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
 	}// ;
 
@@ -85,7 +85,7 @@ public class SysParmHandler extends MFormHandler {
 			parm = new SysParm();
 		}
 		CapBeanUtil.map2Bean(request, parm, SysParm.class);
-		parm.setLastModifyTime(CapDate.getCurrentTimestamp());
+		parm.setUpdateTime(CapDate.getCurrentTimestamp());
 		commonSrv.save(parm);
 		return result;
 	}

@@ -113,7 +113,7 @@ public class SequenceServiceImpl implements SequenceService {
 				thisSeq = new Sequence();
 				thisSeq.setSeqNode(seqNode);
 				thisSeq.setNextSeq(startSeq + 1);
-				thisSeq.setLastModifyTime(CapDate.getCurrentTimestamp());
+				thisSeq.setUpdateTime(CapDate.getCurrentTimestamp());
 				thisSeq.setRounds(1);
 				saveSeq(thisSeq, -1);
 				return startSeq;
@@ -126,7 +126,7 @@ public class SequenceServiceImpl implements SequenceService {
 					nextSeq.setRounds(thisSeq.getRounds() + 1);
 				}
 				nextSeq.setNextSeq(next);
-				nextSeq.setLastModifyTime(CapDate.getCurrentTimestamp());
+				nextSeq.setUpdateTime(CapDate.getCurrentTimestamp());
 				int row = saveSeq(nextSeq, returnSeq);
 				if (row != 1) {
 					return getDBNextSeq(seqNode, interval, startSeq, maxSeq);
@@ -164,7 +164,7 @@ public class SequenceServiceImpl implements SequenceService {
 						seq.setSeqNode(rs.getString("SEQNODE"));
 						seq.setNextSeq(rs.getInt("NEXTSEQ"));
 						seq.setRounds(rs.getInt("ROUNDS"));
-						seq.setLastModifyTime(rs.getTimestamp("LASTMODIFYTIME"));
+						seq.setUpdateTime(rs.getTimestamp("UPDATETIME"));
 						return seq;
 					}
 				});
@@ -226,8 +226,8 @@ public class SequenceServiceImpl implements SequenceService {
 			thisSeq.put("rounds", rounds);
 		}
 
-		public void setLastModifyTime(Timestamp lastModifyTime) {
-			thisSeq.put("lastModifyTime", lastModifyTime);
+		public void setUpdateTime(Timestamp updateTime) {
+			thisSeq.put("updateTime", updateTime);
 		}
 
 		public Map<String, Object> getSequence() {

@@ -39,7 +39,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "CODETYPE", uniqueConstraints = @UniqueConstraint(columnNames = {
+@Table(name = "CFG_CODETYPE", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"locale", "codeType", "codeValue" }))
 public class CodeType extends GenericBean implements IDataObject {
 
@@ -65,10 +65,10 @@ public class CodeType extends GenericBean implements IDataObject {
 	private Integer codeOrder;
 
 	@Column(length = 6)
-	private String lastModifyBy;
+	private String updater;
 
 	@Column
-	private Timestamp lastModifyTime;
+	private Timestamp updateTime;
 
 	public String getOid() {
 		return oid;
@@ -110,20 +110,20 @@ public class CodeType extends GenericBean implements IDataObject {
 		this.codeOrder = codeOrder;
 	}
 
-	public String getLastModifyBy() {
-		return lastModifyBy;
+	public String getUpdater() {
+		return updater;
 	}
 
-	public void setLastModifyBy(String lastModifyBy) {
-		this.lastModifyBy = lastModifyBy;
+	public void setUpdater(String updater) {
+		this.updater = updater;
 	}
 
-	public Timestamp getLastModifyTime() {
-		return lastModifyTime;
+	public Timestamp getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setLastModifyTime(Timestamp lastModifyTime) {
-		this.lastModifyTime = lastModifyTime;
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public String getLocale() {

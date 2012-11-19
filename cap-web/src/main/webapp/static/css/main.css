@@ -3056,7 +3056,7 @@ footer {
 
 /** button **/
 .btn1, .ui-dialog-buttonset .ui-button {
-  background: url("webroot/static/images/button001.jpg") scroll center center no-repeat !important;
+  background: url("webroot/static/images/sprite.png") repeat-x scroll 0 0 transparent !important;;
 }
 
 .btn1.ui-button-text-only .ui-button-text, .ui-dialog-buttonset button.ui-button-text-only .ui-button-text {
@@ -3065,9 +3065,10 @@ footer {
 }
 
 .btn1.ui-button, .ui-dialog-buttonset button.ui-button {
-  width: 65px;
-  height: 24px;
+  min-width: 65px;
+  min-height: 25px;
   line-height: 24px;
+  padding:4px 8px;
   display: inline-block;
   vertical-align: middle;
   text-align: center;

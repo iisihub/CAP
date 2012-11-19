@@ -10,7 +10,7 @@ pageInit(function(){
             }, {header: i18n['sequence']['rounds'],//rounds
                 name: 'rounds',width: 10,
             }, {header: i18n.def.lastModTm,
-                name: 'lastModifyTime',width: 10,align: "center"
+                name: 'updateTime',width: 10,align: "center"
             }],
             onSelectRow: function(){
                 var ret = grid.getSelRowDatas();
