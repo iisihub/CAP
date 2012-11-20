@@ -13,8 +13,8 @@ pageInit(function(){
                 name: 'START_TIME',width:10,align:'center'
             }, {header: i18n['jobexecution']['duration'],
                 name: 'duration',width: 10,align:'center',sortable:false
-            }, {header: i18n.def.status,name: 'STATUS',width: 15,hidden:true
-            }, {header: i18n.def.status,
+            }, {header: i18n['jobexecution']['sch.jobStatus'],name: 'STATUS',width: 15,hidden:true
+            }, {header: i18n['jobexecution']['sch.jobExitCode'],
                 name: 'EXIT_CODE',width: 15
             }, {header: i18n['jobexecution']['executor'],
             	name: 'EXECUTOR',width: 15

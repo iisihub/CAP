@@ -145,8 +145,8 @@
 						<label><input type="radio" id="isNotify" name="isNotify" value="N" checked="checked"/><spring:message code="js.no"/></label></td>
 				</tr>
 				<tr class="notify hide">
-					<th><spring:message code="js.status">
-							<!--狀態-->
+					<th><spring:message code="js.sch.jobExitCode">
+							<!--JOB執行結果-->
 						</spring:message></th>
 					<td>
 						<c:forEach items="${jobExitCode}" var="st">

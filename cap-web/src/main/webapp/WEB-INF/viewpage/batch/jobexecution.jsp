@@ -48,10 +48,10 @@
 						<td><input type="text" id="jobId" name="jobId" maxlength="32" /></td>
 					</tr>
 					<tr>
-						<th><spring:message code="status">
-								<!--狀態-->
+						<th><spring:message code="js.sch.jobExitCode">
+								<!--JOB執行結果-->
 							</spring:message></th>
-						<td><select id="jobStatus" name="jobStatus" combokey="jobStatus" space="true"></select></td>
+						<td><select id="jobExitCode" name="jobExitCode" combokey="jobExitCode" space="true" comboType="2"></select></td>
 					</tr>
 					<tr>
 						<th><spring:message code="js.startTime">
@@ -80,10 +80,10 @@
 						<td><span id="duration" class="field"></span></td>
 					</tr>
 					<tr>
-						<th><spring:message code="status"><!--狀態--></spring:message></th>
-						<td><select id="jobStatus" name="jobStatus" combokey="jobStatus" space="true" disabled="disabled"></select></td>
-						<th><spring:message code="status"><!--狀態--></spring:message></th>
-						<td><select id="EXIT_CODE" name="EXIT_CODE" combokey="jobExitCode" space="true" disabled="disabled"></select></td>
+						<th><spring:message code="js.sch.jobStatus"><!--JOB執行狀態--></spring:message></th>
+						<td><select id="jobStatus" name="jobStatus" combokey="jobStatus" space="true" disabled="disabled" comboType="2"></select></td>
+						<th><spring:message code="js.sch.jobExitCode"><!--JOB執行結果--></spring:message></th>
+						<td><select id="EXIT_CODE" name="EXIT_CODE" combokey="jobExitCode" space="true" disabled="disabled" comboType="2"></select></td>
 					</tr>
 					<tr>
 						<th><spring:message code="js.executor"><!--執行者--></spring:message></th>

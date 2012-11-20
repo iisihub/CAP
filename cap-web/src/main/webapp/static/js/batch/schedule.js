@@ -36,7 +36,7 @@ pageInit(function(){
         	eDialog.find(".notify")[$(this).val()=='Y' ? 'show' : 'hide']();
         });
         eDialog.dialog({ //維護畫面
-        	height: 620,width: 650,modal: true,
+        	height: 630,width: 650,modal: true,
         	close:function(){
         		eDialog.find("#mform").reset().find(".hide").hide().siblings(".show").show();
         	},

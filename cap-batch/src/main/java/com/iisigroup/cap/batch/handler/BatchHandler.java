@@ -356,9 +356,9 @@ public class BatchHandler extends MFormHandler {
 			search.addSearchModeParameters(SearchMode.LIKE, "i.job_name",
 					request.get("jobId") + "%");
 		}
-		if (!CapString.isEmpty(request.get("jobStatus"))) {
-			search.addSearchModeParameters(SearchMode.EQUALS, "e.status",
-					request.get("jobStatus"));
+		if (!CapString.isEmpty(request.get("jobExitCode"))) {
+			search.addSearchModeParameters(SearchMode.EQUALS, "e.exit_code",
+					request.get("jobExitCode"));
 		}
 		if (!CapString.isEmpty(request.get("jobExeId"))) {
 			search.addSearchModeParameters(SearchMode.EQUALS,
