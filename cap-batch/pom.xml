@@ -15,7 +15,6 @@
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<spring.integration.version>2.0.0.RELEASE</spring.integration.version>
 		<quartz-scheduler.version>2.1.5</quartz-scheduler.version>
-		<slf4j.version>1.6.1</slf4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
