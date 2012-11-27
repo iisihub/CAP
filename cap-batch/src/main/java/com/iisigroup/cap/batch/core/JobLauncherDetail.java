@@ -33,7 +33,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.iisigroup.cap.batch.constants.CapBatchConstants;
-import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
 
 /**
@@ -57,11 +56,10 @@ public class JobLauncherDetail extends QuartzJobBean implements
 	private JobLauncher jobLauncher;
 	private JobParametersIncrementer defaultIncrementer;
 	private BatchJobService batchService;
-	private BatchSchedule batchSchedule;
-	private CapBatchNotify batchNotify;
 
 	@SuppressWarnings("rawtypes")
-	protected void executeInternal(JobExecutionContext context) {
+	protected void executeInternal(JobExecutionContext context)
+			throws org.quartz.JobExecutionException {
 		Map jobDataMap = context.getMergedJobDataMap();
 		String jobName = (String) jobDataMap.get(JOB_NAME);
 		logger.info("Quartz trigger firing with Spring Batch jobName="
@@ -77,15 +75,12 @@ public class JobLauncherDetail extends QuartzJobBean implements
 						jobParameters);
 			}
 			jobExecution = jobLauncher.run(job, jobParameters);
+			context.put(K_JobExecution, jobExecution);
+			batchService.updateExecution(jobExecution.getId(),
+					(String) jobDataMap.get(EXECUTOR));
 		} catch (JobExecutionException e) {
 			logger.error("Could not execute job.", e);
-		} finally {
-			if (jobExecution != null) {
-				Long exId = jobExecution.getId();
-				batchService.updateExecution(exId,
-						(String) jobDataMap.get(EXECUTOR));
-				batchNotify.notify(batchSchedule, jobExecution);
-			}
+			throw new org.quartz.JobExecutionException(e);
 		}
 	}
 
@@ -155,14 +150,6 @@ public class JobLauncherDetail extends QuartzJobBean implements
 	public void setDefaultIncrementer(
 			JobParametersIncrementer defaultIncrementer) {
 		this.defaultIncrementer = defaultIncrementer;
-	}
-
-	public void setBatchSchedule(BatchSchedule batchSchedule) {
-		this.batchSchedule = batchSchedule;
-	}
-
-	public void setBatchNotify(CapBatchNotify batchNotify) {
-		this.batchNotify = batchNotify;
 	}
 
 }

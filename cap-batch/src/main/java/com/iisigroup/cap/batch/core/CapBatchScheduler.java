@@ -26,6 +26,7 @@ import java.util.TimeZone;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
+import org.quartz.JobListener;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SimpleScheduleBuilder;
@@ -68,7 +69,7 @@ public class CapBatchScheduler implements CapBatchConstants {
 	private JobLocator jobLocator;
 	private JobLauncher jobLauncher;
 	private JobParametersIncrementer defaultIncrementer;
-	private CapBatchNotify batchNotify;
+	private JobListener globalListener;
 
 	@SuppressWarnings({ "unchecked" })
 	public void loadSchedule() throws Exception {
@@ -86,6 +87,9 @@ public class CapBatchScheduler implements CapBatchConstants {
 						Arrays.asList(new Trigger[] { trigger }));
 			}
 		}
+		if (globalListener != null) {
+			scheduler.getListenerManager().addJobListener(globalListener);
+		}
 		scheduler.scheduleJobs(triggersAndJobs, true);
 		scheduler.start();
 	}// ;
@@ -99,7 +103,7 @@ public class CapBatchScheduler implements CapBatchConstants {
 	public void reSchedule(BatchSchedule oldSch, BatchSchedule newSch)
 			throws SchedulerException {
 		boolean reSch = (oldSch == null);
-		if (!reSch){
+		if (!reSch) {
 			for (String c : SCHEDULE_KEYWORDS) {
 				Object o = newSch.get(c);
 				if (o != null && !o.equals(oldSch.get(c))) {
@@ -144,8 +148,7 @@ public class CapBatchScheduler implements CapBatchConstants {
 					SimpleScheduleBuilder.simpleSchedule()
 							.withIntervalInSeconds(sch.getRepeatInterval())
 							.withRepeatCount(sch.getRepeatCount())).startAt(
-					new Date(System.currentTimeMillis()
-							- sch.getRepeatInterval() * 1000));
+					new Date(System.currentTimeMillis() + 60000));
 
 		} else if ("C".equals(sch.getSchType())) {
 			tirggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(
@@ -167,8 +170,6 @@ public class CapBatchScheduler implements CapBatchConstants {
 		map.put("batchService", batchService);
 		// 放入JobParametersIncrementer要確保不會有重覆的Parameters出現
 		map.put("defaultIncrementer", defaultIncrementer);
-		map.put("batchSchedule", sch);
-		map.put("batchNotify", batchNotify);
 		JobDetailFactoryBean jobFactory = new JobDetailFactoryBean();
 		jobFactory.setName(sch.getSchId());
 		jobFactory.setDescription(sch.getSchDesc());
@@ -216,7 +217,8 @@ public class CapBatchScheduler implements CapBatchConstants {
 		this.defaultIncrementer = defaultIncrementer;
 	}
 
-	public void setBatchNotify(CapBatchNotify batchNotify) {
-		this.batchNotify = batchNotify;
+	public void setGlobalListener(JobListener globalListener) {
+		this.globalListener = globalListener;
 	}
+
 }// ~

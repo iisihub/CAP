@@ -60,7 +60,7 @@
 		<property name="jobLocator" ref="jobRegistry" />
 		<property name="jobLauncher" ref="jobLauncher" />
 		<property name="defaultIncrementer" ref="UUIDIncrementer" />
-		<property name="batchNotify" ref="batchNotify"/>
+		<property name="globalListener" ref="batchNofityListener"/>
 	</bean>
 
 	<bean id="UUIDIncrementer" class="com.iisigroup.cap.batch.support.UUIDIncrementer" />
@@ -78,8 +78,8 @@
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 	</bean>
 	
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~ Mail Notify ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<bean id="batchNotify" class="com.iisigroup.cap.batch.core.CapBatchMailNotify">
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~ quartz listener ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<bean id="batchNofityListener" class="com.iisigroup.cap.batch.listener.CapBatchMailNotifyListener">
 		<property name="mailSender" ref="mailSender" />
 		<property name="config" ref="systemConfig" />
 		<property name="batchSerivce" ref="batchJobService"/>
