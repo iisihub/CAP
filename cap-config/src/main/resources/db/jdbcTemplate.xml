@@ -39,12 +39,12 @@
 			<tx:method name="find*" read-only="true" propagation="NOT_SUPPORTED" />
 			<tx:method name="get*" read-only="true" propagation="NOT_SUPPORTED" />
 			<tx:method name="getNew*" propagation="REQUIRES_NEW" />
-			<tx:method name="saveSeq" timeout="45" rollback-for="Throwable"
+			<tx:method name="saveSeq" timeout="180000" rollback-for="Throwable"
 				propagation="REQUIRES_NEW" />
 			<!-- other methods use the default transaction settings (see below) -->
-			<tx:method name="*" timeout="45" rollback-for="Throwable"
+			<tx:method name="*" timeout="180000" rollback-for="Throwable"
 				propagation="REQUIRED" />
-			<!-- timeout in seconds -->
+			<!-- timeout in millisecond -->
 		</tx:attributes>
 	</tx:advice>
 
