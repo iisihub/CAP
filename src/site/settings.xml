@@ -23,8 +23,10 @@
 				</maven.deploy.release.url>
 				<maven.deploy.snapshots.url>${maven.url}/repositories/snapshots
 				</maven.deploy.snapshots.url>
-				<maven.public.repository>${maven.url}/groups/public</maven.public.repository>
-				<maven.snapshots.repository>${maven.url}/repositories/snapshots</maven.snapshots.repository>
+				<maven.public.repository>${maven.url}/groups/public
+				</maven.public.repository>
+				<maven.snapshots.repository>${maven.url}/repositories/snapshots
+				</maven.snapshots.repository>
 			</properties>
 			<repositories>
 				<repository>
@@ -49,6 +51,25 @@
 					</snapshots>
 				</repository>
 			</repositories>
+		</profile>
+		<profile>
+			<id>attach-source</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </settings>	 	
