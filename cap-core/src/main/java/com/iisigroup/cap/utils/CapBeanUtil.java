@@ -31,10 +31,6 @@ import org.springframework.util.ReflectionUtils;
 
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.utils.CapDate;
-import com.iisigroup.cap.utils.CapMath;
-import com.iisigroup.cap.utils.CapString;
-
 
 /**
  * <p>
@@ -83,6 +79,12 @@ public class CapBeanUtil {
 			}
 		}
 		return destination;
+	}// ;
+
+	public static <T extends GenericBean> T copyBean(T source, T destination)
+			throws CapException {
+		return copyBean(source, destination,
+				CapBeanUtil.getFieldName(destination.getClass(), true));
 	}// ;
 
 	/**
@@ -219,7 +221,8 @@ public class CapBeanUtil {
 	 *            {fieldId=fieldValue}
 	 * @param entry
 	 *            the bean
-	 * @param cols columns
+	 * @param cols
+	 *            columns
 	 * @return T
 	 */
 	public static <T extends GenericBean> T map2Bean(Map<String, Object> map,
@@ -360,7 +363,7 @@ public class CapBeanUtil {
 					if (field.getType() != String.class && "".equals(value)) {
 						value = null;
 					} else if (field.getType() == BigDecimal.class) {
-						value =  CapMath.getBigDecimal(String.valueOf(value));
+						value = CapMath.getBigDecimal(String.valueOf(value));
 					} else if (value instanceof String) {
 						if (field.getType() == java.util.Date.class
 								|| field.getType() == java.sql.Date.class) {
@@ -399,7 +402,8 @@ public class CapBeanUtil {
 	 * <li>keySet = new String[]{"a", "c", "x"}, JSONObject.toString()={"c":null,"a":1,"x":null}</li>
 	 * </pre>
 	 * 
-	 * @param map map
+	 * @param map
+	 *            map
 	 * @param keyAry
 	 *            null時回傳整個 map 所串成的 JSON 物件； not null 時依指定的 keyAry 串組。
 	 * @return JSONObject

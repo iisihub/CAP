@@ -10,6 +10,7 @@
 package com.iisigroup.cap.web;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -98,8 +99,12 @@ public class CapHandlerServlet extends HttpServlet {
 			logger.trace("Request Data: {}",
 					JSONObject.fromObject(req.getParameterMap()).toString());
 		}
-		SimpleContextHolder.put(CapWebUtil.localeKey,
-				req.getSession().getAttribute(CapWebUtil.localeKey));
+		if (req.getSession(false) != null) {
+			SimpleContextHolder.put(CapWebUtil.localeKey, req.getSession()
+					.getAttribute(CapWebUtil.localeKey));
+		} else {
+			SimpleContextHolder.put(CapWebUtil.localeKey, Locale.getDefault());
+		}
 		IResult result = null;
 		Logger pluginlogger = logger;
 		IRequest request = getDefaultRequest(req);

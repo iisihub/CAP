@@ -25,7 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <pre>
- * TODO Write a short description on the purpose of the program
+ * CapUserDetails
  * </pre>
  * 
  * @since 2012/5/15

@@ -43,8 +43,7 @@ public class CapAppContext implements ApplicationContextAware {
 		return resource;
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <T> T getBean(String beanName, Class<Object> c) {
+	public static <T> T getBean(String beanName, Class<T> c) {
 		return (T) applicationContext.getBean(beanName, c);
 	}
 
