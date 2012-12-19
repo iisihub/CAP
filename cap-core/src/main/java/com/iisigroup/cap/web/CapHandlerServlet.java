@@ -52,8 +52,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
 @SuppressWarnings("serial")
 public class CapHandlerServlet extends HttpServlet {
 
-	protected final Logger logger = LoggerFactory
-			.getLogger(CapHandlerServlet.class);
+	protected final Logger logger = LoggerFactory.getLogger(CapHandlerServlet.class);
 	public final String HANDLER = "_handler";
 	public final String ACTION = "_action";
 
@@ -78,8 +77,8 @@ public class CapHandlerServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
+			IOException {
 		doHandlerAction(req, resp);
 	}
 
@@ -89,19 +88,18 @@ public class CapHandlerServlet extends HttpServlet {
 		doHandlerAction(req, resp);
 	}
 
-	protected void doHandlerAction(HttpServletRequest req,
-			HttpServletResponse resp) {
+	protected void doHandlerAction(HttpServletRequest req, HttpServletResponse resp) {
 		SimpleContextHolder.resetContext();
 		String handler = (String) req.getAttribute(HANDLER);
 		String action = (String) req.getAttribute(ACTION);
 		long st = System.currentTimeMillis();
 		if (logger.isTraceEnabled()) {
-			logger.trace("Request Data: {}",
-					JSONObject.fromObject(req.getParameterMap()).toString());
+			logger.trace("Request Data: {}", JSONObject.fromObject(req.getParameterMap())
+					.toString());
 		}
-		if (req.getSession(false) != null) {
-			SimpleContextHolder.put(CapWebUtil.localeKey, req.getSession()
-					.getAttribute(CapWebUtil.localeKey));
+		Object locale = req.getSession().getAttribute(CapWebUtil.localeKey);
+		if (locale != null) {
+			SimpleContextHolder.put(CapWebUtil.localeKey, locale);
 		} else {
 			SimpleContextHolder.put(CapWebUtil.localeKey, Locale.getDefault());
 		}
@@ -134,8 +132,7 @@ public class CapHandlerServlet extends HttpServlet {
 			}
 		} finally {
 			result.respondResult(resp);
-			logger.debug("total spend time : {} ms",
-					(System.currentTimeMillis() - st));
+			logger.debug("total spend time : {} ms", (System.currentTimeMillis() - st));
 			if (logger.isTraceEnabled()) {
 				logger.trace("Response Data : " + result.getLogMessage());
 			}
