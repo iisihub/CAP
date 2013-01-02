@@ -43,7 +43,7 @@
          * @param {Object} datas
          */
         addGridData: function(datas){
-            var $this = $(this), ids = $this.getGridParam("colIds");
+            var $this = $(this), ids = $this.jqGrid("getGridParam", "colIds")
             
             function _convertJson(d){
                 var td = {};
@@ -169,8 +169,10 @@
             //add header
             var _colNames = s.colNames || [];
             s.colNames = [];
+            s.colIds = []
             for (var col in s.colModel) {
                 s.colNames.push(_colNames[col] || s.colModel[col].header || s.colModel[col].name);
+                s.colIds.push(s.colModel[col].name);
             }
             // add columns info
             s = $.extend({}, s, {
@@ -193,6 +195,11 @@
             resGrid.setGridParam({
                 datatype: url ? 'json' : 'local',
                 url: url
+            });
+            
+            //set cust properties
+            resGrid.each(function(){
+               this.p.colIds =  s.colIds;
             });
             
             return resGrid;
