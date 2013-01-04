@@ -9,8 +9,7 @@
 		<class>com.iisigroup.cap.acl.model.CapUser</class>
 		<class>com.iisigroup.cap.acl.model.CapRole</class>
 		<class>com.iisigroup.cap.acl.model.CapFunction</class>
-		<!-- <class>com.iisigroup.cap.base.model.SysParm</class> -->
-		
+		<class>com.iisigroup.cap.base.model.SysParm</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>
 </persistence>

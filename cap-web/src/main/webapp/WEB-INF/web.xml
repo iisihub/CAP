@@ -18,7 +18,7 @@
 	<context-param>
 		<description>設置環境變量根目錄名稱</description>
 		<param-name>webAppRootKey</param-name>
-		<param-value>webapp.root</param-value>
+		<param-value>capWebApp.root</param-value>
 	</context-param>
 
 	<context-param>
@@ -40,7 +40,24 @@
 		<description>spring-request-listener</description>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	<!-- Filter -->
+	<!-- Filter 
+	<filter>
+		<filter-name>shallowEtagHeaderFilter</filter-name>
+		<filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shallowEtagHeaderFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	-->
 	<!--使用spring 內建 -->
 	<filter>
 		<description>encoding filter</description>
@@ -109,6 +126,7 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
+	<!-- 
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -117,18 +135,13 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- <filter> <filter-name>capForwardFilter</filter-name> <filter-class>com.iisigroup.cap.web.ForwardFilter</filter-class> 
-		<init-param> <param-name>/webroot.*</param-name> <param-value>/.</param-value> 
-		</init-param> <init-param> <param-name>/i18njs</param-name> <param-value>/handler/basehandler/queryJsI18N</param-value> 
-		</init-param> </filter> <filter-mapping> <filter-name>capForwardFilter</filter-name> 
-		<url-pattern>/*</url-pattern> </filter-mapping> -->
-	<!-- servlet -->
+	 -->
 	<servlet>
 		<servlet-name>dispatcher-page</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:spring/mvc/page.xml</param-value>
+			<param-value>classpath:spring/page.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet>
@@ -162,7 +175,6 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
-
 
 	<welcome-file-list>
 		<welcome-file>page/index</welcome-file>

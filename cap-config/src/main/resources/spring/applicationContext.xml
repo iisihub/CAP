@@ -12,10 +12,12 @@
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		<property name="ignoreResourceNotFound" value="false" />
 		<property name="locations">
-            <list>
-                <value>classpath:db/database.properties</value>
-            </list>
-        </property>
+			<list>
+				<value>classpath:db/hibernate.properties</value>
+				<value>classpath:batch/batch.properties</value>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
 	</bean>
 
 	<!-- application -->
@@ -25,23 +27,27 @@
 	<bean id="messageSource"
 		class="com.iisigroup.cap.mvc.message.CapReloadableResourceBundleMessageSource">
 	</bean>
-	
+
 	<!-- Syste config -->
 	<bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
 		<constructor-arg index="0">
-			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="location">
-					<value>classpath:config.properties</value>
+			<bean
+				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+				<property name="locations">
+					<list>
+						<value>classpath:batch/batch.properties</value>
+						<value>classpath:config.properties</value>
+					</list>
 				</property>
 			</bean>
 		</constructor-arg>
 	</bean>
-	
+
 	<import resource="classpath:db/datasource.xml" />
-	<!-- <import resource="classpath:db/jdbcTemplate.xml" />-->
+	<import resource="classpath:db/jdbcTemplate.xml" />
 	<import resource="classpath:db/jpa.xml" />
 	<import resource="classpath:spring/component.xml"/>
-	<import resource="classpath:spring/security.xml" />
+	<!-- <import resource="classpath:spring/security.xml" />-->
 	<import resource="classpath:spring/operation.xml" />
-	
+	<import resource="classpath:batch/batch.xml" />
 </beans>
