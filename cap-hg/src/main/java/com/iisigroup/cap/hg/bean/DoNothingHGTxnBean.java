@@ -1,5 +1,5 @@
 /* 
- * MCIHGtTxnDoNothingBean.java
+ * DoNothingHGTxnBean.java
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -17,7 +17,6 @@ import org.dom4j.DocumentHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -72,7 +71,7 @@ public class DoNothingHGTxnBean implements IHGTxnBean {
 	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
 	 */
 	@Override
-	public void execute() throws CapException {
+	public void execute() {
 		this.resultData = this.sendData;
 	}
 

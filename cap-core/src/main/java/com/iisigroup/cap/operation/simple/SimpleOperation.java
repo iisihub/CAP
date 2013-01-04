@@ -49,12 +49,10 @@ public class SimpleOperation implements Operation {
 	 * 
 	 * @see tw.com.iisi.cap.flow.Operation#execute()
 	 */
-	public void execute(OpStepContext ctx, IRequest params, IHandler handler)
-			throws CapException {
+	public void execute(OpStepContext ctx, IRequest params, IHandler handler) {
 		OperationStep step = getStartStep();
 		long startOperation = System.currentTimeMillis();
 		try {
-			SimpleContextHolder.resetContext();
 			while (step != null) {
 				OpStepContext result = ctx;
 				try {
@@ -69,11 +67,11 @@ public class SimpleOperation implements Operation {
 				if (result != null) {
 					if (OperationStep.NEXT.equals(result.getGoToStep())) {
 						step = getNextStep(step.getName());
-					} else if (OperationStep.RETURN.equals(result)
-							|| OperationStep.ERROR.equals(result)) {
+					} else if (OperationStep.RETURN.equals(result.getGoToStep())
+							|| OperationStep.ERROR.equals(result.getGoToStep())) {
 						step = null;
 					} else {
-						step = getStep(step.getRuleMap().get(result));
+						step = getStep(result.getGoToStep());
 					}
 				}
 			}
@@ -82,7 +80,6 @@ public class SimpleOperation implements Operation {
 		} catch (Exception e) {
 			throw new CapException(e, getClass());
 		} finally {
-			SimpleContextHolder.resetContext();
 			logger.debug("Operation cost : {} ms",
 					(System.currentTimeMillis() - startOperation));
 		}

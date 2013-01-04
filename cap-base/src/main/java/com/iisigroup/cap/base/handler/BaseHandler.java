@@ -1,21 +1,15 @@
 package com.iisigroup.cap.base.handler;
 
-import java.util.Locale;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.mvc.i18n.MessageBundleScriptCreator;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -43,39 +37,15 @@ public class BaseHandler extends MFormHandler {
 	 * @return IResult
 	 * @throws CapException
 	 */
-	public IResult fileSuccess(IRequest params) throws CapException {
+	public IResult fileSuccess(IRequest params) {
 		return new AjaxFormResult();
 	}
 
 	@HandlerType(HandlerTypeEnum.FORM)
-	public IResult queryJsI18N(IRequest request) throws CapException {
-		Properties prop = new Properties();
-		AjaxFormResult result = new AjaxFormResult();
-		Locale locale = null;
-		try {
-			locale = CapSecurityContext.getLocale();
-			if (locale == null) {
-				locale = Locale.getDefault();
-			}
-		} catch (Exception e) {
-			locale = Locale.getDefault();
-		}
-		String i18nFile = null;
-		try {
-			i18nFile = new StringBuffer("classpath:/i18n/")
-					.append(request.get("f").replaceAll("/?webroot/page", ""))
-					.append("_").append(locale.toString())
-					.append(".properties").toString();
-			prop.load(CapAppContext.getApplicationContext()
-					.getResource(i18nFile).getInputStream());
-			for (Entry<Object, Object> entry : prop.entrySet()) {
-				result.set((String) entry.getKey(), (String) entry.getValue());
-			}
-		} catch (Exception e) {
-			logger.error("can't load " + i18nFile, e);
-			// throw new CapException(e, getClass());
-		}
-		return result;
+	public IResult queryJsI18N(IRequest request) {
+		String result = MessageBundleScriptCreator.generateJson(request
+				.get("f").replaceAll("/?webroot/page", ""));
+		return new AjaxFormResult(result);
 	}// ;
 
 }

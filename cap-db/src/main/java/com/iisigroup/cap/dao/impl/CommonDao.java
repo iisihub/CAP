@@ -21,6 +21,9 @@ import com.iisigroup.cap.model.IDataObject;
  * CommonDao
  * </pre>
  * 
+ * @param <T>
+ *            T
+ * 
  * @since 2012/9/21
  * @author iristu
  * @version <ul>
@@ -43,8 +46,8 @@ public class CommonDao<T extends IDataObject> extends GenericDao<IDataObject>
 
 	@SuppressWarnings("hiding")
 	@Override
-	public <T> T findByOid(Class<T> clazz, String oid) {
-		return getEntityManager().find(clazz, oid);
+	public <T> T findById(Class<T> clazz, String id) {
+		return getEntityManager().find(clazz, id);
 	}
 
 }

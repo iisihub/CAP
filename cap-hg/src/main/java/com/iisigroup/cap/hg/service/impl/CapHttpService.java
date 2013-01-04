@@ -104,7 +104,7 @@ public class CapHttpService extends AbstractHGservice {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getReceiveData() throws CapException {
+	public String getReceiveData() {
 		return responseData;
 	}
 
@@ -114,7 +114,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * @see com.iisi.cap.hg.service.IHGService#setSendMessage(java.lang.Object)
 	 */
 	@Override
-	public void setSendData(Object data) throws CapException {
+	public void setSendData(Object data) {
 		this.sendData = data;
 	}
 
@@ -240,7 +240,7 @@ public class CapHttpService extends AbstractHGservice {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void initConnection() throws CapException {
+	public void initConnection() {
 		httpPost = new HttpPost();
 		try {
 			if (this.sendData instanceof Map) {

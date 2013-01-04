@@ -115,6 +115,8 @@ public interface IRequest extends Map<String, Object>, Serializable {
 
 	String[] getParamsAsStringArray(String key);
 
+	String getParamsArrayAsString(String key);
+
 	<T> T getFile(String key);
 
 	<T> List<T> getFiles(String key);

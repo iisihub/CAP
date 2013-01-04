@@ -11,8 +11,6 @@
  */
 package com.iisigroup.cap.hg.bean;
 
-import com.iisigroup.cap.exception.CapException;
-
 /**
  * <pre>
  * HG TXN Bean
@@ -30,7 +28,7 @@ public interface IHGTxnBean {
 
 	void setSendData(Object requestData);
 
-	void execute() throws CapException;
+	void execute();
 
 	Object getResultData();
 }

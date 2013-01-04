@@ -11,10 +11,10 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		</entry>
 		<entry key="paging.sourceSql">
 			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() OVER() AS ROWNUM from (
-	${sourceSQL} ) source ) rows where ROWNUM > :startRow and ROWNUM <= :endRow]]></value>
+	@{['sourceSQL']} ) source ) rows where ROWNUM > :startRow and ROWNUM <= :endRow]]></value>
 		</entry>
 		<entry key="paging.totalPage">
-			<value><![CDATA[select count(1) as TOTAL from (${sourceSQL}) rows]]></value>
+			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
 		</entry>
 	</util:map>
 

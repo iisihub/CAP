@@ -22,6 +22,10 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.ParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
 /**
@@ -83,8 +87,7 @@ public class CapDbUtil {
 	 *            the parameters
 	 * @return String
 	 */
-	public static String convertToSQLCommand(String cmd,
-			Map<String, Object> data) {
+	public static String convertToSQLCommand(String cmd, Map<String, ?> data) {
 		String sql = NamedParameterUtils.parseSqlStatementIntoString(cmd);
 		if (data == null || data.isEmpty())
 			return cmd;
@@ -111,10 +114,16 @@ public class CapDbUtil {
 	 * 
 	 * String pattern = "An ${key1} a day keeps the ${key2} away!"; Map<String,
 	 * Map<String, Object> params = {key1=Apple,key2=doctor} new
-	 * StrMessageFormatter(String unformatMsg).reformat(params) ;
 	 * 
 	 * return An Apple a day keep the doctor away!
+	 * 
+	 * @param pattern
+	 *            string
+	 * @param params
+	 *            參數
+	 * @return String
 	 */
+	@Deprecated
 	public static String messageFormat(String pattern,
 			Map<String, Object> params) {
 		final StringBuffer buffer = new StringBuffer();
@@ -125,7 +134,7 @@ public class CapDbUtil {
 		while ((start = pattern.indexOf("${", pos)) != -1) {
 			buffer.append(pattern.substring(pos, start));
 			if (pattern.charAt(start + 1) == '$') {
-				buffer.append("$");
+				buffer.append('$');
 				pos = start + 2;
 				continue;
 			}
@@ -150,6 +159,26 @@ public class CapDbUtil {
 		return buffer.toString();
 	}// ;
 
+	/**
+	 * use Spring Expression Language (SpEL) parse
+	 * 
+	 * @param expressionStr
+	 *            expression string
+	 * @param params
+	 *            parameters
+	 * @param parserContext
+	 *            parserContext
+	 * @return String
+	 */
+	public static String spelParser(String expressionStr,
+			Map<String, Object> params, ParserContext parserContext) {
+		StandardEvaluationContext context = new StandardEvaluationContext(
+				params);
+		ExpressionParser spel = new SpelExpressionParser();
+		return spel.parseExpression(expressionStr, parserContext).getValue(
+				context, String.class);
+	}// ;
+
 	@SuppressWarnings("rawtypes")
 	protected static String getSqlValue(Object o) {
 		String rtn = null;
@@ -158,7 +187,8 @@ public class CapDbUtil {
 		} else {
 			if (o instanceof String) {
 				rtn = (String) o;
-			} else if (o instanceof Number || o instanceof BigDecimal) {
+			} else if (o instanceof Number || o instanceof BigDecimal
+					|| o instanceof StringBuffer) {
 				rtn = o.toString();
 			} else if (o instanceof Timestamp) {
 				rtn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSS")

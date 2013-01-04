@@ -18,7 +18,6 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
@@ -41,13 +40,12 @@ import com.iisigroup.cap.security.model.CapUserDetails;
 public class CapUserAuthenticationProvider extends DaoAuthenticationProvider {
 
 	SessionRegistry sessionRegistry;
-	
+
 	MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
-			UsernamePasswordAuthenticationToken authentication)
-			throws AuthenticationException {
+			UsernamePasswordAuthenticationToken authentication) {
 		CapUserDetails user = (CapUserDetails) userDetails;
 		if (!user.isEnabled()) {
 			// 使用者停用中，不得登入
@@ -68,7 +66,7 @@ public class CapUserAuthenticationProvider extends DaoAuthenticationProvider {
 	public void setSessionRegistry(SessionRegistry sessionRegistry) {
 		this.sessionRegistry = sessionRegistry;
 	}
-	
+
 	public void setMessageSource(MessageSource messageSource) {
 		this.messages = new MessageSourceAccessor(messageSource);
 	}

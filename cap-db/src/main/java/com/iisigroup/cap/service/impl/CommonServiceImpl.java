@@ -51,12 +51,12 @@ public class CommonServiceImpl implements ICommonService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.iisigroup.cap.service.ICommonService#findByOid(java.lang.Class,
+	 * @see com.iisigroup.cap.service.ICommonService#findById(java.lang.Class,
 	 * java.lang.String)
 	 */
 	@Override
-	public <T> T findByOid(Class<T> clazz, String oid) {
-		return commonDao.findByOid(clazz, oid);
+	public <T> T findById(Class<T> clazz, String id) {
+		return commonDao.findById(clazz, id);
 	}
 
 	@Override
@@ -77,6 +77,11 @@ public class CommonServiceImpl implements ICommonService {
 	@Override
 	public void delete(List<?> models) {
 		commonDao.delete(models);
+	}
+
+	@Override
+	public <T> List<T> list(Class<T> clazz) {
+		return commonDao.find(clazz, commonDao.createSearchTemplete());
 	}
 
 }

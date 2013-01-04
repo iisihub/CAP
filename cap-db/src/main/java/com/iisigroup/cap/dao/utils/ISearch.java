@@ -27,7 +27,6 @@ import java.util.Map;
  *          <li>2011/3/28,iristu,new
  *          <li>2011/6/10,RodesChen, add method
  *          </ul>
- * @param <T>
  */
 public interface ISearch extends Serializable {
 
@@ -86,6 +85,7 @@ public interface ISearch extends Serializable {
 	 * 設定查詢的筆數
 	 * 
 	 * @param maxResults
+	 *            查詢筆數
 	 * @return T extends ISearch
 	 */
 	ISearch setMaxResults(int maxResults);
@@ -96,6 +96,7 @@ public interface ISearch extends Serializable {
 	 * 設定查詢的頁碼
 	 * 
 	 * @param firstResult
+	 *            查詢的頁碼
 	 * @return T extends ISearch
 	 */
 	ISearch setFirstResult(int firstResult);

@@ -1,4 +1,4 @@
-/**
+/*
  * IFormatter.java
  *
  * Copyright (c) 2009 International Integrated System, Inc.
@@ -9,18 +9,16 @@
  *
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
-*/
+ */
 package com.iisigroup.cap.formatter;
 
 import java.io.Serializable;
-
-import com.iisigroup.cap.exception.CapFormatException;
-
 
 /**
  * <p>
  * reformat 欄位值
  * </p>
+ * 
  * @author iristu
  * @version <ul>
  *          <li>2010/1/8,iristu,new
@@ -28,16 +26,17 @@ import com.iisigroup.cap.exception.CapFormatException;
  *          </ul>
  */
 public interface IFormatter extends Serializable {
-	
+
 	/**
 	 * 重新format傳入的值
 	 * 
-	 * @param <T> type
-	 * @param in the input
-	 * @return String 
+	 * @param <T>
+	 *            type
+	 * @param in
+	 *            the input
+	 * @return String
 	 * @throws CapFormatException
 	 */
-	public <T> T reformat(Object in) throws CapFormatException;
-	
-}
+	public <T> T reformat(Object in);
 
+}

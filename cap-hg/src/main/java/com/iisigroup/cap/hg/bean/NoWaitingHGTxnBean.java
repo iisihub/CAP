@@ -1,5 +1,5 @@
 /* 
- * MCIHGTxnNoWattingBean.java
+ * NoWaitingHGTxnBean.java
  * 
  * Copyright (c) 2009-2011 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -19,7 +19,7 @@ import com.iisigroup.cap.hg.event.IHGEventAction;
 
 /**
  * <pre>
- * MCIHGTxnNoWatting Bean
+ * NoWaitingHGTxnBean
  * </pre>
  * 
  * @since 2012/2/24
@@ -50,7 +50,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * before action
 	 * 
 	 */
-	public void beforeAction() throws CapException {
+	public void beforeAction() {
 		if (beforeAction != null) {
 			beforeAction.excute(this);
 		}
@@ -62,7 +62,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * @param resultData
 	 *            resultData
 	 */
-	public void afterAction(Object resultData) throws CapException {
+	public void afterAction(Object resultData) {
 		if (afterAction != null) {
 			afterAction.excute(resultData);
 		}
@@ -84,7 +84,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
 	 */
 	@Override
-	public void execute() throws CapException {
+	public void execute() {
 		beforeAction();
 		new excuteThread().start();
 	}

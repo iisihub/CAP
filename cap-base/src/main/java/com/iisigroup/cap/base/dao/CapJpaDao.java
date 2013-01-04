@@ -15,18 +15,22 @@ import javax.persistence.EntityManager;
 
 import com.iisigroup.cap.dao.impl.GenericDao;
 
-/**<pre>
+/**
+ * <pre>
  * CapJpaDao
  * </pre>
- * @since  2012/9/19
+ * 
+ * @since 2012/9/19
  * @author iristu
  * @version <ul>
- *           <li>2012/9/19,iristu,new
+ *          <li>2012/9/19,iristu,new
  *          </ul>
+ * @param <T>
+ *            bean
  */
 public class CapJpaDao<T> extends GenericDao<T> {
-	
-//	@PersistenceContext(unitName = "pu-cap")
+
+	// @PersistenceContext(unitName = "pu-cap")
 	private EntityManager entityManager;
 
 	@Override
@@ -37,7 +41,5 @@ public class CapJpaDao<T> extends GenericDao<T> {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
-	
 
 }

@@ -46,7 +46,6 @@ import org.springframework.util.Assert;
 public class ConditionsUnanimousBased implements AccessDecisionManager,
 		InitializingBean, MessageSourceAware {
 
-	@SuppressWarnings("rawtypes")
 	private Map<String, AccessDecisionVoter> conditionVoters;
 
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource
@@ -61,10 +60,10 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 	 *            使用者登入資訊
 	 * @param object
 	 *            FilterInvocation
-	 * @param config
+	 * @param configAttributes
 	 *            ConfigAttributeDefinition
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public void decide(Authentication authentication, Object object,
 			Collection<ConfigAttribute> configAttributes) {
@@ -135,12 +134,10 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 		return true;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public Map<String, AccessDecisionVoter> getConditionVoters() {
 		return conditionVoters;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void setConditionVoters(
 			Map<String, AccessDecisionVoter> conditionVoters) {
 		this.conditionVoters = conditionVoters;

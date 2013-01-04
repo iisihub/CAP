@@ -13,8 +13,6 @@ package com.iisigroup.cap.formatter;
 
 import java.util.Map;
 
-import com.iisigroup.cap.exception.CapFormatException;
-
 /**
  * <pre>
  * Stirng Formattter
@@ -49,7 +47,7 @@ public class StrMessageFormatter implements IFormatter {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public String reformat(Object in) throws CapFormatException {
+	public String reformat(Object in) {
 		final Map<String, Object> params = (Map<String, Object>) in;
 		final StringBuffer buffer = new StringBuffer();
 		// For each occurrences of "${"
@@ -59,7 +57,7 @@ public class StrMessageFormatter implements IFormatter {
 		while ((start = unformatMsg.indexOf("${", pos)) != -1) {
 			buffer.append(unformatMsg.substring(pos, start));
 			if (unformatMsg.charAt(start + 1) == '$') {
-				buffer.append("$");
+				buffer.append('$');
 				pos = start + 2;
 				continue;
 			}

@@ -64,6 +64,31 @@
             
         },
         /**
+         * 自動設定寬度
+         * @param {integer} maxWidth 寬度
+         * @param {boolean} fitColumn 是否自動調整欄寬
+         */
+        iGridFitSize: function(maxWidth, fitColumn){
+            var self = this.closest(".ui-jqgrid"), $this = $(this);
+            if (!$this.is(":visible")) 
+                return;
+            if (typeof maxWidth == 'boolean') {
+                maxWidth = 0;
+                // fitColumn = maxWidth;
+            }
+            //fitColumn = !!fitColumn;
+            $this.each(function(){
+                if (this.p.autowidth) {
+                    maxWidth = maxWidth || self.parent().width();
+                    maxWidth = (maxWidth > 960) ? 960 : maxWidth
+                }
+                else {
+                    maxWidth = maxWidth || this.p.freezeWidth;
+                }
+                $this.setGridWidth((maxWidth * 98) / 100, fitColumn == undefined ? this.p.forceFit : fitColumn);// ? this.p.forceFit : !(self.width() > maxWidth)); //);
+            });
+        },
+        /**
          * Grid hide (extend jQuery hide)
          * @param {integer} speed
          * @param {function} callback

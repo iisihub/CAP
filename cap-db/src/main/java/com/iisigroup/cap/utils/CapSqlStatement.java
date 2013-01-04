@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.expression.ParserContext;
+
 /**
  * <pre>
  * CapSqlStatement
@@ -29,6 +31,8 @@ import java.util.Map;
 public class CapSqlStatement {
 
 	final Map<String, Object> parameter;
+	
+	ParserContext parserContext;
 
 	public CapSqlStatement(Map<String, Object> map) {
 		this.parameter = map;
@@ -66,5 +70,14 @@ public class CapSqlStatement {
 	public boolean containsKey(String key) {
 		return parameter.containsKey(key);
 	}
+
+	public ParserContext getParserContext() {
+		return parserContext;
+	}
+
+	public void setParserContext(ParserContext parserContext) {
+		this.parserContext = parserContext;
+	}
+	
 
 }// ~

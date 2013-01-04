@@ -13,9 +13,7 @@
 package com.iisigroup.cap.action;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.response.IResult;
-
 
 /**
  * <p>
@@ -30,6 +28,6 @@ import com.iisigroup.cap.response.IResult;
  */
 public interface IAction {
 
-	IResult doWork(IRequest params) throws CapException;
+	IResult doWork(IRequest params);
 
 }

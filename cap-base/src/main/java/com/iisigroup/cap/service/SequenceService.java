@@ -11,6 +11,10 @@
  */
 package com.iisigroup.cap.service;
 
+import java.util.Map;
+
+import com.iisigroup.cap.model.Page;
+
 /**
  * <pre>
  * 流水號產生器
@@ -24,10 +28,12 @@ package com.iisigroup.cap.service;
  */
 public interface SequenceService {
 
+	Page<Map<String, Object>> findPage(int start, int fetch);
+
 	/**
 	 * 取得序號
 	 * 
-	 * @param nodeName
+	 * @param seqNode
 	 *            序號key值
 	 * @param interval
 	 *            序號區間值
@@ -37,6 +43,6 @@ public interface SequenceService {
 	 *            最大序號
 	 * @return next seq
 	 */
-	int getNextSeqNo(String nodeName, int interval, int startSeq, int maxSeq);
+	int getNextSeqNo(String seqNode, int interval, int startSeq, int maxSeq);
 
 }

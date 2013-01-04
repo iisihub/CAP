@@ -1,11 +1,20 @@
+/* 
+ * SysParm.java
+ * 
+ * Copyright (c) 2009-2012 International Integrated System, Inc. 
+ * All Rights Reserved.
+ * 
+ * Licensed Materials - Property of International Integrated System, Inc.
+ * 
+ * This software is confidential and proprietary information of 
+ * International Integrated System, Inc. (&quot;Confidential Information&quot;).
+ */
 package com.iisigroup.cap.base.model;
 
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -21,50 +30,35 @@ import com.iisigroup.cap.model.IDataObject;
  * @author iristu
  * @version <ul>
  *          <li>2010/9/6,iristu,new
- *          <li>2011/12/28,rodeschen,copy from cap
  *          </ul>
  */
 @SuppressWarnings("serial")
-//@Entity
-//@Table(name = "SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parm"))
+@Entity
+@Table(name = "CFG_SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parmId"))
 public class SysParm extends GenericBean implements IDataObject {
 
-	@Id
-//	@GeneratedValue(generator = "strategy-uuid")
-//	@GenericGenerator(name = "strategy-uuid", strategy = "uuid")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-hex")
-	@Column(length = 32)
-	private String oid;
 	/** 參數id */
+	@Id
 	@Column(length = 30, nullable = false)
-	private String parm;
+	private String parmId;
 	/** 參數數值 */
-	@Column(length = 10, nullable = false)
+	@Column(length = 300, nullable = false)
 	private String parmValue;
 	/** 參數描述 */
-	@Column(length = 100)
+	@Column(length = 300)
 	private String parmDesc;
 	/** 修改操作者 */
-	@Column(length = 10, nullable = false)
-	private String lastModBy;
+	@Column(length = 10)
+	private String updater;
 	/** 修改時間 */
-	@Column(nullable = false)
-	private Timestamp lastModTm;
+	private Timestamp updateTime;
 
-	public String getOid() {
-		return oid;
+	public String getParmId() {
+		return parmId;
 	}
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
-
-	public String getParm() {
-		return parm;
-	}
-
-	public void setParm(String parm) {
-		this.parm = parm;
+	public void setParmId(String parmId) {
+		this.parmId = parmId;
 	}
 
 	public String getParmValue() {
@@ -83,20 +77,31 @@ public class SysParm extends GenericBean implements IDataObject {
 		this.parmDesc = parmDesc;
 	}
 
-	public String getLastModBy() {
-		return lastModBy;
+
+	public String getUpdater() {
+		return updater;
 	}
 
-	public void setLastModBy(String lastModBy) {
-		this.lastModBy = lastModBy;
+	public void setUpdater(String updater) {
+		this.updater = updater;
 	}
 
-	public Timestamp getLastModTm() {
-		return lastModTm;
+	public Timestamp getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setLastModTm(Timestamp lastModTm) {
-		this.lastModTm = lastModTm;
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	@Override
+	public String getOid() {
+		return this.parmId;
+	}
+
+	@Override
+	public void setOid(String oid) {
+		this.parmId = oid;
 	}
 
 }

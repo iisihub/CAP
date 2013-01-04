@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.iisigroup.cap.utils.CapString;
+
 /**
  * <pre>
  * default CapRequest
@@ -188,6 +190,12 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 		} else {
 			return new String[0];
 		}
+	}
+
+	@Override
+	public String getParamsArrayAsString(String key) {
+		String[] ary = getParamsAsStringArray(key);
+		return CapString.array2String(ary);
 	}
 
 	/*

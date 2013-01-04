@@ -29,7 +29,6 @@ import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
@@ -82,11 +81,19 @@ public class CodeTypeHandler extends MFormHandler {
 		if (!search.hasOrderBy()) {
 			search.addOrderBy("codeType");
 			search.addOrderBy("codeOrder");
+		} else {
+			Map<String, Boolean> m = search.getOrderBy();
+			if (!m.containsKey("codeType")) {
+				search.addOrderBy("codeType");
+			}
+			if (!m.containsKey("codeOrder")) {
+				search.addOrderBy("codeOrder");
+			}
 		}
 		Page<CodeType> page = commonService.findPage(CodeType.class, search);
 		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		fmt.put("lastModifyTime", new ADDateFormatter());
-		return new GridResult(page.getContent(), page.getTotalRow(),fmt);
+		fmt.put("updateTime", new ADDateFormatter());
+		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
 	}// ;
 
 	/**
@@ -96,7 +103,7 @@ public class CodeTypeHandler extends MFormHandler {
 	 *            request
 	 * @return IResult
 	 */
-	public IResult modify(IRequest request) throws CapException {
+	public IResult modify(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		String type = request.get("type");
 		String locale = CapSecurityContext.getLocale().toString();
@@ -123,8 +130,8 @@ public class CodeTypeHandler extends MFormHandler {
 		if ("A".equals(type)) {
 			code.setOid(null);
 		}
-		code.setLastModifyBy(CapSecurityContext.getUserId());
-		code.setLastModifyTime(CapDate.getCurrentTimestamp());
+		code.setUpdater(CapSecurityContext.getUserId());
+		code.setUpdateTime(CapDate.getCurrentTimestamp());
 		codeTypeService.saveCodeType(code);
 		return result;
 	}

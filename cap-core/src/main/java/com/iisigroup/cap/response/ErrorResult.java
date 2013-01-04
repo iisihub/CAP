@@ -10,19 +10,23 @@
  */
 package com.iisigroup.cap.response;
 
+import java.util.Locale;
+
 import javax.servlet.ServletResponse;
 
-import org.apache.commons.lang.CharEncoding;
-
 import net.sf.json.JSONObject;
+
+import org.apache.commons.lang.CharEncoding;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapClosePageException;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.exception.CapSessioniExpireException;
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <pre>
@@ -78,22 +82,28 @@ public class ErrorResult implements IErrorResult {
 			CapMessageException ce = (CapMessageException) e;
 			logMessage = ce.getMessage();
 			if (!CapString.isEmpty(ce.getMessageKey())) {
-				logMessage = CapAppContext.getMessage(ce.getMessageKey());
+				logMessage = ce.getMessageKey();
 			}
+			logMessage = formatMessage(request, logMessage,
+					ce.getExtraInformation());
 			errorMessage.put(AJAX_MESSAGE_HANDLER_EXCEPTION, logMessage);
 		} else if (e instanceof CapClosePageException) {
 			CapClosePageException ce = (CapClosePageException) e;
 			logMessage = ce.getMessage();
 			if (!CapString.isEmpty(ce.getMessageKey())) {
-				logMessage = CapAppContext.getMessage(ce.getMessageKey());
+				logMessage = ce.getMessageKey();
 			}
+			logMessage = formatMessage(request, logMessage,
+					ce.getExtraInformation());
 			errorMessage.put(AJAX_CLOSE_PAGE_HANDLER_EXCEPTION, logMessage);
 		} else if (e instanceof CapSessioniExpireException) {
 			CapSessioniExpireException ce = (CapSessioniExpireException) e;
 			logMessage = ce.getMessage();
 			if (!CapString.isEmpty(ce.getMessageKey())) {
-				logMessage = CapAppContext.getMessage(ce.getMessageKey());
+				logMessage = ce.getMessageKey();
 			}
+			logMessage = formatMessage(request, logMessage,
+					ce.getExtraInformation());
 			errorMessage.put(AJAX_SESSION_EXPIRE_EXCEPTION, logMessage);
 		} else if (e instanceof CapException) {
 			CapException ce = (CapException) e;
@@ -146,5 +156,33 @@ public class ErrorResult implements IErrorResult {
 		new StringResponse(getContextType(), getEncoding(), getResult())
 				.respond(response);
 	}// ;
+
+	public Locale getLocale(IRequest request) {
+		return (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
+
+	}// ;
+
+	/**
+	 * 格式化訊息
+	 * 
+	 * @param component
+	 *            {@link org.apache.wicket.Component}
+	 * @param msgKey
+	 *            錯誤訊息
+	 * @param extraInfo
+	 *            其它資訊
+	 * @return 錯誤訊息
+	 */
+	protected String formatMessage(IRequest request, String msgKey,
+			Object extraInfo) {
+		Locale locale = getLocale(request);
+		if (extraInfo != null) {
+			return CapAppContext.getMessage(msgKey, (Object[]) extraInfo,
+					locale);
+		} else {
+			return CapAppContext.getMessage(msgKey, locale);
+		}
+
+	}
 
 }

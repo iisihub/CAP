@@ -1,5 +1,5 @@
 /* 
- * HGservice.java
+ * AbstractHGservice.java
  * 
  * Copyright (c) 2009-2011 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -20,24 +20,29 @@ import org.slf4j.LoggerFactory;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.hg.service.IHGService;
 
-/**<pre>
+/**
+ * <pre>
  * HGService
  * </pre>
- * @since  2011/12/12
+ * 
+ * @since 2011/12/12
  * @author rodeschen
  * @version <ul>
- *           <li>2011/12/12,rodeschen,new
+ *          <li>2011/12/12,rodeschen,new
  *          </ul>
  */
 public abstract class AbstractHGservice implements IHGService {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	private Map<String, Object> properties;
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.iisi.cap.hg.service.IHGService#setProperties(java.util.Map)
 	 */
 	@Override
-	public void setProperties(Map<String, Object> property) throws CapException {
+	public void setProperties(Map<String, Object> property) {
 		if (property == null) {
 			throw new CapException("http property error", getClass());
 		}
@@ -48,8 +53,11 @@ public abstract class AbstractHGservice implements IHGService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.iisi.cap.hg.service.IHGService#setProperty(java.lang.String, java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.iisi.cap.hg.service.IHGService#setProperty(java.lang.String,
+	 * java.lang.Object)
 	 */
 	@Override
 	public void setProperty(String name, Object value) {
@@ -60,12 +68,14 @@ public abstract class AbstractHGservice implements IHGService {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.iisi.cap.hg.service.IHGService#getProperties(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getProperty(Object name) throws CapException {
+	public <T> T getProperty(Object name) {
 		return (T) (properties != null && properties.containsKey(name) ? properties
 				.get(name) : null);
 	}

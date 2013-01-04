@@ -1,5 +1,5 @@
 /*
- * CapPluginManager.java 2009/9/9 上午 04:34:00
+ * PluginManager.java 
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
@@ -54,8 +54,7 @@ public class PluginManager implements InitializingBean {
 	 * @throws CapPlugInNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getPlugin(String plugInBeanName)
-			throws CapPlugInNotFoundException {
+	public <T> T getPlugin(String plugInBeanName) {
 		T plugin = null;
 
 		long start = System.currentTimeMillis();

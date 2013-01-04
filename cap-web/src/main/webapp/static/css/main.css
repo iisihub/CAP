@@ -2599,8 +2599,8 @@ body {
 .mainBody {
   margin: auto;
   width: 950px;
-  /*background-color: #FFF;*/
-  background-image: url("webroot/static/images/body_bg.jpg");
+  background-color: #FFF;
+  /*background-image: url("webroot/static/images/body_bg.jpg");*/
   background-repeat: no-repeat;
   background-position: center top;
   position: relative;
@@ -2694,16 +2694,25 @@ fieldset.row .row-tr .row-td.c2 {
   padding-right: 2px;
 }
 
+.lang {
+	background-image: url("../images/icon-right.png");
+}
+
 /** menu **/
 nav.top {
   position: relative;
   font-size: 14px;
   font-weight: bold;
+  background: none repeat scroll 0 0 #C2C2C2;
+  height: 37px;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
 }
 nav ul {
   margin: 0px;
   padding: 0px;
-  float: left;
+  float: right;
 }
 nav.top ul {
   margin: auto;
@@ -2715,32 +2724,39 @@ nav.top ul.block {
 }
 nav.top ul.navmenu {
   position: absolute;
-  right: 0px;
+  /*right: 0px;*/
 }
 nav.top ul.navmenu li {
-  background-image: url("webroot/static/images/first_menu_up_bg.png");
   float: left;
-  position: relative;
-  border-right: #CCC 1px solid;
-  line-height: 35px;
-  min-width: 95px;
+  margin-right: 2px;
+  text-align: center;
+  width: 161px;
 }
 nav.top ul.navmenu li a {
-  padding: 0px;
-  margin: 0px;
+  background: none repeat scroll 0 0 #6F6F6F;
+  border: 1px solid #656565;
+  color: #FFFFFF;
   display: block;
-  text-decoration: none;
+  font-size: 15px;
+  height: 15px;
+  letter-spacing: 2px;
+  margin-top: 3px;
+  padding: 5px 0 9px;
   text-align: center;
-  color: #777;
-  /*最外面字体颜色*/
+  text-decoration: none;
 }
 nav.top ul.navmenu li a:hover {
-  color: #005CA1;
+  background: none repeat scroll 0 0 #C90915;
+  border-color: #B90000;
+  text-decoration: none;
 }
 nav.top ul.navmenu li a.select {
-  font-size: 1.1em;
-  color: #005CA1;
-  /*上面字体背景颜色*/
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: medium none;
+  color: #000000;
+  font-weight: bold;
+  margin-top: 0;
+  padding: 9px 1px 13px;
 }
 nav.top ul.navmenu li ul {
   display: none;
@@ -2797,17 +2813,100 @@ nav.top ul.navmenu li:hover ul li a {
 
 /*左下DIV设置*/
 nav.sub {
+  background: url("../images/sidebar-bg.png") no-repeat scroll right top transparent;
   width: 180px;
-  height: 450px;
+  min-height: 180px;
+  height: 400px;
   float: left;
   left: 0px;
+  overflow: hidden;
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+nav.sub ol {
+    border-top: 1px solid #D5D5D5;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+nav.sub li {
+    background: none repeat scroll 0 0 #C90915;
+    border-bottom: 1px solid #D5D5D5;
+    padding-left: 4px;
+}
+nav.sub li a {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #717171;
+    display: block;
+    padding: 9px 10px;
+    text-decoration: none;
+}
+nav.sub li a:hover, nav.sub li a.selected {
+    background: none repeat scroll 0 0 #C90915;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+nav.sub li a.selected {
+    background: none repeat scroll 0 0 #454545;
+    color: #FFFFFF;
+    margin-left: -4px;
+    padding-left: 14px;
+}
+nav.sub ul {
+    background: none repeat scroll 0 0 #454545;
+    border-bottom: 2px solid #454545;
+    display: none;
+    list-style: none outside none;
+    margin: 0 0 0 -4px;
+    padding: 0 0 0 4px;
+}
+nav.sub ul li {
+    background: none repeat scroll 0 0 #DDDDDD;
+    border-bottom: 1px dotted #ADADAD;
+    padding: 0 0 0 4px;
+}
+nav.sub ul li.last {
+    border-bottom: medium none;
+}
+nav.sub ul li a {
+    background: none repeat scroll 0 0 #F4F4F4;
+    color: #454545;
+    display: block;
+    padding: 9px 0 9px 10px;
+}
+nav.sub ul li a:hover {
+    background: none repeat scroll 0 0 #DDDDDD;
+    color: #000000;
+}
+nav.sub ul li a.selected {
+    background: none repeat scroll 0 0 #717171;
+    color: #FFFFFF;
+}
+nav.sub ul ul {
+    background: none repeat scroll 0 0 #717171;
+    padding-right: 4px;
+}
+nav.sub ul ul li {
+}
+nav.sub ul ul li a {
+    line-height: 1.45em;
+    margin-right: -4px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+nav.sub ul ul li a:hover {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #C90915;
+    margin-left: -4px;
 }
 
-/*右边的DIV*/
+/*content*/
 article {
   width: 740px;
   float: left;
   padding-left: 10px;
+  border-left: 1px solid #D5D5D5;
+  min-height: 440px;
 }
 
 .main {
@@ -2818,10 +2917,80 @@ article {
 
 header {
   width: 100%;
-  height: 50px;
+  height: 70px;
 }
 header div {
   padding-top: 15px;
+}
+header .logo {
+    left: 20px;
+    position: absolute;
+}
+.bg-left, .bg-right {
+    height: 460px;
+    position: absolute;
+    top: 0;
+    width: 10px;
+}
+.bg-left {
+    background: url("../images/bg-left.png") no-repeat scroll right top transparent;
+    left: -10px;
+}
+.bg-right {
+    background: url("../images/bg-right.png") no-repeat scroll left top transparent;
+    right: -10px;
+}
+header li a:hover {
+    color: #CC0000;
+    text-decoration: none;
+}
+header ol, header ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+header ol {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #DDDDDD;
+    height: 18px;
+    overflow: hidden;
+    padding-left: 8px;
+    position: absolute;
+    right: 20px;
+    top: 8px;
+    width: 100px;
+    z-index: 999;
+}
+header ol li {
+    font-size: 11px;
+    padding: 5px 0;
+}
+header ol li a {
+    color: #000000;
+}
+header ol li.lang {
+    background: url("../images/icon-right.png") no-repeat scroll 83px center transparent;
+    font-weight: 900;
+    margin-bottom: 6px;
+    padding: 2px 0;
+}
+header ol li.lang a {
+    color: #6E6E6E;
+}
+header ul {
+    padding-top: 68px;
+}
+header ul li {
+    background: url("../images/icon-head.png") no-repeat scroll right center transparent;
+    float: right;
+    padding-right: 19px;
+}
+header ul li.last {
+    background: none repeat scroll 0 0 transparent;
+    padding: 0;
+}
+header ul li a {
+    color: #434343;
 }
 
 /* footer */
@@ -2887,7 +3056,7 @@ footer {
 
 /** button **/
 .btn1, .ui-dialog-buttonset .ui-button {
-  background: url("webroot/static/images/button001.jpg") scroll center center no-repeat !important;
+  background: url("webroot/static/images/sprite.png") repeat-x scroll 0 0 transparent !important;;
 }
 
 .btn1.ui-button-text-only .ui-button-text, .ui-dialog-buttonset button.ui-button-text-only .ui-button-text {
@@ -2896,9 +3065,10 @@ footer {
 }
 
 .btn1.ui-button, .ui-dialog-buttonset button.ui-button {
-  width: 65px;
-  height: 24px;
+  min-width: 65px;
+  min-height: 25px;
   line-height: 24px;
+  padding:4px 8px;
   display: inline-block;
   vertical-align: middle;
   text-align: center;
@@ -2929,4 +3099,7 @@ footer {
 .errorDialogCss .ui-dialog-titlebar {
   background: #CC0000;
   border: 1px solid #E3A1A1;
+}
+.text-red {
+	color:red
 }

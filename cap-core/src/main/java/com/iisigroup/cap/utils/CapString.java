@@ -37,7 +37,8 @@ import com.iisigroup.cap.Constants;
  */
 public class CapString {
 
-	public final static char[] hexChar = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+	public final static char[] hexChar = { '0', '1', '2', '3', '4', '5', '6',
+			'7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
 	/**
 	 * 將byte陣列轉為十六進位字串 如{0x01, 0x02} => 0102 (Move from
@@ -142,7 +143,8 @@ public class CapString {
 	 *            the append character. 填滿的字元.
 	 * @return the output string. 輸出加長後字串.
 	 */
-	public static String fillString(String in, int length, boolean rightAlign, char ch) {
+	public static String fillString(String in, int length, boolean rightAlign,
+			char ch) {
 
 		StringBuffer sb = new StringBuffer();
 		if (in == null) {
@@ -152,7 +154,8 @@ public class CapString {
 		if (inLength >= length) {
 			return in;
 		} else {
-			int loopLength = ch < 256 ? length - inLength : (length - inLength) / 2;
+			int loopLength = ch < 256 ? length - inLength
+					: (length - inLength) / 2;
 			for (int i = 0; i < loopLength; i++) {
 				sb.append(ch);
 			}
@@ -181,7 +184,8 @@ public class CapString {
 	 *            the input string charset.
 	 * @return the output string. 輸出加長後字串.
 	 */
-	public static String fillString(String rStr, int length, boolean rightAlign, String ch, String charset) {
+	public static String fillString(String rStr, int length,
+			boolean rightAlign, String ch, String charset) {
 		if (rStr == null) {
 			rStr = Constants.EMPTY_STRING;
 		}
@@ -198,9 +202,11 @@ public class CapString {
 			if (rStr.getBytes(charset).length > length) {
 				if (rightAlign) {
 					int index = rStr.getBytes(charset).length - length;
-					rStr = new String(rStr.getBytes(charset), index, length, charset);
+					rStr = new String(rStr.getBytes(charset), index, length,
+							charset);
 				} else {
-					rStr = new String(rStr.getBytes(charset), 0, length, charset);
+					rStr = new String(rStr.getBytes(charset), 0, length,
+							charset);
 				}
 
 			}
@@ -453,10 +459,14 @@ public class CapString {
 	 */
 	public static String array2String(String[] ary) {
 		StringBuffer sb = new StringBuffer();
-		for (String s : ary) {
-			sb.append(s).append(',');
+		if (ary != null && ary.length > 0) {
+			for (String s : ary) {
+				sb.append(s).append(',');
+			}
+			if (sb.length() > 1) {
+				sb.deleteCharAt(sb.length() - 1);
+			}
 		}
-		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 	}// ;
 

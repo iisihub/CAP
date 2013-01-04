@@ -2,7 +2,6 @@ package com.iisigroup.cap.hg.service;
 
 import java.util.Map;
 
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.hg.enums.ConnStatusEnum;
 
 /**
@@ -26,7 +25,7 @@ public interface IHGService {
 	 * 
 	 * @throws CapException
 	 */
-	void setProperties(Map<String, Object> property) throws CapException;
+	void setProperties(Map<String, Object> property);
 
 	/**
 	 * set property
@@ -49,14 +48,14 @@ public interface IHGService {
 	 * @throws CapException
 	 * @return <T>
 	 */
-	<T> T getProperty(Object name) throws CapException;
+	<T> T getProperty(Object name);
 
 	/**
 	 * initial connection
 	 * 
 	 * @throws CapException
 	 */
-	void initConnection() throws CapException;
+	void initConnection();
 
 	/**
 	 * get hg status
@@ -82,7 +81,7 @@ public interface IHGService {
 	 *            stauts
 	 * @return <T>
 	 */
-	<T> T getReceiveData() throws CapException;
+	<T> T getReceiveData();
 
 	/**
 	 * set send data
@@ -91,7 +90,7 @@ public interface IHGService {
 	 *            data
 	 * @throws CapException
 	 */
-	void setSendData(Object data) throws CapException;
+	void setSendData(Object data);
 
 	/**
 	 * execute connect

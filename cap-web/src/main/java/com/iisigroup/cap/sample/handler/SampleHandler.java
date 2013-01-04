@@ -27,7 +27,6 @@ import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.ByteArrayDownloadResult;
@@ -52,7 +51,7 @@ public class SampleHandler extends MFormHandler {
 			.getLogger(SampleHandler.class);
 
 	@HandlerType(HandlerTypeEnum.FileUpload)
-	public IResult upload(IRequest request) throws CapException {
+	public IResult upload(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		// String str = request.get("testStr");
 		MultipartFile f = request.getFile("ufile");
@@ -68,7 +67,7 @@ public class SampleHandler extends MFormHandler {
 	}// ;
 
 	@HandlerType(HandlerTypeEnum.FileDownload)
-	public IResult dwnload(IRequest request) throws CapException {
+	public IResult dwnload(IRequest request) {
 		//String outputName = request.get("fileName", "CapLog.log");
 		File file = new File("logs/CapLog.log");
 		FileInputStream is = null;

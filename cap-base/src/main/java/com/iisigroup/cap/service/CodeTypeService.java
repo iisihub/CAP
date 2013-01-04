@@ -53,6 +53,8 @@ public interface CodeTypeService {
 	 * 
 	 * @param types
 	 *            types
+	 * @param locale
+	 *            語系
 	 * @return Map<String, Map<String,String>>
 	 */
 	Map<String, Map<String, String>> findByCodeTypes(String[] types,
@@ -63,6 +65,8 @@ public interface CodeTypeService {
 	 * 
 	 * @param types
 	 *            type keys
+	 * @param locale
+	 *            語系
 	 * @return Map<String, CapAjaxFormResult>
 	 */
 	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types, String locale);
@@ -73,7 +77,7 @@ public interface CodeTypeService {
 	 * @param type
 	 *            typeName
 	 * @param value
-	 *            value
+	 *            value * @param locale 語系
 	 * @return CodeType
 	 */
 	CodeType getByCodeTypeAndValue(String type, String value, String locale);

@@ -65,7 +65,7 @@ public class GenericBean {
 	 * @throws CapException
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T set(String field, Object value) throws CapException {
+	public <T> T set(String field, Object value) {
 		if (CapString.isEmpty(field)) {
 			return (T) this;
 		}
@@ -97,7 +97,7 @@ public class GenericBean {
 	 *            欄位名稱
 	 * @return Object
 	 */
-	public Object get(String fieldId) throws CapException {
+	public Object get(String fieldId) {
 		if (CapString.isEmpty(fieldId)) {
 			throw new CapException("field [" + fieldId + "] is empty!!",
 					getClass());
@@ -152,7 +152,7 @@ public class GenericBean {
 	 * @return String JsonString
 	 */
 	public String toJSONString(String[] columns,
-			Map<String, IFormatter> reformat) throws CapException {
+			Map<String, IFormatter> reformat) {
 		JSONArray row = new JSONArray();
 		for (String str : columns) {
 			Object val = null;
@@ -194,7 +194,7 @@ public class GenericBean {
 	 * @return String JsonString
 	 */
 	public JSONObject toJSONObject(String[] columns,
-			Map<String, IFormatter> reformat) throws CapException {
+			Map<String, IFormatter> reformat) {
 		JSONObject json = new JSONObject();
 		if (columns == null) {
 			Field[] cols = CapBeanUtil.getField(this.getClass(), true);// this.getClass().getDeclaredFields();

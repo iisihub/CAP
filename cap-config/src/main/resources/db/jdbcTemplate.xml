@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 	<import resource="classpath:sql/h2template.xml" />
 	<import resource="classpath:sql/userDefineSQL.xml" />
+	
+	<bean id="sqlParserContext" class="org.springframework.expression.common.TemplateParserContext" >
+		<constructor-arg index="0" value="@{" />
+		<constructor-arg index="1" value="}" />
+	</bean>
 
 	<bean id="capJdbcTemplate" class="com.iisigroup.cap.jdbc.CapNamedJdbcTemplate">
 		<property name="dataSource" ref="cap-db" />
 		<property name="sqltemp">
 			<bean class="com.iisigroup.cap.utils.CapSqlStatement">
 				<constructor-arg index="0" ref="h2template" />
+				<property name="parserContext" ref="sqlParserContext" />
 			</bean>
 		</property>
 		<property name="sqlProvider" ref="userSqlStatement" />
 	</bean>
+	
+	<bean id="capJdbcTxManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="cap-db" />
+	</bean>
+
+	<tx:advice id="capJdbcTxAdvice" transaction-manager="capJdbcTxManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- all methods below are read-only -->
+			<tx:method name="list*" read-only="true" propagation="NOT_SUPPORTED" />
+			<tx:method name="find*" read-only="true" propagation="NOT_SUPPORTED" />
+			<tx:method name="get*" read-only="true" propagation="NOT_SUPPORTED" />
+			<tx:method name="getNew*" propagation="REQUIRES_NEW" />
+			<tx:method name="saveSeq" timeout="180000" rollback-for="Throwable"
+				propagation="REQUIRES_NEW" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" timeout="180000" rollback-for="Throwable"
+				propagation="REQUIRED" />
+			<!-- timeout in millisecond -->
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="capJdbcServiceOperation"
+			expression="execution(* com..jdbc.impl.*(..)) and !@annotation(com.iisigroup.cap.annotation.NonTransactional)"  />
+		<aop:advisor advice-ref="capJdbcTxAdvice" pointcut-ref="capJdbcServiceOperation" />
+	</aop:config>
+	
 
 </beans>

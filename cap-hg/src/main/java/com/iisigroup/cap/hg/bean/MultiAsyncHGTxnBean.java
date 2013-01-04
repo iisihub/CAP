@@ -57,7 +57,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
 	 */
 	@Override
-	public void execute() throws CapException {
+	public void execute() {
 		List<IHGService> rService = new ArrayList<IHGService>();
 		List<IHGService> nrService = new ArrayList<IHGService>();
 		IHGService ts;
@@ -76,7 +76,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 				}
 				nrService.add(ts);
 			}
-			//ts.setProperty(MCIConstants.TXNCD, getTxnCd());
+			// ts.setProperty(MCIConstants.TXNCD, getTxnCd());
 			ts.setSendData(getSendData());
 			ts.initConnection();
 			try {
@@ -94,14 +94,16 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 		for (ActionBean s : services) {
 			ts = s.getService();
 			if (s.getResponseAction() != null) {
-				resultData = s.getResponseAction().margeResponse(resultData, ts.getReceiveData());
+				resultData = s.getResponseAction().margeResponse(resultData,
+						ts.getReceiveData());
 			} else if (resultData == null) {
 				resultData = ts.getReceiveData();
 			}
 		}
 	}
 
-	private void executeService(long startTime, List<IHGService> service, int timeout) throws CapException {
+	private void executeService(long startTime, List<IHGService> service,
+			int timeout) {
 		IHGService s;
 		while (true) {
 			for (int i = service.size() - 1; i >= 0; i--) {
@@ -110,7 +112,8 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 					service.remove(s);
 				}
 			}
-			if (service.isEmpty() || System.currentTimeMillis() - startTime >= timeout) {
+			if (service.isEmpty()
+					|| System.currentTimeMillis() - startTime >= timeout) {
 				for (IHGService s2 : service) {
 					s2.setStatus(ConnStatusEnum.TIMEOUT);
 					logger.error(s2.getClass().getName() + " status: timeout");

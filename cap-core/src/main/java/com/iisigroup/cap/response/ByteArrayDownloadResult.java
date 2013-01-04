@@ -1,5 +1,5 @@
 /* 
- * CapByteDownloadResult.java
+ * ByteArrayDownloadResult.java
  * 
  * Copyright (c) 2009-2011 International Integrated System, Inc. 
  * All Rights Reserved.

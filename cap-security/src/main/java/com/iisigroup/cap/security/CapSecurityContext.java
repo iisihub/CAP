@@ -63,7 +63,8 @@ public class CapSecurityContext {
 	 * </pre>
 	 * 
 	 * @param <T>
-	 * @return
+	 *            T extends IUser
+	 * @return IUser
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends IUser> T getUser() {

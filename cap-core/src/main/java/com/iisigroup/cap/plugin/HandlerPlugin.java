@@ -1,5 +1,5 @@
 /*
- * AjaxHandlerPlugin.java
+ * HandlerPlugin.java
  *  
  * Copyright (c) 2009-2011 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.IHandler;
 import com.iisigroup.cap.response.IResult;
 
@@ -44,7 +43,7 @@ public abstract class HandlerPlugin implements IPlugin, IHandler {
 	 *            Client 參數
 	 * @return String
 	 */
-	public abstract IResult execute(IRequest params) throws CapException;
+	public abstract IResult execute(IRequest params) ;
 
 	IRequest request;
 

@@ -114,8 +114,9 @@ public class CapException extends RuntimeException {
 		return extraInformation;
 	}
 
-	public void setExtraInformation(Object extraInformation) {
+	public CapException setExtraInformation(Object extraInformation) {
 		this.extraInformation = extraInformation;
+		return this;
 	}
 
 }

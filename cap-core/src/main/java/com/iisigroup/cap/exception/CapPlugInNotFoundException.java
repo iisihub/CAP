@@ -39,8 +39,6 @@ public class CapPlugInNotFoundException extends CapException {
 	 *            the plugin id
 	 * @param pluginName
 	 *            the plugin name
-	 * @param version
-	 *            the version
 	 */
 	public CapPlugInNotFoundException(String pluginId, String pluginName) {
 		this.pluginId = pluginId;

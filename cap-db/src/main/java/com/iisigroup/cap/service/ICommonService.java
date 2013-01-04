@@ -30,8 +30,10 @@ import com.iisigroup.cap.model.Page;
 public interface ICommonService {
 
 	<T> Page<T> findPage(Class<T> clazz, ISearch search);
+	
+	<T> List<T> list(Class<T> clazz);
 
-	<T> T findByOid(Class<T> clazz, String oid);
+	<T> T findById(Class<T> clazz, String id);
 
 	<T> void save(T model);
 

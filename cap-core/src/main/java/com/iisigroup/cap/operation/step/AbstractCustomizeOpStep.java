@@ -21,9 +21,6 @@
  */
 package com.iisigroup.cap.operation.step;
 
-import java.util.Map;
-
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.OperationStep;
 
@@ -42,8 +39,6 @@ public abstract class AbstractCustomizeOpStep implements OperationStep {
 
 	String name;
 
-	Map<String, String> ruleMap;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -56,20 +51,10 @@ public abstract class AbstractCustomizeOpStep implements OperationStep {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tw.com.iisi.cap.flow.OperationStep#getRuleMap()
-	 */
-	public Map<String, String> getRuleMap() {
-		return ruleMap;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tw.com.iisi.cap.flow.OperationStep#handleException(java.lang.Exception)
 	 */
-	public OpStepContext handleException(OpStepContext ctx, Exception e)
-			throws CapException {
+	public OpStepContext handleException(OpStepContext ctx, Exception e) {
 		ctx.setGoToStep(ERROR);
 		return ctx;
 	}
@@ -81,15 +66,6 @@ public abstract class AbstractCustomizeOpStep implements OperationStep {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.OperationStep#setRuleMap(java.util.Map)
-	 */
-	public void setRuleMap(Map<String, String> ruleMap) {
-		this.ruleMap = ruleMap;
 	}
 
 }

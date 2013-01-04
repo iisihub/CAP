@@ -118,7 +118,7 @@ public class CapPermissionVoter extends RoleVoter {
 					if (q.startsWith("x=") || q.startsWith("jsessionid=")) {
 						continue;
 					} else {
-						newQueryString.append(q).append("&");
+						newQueryString.append(q).append('&');
 					}
 				}
 				if (newQueryString.length() > 0) {

@@ -1,5 +1,5 @@
 /*
- * CapAjaxFormResult.java
+ * AjaxFormResult.java
  *
  * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
@@ -191,7 +191,8 @@ public class AjaxFormResult implements IResult {
 	 * 比對是否存在此key
 	 * 
 	 * @param key
-	 * @return
+	 *            key
+	 * @return boolean
 	 */
 	public boolean containsKey(String key) {
 		return resultMap.containsKey(key);

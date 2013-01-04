@@ -13,7 +13,7 @@ package com.iisigroup.cap.contants;
 
 /**
  * <pre>
- * TODO Write a short description on the purpose of the program
+ * CapJdbcContants
  * </pre>
  * 
  * @since 2012/9/19
@@ -31,5 +31,14 @@ public interface CapJdbcContants {
 	final String SQLPaging_TotalPage = "paging.totalPage";
 	
 	final String SQLPaging_SourceSQL="sourceSQL";
+	
+	final static String EMPTY_STRING = "";
+
+	/**
+	 * a space string.
+	 */
+	final static String SPACE = " ";
+	
+	void nothing();
 
 }

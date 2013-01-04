@@ -15,39 +15,37 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
-
 
 /**
  * <pre>
  * Common Handler
  * </pre>
- * @since  2011/3/22
+ * 
+ * @since 2011/3/22
  * @author RodesChen
  * @version <ul>
- *           <li>2011/3/22,RodesChen,new
+ *          <li>2011/3/22,RodesChen,new
  *          </ul>
  */
 @Scope("request")
 @Controller("commonformhandler")
 public class CapCommonFormHandler extends MFormHandler {
 
-
 	/**
 	 * <pre>
 	 * 檔案作業完成後以防IE status bar 不停止
 	 * </pre>
-	 * @param params PageParameters
+	 * 
+	 * @param params
+	 *            PageParameters
 	 * @return IResult
 	 * @throws CapException
 	 */
-	public IResult fileSuccess(IRequest params)
-			throws CapException {
+	public IResult fileSuccess(IRequest params) {
 		return new AjaxFormResult();
 	}
-
 
 	/**
 	 * <pre>
@@ -60,12 +58,15 @@ public class CapCommonFormHandler extends MFormHandler {
 		return "simpleOperation";
 	}
 
-
-	/* (non-Javadoc)
-	 * @see tw.com.iisi.cap.plugin.CapHandlerPlugin#execute(tw.com.iisi.cap.component.ICapRequest)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tw.com.iisi.cap.plugin.CapHandlerPlugin#execute(tw.com.iisi.cap.component
+	 * .ICapRequest)
 	 */
 	@Override
-	public IResult execute(IRequest request) throws CapException {
+	public IResult execute(IRequest request) {
 		return null;
 	}
 

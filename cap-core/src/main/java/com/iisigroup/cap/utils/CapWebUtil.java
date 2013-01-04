@@ -33,18 +33,21 @@ import com.iisigroup.cap.component.IRequest;
  *          </ul>
  */
 public class CapWebUtil {
+	
+	public static final String localeKey = "localeKey";
 
 	/**
 	 * 下載檔名中文依IE及FireFox做區分
 	 * 
-	 * @param req
+	 * @param request
 	 *            HttpServletRequest
 	 * @param fileName
 	 *            前端要顯示的檔案名稱
 	 * @return String
 	 */
 	public static String encodeFileName(IRequest request, String fileName) {
-		HttpServletRequest req = (HttpServletRequest) request.getServletRequest();
+		HttpServletRequest req = (HttpServletRequest) request
+				.getServletRequest();
 		try {
 			fileName = URLDecoder.decode(fileName, "utf-8");
 			String agent = req.getHeader("USER-AGENT");
@@ -63,6 +66,6 @@ public class CapWebUtil {
 		} catch (UnsupportedEncodingException e) {
 			return fileName;
 		}
-	}
+	}// ;
 
 }

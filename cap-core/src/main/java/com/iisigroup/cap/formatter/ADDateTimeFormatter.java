@@ -16,8 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.iisigroup.cap.Constants;
-import com.iisigroup.cap.exception.CapFormatException;
-
 
 /**
  * <pre>
@@ -36,34 +34,34 @@ import com.iisigroup.cap.exception.CapFormatException;
 @SuppressWarnings("serial")
 public class ADDateTimeFormatter implements IFormatter {
 
-    private SimpleDateFormat _df;
-    
-    String DEF_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	private SimpleDateFormat _df;
 
-    public ADDateTimeFormatter() {
-        _df = new SimpleDateFormat(DEF_PATTERN);
-    }
+	String DEF_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    public ADDateTimeFormatter(String pattern) {
-        _df = new SimpleDateFormat(pattern);
-    }
+	public ADDateTimeFormatter() {
+		_df = new SimpleDateFormat(DEF_PATTERN);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
-     */
-    @SuppressWarnings("unchecked")
-	public String reformat(Object in) throws CapFormatException {
-    	if (in == null){
+	public ADDateTimeFormatter(String pattern) {
+		_df = new SimpleDateFormat(pattern);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	public String reformat(Object in) {
+		if (in == null) {
 			return Constants.EMPTY_STRING;
 		}
-    	if (in instanceof Calendar) {
-            in = ((Calendar) in).getTime();
-        }else if (in instanceof String){
+		if (in instanceof Calendar) {
+			in = ((Calendar) in).getTime();
+		} else if (in instanceof String) {
 			return (String) in;
-        }
-        return _df.format(in);
-    }
+		}
+		return _df.format(in);
+	}
 
 }

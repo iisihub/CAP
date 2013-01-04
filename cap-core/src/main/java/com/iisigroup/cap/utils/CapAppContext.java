@@ -2,9 +2,14 @@ package com.iisigroup.cap.utils;
 
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.core.io.Resource;
+
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 
 /**
  * <pre>
@@ -15,9 +20,11 @@ import org.springframework.core.io.Resource;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/11/4,rodeschen,new
+ *          <li>2012/12/19,rodeschen,catch NoSuchMessageException
  *          </ul>
  */
 public class CapAppContext implements ApplicationContextAware {
+	protected static Log logger = LogFactory.getLog(CapAppContext.class);
 
 	@Override
 	public void setApplicationContext(ApplicationContext ctx) {
@@ -32,7 +39,8 @@ public class CapAppContext implements ApplicationContextAware {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName) {
-		return (T) (applicationContext.containsBean(beanName) ? applicationContext.getBean(beanName) : null);
+		return (T) (applicationContext.containsBean(beanName) ? applicationContext
+				.getBean(beanName) : null);
 	}
 
 	public static Resource getResource(String path) {
@@ -40,21 +48,18 @@ public class CapAppContext implements ApplicationContextAware {
 		return resource;
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <T> T getBean(String beanName, Class<Object> c) {
+	public static <T> T getBean(String beanName, Class<T> c) {
 		return (T) applicationContext.getBean(beanName, c);
 	}
 
 	public static String getMessage(String key) {
-//		IUser user = CapSecurityContext.getUser();
-//		return getMessage(key, null, user == null ? Locale.getDefault() : user.getLocale());
-		return null;
+		Locale locale = (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
+		return getMessage(key, null, locale == null ? Locale.getDefault() : locale);
 	}
 
 	public static String getMessage(String key, Object[] args) {
-//		IUser user = SecurityContext.getUser();
-//		return getMessage(key, args, user == null ? Locale.getDefault() : user.getLocale());
-		return null;
+		Locale locale = (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
+		return getMessage(key, args, locale == null ? Locale.getDefault() : locale);
 	}
 
 	public static String getMessage(String key, Locale locale) {
@@ -62,7 +67,13 @@ public class CapAppContext implements ApplicationContextAware {
 	}
 
 	public static String getMessage(String key, Object[] args, Locale locale) {
-		return applicationContext.getMessage(key, args, locale);
+		try {
+			return applicationContext.getMessage(key, args, locale);
+		} catch (NoSuchMessageException e) {
+			logger.warn("can't find message key:" + key);
+			return key;
+		}
+
 	}
 
 }

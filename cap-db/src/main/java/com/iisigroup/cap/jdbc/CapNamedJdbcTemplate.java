@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.SqlParameter;
@@ -35,10 +36,14 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.iisigroup.cap.contants.CapJdbcContants;
+import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.exception.CapDBException;
+import com.iisigroup.cap.jdbc.support.CapColumnMapRowMapper;
+import com.iisigroup.cap.jdbc.support.CapRowMapperResultSetExtractor;
+import com.iisigroup.cap.jdbc.support.CapSqlSearchQueryProvider;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.utils.CapSqlStatement;
 import com.iisigroup.cap.utils.CapDbUtil;
+import com.iisigroup.cap.utils.CapSqlStatement;
 
 /**
  * <pre>
@@ -86,6 +91,30 @@ public class CapNamedJdbcTemplate {
 		// this.logger = LoggerFactory.getLogger(clazz);
 	}
 
+	public void query(String sqlId, Map<String, Object> args,
+			RowCallbackHandler rch) {
+		StringBuffer sql = new StringBuffer(
+				(String) sqlp.getValue(sqlId, sqlId));
+		sql.append(' ').append(
+				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("SqlId=")
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
+					.append("\n\t")
+					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
+					.toString());
+		}
+		long cur = System.currentTimeMillis();
+		try {
+			namedjdbc.query(sql.toString(), args, rch);
+		} catch (Exception e) {
+			throw new CapDBException(e, causeClass);
+		} finally {
+			logger.info("CapNamedJdbcTemplate spend {} ms",
+					(System.currentTimeMillis() - cur));
+		}
+	}// ;
+
 	/**
 	 * 查詢
 	 * 
@@ -111,13 +140,13 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		if (appendDynamicSql != null) {
-			sql.append(" ").append(appendDynamicSql);
+			sql.append(' ').append(appendDynamicSql);
 		}
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -138,6 +167,8 @@ public class CapNamedJdbcTemplate {
 	/**
 	 * 查詢，查詢結果為List<Map<key, value>>
 	 * 
+	 * @param <T>
+	 *            bean
 	 * @param sqlId
 	 *            sqlId
 	 * @param appendDynamicSql
@@ -146,6 +177,7 @@ public class CapNamedJdbcTemplate {
 	 *            傳入參數
 	 * @param rm
 	 *            RowMapper
+	 * 
 	 * @return List<T>
 	 */
 	public <T> List<T> query(String sqlId, String appendDynamicSql,
@@ -153,13 +185,13 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		if (appendDynamicSql != null) {
-			sql.append(" ").append(appendDynamicSql);
+			sql.append(' ').append(appendDynamicSql);
 		}
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -257,11 +289,11 @@ public class CapNamedJdbcTemplate {
 	public int queryForInt(String sqlId, Map<String, Object> args) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -307,9 +339,9 @@ public class CapNamedJdbcTemplate {
 		String sql = sqlp.getValue(sqlId, sqlId);
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
-					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
+					.append(CapDbUtil.convertToSQLCommand(sql, args))
 					.toString());
 		}
 		long cur = System.currentTimeMillis();
@@ -345,12 +377,12 @@ public class CapNamedJdbcTemplate {
 					}
 					if (logger.isTraceEnabled()) {
 						logger.trace(new StringBuffer("SqlId=")
-								.append(sqlId)
+								.append(sqlp.containsKey(sqlId) ? sqlId : "")
 								.append("\n#")
 								.append((i + 1))
 								.append("\t")
-								.append(CapDbUtil.convertToSQLCommand(
-										sql.toString(), valueMap)).toString());
+								.append(CapDbUtil.convertToSQLCommand(sql,
+										valueMap)).toString());
 					}
 				}
 				cur = System.currentTimeMillis();
@@ -426,20 +458,20 @@ public class CapNamedJdbcTemplate {
 	 * wrapper SqlRowSet queryForRowSet(String sql, Object[] args) from
 	 * org.springframework.jdbc.core.JdbcTemplate
 	 * 
-	 * @param sql
+	 * @param sqlId
+	 *            sqlId
 	 * @param args
-	 * @param argTypes
-	 * @return
-	 * @throws GWException
+	 *            參數
+	 * @return SqlRowSet
 	 */
 	public SqlRowSet queryForRowSet(String sqlId, Map<String, Object> args) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
-					.append(sqlId)
+					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
 					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
 					.toString());
@@ -460,21 +492,21 @@ public class CapNamedJdbcTemplate {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(CapJdbcContants.SQLPaging_SourceSQL,
 				sqlp.getValue(sqlId, sqlId));
-		StringBuffer sql = new StringBuffer().append(CapDbUtil.messageFormat(
+		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
-				params));
-		sql.append(" ").append(
+				params, sqltemp.getParserContext()));
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
-		if (logger.isTraceEnabled()) {
-			logger.trace(new StringBuffer("\n\t").append(
-					CapDbUtil.convertToSQLCommand(sql.toString(), args))
-					.toString());
-		}
 		if (args == null) {
 			args = new HashMap<String, Object>();
 		}
 		args.put("startRow", startRow);
 		args.put("endRow", startRow + fetchSize);
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("\n\t").append(
+					CapDbUtil.convertToSQLCommand(sql.toString(), args))
+					.toString());
+		}
 		long cur = System.currentTimeMillis();
 		try {
 			return namedjdbc.queryForList(sql.toString(), args);
@@ -491,10 +523,10 @@ public class CapNamedJdbcTemplate {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(CapJdbcContants.SQLPaging_SourceSQL,
 				sqlp.getValue(sqlId, sqlId));
-		StringBuffer sql = new StringBuffer().append(CapDbUtil.messageFormat(
+		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
-				params));
-		sql.append(" ").append(
+				params, sqlp.getParserContext()));
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("\n\t").append(
@@ -508,6 +540,105 @@ public class CapNamedJdbcTemplate {
 		try {
 			return new Page<Map<String, Object>>(list, namedjdbc.queryForInt(
 					sql.toString(), args), fetchSize, startRow);
+		} catch (Exception e) {
+			throw new CapDBException(e, causeClass);
+		} finally {
+			logger.info("CapNamedJdbcTemplate spend {} ms",
+					(System.currentTimeMillis() - cur));
+		}
+	}// ;
+
+	public Page<Map<String, Object>> queryForPage(String sqlId, ISearch search) {
+		CapSqlSearchQueryProvider provider = new CapSqlSearchQueryProvider(
+				search);
+		String _sql = sqlp.getValue(sqlId, sqlId);
+		StringBuffer sourceSql = new StringBuffer(_sql).append(
+				_sql.toUpperCase().lastIndexOf("WHERE") > 0 ? " AND "
+						: " WHERE ").append(provider.generateWhereCause());
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(CapJdbcContants.SQLPaging_SourceSQL, sourceSql.toString());
+		// 準備查詢筆數sql
+		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
+				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
+				params, sqlp.getParserContext()));
+		sql.append(' ').append(
+				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("\n\t").append(
+					CapDbUtil.convertToSQLCommand(sql.toString(),
+							provider.getParams())).toString());
+		}
+		String sqlRow = sql.toString();
+		// 準備查詢list sql
+		sourceSql.append(provider.generateOrderCause());
+		params.put(CapJdbcContants.SQLPaging_SourceSQL, sourceSql.toString());
+		sql = new StringBuffer().append(CapDbUtil.spelParser(
+				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
+				params, sqlp.getParserContext()));
+		sql.append(' ').append(
+				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("\n\t").append(
+					CapDbUtil.convertToSQLCommand(sql.toString(),
+							provider.getParams())).toString());
+		}
+		long cur = System.currentTimeMillis();
+		try {
+			int totalRows = namedjdbc.queryForInt(sqlRow, provider.getParams());
+			List<Map<String, Object>> list = namedjdbc.queryForList(
+					sql.toString(), provider.getParams());
+			return new Page<Map<String, Object>>(list, totalRows,
+					search.getMaxResults(), search.getFirstResult());
+		} catch (Exception e) {
+			throw new CapDBException(e, causeClass);
+		} finally {
+			logger.info("CapNamedJdbcTemplate spend {} ms",
+					(System.currentTimeMillis() - cur));
+		}
+	}// ;
+
+	public <T> Page<T> queryForPage(String sqlId, ISearch search,
+			RowMapper<T> rm) {
+		CapSqlSearchQueryProvider provider = new CapSqlSearchQueryProvider(
+				search);
+		String _sql = sqlp.getValue(sqlId, sqlId);
+		StringBuffer sourceSql = new StringBuffer(_sql).append(
+				_sql.toUpperCase().lastIndexOf("WHERE") > 0 ? " AND "
+						: " WHERE ").append(provider.generateWhereCause());
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(CapJdbcContants.SQLPaging_SourceSQL, sourceSql.toString());
+		// 準備查詢筆數sql
+		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
+				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
+				params, sqlp.getParserContext()));
+		sql.append(' ').append(
+				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("\n\t").append(
+					CapDbUtil.convertToSQLCommand(sql.toString(),
+							provider.getParams())).toString());
+		}
+		String sqlRow = sql.toString();
+		// 準備查詢list sql
+		sourceSql.append(provider.generateOrderCause());
+		params.put(CapJdbcContants.SQLPaging_SourceSQL, sourceSql.toString());
+		sql = new StringBuffer().append(CapDbUtil.spelParser(
+				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
+				params, sqlp.getParserContext()));
+		sql.append(' ').append(
+				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (logger.isTraceEnabled()) {
+			logger.trace(new StringBuffer("\n\t").append(
+					CapDbUtil.convertToSQLCommand(sql.toString(),
+							provider.getParams())).toString());
+		}
+		long cur = System.currentTimeMillis();
+		try {
+			int totalRows = namedjdbc.queryForInt(sqlRow, provider.getParams());
+			List<T> list = namedjdbc.query(sql.toString(),
+					provider.getParams(), rm);
+			return new Page<T>(list, totalRows, search.getMaxResults(),
+					search.getFirstResult());
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
 		} finally {
