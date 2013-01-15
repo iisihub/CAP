@@ -29,6 +29,7 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
  *          <li>2010/11/2,iristu,new
  *          </ul>
  */
+@SuppressWarnings("deprecation")
 public class CapAuthenticationEntryPoint extends
 		LoginUrlAuthenticationEntryPoint {
 

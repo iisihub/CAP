@@ -35,7 +35,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class CapUserDetails implements UserDetails, IUser {
+public class CapUserDetails implements UserDetails {
 
 	private String password;
 	private String userId;
@@ -77,7 +77,7 @@ public class CapUserDetails implements UserDetails, IUser {
 	}
 
 	public String getUsername() {
-		return userId;
+		return userName;
 	}
 
 	public boolean isAccountNonExpired() {
@@ -112,37 +112,18 @@ public class CapUserDetails implements UserDetails, IUser {
 		this.roles = roles;
 	}
 
-	@Override
 	public String getUserId() {
 		return userId;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisi.cap.security.model.IUser#getUserName()
-	 */
-	@Override
 	public String getUserName() {
 		return userName;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisi.cap.security.model.IUser#getUnitNo()
-	 */
-	@Override
 	public String getUnitNo() {
 		return unitNo;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisi.cap.security.model.IUser#getLocale()
-	 */
-	@Override
 	public Locale getLocale() {
 		return locale;
 	}
