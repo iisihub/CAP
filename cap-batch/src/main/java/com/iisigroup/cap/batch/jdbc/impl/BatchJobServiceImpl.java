@@ -24,8 +24,6 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameter.ParameterType;
 import org.springframework.batch.core.JobParameters;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
 import com.iisigroup.cap.batch.model.BatchJob;
@@ -36,6 +34,7 @@ import com.iisigroup.cap.batch.support.BatchScheduleRowMapper;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapSystemConfig;
 
@@ -56,9 +55,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 
 	@Resource
 	private CapSystemConfig config;
-
-	public final ResourceLoader resourceLoader = new DefaultResourceLoader(
-			getClass().getClassLoader());
 
 	public void setJdbc(CapNamedJdbcTemplate jdbc) {
 		this.jdbc = jdbc;
@@ -84,7 +80,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 
 	@Override
 	public org.springframework.core.io.Resource getJobResource(BatchJob job) {
-		return resourceLoader.getResource(new StringBuffer(config.getProperty(
+		return CapAppContext.getResource(new StringBuffer(config.getProperty(
 				"batch.jobsroot", "")).append(job.getJobResource()).toString());
 	}
 
@@ -227,7 +223,5 @@ public class BatchJobServiceImpl implements BatchJobService {
 		map.put("executor", executor);
 		jdbc.update("jobExecution.updateById", map);
 	}
-	
-	
 
 }// ~

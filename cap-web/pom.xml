@@ -84,24 +84,26 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
 		</dependency>
+		<!-- provided：在編譯和測試的過程有效,在最後生成war時不加入 
+			 runtime：在運行的時候依賴,在編譯的時候不依賴-->
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-			<scope>runtime</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2.2</version>
-			<scope>runtime</scope>
+			<scope>provided</scope>
 		</dependency>
 		<!-- H2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.3.153</version>
-			<scope>runtime</scope>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>

@@ -16,15 +16,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.MapUtils;
 import org.quartz.SchedulerException;
 import org.springframework.batch.admin.service.JobService;
-import org.springframework.batch.admin.web.JobExecutionInfo;
-import org.springframework.batch.admin.web.JobInfo;
 import org.springframework.batch.admin.web.JobParametersExtractor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -43,8 +40,6 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -206,7 +201,7 @@ public class BatchHandler extends MFormHandler {
 	}// ;
 
 	/**
-	 * 手動執行
+	 * 取得JOB最後一次執行的JobParameters
 	 * 
 	 * @param request
 	 *            request
@@ -242,7 +237,6 @@ public class BatchHandler extends MFormHandler {
 			try {
 				JobExecution jobExecution = jobService.launch(jobName,
 						jobParameters);
-				// new JobExecutionInfo(jobExecution, TimeZone.getDefault());
 				batchSrv.updateExecution(jobExecution.getId(),
 						CapSecurityContext.getUserId());
 			} catch (NoSuchJobException e) {
@@ -303,12 +297,10 @@ public class BatchHandler extends MFormHandler {
 		BatchSchedule newSch = new BatchSchedule();
 		boolean isnew = (oldSch == null);
 		if (!isnew) {
-			CapBeanUtil.copyBean(oldSch, newSch,
-					CapBeanUtil.getFieldName(BatchSchedule.class, true));
+			CapBeanUtil.copyBean(oldSch, newSch);
 		}
-		CapBeanUtil.map2Bean(request, newSch, BatchSchedule.class);
-		newSch.setNotifyStatus(CapString.array2String(request
-				.getParamsAsStringArray("notifyStatus")));
+		CapBeanUtil.map2Bean(request, newSch);
+		newSch.setNotifyStatus(request.getParamsArrayAsString("notifyStatus"));
 		if (!"C".equals(newSch.getSchType())) {
 			newSch.setCronExpression(null);
 			newSch.setTimeZoneId(null);
@@ -422,17 +414,11 @@ public class BatchHandler extends MFormHandler {
 		long jobExecutionId = Long.parseLong(request.get("jobExeId"));
 		try {
 			JobExecution jobExecution = jobService.stop(jobExecutionId);
-			new JobExecutionInfo(jobExecution, TimeZone.getDefault());
+			batchSrv.updateExecution(jobExecution.getId(),
+					CapSecurityContext.getUserId());
 		} catch (NoSuchJobExecutionException e) {
 			throw new CapMessageException("msg.job.noSuchJob", getClass());
 		} catch (JobExecutionNotRunningException e) {
-			JobExecution jobExecution;
-			try {
-				jobExecution = jobService.getJobExecution(jobExecutionId);
-				new JobExecutionInfo(jobExecution, TimeZone.getDefault());
-			} catch (NoSuchJobExecutionException e1) {
-				// safe
-			}
 			throw new CapMessageException("msg.job.noRunnigJob", getClass())
 					.setExtraInformation(new Object[] { jobExecutionId });
 		}
@@ -452,17 +438,10 @@ public class BatchHandler extends MFormHandler {
 			long jobInstanceId = Long.parseLong(request.get("jobInsId"));
 			Collection<JobExecution> jobExecutions = jobService
 					.getJobExecutionsForJobInstance(jobName, jobInstanceId);
-			new JobInfo(jobName, jobExecutions.size() + 1);
 			JobExecution jobExecution = jobExecutions.iterator().next();
-			new JobExecutionInfo(jobExecution, TimeZone.getDefault());
-
 			Long jobExecutionId = jobExecution.getId();
-
 			try {
-
 				jobExecution = jobService.restart(jobExecutionId);
-				new JobExecutionInfo(jobExecution, TimeZone.getDefault());
-
 			} catch (NoSuchJobExecutionException e) {
 				throw new CapMessageException("msg.job.noSuchJob", getClass());
 			} catch (JobExecutionAlreadyRunningException e) {
@@ -521,14 +500,11 @@ public class BatchHandler extends MFormHandler {
 		return applicationContextFactory.createApplicationContext();
 	}
 
-	public final ResourceLoader resourceLoader = new DefaultResourceLoader(
-			getClass().getClassLoader());
-
 	private void checkFileExist(BatchJob job) {
 		String location = config.getProperty("batch.jobsroot", "")
 				+ job.getJobResource();
 		try {
-			org.springframework.core.io.Resource f = resourceLoader
+			org.springframework.core.io.Resource f = CapAppContext
 					.getResource(location);
 			if (f == null || !f.exists()) {
 				throw new CapMessageException("msg.job.fileNotFund", getClass());

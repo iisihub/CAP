@@ -22,7 +22,7 @@
 		</property>
 	</bean>
 
-	<bean id="jobLoader"
+	<bean id="autoJobLoader"
 		class="org.springframework.batch.core.configuration.support.AutomaticJobRegistrar">
 		<property name="applicationContextFactories">
 			<bean
@@ -30,12 +30,7 @@
 				<property name="jobService" ref="batchJobService" />
 			</bean>
 		</property>
-		<property name="jobLoader">
-			<bean
-				class="org.springframework.batch.core.configuration.support.DefaultJobLoader">
-				<property name="jobRegistry" ref="jobRegistry" />
-			</bean>
-		</property>
+		<property name="jobLoader" ref="jobLoader"/>
 	</bean>
 
 	<bean id="jobRegistry"
@@ -46,6 +41,14 @@
 		<property name="jobRepository" ref="jobRepository" />
 		<property name="jobLauncher" ref="jobLauncher" />
 		<property name="jobLocator" ref="jobRegistry" />
+		<property name="dataSource" ref="cap-db" />
+	</bean>
+		
+	<bean id="jobLoader" class="org.springframework.batch.core.configuration.support.DefaultJobLoader">
+		<property name="jobRegistry" ref="jobRegistry" />
+	</bean>
+	
+	<bean id="jobExplorer" class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean">
 		<property name="dataSource" ref="cap-db" />
 	</bean>
 
@@ -85,4 +88,5 @@
 		<property name="batchSerivce" ref="batchJobService"/>
 		<property name="messageTemplate" value="${mail.messageTemplate}"/>
 	</bean>
+	
 </beans>
