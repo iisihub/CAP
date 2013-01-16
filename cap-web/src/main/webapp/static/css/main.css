@@ -2589,7 +2589,7 @@ tr.ui-search-toolbar input, tr.ui-search-toolbar select {
 }
 
 body {
-  background: url(webroot/static/images/bg.png) #f7f7f7 top repeat-x;
+  background: url(../static/images/bg.png) #f7f7f7 top repeat-x;
   font-size: 12px;
   font-family: Verdana, "新細明體", PMingLiu, Geneva, sans-serif;
   padding: 0;
@@ -2600,7 +2600,7 @@ body {
   margin: auto;
   width: 950px;
   background-color: #FFF;
-  /*background-image: url("webroot/static/images/body_bg.jpg");*/
+  /*background-image: url("../static/images/body_bg.jpg");*/
   background-repeat: no-repeat;
   background-position: center top;
   position: relative;
@@ -2787,7 +2787,7 @@ nav.top ul.navmenu li:hover ul li a {
   height: 28px;
   cursor: pointer;
   font-size: 14px;
-  background-image: url(webroot/static/pic/buttonBackground.jpg);
+  background-image: url(../static/pic/buttonBackground.jpg);
   border: 0px;
 }
 .menu .button.select, .menu .button:hover {
@@ -2995,7 +2995,7 @@ header ul li a {
 
 /* footer */
 footer {
-  background: url(webroot/static/images/bg-foot.png) top no-repeat;
+  background: url(../static/images/bg-foot.png) top no-repeat;
   padding: 16px 0;
   color: #8B8B8B;
   text-align: right;
@@ -3008,11 +3008,11 @@ footer {
   position: absolute;
 }
 .bg-around.right {
-  background: url(webroot/static/images/bg-right.png) left top no-repeat;
+  background: url(../static/images/bg-right.png) left top no-repeat;
   right: -10px;
 }
 .bg-around.left {
-  background: url(webroot/static/images/bg-left.png) right top no-repeat;
+  background: url(../static/images/bg-left.png) right top no-repeat;
   left: -10px;
 }
 
@@ -3040,7 +3040,7 @@ footer {
   line-height: 20px;
 }
 .r-grid .ui-state-default, .r-grid .ui-widget-content .ui-state-default, .r-grid .ui-widget-header .ui-state-default {
-  background: url("webroot/static/images/centercontent_tr001.jpg");
+  background: url("../static/images/centercontent_tr001.jpg");
   background-repeat: repeat-x;
 }
 .r-grid .ui-jqgrid tr.ui-row-ltr td, .r-grid .ui-jqgrid tr.jqgrow td {
@@ -3056,7 +3056,7 @@ footer {
 
 /** button **/
 .btn1, .ui-dialog-buttonset .ui-button {
-  background: url("webroot/static/images/sprite.png") repeat-x scroll 0 0 transparent !important;;
+  background: url("../static/images/sprite.png") repeat-x scroll 0 0 transparent !important;;
 }
 
 .btn1.ui-button-text-only .ui-button-text, .ui-dialog-buttonset button.ui-button-text-only .ui-button-text {

@@ -7,19 +7,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title><decorator:title default="CapWebMVC" /></title>
-        <link rel="stylesheet" href="webroot/static/css/main.css" />
+        <link rel="stylesheet" href="../static/css/main.css" />
         <!--[if lt IE 9]>
-            <script src="webroot/static/lib/js/html5.js"></script>
+            <script src="../static/lib/js/html5.js"></script>
         <![endif]-->
-        <script src="webroot/static/requirejs/2.0.6/require.min.js"></script>
-        <script src="webroot/static/js/main.js"></script>
+        <script data-main="../static/main" src="../static/requirejs/2.0.6/require.min.js"></script>
 		<decorator:head/>
     </head>
     <body>
         <div class="mainBody">
             <header>
                 <div class="logo">
-                    <a><img src="webroot/static/images/logo.png"></a>
+                    <a><img src="../static/images/logo.png"></a>
                 </div>
                 <ol style="height:18px;">
 					<li class="lang"><a href="#language">&nbsp;LANGUAGE&nbsp;</a></li>
