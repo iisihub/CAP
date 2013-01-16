@@ -467,7 +467,7 @@ $.holdReady(true);
                     },
                     loadPage : function(href, fn) {
                         $.blockUI.showBG = true;
-                        $.startBlockUI();
+                        $.startBlockUI && $.startBlockUI();
                         var section = $("article");
                         section.animate({
                             opacity : 0.01

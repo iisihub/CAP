@@ -7,7 +7,7 @@ var logDebug = function() {
 };
 require.config({
 	urlArgs : 'cache=' + parseInt(Math.random() * 1000),
-	baseUrl : '../webroot/static',
+	baseUrl : '../static',
 	paths : {
 		'libjs' : 'lib/js/libjs',          //third party lib
 		'capjs' : 'lib/js/capjs',          //cap lib
@@ -18,11 +18,11 @@ require.config({
 	shim : {
 		'cust-properties' : ['libjs', 'common.properties' ],
 		'capjs' : ['libjs', 'cust-properties'],
-		'cust-common' : ['libjs', 'capjs', 'common.properties' ] //客制化lib 載入設定
+		'cust-common' : ['libjs', 'common.properties','capjs' ] //客制化lib 載入設定
 	}
 });
 
-require(['libjs','common.properties','capjs','cust-properties', 'cust-common'], function() {
+require(['libjs', 'common.properties', 'cust-properties','capjs', 'cust-common'], function() {
 	logDebug("cust js init");
 });
 

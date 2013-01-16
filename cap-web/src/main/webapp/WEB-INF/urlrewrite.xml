@@ -11,19 +11,13 @@
 		<from>^/favicon.ico$</from>
 		<to last="true">/static/images/favicon.ico</to>
 	</rule>
+	
 	<!-- 轉換靜態網頁位址並加入Cache設定 -->
 	<rule match-type="regex">
 		<note>Serve static content directly from the filesystem and add
 			caching instruction</note>
-		<from>.*/webroot/static/(.*)</from>
-		<set type="expires">5 days</set>
-		<to last="true">/static/$1</to>
-	</rule>
-	<!-- 轉換 weboot 位置至 content root -->
-	<rule>
-		<note>webroot</note>
-		<from>.*/webroot/(.*)</from>
-		<to>/$1</to>
+		<from>/static/(.*)</from>
+		<set type="expires">14 days</set>
 	</rule>
 	<!-- forward i18n url -->
 	<rule match-type="regex">
