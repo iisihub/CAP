@@ -22,7 +22,7 @@
         'capjs.properties' : 'lib/js/common/common.properties',
         'cust-properties' : 'js/common/cust.properties', // 客制化設定檔
         'cust-common' : 'js/common/cust.common',
-	'custjs':'custjs'
+	    'custjs':'custjs'
 
     }
 })

@@ -2,7 +2,6 @@ package com.iisigroup.cap.hg.service;
 
 import java.util.Map;
 
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.hg.enums.ConnStatusEnum;
 
 /**
@@ -14,6 +13,7 @@ import com.iisigroup.cap.hg.enums.ConnStatusEnum;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/12/5,rodeschen,new
+ *          <li>2013/1/15,rodeschen,add setHeader,remove CapException
  *          </ul>
  */
 public interface IHGService {
@@ -24,9 +24,8 @@ public interface IHGService {
 	 * @param property
 	 *            property
 	 * 
-	 * @throws CapException
 	 */
-	void setProperties(Map<String, Object> property) throws CapException;
+	void setProperties(Map<String, Object> property);
 
 	/**
 	 * set property
@@ -46,17 +45,15 @@ public interface IHGService {
 	 * @param name
 	 *            name
 	 * 
-	 * @throws CapException
 	 * @return <T>
 	 */
-	<T> T getProperty(Object name) throws CapException;
+	<T> T getProperty(Object name);
 
 	/**
 	 * initial connection
 	 * 
-	 * @throws CapException
 	 */
-	void initConnection() throws CapException;
+	void initConnection();
 
 	/**
 	 * get hg status
@@ -76,22 +73,18 @@ public interface IHGService {
 	void setStatus(ConnStatusEnum status);
 
 	/**
-	 * get receive data
-	 * 
-	 * @param <T>
-	 *            stauts
-	 * @return <T>
-	 */
-	<T> T getReceiveData() throws CapException;
-
-	/**
 	 * set send data
 	 * 
 	 * @param data
 	 *            data
-	 * @throws CapException
 	 */
-	void setSendData(Object data) throws CapException;
+	void setSendData(Object data);
+
+	/**
+	 * 
+	 * @param data
+	 */
+	void setHeader(Object data);
 
 	/**
 	 * execute connect
@@ -99,6 +92,15 @@ public interface IHGService {
 	 * @throws Exception
 	 */
 	void execute() throws Exception;
+
+	/**
+	 * get receive data
+	 * 
+	 * @param <T>
+	 *            stauts
+	 * @return <T>
+	 */
+	<T> T getReceiveData();
 
 	/**
 	 * error handle
