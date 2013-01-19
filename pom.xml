@@ -59,8 +59,8 @@
 				</plugins>
 			</build>
 		</profile>
-		<!--deploy 時使用 {mvn goal -P deploy} 相關位置設定於settings.xml or cap/src/site/settings.xml 
-			(需匯入eclipse maven) PS：distributionManagement 只能放至 pom.xml 中 -->
+		<!--deploy 時使用 {mvn goal -P deploy} 相關位置設定於settings.xml or cap/src/site/settings.xml (需匯入eclipse maven) PS：distributionManagement 
+			只能放至 pom.xml 中 -->
 		<profile>
 			<id>deploy</id>
 			<distributionManagement>
@@ -73,6 +73,26 @@
 					<url>${maven.deploy.snapshots.url}</url>
 				</snapshotRepository>
 			</distributionManagement>
+		</profile>
+		<!-- 只能放在pom 無法放至 settings.xml -->
+		<profile>
+			<id>attach-source</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 	<dependencies>
