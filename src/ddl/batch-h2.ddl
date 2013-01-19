@@ -3,7 +3,7 @@
 --SCH_SCHEDULES 排程設定檔
 --=====================================
 CREATE TABLE BAH_SCHEDULE(
-	schID			varchar(80)		not null,
+	schID			varchar(30)		not null,
 	schDesc			varchar(300),
 	jobId			varchar(100)  	not null,
 	isEnabled		varchar(1),
@@ -13,7 +13,7 @@ CREATE TABLE BAH_SCHEDULE(
 	repeatCount 	bigint,
   	repeatInterval 	bigint,
   	priority 		integer						default 5,
-  	exeHost			varchar(100),
+  	exeHost			varchar(30)					default 'localhost',
 	jobData 		varchar(2000),
 	isNotify		varchar(1),
 	notifyStatus	varchar(50),
@@ -21,6 +21,11 @@ CREATE TABLE BAH_SCHEDULE(
 	updater    		varchar(10),
     updateTime 		timestamp,
 	CONSTRAINT P_SCHEDULE PRIMARY KEY (schID)
+);
+
+CREATE INDEX X_SCHEDULE ON BAH_SCHEDULE (
+	exeHost 	ASC, 
+	isEnabled 	ASC
 );
 
 COMMENT ON TABLE BAH_SCHEDULE IS '排程設定檔';
@@ -38,9 +43,9 @@ COMMENT ON BAH_SCHEDULE(
 	priority		IS '優先順序',
 	exeHost			IS '執行主機',
 	jobData			IS 'jobMapData參數',
-	isNotify		IS '是否mail通知(Y/N)',
-	notifyCode 		IS '執行狀態通知',
-	notifyTo		IS 'mail收件人',
+	isNotify		IS '是否訊息通知(Y/N)',
+	notifyCode 		IS '通知結果狀態',
+	notifyTo		IS '通知(email)',
 	updater			IS '修改人',
 	updateTime		IS '修改時間'
 );
@@ -53,7 +58,7 @@ CREATE TABLE BAH_JOB (
     jobDesc			varchar(300) 	NOT NULL,
     jobResource		varchar(200)  	NOT NULL,
     updater			varchar(10) ,
-    updateTime			timestamp,
+    updateTime		timestamp,
     CONSTRAINT P_BAH_JOB PRIMARY KEY (JOBID)
 );
 
@@ -148,4 +153,4 @@ CREATE SEQUENCE BAH_STEP_EXECUTION_SEQ;
 CREATE SEQUENCE BAH_JOB_EXECUTION_SEQ;
 CREATE SEQUENCE BAH_JOB_SEQ;
 
-alter table BAH_JOB_EXECUTION add column executor varchar(10);
+alter table BAH_JOB_EXECUTION add column executor varchar(30);
