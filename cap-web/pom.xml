@@ -34,6 +34,8 @@
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-config</artifactId>
 			<version>2.0.0</version>
+			<!-- 包版時不包進 war 中 使用 build plugin copy 進classes -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
@@ -50,7 +52,7 @@
 			<artifactId>cap-base</artifactId>
 			<version>2.0.0</version>
 		</dependency>
-		<!--  -->
+		<!-- -->
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-batch</artifactId>
@@ -77,15 +79,14 @@
 			<artifactId>hibernate-ehcache</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId> 
-			<version>2.2.0</version> </dependency> -->
+		<!-- <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId> <version>2.2.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
 		</dependency>
 		<!-- provided：在編譯和測試的過程有效,在最後生成war時不加入 
-			 runtime：在運行的時候依賴,在編譯的時候不依賴-->
+		     runtime：在運行的時候依賴,在編譯的時候不依賴 -->
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
@@ -105,10 +106,11 @@
 			<version>1.3.153</version>
 			<scope>provided</scope>
 		</dependency>
-	<dependency>
+		<dependency>
 			<groupId>rhino</groupId>
 			<artifactId>js</artifactId>
 			<version>1.7R4</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -133,7 +135,7 @@
 						<argument>${basedir}/src/main/webapp/static/build.js</argument>
 						<argument>name=main</argument>
 						<argument>out=${basedir}/src/main/webapp/static/build-main.js</argument>
-						<!-- <argument>optimize=none</argument>-->
+						<!-- <argument>optimize=none</argument> -->
 					</arguments>
 				</configuration>
 			</plugin>
@@ -141,6 +143,20 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
+			</plugin>
+			<!-- 將config  copy 至 classes-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>${basedir}/../cap-config/src/main/resources</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+						</resource>
+					</webResources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
