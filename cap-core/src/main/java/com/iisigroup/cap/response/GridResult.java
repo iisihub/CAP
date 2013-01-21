@@ -191,8 +191,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 		resultMap.putAll(json);
 	}
 
-	public GridResult addReformatData(String key, IFormatter formatter)
-			throws CapException {
+	public GridResult addReformatData(String key, IFormatter formatter) {
 		if (dataReformatter == null) {
 			dataReformatter = new HashMap<String, IFormatter>();
 		}
@@ -267,7 +266,7 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	public Map<String, IFormatter> getDataReformatter() {
 		return this.dataReformatter;
 	}
-	
+
 	@Override
 	public void respondResult(ServletResponse response) {
 		new StringResponse(getContextType(), getEncoding(), getResult())

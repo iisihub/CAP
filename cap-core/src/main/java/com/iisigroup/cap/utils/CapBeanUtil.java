@@ -29,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
 
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.model.GenericBean;
 
 /**
@@ -68,7 +67,7 @@ public class CapBeanUtil {
 	 * @throws CapException
 	 */
 	public static <T extends GenericBean> T copyBean(T source, T destination,
-			String[] columns) throws CapException {
+			String[] columns) {
 		if (source instanceof GenericBean && destination instanceof GenericBean) {
 			GenericBean s = (GenericBean) source;
 			GenericBean d = (GenericBean) destination;
@@ -81,8 +80,7 @@ public class CapBeanUtil {
 		return destination;
 	}// ;
 
-	public static <T extends GenericBean> T copyBean(T source, T destination)
-			throws CapException {
+	public static <T extends GenericBean> T copyBean(T source, T destination) {
 		return copyBean(source, destination,
 				CapBeanUtil.getFieldName(destination.getClass(), true));
 	}// ;
@@ -100,7 +98,7 @@ public class CapBeanUtil {
 	 * @throws CapException
 	 */
 	public static <T extends GenericBean> Map<String, Object> bean2Map(
-			T source, String[] columns) throws CapException {
+			T source, String[] columns) {
 		return bean2Map(source, columns, null);
 	}// ;
 
@@ -121,7 +119,7 @@ public class CapBeanUtil {
 	 * @throws CapException
 	 */
 	public static <T extends GenericBean> Map<String, Object> bean2Map(
-			T source, String[] columns, String prefix) throws CapException {
+			T source, String[] columns, String prefix) {
 		return bean2Map(source, columns, prefix, true);
 	}// ;
 
@@ -144,8 +142,7 @@ public class CapBeanUtil {
 	 * @throws CapException
 	 */
 	public static <T extends GenericBean> Map<String, Object> bean2Map(
-			T source, String[] columns, String fixString, boolean isPrefix)
-			throws CapException {
+			T source, String[] columns, String fixString, boolean isPrefix) {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		GenericBean s = (GenericBean) source;
 		for (String col : columns) {

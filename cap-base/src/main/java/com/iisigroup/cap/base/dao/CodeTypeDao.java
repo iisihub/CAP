@@ -51,8 +51,8 @@ public interface CodeTypeDao extends IGenericDao<CodeType> {
 	 *            語言別
 	 * @return T
 	 */
-	public CodeType findByCodeTypeAndCodeValue(String cType,
-			String cValue, String locale);
+	public CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
+			String locale);
 
 	/**
 	 * find by codetype.
@@ -79,11 +79,12 @@ public interface CodeTypeDao extends IGenericDao<CodeType> {
 	public List<CodeType> findByCodeTypeAndCodeDesc(String cType,
 			String codeDesc, String locale);
 
-	
 	/**
 	 * 查詢OID
-	 * @param oid OID
-	 * @return
+	 * 
+	 * @param oid
+	 *            OID
+	 * @return CodeType
 	 */
 	public CodeType findByOid(String oid);
 

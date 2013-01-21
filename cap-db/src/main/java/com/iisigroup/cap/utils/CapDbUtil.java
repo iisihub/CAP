@@ -1,5 +1,5 @@
 /* 
- * CapSqlUtil.java
+ * CapDbUtil.java
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -30,7 +30,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
 /**
  * <pre>
- * CapSqlUtil
+ * CapDbUtil
  * </pre>
  * 
  * @since 2012/9/21
@@ -116,6 +116,12 @@ public class CapDbUtil {
 	 * Map<String, Object> params = {key1=Apple,key2=doctor} new
 	 * 
 	 * return An Apple a day keep the doctor away!
+	 * 
+	 * @param pattern
+	 *            string
+	 * @param params
+	 *            參數
+	 * @return String
 	 */
 	@Deprecated
 	public static String messageFormat(String pattern,
@@ -128,7 +134,7 @@ public class CapDbUtil {
 		while ((start = pattern.indexOf("${", pos)) != -1) {
 			buffer.append(pattern.substring(pos, start));
 			if (pattern.charAt(start + 1) == '$') {
-				buffer.append("$");
+				buffer.append('$');
 				pos = start + 2;
 				continue;
 			}
@@ -159,8 +165,10 @@ public class CapDbUtil {
 	 * @param expressionStr
 	 *            expression string
 	 * @param params
+	 *            parameters
 	 * @param parserContext
-	 * @return
+	 *            parserContext
+	 * @return String
 	 */
 	public static String spelParser(String expressionStr,
 			Map<String, Object> params, ParserContext parserContext) {

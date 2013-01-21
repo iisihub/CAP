@@ -159,7 +159,8 @@ public class CapDate {
 		boolean b2 = d2 == end2;
 		if (b1 || b2) {
 			if (b1 && b2) {
-				d1 = d2 = 31;
+				d1 = 31;
+				d2 = d1;
 			} else if (b1) {
 				if (d2 >= d1) {
 					d2 = d1;

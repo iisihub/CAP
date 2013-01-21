@@ -59,7 +59,7 @@ public class CapSqlSearchQueryProvider {
 				Object _value = s.getValue();
 				if (_key instanceof SearchModeParameter
 						&& _value instanceof SearchModeParameter) {
-					sb.append("(").append(
+					sb.append('(').append(
 							generateItemQuery((SearchModeParameter) _key));
 					if (SearchMode.OR == s.getMode()) {
 						sb.append(" or ");
@@ -67,7 +67,7 @@ public class CapSqlSearchQueryProvider {
 						sb.append(" and ");
 					}
 					sb.append(generateItemQuery((SearchModeParameter) _value))
-							.append(")");
+							.append(')');
 
 				} else {
 					sb.append(generateItemQuery(s));
@@ -93,7 +93,7 @@ public class CapSqlSearchQueryProvider {
 				if (entry.getValue()) {
 					sb.append(" desc ");
 				}
-				sb.append(",");
+				sb.append(',');
 			}
 			int len = sb.length();
 			sb.delete(len - 1, len); // 拿掉最後一個","
@@ -112,7 +112,7 @@ public class CapSqlSearchQueryProvider {
 			Object[] values = asArray(value);
 			if (values != null) {
 				sb.append(key).append(" between :").append(key)
-						.append("1 and :").append(key).append("2");
+						.append("1 and :").append(key).append('2');
 				params.put(key + "1", values[0]);
 				params.put(key + "2", values[1]);
 			}

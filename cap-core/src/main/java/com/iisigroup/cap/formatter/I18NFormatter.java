@@ -12,7 +12,6 @@
 package com.iisigroup.cap.formatter;
 
 import com.iisigroup.cap.Constants;
-import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 
@@ -36,7 +35,7 @@ public class I18NFormatter implements IFormatter {
 	public I18NFormatter() {
 		hasPrefix = false;
 	}
-	
+
 	public I18NFormatter(String prefix) {
 		this.prefix = prefix;
 		hasPrefix = true;
@@ -49,7 +48,7 @@ public class I18NFormatter implements IFormatter {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public String reformat(Object in) throws CapFormatException {
+	public String reformat(Object in) {
 		String key = CapString.trimNull(in);
 		if (!CapString.isEmpty(key)) {
 			return CapAppContext.getMessage(hasPrefix ? (prefix + key) : key);

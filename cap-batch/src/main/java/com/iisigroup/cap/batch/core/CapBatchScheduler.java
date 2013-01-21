@@ -97,7 +97,10 @@ public class CapBatchScheduler implements CapBatchConstants {
 	/**
 	 * 重新排程
 	 * 
-	 * @param schedule
+	 * @param oldSch
+	 *            舊排程
+	 * @param newSch
+	 *            新排程
 	 * @throws SchedulerException
 	 */
 	public void reSchedule(BatchSchedule oldSch, BatchSchedule newSch)

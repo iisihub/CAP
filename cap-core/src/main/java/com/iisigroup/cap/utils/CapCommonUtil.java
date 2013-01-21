@@ -125,7 +125,7 @@ public class CapCommonUtil {
 		}
 		for (int i = firstTokenLength; i < amount.length(); i += delimiterDigit) {
 			if (i > 0) {
-				formattedAmount.append(",");
+				formattedAmount.append(',');
 			}
 			formattedAmount.append(amount.substring(i, i + delimiterDigit));
 		}

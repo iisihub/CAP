@@ -1,5 +1,5 @@
 /* 
- * IMCIPageReportService.java
+ * IPageReport.java
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -14,7 +14,6 @@ package com.iisigroup.cap.mvc.page.report;
 import java.util.Map;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.service.IService;
 
 /**
@@ -38,5 +37,5 @@ public interface IPageReport extends IService {
 	 * @return report data
 	 * @throws CapException
 	 */
-	Map<String, Object> excute(IRequest request) throws CapException;
+	Map<String, Object> excute(IRequest request);
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.mvc.i18n.MessageBundleScriptCreator;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -38,14 +37,14 @@ public class BaseHandler extends MFormHandler {
 	 * @return IResult
 	 * @throws CapException
 	 */
-	public IResult fileSuccess(IRequest params) throws CapException {
+	public IResult fileSuccess(IRequest params) {
 		return new AjaxFormResult();
 	}
 
 	@HandlerType(HandlerTypeEnum.FORM)
-	public IResult queryJsI18N(IRequest request) throws CapException {
-		String result = MessageBundleScriptCreator.generateJson(request.get("f").replaceAll(
-				"/?webroot/page", ""));
+	public IResult queryJsI18N(IRequest request) {
+		String result = MessageBundleScriptCreator.generateJson(request
+				.get("f").replaceAll("/?webroot/page", ""));
 		return new AjaxFormResult(result);
 	}// ;
 

@@ -12,10 +12,7 @@
  */
 package com.iisigroup.cap.operation;
 
-import java.util.Map;
-
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.IHandler;
 
 /**
@@ -40,14 +37,8 @@ public interface OperationStep {
 
 	void setName(String name);
 
-	Map<String, String> getRuleMap();
+	OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler);
 
-	void setRuleMap(Map<String, String> ruleMap);
-
-	OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler)
-			throws CapException;
-
-	OpStepContext handleException(OpStepContext ctx, Exception e)
-			throws CapException;
+	OpStepContext handleException(OpStepContext ctx, Exception e);
 
 }

@@ -49,8 +49,7 @@ public class SimpleOperation implements Operation {
 	 * 
 	 * @see tw.com.iisi.cap.flow.Operation#execute()
 	 */
-	public void execute(OpStepContext ctx, IRequest params, IHandler handler)
-			throws CapException {
+	public void execute(OpStepContext ctx, IRequest params, IHandler handler) {
 		OperationStep step = getStartStep();
 		long startOperation = System.currentTimeMillis();
 		try {
@@ -72,7 +71,7 @@ public class SimpleOperation implements Operation {
 							|| OperationStep.ERROR.equals(result.getGoToStep())) {
 						step = null;
 					} else {
-						step = getStep(step.getRuleMap().get(result));
+						step = getStep(result.getGoToStep());
 					}
 				}
 			}

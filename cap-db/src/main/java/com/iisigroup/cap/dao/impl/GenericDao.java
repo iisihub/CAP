@@ -83,7 +83,7 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	/**
 	 * Insert.
 	 * 
-	 * @param entry
+	 * @param entity
 	 *            the entry
 	 */
 	public void save(Object entity) {
@@ -108,7 +108,7 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	/**
 	 * Delete.
 	 * 
-	 * @param entry
+	 * @param entity
 	 *            the entry
 	 */
 	public void delete(Object entity) {
@@ -185,6 +185,10 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 
 	/**
 	 * 查詢頁的資料
+	 * 
+	 * @param search
+	 *            SearchSetting
+	 * @return Page<S>
 	 */
 	public Page<T> findPage(ISearch search) {
 		return findPage(getType(), search);
@@ -193,9 +197,13 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	/**
 	 * find by SearchSetting
 	 * 
+	 * @param <S>
+	 *            bean
 	 * @param search
 	 *            SearchSetting
-	 * @return List<T>
+	 * @param clazz
+	 *            Class<S>
+	 * @return List<S>
 	 */
 	public <S> List<S> find(Class<S> clazz, final ISearch search) {
 		return createQuery(clazz, search).getResultList();
@@ -204,9 +212,13 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	/**
 	 * 取得筆數
 	 * 
+	 * @param <S>
+	 *            bean
+	 * @param clazz
+	 *            Class<S>
 	 * @param search
 	 *            SearchSetting
-	 * @return Long
+	 * @return int
 	 */
 	public <S> int count(Class<S> clazz, ISearch search) {
 		CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
@@ -220,6 +232,14 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 
 	/**
 	 * 查詢頁的資料
+	 * 
+	 * @param <S>
+	 *            bean
+	 * @param clazz
+	 *            Class<S>
+	 * @param search
+	 *            SearchSetting
+	 * @return Page<S>
 	 */
 	public <S> Page<S> findPage(Class<S> clazz, ISearch search) {
 		return new Page<S>(find(clazz, search), count(clazz, search),
@@ -331,6 +351,11 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	}// ;
 
 	// -------------------------------------------------------
+	/**
+	 * <pre>
+	 * CapSpecifications
+	 * </pre>
+	 */
 	@SuppressWarnings("rawtypes")
 	class CapSpecifications {
 

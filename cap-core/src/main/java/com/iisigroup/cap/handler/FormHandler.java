@@ -14,7 +14,6 @@ package com.iisigroup.cap.handler;
 
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
@@ -37,7 +36,7 @@ import com.iisigroup.cap.utils.CapAppContext;
 public abstract class FormHandler extends HandlerPlugin {
 
 	@Override
-	public IResult execute(IRequest params) throws CapException {
+	public IResult execute(IRequest params) {
 		Operation oper = getOperation();
 		if (oper != null) {
 			OpStepContext ctx = new OpStepContext(OperationStep.NEXT);

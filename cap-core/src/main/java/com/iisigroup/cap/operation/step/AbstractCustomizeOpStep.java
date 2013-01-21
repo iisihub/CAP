@@ -23,7 +23,6 @@ package com.iisigroup.cap.operation.step;
 
 import java.util.Map;
 
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.OperationStep;
 
@@ -68,8 +67,7 @@ public abstract class AbstractCustomizeOpStep implements OperationStep {
 	 * @see
 	 * tw.com.iisi.cap.flow.OperationStep#handleException(java.lang.Exception)
 	 */
-	public OpStepContext handleException(OpStepContext ctx, Exception e)
-			throws CapException {
+	public OpStepContext handleException(OpStepContext ctx, Exception e) {
 		ctx.setGoToStep(ERROR);
 		return ctx;
 	}

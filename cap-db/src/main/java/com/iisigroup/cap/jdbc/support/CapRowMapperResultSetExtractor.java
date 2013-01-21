@@ -26,6 +26,8 @@ import org.springframework.util.Assert;
  * Callback interface used by {@link JdbcTemplate}'s query methods
  * </pre>
  * 
+ * @param <T>
+ *            T
  * @since 2011/8/4
  * @author iristu
  * @version <ul>
@@ -52,8 +54,8 @@ public class CapRowMapperResultSetExtractor<T> implements
 	 * @param fetchSize
 	 *            the fetech size
 	 */
-	public CapRowMapperResultSetExtractor(RowMapper<T> rowMapper,
-			int startRow, int fetchSize) {
+	public CapRowMapperResultSetExtractor(RowMapper<T> rowMapper, int startRow,
+			int fetchSize) {
 		Assert.notNull(rowMapper, "RowMapper is required");
 		this.rowMapper = rowMapper;
 		this.startRow = startRow;
@@ -65,22 +67,23 @@ public class CapRowMapperResultSetExtractor<T> implements
 	 * 
 	 * @param rs
 	 *            ResultSet
+	 * @return List<T>
 	 */
-	@Override
 	public List<T> extractData(ResultSet rs) throws SQLException {
 		List<T> results = new ArrayList<T>();
-//		if (startRow > 1) { 
-//			for (int i = 0; i < startRow - 1; i++) {
-//				if (!rs.next()) {
-//					break;
-//				}
-//			}
-//		}
-		if (rs.absolute(startRow)){
+		// if (startRow > 1) {
+		// for (int i = 0; i < startRow - 1; i++) {
+		// if (!rs.next()) {
+		// break;
+		// }
+		// }
+		// }
+		if (rs.absolute(startRow)) {
 			for (int rows = 0; rows < fetchSize && rs.next(); rows++) {
 				results.add(this.rowMapper.mapRow(rs, rows));
 			}
-		}return results;
+		}
+		return results;
 	}// ;
 
 }// ~

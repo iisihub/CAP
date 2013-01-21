@@ -39,7 +39,7 @@ public class CapWebUtil {
 	/**
 	 * 下載檔名中文依IE及FireFox做區分
 	 * 
-	 * @param req
+	 * @param request
 	 *            HttpServletRequest
 	 * @param fileName
 	 *            前端要顯示的檔案名稱

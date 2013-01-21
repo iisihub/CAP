@@ -14,7 +14,6 @@ package com.iisigroup.cap.operation.step;
 
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.IHandler;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.response.IResult;
@@ -34,7 +33,7 @@ public class CapHandleOpStep extends AbstractCustomizeOpStep {
 
 	@Override
 	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) throws CapException {
+			IHandler handler) {
 		IResult rtn = null;
 		@SuppressWarnings("static-access")
 		String actionType = params.get(handler.FORM_ACTION);

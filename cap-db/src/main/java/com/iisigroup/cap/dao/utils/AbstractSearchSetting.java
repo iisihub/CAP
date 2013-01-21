@@ -19,8 +19,6 @@ import java.util.Map;
 
 import org.springframework.util.Assert;
 
-
-
 /**
  * <p>
  * SearchSetting .
@@ -35,12 +33,10 @@ import org.springframework.util.Assert;
  */
 public abstract class AbstractSearchSetting implements ISearch {
 
-	/**
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public AbstractSearchSetting() {
-		
+
 	}
 
 	/**
@@ -147,18 +143,19 @@ public abstract class AbstractSearchSetting implements ISearch {
 	// -----------------------------------
 	// Pagination support
 	// -----------------------------------
-	//private int maxResultsLimit = 2000;
+	// private int maxResultsLimit = 2000;
 	private int maxResults = 100;
 
 	/**
 	 * 設定查詢的筆數
 	 * 
 	 * @param maxResults
-	 * @return
+	 *            查詢的筆數
+	 * @return this
 	 */
 	public AbstractSearchSetting setMaxResults(int maxResults) {
 		Assert.isTrue(maxResults > 0, "maxResults must be > 0");
-		//this.maxResults = Math.min(maxResults, maxResultsLimit);
+		// this.maxResults = Math.min(maxResults, maxResultsLimit);
 		this.maxResults = maxResults;
 		return this;
 	}
@@ -174,7 +171,8 @@ public abstract class AbstractSearchSetting implements ISearch {
 	 * 設定查詢的頁碼
 	 * 
 	 * @param firstResult
-	 * @return
+	 *            查詢的頁碼
+	 * @return this
 	 */
 	public AbstractSearchSetting setFirstResult(int firstResult) {
 		Assert.isTrue(firstResult >= 0, "maxResults must be >= 0");
@@ -203,9 +201,9 @@ public abstract class AbstractSearchSetting implements ISearch {
 		return this;
 	}
 
-	public AbstractSearchSetting addSearchModeParameters(ISearch search){
+	public AbstractSearchSetting addSearchModeParameters(ISearch search) {
 		this.searchModeParameters.addAll(search.getSearchModeParameters());
 		return this;
 	}
-	
+
 }

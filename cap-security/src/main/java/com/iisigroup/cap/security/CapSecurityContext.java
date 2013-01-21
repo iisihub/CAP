@@ -62,8 +62,8 @@ public class CapSecurityContext {
 	 * 取得Spring Security登入者的user information.
 	 * </pre>
 	 * 
-	 * @param <T>
-	 * @return
+	 * @param <T> T extends IUser
+	 * @return T T extends IUser
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends IUser> T getUser() {
