@@ -1,5 +1,6 @@
 /* 專案JS設定檔    */
 $.extend(Properties || {}, {
+	contextName : '/cap-web/',
 	window : {
 		closeConfirm : true,
 		closeWindowMsg : '重新載入後資料將會消失!!\nReload the page data will be lost!!',
@@ -13,5 +14,4 @@ $.extend(Properties || {}, {
 		rowNum : 30,
 		rowList : []
 	}
-
 });

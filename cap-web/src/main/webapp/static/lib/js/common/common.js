@@ -684,7 +684,7 @@ $.holdReady(true);
                         $.blockUI({
                             fadeIn : 0,
                             fadeOut : 0,
-                            message : i18n.def.loading + '   <img src="../static/images/ajax-loader.gif" style="width: 16px;hight:11px;"/>',
+                            message : i18n.def.loading + '   <img src="'+url("static/images/ajax-loader.gif")+'" style="width: 16px;hight:11px;"/>',
                             css : {
                                 'z-index' : 10010,
                                 top : '0',
