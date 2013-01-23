@@ -26,7 +26,7 @@ require.config({
 });
 
 define('libjs', ['json3', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone'], function() {
-    $.holdReady(true); // enable at common.js
+   // $.holdReady(true); // enable at common.js
     logDebug('lib init');
 });
 
