@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <p>
@@ -33,6 +34,7 @@ import com.iisigroup.cap.utils.CapString;
  * @author gabriellalau
  * @version <ul>
  *          <li>2011-11-23,gabriella,new
+ *          <li>2013-1-23,RodesChen,move getRequestURL to CapWebUtil
  *          </ul>
  */
 public class LogContextFilter implements Filter {
@@ -70,7 +72,7 @@ public class LogContextFilter implements Filter {
 			LogContext.seClientAddr(req.getRemoteAddr());
 			// Session ID
 			LogContext.setSessionId(session.getId());
-			LogContext.setRequestURL(getRequestURL(req));
+			LogContext.setRequestURL(CapWebUtil.getRequestURL(req));
 			// User相關資訊
 			String userId = (String) session.getAttribute(LOGIN_USERNAME);
 			userId = CapString.isEmpty(userId) ? (String) request
@@ -84,36 +86,6 @@ public class LogContextFilter implements Filter {
 		chain.doFilter(request, response);
 		LogContext.resetLogContext();
 	}// ;
-
-	/**
-	 * Gets the request url.
-	 * 
-	 * @param filter
-	 *            the filter
-	 * 
-	 * @return the request url
-	 */
-	private String getRequestURL(HttpServletRequest req) {
-		String url = req.getRequestURI().replaceFirst(req.getContextPath(), "");
-		int f = url.indexOf("/webroot");
-		if (f > -1) {
-			url = url.substring(f + 8);
-		}
-		if (!CapString.isEmpty(req.getParameter("_handler"))) {
-			url = "/" + req.getParameter("_handler");
-		} else if (!CapString.isEmpty((String) req.getAttribute("_handler"))) {
-			url = "/" + req.getAttribute("_handler");
-		}
-		f = url.indexOf("/handler");
-		if (f > -1) {
-			url = url.substring(f + 8);
-		}
-		f = url.indexOf("/page");
-		if (f > -1) {
-			url = url.substring(f + 5);
-		}
-		return url;
-	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// do nothing
