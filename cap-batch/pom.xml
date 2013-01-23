@@ -13,7 +13,7 @@
 		<spring.batch.version>2.1.9.RELEASE</spring.batch.version>
 		<spring.batch.admin.version>1.2.1.RELEASE</spring.batch.admin.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
-		<spring.integration.version>2.1.0.RELEASE</spring.integration.version>
+		<spring.integration.version>2.2.0.RELEASE</spring.integration.version>
 		<quartz-scheduler.version>2.1.5</quartz-scheduler.version>
 	</properties>
 	<dependencies>
