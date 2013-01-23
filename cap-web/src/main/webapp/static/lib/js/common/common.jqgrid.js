@@ -223,4 +223,31 @@
         return _jqGrid.apply(this.is("table") ? $(this) : $(this.find("table")), arguments);
     };
     $.extend($.fn.jqGrid, _jqGrid);
+    
+    
+    
+    //add jqGrid foramter
+    $.extend($.fn.fmatter, {
+        click : (function() {
+            var _click = function(cellvalue, options, rowdata) {
+                return "<a href=\"#\" role=\"gridcellclick\" cellvalue=\"" + cellvalue + "\" idname=\"" + options.colModel.name + "\" rowid=\"" + options.rowId + "\">" + cellvalue + "</a>";
+            };
+
+            _click.unformat = function(cellvalue, options) {
+                return cellvalue;
+            };
+            return _click;
+        })(),
+
+        fileDownload : (function() {
+            var _download = function(cellvalue, options, rowdata) {
+                return "<a href=\"#\" role=\"gridcelldownload\" cellvalue=\"" + cellvalue + "\" idname=\"" + options.colModel.name + "\" rowid=\"" + options.rowId + "\">" + (i18n && i18n.def.download || "下載") + "</a>";
+            };
+
+            _download.unformat = function(cellvalue, options) {
+                return cellvalue;
+            };
+            return _download;
+        })()
+    });
 })(jQuery);
