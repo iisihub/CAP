@@ -17,6 +17,8 @@ import java.io.ObjectOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import org.apache.commons.io.IOUtils;
+
 /**
  * <pre>
  * Object seriaization utilities
@@ -25,7 +27,7 @@ import java.util.zip.GZIPOutputStream;
  * @since 2003/5/20
  * @author Malo Jwo
  * @version <ul>
- *          <li>2011/6/27,iristu,copy from gaia 
+ *          <li>2011/6/27,iristu,copy from gaia
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
@@ -67,12 +69,19 @@ public class CapSerialization {
 	 */
 	public byte[] compress(byte[] input) throws java.io.IOException {
 		byte[] result = null;
-		java.io.ByteArrayOutputStream baout = new java.io.ByteArrayOutputStream();
-		GZIPOutputStream gzipout = new GZIPOutputStream(baout);
-		gzipout.write(input);
-		gzipout.finish();
-		result = baout.toByteArray();
-		return result;
+		java.io.ByteArrayOutputStream baout = null;
+		GZIPOutputStream gzipout = null;
+		try {
+			baout = new java.io.ByteArrayOutputStream();
+			gzipout = new GZIPOutputStream(baout);
+			gzipout.write(input);
+			gzipout.finish();
+			result = baout.toByteArray();
+			return result;
+		} finally {
+			IOUtils.closeQuietly(baout);
+			IOUtils.closeQuietly(gzipout);
+		}
 	}
 
 	/**
@@ -87,17 +96,25 @@ public class CapSerialization {
 
 		byte[] buf = new byte[2048];
 		byte[] result = null;
-		java.io.ByteArrayInputStream bain = new java.io.ByteArrayInputStream(
-				input);
-		GZIPInputStream gzipin = new GZIPInputStream(bain);
-		ByteArrayOutputStream baout = new ByteArrayOutputStream();
-		int size;
-		while ((size = gzipin.read(buf)) != -1) {
-			baout.write(buf, 0, size);
+		java.io.ByteArrayInputStream bain = null;
+		ByteArrayOutputStream baout = null;
+		GZIPInputStream gzipin = null;
+		try {
+			bain = new java.io.ByteArrayInputStream(input);
+			gzipin = new GZIPInputStream(bain);
+			baout = new ByteArrayOutputStream();
+			int size;
+			while ((size = gzipin.read(buf)) != -1) {
+				baout.write(buf, 0, size);
+			}
+			result = baout.toByteArray();
+			return result;
+		} finally {
+			IOUtils.closeQuietly(bain);
+			IOUtils.closeQuietly(baout);
+			IOUtils.closeQuietly(gzipin);
 		}
-		gzipin.close();
-		result = baout.toByteArray();
-		return result;
+
 	}
 
 	/**
@@ -127,16 +144,8 @@ public class CapSerialization {
 		} catch (Exception e) {
 			e.getMessage();
 		} finally {
-			try {
-				ois.close();
-			} catch (Exception e) {
-				e.getMessage();
-			}
-			try {
-				bais.close();
-			} catch (Exception e) {
-				e.getMessage();
-			}
+			IOUtils.closeQuietly(ois);
+			IOUtils.closeQuietly(bais);
 		}
 		return null;
 	}
@@ -163,22 +172,12 @@ public class CapSerialization {
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(o);
 			byte[] out = baos.toByteArray();
-			oos.close();
-			baos.close();
 			return compress ? compress(out) : out;
 		} catch (Exception e) {
 			e.getMessage();
 		} finally {
-			try {
-				oos.close();
-			} catch (Exception e) {
-				e.getMessage();
-			}
-			try {
-				baos.close();
-			} catch (Exception e) {
-				e.getMessage();
-			}
+			IOUtils.closeQuietly(oos);
+			IOUtils.closeQuietly(baos);
 		}
 		return null;
 	}

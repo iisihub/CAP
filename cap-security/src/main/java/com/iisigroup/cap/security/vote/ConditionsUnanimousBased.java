@@ -43,8 +43,8 @@ import org.springframework.util.Assert;
  *          <li>2011/1/20,iristu,new
  *          </ul>
  */
-public class ConditionsUnanimousBased implements AccessDecisionManager,InitializingBean,
-		MessageSourceAware {
+public class ConditionsUnanimousBased implements AccessDecisionManager,
+		InitializingBean, MessageSourceAware {
 
 	private Map<String, AccessDecisionVoter> conditionVoters;
 
@@ -60,10 +60,10 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 	 *            使用者登入資訊
 	 * @param object
 	 *            FilterInvocation
-	 * @param config
+	 * @param configAttributes
 	 *            ConfigAttributeDefinition
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public void decide(Authentication authentication, Object object,
 			Collection<ConfigAttribute> configAttributes) {
@@ -80,7 +80,7 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 
 			if (conditionVoters.containsKey(s)) {
 				AccessDecisionVoter voter = conditionVoters.get(s);
-				if (voter instanceof RoleVoter){
+				if (voter instanceof RoleVoter) {
 					((RoleVoter) voter).setRolePrefix(s);
 				}
 				decisionVoters.add(voter);
@@ -150,7 +150,8 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,Initializ
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notEmpty(this.conditionVoters, "AccessDecisionVoters is required");
+		Assert.notEmpty(this.conditionVoters,
+				"AccessDecisionVoters is required");
 	}
 
 }// ~

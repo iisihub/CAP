@@ -1,7 +1,7 @@
-/**
+/*
  * IAction.java
  *
- * Copyright (c) 2009 International Integrated System, Inc.
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
  *
@@ -13,9 +13,7 @@
 package com.iisigroup.cap.action;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.response.IResult;
-
 
 /**
  * <p>
@@ -30,6 +28,6 @@ import com.iisigroup.cap.response.IResult;
  */
 public interface IAction {
 
-	IResult doWork(IRequest params) throws CapException;
+	IResult doWork(IRequest params);
 
 }

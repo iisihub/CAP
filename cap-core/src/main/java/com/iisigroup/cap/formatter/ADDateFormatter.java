@@ -17,8 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.iisigroup.cap.Constants;
-import com.iisigroup.cap.exception.CapFormatException;
-
 
 /**
  * <p>
@@ -38,16 +36,16 @@ import com.iisigroup.cap.exception.CapFormatException;
 @SuppressWarnings("serial")
 public class ADDateFormatter implements IFormatter {
 
-    static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
-     */
-    @SuppressWarnings("unchecked")
-	public String reformat(Object in) throws CapFormatException {
-    	if (in != null && !"".equals(in)) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	public String reformat(Object in) {
+		if (in != null && !"".equals(in)) {
 			if (in instanceof Calendar) {
 				in = ((Calendar) in).getTime();
 			} else if (in instanceof String) {
@@ -57,6 +55,6 @@ public class ADDateFormatter implements IFormatter {
 		} else {
 			return Constants.EMPTY_STRING;
 		}
-    }
+	}
 
 }

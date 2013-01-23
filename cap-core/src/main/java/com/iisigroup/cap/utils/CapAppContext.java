@@ -10,7 +10,6 @@ import org.springframework.context.NoSuchMessageException;
 import org.springframework.core.io.Resource;
 
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
-import com.iisigroup.cap.operation.step.CapFileUploadOpStep;
 
 /**
  * <pre>

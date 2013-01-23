@@ -85,7 +85,7 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 
 	@Override
 	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) throws CapException {
+			IHandler handler) {
 		MultipartHttpServletRequest req = uploadFile(params);
 		params.setRequestObject(req);
 		return ctx.setGoToStep(NEXT);

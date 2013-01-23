@@ -1,5 +1,5 @@
 /* 
- * MCI020402U03PageReport.java
+ * SampilePageReport.java
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 
 /**
  * <pre>
@@ -38,7 +37,7 @@ public class SampilePageReport implements IPageReport {
 	
 
 	@Override
-	public Map<String, Object> excute(IRequest request) throws CapException {
+	public Map<String, Object> excute(IRequest request) {
 		Map<String, Object> m = new HashMap<String, Object>();
 		// TODO put data to m
 		return m;

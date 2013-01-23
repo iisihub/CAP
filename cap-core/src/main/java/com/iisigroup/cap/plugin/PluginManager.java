@@ -54,8 +54,7 @@ public class PluginManager implements InitializingBean {
 	 * @throws CapPlugInNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getPlugin(String plugInBeanName)
-			throws CapPlugInNotFoundException {
+	public <T> T getPlugin(String plugInBeanName) {
 		T plugin = null;
 
 		long start = System.currentTimeMillis();

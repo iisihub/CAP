@@ -29,7 +29,6 @@ import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
@@ -104,7 +103,7 @@ public class CodeTypeHandler extends MFormHandler {
 	 *            request
 	 * @return IResult
 	 */
-	public IResult modify(IRequest request) throws CapException {
+	public IResult modify(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		String type = request.get("type");
 		String locale = CapSecurityContext.getLocale().toString();

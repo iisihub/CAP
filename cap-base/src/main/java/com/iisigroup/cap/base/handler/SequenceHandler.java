@@ -22,7 +22,6 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -56,7 +55,7 @@ public class SequenceHandler extends MFormHandler {
 		return new MapGridResult(page.getContent(), page.getTotalRow());
 	}// ;
 
-	public IResult getNewSeq(IRequest params) throws CapException {
+	public IResult getNewSeq(IRequest params) {
 		AjaxFormResult result = new AjaxFormResult();
 		String seqNode = params.get("seqNode");
 		int theSeq = seqSrv.getNextSeqNo(seqNode, 1, 1, Integer.MAX_VALUE);

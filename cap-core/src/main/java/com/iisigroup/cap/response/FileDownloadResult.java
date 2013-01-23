@@ -14,7 +14,6 @@ package com.iisigroup.cap.response;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -22,6 +21,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,13 +118,14 @@ public class FileDownloadResult implements IResult {
 	@Override
 	public void respondResult(ServletResponse response) {
 		InputStream in = null;
+		OutputStream output = null;
 		try {
 			if (_outputName != null && response instanceof HttpServletResponse) {
 				((HttpServletResponse) response).setHeader(
 						"Content-Disposition", "attachment;filename=\""
 								+ _outputName + "\"");
 			}
-			OutputStream output = response.getOutputStream();
+			output = response.getOutputStream();
 			File file = new File(_file);
 			int length = -1;
 			// Stream to the requester.
@@ -139,11 +140,8 @@ public class FileDownloadResult implements IResult {
 		} catch (Exception e) {
 			throw new CapException(e, getClass());
 		} finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				e.getMessage();
-			}
+			IOUtils.closeQuietly(in);
+			IOUtils.closeQuietly(output);
 		}
 
 	}// ;

@@ -19,8 +19,6 @@ import javax.annotation.Resource;
 
 import net.sf.json.JSONArray;
 
-import org.springframework.util.ReflectionUtils;
-
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
@@ -39,6 +37,7 @@ import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapCommonUtil;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -89,7 +88,7 @@ public abstract class MFormHandler extends HandlerPlugin {
 		}
 
 		@Override
-		public IResult doWork(IRequest params) throws CapException {
+		public IResult doWork(IRequest params) {
 			IResult rtn = null;
 			String methodId = params.get(FORM_ACTION);
 			if (CapString.isEmpty(methodId)) {
@@ -97,8 +96,8 @@ public abstract class MFormHandler extends HandlerPlugin {
 			}
 			boolean hasMethod = false;
 			try {
-				Method method = ReflectionUtils.findMethod(
-						executeHandler.getClass(), methodId, null);
+				Method method = CapCommonUtil.findMethod(
+						executeHandler.getClass(), methodId, (Class<?>) null);
 				if (method != null) {
 					HandlerType type = method.getAnnotation(HandlerType.class);
 					if (type != null
@@ -147,8 +146,7 @@ public abstract class MFormHandler extends HandlerPlugin {
 	}// ;
 
 	@SuppressWarnings({ "rawtypes" })
-	private IResult getGridData(Method method, IRequest params)
-			throws CapException {
+	private IResult getGridData(Method method, IRequest params) {
 		ISearch search = createSearchTemplete();
 		boolean pages = params.containsParamsKey(IGridEnum.PAGE.getCode());
 		int page = 0, pageRows = 0, startRow = 0;
@@ -202,7 +200,7 @@ public abstract class MFormHandler extends HandlerPlugin {
 	 * @return String string[]
 	 */
 	@SuppressWarnings("unchecked")
-	protected String[] getColumns(String params) throws CapException {
+	protected String[] getColumns(String params) {
 		JSONArray arr = JSONArray.fromObject(params);
 		String[] colNames = new String[arr.size()];
 		for (int i = 0; i < arr.size(); i++) {
@@ -229,12 +227,12 @@ public abstract class MFormHandler extends HandlerPlugin {
 	 *            PageParameters
 	 * @return IResult
 	 */
-	public IResult doWork(IRequest params) throws CapException {
+	public IResult doWork(IRequest params) {
 		return null;
 	}
 
 	@Override
-	public IResult execute(IRequest params) throws CapException {
+	public IResult execute(IRequest params) {
 		Operation oper = getOperation(params);
 		if (oper != null) {
 			OpStepContext ctx = new OpStepContext(OperationStep.NEXT);
@@ -246,8 +244,8 @@ public abstract class MFormHandler extends HandlerPlugin {
 
 	protected String getOperationName(IRequest params) {
 		String methodId = params.get(FORM_ACTION);
-		Method method = ReflectionUtils.findMethod(this.getClass(), methodId,
-				null);
+		Method method = CapCommonUtil.findMethod(this.getClass(), methodId,
+				(Class<?>) null);
 		if (method != null) {
 			HandlerType type = method.getAnnotation(HandlerType.class);
 			if (type != null) {

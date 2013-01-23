@@ -95,7 +95,7 @@ public class CapNamedJdbcTemplate {
 			RowCallbackHandler rch) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
@@ -140,9 +140,9 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		if (appendDynamicSql != null) {
-			sql.append(" ").append(appendDynamicSql);
+			sql.append(' ').append(appendDynamicSql);
 		}
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
@@ -167,6 +167,8 @@ public class CapNamedJdbcTemplate {
 	/**
 	 * 查詢，查詢結果為List<Map<key, value>>
 	 * 
+	 * @param <T>
+	 *            bean
 	 * @param sqlId
 	 *            sqlId
 	 * @param appendDynamicSql
@@ -175,6 +177,7 @@ public class CapNamedJdbcTemplate {
 	 *            傳入參數
 	 * @param rm
 	 *            RowMapper
+	 * 
 	 * @return List<T>
 	 */
 	public <T> List<T> query(String sqlId, String appendDynamicSql,
@@ -182,9 +185,9 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		if (appendDynamicSql != null) {
-			sql.append(" ").append(appendDynamicSql);
+			sql.append(' ').append(appendDynamicSql);
 		}
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
@@ -286,7 +289,7 @@ public class CapNamedJdbcTemplate {
 	public int queryForInt(String sqlId, Map<String, Object> args) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
@@ -338,7 +341,7 @@ public class CapNamedJdbcTemplate {
 			logger.trace(new StringBuffer("SqlId=")
 					.append(sqlp.containsKey(sqlId) ? sqlId : "")
 					.append("\n\t")
-					.append(CapDbUtil.convertToSQLCommand(sql.toString(), args))
+					.append(CapDbUtil.convertToSQLCommand(sql, args))
 					.toString());
 		}
 		long cur = System.currentTimeMillis();
@@ -378,8 +381,8 @@ public class CapNamedJdbcTemplate {
 								.append("\n#")
 								.append((i + 1))
 								.append("\t")
-								.append(CapDbUtil.convertToSQLCommand(
-										sql.toString(), valueMap)).toString());
+								.append(CapDbUtil.convertToSQLCommand(sql,
+										valueMap)).toString());
 					}
 				}
 				cur = System.currentTimeMillis();
@@ -455,16 +458,16 @@ public class CapNamedJdbcTemplate {
 	 * wrapper SqlRowSet queryForRowSet(String sql, Object[] args) from
 	 * org.springframework.jdbc.core.JdbcTemplate
 	 * 
-	 * @param sql
+	 * @param sqlId
+	 *            sqlId
 	 * @param args
-	 * @param argTypes
-	 * @return
-	 * @throws GWException
+	 *            參數
+	 * @return SqlRowSet
 	 */
 	public SqlRowSet queryForRowSet(String sqlId, Map<String, Object> args) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
@@ -492,7 +495,7 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
 				params, sqltemp.getParserContext()));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (args == null) {
 			args = new HashMap<String, Object>();
@@ -523,7 +526,7 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
 				params, sqlp.getParserContext()));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("\n\t").append(
@@ -558,7 +561,7 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
 				params, sqlp.getParserContext()));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("\n\t").append(
@@ -572,7 +575,7 @@ public class CapNamedJdbcTemplate {
 		sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
 				params, sqlp.getParserContext()));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("\n\t").append(
@@ -608,7 +611,7 @@ public class CapNamedJdbcTemplate {
 		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
 				params, sqlp.getParserContext()));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("\n\t").append(
@@ -622,7 +625,7 @@ public class CapNamedJdbcTemplate {
 		sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
 				params, sqlp.getParserContext()));
-		sql.append(" ").append(
+		sql.append(' ').append(
 				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("\n\t").append(

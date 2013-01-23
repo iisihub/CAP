@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import com.iisigroup.cap.Constants;
-import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.model.GenericBean;
 
 /**
@@ -61,7 +60,7 @@ public class DurationFormatter implements IBeanFormatter {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public String reformat(Object in) throws CapFormatException {
+	public String reformat(Object in) {
 		Timestamp start = null, end = null;
 		if (in instanceof GenericBean) {
 			GenericBean bean = (GenericBean) in;

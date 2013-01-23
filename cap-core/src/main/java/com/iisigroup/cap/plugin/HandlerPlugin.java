@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.IHandler;
 import com.iisigroup.cap.response.IResult;
 
@@ -44,7 +43,7 @@ public abstract class HandlerPlugin implements IPlugin, IHandler {
 	 *            Client 參數
 	 * @return String
 	 */
-	public abstract IResult execute(IRequest params) throws CapException;
+	public abstract IResult execute(IRequest params) ;
 
 	IRequest request;
 

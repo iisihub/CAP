@@ -11,6 +11,7 @@
  */
 package com.iisigroup.cap.mvc.i18n;
 
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
@@ -18,6 +19,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -191,6 +193,7 @@ public class MessageBundleScriptCreator {
 			locale = Locale.getDefault();
 		}
 		String i18nFile = null;
+		InputStream is = null;
 		try {
 			i18nFile = new StringBuffer("classpath:/i18n/").append(i18nPath)
 					.append("_").append(locale.toString())
@@ -198,7 +201,8 @@ public class MessageBundleScriptCreator {
 			Resource rs = CapAppContext.getApplicationContext().getResource(
 					i18nFile);
 			if (rs != null) {
-				prop.load(rs.getInputStream());
+				is = rs.getInputStream();
+				prop.load(is);
 			} else {
 				i18nFile = new StringBuffer("classpath:/i18n/")
 						.append(i18nPath).append("_").append(".properties")
@@ -206,12 +210,15 @@ public class MessageBundleScriptCreator {
 				rs = CapAppContext.getApplicationContext()
 						.getResource(i18nFile);
 				if (rs != null) {
-					prop.load(rs.getInputStream());
+					is = rs.getInputStream();
+					prop.load(is);
 				}
 			}
 
 		} catch (Exception e) {
 			logger.error("can't load " + i18nPath);
+		}finally{
+			IOUtils.closeQuietly(is);
 		}
 		return prop;
 	}

@@ -191,7 +191,8 @@ public class AjaxFormResult implements IResult {
 	 * 比對是否存在此key
 	 * 
 	 * @param key
-	 * @return
+	 *            key
+	 * @return boolean
 	 */
 	public boolean containsKey(String key) {
 		return resultMap.containsKey(key);

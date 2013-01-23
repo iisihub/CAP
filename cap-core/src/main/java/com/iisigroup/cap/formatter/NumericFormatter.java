@@ -14,7 +14,6 @@ package com.iisigroup.cap.formatter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.utils.CapMath;
 
 /**
@@ -54,7 +53,7 @@ public class NumericFormatter implements IFormatter {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public String reformat(Object in) throws CapFormatException {
+	public String reformat(Object in) {
 
 		BigDecimal dec = in instanceof BigDecimal ? (BigDecimal) in : CapMath
 				.getBigDecimal((String) in);

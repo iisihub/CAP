@@ -195,8 +195,7 @@ public class MapGridResult implements
 		resultMap.putAll(json);
 	}
 
-	public MapGridResult addReformatData(String key, IFormatter formatter)
-			throws CapException {
+	public MapGridResult addReformatData(String key, IFormatter formatter) {
 		if (dataReformatter == null) {
 			dataReformatter = new HashMap<String, IFormatter>();
 		}
@@ -231,8 +230,7 @@ public class MapGridResult implements
 	/** column split regularre char **/
 	private static String SPLIT = "\\|";
 
-	protected String dataToJsonString(Map<String, Object> data)
-			throws CapException {
+	protected String dataToJsonString(Map<String, Object> data) {
 		JSONArray row = new JSONArray();
 		for (String str : columns) {
 			Object val = null;
@@ -358,7 +356,7 @@ public class MapGridResult implements
 	public Map<String, IFormatter> getDataReformatter() {
 		return this.dataReformatter;
 	}
-	
+
 	@Override
 	public void respondResult(ServletResponse response) {
 		new StringResponse(getContextType(), getEncoding(), getResult())
