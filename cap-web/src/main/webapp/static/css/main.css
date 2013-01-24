@@ -2840,6 +2840,7 @@ nav.sub li a {
     display: block;
     padding: 9px 10px;
     text-decoration: none;
+    cursor: pointer;
 }
 nav.sub li a:hover, nav.sub li a.selected {
     background: none repeat scroll 0 0 #C90915;
