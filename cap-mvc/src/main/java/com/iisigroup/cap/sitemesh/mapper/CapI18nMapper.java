@@ -14,8 +14,13 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.web.util.UrlUtils;
+
 import com.iisigroup.cap.mvc.i18n.MessageBundleScriptCreator;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapWebUtil;
 import com.opensymphony.module.sitemesh.Config;
 import com.opensymphony.module.sitemesh.Decorator;
 import com.opensymphony.module.sitemesh.DecoratorMapper;
@@ -30,10 +35,11 @@ import com.opensymphony.module.sitemesh.mapper.AbstractDecoratorMapper;
  * @author rodeschen
  * @version <ul>
  *          <li>2012/9/28,rodeschen,new
+ *          <li>2013/1/23,RodesChen,fix weblogic getPath error
  *          </ul>
  */
 public class CapI18nMapper extends AbstractDecoratorMapper {
-
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	private final static String PROP_I18N = "i18n";
 	private String ignorePathReg;
 
@@ -54,11 +60,10 @@ public class CapI18nMapper extends AbstractDecoratorMapper {
 	@Override
 	public Decorator getDecorator(HttpServletRequest request,
 			com.opensymphony.module.sitemesh.Page page) {
-		if (!CapString.checkRegularMatch(request.getPathInfo(), ignorePathReg)) {
-			page.addProperty(
-					PROP_I18N,
-					MessageBundleScriptCreator.createScript(request.getPathInfo().replaceAll("^/",
-							"")));
+		String pathInfo = CapWebUtil.getRequestURL(request);
+		if (!CapString.checkRegularMatch(UrlUtils.buildRequestUrl(request), ignorePathReg)) {
+			page.addProperty(PROP_I18N, MessageBundleScriptCreator.createScript(pathInfo
+					.replaceAll("(^/page/|[.][jJ][sS][pP]$)", "")));
 		}
 		return super.getDecorator(request, page);
 	}

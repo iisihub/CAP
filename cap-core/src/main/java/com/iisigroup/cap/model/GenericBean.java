@@ -62,7 +62,6 @@ public class GenericBean {
 	 * @param value
 	 *            欄位值
 	 * @return T <T>
-	 * @throws CapException
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T set(String field, Object value) {

@@ -1,13 +1,13 @@
 /**
  * override grid
  */
-(function($){
+(function($) {
 
     $.extend($.fn, {
         /**
          * 取得目前所選取資料行資料
          */
-        getSelRowDatas: function(){
+        getSelRowDatas : function() {
             var tGrid = $(this);
             if (tGrid.jqGrid('getGridParam', 'multiselect')) {
                 var sels = tGrid.jqGrid('getGridParam', 'selarrrow');
@@ -16,8 +16,7 @@
                     res.push(tGrid.getRowData(sels[i]));
                 }
                 return res.length ? res : undefined;
-            }
-            else {
+            } else {
                 var selrow = tGrid.jqGrid('getGridParam', 'selrow');
                 return selrow ? tGrid.getRowData(selrow) : undefined;
             }
@@ -26,13 +25,13 @@
          * 將GridData轉換為Array<JSON>值
          * @param {boolean} stringify
          */
-        serializeGridData: function(stringify){
+        serializeGridData : function(stringify) {
             var data = [];
             if ($(this).attr('role') == 'grid') {
                 var tGrid = $(this);
-                tGrid.find('tr[id]').each(function(){
+                tGrid.find('tr[id]').each(function() {
                     data.push($.extend(tGrid.getRowData($(this).attr('id')), {
-                        rowId: $(this).attr('id')
+                        rowId : $(this).attr('id')
                     }));
                 });
             }
@@ -42,18 +41,18 @@
          * add data to grid by Array[json,json,....] or Array[array,array,....]
          * @param {Object} datas
          */
-        addGridData: function(datas){
-            var $this = $(this), ids = $this.getGridParam("colIds");
-            
-            function _convertJson(d){
+        addGridData : function(datas) {
+            var $this = $(this), ids = $this.jqGrid("getGridParam", "colIds")
+
+            function _convertJson(d) {
                 var td = {};
                 for (var i in ids) {
                     td[ids[i]] = d[i++];
                 }
                 return td;
             }
-            
-            if (datas instanceof Array) {
+
+            if ( datas instanceof Array) {
                 for (var data in datas) {
                     var _data = (datas[data] instanceof Array) ? _convertJson(datas[data]) : datas[data], rowId = _data[$this[0].colKey];
                     var _new = !$this[0].rows.namedItem(rowId);
@@ -61,31 +60,49 @@
                 }
             }
             return this;
-            
+
+        },
+        /**
+         * 刪除所選 row data
+         */
+        removeSelected : function() {
+            return this.removeGridData(this.jqGrid('getGridParam', 'multiselect') ? this.jqGrid('getGridParam', 'selarrrow') : this.jqGrid('getGridParam', 'selrow'));
+        },
+
+        /**
+         * 刪除row data by Array[id1,id2] or id
+         * @param {Object} array or string - ids
+         */
+        removeGridData : function(ids) {
+            ids = ( typeof ids === 'string' ) ? [ids] : [].concat(ids);
+            for (i in ids) {
+                this.delRowData(ids[i]);
+            }
+            return this;
         },
         /**
          * 自動設定寬度
          * @param {integer} maxWidth 寬度
          * @param {boolean} fitColumn 是否自動調整欄寬
          */
-        iGridFitSize: function(maxWidth, fitColumn){
+        iGridFitSize : function(maxWidth, fitColumn) {
             var self = this.closest(".ui-jqgrid"), $this = $(this);
-            if (!$this.is(":visible")) 
+            if (!$this.is(":visible"))
                 return;
-            if (typeof maxWidth == 'boolean') {
+            if ( typeof maxWidth == 'boolean') {
                 maxWidth = 0;
                 // fitColumn = maxWidth;
             }
             //fitColumn = !!fitColumn;
-            $this.each(function(){
+            $this.each(function() {
                 if (this.p.autowidth) {
                     maxWidth = maxWidth || self.parent().width();
                     maxWidth = (maxWidth > 960) ? 960 : maxWidth
-                }
-                else {
+                } else {
                     maxWidth = maxWidth || this.p.freezeWidth;
                 }
-                $this.setGridWidth((maxWidth * 98) / 100, fitColumn == undefined ? this.p.forceFit : fitColumn);// ? this.p.forceFit : !(self.width() > maxWidth)); //);
+                $this.setGridWidth((maxWidth * 98) / 100, fitColumn == undefined ? this.p.forceFit : fitColumn);
+                // ? this.p.forceFit : !(self.width() > maxWidth)); //);
             });
         },
         /**
@@ -93,7 +110,7 @@
          * @param {integer} speed
          * @param {function} callback
          */
-        iGridHide: function(speed, callback){
+        iGridHide : function(speed, callback) {
             $("#gbox_" + $(this).attr("id")).hide(speed, callback);
             return $(this);
         },
@@ -102,12 +119,12 @@
          * @param {integer} speed
          * @param {function} callback
          */
-        iGridShow: function(speed, callback){
+        iGridShow : function(speed, callback) {
             $("#gbox_" + $(this).attr("id")).show(speed, callback);
             return $(this);
         }
     });
-    
+
     //    $.extend($.jgrid.defaults, {
     //        rowNum: 50,
     //        //	scroll: 1,
@@ -120,81 +137,86 @@
     //        forceFit: true
     //    });
     var _jqGrid = $.fn.jqGrid;
-    $.fn.jqGrid = function(){
+    $.fn.jqGrid = function() {
         if (!arguments.length) {
             alert("grid argument error");
             return this;
         }
-        
-        
+
         if ((this.is("div") || !this.is("[role=grid]")) && typeof arguments[0] === 'object') {
             var url = arguments[0].url;
             //default settings
             var needPager = !(arguments[0].pager === false);
             var s = $.extend({}, {
-                ajaxGridOptions: { // ajax option
-                    global: false
+                ajaxGridOptions : {// ajax option
+                    global : false
                 },
-                forceFit: true,
-                url: '',
-                mtype: 'POST',
-                rowNum: (needPager == false) ? 1000 : Properties.Grid.rowNum,
-                rowList: Properties.Grid.rowList,
-                multiselect: false,
-                viewrecords: true,
-                pgbuttons: needPager,
-                pginput: needPager,
-                loadonce: false,
-                autowidth: true,
-                localFirst: false,
-                gridview: true
+                forceFit : true,
+                url : '',
+                mtype : 'POST',
+                rowNum : (needPager == false) ? 1000 : Properties.Grid.rowNum,
+                rowList : Properties.Grid.rowList,
+                multiselect : false,
+                viewrecords : true,
+                pgbuttons : needPager,
+                pginput : needPager,
+                loadonce : false,
+                autowidth : true,
+                localFirst : false,
+                gridview : true
             }, arguments[0]);
             //  console.debug(s);
             var id = this.attr("id");
             this.append($("<table />", {
-                id: id
+                id : id
             })).addClass("r-grid").removeAttr("id");
             // add pager
             // arguments[0].pager &&
             this.append($("<div />", {
-                id: id + "-pager"
+                id : id + "-pager"
             }));
             $.extend(s, {
-                pager: id + "-pager",
-                hidegrid: false,
-                datatype: (!s.localFirst && url) ? 'json' : 'local',
-                url: (!s.localFirst && url) ? url : ''
+                pager : id + "-pager",
+                hidegrid : false,
+                datatype : (!s.localFirst && url) ? 'json' : 'local',
+                url : (!s.localFirst && url) ? url : ''
             });
-            
+
             //add header
             var _colNames = s.colNames || [];
             s.colNames = [];
+            s.colIds = []
             for (var col in s.colModel) {
                 s.colNames.push(_colNames[col] || s.colModel[col].header || s.colModel[col].name);
+                s.colIds.push(s.colModel[col].name);
             }
             // add columns info
             s = $.extend({}, s, {
-                postData: $.extend(s.postData || {}, {
-                    _columnParam: JSON.stringify(s.colModel, null),
-                    groupCloumn: JSON.stringify(s.groupingView && s.groupingView.groupField || [], null),
-                    mtype: "post"
+                postData : $.extend(s.postData || {}, {
+                    _columnParam : JSON.stringify(s.colModel, null),
+                    groupCloumn : JSON.stringify(s.groupingView && s.groupingView.groupField || [], null),
+                    mtype : "post"
                 })
             });
             //            console.debug(s)
             var resGrid = _jqGrid.call(this.is("table") ? this : this.find("table"), s);
             resGrid.navGrid("#" + id + "-pager", {
-                del: false,
-                add: false,
-                edit: false,
-                search: false
+                del : false,
+                add : false,
+                edit : false,
+                search : false
             });
-            
-            s.localFirst &&
-            resGrid.setGridParam({
-                datatype: url ? 'json' : 'local',
-                url: url
+
+            s.localFirst && resGrid.setGridParam({
+                datatype : url ? 'json' : 'local',
+                url : url
             });
-            
+
+            //set cust properties
+            resGrid.each(function() {
+                this.p.colIds = s.colIds;
+            });
+
             return resGrid;
         }
         //

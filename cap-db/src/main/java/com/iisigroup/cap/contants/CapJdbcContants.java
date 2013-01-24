@@ -38,7 +38,5 @@ public interface CapJdbcContants {
 	 * a space string.
 	 */
 	final static String SPACE = " ";
-	
-	void nothing();
 
 }

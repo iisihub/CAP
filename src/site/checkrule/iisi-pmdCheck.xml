@@ -1728,6 +1728,7 @@ public void doSomething() {
  ]]>
       </example>
 	</rule>
+	<!-- 
 	<rule name="AvoidConstantsInterface" since="3.5"
 		message="An Interface should be used only to model a behaviour; consider converting this to a class."
 		class="net.sourceforge.pmd.rules.XPathRule"
@@ -1760,6 +1761,7 @@ public void doSomething() {
     ]]>
       </example>
 	</rule>
+	 -->
 	<rule name="UseCollectionIsEmpty" since="3.9"
 		message="Substitute calls to size() == 0 (or size() != 0) with calls to isEmpty()"
 		class="net.sourceforge.pmd.rules.design.UseCollectionIsEmpty"

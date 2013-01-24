@@ -41,7 +41,6 @@ public class CapCommonFormHandler extends MFormHandler {
 	 * @param params
 	 *            PageParameters
 	 * @return IResult
-	 * @throws CapException
 	 */
 	public IResult fileSuccess(IRequest params) {
 		return new AjaxFormResult();

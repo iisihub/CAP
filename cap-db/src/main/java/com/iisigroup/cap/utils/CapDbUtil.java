@@ -1,5 +1,5 @@
 /* 
- * CapSqlUtil.java
+ * CapDbUtil.java
  * 
  * Copyright (c) 2009-2012 International Integrated System, Inc. 
  * All Rights Reserved.
@@ -30,7 +30,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
 /**
  * <pre>
- * CapSqlUtil
+ * CapDbUtil
  * </pre>
  * 
  * @since 2012/9/21

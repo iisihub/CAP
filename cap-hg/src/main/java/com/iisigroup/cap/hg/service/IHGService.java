@@ -13,6 +13,7 @@ import com.iisigroup.cap.hg.enums.ConnStatusEnum;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/12/5,rodeschen,new
+ *          <li>2013/1/15,rodeschen,add setHeader,remove CapException
  *          </ul>
  */
 public interface IHGService {
@@ -23,7 +24,6 @@ public interface IHGService {
 	 * @param property
 	 *            property
 	 * 
-	 * @throws CapException
 	 */
 	void setProperties(Map<String, Object> property);
 
@@ -45,7 +45,6 @@ public interface IHGService {
 	 * @param name
 	 *            name
 	 * 
-	 * @throws CapException
 	 * @return <T>
 	 */
 	<T> T getProperty(Object name);
@@ -53,7 +52,6 @@ public interface IHGService {
 	/**
 	 * initial connection
 	 * 
-	 * @throws CapException
 	 */
 	void initConnection();
 
@@ -75,22 +73,20 @@ public interface IHGService {
 	void setStatus(ConnStatusEnum status);
 
 	/**
-	 * get receive data
-	 * 
-	 * @param <T>
-	 *            stauts
-	 * @return <T>
-	 */
-	<T> T getReceiveData();
-
-	/**
 	 * set send data
 	 * 
 	 * @param data
 	 *            data
-	 * @throws CapException
 	 */
 	void setSendData(Object data);
+
+	/**
+	 * setHeader
+	 * 
+	 * @param data
+	 *            Object
+	 */
+	void setHeader(Object data);
 
 	/**
 	 * execute connect
@@ -98,6 +94,15 @@ public interface IHGService {
 	 * @throws Exception
 	 */
 	void execute() throws Exception;
+
+	/**
+	 * get receive data
+	 * 
+	 * @param <T>
+	 *            stauts
+	 * @return <T>
+	 */
+	<T> T getReceiveData();
 
 	/**
 	 * error handle

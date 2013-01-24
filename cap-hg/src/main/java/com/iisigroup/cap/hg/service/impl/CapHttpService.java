@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ import com.iisigroup.cap.utils.CapString;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/11/10,rodeschen,new
+ *          <li>2013/1/15,rodeschen,add setHeader,remove CapException
  *          </ul>
  */
 public class CapHttpService extends AbstractHGservice {
@@ -61,6 +63,8 @@ public class CapHttpService extends AbstractHGservice {
 	private boolean isAsync;
 
 	private Object sendData;
+
+	private Map<String, String> header;
 
 	/**
 	 * @param Map
@@ -111,6 +115,25 @@ public class CapHttpService extends AbstractHGservice {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.iisigroup.cap.hg.service.IHGService#setHeader(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void setHeader(Object data) {
+		this.header = (Map<String, String>) data;
+
+	}
+
+	public void addHeader(String key, String value) {
+		if (this.header == null) {
+			this.header = new HashMap<String, String>();
+		}
+		this.header.put(key, value);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.iisi.cap.hg.service.IHGService#setSendMessage(java.lang.Object)
 	 */
 	@Override
@@ -145,13 +168,19 @@ public class CapHttpService extends AbstractHGservice {
 	 *            parameter
 	 * @throws UnsupportedEncodingException
 	 */
-	public void setRequestParams(Map<String, String> map)
-			throws UnsupportedEncodingException {
+	public void setRequestParams(Map<String, String> map) throws UnsupportedEncodingException {
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		for (String key : map.keySet()) {
 			nvps.add(new BasicNameValuePair(key, map.get(key)));
 		}
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps, defaultEncode));
+
+	}
+
+	public void setRequestHeader(Map<String, String> map) {
+		for (String key : map.keySet()) {
+			httpPost.addHeader(key, map.get(key));
+		}
 	}
 
 	private void excuteHttp() throws Exception {
@@ -166,8 +195,8 @@ public class CapHttpService extends AbstractHGservice {
 		if (entity != null) {
 			InputStream instream = entity.getContent();
 			try {
-				responseData = StringUtils.join(IOUtils.readLines(instream,
-						defaultEncode).toArray());
+				responseData = StringUtils.join(IOUtils.readLines(instream, defaultEncode)
+						.toArray());
 
 			} catch (RuntimeException ex) {
 				httpPost.abort();
@@ -186,8 +215,7 @@ public class CapHttpService extends AbstractHGservice {
 		// }
 		// });
 		logger.debug("host response:" + responseData);
-		logger.debug("Send Host spand time: "
-				+ (System.currentTimeMillis() - st) + "ms");
+		logger.debug("Send Host spand time: " + (System.currentTimeMillis() - st) + "ms");
 		setStatus(ConnStatusEnum.COMPLETE);
 
 	}
@@ -242,6 +270,9 @@ public class CapHttpService extends AbstractHGservice {
 	@Override
 	public void initConnection() {
 		httpPost = new HttpPost();
+		if (this.header instanceof Map) {
+			setRequestHeader((Map<String, String>) this.header);
+		}
 		try {
 			if (this.sendData instanceof Map) {
 				setRequestParams((Map<String, String>) this.sendData);
@@ -253,19 +284,14 @@ public class CapHttpService extends AbstractHGservice {
 			throw new CapException(e, getClass());
 		}
 		httpClient = new DefaultHttpClient();
+		int ct = Integer.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
+		int st = Integer.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
 
-		int ct = Integer
-				.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
-		int st = Integer
-				.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));// getProperty(CapConstants.SOCKET_TIMEOUT);
-
-		String encode = defaultEncode;// getProperty(Constants.TRANSFER_ENCODING);
+		String encode = defaultEncode;
 		String async = getProperty(Constants.ASYNC);
 
-		httpClient.getParams().setParameter(
-				HttpConnectionParams.CONNECTION_TIMEOUT, ct);
-		httpClient.getParams()
-				.setParameter(HttpConnectionParams.SO_TIMEOUT, st);
+		httpClient.getParams().setParameter(HttpConnectionParams.CONNECTION_TIMEOUT, ct);
+		httpClient.getParams().setParameter(HttpConnectionParams.SO_TIMEOUT, st);
 		defaultEncode = encode != null ? encode : defaultEncode;
 		isAsync = (async != null ? Boolean.valueOf(async) : false);
 		setStatus(ConnStatusEnum.INIT);
@@ -282,16 +308,13 @@ public class CapHttpService extends AbstractHGservice {
 		logger.error(e.getMessage(), e);
 		if (e instanceof HttpHostConnectException) {
 			setStatus(ConnStatusEnum.CONNECT_ERROR);
-			return "{rc:'" + ConnStatusEnum.CONNECT_ERROR
-					+ "',msg:'connect error'}";
+			return "{rc:'" + ConnStatusEnum.CONNECT_ERROR + "',msg:'connect error'}";
 		} else if (e instanceof SocketTimeoutException) {
 			setStatus(ConnStatusEnum.TIMEOUT);
-			return "{rc:'" + ConnStatusEnum.TIMEOUT
-					+ "',msg:'connect timeout'}";
+			return "{rc:'" + ConnStatusEnum.TIMEOUT + "',msg:'connect timeout'}";
 		} else {
 			setStatus(ConnStatusEnum.ERROR);
-			return "{rc:'" + ConnStatusEnum.ERROR + "',msg:'" + e.getMessage()
-					+ "'}";
+			return "{rc:'" + ConnStatusEnum.ERROR + "',msg:'" + e.getMessage() + "'}";
 		}
 	}
 

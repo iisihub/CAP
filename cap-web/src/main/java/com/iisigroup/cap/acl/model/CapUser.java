@@ -25,6 +25,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.model.IUser;
 
 /**
@@ -91,13 +92,7 @@ public class CapUser implements IUser {
 		this.userRoles = userRoles;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisigroup.cap.security.model.IUser#getRoles()
-	 */
-	@Override
-	public Map<String, String> getRoles() {
+	public Map<String, String> getMapRoles() {
 		Map<String, String> rs = new HashMap<String, String>();
 		if (userRoles != null && !userRoles.isEmpty()) {
 			for (CapRole r : this.userRoles) {
@@ -115,6 +110,11 @@ public class CapUser implements IUser {
 	@Override
 	public Locale getLocale() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<? extends IRole> getRoles() {
 		return null;
 	}
 

@@ -22,7 +22,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.iisigroup.cap.security.model.IUser;
+import com.iisigroup.cap.security.model.CapUserDetails;
 
 /**
  * <pre>
@@ -43,35 +43,14 @@ public class CapSecurityContext {
 	 * </pre>
 	 * 
 	 * @param <T>
-	 *            extends UserDetails
-	 * @return T
+	 *            T extends IUser
+	 * @return T T extends IUser
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends UserDetails> T getUserDetails() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
+	public static <T extends CapUserDetails> T getUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		if (auth != null && auth.getPrincipal() instanceof UserDetails) {
-			return ((T) auth.getPrincipal());
-		}
-		return null;
-	}
-
-	/**
-	 * <pre>
-	 * 取得Spring Security登入者的user information.
-	 * </pre>
-	 * 
-	 * @param <T>
-	 *            T extends IUser
-	 * @return IUser
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T extends IUser> T getUser() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-
-		if (auth != null && auth.getPrincipal() instanceof IUser) {
 			return ((T) auth.getPrincipal());
 		}
 		return null;
@@ -85,7 +64,7 @@ public class CapSecurityContext {
 	 * @return String
 	 */
 	public static String getUserId() {
-		IUser user = getUser();
+		CapUserDetails user = getUser();
 		if (user != null) {
 			return user.getUserId();
 		}
@@ -100,7 +79,7 @@ public class CapSecurityContext {
 	 * @return String
 	 */
 	public static String getUserName() {
-		IUser user = getUser();
+		CapUserDetails user = getUser();
 		if (user != null) {
 			return user.getUserName();
 		}
@@ -115,7 +94,7 @@ public class CapSecurityContext {
 	 * @return String
 	 */
 	public static String getUnitNo() {
-		IUser user = getUser();
+		CapUserDetails user = getUser();
 		if (user != null) {
 			return user.getUnitNo();
 		}
@@ -123,7 +102,7 @@ public class CapSecurityContext {
 	}
 
 	public static Locale getLocale() {
-		IUser user = getUser();
+		CapUserDetails user = getUser();
 		if (user != null) {
 			return user.getLocale();
 		} else {
@@ -132,7 +111,7 @@ public class CapSecurityContext {
 	}
 
 	public static Collection<? extends GrantedAuthority> getAuthorities() {
-		UserDetails user = getUserDetails();
+		UserDetails user = getUser();
 		if (user != null) {
 			return user.getAuthorities();
 		}
@@ -143,8 +122,7 @@ public class CapSecurityContext {
 		Set<String> roleOids = new HashSet<String>();
 		Collection<? extends GrantedAuthority> auths = getAuthorities();
 		for (GrantedAuthority auth : auths) {
-			if (AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY.equals(auth
-					.getAuthority())) {
+			if (AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY.equals(auth.getAuthority())) {
 				continue;
 			}
 			roleOids.add(auth.getAuthority());

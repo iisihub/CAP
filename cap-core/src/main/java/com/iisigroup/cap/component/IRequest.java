@@ -43,7 +43,7 @@ public interface IRequest extends Map<String, Object>, Serializable {
 	 * 
 	 * @return ServletRequest
 	 */
-	ServletRequest getServletRequest();
+	<T extends ServletRequest> T getServletRequest();
 
 	/**
 	 * get request parameter

@@ -33,7 +33,7 @@ import com.iisigroup.cap.component.IRequest;
  *          </ul>
  */
 public class CapWebUtil {
-	
+
 	public static final String localeKey = "localeKey";
 
 	/**
@@ -67,5 +67,35 @@ public class CapWebUtil {
 			return fileName;
 		}
 	}// ;
+
+	/**
+	 * Gets the request url.
+	 * 
+	 * @param req
+	 *            HttpServletRequest
+	 * 
+	 * @return the request url
+	 */
+	public static String getRequestURL(HttpServletRequest req) {
+		String url = req.getRequestURI().replaceFirst(req.getContextPath(), "");
+		int f = url.indexOf("/webroot");
+		if (f > -1) {
+			url = url.substring(f + 8);
+		}
+		if (!CapString.isEmpty(req.getParameter("_handler"))) {
+			url = "/" + req.getParameter("_handler");
+		} else if (!CapString.isEmpty((String) req.getAttribute("_handler"))) {
+			url = "/" + req.getAttribute("_handler");
+		}
+		f = url.indexOf("/handler");
+		if (f > -1) {
+			url = url.substring(f + 8);
+		}
+		f = url.indexOf("/page");
+		if (f > -1) {
+			url = url.substring(f + 5);
+		}
+		return url;
+	}
 
 }

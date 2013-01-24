@@ -13,8 +13,8 @@
 package com.iisigroup.cap.security.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * <p>
@@ -27,7 +27,7 @@ import java.util.Map;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public interface IUser extends Serializable{
+public interface IUser extends Serializable {
 
 	String getUserId();
 
@@ -35,8 +35,8 @@ public interface IUser extends Serializable{
 
 	String getUnitNo();
 
-	Map<String, String> getRoles();
-	
+	List<? extends IRole> getRoles();
+
 	Locale getLocale();
-	
+
 }

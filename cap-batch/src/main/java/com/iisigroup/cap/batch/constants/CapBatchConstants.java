@@ -29,10 +29,11 @@ public interface CapBatchConstants {
 	final String LOCALHOST = "localhost";
 
 	final String EXECUTOR = "executor";
-
+	
 	final String K_JobExecution = "_jobExecution";
 
 	final String[] SCHEDULE_KEYWORDS = new String[] { "isEnabled", "exeHost",
 			"cronExpression", "timeZoneId", "repeatCount", "repeatInterval",
 			"priority", "jobData" };
+
 }

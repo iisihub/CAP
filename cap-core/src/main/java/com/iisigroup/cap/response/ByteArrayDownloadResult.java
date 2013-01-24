@@ -19,6 +19,8 @@ import java.io.OutputStream;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.utils.CapWebUtil;
 
@@ -99,6 +101,7 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 	public void respondResult(ServletResponse response) {
 		int length = -1;
 		InputStream in = null;
+		OutputStream output = null;
 		try {
 			if (getOutputName() != null
 					&& response instanceof HttpServletResponse) {
@@ -106,7 +109,7 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 						"Content-Disposition", "attachment;filename=\""
 								+ getOutputName() + "\"");
 			}
-			OutputStream output = response.getOutputStream();
+			output = response.getOutputStream();
 
 			// Stream to the requester.
 			byte[] bbuf = new byte[1024 * 1024];
@@ -119,12 +122,8 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 		} catch (IOException e) {
 			e.getMessage();
 		} finally {
-			try {
-				in.close();
-				// output.close();
-			} catch (IOException e) {
-				e.getMessage();
-			}
+			IOUtils.closeQuietly(in);
+			IOUtils.closeQuietly(output);
 		}
 	}// ;
 }// ~

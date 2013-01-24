@@ -67,10 +67,10 @@ public class StrMessageFormatter implements IFormatter {
 					startVariableName);
 
 			if (endVariableName != -1) {
-				String variableName = unformatMsg.substring(
-						startVariableName, endVariableName);
-				String value = params.containsKey(variableName) ? params
-						.get(variableName).toString() : "";
+				String variableName = unformatMsg.substring(startVariableName,
+						endVariableName);
+				String value = params.containsKey(variableName) ? params.get(
+						variableName).toString() : "";
 				buffer.append(value);
 				pos = endVariableName + 1;
 			} else {
@@ -83,4 +83,4 @@ public class StrMessageFormatter implements IFormatter {
 		return buffer.toString();
 	}// ;
 
-}//~
+}// ~

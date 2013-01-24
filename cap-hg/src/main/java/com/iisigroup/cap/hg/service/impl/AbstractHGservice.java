@@ -28,7 +28,8 @@ import com.iisigroup.cap.hg.service.IHGService;
  * @since 2011/12/12
  * @author rodeschen
  * @version <ul>
- *          <li>2011/12/12,rodeschen,new
+ *           <li>2011/12/12,rodeschen,new
+ *           <li>2012/1/15,rodeschen,remove CapException
  *          </ul>
  */
 public abstract class AbstractHGservice implements IHGService {
@@ -42,7 +43,7 @@ public abstract class AbstractHGservice implements IHGService {
 	 * @see com.iisi.cap.hg.service.IHGService#setProperties(java.util.Map)
 	 */
 	@Override
-	public void setProperties(Map<String, Object> property) {
+	public void setProperties(Map<String, Object> property){
 		if (property == null) {
 			throw new CapException("http property error", getClass());
 		}

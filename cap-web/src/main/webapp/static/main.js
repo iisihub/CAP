@@ -1,7 +1,9 @@
+
 var logDebug = function() {
 	if (window.console) {
 		console.log(arguments);
 	}
+
 };
 require.config({
 	urlArgs : 'cache=' + parseInt(Math.random() * 1000),
@@ -14,9 +16,9 @@ require.config({
 		'cust-common' : 'js/common/cust.common'　 // 客制化 CommonJS檔
 	},
 	shim : {
-		'cust-properties' : ['libjs', 'common.properties'],
+		'cust-properties' : ['libjs', 'common.properties' ],
 		'capjs' : ['libjs', 'cust-properties'],
-		'cust-common' : ['libjs', 'cust-properties', 'capjs'] //客制化lib 載入設定
+		'cust-common' : ['libjs', 'common.properties','capjs' ] //客制化lib 載入設定
 	}
 });
 

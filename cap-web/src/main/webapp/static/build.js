@@ -1,5 +1,5 @@
-require.config({
-    //all js setting
+( {
+    
     paths : {
         'json3' : 'lib/js/json3.min',
         'jquery' : 'lib/js/jquery/jquery-1.8.2',
@@ -11,21 +11,18 @@ require.config({
         'fileupload' : 'lib/js/jquery/plugin/ajaxfileupload/ajaxfileupload',
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
         'underscore' : 'lib/js/backbone/underscore',
-        'backbone' : 'lib/js/backbone/backbone'
-    },
-    shim : {
-        'blockui' : ['jquery'],
-        'jquery-ui' : ['jquery'],
-        'jqgrid-i18n' : ['jquery'],
-        'jqgrid' : ['jquery-ui', 'jqgrid-i18n'],
-        'validate-i18n' : ['jquery'],
-        'validate' : ['jquery', 'validate-i18n'],
-        'fileupload' : ['jquery'],
-        'backbone' : ['underscore', 'jquery']
-    }
-});
+        'backbone' : 'lib/js/backbone/backbone',
 
-define('libjs', ['json3', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone'], function() {
-   // $.holdReady(true); // enable at common.js
-    logDebug('lib init');
-});
+        'common.properties' : 'lib/js/common/common.properties',
+        'common.jqgrid' : 'lib/js/common/common.jqgrid',
+        'commonjs' : 'lib/js/common/common',
+
+        'libjs' : 'lib/js/libjs', //third party lib
+        'capjs' : 'lib/js/capjs', //cap lib
+        'capjs.properties' : 'lib/js/common/common.properties',
+        'cust-properties' : 'js/common/cust.properties', // 客制化設定檔
+        'cust-common' : 'js/common/cust.common',
+	    'custjs':'custjs'
+
+    }
+})
