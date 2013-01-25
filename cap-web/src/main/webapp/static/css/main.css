@@ -54,6 +54,7 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
+a {cursor: pointer;}
 
 /*
  * jQuery UI CSS Framework 1.8.16
