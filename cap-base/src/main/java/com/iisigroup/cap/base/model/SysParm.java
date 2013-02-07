@@ -47,6 +47,9 @@ public class SysParm extends GenericBean implements IDataObject {
 	/** 參數描述 */
 	@Column(length = 300)
 	private String parmDesc;
+	/** 其它註記 */
+	@Column(length = 1)
+	private String isEncrypt;
 	/** 修改操作者 */
 	@Column(length = 10)
 	private String updater;
@@ -103,5 +106,14 @@ public class SysParm extends GenericBean implements IDataObject {
 	public void setOid(String oid) {
 		this.parmId = oid;
 	}
+
+	public String getIsEncrypt() {
+		return isEncrypt;
+	}
+
+	public void setIsEncrypt(String isEncrypt) {
+		this.isEncrypt = isEncrypt;
+	}
+
 
 }

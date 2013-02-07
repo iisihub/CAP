@@ -32,9 +32,11 @@ import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -57,9 +59,9 @@ public class SysParmHandler extends MFormHandler {
 	@HandlerType(HandlerTypeEnum.GRID)
 	public GridResult query(ISearch search, IRequest params) {
 
-		if (params.containsKey("parmId")) {
-			search.addSearchModeParameters(SearchMode.EQUALS, "parmId",
-					params.get("parmId"));
+		if (!CapString.isEmpty(params.get("parmId"))) {
+			search.addSearchModeParameters(SearchMode.LIKE, "parmId",
+					params.get("parmId") + "%");
 		}
 		if (!search.hasOrderBy()) {
 			search.addOrderBy("parmId");
@@ -84,6 +86,7 @@ public class SysParmHandler extends MFormHandler {
 			parm = new SysParm();
 		}
 		CapBeanUtil.map2Bean(request, parm, SysParm.class);
+		parm.setUpdater(CapSecurityContext.getUserId());
 		parm.setUpdateTime(CapDate.getCurrentTimestamp());
 		commonSrv.save(parm);
 		return result;
@@ -98,9 +101,12 @@ public class SysParmHandler extends MFormHandler {
 	 */
 	public IResult delete(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
-		SysParm parm = commonSrv.findById(SysParm.class, request.get("parmId"));
-		if (parm != null) {
-			commonSrv.delete(parm);
+		String[] ids = request.getParamsAsStringArray("parmId");
+		for (String id : ids) {
+			SysParm parm = commonSrv.findById(SysParm.class, id);
+			if (parm != null) {
+				commonSrv.delete(parm);
+			}
 		}
 		return result;
 	}

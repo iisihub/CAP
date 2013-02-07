@@ -37,7 +37,7 @@ public class CapHandleOpStep extends AbstractCustomizeOpStep {
 		IResult rtn = null;
 		@SuppressWarnings("static-access")
 		String actionType = params.get(handler.FORM_ACTION);
-		setName(handler.getHandlerName() + "." + actionType);
+		setName(handler.getHandlerName());
 		IAction action = handler.getAction(actionType);
 		rtn = action.doWork(params);
 		ctx.setGoToStep(NEXT);

@@ -63,6 +63,9 @@ public class CodeType extends GenericBean implements IDataObject {
 
 	@Column(nullable = false, length = 3)
 	private Integer codeOrder;
+	
+	@Column(length = 300)
+	private String typeDesc;
 
 	@Column(length = 6)
 	private String updater;
@@ -134,4 +137,11 @@ public class CodeType extends GenericBean implements IDataObject {
 		this.locale = locale;
 	}
 
+	public String getTypeDesc() {
+		return typeDesc;
+	}
+
+	public void setTypeDesc(String typeDesc) {
+		this.typeDesc = typeDesc;
+	}
 }

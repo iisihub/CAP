@@ -70,13 +70,13 @@ public class CodeTypeHandler extends MFormHandler {
 
 	@HandlerType(HandlerTypeEnum.GRID)
 	public GridResult query(ISearch search, IRequest params) {
-		if (params.containsKey("locale")) {
+		if (!CapString.isEmpty(params.get("locale"))) {
 			search.addSearchModeParameters(SearchMode.EQUALS, "locale",
 					params.get("locale"));
 		}
-		if (params.containsKey("codeType")) {
-			search.addSearchModeParameters(SearchMode.EQUALS, "codeType",
-					params.get("codeType"));
+		if (!CapString.isEmpty(params.get("codeType"))) {
+			search.addSearchModeParameters(SearchMode.LIKE, "codeType",
+					params.get("codeType")+ "%");
 		}
 		if (!search.hasOrderBy()) {
 			search.addOrderBy("codeType");
@@ -145,7 +145,10 @@ public class CodeTypeHandler extends MFormHandler {
 	 */
 	public IResult delete(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
-		codeTypeService.deleteById(request.get("oid"));
+		String[] ids = request.getParamsAsStringArray("oid");
+		for (String id : ids) {
+			codeTypeService.deleteById(id);
+		}
 		return result;
 	}
 
