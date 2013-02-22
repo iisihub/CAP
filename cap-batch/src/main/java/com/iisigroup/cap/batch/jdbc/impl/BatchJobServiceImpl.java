@@ -122,7 +122,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	public void deleteJob(String jobId) {
 		Map<String, Object> job = new HashMap<String, Object>();
 		job.put("jobId", jobId);
-		jdbc.update("batchJob.insert", job);
+		jdbc.update("batchJob.delete", job);
 		jdbc.update("batchSch.deleteByJob", job);
 	}
 

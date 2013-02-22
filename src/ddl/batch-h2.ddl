@@ -13,7 +13,7 @@ CREATE TABLE BAH_SCHEDULE(
 	repeatCount 	bigint,
   	repeatInterval 	bigint,
   	priority 		integer						default 5,
-  	exeHost			varchar(30)					default 'localhost',
+  	exeHost			varchar(30)							default 'localhost',
 	jobData 		varchar(2000),
 	isNotify		varchar(1),
 	notifyStatus	varchar(50),
@@ -57,6 +57,7 @@ CREATE TABLE BAH_JOB (
     jobId			varchar(100)  	NOT NULL,
     jobDesc			varchar(300) 	NOT NULL,
     jobResource		varchar(200)  	NOT NULL,
+    jobData		varchar(200)  	,
     updater			varchar(10) ,
     updateTime		timestamp,
     CONSTRAINT P_BAH_JOB PRIMARY KEY (JOBID)

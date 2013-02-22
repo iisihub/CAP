@@ -38,6 +38,7 @@
 
 	<bean id="jobService"
 		class="org.springframework.batch.admin.service.SimpleJobServiceFactoryBean">
+		<property name="tablePrefix" value="${batch.table-prefix}"/>
 		<property name="jobRepository" ref="jobRepository" />
 		<property name="jobLauncher" ref="jobLauncher" />
 		<property name="jobLocator" ref="jobRegistry" />
