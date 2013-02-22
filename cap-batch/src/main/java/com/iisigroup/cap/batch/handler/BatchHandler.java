@@ -130,7 +130,7 @@ public class BatchHandler extends MFormHandler {
 						return "";
 					}
 				} catch (Exception e) {
-					return "<b class='text-red'>X</b>";
+					return "X";
 				}
 			}
 		});
@@ -336,10 +336,13 @@ public class BatchHandler extends MFormHandler {
 	 */
 	public IResult schDelete(IRequest request) throws SchedulerException {
 		AjaxFormResult result = new AjaxFormResult();
-		BatchSchedule sch = batchSrv.findSchById(request.get("schId"));
-		if (sch != null) {
-			batchSrv.deleteJob(sch.getSchId());
-			capScheduler.deleteSchedule(sch);
+		String[] ids = request.getParamsAsStringArray("schId");
+		for (String id : ids) {
+			BatchSchedule sch = batchSrv.findSchById(id);
+			if (sch != null) {
+				batchSrv.deleteSch(id);
+				capScheduler.deleteSchedule(sch);
+			}
 		}
 		return result;
 	}// ;
@@ -532,6 +535,8 @@ public class BatchHandler extends MFormHandler {
 			}
 		} catch (NullPointerException e) {
 			throw new CapMessageException("msg.job.fileNotFund", getClass());
+		} catch (CapMessageException me) {
+			throw me;
 		} catch (Exception e1) {
 			throw new CapException(e1, getClass());
 		}
