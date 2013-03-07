@@ -43,6 +43,7 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 import com.iisigroup.cap.dao.utils.SearchModeParameter;
 import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.IKeyObject;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -146,6 +147,8 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	public Serializable getPrimaryKey(Object model) {
 		if (model instanceof IDataObject) {
 			return (Serializable) ((IDataObject) model).getOid();
+		} else if (model instanceof IKeyObject) {
+			return (Serializable) ((IKeyObject) model).getPrimaryKey();
 		} else {
 			return null;
 		}

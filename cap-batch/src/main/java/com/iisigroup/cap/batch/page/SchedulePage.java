@@ -24,10 +24,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.service.BatchJobService;
 import com.iisigroup.cap.mvc.action.BaseActionController;
-import com.iisigroup.cap.service.CodeTypeService;
 
 /**
  * <pre>

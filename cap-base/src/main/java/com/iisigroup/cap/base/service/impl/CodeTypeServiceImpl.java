@@ -8,7 +8,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.service.impl;
+package com.iisigroup.cap.base.service.impl;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,9 +20,9 @@ import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
+import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.service.AbstractService;
-import com.iisigroup.cap.service.CodeTypeService;
 
 /**
  * <pre>

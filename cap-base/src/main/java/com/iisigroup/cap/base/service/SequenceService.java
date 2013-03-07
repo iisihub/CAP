@@ -9,7 +9,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.service;
+package com.iisigroup.cap.base.service;
 
 import java.util.Map;
 

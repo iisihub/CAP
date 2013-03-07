@@ -9,7 +9,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.jdbc.impl;
+package com.iisigroup.cap.base.jdbc.impl;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
@@ -23,9 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.iisigroup.cap.base.service.SequenceService;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.service.SequenceService;
 import com.iisigroup.cap.utils.CapDate;
 
 /**
