@@ -16,48 +16,54 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.component.CapSpringMVCRequest;
 import com.iisigroup.cap.mvc.page.report.IPageReport;
+import com.iisigroup.cap.security.CapSecurityContext;
+import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
  * page action
  * </pre>
- * 
+ *
  * @since 2011-11-29
  * @author mars
  * @version <ul>
  *          <li>2011-11-29,mars,new
+ *          <li>2013/3/8,RodesChen, add append userDetails
  *          </ul>
  */
 @Controller
 @RequestMapping("/*")
 public class PageAction extends BaseActionController {
 
-//	@RequestMapping("/loginCheck")
-//	public RedirectView loginCheck(Locale locale, HttpServletRequest request, HttpServletResponse response) {
-////		CapUserDetails user = new BQDUserDetails();
-////		// String password = request.getParameter("password");
-////		user.setUserId(request.getParameter("id"));
-////		user.setLocale(locale);
-////		request.getSession().setAttribute(CapLogContextFilter.LOGIN_USERNAME, user.getUserId());
-////		BQDSecurityContext.getSecurityContext().setUser(user);
-////		return new RedirectView("home");
-//	}
+	// @RequestMapping("/loginCheck")
+	// public RedirectView loginCheck(Locale locale, HttpServletRequest request,
+	// HttpServletResponse response) {
+	// // CapUserDetails user = new BQDUserDetails();
+	// // // String password = request.getParameter("password");
+	// // user.setUserId(request.getParameter("id"));
+	// // user.setLocale(locale);
+	// // request.getSession().setAttribute(CapLogContextFilter.LOGIN_USERNAME,
+	// user.getUserId());
+	// // BQDSecurityContext.getSecurityContext().setUser(user);
+	// // return new RedirectView("home");
+	// }
 
-	
 	private IRequest getDefaultRequest() {
 		IRequest cr = CapAppContext.getBean("CapDefaultRequest");
 		return cr != null ? cr : new CapSpringMVCRequest();
 	}
 
 	@RequestMapping("/logout")
-	public RedirectView logout(Locale locale, HttpServletRequest request, HttpServletResponse response) {
+	public RedirectView logout(Locale locale, HttpServletRequest request,
+			HttpServletResponse response) {
 		request.getSession().invalidate();
 		return new RedirectView("/");
 	}
 
 	@RequestMapping("/report/{reportService}")
-	public ModelAndView handleReport(@PathVariable String reportService, Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView handleReport(@PathVariable String reportService, Locale locale,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String path = request.getPathInfo();
 		ModelAndView model = new ModelAndView(path);
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -71,12 +77,15 @@ public class PageAction extends BaseActionController {
 		return model;
 	}
 
-
 	@RequestMapping("/**")
-	public ModelAndView handleRequestInternal(Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView handleRequestInternal(Locale locale, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		String path = request.getPathInfo();
 		ModelAndView model = new ModelAndView(path);
+		CapUserDetails userDetails = CapSecurityContext.getUser();
+		if (userDetails != null) {
+			model.addObject("userDetails", userDetails);
+		}
 		return model;
 	}
-
 }

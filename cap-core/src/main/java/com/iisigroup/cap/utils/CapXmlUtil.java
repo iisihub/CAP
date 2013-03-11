@@ -107,17 +107,29 @@ public class CapXmlUtil {
 	 * 
 	 * @param doc
 	 *            document
+	 * @param format format
 	 * @return String
 	 */
-	public static String convertDocumentToString(Document doc) {
+	public static String convertDocumentToString(Document doc, boolean format) {
 		StringWriter out = new StringWriter();
 		try {
-			new XMLWriter(out, new OutputFormat(Constants.EMPTY_STRING, false, CharEncoding.UTF_8))
+			new XMLWriter(out, new OutputFormat(Constants.EMPTY_STRING, format, CharEncoding.UTF_8))
 					.write(doc);
 			return out.toString();
 		} catch (IOException e) {
 			throw new CapMessageException(e, CapXmlUtil.class);
 		}
+	}
+
+	/**
+	 * 將xml document 轉換為 string
+	 * 
+	 * @param doc
+	 *            document
+	 * @return String
+	 */
+	public static String convertDocumentToString(Document doc) {
+		return convertDocumentToString(doc, false);
 	}
 
 	@SuppressWarnings("unchecked")
