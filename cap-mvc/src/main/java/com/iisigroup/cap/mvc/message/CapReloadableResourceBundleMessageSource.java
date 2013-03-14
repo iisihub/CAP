@@ -36,9 +36,10 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2013/1/23,roodeschen,fix weglogic deployment error
  *          </ul>
  */
-public class CapReloadableResourceBundleMessageSource extends
-		org.springframework.context.support.ReloadableResourceBundleMessageSource implements
-		ApplicationContextAware, InitializingBean {
+public class CapReloadableResourceBundleMessageSource
+		extends
+		org.springframework.context.support.ReloadableResourceBundleMessageSource
+		implements ApplicationContextAware, InitializingBean {
 
 	protected final Logger logger = LoggerFactory
 			.getLogger(CapReloadableResourceBundleMessageSource.class);
@@ -66,17 +67,19 @@ public class CapReloadableResourceBundleMessageSource extends
 			for (Resource resource : resources) {
 				String path = resource.getURI().toString();
 				if (CapString.checkRegularMatch(path, i18nFileREG)) {
-					path = path.replaceAll(i18nFileREG, "")
+					path = path
+							.replaceAll(i18nFileREG, "")
 							.replaceAll(".*/i18n/", "classpath:/i18n/")
 							// for windows
-							.replaceAll(".*\\\\i18n\\\\", "classpath:\\\\i18n\\\\")
+							.replaceAll(".*\\\\i18n\\\\",
+									"classpath:\\\\i18n\\\\")
 							.replaceAll("\\\\", "/");
 					l.add(path);
 				}
 				logger.debug("set message path:" + path);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		super.setBasenames(l.toArray(new String[l.size()]));
 
