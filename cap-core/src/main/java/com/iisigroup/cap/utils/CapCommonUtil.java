@@ -12,6 +12,8 @@ package com.iisigroup.cap.utils;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 
 import org.springframework.util.Assert;
@@ -45,7 +47,8 @@ public class CapCommonUtil {
 	 */
 	public static String toChineseUpperAmount(String amount, boolean nonDollar) {
 		if (!nonDollar) {
-			amount = CapMath.getBigDecimal(amount).setScale(3, BigDecimal.ROUND_HALF_UP).toString();
+			amount = CapMath.getBigDecimal(amount)
+					.setScale(3, BigDecimal.ROUND_HALF_UP).toString();
 		}
 		String[] digit = { "零", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖" };
 		String[] aa = { "", "拾", "佰", "仟" };
@@ -56,7 +59,8 @@ public class CapCommonUtil {
 		StringBuffer result = new StringBuffer();
 
 		if (amount.indexOf(".") > 0) {
-			amtInteger = formatAmount(amount.substring(0, amount.indexOf(".")), 4).split(",");
+			amtInteger = formatAmount(amount.substring(0, amount.indexOf(".")),
+					4).split(",");
 			amtFraction = amount.substring(amount.indexOf(".") + 1);
 		} else {
 			amtInteger = formatAmount(amount, 4).split(",");
@@ -68,7 +72,9 @@ public class CapCommonUtil {
 				StringBuffer ans = new StringBuffer();
 				String aThousandAmount = amtInteger[i - 1];
 				for (int j = aThousandAmount.length(); j > 0; j--) {
-					String d = digit[Integer.parseInt(String.valueOf(aThousandAmount.charAt(aThousandAmount.length() - j)))];
+					String d = digit[Integer.parseInt(String
+							.valueOf(aThousandAmount.charAt(aThousandAmount
+									.length() - j)))];
 					if (!"零".equals(d)) {
 						if (behindZeroDigit) {
 							ans.append("零");
@@ -91,7 +97,8 @@ public class CapCommonUtil {
 				if (!nonDollar) {
 					result.append("元");
 				}
-				if (amtFraction.length() < 1 || (!nonDollar && amtFraction.matches("^000[0-9]{0,}"))) {
+				if (amtFraction.length() < 1
+						|| (!nonDollar && amtFraction.matches("^000[0-9]{0,}"))) {
 					if (!nonDollar) {
 						result.append("整");
 					}
@@ -100,7 +107,8 @@ public class CapCommonUtil {
 						result.append("點");
 					}
 					int length = amtFraction.length();
-					for (int j = 0; j < amtFraction.length() && (nonDollar || (!nonDollar && j < cc.length)); j++) {
+					for (int j = 0; j < amtFraction.length()
+							&& (nonDollar || (!nonDollar && j < cc.length)); j++) {
 						String a = String.valueOf(amtFraction.charAt(j));
 						if (!"0".equals(a)) {
 							String d = digit[Integer.parseInt(a)];
@@ -108,7 +116,9 @@ public class CapCommonUtil {
 							if (!nonDollar) {
 								result.append(cc[(j) % 4]);
 							}
-						} else if (nonDollar && CapMath.compare(amtFraction.substring(j, length), "0") != 0) {
+						} else if (nonDollar
+								&& CapMath.compare(
+										amtFraction.substring(j, length), "0") != 0) {
 							result.append("零");
 						}
 					}
@@ -136,22 +146,44 @@ public class CapCommonUtil {
 		// System.out.println(formattedAmount);
 		return formattedAmount.toString();
 	}
-	
-	public static Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
+
+	public static Method findMethod(Class<?> clazz, String name,
+			Class<?>... paramTypes) {
 		Assert.notNull(clazz, "Class must not be null");
 		Assert.notNull(name, "Method name must not be null");
 		Class<?> searchType = clazz;
 		while (searchType != null) {
-			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
+			Method[] methods = (searchType.isInterface() ? searchType
+					.getMethods() : searchType.getDeclaredMethods());
 			for (Method method : methods) {
 				if (name.equals(method.getName())
-						&& (paramTypes == null || paramTypes.length==0 || paramTypes[0]==null || Arrays.equals(paramTypes, method.getParameterTypes()))) {
+						&& (paramTypes == null || paramTypes.length == 0
+								|| paramTypes[0] == null || Arrays.equals(
+								paramTypes, method.getParameterTypes()))) {
 					return method;
 				}
 			}
 			searchType = searchType.getSuperclass();
 		}
 		return null;
+	}// ;
+
+	private static String hostName;
+
+	/**
+	 * 取得電腦名稱
+	 * 
+	 * @return String
+	 */
+	public static String getHostName() {
+		if (hostName == null) {
+			try {
+				hostName = InetAddress.getLocalHost().getHostName();
+			} catch (UnknownHostException e) {
+				hostName = "unknow";
+			}
+		}
+		return hostName;
 	}
 
 }
