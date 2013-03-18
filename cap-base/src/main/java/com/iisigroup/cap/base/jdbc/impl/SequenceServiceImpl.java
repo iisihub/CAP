@@ -11,7 +11,6 @@
  */
 package com.iisigroup.cap.base.jdbc.impl;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -52,13 +51,11 @@ public class SequenceServiceImpl implements SequenceService {
 	public void setJdbc(CapNamedJdbcTemplate jdbc) {
 		this.jdbc = jdbc;
 	}
-	
 
 	@Override
-	public Page<Map<String, Object>> findPage(int start,int fetch) {
+	public Page<Map<String, Object>> findPage(int start, int fetch) {
 		return jdbc.queryForPage("Sequence.listAll", null, start, fetch);
 	}
-
 
 	/**
 	 * 取得序號
@@ -176,8 +173,7 @@ public class SequenceServiceImpl implements SequenceService {
 	 * 流水號設定
 	 * </pre>
 	 */
-	private class NodeSeq implements Serializable {
-		private static final long serialVersionUID = 1L;
+	private class NodeSeq {
 		@SuppressWarnings("unused")
 		String seqNode;
 		int nextSeqNo;

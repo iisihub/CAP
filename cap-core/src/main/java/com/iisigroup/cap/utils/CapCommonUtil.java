@@ -77,7 +77,7 @@ public class CapCommonUtil {
 									.length() - j)))];
 					if (!"零".equals(d)) {
 						if (behindZeroDigit) {
-							ans.append("零");
+							ans.append('零');
 						}
 						ans.append(d);
 						ans.append(aa[(j + 3) % 4]);
@@ -91,20 +91,20 @@ public class CapCommonUtil {
 			}
 			// 修正尾數
 			if (result.length() == 0) {
-				result.append("零");
+				result.append('零');
 			}
 			if (result.length() > 0) {
 				if (!nonDollar) {
-					result.append("元");
+					result.append('元');
 				}
 				if (amtFraction.length() < 1
 						|| (!nonDollar && amtFraction.matches("^000[0-9]{0,}"))) {
 					if (!nonDollar) {
-						result.append("整");
+						result.append('整');
 					}
 				} else {
 					if (nonDollar) {
-						result.append("點");
+						result.append('點');
 					}
 					int length = amtFraction.length();
 					for (int j = 0; j < amtFraction.length()
@@ -119,7 +119,7 @@ public class CapCommonUtil {
 						} else if (nonDollar
 								&& CapMath.compare(
 										amtFraction.substring(j, length), "0") != 0) {
-							result.append("零");
+							result.append('零');
 						}
 					}
 				}

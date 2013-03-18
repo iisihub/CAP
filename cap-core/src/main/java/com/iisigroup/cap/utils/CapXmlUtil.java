@@ -30,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.Constants;
-import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 
 /**
@@ -45,7 +44,8 @@ import com.iisigroup.cap.exception.CapMessageException;
  *          </ul>
  */
 public class CapXmlUtil {
-	protected static final Logger logger = LoggerFactory.getLogger(CapXmlUtil.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(CapXmlUtil.class);
 
 	/**
 	 * 取得 xPath 節點 text
@@ -56,7 +56,8 @@ public class CapXmlUtil {
 	 *            xpath
 	 * @return String
 	 */
-	public static String getDocSingleNodeTextByXPath(Document document, String xPath) {
+	public static String getDocSingleNodeTextByXPath(Document document,
+			String xPath) {
 		try {
 			Node node = document.selectSingleNode(xPath);
 			if (node != null) {
@@ -91,7 +92,8 @@ public class CapXmlUtil {
 	 * 將 XML 字串轉為Document
 	 * 
 	 * @param xmlString
-	 * @return
+	 *            xmlString
+	 * @return Document
 	 * @throws CapException
 	 */
 	public static Document convertXMLStringToDocument(String xmlString) {
@@ -107,14 +109,15 @@ public class CapXmlUtil {
 	 * 
 	 * @param doc
 	 *            document
-	 * @param format format
+	 * @param format
+	 *            format
 	 * @return String
 	 */
 	public static String convertDocumentToString(Document doc, boolean format) {
 		StringWriter out = new StringWriter();
 		try {
-			new XMLWriter(out, new OutputFormat(Constants.EMPTY_STRING, format, CharEncoding.UTF_8))
-					.write(doc);
+			new XMLWriter(out, new OutputFormat(Constants.EMPTY_STRING, format,
+					CharEncoding.UTF_8)).write(doc);
 			return out.toString();
 		} catch (IOException e) {
 			throw new CapMessageException(e, CapXmlUtil.class);
@@ -141,10 +144,10 @@ public class CapXmlUtil {
 		} else {
 			JSONObject json2 = new JSONObject();
 			for (Element el2 : (List<Element>) el.elements()) {
-				putJSONValue(json2, el2.getName(), travelXML(el2).get(el2.getName()));
+				putJSONValue(json2, el2.getName(),
+						travelXML(el2).get(el2.getName()));
 			}
 			putJSONValue(json, nodeName, json2);
-
 		}
 		return json;
 	}

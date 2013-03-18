@@ -11,13 +11,9 @@
  */
 package com.iisigroup.cap.batch.listener;
 
-import java.io.StringWriter;
-import java.io.Writer;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-
-import javax.mail.internet.MimeMessage;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -27,19 +23,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.admin.web.JobParametersExtractor;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import com.iisigroup.cap.base.service.EmailService;
 import com.iisigroup.cap.batch.constants.CapBatchConstants;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
 import com.iisigroup.cap.formatter.DurationFormatter;
 import com.iisigroup.cap.utils.CapString;
-import com.iisigroup.cap.utils.CapSystemConfig;
 
-import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 /**
@@ -60,11 +54,13 @@ public class CapBatchMailNotifyListener implements JobListener,
 			.getLogger(CapBatchMailNotifyListener.class);
 
 	private BatchJobService batchSerivce;
-	private JavaMailSender mailSender;
-	private CapSystemConfig config;
-	private String messageTemplate;
+	private EmailService mailSender;
 	private JobParametersExtractor jobParametersExtractor;
-	Configuration configuration;
+
+	private FreeMarkerConfigurer fmConfg;
+	private String messageTemplate;
+
+	private String mailSubject;
 
 	/*
 	 * (non-Javadoc)
@@ -86,36 +82,13 @@ public class CapBatchMailNotifyListener implements JobListener,
 				for (String status : sch.getNotifyStatus().split(",")) {
 					if (CapString.trimNull(status).equals(
 							job.getExitStatus().getExitCode())) {
-
-						MimeMessagePreparator preparator = new MimeMessagePreparator() {
-							public void prepare(MimeMessage mimeMessage)
-									throws Exception {
-								MimeMessageHelper mail = new MimeMessageHelper(
-										mimeMessage, true, "utf-8");
-								// 寄件人
-								mail.setFrom(config.getProperty("mail.sender"));
-								// 收件人
-								mail.setTo(sch.getNotifyTo().split(","));
-								String subject = MessageFormat
-										.format(config
-												.getProperty("batch.notifySubject"),
-												new Object[] {
-														sch.getSchId(),
-														sch.getSchDesc(),
-														job.getExitStatus()
-																.getExitCode() });
-								// 主旨
-								mail.setSubject(subject);
-								mail.setText(buildText(job), true);
-							}
-						};
-						mailSender.send(preparator);
-						logger.debug(
-								"send to {} ,{}-{}-{}",
-								new String[] { sch.getNotifyTo(),
-										sch.getSchId(),
-										String.valueOf(job.getId()),
+						// 主旨
+						String subject = MessageFormat.format(mailSubject,
+								new Object[] { sch.getSchId(),
+										sch.getSchDesc(),
 										job.getExitStatus().getExitCode() });
+						mailSender.sendEmail(sch.getNotifyTo().split(","),
+								subject, buildText(job));
 						break;
 					}
 				}
@@ -126,10 +99,9 @@ public class CapBatchMailNotifyListener implements JobListener,
 	protected String buildText(JobExecution job) {
 		Map<String, Object> result = getExecutionResult(job);
 		try {
-			Template t = configuration.getTemplate(messageTemplate);
-			Writer writer = new StringWriter();
-			t.process(getExecutionResult(job), writer);
-			return writer.toString();
+			Template t = fmConfg.getConfiguration()
+					.getTemplate(messageTemplate);
+			return FreeMarkerTemplateUtils.processTemplateIntoString(t, result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -194,9 +166,6 @@ public class CapBatchMailNotifyListener implements JobListener,
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		configuration = new Configuration();
-		configuration.setDefaultEncoding("utf-8");
-		configuration.setClassForTemplateLoading(getClass(), "/");
 		jobParametersExtractor = new JobParametersExtractor();
 	}
 
@@ -204,12 +173,16 @@ public class CapBatchMailNotifyListener implements JobListener,
 		this.batchSerivce = batchSerivce;
 	}
 
-	public void setMailSender(JavaMailSender mailSender) {
+	public void setMailSubject(String mailSubject) {
+		this.mailSubject = mailSubject;
+	}
+
+	public void setMailSender(EmailService mailSender) {
 		this.mailSender = mailSender;
 	}
 
-	public void setConfig(CapSystemConfig config) {
-		this.config = config;
+	public void setFmConfg(FreeMarkerConfigurer fmConfg) {
+		this.fmConfg = fmConfg;
 	}
 
 	public void setMessageTemplate(String messageTemplate) {

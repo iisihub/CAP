@@ -46,7 +46,7 @@ import org.springframework.util.Assert;
 public class ConditionsUnanimousBased implements AccessDecisionManager,
 		InitializingBean, MessageSourceAware {
 
-	private Map<String, AccessDecisionVoter> conditionVoters;
+	private Map<String, AccessDecisionVoter<Object>> conditionVoters;
 
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource
 			.getAccessor();
@@ -63,23 +63,22 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 	 * @param configAttributes
 	 *            ConfigAttributeDefinition
 	 */
-	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public void decide(Authentication authentication, Object object,
 			Collection<ConfigAttribute> configAttributes) {
 		int grant = 0;
 		int abstain = 0;
 
-		List<AccessDecisionVoter> decisionVoters = new ArrayList<AccessDecisionVoter>();
+		List<AccessDecisionVoter<Object>> decisionVoters = new ArrayList<AccessDecisionVoter<Object>>();
 
-		Iterator configIter = configAttributes.iterator();
+		Iterator<ConfigAttribute> configIter = configAttributes.iterator();
 
 		while (configIter.hasNext()) {
 
 			String s = ((ConfigAttribute) configIter.next()).getAttribute();
 
 			if (conditionVoters.containsKey(s)) {
-				AccessDecisionVoter voter = conditionVoters.get(s);
+				AccessDecisionVoter<Object> voter = conditionVoters.get(s);
 				if (voter instanceof RoleVoter) {
 					((RoleVoter) voter).setRolePrefix(s);
 				}
@@ -88,10 +87,11 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 
 		}
 
-		Iterator<AccessDecisionVoter> voters = decisionVoters.iterator();
+		Iterator<AccessDecisionVoter<Object>> voters = decisionVoters.iterator();
 
 		while (voters.hasNext()) {
-			AccessDecisionVoter voter = (AccessDecisionVoter) voters.next();
+			AccessDecisionVoter<Object> voter = (AccessDecisionVoter<Object>) voters
+					.next();
 			int result = voter.vote(authentication, object, configAttributes);
 
 			switch (result) {
@@ -134,12 +134,12 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 		return true;
 	}
 
-	public Map<String, AccessDecisionVoter> getConditionVoters() {
+	public Map<String, AccessDecisionVoter<Object>> getConditionVoters() {
 		return conditionVoters;
 	}
 
 	public void setConditionVoters(
-			Map<String, AccessDecisionVoter> conditionVoters) {
+			Map<String, AccessDecisionVoter<Object>> conditionVoters) {
 		this.conditionVoters = conditionVoters;
 	}
 

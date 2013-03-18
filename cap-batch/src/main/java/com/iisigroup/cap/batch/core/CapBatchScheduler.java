@@ -191,7 +191,7 @@ public class CapBatchScheduler implements CapBatchConstants {
 	}
 
 	public String getHostId() {
-		if (LOCALHOST.equals(hostId)) {
+		if (!LOCALHOST.equals(hostId)) {
 			synchronized (hostId) {
 				try {
 					hostId = InetAddress.getLocalHost().getHostName();
