@@ -663,8 +663,7 @@ $.holdReady(true);
                         },
                         data : $.extend({}, window.responseJSON ? responseJSON : {}, {
                             _pa : s.handler || '',
-                            formAction : s.action || '',
-                            txCode : window.txCode || window.responseJSON && responseJSON.txCode || ""
+                            formAction : s.action || ''
                         }, s.data)
                     }));
                 },
