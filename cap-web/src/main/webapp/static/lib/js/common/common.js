@@ -92,7 +92,6 @@ $.holdReady(true);
 
     //所有動作均等待i18n 完成後再動作
     window.i18n.load("def").done(function() {
-
         // common js 初始化開始
         (function($) {
             //global function
@@ -242,6 +241,12 @@ $.holdReady(true);
                 },
 
                 CommonAPI : {
+                    /**
+                     *判斷是否為 JSON Object
+                     */
+                    isJSON : function(obj) {
+                        return typeof obj == "object" && obj.constructor == Object;
+                    },
                     /**
                      * 產生對話框
                      *
@@ -684,7 +689,7 @@ $.holdReady(true);
                         $.blockUI({
                             fadeIn : 0,
                             fadeOut : 0,
-                            message : i18n.def.loading + '   <img src="'+url("static/images/ajax-loader.gif")+'" style="width: 16px;hight:11px;"/>',
+                            message : i18n.def.loading + '   <img src="' + url("static/images/ajax-loader.gif") + '" style="width: 16px;hight:11px;"/>',
                             css : {
                                 'z-index' : 10010,
                                 top : '0',
@@ -1384,13 +1389,17 @@ $.holdReady(true);
                     }
                 }
             });
-
             // APIS
             window.API = window.CommonAPI;
 
             // init
             $(document).ready(function() {
                 loadPageInit.call(document);
+                $("body").on("click", "a", function(e) {
+                    if ($(this).attr('href').match("^#")) {
+                        e.preventDefault();
+                    }
+                });
             });
             $.holdReady(false);
         })(_jQuery);

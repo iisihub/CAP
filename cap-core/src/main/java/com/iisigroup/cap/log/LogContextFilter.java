@@ -31,9 +31,9 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * set log4j MDC for log user information.
  * </p>
  * 
- * @author gabriellalau
+ * @author iris tu
  * @version <ul>
- *          <li>2011-11-23,gabriella,new
+ *          <li>2011-11-23,iristu,new
  *          <li>2013-1-23,RodesChen,move getRequestURL to CapWebUtil
  *          </ul>
  */

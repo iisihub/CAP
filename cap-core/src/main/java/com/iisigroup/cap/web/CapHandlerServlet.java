@@ -1,10 +1,10 @@
-/* 
- * Copyright (c) 2009-2012 International Integrated System, Inc. 
+/*
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * All Rights Reserved.
- * 
+ *
  * Licensed Materials - Property of International Integrated System, Inc.
- * 
- * This software is confidential and proprietary information of 
+ *
+ * This software is confidential and proprietary information of
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
 package com.iisigroup.cap.web;
@@ -41,12 +41,13 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * <pre>
  * Cap handler Servlet
  * </pre>
- * 
+ *
  * @since 2012/9/3
  * @author rodeschen
  * @version <ul>
  *          <li>2012/9/3,rodeschen,new
  *          <li>2012/9/18,iristu,modify
+ *          <li>2013/2/28,rodeschen,add set request
  *          </ul>
  */
 @SuppressWarnings("serial")
@@ -111,6 +112,7 @@ public class CapHandlerServlet extends HttpServlet {
 		try {
 			request.setParameter(FormHandler.FORM_ACTION, action);
 			HandlerPlugin plugin = pluginMgr.getPlugin(handler);
+			plugin.setRequest(request);
 			pluginlogger = LoggerFactory.getLogger(plugin.getClass());
 			result = plugin.execute(request);
 		} catch (Exception e) {

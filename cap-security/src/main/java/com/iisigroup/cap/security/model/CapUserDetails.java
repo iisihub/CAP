@@ -32,6 +32,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author rodeschen
  * @version <ul>
  *          <li>2012/5/15,rodeschen,new
+ *          <li>2013/3/6,rodeschen,add set method
  *          </ul>
  */
 @SuppressWarnings("serial")
@@ -131,6 +132,23 @@ public class CapUserDetails implements UserDetails {
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setUnitNo(String unitNo) {
+		this.unitNo = unitNo;
 	}
 
 }

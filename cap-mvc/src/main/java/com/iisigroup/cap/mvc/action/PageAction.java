@@ -19,6 +19,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.iisigroup.cap.component.CapSpringMVCRequest;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.mvc.page.report.IPageReport;
+import com.iisigroup.cap.security.CapSecurityContext;
+import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.utils.CapAppContext;
 
 /**
@@ -30,6 +32,7 @@ import com.iisigroup.cap.utils.CapAppContext;
  * @author mars
  * @version <ul>
  *          <li>2011-11-29,mars,new
+ *          <li>2013/3/8,RodesChen, add append userDetails
  *          </ul>
  */
 @Controller
@@ -68,9 +71,8 @@ public class PageAction extends BaseActionController {
 		ModelAndView model = new ModelAndView(path);
 		HttpSession session = request.getSession(false);
 		final AuthenticationException ae = (session != null) ? (AuthenticationException) session
-				.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION)
-				: null;
-		if (ae!=null){
+				.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) : null;
+		if (ae != null) {
 			String errmsg = ae.getMessage();
 			model.addObject("errorMessage", errmsg);
 		}
@@ -100,7 +102,10 @@ public class PageAction extends BaseActionController {
 			throws Exception {
 		String path = request.getPathInfo();
 		ModelAndView model = new ModelAndView(path);
+		CapUserDetails userDetails = CapSecurityContext.getUser();
+		if (userDetails != null) {
+			model.addObject("userDetails", userDetails);
+		}
 		return model;
 	}
-
 }
