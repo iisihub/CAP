@@ -663,8 +663,7 @@ $.holdReady(true);
                         },
                         data : $.extend({}, window.responseJSON ? responseJSON : {}, {
                             _pa : s.handler || '',
-                            formAction : s.action || '',
-                            txCode : window.txCode || window.responseJSON && responseJSON.txCode || ""
+                            formAction : s.action || ''
                         }, s.data)
                     }));
                 },
@@ -1198,7 +1197,7 @@ $.holdReady(true);
                                     }
                                 }).data('bindChanged', true);
                         }
-                        return s.html( ops = (((s.attr("space") == "true") ? ("<option value=''>" + i18n.def.comboSpace + "</option>") : "") + ops)).val(defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
+                        return s.html(ops = ((s.attr("space")!=undefined && s.attr("space")!='false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space"))  + "</option>") : "") + ops)).val(defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
                     }).call(this, options, append);
                 },
 
