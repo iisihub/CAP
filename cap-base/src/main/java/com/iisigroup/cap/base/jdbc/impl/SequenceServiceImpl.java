@@ -9,9 +9,8 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.jdbc.impl;
+package com.iisigroup.cap.base.jdbc.impl;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -23,9 +22,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.iisigroup.cap.base.service.SequenceService;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.service.SequenceService;
 import com.iisigroup.cap.utils.CapDate;
 
 /**
@@ -52,13 +51,11 @@ public class SequenceServiceImpl implements SequenceService {
 	public void setJdbc(CapNamedJdbcTemplate jdbc) {
 		this.jdbc = jdbc;
 	}
-	
 
 	@Override
-	public Page<Map<String, Object>> findPage(int start,int fetch) {
+	public Page<Map<String, Object>> findPage(int start, int fetch) {
 		return jdbc.queryForPage("Sequence.listAll", null, start, fetch);
 	}
-
 
 	/**
 	 * 取得序號
@@ -176,8 +173,7 @@ public class SequenceServiceImpl implements SequenceService {
 	 * 流水號設定
 	 * </pre>
 	 */
-	private class NodeSeq implements Serializable {
-		private static final long serialVersionUID = 1L;
+	private class NodeSeq {
 		@SuppressWarnings("unused")
 		String seqNode;
 		int nextSeqNo;

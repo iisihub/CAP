@@ -38,11 +38,7 @@ public interface IRequest extends Map<String, Object>, Serializable {
 	 */
 	void setRequestObject(Object obj);
 
-	/**
-	 * get ServletRequest
-	 * 
-	 * @return ServletRequest
-	 */
+
 	<T extends ServletRequest> T getServletRequest();
 
 	/**

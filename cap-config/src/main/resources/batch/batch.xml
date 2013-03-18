@@ -30,7 +30,7 @@
 				<property name="jobService" ref="batchJobService" />
 			</bean>
 		</property>
-		<property name="jobLoader" ref="jobLoader"/>
+		<property name="jobLoader" ref="jobLoader" />
 	</bean>
 
 	<bean id="jobRegistry"
@@ -38,18 +38,20 @@
 
 	<bean id="jobService"
 		class="org.springframework.batch.admin.service.SimpleJobServiceFactoryBean">
-		<property name="tablePrefix" value="${batch.table-prefix}"/>
+		<property name="tablePrefix" value="${batch.table-prefix}" />
 		<property name="jobRepository" ref="jobRepository" />
 		<property name="jobLauncher" ref="jobLauncher" />
 		<property name="jobLocator" ref="jobRegistry" />
 		<property name="dataSource" ref="cap-db" />
 	</bean>
-		
-	<bean id="jobLoader" class="org.springframework.batch.core.configuration.support.DefaultJobLoader">
+
+	<bean id="jobLoader"
+		class="org.springframework.batch.core.configuration.support.DefaultJobLoader">
 		<property name="jobRegistry" ref="jobRegistry" />
 	</bean>
-	
-	<bean id="jobExplorer" class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean">
+
+	<bean id="jobExplorer"
+		class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean">
 		<property name="dataSource" ref="cap-db" />
 	</bean>
 
@@ -64,7 +66,7 @@
 		<property name="jobLocator" ref="jobRegistry" />
 		<property name="jobLauncher" ref="jobLauncher" />
 		<property name="defaultIncrementer" ref="UUIDIncrementer" />
-		<property name="globalListener" ref="batchNofityListener"/>
+		<property name="globalListener" ref="batchNofityListener" />
 	</bean>
 
 	<bean id="UUIDIncrementer" class="com.iisigroup.cap.batch.support.UUIDIncrementer" />
@@ -81,13 +83,15 @@
 		<property name="configLocation" value="classpath:batch/quartz.properties" />
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 	</bean>
-	
+
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~ quartz listener ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<bean id="batchNofityListener" class="com.iisigroup.cap.batch.listener.CapBatchMailNotifyListener">
+	<bean id="batchNofityListener"
+		class="com.iisigroup.cap.batch.listener.CapBatchMailNotifyListener">
 		<property name="mailSender" ref="mailSender" />
-		<property name="config" ref="systemConfig" />
-		<property name="batchSerivce" ref="batchJobService"/>
-		<property name="messageTemplate" value="${mail.messageTemplate}"/>
+		<property name="batchSerivce" ref="batchJobService" />
+		<property name="fmConfg" ref="freemarkerConfig" />
+		<property name="mailSubject" value="${batch.notifySubject}" />
+		<property name="messageTemplate" value="${batch.messageTemplate}" />
 	</bean>
-	
+
 </beans>

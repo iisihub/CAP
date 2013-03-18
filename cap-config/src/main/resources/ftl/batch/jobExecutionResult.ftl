@@ -53,7 +53,6 @@
 				<th style="${th2}">Rollbacks</th>
 				<th style="${th2}">Duration</th>
 				<th style="${th2}">Status</th>
-				<th style="${th2}">ExitMessage</th>
 			</tr>
 			<#list stepInfos as step>
 				<tr>
@@ -64,7 +63,10 @@
 					<td style="${td1}" align="right">${step.ROLLBACK_COUNT!}</td>
 					<td style="${td1}">${step.duration!}</td>
 					<td style="${td1}">${step.EXIT_CODE!}</td>
-					<td style="${td1}">${step.EXIT_MESSAGE!}</td>
+				</tr>
+				<tr>
+					<th style="${th2}">ExitMessage</th>
+					<td style="${td1}" colspan="6">${step.EXIT_MESSAGE!}</td>
 				</tr>
 			</#list>
 		</table>

@@ -128,6 +128,7 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * 
 	 * @see tw.com.iisi.cap.component.ICapRequest#getServletRequest()
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public ServletRequest getServletRequest() {
 		return request;

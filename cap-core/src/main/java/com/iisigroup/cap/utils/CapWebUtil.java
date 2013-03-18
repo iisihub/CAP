@@ -69,8 +69,8 @@ public class CapWebUtil {
 	/**
 	 * Gets the request url.
 	 * 
-	 * @param filter
-	 *            the filter
+	 * @param req
+	 *            HttpServletRequest
 	 * 
 	 * @return the request url
 	 */

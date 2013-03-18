@@ -35,7 +35,8 @@ import java.util.regex.Pattern;
  *          dateFormat)
  *          <li>2011/8/15,BillWang,add method convertStringToTimestamp(String
  *          date)
- *          <li>2011/10/6, CP, add method convertTimestampToString(Timestamp, string)</li>
+ *          <li>2011/10/6, CP, add method convertTimestampToString(Timestamp,
+ *          string)</li>
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
@@ -696,12 +697,13 @@ public class CapDate {
 		type = type.replaceAll("Y", "y").replaceAll("m", "M")
 				.replaceAll("D", "d");
 		String regEx = bRegEx.toString();
-		regEx = "(^" + regEx + "$| " + regEx + "|^" + regEx + " | " + regEx
-				+ "$)";
+		regEx = new StringBuffer("(^").append(regEx).append("$| ")
+				.append(regEx).append("|^").append(regEx).append(" | ")
+				.append(regEx).append("$)").toString();
 
-		String match;
+		String match = CapString.getRegularMatch(str, regEx);
 		// 因確保不會找錯所以每次都重找一次
-		while (!CapString.isEmpty(match = CapString.getRegularMatch(str, regEx))) {
+		while (!CapString.isEmpty(match)) {
 			StringBuffer date = new StringBuffer(match.trim());
 			StringBuffer twDate = new StringBuffer();
 			int year;
@@ -729,20 +731,20 @@ public class CapDate {
 					(hasMinus ? "-" : "")
 							+ CapString.fillZeroHead(
 									twDate.substring((hasMinus) ? 1 : 0), 9));
+			match = CapString.getRegularMatch(str, regEx);
 		}
 
 		return str;
 	}
 
-
-
 	/**
-	 * 增加 or 減少月份 (傳入格式 20081212 )
-	 * &#064;param oldyyyymmdd 原日期
-	 * &#064;param i 正數表示增加，負數表示減少
-	 * &#064;return  增減後的日期
-	 * @param oldyyyymmdd date
-	 * @param i role date
+	 * 增加 or 減少月份 (傳入格式 20081212 ) &#064;param oldyyyymmdd 原日期 &#064;param i
+	 * 正數表示增加，負數表示減少 &#064;return 增減後的日期
+	 * 
+	 * @param oldyyyymmdd
+	 *            date
+	 * @param i
+	 *            role date
 	 * @return String
 	 */
 	public static String addMonth(String oldyyyymmdd, int i) {
@@ -870,18 +872,17 @@ public class CapDate {
 	public static java.sql.Date getCurrentSqlDate() {
 		return parseSQLDate(new Date());
 	}
-	
+
 	/**
 	 * 將日期的字串格式(yyyy-MM-dd |　yyyy/MM/dd | yyyyMMdd)轉換成java.sql.Date形態
 	 * 
-	 * @param date date
+	 * @param date
+	 *            date
 	 * @return java.sql.Date
 	 */
 	public static java.sql.Date parseSQLDate(String date) {
 		return new java.sql.Date(parseDate(date).getTime());
 	}
-	
-	
 
 	/**
 	 * 將java.util.Date轉換成java.sql.Date形態
@@ -922,12 +923,14 @@ public class CapDate {
 		df.setLenient(false);
 		return new Timestamp(df.parse(date, new ParsePosition(0)).getTime());
 	}
+
 	/**
 	 * <pre>
 	 * 日期字串轉換為Timestamp
 	 * </pre>
 	 * 
-	 * @param date 日期字串 格式：yyyyMMddHHmmss
+	 * @param date
+	 *            日期字串 格式：yyyyMMddHHmmss
 	 * @return Timestamp
 	 */
 	public static Timestamp convertStringToTimestamp2(String date) {
@@ -935,36 +938,44 @@ public class CapDate {
 		df.setLenient(false);
 		return new Timestamp(df.parse(date, new ParsePosition(0)).getTime());
 	}
-	
+
 	/**
 	 * 傳換Timestamp
-	 * @param tp Timestamp 日期
-	 * @param dataFormat String 格式 ex:"yyyy-MM-dd.HH.mm.ss.000000"
+	 * 
+	 * @param tp
+	 *            Timestamp 日期
+	 * @param dataFormat
+	 *            String 格式 ex:"yyyy-MM-dd.HH.mm.ss.000000"
 	 * @return String
 	 */
-	public static String convertTimestampToString(Timestamp tp, String dataFormat){
+	public static String convertTimestampToString(Timestamp tp,
+			String dataFormat) {
 		String rtnStr = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(dataFormat);
 		rtnStr = sdf.format(tp);
 		return rtnStr;
 	}
-	/** 
-     * 获得指定日期的后一天 
-     * @param specifiedDay 
-     * @return String
-     */  
-   public static String getSpecifiedDayAfter(String specifiedDay) {  
-        Calendar c = Calendar.getInstance();  
-        Date date = null;  
-        try {  
-            date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);  
-        } catch (ParseException e) {  
-        	return null;
-        }  
-        c.setTime(date);  
-        int day = c.get(Calendar.DATE);  
-        c.set(Calendar.DATE, day + 1);  
-        String dayAfter = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());  
-        return dayAfter;  
-    }  
+
+	/**
+	 * 獲得指定日期的後一天
+	 * 
+	 * @param specifiedDay
+	 *            指定日期
+	 * @return String
+	 */
+	public static String getSpecifiedDayAfter(String specifiedDay) {
+		Calendar c = Calendar.getInstance();
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yy-MM-dd").parse(specifiedDay);
+		} catch (ParseException e) {
+			return null;
+		}
+		c.setTime(date);
+		int day = c.get(Calendar.DATE);
+		c.set(Calendar.DATE, day + 1);
+		String dayAfter = new SimpleDateFormat("yyyy-MM-dd")
+				.format(c.getTime());
+		return dayAfter;
+	}
 }//

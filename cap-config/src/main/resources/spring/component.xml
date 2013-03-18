@@ -5,7 +5,7 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:annotation-config />
-	
+
 	<context:component-scan base-package="com.iisigroup.batch.sample" />
 
 	<!-- @Repository -->
@@ -18,34 +18,53 @@
 	<!-- @Page Report -->
 	<context:component-scan base-package="com.iisigroup.cap.**.page.report" />
 
-	<bean id="SequenceService" class="com.iisigroup.cap.jdbc.impl.SequenceServiceImpl">
+	<bean id="SequenceService" class="com.iisigroup.cap.base.jdbc.impl.SequenceServiceImpl">
 		<property name="jdbc" ref="capJdbcTemplate" />
 	</bean>
 	<bean id="CommonBeanService" class="com.iisigroup.cap.service.impl.CommonServiceImpl">
 		<property name="commonDao" ref="CommonBeanDao" />
 	</bean>
 	<bean id="CommonBeanDao" class="com.iisigroup.cap.dao.impl.CommonDao">
-		<property name="entityManager" ref="capEntityManager"/>
+		<property name="entityManager" ref="capEntityManager" />
 	</bean>
 	<bean id="codeTypeDao" class="com.iisigroup.cap.base.dao.impl.CodeTypeDaoImpl">
-		<property name="entityManager" ref="capEntityManager"/>
+		<property name="entityManager" ref="capEntityManager" />
 	</bean>
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	    <property name="defaultEncoding" value="UTF-8"/>
-	    <property name="host" value="${smtp.emailDomain}"/>
-	    <property name="port" value="${smtp.prot}"/>
-	    <property name="username" value="${mail.username}"/>
-	    <property name="password" value="${mail.password}"/>
-	    <property name="javaMailProperties">
-	        <props>
-	            <prop key="mail.smtp.auth">true</prop>
-	            <prop key="mail.smtp.starttls.enable">true</prop>
-	            <!-- 
-	            <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-	            <prop key="mail.smtp.socketFactory.fallback">false</prop>
-	            <prop key="mail.smtp.socketFactory.port">465</prop>
-	             -->
-	        </props>
-	    </property>
+
+	<bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">
+		<property name="sendForm" value="${mail.sender}"/>
+		<property name="mailSender">
+			<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
+				<property name="defaultEncoding" value="${defaultEncoding}" />
+				<property name="host" value="${smtp.emailDomain}" />
+				<property name="port" value="${smtp.prot}" />
+				<property name="username" value="${mail.username}" />
+				<property name="password" value="${mail.password}" />
+				<property name="javaMailProperties">
+					<props>
+						<prop key="mail.smtp.auth">true</prop>
+						<prop key="mail.smtp.starttls.enable">true</prop>
+						<!-- <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop> 
+							<prop key="mail.smtp.socketFactory.fallback">false</prop> <prop key="mail.smtp.socketFactory.port">465</prop> -->
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- freemarker config -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPaths">
+			<list>
+				<value>${batch.freemarkDir}</value>
+			</list>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="defaultEncoding">${defaultEncoding}</prop>
+				<prop key="locale">${defaultLocale}</prop>
+			</props>
+		</property>
 	</bean>
 </beans>

@@ -14,7 +14,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:db/database.properties</value>
-				<value>classpath:batch/batch.properties</value>
 				<value>classpath:config.properties</value>
 			</list>
 		</property>
@@ -35,7 +34,6 @@
 				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 				<property name="locations">
 					<list>
-						<value>classpath:batch/batch.properties</value>
 						<value>classpath:config.properties</value>
 					</list>
 				</property>

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
+import com.iisigroup.cap.base.service.SequenceService;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.handler.MFormHandler;
@@ -27,7 +28,6 @@ import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.response.MapGridResult;
-import com.iisigroup.cap.service.SequenceService;
 
 /**
  * <pre>
