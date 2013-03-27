@@ -185,5 +185,22 @@ public class CapCommonUtil {
 		}
 		return hostName;
 	}
+	
+	private static String ip;
+	
+	/**
+	 * 取得電腦IP
+	 * @return ip address
+	 */
+	public static String getHostIp(){
+		if (ip == null) {
+			try {
+				ip = InetAddress.getLocalHost().getHostAddress();
+			} catch (UnknownHostException e) {
+				ip = "0.0.0.0";
+			}
+		}
+		return ip;
+	}
 
 }

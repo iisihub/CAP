@@ -74,9 +74,12 @@ public class CapReloadableResourceBundleMessageSource
 							.replaceAll(".*\\\\i18n\\\\",
 									"classpath:\\\\i18n\\\\")
 							.replaceAll("\\\\", "/");
-					l.add(path);
+					if (!l.contains(path)) {
+						l.add(path);
+						logger.debug("set message path:" + path);
+					}
 				}
-				logger.debug("set message path:" + path);
+
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
