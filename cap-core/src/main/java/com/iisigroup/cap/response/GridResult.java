@@ -20,10 +20,6 @@ import javax.servlet.ServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.lang.CharEncoding;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.IFormatter;
@@ -42,24 +38,18 @@ import com.iisigroup.cap.model.GenericBean;
  *          <li>2011/11/1,rodeschen,from cap
  *          <li>2011/11/1,rodeschen,modify for criteria
  *          <li>2012/09/18,iristu,改implements IGridResult
+ *          <li>2013/03/29,rodeschen,add extends AjaxFormResult
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class GridResult implements IGridResult<GridResult, GenericBean> {
+public class GridResult extends AjaxFormResult implements
+		IGridResult<GridResult, GenericBean> {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected List<? extends GenericBean> rowData;
 
-	private JSONObject resultMap;
+	protected String[] columns;
 
-	private List<? extends GenericBean> rowData;
-
-	private String[] columns;
-
-	private Map<String, IFormatter> dataReformatter;
-
-	private String contentType;
-
-	private String encoding;
+	protected Map<String, IFormatter> dataReformatter;
 
 	public GridResult() {
 		resultMap = new JSONObject();
@@ -232,34 +222,6 @@ public class GridResult implements IGridResult<GridResult, GenericBean> {
 	 */
 	public void setDataReformatter(Map<String, IFormatter> dataReformatter) {
 		this.dataReformatter = dataReformatter;
-	}
-
-	@Override
-	public String getContextType() {
-		if (contentType != null) {
-			return this.contentType;
-		} else {
-			return "text/plain";
-		}
-	}
-
-	@Override
-	public String getEncoding() {
-		if (encoding != null) {
-			return this.encoding;
-		} else {
-			return CharEncoding.UTF_8;
-		}
-	}
-
-	@Override
-	public void setContextType(String cxtType) {
-		this.contentType = cxtType;
-	}
-
-	@Override
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
 	}
 
 	@Override

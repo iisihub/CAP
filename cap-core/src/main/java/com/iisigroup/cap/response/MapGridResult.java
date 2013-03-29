@@ -23,10 +23,6 @@ import javax.servlet.ServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.lang.CharEncoding;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.ibm.icu.util.Calendar;
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
@@ -45,25 +41,18 @@ import com.iisigroup.cap.formatter.IFormatter;
  * @version <ul>
  *          <li>2011/10/26,iristu,new
  *          <li>2011/03/28,sunkist,update callback
+ *          <li>2013/03/29,rodeschen,add extends AjaxFormResult
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class MapGridResult implements
+public class MapGridResult extends AjaxFormResult implements
 		IGridResult<MapGridResult, Map<String, Object>> {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected List<? extends Map<String, Object>> rowData;
 
-	private JSONObject resultMap;
+	protected String[] columns;
 
-	private List<? extends Map<String, Object>> rowData;
-
-	private String[] columns;
-
-	private String contentType;
-
-	private String encoding;
-
-	private Map<String, IFormatter> dataReformatter;
+	protected Map<String, IFormatter> dataReformatter;
 
 	public MapGridResult() {
 		resultMap = new JSONObject();
@@ -219,7 +208,7 @@ public class MapGridResult implements
 				try {
 					row.put(IGridEnum.CELL.getCode(), dataToJsonString(data));
 				} catch (CapException e) {
-					e.printStackTrace();
+					logger.debug(e.getMessage(), getClass());
 				}
 				rows.add(row);
 			}
@@ -322,34 +311,6 @@ public class MapGridResult implements
 
 	public Map<String, Boolean> getOrderBy() {
 		return this.orderBy;
-	}
-
-	@Override
-	public String getContextType() {
-		if (contentType != null) {
-			return this.contentType;
-		} else {
-			return "text/plain";
-		}
-	}
-
-	@Override
-	public String getEncoding() {
-		if (encoding != null) {
-			return this.encoding;
-		} else {
-			return CharEncoding.UTF_8;
-		}
-	}
-
-	@Override
-	public void setContextType(String cxtType) {
-		this.contentType = cxtType;
-	}
-
-	@Override
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
 	}
 
 	@Override
