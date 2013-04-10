@@ -170,8 +170,7 @@ public abstract class MFormHandler extends HandlerPlugin {
 						.equals(isAsc));
 			}
 		}
-		IGridResult result = new GridResult();
-		result.setColumns(getColumns(params.get(IGridEnum.COL_PARAM.getCode())));
+		IGridResult result = null;
 		try {
 			result = (IGridResult) method.invoke(this, search, params);
 			result.setColumns(getColumns(params.get(IGridEnum.COL_PARAM
