@@ -23,7 +23,7 @@ import com.iisigroup.cap.response.AjaxFormResult;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/11/28,rodeschen,new
- *          <li>2012/3/12,gabriellaLau,add queryCodeTypeByType
+ *          <li>2013/4/10,rodeschen,增加預設語系
  *          </ul>
  */
 public interface CodeTypeService {
@@ -49,6 +49,17 @@ public interface CodeTypeService {
 	Map<String, String> findByCodeType(String codeType, String locale);
 
 	/**
+	 * get Map by code type 語系預設使用
+	 * SimpleContextHolder.get(CapWebUtil.localeKey);
+	 * 
+	 * @param codeType
+	 *            代碼類型
+	 * @return Map
+	 * 
+	 */
+	Map<String, String> findByCodeType(String codeType);
+
+	/**
 	 * get codeType by types
 	 * 
 	 * @param types
@@ -63,6 +74,17 @@ public interface CodeTypeService {
 	/**
 	 * get codeType by types
 	 * 
+	 * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
+	 * 
+	 * @param types
+	 *            types
+	 * @return Map<String, Map<String,String>>
+	 */
+	Map<String, Map<String, String>> findByCodeTypes(String[] types);
+
+	/**
+	 * get codeType by types
+	 * 
 	 * @param types
 	 *            type keys
 	 * @param locale
@@ -72,15 +94,35 @@ public interface CodeTypeService {
 	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types, String locale);
 
 	/**
+	 * get codeType by types
+	 * 
+	 * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
+	 * 
+	 * @param types
+	 *            type keys
+	 * @return Map<String, CapAjaxFormResult>
+	 */
+	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types);
+
+	/**
 	 * get CodeType by type and value
 	 * 
 	 * @param type
 	 *            typeName
-	 * @param value
-	 *            value * @param locale 語系
 	 * @return CodeType
 	 */
 	CodeType getByCodeTypeAndValue(String type, String value, String locale);
+
+	/**
+	 * get CodeType by type and value
+	 * 
+	 * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
+	 * 
+	 * @param type
+	 *            typeName
+	 * @return CodeType
+	 */
+	CodeType getByCodeTypeAndValue(String type, String value);
 
 	/**
 	 * get CodeType by oid
