@@ -9,11 +9,13 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.mvc.message;
+package com.iisigroup.cap.message;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,8 +45,38 @@ public class CapReloadableResourceBundleMessageSource
 
 	protected final Logger logger = LoggerFactory
 			.getLogger(CapReloadableResourceBundleMessageSource.class);
-	private final String i18nFileREG = "(_zh_CN|_en|_zh_TW).properties$";
-	private final String i18nPattern = "classpath:/i18n/**/*.properties";
+
+	// private final String i18nFileREG = "(_zh_CN|_en|_zh_TW).properties$";
+	// private final String i18nPattern = "classpath:/i18n/**/*.properties";
+
+	private String[] languages;
+	private String basePath;
+	//設定預設語系 - 如有使用Spring MVC 可省略
+	private Locale defaultLocale;
+
+	/**
+	 * @param defaultLocale
+	 *            the defaultLocale to set
+	 */
+	public void setDefaultLocale(Locale defaultLocale) {
+		this.defaultLocale = defaultLocale;
+	}
+
+	/**
+	 * @param language
+	 *            the language to set
+	 */
+	public void setLanguages(String[] languages) {
+		this.languages = languages;
+	}
+
+	/**
+	 * @param basePath
+	 *            the basePath to set
+	 */
+	public void setBasePath(String basePath) {
+		this.basePath = basePath;
+	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext ctx) {
@@ -62,6 +94,12 @@ public class CapReloadableResourceBundleMessageSource
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		Set<String> l = new HashSet<String>();
+		String i18nPattern = basePath + "/**/*.properties";
+		String i18nFileREG = "(" + StringUtils.join(languages, '|')
+				+ ").properties$";
+		if (defaultLocale != null) {
+			Locale.setDefault(this.defaultLocale);
+		}
 		try {
 			Resource[] resources = applicationContext.getResources(i18nPattern);
 			for (Resource resource : resources) {
