@@ -249,8 +249,11 @@ public abstract class MFormHandler extends HandlerPlugin {
 		if (method != null) {
 			HandlerType type = method.getAnnotation(HandlerType.class);
 			if (type != null) {
-				return handlerOp
-						.getValue(type.value().name(), SIMPLE_OPERATION);
+				String op = type.name();
+				if (op == null || "".equals(op)) {
+					op = type.value().name();
+				}
+				return handlerOp.getValue(op, SIMPLE_OPERATION);
 			}
 		}
 		return SIMPLE_OPERATION;
