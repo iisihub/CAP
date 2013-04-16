@@ -95,8 +95,10 @@ public class CapNamedJdbcTemplate {
 			RowCallbackHandler rch) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
-		sql.append(' ').append(
-				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (!sql.toString().trim().toUpperCase().startsWith("CALL")) {
+			sql.append(' ').append(
+					sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		}
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
 					.append(sqlp.containsKey(sqlId) ? sqlId : "")
@@ -142,8 +144,10 @@ public class CapNamedJdbcTemplate {
 		if (appendDynamicSql != null) {
 			sql.append(' ').append(appendDynamicSql);
 		}
-		sql.append(' ').append(
-				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (!sql.toString().trim().toUpperCase().startsWith("CALL")) {
+			sql.append(' ').append(
+					sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		}
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
 					.append(sqlp.containsKey(sqlId) ? sqlId : "")
@@ -187,8 +191,10 @@ public class CapNamedJdbcTemplate {
 		if (appendDynamicSql != null) {
 			sql.append(' ').append(appendDynamicSql);
 		}
-		sql.append(' ').append(
-				sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		if (!sql.toString().trim().toUpperCase().startsWith("CALL")) {
+			sql.append(' ').append(
+					sqltemp.getValue(CapJdbcContants.SQLQuery_Suffix, ""));
+		}
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
 					.append(sqlp.containsKey(sqlId) ? sqlId : "")
