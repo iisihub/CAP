@@ -57,14 +57,18 @@ public interface Constants {
 	 * a "-1" string.
 	 */
 	public final static String S1N = "-1";
-    /**
-     * a "Y" string
-     */
-	public static final String FLAG_Y="Y";
 	/**
-     * a "N" string
-     */
-	public static final String FLAG_N="N";
+	 * a "Y" string
+	 */
+	public static final String FLAG_Y = "Y";
+	/**
+	 * a "N" string
+	 */
+	public static final String FLAG_N = "N";
+	/**
+	 * a "-" string
+	 */
+	public final static String NEGATIVE = "-";
 	/**
 	 * a BigDecimal, value is 0.
 	 */
@@ -86,18 +90,17 @@ public interface Constants {
 	public final static String[] EMPTY_ARRAY = new String[0];
 
 	public final static String VALUES_SEPARATOR = "|";
-	
+
 	public final static String COMMA = ",";
-	
+
 	public final static String DATE_STAMP = "'";
 
 	/**
 	 * http
 	 */
-	public final static String HOST_URL = "HOST_URL";//HTTP.TARGET_HOST;
+	public final static String HOST_URL = "HOST_URL";// HTTP.TARGET_HOST;
 
-	public final static String CONNECTION_TIMEOUT = "TIMEOUT";//HttpConnectionParams.CONNECTION_TIMEOUT;
-
+	public final static String CONNECTION_TIMEOUT = "TIMEOUT";// HttpConnectionParams.CONNECTION_TIMEOUT;
 
 	public final static String ASYNC = "ASYNC";
 
@@ -111,18 +114,17 @@ public interface Constants {
 
 	/** UI端顯示訊息 */
 	public final static String AJAX_NOTIFY_MESSAGE = "NOTIFY_MESSAGE";
-	
-	
+
 	/**
-	 * security 
+	 * security
 	 */
 	public final static String SECURITY_CONTEXT = "capSecurityContext";
-	
+
 	/**
 	 * system config
 	 */
 	public final static String SYSTEM_CONFIG = "systemConfig";
-	
+
 	public static final String TXNCD = "transCde";
 
 }

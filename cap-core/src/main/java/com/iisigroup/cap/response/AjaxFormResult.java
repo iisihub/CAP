@@ -23,6 +23,8 @@ import javax.servlet.ServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.CharEncoding;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <pre>
@@ -38,15 +40,18 @@ import org.apache.commons.lang.CharEncoding;
  *          putAll(Map<String,Object> map) to CapAjaxFormResult
  *          putAll(Map<String, ? extends Object> map)
  *          <li>2011/11/1,rodeschen,from cap
+ *          <li>2013/03/29,rodeschen,field change to protected
  *          </ul>
  */
 @SuppressWarnings("serial")
 public class AjaxFormResult implements IResult {
 
-	private JSONObject resultMap;
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private String contentType;
-	private String encoding;
+	protected JSONObject resultMap;
+
+	protected String contentType;
+	protected String encoding;
 
 	/**
 	 * 建構子

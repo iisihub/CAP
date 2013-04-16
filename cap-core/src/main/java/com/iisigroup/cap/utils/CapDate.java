@@ -37,7 +37,8 @@ import java.util.regex.Pattern;
  *          date)
  *          <li>2011/10/6, CP, add method convertTimestampToString(Timestamp,
  *          string)</li>
- *          <li>2011/11/1,rodeschen,from cap
+ *          <li>2013/3/26,rodeschen add
+ *          convertStringToTimestamp,convertDateTimeFromF1ToF2
  *          </ul>
  */
 public class CapDate {
@@ -915,13 +916,11 @@ public class CapDate {
 	 * </pre>
 	 * 
 	 * @param date
-	 *            日期字串
+	 *            日期字串 格式：yyyy-MM-dd HH:mm:ss
 	 * @return Timestamp
 	 */
 	public static Timestamp convertStringToTimestamp1(String date) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		df.setLenient(false);
-		return new Timestamp(df.parse(date, new ParsePosition(0)).getTime());
+		return convertStringToTimestamp(date, "yyyy-MM-dd HH:mm:ss");
 	}
 
 	/**
@@ -934,9 +933,33 @@ public class CapDate {
 	 * @return Timestamp
 	 */
 	public static Timestamp convertStringToTimestamp2(String date) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		return convertStringToTimestamp(date, "yyyyMMddHHmmss");
+	}
+
+	/**
+	 * 日期處理(String+Format=Timestamp)
+	 * 
+	 * @param date
+	 * @return Timestamp
+	 */
+	public static Timestamp convertStringToTimestamp(String date, String format) {
+		SimpleDateFormat df = new SimpleDateFormat(format);
 		df.setLenient(false);
 		return new Timestamp(df.parse(date, new ParsePosition(0)).getTime());
+	}
+
+	/**
+	 * 日期字串轉換(datetime)
+	 * 
+	 * @param time
+	 * @param format1
+	 * @param format2
+	 * @return
+	 */
+	public static String convertDateTimeFromF1ToF2(String time, String format1,
+			String format2) {
+		Timestamp tp = convertStringToTimestamp(time, format1);
+		return convertTimestampToString(tp, format2);
 	}
 
 	/**

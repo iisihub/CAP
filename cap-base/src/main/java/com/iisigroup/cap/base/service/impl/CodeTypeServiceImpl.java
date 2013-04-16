@@ -21,8 +21,10 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.service.CodeTypeService;
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <pre>
@@ -33,6 +35,7 @@ import com.iisigroup.cap.service.AbstractService;
  * @author rodeschen
  * @version <ul>
  *          <li>2011/11/28,rodeschen,new
+ *          <li>2013/4/10,rodeschen,增加預設語系
  *          </ul>
  */
 @Service
@@ -121,4 +124,55 @@ public class CodeTypeServiceImpl extends AbstractService implements
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.iisigroup.cap.base.service.CodeTypeService#findByCodeType(java.lang
+	 * .String)
+	 */
+	@Override
+	public Map<String, String> findByCodeType(String codeType) {
+		return findByCodeType(codeType,
+				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.iisigroup.cap.base.service.CodeTypeService#findByCodeTypes(java.lang
+	 * .String[])
+	 */
+	@Override
+	public Map<String, Map<String, String>> findByCodeTypes(String[] types) {
+		return findByCodeTypes(types,
+				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.iisigroup.cap.base.service.CodeTypeService#getCodeTypeByTypes(java
+	 * .lang.String[])
+	 */
+	@Override
+	public Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types) {
+		return getCodeTypeByTypes(types,
+				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.iisigroup.cap.base.service.CodeTypeService#getByCodeTypeAndValue(
+	 * java.lang.String, java.lang.String)
+	 */
+	@Override
+	public CodeType getByCodeTypeAndValue(String type, String value) {
+		return getByCodeTypeAndValue(type, value,
+				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+	}
 }
