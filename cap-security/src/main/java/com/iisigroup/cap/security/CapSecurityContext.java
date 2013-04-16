@@ -11,6 +11,7 @@
  */
 package com.iisigroup.cap.security;
 
+import java.net.InetAddress;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
@@ -23,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.iisigroup.cap.security.model.CapUserDetails;
+import com.iisigroup.cap.security.web.CapAuthenticationDetails;
 
 /**
  * <pre>
@@ -48,12 +50,15 @@ public class CapSecurityContext {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends CapUserDetails> T getUser() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		if (auth != null && auth.getPrincipal() instanceof UserDetails) {
-			return ((T) auth.getPrincipal());
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		if (auth != null
+				&& auth.getDetails() instanceof CapAuthenticationDetails) {
+			CapAuthenticationDetails detail = (CapAuthenticationDetails) auth
+					.getDetails();
+			return ((T) detail.getUserDetails());
 		}
-		return null;
+		return (T) getDefautlUserDetails();
 	}
 
 	/**
@@ -122,7 +127,8 @@ public class CapSecurityContext {
 		Set<String> roleOids = new HashSet<String>();
 		Collection<? extends GrantedAuthority> auths = getAuthorities();
 		for (GrantedAuthority auth : auths) {
-			if (AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY.equals(auth.getAuthority())) {
+			if (AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY.equals(auth
+					.getAuthority())) {
 				continue;
 			}
 			roleOids.add(auth.getAuthority());
@@ -130,4 +136,17 @@ public class CapSecurityContext {
 		return roleOids;
 	}
 
+	private static CapUserDetails getDefautlUserDetails() {
+		CapUserDetails user = new CapUserDetails();
+		String userId = "";
+		try {
+			userId = InetAddress.getLocalHost().getHostName();
+		} catch (java.net.UnknownHostException uhe) {
+			userId = "UNKNOWN";
+		}
+		user.setUserId(userId);
+		user.setUserName(userId);
+		user.setUnitNo("999");
+		return user;
+	}// ;
 }
