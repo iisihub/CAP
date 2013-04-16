@@ -38,7 +38,10 @@
 		<mapper class="com.iisigroup.cap.sitemesh.mapper.CapI18nMapper">
 			<param name="ignorePathReg" value="(page/index|page/login)" />
 		</mapper>
-
+		<mapper class="com.iisigroup.cap.sitemesh.mapper.CapRequestJSONMapper">
+			<param name="decoratorFile" value="minimal"/>
+			<param name="ignoreParams" value="_isAjax,formAction,_pa"/>
+		</mapper>
 
 		<mapper class="com.opensymphony.module.sitemesh.mapper.PageDecoratorMapper">
 			<param name="property.1" value="meta.decorator" />
