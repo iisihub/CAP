@@ -108,11 +108,14 @@ public class CapSecurityContext {
 
 	public static Locale getLocale() {
 		CapUserDetails user = getUser();
+		Locale locale = null;
 		if (user != null) {
-			return user.getLocale();
-		} else {
-			return Locale.getDefault();
+			locale = user.getLocale();
 		}
+		if (locale == null) {
+			locale = Locale.getDefault();
+		}
+		return locale;
 	}
 
 	public static Collection<? extends GrantedAuthority> getAuthorities() {
