@@ -36,6 +36,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * @version <ul>
  *          <li>2011/11/15,iristu,new
  *          <li>2012/2/3,rodeschen,copy from cap
+ *          <li>2013/4/15,iristu,修正IE7下載時錯誤
  *          </ul>
  */
 @SuppressWarnings("serial")
@@ -103,14 +104,17 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 		InputStream in = null;
 		OutputStream output = null;
 		try {
+			response.setContentType(getContentType());
+			response.setContentLength(_byteArray.length);
 			if (getOutputName() != null
 					&& response instanceof HttpServletResponse) {
-				((HttpServletResponse) response).setHeader(
-						"Content-Disposition", "attachment;filename=\""
-								+ getOutputName() + "\"");
+				HttpServletResponse resp = (HttpServletResponse) response;
+				resp.setHeader("Content-Disposition", "attachment;filename=\""
+						+ getOutputName() + "\"");
+				resp.setHeader("Cache-Control", "public");
+				resp.setHeader("Pragma", "public");
 			}
 			output = response.getOutputStream();
-
 			// Stream to the requester.
 			byte[] bbuf = new byte[1024 * 1024];
 
