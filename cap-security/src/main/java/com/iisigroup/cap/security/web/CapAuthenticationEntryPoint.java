@@ -47,7 +47,7 @@ public class CapAuthenticationEntryPoint extends
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String xReq = httpRequest.getHeader("x-requested-with");
 		if ("XMLHttpRequest".equalsIgnoreCase(xReq)) {
-			return new StringBuffer(getLoginFormUrl()).append("?ajax")
+			return new StringBuffer(getLoginFormUrl()).append("?ajax=1")
 					.toString();
 		} else {
 			return getLoginFormUrl();
