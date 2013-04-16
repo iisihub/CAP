@@ -49,7 +49,7 @@ public class BaseActionController extends MultiActionController {
 			out.write(string);
 			out.flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 	}
 
