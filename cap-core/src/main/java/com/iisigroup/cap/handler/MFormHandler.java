@@ -33,7 +33,6 @@ import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
 import com.iisigroup.cap.plugin.HandlerPlugin;
-import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -248,8 +247,11 @@ public abstract class MFormHandler extends HandlerPlugin {
 		if (method != null) {
 			HandlerType type = method.getAnnotation(HandlerType.class);
 			if (type != null) {
-				return handlerOp
-						.getValue(type.value().name(), SIMPLE_OPERATION);
+				String op = type.name();
+				if (op == null || "".equals(op)) {
+					op = type.value().name();
+				}
+				return handlerOp.getValue(op, SIMPLE_OPERATION);
 			}
 		}
 		return SIMPLE_OPERATION;
