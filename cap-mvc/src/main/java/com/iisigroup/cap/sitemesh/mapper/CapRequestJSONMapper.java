@@ -90,9 +90,9 @@ public class CapRequestJSONMapper extends AbstractDecoratorMapper {
 				}
 			}
 			StringBuffer str = new StringBuffer(
-					"<script type=\"text/javascript\">var reqJSON='");
+					"<script type=\"text/javascript\">var reqJSON=");
 			str.append(JSONSerializer.toJSON(hm).toString()).append(
-					"';</script>");
+					";</script>");
 			page.addProperty(PROP_KEY, str.toString());
 		}
 		return super.getDecorator(request, page);
