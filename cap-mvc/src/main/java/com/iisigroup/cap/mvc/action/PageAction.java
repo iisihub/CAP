@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.model.CapUserDetails;
+import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -37,12 +39,21 @@ public class PageAction extends BaseActionController {
 		String path = request.getPathInfo();
 		ModelAndView model = new ModelAndView(path);
 		HttpSession session = request.getSession(false);
+		response.setStatus(HttpServletResponse.SC_OK);
 		final AuthenticationException ae = (session != null) ? (AuthenticationException) session
 				.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) : null;
+		String errmsg = "";
 		if (ae != null) {
-			String errmsg = ae.getMessage();
-			model.addObject("errorMessage", errmsg);
+			errmsg = ae.getMessage();
+		} else {
+			AccessDeniedException accessDenied = (AccessDeniedException) request
+					.getAttribute(WebAttributes.ACCESS_DENIED_403);
+			if (accessDenied != null) {
+				errmsg = CapAppContext.getMessage("AccessCheck.AccessDenied",
+						locale) + errmsg;
+			}
 		}
+		model.addObject("errorMessage", errmsg);
 		return model;
 	}
 
