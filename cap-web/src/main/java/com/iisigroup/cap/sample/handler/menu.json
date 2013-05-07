@@ -1,0 +1,23 @@
+{
+	"menu" : [{
+		"name":"各項申請",
+		"url" : "report",
+		"child":[{
+			"name":"預約開戶申請",
+			"url" : "reserveOpen"
+		},{
+			"name":"申請書下載",
+			"url" : "#"
+		}]
+	},{
+		"name":"利匯率查詢",
+		"url" : "query",
+		"child":[{
+			"name":"利率查詢",
+			"url":"#"
+		},{
+			"name":"匯率查詢",
+			"url":"#"
+		}]
+	}]
+}
