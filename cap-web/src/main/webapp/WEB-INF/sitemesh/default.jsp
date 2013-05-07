@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title><decorator:title default="CapWebMVC" /></title>
+<title><decorator:title default="BQD POC" /></title>
 <link rel="stylesheet" href="../static/css/main.css" />
 <!--[if lt IE 9]>
             <script src="../static/lib/js/html5.js"></script>
@@ -24,12 +24,6 @@
 			<div class="logo">
 				<a><img src="../static/images/logo.png"></a>
 			</div>
-			<ol style="height: 18px;">
-				<li class="lang"><a href="#language">&nbsp;LANGUAGE&nbsp;</a></li>
-				<li>&nbsp;-<a href="?lang=zh_TW">&nbsp;正體&nbsp;</a></li>
-				<li>&nbsp;-<a href="?lang=zh_CN">&nbsp;简体&nbsp;</a></li>
-				<li>&nbsp;-<a href="?lang=en">&nbsp;ENGLISH&nbsp;</a></li>
-			</ol>
 		</header>
 		<nav class="top">
 			<ul class="block"></ul>

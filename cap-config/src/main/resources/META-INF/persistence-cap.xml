@@ -5,8 +5,7 @@
 	<persistence-unit name="pu-cap">
 		<mapping-file>META-INF/orm-cap.xml</mapping-file>
 		<!-- base -->
-		<class>com.iisigroup.cap.base.model.CodeType</class>
-		<class>com.iisigroup.cap.base.model.SysParm</class>
+		<class>com.bqd.poc.sample.OpenAcct</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>

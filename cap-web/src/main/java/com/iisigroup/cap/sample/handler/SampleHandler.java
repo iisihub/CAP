@@ -14,6 +14,7 @@ package com.iisigroup.cap.sample.handler;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -69,7 +70,7 @@ public class SampleHandler extends MFormHandler {
 
 	@HandlerType(HandlerTypeEnum.FileDownload)
 	public IResult dwnload(IRequest request) throws CapException {
-		//String outputName = request.get("fileName", "CapLog.log");
+		// String outputName = request.get("fileName", "CapLog.log");
 		File file = new File("logs/CapLog.log");
 		FileInputStream is = null;
 		try {
@@ -82,12 +83,20 @@ public class SampleHandler extends MFormHandler {
 			IOUtils.closeQuietly(is);
 		}
 		return null;
-//		return new FileDownloadResult(request, "logs/CapLog.log", outputName,
-//				"text/plain");
+		// return new FileDownloadResult(request, "logs/CapLog.log", outputName,
+		// "text/plain");
 	}// ;
-	
-	
-	public IResult queryMenu(IRequest request){
-		return new AjaxFormResult("{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
+
+	public IResult queryMenu(IRequest request) {
+		InputStream in = getClass().getResourceAsStream("menu.json");
+		try {
+			String str = IOUtils.toString(in, "utf-8");
+			return new AjaxFormResult(str);
+		} catch (IOException e) {
+			logger.trace(e.getMessage());
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
+		return new AjaxFormResult("");
 	}
 }
