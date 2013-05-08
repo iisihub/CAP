@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -50,7 +49,7 @@ public class CapHttpService extends AbstractHGservice {
 	private HttpPost httpPost;
 	// private HttpResponse httpResponse;
 	private int httpStatus;
-	private String responseData;
+	private byte[] responseData;
 	/** default Connection Timeout **/
 	// private int defaultConnectTimeout = 3000;
 	/** default socket Timeout **/
@@ -108,8 +107,16 @@ public class CapHttpService extends AbstractHGservice {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getReceiveData() throws CapException {
+	public Object getReceiveData() throws CapException {
 		return responseData;
+	}
+
+	public String getReceiveStringData() throws CapException {
+		try {
+			return new String(responseData, defaultEncode);
+		} catch (UnsupportedEncodingException e) {
+			throw new CapException(e, getClass());
+		}
 	}
 
 	/*
@@ -168,7 +175,8 @@ public class CapHttpService extends AbstractHGservice {
 	 *            parameter
 	 * @throws UnsupportedEncodingException
 	 */
-	public void setRequestParams(Map<String, String> map) throws UnsupportedEncodingException {
+	public void setRequestParams(Map<String, String> map)
+			throws UnsupportedEncodingException {
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		for (String key : map.keySet()) {
 			nvps.add(new BasicNameValuePair(key, map.get(key)));
@@ -195,8 +203,10 @@ public class CapHttpService extends AbstractHGservice {
 		if (entity != null) {
 			InputStream instream = entity.getContent();
 			try {
-				responseData = StringUtils.join(IOUtils.readLines(instream, defaultEncode)
-						.toArray());
+				responseData = IOUtils.toByteArray(instream);
+
+				// responseData = StringUtils.join(IOUtils.readLines(instream,
+				// defaultEncode).toArray());
 
 			} catch (RuntimeException ex) {
 				httpPost.abort();
@@ -215,7 +225,8 @@ public class CapHttpService extends AbstractHGservice {
 		// }
 		// });
 		logger.debug("host response:" + responseData);
-		logger.debug("Send Host spand time: " + (System.currentTimeMillis() - st) + "ms");
+		logger.debug("Send Host spand time: "
+				+ (System.currentTimeMillis() - st) + "ms");
 		setStatus(ConnStatusEnum.COMPLETE);
 
 	}
@@ -256,7 +267,7 @@ public class CapHttpService extends AbstractHGservice {
 			try {
 				excuteHttp();
 			} catch (Exception e) {
-				responseData = errorHandle(e);
+				responseData = errorHandle(e).getBytes();
 			}
 		}
 	}
@@ -284,14 +295,18 @@ public class CapHttpService extends AbstractHGservice {
 			throw new CapException(e, getClass());
 		}
 		httpClient = new DefaultHttpClient();
-		int ct = Integer.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
-		int st = Integer.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
+		int ct = Integer
+				.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
+		int st = Integer
+				.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
 
 		String encode = defaultEncode;
 		String async = getProperty(Constants.ASYNC);
 
-		httpClient.getParams().setParameter(HttpConnectionParams.CONNECTION_TIMEOUT, ct);
-		httpClient.getParams().setParameter(HttpConnectionParams.SO_TIMEOUT, st);
+		httpClient.getParams().setParameter(
+				HttpConnectionParams.CONNECTION_TIMEOUT, ct);
+		httpClient.getParams()
+				.setParameter(HttpConnectionParams.SO_TIMEOUT, st);
 		defaultEncode = encode != null ? encode : defaultEncode;
 		isAsync = (async != null ? Boolean.valueOf(async) : false);
 		setStatus(ConnStatusEnum.INIT);
@@ -308,13 +323,16 @@ public class CapHttpService extends AbstractHGservice {
 		logger.error(e.getMessage(), e);
 		if (e instanceof HttpHostConnectException) {
 			setStatus(ConnStatusEnum.CONNECT_ERROR);
-			return "{rc:'" + ConnStatusEnum.CONNECT_ERROR + "',msg:'connect error'}";
+			return "{rc:'" + ConnStatusEnum.CONNECT_ERROR
+					+ "',msg:'connect error'}";
 		} else if (e instanceof SocketTimeoutException) {
 			setStatus(ConnStatusEnum.TIMEOUT);
-			return "{rc:'" + ConnStatusEnum.TIMEOUT + "',msg:'connect timeout'}";
+			return "{rc:'" + ConnStatusEnum.TIMEOUT
+					+ "',msg:'connect timeout'}";
 		} else {
 			setStatus(ConnStatusEnum.ERROR);
-			return "{rc:'" + ConnStatusEnum.ERROR + "',msg:'" + e.getMessage() + "'}";
+			return "{rc:'" + ConnStatusEnum.ERROR + "',msg:'" + e.getMessage()
+					+ "'}";
 		}
 	}
 
