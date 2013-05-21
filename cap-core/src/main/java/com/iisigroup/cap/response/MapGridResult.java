@@ -42,6 +42,7 @@ import com.iisigroup.cap.formatter.IFormatter;
  *          <li>2011/10/26,iristu,new
  *          <li>2011/03/28,sunkist,update callback
  *          <li>2013/03/29,rodeschen,add extends AjaxFormResult
+ *          <li>2013/5/21,rodeschen,修改format錯誤放入原值
  *          </ul>
  */
 @SuppressWarnings("serial")
@@ -243,10 +244,13 @@ public class MapGridResult extends AjaxFormResult implements
 				} else if (val instanceof Date || val instanceof Calendar) {
 					val = new ADDateFormatter().reformat(val);
 				}
-				row.add(String.valueOf(val));
+			//	row.add(String.valueOf(val));
 			} catch (Exception e) {
-				throw new CapException(e.getMessage(), e, getClass());
+				//2013/5/21,rodeschen,修改format錯誤放入原值
+				//val = "";
+				//new CapException(e.getMessage(), e, getClass());
 			}
+			row.add(String.valueOf(val));
 		}
 		return row.toString();
 	}
