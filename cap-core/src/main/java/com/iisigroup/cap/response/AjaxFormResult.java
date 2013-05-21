@@ -206,6 +206,10 @@ public class AjaxFormResult implements IResult {
 	public String toString() {
 		return resultMap.toString();
 	}
+	
+	public boolean isEmpty(){
+		return resultMap.isEmpty();
+	}
 
 	/**
 	 * 移除欄位
@@ -215,7 +219,8 @@ public class AjaxFormResult implements IResult {
 	 * @return this FormResult
 	 */
 	public AjaxFormResult removeField(String key) {
-		resultMap.remove(key);
+		if (resultMap.containsKey(key))
+			resultMap.remove(key);
 		return this;
 	}
 

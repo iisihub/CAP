@@ -394,6 +394,21 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 					} else {
 						return null;
 					}
+				} else if (SearchMode.OR == _key || SearchMode.AND == _key) {
+					List<SearchModeParameter> list = (List<SearchModeParameter>) _value;
+					List<Predicate> predicates = new ArrayList<Predicate>(
+							list.size());
+					for (SearchModeParameter param : list) {
+						predicates.add(new CapSpecifications(param)
+								.toPredicate(root, query, builder));
+					}
+					if (SearchMode.OR == _key) {
+						return builder.or(predicates
+								.toArray(new Predicate[predicates.size()]));
+					} else {
+						return builder.and(predicates
+								.toArray(new Predicate[predicates.size()]));
+					}
 				}
 				String key = (String) _key;
 
@@ -433,6 +448,8 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 					return builder.isNotNull(path);
 				case IN:
 					return path.in(asArray(_value));
+				case NOT_IN:
+					return builder.not(path.in(asArray(_value)));
 				case LIKE:
 					return builder.like((Path<String>) path,
 							String.valueOf(_value));
