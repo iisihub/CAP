@@ -103,6 +103,8 @@ public interface Constants {
 	public final static String CONNECTION_TIMEOUT = "TIMEOUT";// HttpConnectionParams.CONNECTION_TIMEOUT;
 
 	public final static String ASYNC = "ASYNC";
+	
+	public final static String HTTP_RETRY_COUNT = "HTTP_RETRY_COUNT";
 
 	/**
 	 * Empty Json

@@ -1,5 +1,6 @@
 package com.iisigroup.cap.hg.service.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.SocketTimeoutException;
@@ -13,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpHostConnectException;
@@ -21,6 +23,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -195,11 +198,12 @@ public class CapHttpService extends AbstractHGservice {
 
 		httpPost.setURI(new URI((String) getProperty(Constants.HOST_URL)));
 		long st = System.currentTimeMillis();
+		
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		httpStatus = httpResponse.getStatusLine().getStatusCode();
-
+		
 		HttpEntity entity = httpResponse.getEntity();
-
+	
 		if (entity != null) {
 			InputStream instream = entity.getContent();
 			try {
@@ -295,6 +299,23 @@ public class CapHttpService extends AbstractHGservice {
 			throw new CapException(e, getClass());
 		}
 		httpClient = new DefaultHttpClient();
+		String retryCount = getProperty(Constants.HTTP_RETRY_COUNT);
+		if(retryCount != null){
+			final int count = Integer.valueOf(retryCount);
+			httpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
+				
+				@Override
+				public boolean retryRequest(IOException exception, int executionCount,
+						HttpContext context) {
+					if (executionCount > count) {
+	                    return false;
+	                }
+					logger.info("retry count:" + executionCount);
+					return true;
+				}
+			});
+		}
+		
 		int ct = Integer
 				.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
 		int st = Integer
