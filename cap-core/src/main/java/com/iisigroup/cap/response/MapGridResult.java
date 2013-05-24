@@ -209,7 +209,7 @@ public class MapGridResult extends AjaxFormResult implements
 				try {
 					row.put(IGridEnum.CELL.getCode(), dataToJsonString(data));
 				} catch (CapException e) {
-					logger.debug(e.getMessage(), getClass());
+					logger.error(e.getMessage(), getClass());
 				}
 				rows.add(row);
 			}

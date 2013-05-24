@@ -198,12 +198,12 @@ public class CapHttpService extends AbstractHGservice {
 
 		httpPost.setURI(new URI((String) getProperty(Constants.HOST_URL)));
 		long st = System.currentTimeMillis();
-		
+
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		httpStatus = httpResponse.getStatusLine().getStatusCode();
-		
+
 		HttpEntity entity = httpResponse.getEntity();
-	
+
 		if (entity != null) {
 			InputStream instream = entity.getContent();
 			try {
@@ -300,22 +300,23 @@ public class CapHttpService extends AbstractHGservice {
 		}
 		httpClient = new DefaultHttpClient();
 		String retryCount = getProperty(Constants.HTTP_RETRY_COUNT);
-		if(retryCount != null){
+		if (retryCount != null) {
 			final int count = Integer.valueOf(retryCount);
-			httpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
-				
-				@Override
-				public boolean retryRequest(IOException exception, int executionCount,
-						HttpContext context) {
-					if (executionCount > count) {
-	                    return false;
-	                }
-					logger.info("retry count:" + executionCount);
-					return true;
-				}
-			});
+			httpClient
+					.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
+
+						@Override
+						public boolean retryRequest(IOException exception,
+								int executionCount, HttpContext context) {
+							if (executionCount > count) {
+								return false;
+							}
+							logger.info("retry count:" + executionCount +" -- error:" + exception.getMessage());
+							return true;
+						}
+					});
 		}
-		
+
 		int ct = Integer
 				.valueOf((String) getProperty(Constants.CONNECTION_TIMEOUT));
 		int st = Integer
