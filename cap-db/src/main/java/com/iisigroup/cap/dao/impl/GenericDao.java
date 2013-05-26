@@ -56,6 +56,7 @@ import com.iisigroup.cap.model.Page;
  *          <li>2011/11/20,gabriella,modify
  *          <li>2012/2/14,RodesChen,add resource name
  *          <li>2012/6/29,RodesChen,add findUniqueOrNone setMaxResults 1
+ *          <li>2013/5/21,增加SearchMode or & and 的查詢設定
  *          </ul>
  * @param <T>
  */
@@ -391,6 +392,21 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 					} else {
 						return null;
 					}
+				} else if (SearchMode.OR == _key || SearchMode.AND == _key) {
+					List<SearchModeParameter> list = (List<SearchModeParameter>) _value;
+					List<Predicate> predicates = new ArrayList<Predicate>(
+							list.size());
+					for (SearchModeParameter param : list) {
+						predicates.add(new CapSpecifications(param)
+								.toPredicate(root, query, builder));
+					}
+					if (SearchMode.OR == _key) {
+						return builder.or(predicates
+								.toArray(new Predicate[predicates.size()]));
+					} else {
+						return builder.and(predicates
+								.toArray(new Predicate[predicates.size()]));
+					}
 				}
 				String key = (String) _key;
 
@@ -430,6 +446,8 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 					return builder.isNotNull(path);
 				case IN:
 					return path.in(asArray(_value));
+				case NOT_IN:
+					return builder.not(path.in(asArray(_value)));
 				case LIKE:
 					return builder.like((Path<String>) path,
 							String.valueOf(_value));

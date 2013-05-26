@@ -15,6 +15,17 @@ package com.iisigroup.cap.dao.utils;
 /**
  * <p>
  * Search Mode.
+ * <pre>
+ * <code>
+ * List<SearchModeParameter> ors = new ArrayList<SearchModeParameter>(); 
+ * for (String u : unitIds) { 
+ * 	ors.add(new SearchModeParameter(SearchMode.LIKE, "branchNo", u + "%")); 
+ * }
+ * search.addSearchModeParameters(SearchMode.OR, SearchMode.OR, ors);
+ * 
+ * -->  where xxxx=? and (branchNo like ? or branchNo like ? or branchNo like ?)
+ * </code>
+ * </pre>
  * </p>
  * 
  * @author iristu
@@ -26,13 +37,15 @@ package com.iisigroup.cap.dao.utils;
 public enum SearchMode {
 	/** in */
 	IN("in"),
+	/** not in */
+	NOT_IN("in"),
 	/** = */
 	EQUALS("eq"),
 	/** != */
 	NOT_EQUALS("ne"),
 	/** like */
 	LIKE("like"),
-	/**not like */
+	/** not like */
 	NOT_LIKE("notLike"),
 	/** > */
 	GREATER_THAN("gt"),
@@ -76,5 +89,5 @@ public enum SearchMode {
 	public String toString() {
 		return code;
 	}
-	
+
 }

@@ -5,12 +5,15 @@
  | Follow us on twitter: @springfuse
  | Template pack-mvc-3-sd:src/main/webapp/WEB-INF/sitemesh/minimal.p.vm.jsp
 --%>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"
-%><html>
-	<head>
-		<decorator:head/>
-	</head>
-	<body>
-		<decorator:body />
-	</body>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
+	prefix="decorator"%><html>
+<head>
+<script src="../../static/requirejs/2.0.6/require.min.js"></script>
+<script src="../../static/main2.js"></script>
+<decorator:getProperty property="reqJSON" default="" />
+<decorator:head />
+</head>
+<body>
+	<decorator:body />
+</body>
 </html>

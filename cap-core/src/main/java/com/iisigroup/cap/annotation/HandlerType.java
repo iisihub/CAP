@@ -21,6 +21,8 @@ import java.lang.annotation.Target;
 public @interface HandlerType {
 	HandlerTypeEnum value() default HandlerTypeEnum.FORM;
 
+	String name() default "";
+
 	/**
 	 * <pre>
 	 * Handler Type Enum
