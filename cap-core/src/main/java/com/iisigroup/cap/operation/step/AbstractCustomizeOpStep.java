@@ -23,6 +23,9 @@ package com.iisigroup.cap.operation.step;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.OperationStep;
 
@@ -38,6 +41,8 @@ import com.iisigroup.cap.operation.OperationStep;
  *          </ul>
  */
 public abstract class AbstractCustomizeOpStep implements OperationStep {
+	
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	String name;
 

@@ -35,13 +35,14 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * @version <ul>
  *          <li>2011-11-23,iristu,new
  *          <li>2013-1-23,RodesChen,move getRequestURL to CapWebUtil
+ *          <li>2013-6-3,RodesChen,增加 UUID 取代 threadID 以防值過長(Weblogic)
  *          </ul>
  */
 public class LogContextFilter implements Filter {
 
 	public final static String LOGIN_USERNAME = "LOGIN_USERNAME";
 
-	private final static String DEFAULT_LOGIN = "------";
+	public final static String DEFAULT_LOGIN = "------";
 
 	/*
 	 * (non-Javadoc)
@@ -64,7 +65,7 @@ public class LogContextFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		// Host IP
 		LogContext.setHost(req.getLocalAddr());
-
+		LogContext.setUUID(CapString.getUUIDString());
 		if (session == null) {
 			LogContext.setLogin(DEFAULT_LOGIN);
 		} else {

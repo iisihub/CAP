@@ -200,6 +200,8 @@ public class CapHttpService extends AbstractHGservice {
 		long st = System.currentTimeMillis();
 
 		HttpResponse httpResponse = httpClient.execute(httpPost);
+		logger.debug("Send Host spand time1: "
+				+ (System.currentTimeMillis() - st) + "ms");
 		httpStatus = httpResponse.getStatusLine().getStatusCode();
 
 		HttpEntity entity = httpResponse.getEntity();
@@ -228,8 +230,10 @@ public class CapHttpService extends AbstractHGservice {
 		// return !(count > 3);
 		// }
 		// });
-		logger.debug("host response:" + responseData);
-		logger.debug("Send Host spand time: "
+		if(logger.isTraceEnabled()){
+			logger.trace("host response:" + new String(responseData));
+		}
+		logger.debug("Send Host spand time2: "
 				+ (System.currentTimeMillis() - st) + "ms");
 		setStatus(ConnStatusEnum.COMPLETE);
 

@@ -33,7 +33,6 @@ import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
 import com.iisigroup.cap.plugin.HandlerPlugin;
-import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;

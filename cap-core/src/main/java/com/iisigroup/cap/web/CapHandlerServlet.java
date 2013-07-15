@@ -41,7 +41,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * <pre>
  * Cap handler Servlet
  * </pre>
- *
+ * 
  * @since 2012/9/3
  * @author rodeschen
  * @version <ul>
@@ -53,7 +53,8 @@ import com.iisigroup.cap.utils.CapWebUtil;
 @SuppressWarnings("serial")
 public class CapHandlerServlet extends HttpServlet {
 
-	protected final Logger logger = LoggerFactory.getLogger(CapHandlerServlet.class);
+	protected final Logger logger = LoggerFactory
+			.getLogger(CapHandlerServlet.class);
 	public final String HANDLER = "_handler";
 	public final String ACTION = "_action";
 
@@ -78,8 +79,8 @@ public class CapHandlerServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-			IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		doHandlerAction(req, resp);
 	}
 
@@ -89,14 +90,15 @@ public class CapHandlerServlet extends HttpServlet {
 		doHandlerAction(req, resp);
 	}
 
-	protected void doHandlerAction(HttpServletRequest req, HttpServletResponse resp) {
+	protected void doHandlerAction(HttpServletRequest req,
+			HttpServletResponse resp) {
 		SimpleContextHolder.resetContext();
 		String handler = (String) req.getAttribute(HANDLER);
 		String action = (String) req.getAttribute(ACTION);
 		long st = System.currentTimeMillis();
 		if (logger.isTraceEnabled()) {
-			logger.trace("Request Data: {}", JSONObject.fromObject(req.getParameterMap())
-					.toString());
+			logger.trace("Request Data: {}",
+					JSONObject.fromObject(req.getParameterMap()).toString());
 		}
 		Object locale = req.getSession().getAttribute(CapWebUtil.localeKey);
 		if (locale != null) {
@@ -110,6 +112,8 @@ public class CapHandlerServlet extends HttpServlet {
 		try {
 			request.setParameter(FormHandler.FORM_ACTION, action);
 			HandlerPlugin plugin = pluginMgr.getPlugin(handler);
+			logger.info("plugin:" + handler + " - "
+					+ plugin.getClass().getSimpleName() + " action:" + action);
 			plugin.setRequest(request);
 			pluginlogger = LoggerFactory.getLogger(plugin.getClass());
 			result = plugin.execute(request);
@@ -134,7 +138,8 @@ public class CapHandlerServlet extends HttpServlet {
 			}
 		} finally {
 			result.respondResult(resp);
-			logger.debug("total spend time : {} ms", (System.currentTimeMillis() - st));
+			logger.debug("total spend time : {} ms",
+					(System.currentTimeMillis() - st));
 			if (logger.isTraceEnabled()) {
 				logger.trace("Response Data : " + result.getLogMessage());
 			}
