@@ -39,10 +39,12 @@ public class LogContext extends InheritableThreadLocal {
 
 	public static final String LOGIN = "login";
 
+	public static final String UUID = "uuid";
+
 	public static final String SESSION_ID = "sessionId";
 
 	public static final String HOST = "host";
-	
+
 	public static final String CLIENT_ADDR = "clientAddr";
 
 	public static final String REQUEST_URI = "reqURI";
@@ -189,9 +191,13 @@ public class LogContext extends InheritableThreadLocal {
 	public static void seClientAddr(String addr) {
 		put(CLIENT_ADDR, addr);
 	}
-	
+
 	public static void setRequestURL(String url) {
 		put(REQUEST_URI, url);
+	}
+
+	public static void setUUID(String uuid) {
+		put(UUID, uuid);
 	}
 
 }
