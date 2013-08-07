@@ -3,7 +3,7 @@ pageInit(function() {
 
         var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 
-        window.socket = io.connect('http://192.168.221.92:9092');
+        window.socket = io.connect('http://' + window.location.hostname + ':9092');
 
         socket.on('connect', function() {
             output('<span class="connect-msg">Client has connected to the server!</span>');
@@ -17,9 +17,9 @@ pageInit(function() {
         socket.on('disconnect', function() {
             output('<span class="disconnect-msg">The client has disconnected!</span>');
         });
-        
-        socket.on("reconnect_failed",function(){
-           output('<span class="disconnect-msg">The client has reconnect_failed!</span>');
+
+        socket.on("reconnect_failed", function() {
+            output('<span class="disconnect-msg">The client has reconnect_failed!</span>');
         });
 
         $("#disconnect").click(function() {
