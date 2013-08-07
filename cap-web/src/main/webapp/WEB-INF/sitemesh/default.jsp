@@ -14,8 +14,8 @@
 <!--[if lt IE 9]>
             <script src="../static/lib/js/html5.js"></script>
         <![endif]-->
-<script data-main="../static/main"
-	src="../static/requirejs/2.0.6/require.min.js"></script>
+<script src="../static/requirejs/2.0.6/require.min.js"></script>
+<script src="../static/main.js"></script>
 <decorator:head />
 </head>
 <body>

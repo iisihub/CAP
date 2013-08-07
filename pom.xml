@@ -15,6 +15,7 @@
 		<module>cap-db</module>
 		<module>cap-base</module>
 		<module>cap-batch</module>
+		<module>cap-websocket</module>
 	</modules>
 	<profiles>
 		<profile>

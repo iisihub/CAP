@@ -58,6 +58,12 @@
 			<artifactId>cap-batch</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-websocket</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>

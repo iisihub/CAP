@@ -88,6 +88,6 @@ public class SampleHandler extends MFormHandler {
 	
 	
 	public IResult queryMenu(IRequest request){
-		return new AjaxFormResult("{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
+		return new AjaxFormResult("{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}, {'name':'WebSocket','url':'webSocket'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
 	}
 }

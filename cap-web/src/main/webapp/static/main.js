@@ -1,4 +1,3 @@
-
 var logDebug = function() {
 	if (window.console) {
 		console.log(arguments);
