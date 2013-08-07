@@ -3,13 +3,11 @@ pageInit(function() {
 
         var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 
-        var socket = io.connect('http://192.168.221.92:9092' ,{
-            "":""
-        });
+        window.socket = io.connect('http://192.168.221.92:9092');
 
         socket.on('connect', function() {
-            console.log(arguments);
             output('<span class="connect-msg">Client has connected to the server!</span>');
+            console.log(socket.socket.sessionid);
         });
 
         socket.on('chatevent', function(data) {
