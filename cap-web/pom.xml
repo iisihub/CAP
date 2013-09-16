@@ -6,9 +6,7 @@
 		<groupId>com.iisigroup.cap</groupId>
 		<version>2.0.0</version>
 	</parent>
-	<groupId>com.iisigroup.cap</groupId>
 	<artifactId>cap-web</artifactId>
-	<version>2.0.0</version>
 	<packaging>war</packaging>
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
@@ -18,51 +16,41 @@
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-core</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-security</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-mvc</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-config</artifactId>
-			<version>2.0.0</version>
 			<!-- 包版時不包進 war 中 使用 build plugin copy 進classes -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-hg</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-db</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-base</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<!-- -->
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-batch</artifactId>
-			<version>2.0.0</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-websocket</artifactId>
-			<version>0.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.tuckey</groupId>

@@ -6,9 +6,7 @@
 		<groupId>com.iisigroup.cap</groupId>
 		<version>2.0.0</version>
 	</parent>
-	<groupId>com.iisigroup.cap</groupId>
 	<artifactId>cap-batch</artifactId>
-	<version>2.0.0</version>
 	<properties>
 		<spring.batch.version>2.1.9.RELEASE</spring.batch.version>
 		<spring.batch.admin.version>1.2.1.RELEASE</spring.batch.admin.version>
@@ -19,28 +17,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-core</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-security</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-db</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-mvc</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-base</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.batch</groupId>

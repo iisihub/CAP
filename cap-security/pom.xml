@@ -6,9 +6,7 @@
 		<groupId>com.iisigroup.cap</groupId>
 		<version>2.0.0</version>
 	</parent>
-	<groupId>com.iisigroup.cap</groupId>
 	<artifactId>cap-security</artifactId>
-	<version>2.0.0</version>
 	<properties>
 		<spring-security.version>3.1.1.RELEASE</spring-security.version>
 	</properties>
@@ -17,7 +15,6 @@
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-core</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 		<!-- Spring security ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<dependency>
