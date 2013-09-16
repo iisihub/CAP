@@ -15,18 +15,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-mvc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-config</artifactId>
 			<!-- 包版時不包進 war 中 使用 build plugin copy 進classes -->
 			<scope>provided</scope>
@@ -35,15 +23,6 @@
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-hg</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-db</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-base</artifactId>
-		</dependency>
-		<!-- -->
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-batch</artifactId>
