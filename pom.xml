@@ -5,6 +5,55 @@
 	<artifactId>cap</artifactId>
 	<version>2.0.0</version>
 	<packaging>pom</packaging>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-mvc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-hg</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-db</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-batch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-websocket</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 	<modules>
 		<module>cap-core</module>
 		<module>cap-mvc</module>
@@ -28,7 +77,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>2.5.1</version>
+						<version>3.0</version>
 						<configuration>
 							<source>1.6</source>
 							<target>1.6</target>
