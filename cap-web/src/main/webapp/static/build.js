@@ -12,6 +12,7 @@
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
         'underscore' : 'lib/js/backbone/underscore',
         'backbone' : 'lib/js/backbone/backbone',
+        'socketio' : 'lib/js/socket.io',
 
         'common.properties' : 'lib/js/common/common.properties',
         'common.jqgrid' : 'lib/js/common/common.jqgrid',
