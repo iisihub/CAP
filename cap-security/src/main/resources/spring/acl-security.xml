@@ -22,8 +22,10 @@
 		<anonymous enabled="false" />
 		<form-login always-use-default-target="true" login-page="/app/login"
 			default-target-url="/app/home/adm" authentication-failure-url="/app/login?error" />
-		<concurrent-session-control max-sessions="1"
-			expired-url="/app/error/message?loginOther" /> <!-- exception-if-maximum-exceeded="true" -->
+		<session-management>
+			<concurrency-control max-sessions="1"
+				expired-url="/app/error/message?loginOther" /> <!-- exception-if-maximum-exceeded="true" -->
+		</session-management>
 		<logout logout-url="/j_spring_security_logout"
 			logout-success-url="/app/login" />
 	</http>
@@ -33,7 +35,9 @@
 		<beans:property name="userDao" ref="UserDao" />
 	</beans:bean>
 
-	<authentication-provider user-service-ref="userDetailsServiceImpl" />
+	<authentication-manager>
+		<authentication-provider user-service-ref="userDetailsServiceImpl" />
+	</authentication-manager>
 
 	<beans:bean id="capAuthenticationEntryPoint"
 		class="com.iisigroup.cap.security.web.CapAuthenticationEntryPoint">
@@ -63,7 +67,7 @@
 		class="org.springframework.security.event.authentication.LoggerListener" />
 		
 	<!-- Security context -->
-	<bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
+	<beans:bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
 		scope="session" />
 
 </beans:beans>
