@@ -136,5 +136,22 @@ $(document).ready(function() {
         }
         return false;
     });
+    $.datepicker._gotoTodayOriginal = $.datepicker._gotoToday;
+    $.datepicker._gotoToday = function(id) {
+        // now, call the original handler
+        $.datepicker._gotoTodayOriginal.apply(this, [id]);
+        // invoke selectDate to select the current date and close datepicker.
+    	var target = $(id), inst = this._getInst(target[0]);
+    	var dateStr = (dateStr != null ? dateStr : this._formatDate(inst));
+    	inst.input.val(dateStr);
+    };
+    $.datepicker.setDefaults({
+    	onChangeMonthYear: function(year, month, inst){
+            var ym = API.getToday().substr(0, 7), changeYm = year + "-" + (month < 10 ? "0" : "") + month;
+            if (ym !== changeYm) {
+                $(this).datepicker('setDate', changeYm + '-1');
+            }
+    	}
+    });
 });
 
