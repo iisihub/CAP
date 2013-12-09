@@ -12,7 +12,8 @@ require.config({
         'fileupload' : 'lib/js/jquery/plugin/ajaxfileupload/ajaxfileupload',
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
         'underscore' : 'lib/js/backbone/underscore',
-        'backbone' : 'lib/js/backbone/backbone'
+        'backbone' : 'lib/js/backbone/backbone',
+        'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min'
     },
     shim : {
         'blockui' : ['jquery'],
@@ -22,11 +23,12 @@ require.config({
         'validate-i18n' : ['jquery'],
         'validate' : ['jquery', 'validate-i18n'],
         'fileupload' : ['jquery'],
-        'backbone' : ['underscore', 'jquery']
+        'backbone' : ['underscore', 'jquery'],
+	    'sceditor' : ['jquery']
     }
 });
 
-define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone'], function() {
+define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor'], function() {
    // $.holdReady(true); // enable at common.js
     logDebug('lib init');
 });

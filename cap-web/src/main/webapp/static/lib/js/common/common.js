@@ -809,7 +809,7 @@ $.holdReady(true);
                     if (!this.length) {
                         return this;
                     }
-
+                    if ($.isFunction(url)) { return this; }
                     var selector, type, response, self = this, off = url.indexOf(" ");
 
                     if (off >= 0) {
