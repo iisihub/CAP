@@ -30,6 +30,18 @@
 	<bean id="codeTypeDao" class="com.iisigroup.cap.base.dao.impl.CodeTypeDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
+	<bean id="caseInfoDao" class="com.iisigroup.cap.base.dao.impl.CaseInfoDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
+	<bean id="divCtItmDao" class="com.iisigroup.cap.base.dao.impl.DivCtItmDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
+	<bean id="divFtItmDao" class="com.iisigroup.cap.base.dao.impl.DivFtItmDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
+	<bean id="divRlItmDao" class="com.iisigroup.cap.base.dao.impl.DivRlItmDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
 
 	<bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">
 		<property name="sendForm" value="${mail.sender}"/>

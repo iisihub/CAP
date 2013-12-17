@@ -7,6 +7,10 @@
 		<!-- base -->
 		<class>com.iisigroup.cap.base.model.CodeType</class>
 		<class>com.iisigroup.cap.base.model.SysParm</class>
+		<class>com.iisigroup.cap.base.model.CaseInfo</class>
+		<class>com.iisigroup.cap.base.model.DivFtItm</class>
+		<class>com.iisigroup.cap.base.model.DivCtItm</class>
+		<class>com.iisigroup.cap.base.model.DivRlItm</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>

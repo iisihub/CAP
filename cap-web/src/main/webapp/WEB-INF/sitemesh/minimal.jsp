@@ -8,8 +8,8 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%><html>
 <head>
-<script src="../../static/requirejs/2.0.6/require.min.js"></script>
-<script src="../../static/main2.js"></script>
+<script src="../../../static/requirejs/2.0.6/require.min.js"></script>
+<script src="../../../static/main.js"></script>
 <decorator:getProperty property="reqJSON" default="" />
 <decorator:head />
 </head>
