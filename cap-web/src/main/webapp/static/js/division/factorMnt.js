@@ -53,26 +53,6 @@ pageInit(function(){
         
         //查詢
         $("#qry").click(function(){
-//        	debugger;
-    		$.ajax({
-    			type : "POST",
-    			handler : _handler,
-    			data : {
-    				formAction : "queryByKeys"
-    			},
-    			success : function(d) {
-    				alter(" test insert action");
-    			}
-    		});
-//        	$.ajax({
-//                data: {ftItmNos : [1,2,3,4]},
-//                url : "webroot/factorMnthandler/queryByKeys",
-//                success: function(){
-//                	alter(" test insert action");
-//                }
-//        		
-//        	});
-        	
 //            grid.jqGrid('setGridParam', {
 //                postData: {
 //                }
@@ -100,5 +80,22 @@ pageInit(function(){
 			}
         });
        //刪除
+       $("#delete").click(function(){
+    	   
+       });
+       //insert 測試資料
+       $("#insertTestCases").click(function() {
+			debugger;
+			$.ajax({
+				data : {
+					ftItmNos : [ 1, 2, 3, 4 ]
+				},
+				url : "webroot/factorMnthandler/queryByKeys",
+				success : function() {
+					alter(" test insert action");
+				}
+	
+			});
+		});
     });
 });

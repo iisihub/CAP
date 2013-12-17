@@ -36,6 +36,9 @@
 					<!--刪除-->
 				</spring:message>
 			</button>
+			<button id="insertTestCases" type="button" class="btn1">
+				<spring:message code="factor.insertTestCases"/>
+			</button>
 		</div>
 	<div id="gridview"></div>
 	</form>
