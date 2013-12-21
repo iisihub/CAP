@@ -30,18 +30,28 @@ $.holdReady(true);
             set : function(settings) {
                 if (settings) {
                     Backbone.history && Backbone.history.stop();
-                    window._router = new (Backbone.Router.extend(settings));
+                    var AppRouter = Backbone.Router.extend(settings);
+                    window._router = new AppRouter;
+                    window._router.on('all', function() {
+                        router.params = {};
+                        if (router._params) {
+                            router.params = router._params;
+                        }
+                        router._params = {};
+                    });
                     Backbone.history.start();
                 }
             },
-            to : function(path) {
+            to : function(path, params) {
+                router._params = params;
                 if (path && window._router)
                     window._router.navigate(path, {
                         trigger : true
                     });
                 else
                     throw "no router";
-            }
+        },
+            params : {}
         },
 
         url : function(path) {
@@ -90,13 +100,13 @@ $.holdReady(true);
         // load default i18n Data
     })(_jQuery);
 
-    //所有動作均等待i18n 完成後再動作
+    // 所有動作均等待i18n 完成後再動作
     window.i18n.load("def").done(function() {
         // common js 初始化開始
         (function($) {
-            //global function
+            // global function
             $.extend(window, {
-                //logger
+                // logger
                 logDebug : function() {
                     if (window.console) {
                         console.log(arguments);
@@ -139,7 +149,7 @@ $.holdReady(true);
                     return window.pageChangeMsg;
                 },
 
-                //error function
+                // error function
                 checkFormErrorAndRequired : function(form) {
                     if (form.find(".data-error,.item-data-error").size()) {
                         return false;
@@ -155,7 +165,8 @@ $.holdReady(true);
                         try {
                             json = JSON.parse(xhr.responseText);
                         } catch (e) {
-                            // logDebug("ajaxError", e);
+                            // logDebug("ajaxError",
+                            // e);
                             json = {};
                         }
                         // ilog.debug(json);
@@ -164,7 +175,10 @@ $.holdReady(true);
                         }
 
                         if (res && xhr.status && xhr.status != '200' || xhr.status == 0) {
-                            // ilog.server("http error code: 「" + xhr.status + "」");
+                            // ilog.server("http
+                            // error code: 「" +
+                            // xhr.status +
+                            // "」");
                             return false;
                         }
                         return res;
@@ -178,14 +192,17 @@ $.holdReady(true);
                                 window.location = window.location.href.replace(/#$/, '');
                                 window.close();
                             });
-                            // API.loadPage("../error/errormsg?errorMsg=" +
+                            // API.loadPage("../error/errormsg?errorMsg="
+                            // +
                             // encodeURIComponent(encodeURIComponent(json.AJAX_CLOSE_PAGE_HANDLER_EXCEPTION)),
-                            // $("#" + Properties.innerPageFrameId));
+                            // $("#" +
+                            // Properties.innerPageFrameId));
                             return false;
                         },
                         AJAX_MESSAGE_HANDLER_EXCEPTION : function(xhr, action, json) {
                             // ilog.debug(json.AJAX_MESSAGE_HANDLER_EXCEPTION);
-                            // CommonAPI.showPopMessage(json.AJAX_MESSAGE_HANDLER_EXCEPTION, action
+                            // CommonAPI.showPopMessage(json.AJAX_MESSAGE_HANDLER_EXCEPTION,
+                            // action
                             // || undefined);
                             API.showErrorMessage(json.AJAX_MESSAGE_HANDLER_EXCEPTION);
                             return false;
@@ -234,7 +251,9 @@ $.holdReady(true);
                     }
 
                     if (res && xhr.status && xhr.status != '200') {
-                        // ilog.server("http error code: 「" + xhr.status + "」");
+                        // ilog.server("http
+                        // error code: 「" +
+                        // xhr.status + "」");
                         return "connect error";
                     }
                     return "";
@@ -242,7 +261,7 @@ $.holdReady(true);
 
                 CommonAPI : {
                     /**
-                     *判斷是否為 JSON Object
+                     * 判斷是否為 JSON Object
                      */
                     isJSON : function(obj) {
                         return typeof obj == "object" && obj.constructor == Object;
@@ -318,7 +337,8 @@ $.holdReady(true);
                             closeName : i18n.def.close,
                             title : message && !$.isFunction(message) ? title : i18n.def.confirmTitle,
                             message : message && !$.isFunction(message) ? message : title,
-                            // buttons: closeBtn,
+                            // buttons:
+                            // closeBtn,
                             buttons : closeBtn,
                             noClose : true
                         });
@@ -330,15 +350,19 @@ $.holdReady(true);
                      * @param {String}
                      *            title title
                      * @param {Object}
-                     *            message message
+                     *            message
+                     *            message
                      * @param {Object}
-                     *            action 關閉對話框後動作
+                     *            action
+                     *            關閉對話框後動作
                      */
                     showPopMessage : function(title, message, action, cls) {
                         var randomID = "sysMessage" + parseInt(Math.random() * 1000, 10);
                         // var closeBtn = {};
-                        // closeBtn[i18n.def.close] = function(){
-                        // CommonAPI.iConfirmDialog(randomID, 'close');
+                        // closeBtn[i18n.def.close]
+                        // = function(){
+                        // CommonAPI.iConfirmDialog(randomID,
+                        // 'close');
                         // };
 
                         return CommonAPI._showConfirmMessage({
@@ -347,7 +371,8 @@ $.holdReady(true);
                             closeName : i18n.def.close,
                             title : message && !$.isFunction(message) ? title : i18n.def.confirmTitle,
                             message : message && !$.isFunction(message) ? message : title,
-                            // buttons: closeBtn,
+                            // buttons:
+                            // closeBtn,
                             close : function() {
                                 $("#" + randomID).remove();
                                 action && action();
@@ -357,28 +382,34 @@ $.holdReady(true);
                     },
 
                     /**
-                     * 產生提示對話框(預設與showPopMessage同 提供給予各專案replace使用)
+                     * 產生提示對話框(預設與showPopMessage同
+                     * 提供給予各專案replace使用)
                      *
                      * @param {String}
                      *            title title
                      * @param {Object}
-                     *            message message
+                     *            message
+                     *            message
                      * @param {Object}
-                     *            action 關閉對話框後動作
+                     *            action
+                     *            關閉對話框後動作
                      */
                     showMessage : function(title, message, action) {
                         return API.showPopMessage(title, message, action);
                     },
 
                     /**
-                     * 產生提示對話框(預設與showPopMessage同 提供給予各專案replace使用)
+                     * 產生提示對話框(預設與showPopMessage同
+                     * 提供給予各專案replace使用)
                      *
                      * @param {String}
                      *            title title
                      * @param {Object}
-                     *            message message
+                     *            message
+                     *            message
                      * @param {Object}
-                     *            action 關閉對話框後動作
+                     *            action
+                     *            關閉對話框後動作
                      */
                     showErrorMessage : function(title, message, action) {
                         return API.showPopMessage(title, message, action, "xxxxxxx");
@@ -394,7 +425,9 @@ $.holdReady(true);
                     },
 
                     /**
-                     * ajax 動作完成後錯誤訊息顯示方式(預設與showPopMessage同 提供給予各專案replace使用)
+                     * ajax
+                     * 動作完成後錯誤訊息顯示方式(預設與showPopMessage同
+                     * 提供給予各專案replace使用)
                      *
                      * @param {String}
                      *            msg
@@ -404,7 +437,9 @@ $.holdReady(true);
                     },
 
                     /**
-                     * ajax 動作完成後通知訊息顯示方式(預設與showPopMessage同 提供給予各專案replace使用)
+                     * ajax
+                     * 動作完成後通知訊息顯示方式(預設與showPopMessage同
+                     * 提供給予各專案replace使用)
                      *
                      * @param {String}
                      *            msg
@@ -428,7 +463,8 @@ $.holdReady(true);
                      * @param {integer}
                      *            length 長度
                      * @param {boolean}
-                     *            rightAlign 是否補字串後方
+                     *            rightAlign
+                     *            是否補字串後方
                      * @param {char}
                      *            ch 補足字元
                      */
@@ -525,7 +561,10 @@ $.holdReady(true);
                      * 於後端取得下拉選單資料
                      *
                      * @param {Array ||
-                     *            String} updatekeys reutrn {JSON} comboList
+                     *            String}
+                     *            updatekeys
+                     *            reutrn {JSON}
+                     *            comboList
                      */
                     loadCombos : function(updateKeys, comboaction) {
                         if (updateKeys === "")
@@ -555,12 +594,13 @@ $.holdReady(true);
                 }
             });
 
-            //add String method
+            // add String method
             $.extend(String.prototype, {
                 // 計算有幾個全型字、中文字... 或英數字混雜
                 countLength : function(type) {
                     var c = this.match(/[^ -~]/g);
-                    if (type == 'B') {// big5 +2
+                    if (type == 'B') {// big5
+                        // +2
                         return this.length + ( c ? c.length : 0);
                     } else {// 預設UTF-8 +3
                         return this.length + ( c ? c.length * 2 : 0);
@@ -594,7 +634,7 @@ $.holdReady(true);
                 }
             });
 
-            //add jQuery static method
+            // add jQuery static method
             $.extend({
                 emptyFunction : function() {
                     return true;
@@ -623,7 +663,8 @@ $.holdReady(true);
                     }
                     // ---------------------------------------------------------------------------------
                     // 移除page 以防server side 無法抓取正確值
-                    // if(window.responseJSON) delete responseJSON.page;
+                    // if(window.responseJSON) delete
+                    // responseJSON.page;
                     return $.__ajax($.extend({
                         dataType : "json",
                         cache : false,
@@ -651,7 +692,8 @@ $.holdReady(true);
                             } catch (e) {
                             }
                             if (statusText == 'timeout') {
-                                // request timeout
+                                // request
+                                // timeout
                                 API.showErrorMessage(i18n.def.timeout);
                             } else if (!xhr.status && statusText) {
                                 API.showErrorMessage(i18n.def.connectError + "-「" + statusText + "」");
@@ -680,7 +722,7 @@ $.holdReady(true);
                 }
             });
 
-            //設定blockUI
+            // 設定blockUI
             if ($.blockUI) {
                 $.blockUI.showBG = true;
                 $.extend({
@@ -697,7 +739,7 @@ $.holdReady(true);
                                 border : '#000 1px solid',
                                 '-webkit-border-radius' : '5px',
                                 '-moz-border-radius' : '5px',
-                                //opacity: .85,
+                                // opacity: .85,
                                 'font-size' : '0.8em',
                                 padding : '2px',
                                 fontWeight : 'bolder',
@@ -776,7 +818,11 @@ $.holdReady(true);
                                 CommonAPI.showErrorMessage(i18n.def.fileUploadError);
                             },
                             data : $.extend(s.data || {}, {
-                                iframe : true // ie error access denied
+                                iframe : true
+                                // ie
+                                // error
+                                // access
+                                // denied
                             })
                         }));
 
@@ -786,15 +832,18 @@ $.holdReady(true);
 
             // add jQuery prototype method
             $.fn.extend({
-                //增加val 行為
+                // 增加val 行為
                 __val : jQuery.fn.val,
                 val : function(value) {
                     var res = (this.data("maskRule") && this.data("realValue")) ? this.data("realValue") : (this.is("span,div") ? this.text() : this.__val());
                     if (value != undefined) {
-                        this.data("realValue", value)[(this.is("span,div") ? "text" : "__val")](value);
+                        this.data("realValue", value)[(this
+                        .is("span,div") ? "text"
+                        : "__val")](value);
                         if (this.data("maskRule") && this.data("isChange") !== true) {
                             this.data("isChange", true).trigger("change").data("isChange", false).trigger("mask");
-                        };
+                        }
+                        ;
                         res = this;
                     }
                     return res;
@@ -805,11 +854,14 @@ $.holdReady(true);
                         return this.___load.apply(this, arguments);
                     }
 
-                    // Don't do a request if no elements are being requested
+                    // Don't do a request if no elements
+                    // are being requested
                     if (!this.length) {
                         return this;
                     }
-                    if ($.isFunction(url)) { return this; }
+                    if ($.isFunction(url)) {
+                        return this;
+                    }
                     var selector, type, response, self = this, off = url.indexOf(" ");
 
                     if (off >= 0) {
@@ -820,11 +872,13 @@ $.holdReady(true);
                     // If it's a function
                     if ($.isFunction(params)) {
 
-                        // We assume that it's the callback
+                        // We assume that it's the
+                        // callback
                         callback = params;
                         params = undefined;
 
-                        // Otherwise, build a param string
+                        // Otherwise, build a param
+                        // string
                     } else if (params && typeof params === "object") {
                         type = "POST";
                     }
@@ -833,7 +887,12 @@ $.holdReady(true);
                     $.ajax({
                         url : url,
 
-                        // if "type" variable is undefined, then "GET" method will be used
+                        // if "type"
+                        // variable is
+                        // undefined,
+                        // then "GET"
+                        // method will
+                        // be used
                         type : type,
                         dataType : "html",
                         data : params,
@@ -852,15 +911,54 @@ $.holdReady(true);
                         }
                     }).done(function(responseText) {
 
-                        // Save response for use in complete callback
+                        // Save response
+                        // for use in
+                        // complete
+                        // callback
                         response = arguments;
 
-                        // See if a selector was specified
-                        self.html( selector ? // Create a dummy div to hold the results
-                        $("<div>")// inject the contents of the document in, removing the scripts
-                        // to avoid any 'Permission Denied' errors in IE
-                        .append(responseText.replace(rscript, ""))// Locate the specified elements
-                        .find(selector) : // If not, just inject the full result
+                        // See if a
+                        // selector was
+                        // specified
+                        self.html( selector ? // Create
+                        // a
+                        // dummy
+                        // div
+                        // to
+                        // hold
+                        // the
+                        // results
+                        $("<div>")
+                        // inject
+                        // the
+                        // contents
+                        // of
+                        // the
+                        // document
+                        // in,
+                        // removing
+                        // the
+                        // scripts
+                        // to
+                        // avoid
+                        // any
+                        // 'Permission
+                        // Denied'
+                        // errors
+                        // in
+                        // IE
+                        .append(responseText.replace(rscript, ""))
+                        // Locate
+                        // the
+                        // specified
+                        // elements
+                        .find(selector) : // If
+                        // not,
+                        // just
+                        // inject
+                        // the
+                        // full
+                        // result
                         responseText);
 
                     });
@@ -873,7 +971,7 @@ $.holdReady(true);
                     if ( typeof arg1 !== "string") {
                         var $this = this;
                         $this.find('form').each(function() {
-                            //$(this).validate();
+                            // $(this).validate();
                             $(this).validationEngine('validate');
                         });
                         var _o = arg1 && arg1.open;
@@ -883,7 +981,8 @@ $.holdReady(true);
                             autoOpen : false,
                             modal : true,
                             maxWidth : 600,
-                            // width: 'auto',
+                            // width:
+                            // 'auto',
                             minWidth : 350
                             // minWidth: 350
                         }, arg1, {
@@ -931,8 +1030,9 @@ $.holdReady(true);
                                 try {
                                     var value = json[jid];
                                     value = (value == null ? "" : value);
-                                    switch ((item.attr("type") ||
-                                    "").toLowerCase()) {
+                                    switch ((item
+                                    .attr("type") || "")
+                                    .toLowerCase()) {
                                         case "text":
                                         case "hidden":
                                         case "password":
@@ -971,7 +1071,9 @@ $.holdReady(true);
                                                 if (iTagName.toLowerCase() == "form") {
                                                     item.setData(value);
                                                 } else {
-                                                    item[(iTagName.match(/(textarea|div|span)/)) ? 'val' : 'html'](value);
+                                                    item[(iTagName
+                                                    .match(/(textarea|div|span)/)) ? 'val'
+                                                    : 'html'](value);
                                                 }
                                             }
                                     }
@@ -990,7 +1092,9 @@ $.holdReady(true);
                             if (!hItem.size()) {
                                 obj.append($("<input type='hidden' id='" + jid + "'" + " name='" + jid + "'" + " value='" + value + "'" + " />"));
                             } else {
-                                switch ((hItem.attr("type") || "").toLowerCase()) {
+                                switch ((hItem
+                                .attr("type") || "")
+                                .toLowerCase()) {
                                     case "text":
                                     case "hidden":
                                     case "password":
@@ -1001,7 +1105,9 @@ $.holdReady(true);
                                         break;
                                     default:
                                         var iTagName = hItem[0].nodeName.toLowerCase();
-                                        hItem[(iTagName.match(/(textarea|div|span|select)/)) ? 'val' : 'html'](value);
+                                        hItem[(iTagName
+                                        .match(/(textarea|div|span|select)/)) ? 'val'
+                                        : 'html'](value);
                                 }
                             }
                         } catch (e2) {
@@ -1015,7 +1121,8 @@ $.holdReady(true);
                  * 將dom內之輸入欄位轉成Json
                  *
                  * @param {boolean}
-                 *            noHide 無需Hidden 欄位 預設為 false (全取)
+                 *            noHide 無需Hidden 欄位 預設為
+                 *            false (全取)
                  */
                 serializeData : function(noHide) {
                     var result = {}, self = $(this);
@@ -1025,9 +1132,11 @@ $.holdReady(true);
                         }).each(function() {
                             var $this = $(this);
                             $this.each(function() {
-                                switch (this.nodeName.toLowerCase()) {
+                                switch (this.nodeName
+                                .toLowerCase()) {
                                     case 'input':
-                                        switch (this.type.toLowerCase()) {
+                                        switch (this.type
+                                        .toLowerCase()) {
                                             case "text":
                                             case "hidden":
                                             case "password":
@@ -1084,8 +1193,11 @@ $.holdReady(true);
                 },
                 /**
                  * 設定 Selector's subitem readonly 狀態
-                 * @param {boolean} b 預設為 true (readOnly)
-                 * @param {String} jquerySelector
+                 *
+                 * @param {boolean}
+                 *            b 預設為 true (readOnly)
+                 * @param {String}
+                 *            jquerySelector
                  */
                 readOnlyChilds : function(b, excludeSelector) {
                     b = (b == undefined) ? true : b;
@@ -1096,15 +1208,19 @@ $.holdReady(true);
                 },
                 /**
                  * 設定欄位Readonly 狀態
-                 * @param {boolean} f 預設為 true (readOnly)
+                 *
+                 * @param {boolean}
+                 *            f 預設為 true (readOnly)
                  */
                 readOnly : function(b) {
                     b = (b == undefined) ? true : b;
                     var $this = $(this);
                     $this.each(function() {
-                        switch (this.nodeName.toLowerCase()) {
+                        switch (this.nodeName
+                        .toLowerCase()) {
                             case 'input':
-                                switch (this.type.toLowerCase()) {
+                                switch (this.type
+                                .toLowerCase()) {
                                     case 'text':
                                         ($(this).is('.date') || $(this).is('.date2')) && ( b ? $(this).datepicker('destroy') : $(this).datepicker());
                                         this.readOnly = b;
@@ -1136,7 +1252,8 @@ $.holdReady(true);
                         var okey = "";
                         if ( typeof o === "string") {
                             okey = o;
-                            o = CommonAPI.loadCombos(o)[o];
+                            o = CommonAPI
+                            .loadCombos(o)[o];
                         }
                         var to = {}, s = $(this), defalutValue = s.attr("defaultValue") || "", ops = ""/*
                          * (s.attr("space") ==
@@ -1197,7 +1314,7 @@ $.holdReady(true);
                                     }
                                 }).data('bindChanged', true);
                         }
-                        return s.html(ops = ((s.attr("space")!=undefined && s.attr("space")!='false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space"))  + "</option>") : "") + ops)).val(defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
+                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).val(defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
                     }).call(this, options, append);
                 },
 
@@ -1293,7 +1410,8 @@ $.holdReady(true);
                                 }
                             }
                         }
-                        // 放入padding 功能
+                        // 放入padding
+                        // 功能
                     }).end().filter("input[padding]").each(function() {
                         $(this).bind("blur.fill", function() {
                             var $fthis = $(this);
@@ -1305,7 +1423,8 @@ $.holdReady(true);
 
                     if (!isSubPage) {
                         if (/(home)$/i.test(location.pathname)) {
-                            // 如為主頁面將window name 設為mainPage
+                            // 如為主頁面將window name
+                            // 設為mainPage
                             window.name = "mainPage";
                         }
 
