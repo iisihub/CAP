@@ -18,7 +18,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.iisigroup.cap.base.dao.DivCtDtlDao;
 import com.iisigroup.cap.base.dao.DivCtItmDao;
+import com.iisigroup.cap.base.model.DivCtDtl;
 import com.iisigroup.cap.base.model.DivCtItm;
 import com.iisigroup.cap.base.service.ConditionMntService;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -40,16 +42,22 @@ public class ConditionMntServiceImpl extends AbstractService implements
 		ConditionMntService {
 
 	@Resource
-	private DivCtItmDao dao;
+	private DivCtItmDao ctItmDao;
+
+	@Resource
+	private DivCtDtlDao ctDtlDao;
 
 	@Override
 	public void saveDivCtItm(DivCtItm ctItm) {
-		dao.save(ctItm);
+		ctItmDao.save(ctItm);
+		if(ctItm.getDivCtDtls()!=null){
+			ctDtlDao.save(ctItm.getDivCtDtls());
+		}
 	}
 
 	@Override
 	public Map<String, String> findByDivCtItmNos(String[] DivCtItmNos) {
-		List<DivCtItm> ftList = dao.findByDivCtItmNo(DivCtItmNos);
+		List<DivCtItm> ftList = ctItmDao.findByDivCtItmNo(DivCtItmNos);
 		Map<String, String> m = new LinkedHashMap<String, String>();
 		if (!ftList.isEmpty()) {
 			for (DivCtItm c : ftList) {
@@ -60,13 +68,13 @@ public class ConditionMntServiceImpl extends AbstractService implements
 	}
 
 	@Override
-	public DivCtItm findByDivCtItmNo(String DivCtItmNo) {
-		return dao.findByDivCtItmNo(DivCtItmNo);
+	public DivCtItm findByDivCtItmNo(String divCtNo) {
+		return ctItmDao.findByDivCtItmNo(divCtNo);
 	}
 
 	@Override
 	public Map<String, Map<String, String>> findMapByCtItmNos(String[] nos) {
-		List<DivCtItm> ftList = dao.findByDivCtItmNoAndInputFlg(nos, "1");
+		List<DivCtItm> ftList = ctItmDao.findByDivCtItmNoAndInputFlg(nos, "1");
 		Map<String, Map<String, String>> m = new LinkedHashMap<String, Map<String, String>>();
 		if (!ftList.isEmpty()) {
 			for (int i = 0; i < nos.length; i++) {
@@ -84,7 +92,7 @@ public class ConditionMntServiceImpl extends AbstractService implements
 
 	@Override
 	public Map<String, AjaxFormResult> getDivCtItmsByNos(String[] nos) {
-		List<DivCtItm> ftList = dao.findByDivCtItmNoAndInputFlg(nos, "1");
+		List<DivCtItm> ftList = ctItmDao.findByDivCtItmNoAndInputFlg(nos, "1");
 		Map<String, AjaxFormResult> m = new LinkedHashMap<String, AjaxFormResult>();
 		if (!ftList.isEmpty()) {
 			for (DivCtItm c : ftList) {
@@ -102,19 +110,27 @@ public class ConditionMntServiceImpl extends AbstractService implements
 
 	@Override
 	public DivCtItm getByCtItmNo(String ctItmNo) {
-		return dao.findByDivCtItmNo(ctItmNo);
+		return ctItmDao.findByDivCtItmNo(ctItmNo);
 	}
 
 	@Override
 	public DivCtItm getById(String oid) {
-		return dao.find(oid);
+		return ctItmDao.find(oid);
 	}
 
 	@Override
 	public void deleteById(String oid) {
-		DivCtItm ctItm = dao.find(oid);
+		DivCtItm ctItm = ctItmDao.find(oid);
 		if (ctItm != null) {
-			dao.delete(ctItm);
+			if(ctItm.getDivCtDtls()!=null){
+				ctDtlDao.delete(ctItm.getDivCtDtls());
+			}
+			ctItmDao.delete(ctItm);
 		}
+	}
+	
+	@Override
+	public void deleteCtDtlByList(List<DivCtDtl> ctDtls){
+		ctDtlDao.delete(ctDtls);
 	}
 }

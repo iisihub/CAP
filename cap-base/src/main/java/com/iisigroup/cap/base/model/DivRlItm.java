@@ -12,11 +12,15 @@
 package com.iisigroup.cap.base.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -67,6 +71,10 @@ public class DivRlItm extends GenericBean implements IDataObject {
 
 	@Column
 	private Timestamp updateTime;
+	
+	// bi-directional many-to-one association to DivRlDtl
+	@OneToMany(mappedBy = "divRlItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private List<DivRlDtl> divRlDtls;
 
 	public String getOid() {
 		return oid;
@@ -114,6 +122,14 @@ public class DivRlItm extends GenericBean implements IDataObject {
 
 	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public List<DivRlDtl> getDivRlDtls() {
+		return divRlDtls;
+	}
+
+	public void setDivRlDtls(List<DivRlDtl> divRlDtls) {
+		this.divRlDtls = divRlDtls;
 	}
 
 }

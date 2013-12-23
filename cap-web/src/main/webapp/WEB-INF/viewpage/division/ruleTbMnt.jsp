@@ -11,7 +11,7 @@
 </head>
 <body>
 	<script>
-		loadScript('js/division/ruleMnt');
+		loadScript('js/division/ruleTbMnt');
 	</script>
 	<div>
 		<div class="btns" colspan="4" style="text-align: right">

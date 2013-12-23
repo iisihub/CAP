@@ -1,108 +1,147 @@
 pageInit(function(){
 	$(document).ready(function(){
-		var ftRsGrid = $("#ftRsGrid").jqGrid({
-            height: "380",
-            width: "100%",
-            rownumbers: true,
-            multiselect: false,
-            hideMultiselect: false,
-            autowidth: true,
-            localFirst: true,
-			colModel : [ {
-				header : "條件項目",
-				name : "name1",
-				align : "left",
-				width : 10
-			}, {
-				header : "條件值域",
-				name : "name2",
-				align : "left",
-				width : 40
-			}, {
-				header : "是否為動作",
-				name : "name3",
-				align : "left",
-				width : 5
-			}, {
-				header : "排序",
-				name : "name4",
-				align : "left",
-				width : 5
-			} ]
-		}).addGridData(
-				[
-						[ '產品項目', '信貸,信用卡', '否' ],
-						[ '逾期天數', '逾期天數  1 ~ 30,逾期天數 31 ~ 60',
-								'否', '' ],
-						[ '催收人員', '王小一,王小二,王小三,王小四,王小五', '否' ],
-						[ '分派組別', '電催組', '是' ] ]);
-		
+//		debugger;
+		var _mainOid = reqJSON.mainOid;
+		var _factorNo = reqJSON.factorNo;
+		var mform = $("#mform");
+		$.ajax({
+	        url:"webroot/factorMnthandler/query",
+	        data:{
+	        	mainOid: _mainOid,
+                factorNo: _factorNo,
+	        },
+	        success:function(json){
+	        	mform.injectData(json);
+	        	ftDtlGrid.jqGrid('setGridParam', {
+	                postData: {
+	                	factorNo:mform.find("#factorNo").val()
+	                }
+	            });
+	        	ftDtlGrid.trigger("reloadGrid");
+	        }
+		});
+
 		var ftDtlGrid = $("#ftDtlGrid").jqGrid({
-			height : 100,
+			url: 'webroot/factorMntGridhandler/queryFactorDtlGridByFactorNo',
+			height : 150,
+			autowidth: true,
 			localFirst : true,
-			needPager : false,
-//			multiselect : true,
-			colModel : [ {
-				header : "值域選項",
-				name : "name1",
-				align : "left",
-				width : 20
-			} ]
-		}).addGridData(
-				[ [ '逾期天數  1 ~ 30' ], [ '逾期天數 31 ~ 60' ],
-						[ '逾期天數 61 ~ 90' ], [ '逾期天數 91 ~180' ],
-						[ '逾期天數 181~' ] ]);
+//			needPager : true,
+//			multiselect: true,
+			postData:{factorNo:$("#factorNo").val()},
+			colModel : [ { colHeader : "值域註解", name : "rangeNm", align: "left", width: 20 }
+			, { colHeader : "值域一", name : "range1", align: "left", width: 10 }
+			, { colHeader : "值域二", name : "range2", align: "left", width: 10 }
+			, { colHeader : "順序", name : "rangesor", align: "left", width: 10, hidden:true }
+			]
+		});
+//		.addGridData([
+//			['逾期天數  1 ~ 30','1','30','1'],
+//			['逾期天數 31 ~ 60','31','60','2'],
+//			['逾期天數 61 ~ 90','61','90','3'],
+//			['逾期天數 91 ~180','91','180','4'],
+//			['逾期天數 181~','181','999999','5']
+//		]);
 	
-		$("#new_btn1").click(function() {
+		mform.find("#mod_btn").click(function() {
 			//open dialog
-			$("#edit_dialog1").thickbox({
-				modal : false,
-				height : 280,
-				width : 600,
-				buttons : {
-					"確定" : function() {
-						$.thickbox.close()
-					},
-					"取消" : function() {
-						$.thickbox.close()
-					}
+			var test = $("#dataType").val();
+			if(test=="3"){
+				$("#edit_dialog").find(".ftType1").hide();
+				$("#edit_dialog").find(".ftType2").show();
+			}else{
+				$("#edit_dialog").find(".ftType1").show();
+				$("#edit_dialog").find(".ftType2").hide();
+			}
+			fDialog.dialog('open');
+		}).end().find("#new_btn").click(function() {
+			//open dialog
+			var test = $("#dataType").val();
+			if(test=="3"){
+				$("#edit_dialog").find(".ftType1").hide();
+				$("#edit_dialog").find(".ftType2").show();
+			}else{
+				$("#edit_dialog").find(".ftType1").show();
+				$("#edit_dialog").find(".ftType2").hide();
+			}
+			fDialog.dialog('open');
+		}).end().find("#del_btn").click(function(){
+			ftDtlGrid.removeSelected();
+		});
+		$("#save_btn").click(function(){
+			var xxxData = ftDtlGrid.serializeGridData();
+			var ary = new Array(xxxData.length);
+			var datas = $.extend({}, mform.serializeData());
+//			debugger;
+			for(var i = 0; i<ary.length ; i++){
+				ary[i] = JSON.stringify(xxxData[i]);
+			}
+			var gridData = {grid : ary};
+			$.extend(datas, gridData);
+			/**儲存 連後端儲存*/
+			$.ajax({
+				url : "webroot/factorMnthandler/saveFactorDtl",
+				data : datas,
+				success : function(json) {
+//					ftDtlGrid.jqGrid('setGridParam', {
+//		                postData: {
+//		                	factorNo:mform.find("#factorNo").val()
+//		                }
+//		            });
+//					ftDtlGrid.trigger("reloadGrid");
+					CommonAPI.showPopMessage("儲存因子資料完成");
 				}
 			});
 		});
+		
 
-		$("#edit_btn1").click(function() {
-			//open dialog
-			$("#edit_dialog1").thickbox({
-				modal : false,
-				height : 280,
-				width : 600,
-				buttons : {
-					"確定" : function() {
-						$.thickbox.close()
-					},
-					"取消" : function() {
-						$.thickbox.close()
-					}
-				}
-			});
-		});
-
-		$("#assign_btn").click(function() {
-			//open dialog
-			$("#edit_dialog2").thickbox({
-				modal : false,
-				height : 280,
-				width : 600,
-				buttons : {
-					"確定" : function() {
-						$.thickbox.close()
-					},
-					"取消" : function() {
-						$.thickbox.close()
-					}
-				}
-			});
-		});
-
+		var fDialog = $("#edit_dialog");
+		fDialog.dialog({
+        	height: 250,width: 650,modal: true,
+        	close:function(){
+        		fDialog.find("#facform").reset();
+        	},
+        	buttons:API.createJSON([{
+        		key:i18n.def.sure,
+        		value:function(){
+//        			debugger;
+        			var facform = fDialog.find("#facform");
+        			var ftDtlGridRecords = ftDtlGrid.getGridParam("records");
+        			var rowData = {};
+        			if(facform.find("#range1").val() && facform.find("#range2").val()){        				
+        				rowData = {
+    						rangeNm:mform.find("#factorNm").val()+" "
+    						+facform.find("#range1").val()+"~"+facform.find("#range2").val()
+    						,range1 : facform.find("#range1").val()
+    						,range2 : facform.find("#range2").val()
+        				};
+        			}else if(facform.find("#range1").val()){
+        				rowData = {
+    						rangeNm:mform.find("#factorNm").val()+" "+facform.find("#range1").val()
+    						,range1 : facform.find("#range1").val()
+    						,range2 : facform.find("#range2").val()
+        				};
+        			}else if(facform.find("#ftTypeBlnSel").val()){
+        				var selVal = "(否)";
+        				if(facform.find("#ftTypeBlnSel").val()=="true"){
+        					selVal = "(是)";
+        				}
+        				rowData = {
+        						rangeNm:mform.find("#factorNm").val()+""+selVal
+        						,range1 : facform.find("#ftTypeBlnSel").val()
+            				};
+        			}
+        			facform.validationEngine('validate') &&
+        			ftDtlGrid.addRowData(parseInt(ftDtlGridRecords)+1, rowData);
+        			fDialog.dialog('close');
+        		}
+        	},{
+        		key:i18n.def.close,
+        		value:function(){
+        			fDialog.dialog('close');
+        		}
+        	}])
+        });
+		
 	});
 });

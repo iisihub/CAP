@@ -12,11 +12,15 @@
 package com.iisigroup.cap.base.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -38,10 +42,9 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  */
 @SuppressWarnings("serial")
 @Entity
-
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DIVCTITM", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"divCtNo" }))
+		"oid" }))
 public class DivCtItm extends GenericBean implements IDataObject {
 
 	@Id
@@ -59,12 +62,24 @@ public class DivCtItm extends GenericBean implements IDataObject {
 	/** 條件屬性-動作or條件 */
 	@Column(length = 1)
 	private String divCtTyp;
+	
+	/** 分派處理/組別 */
+	@Column(length = 30)
+	private String divCtAction;
+	
+	/** 分派設定 */
+	@Column(length = 30)
+	private String divCtSetting;
 
 	@Column(length = 6)
 	private String updater;
 
 	@Column
 	private Timestamp updateTime;
+
+	// bi-directional many-to-one association to DivCtDtl
+	@OneToMany(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private List<DivCtDtl> divCtDtls;
 	
 	public String getOid() {
 		return oid;
@@ -73,6 +88,7 @@ public class DivCtItm extends GenericBean implements IDataObject {
 	public void setOid(String oid) {
 		this.oid = oid;
 	}
+
 
 	public String getDivCtNo() {
 		return divCtNo;
@@ -120,6 +136,30 @@ public class DivCtItm extends GenericBean implements IDataObject {
 	 */
 	public void setDivCtTyp(String divCtTyp) {
 		this.divCtTyp = divCtTyp;
+	}
+
+	public List<DivCtDtl> getDivCtDtls() {
+		return divCtDtls;
+	}
+
+	public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
+		this.divCtDtls = divCtDtls;
+	}
+
+	public String getDivCtAction() {
+		return divCtAction;
+	}
+
+	public void setDivCtAction(String divCtAction) {
+		this.divCtAction = divCtAction;
+	}
+
+	public String getDivCtSetting() {
+		return divCtSetting;
+	}
+
+	public void setDivCtSetting(String divCtSetting) {
+		this.divCtSetting = divCtSetting;
 	}
 
 }

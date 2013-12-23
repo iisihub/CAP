@@ -24,8 +24,10 @@ import org.springframework.stereotype.Service;
 
 import com.ibm.icu.util.Calendar;
 import com.iisigroup.cap.base.dao.CaseInfoDao;
+import com.iisigroup.cap.base.dao.DivFtDtlDao;
 import com.iisigroup.cap.base.dao.DivFtItmDao;
 import com.iisigroup.cap.base.model.CaseInfo;
+import com.iisigroup.cap.base.model.DivFtDtl;
 import com.iisigroup.cap.base.model.DivFtItm;
 import com.iisigroup.cap.base.service.FactorMntService;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -47,7 +49,10 @@ public class FactorMntServiceImpl extends AbstractService implements
 		FactorMntService {
 	
 	@Resource
-	private DivFtItmDao dao;
+	private DivFtItmDao ftItmDao;
+
+	@Resource
+	private DivFtDtlDao ftDtlDao;
 	
 	@Resource
 	private CaseInfoDao caseInfoDao;
@@ -80,12 +85,15 @@ public class FactorMntServiceImpl extends AbstractService implements
 
 	@Override
 	public void saveDivFtItm(DivFtItm ftItm) {
-		dao.save(ftItm);
+		ftItmDao.save(ftItm);
+		if(ftItm.getDivFtDtls()!=null){
+			ftDtlDao.save(ftItm.getDivFtDtls());
+		}
 	}
 
 	@Override
 	public Map<String, String> findByDivFtItmNos(String[] divFtItmNos) {
-		List<DivFtItm> ftList = dao.findByDivFtItmNo(divFtItmNos);
+		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNo(divFtItmNos);
 		Map<String, String> m = new LinkedHashMap<String, String>();
 		if (!ftList.isEmpty()) {
 			for (DivFtItm c : ftList) {
@@ -97,12 +105,17 @@ public class FactorMntServiceImpl extends AbstractService implements
 
 	@Override
 	public DivFtItm findByDivFtItmNo(String divFtItmNo) {
-		return dao.findByDivFtItmNo(divFtItmNo);
+		return ftItmDao.findByDivFtItmNo(divFtItmNo);
+	}
+	
+	@Override
+	public List<DivFtItm> findAllDivFtItm(){
+		return ftItmDao.findAllFtItm();
 	}
 
 	@Override
 	public Map<String, Map<String, String>> findMapByFtItmNos(String[] nos) {
-		List<DivFtItm> ftList = dao.findByDivFtItmNoAndInputFlg(nos, "1");
+		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNoAndInputFlg(nos, "1");
 		Map<String, Map<String, String>> m = new LinkedHashMap<String, Map<String, String>>();
 		if (!ftList.isEmpty()) {
 			for (int i = 0; i < nos.length; i++) {
@@ -120,7 +133,7 @@ public class FactorMntServiceImpl extends AbstractService implements
 
 	@Override
 	public Map<String, AjaxFormResult> getDivFtItmByNos(String[] nos) {
-		List<DivFtItm> ftList = dao.findByDivFtItmNoAndInputFlg(nos, "1");
+		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNoAndInputFlg(nos, "1");
 		Map<String, AjaxFormResult> m = new LinkedHashMap<String, AjaxFormResult>();
 		if (!ftList.isEmpty()) {
 			for (DivFtItm c : ftList) {
@@ -138,19 +151,32 @@ public class FactorMntServiceImpl extends AbstractService implements
 
 	@Override
 	public DivFtItm getByFtItmNo(String ftItmNo) {
-		return dao.findByDivFtItmNo(ftItmNo);
+		return ftItmDao.findByDivFtItmNo(ftItmNo);
 	}
 
 	@Override
 	public DivFtItm getById(String oid) {
-		return dao.find(oid);
+		return ftItmDao.find(oid);
 	}
 
 	@Override
 	public void deleteById(String oid) {
-		DivFtItm ftItm = dao.find(oid);
+		DivFtItm ftItm = ftItmDao.find(oid);
 		if (ftItm != null) {
-			dao.delete(ftItm);
+			if(ftItm.getDivFtDtls()!=null){
+				ftDtlDao.delete(ftItm.getDivFtDtls());
+			}
+			ftItmDao.delete(ftItm);
 		}
+	}
+	
+	@Override
+	public DivFtDtl findByFactorNoAndRangeNo(String factorNo, String rangeNo){
+		return ftDtlDao.findByFactorNoAndRangeNo(factorNo, rangeNo);
+	}
+	
+	@Override
+	public List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos){
+		return ftDtlDao.findByFactorNoAndRangeNos(factorNo, rangeNos);
 	}
 }

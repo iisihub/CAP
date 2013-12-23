@@ -9,8 +9,10 @@
  */
 package com.iisigroup.cap.base.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.iisigroup.cap.base.model.DivFtDtl;
 import com.iisigroup.cap.base.model.DivFtItm;
 import com.iisigroup.cap.response.AjaxFormResult;
 
@@ -98,6 +100,27 @@ public interface FactorMntService {
 	 */
 	void deleteById(String oid);
 
-	void insertTestCaseInfoData();
+	/**
+	 * 取得所有因子項目
+	 * @return List<DivFtItm>
+	 */
+	List<DivFtItm> findAllDivFtItm();
 
+	/**
+	 * 查詢Factor Detail Data
+	 * @param factorNo String
+	 * @param rangeNos String[]
+	 * @return
+	 */
+	List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos);
+
+	/**
+	 * 查詢Factor Detail Data
+	 * @param factorNo String
+	 * @param rangeNo String
+	 * @return
+	 */
+	DivFtDtl findByFactorNoAndRangeNo(String factorNo, String rangeNos);
+
+	void insertTestCaseInfoData();
 }

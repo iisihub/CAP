@@ -5,30 +5,27 @@ pageInit(function(){
             height: "380",
             width: "100%",
             rownumbers: true,
-            multiselect: false,
-            hideMultiselect: false,
-            autowidth: true,
-            localFirst: true,
+//            autowidth: true,
+//            localFirst: true,
 			colModel : [ {
-				header: i18n['ruleMnt']['ruleTbNm'],
+				header: i18n['ruleTbMnt']['ruleTbNm'],
 				name : "ruleTbNm",
 				align: "left",
 				width: 10
 			}, {
-				header: i18n['ruleMnt']['ruleCont'],
+				header: i18n['ruleTbMnt']['ruleCont'],
 				name : "ruleCont",
 				align: "left",
 				width: 50
 			}, {
-				header: i18n['ruleMnt']['classify'],
+				header: i18n['ruleTbMnt']['classify'],
 				name : "classify",
 				align: "left",
 				width: 10
 			}, {
-				header: i18n['ruleMnt']['enable'],
-				name : "enable",
-				align: "center",
-				sortable : true,
+				header: 'oid',
+				name : "oid",
+				hidden : true,
 				width: 5
 			}]
 		}).addGridData([['大型分案規則表','M0新件分案,回沖分案,月底分案,月初分案,馬上分案','件數平均','是']

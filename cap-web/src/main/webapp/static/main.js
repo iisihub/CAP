@@ -6,7 +6,8 @@ var logDebug = function() {
 };
 require.config({
 	urlArgs : 'cache=' + parseInt(Math.random() * 1000),
-	baseUrl : '../static',
+//	baseUrl : '../static',
+	baseUrl : baseUrl,
 	paths : {
 		'libjs' : 'lib/js/libjs',          //third party lib
 		'capjs' : 'lib/js/capjs',          //cap lib

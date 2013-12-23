@@ -79,4 +79,10 @@ public interface DivFtItmDao extends IGenericDao<DivFtItm> {
 	 */
 	public DivFtItm findByOid(String oid);
 
+	/**
+	 * 取得所有因子項目
+	 * @return List<DivFtItm>
+	 */
+	List<DivFtItm> findAllFtItm();
+
 }

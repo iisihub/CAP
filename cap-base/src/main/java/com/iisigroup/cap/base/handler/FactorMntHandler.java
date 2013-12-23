@@ -11,40 +11,30 @@
  */
 package com.iisigroup.cap.base.handler;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ReflectionUtils;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.base.model.CodeType;
+import com.iisigroup.cap.base.model.DivFtDtl;
 import com.iisigroup.cap.base.model.DivFtItm;
 import com.iisigroup.cap.base.service.FactorMntService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
-import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.ICommonService;
-import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
@@ -70,70 +60,91 @@ public class FactorMntHandler extends MFormHandler {
 	@Resource(name = "CommonBeanService")
 	private ICommonService commonService;
 	
-	private static final Logger logger = LoggerFactory
-			.getLogger(FactorMntHandler.class);
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(ISearch search, IRequest params) {
-		if (params.containsKey("factorNo")) {
-			search.addSearchModeParameters(SearchMode.EQUALS, "factorNo",
-					params.get("factorNo"));
+	private static final Logger logger = LoggerFactory.getLogger(FactorMntHandler.class);
+	
+	/**
+	 * 查詢Factor資料明細
+	 * @param search
+	 * @param params
+	 * @return
+	 */
+	@HandlerType(HandlerTypeEnum.FORM)
+	public IResult query(IRequest request) {
+		String oid = request.get("mainOid");
+		String factorNo = request.get("factorNo");
+		AjaxFormResult result = new AjaxFormResult();
+		DivFtItm ftItm = null;
+		if(!CapString.isEmpty(oid)){
+			ftItm = factorMntService.getById(oid);
+		}else if(!CapString.isEmpty(factorNo)){
+			ftItm = factorMntService.findByDivFtItmNo(factorNo);
 		}
-//		if (params.containsKey("inputFlg")) {
-//			search.addSearchModeParameters(SearchMode.EQUALS, "inputFlg",
-//					params.get("inputFlg"));
-//		}
-		
-		Page<CodeType> page = commonService.findPage(CodeType.class, search);
-		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		fmt.put("updateTime", new ADDateFormatter());
-		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+		if(ftItm!=null){
+			result.putAll(ftItm.toJSONObject(new String[]{"factorNo", "factorNm", "dataType"
+					, "oid", "tableNm", "columnNm"}, null));
+		}
+		return result;
 	}// ;
 
 	/**
-	 * modify codetype
-	 * 
-	 * @param request
-	 *            request
+	 * modify Factor Item and Detail
+	 * @param request request
 	 * @return IResult
 	 */
-	public IResult modify(IRequest request) {
+	public IResult saveFactorDtl(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		String type = request.get("type");
-		String divFtItmNo = request.get("divFtItmNo");
-//		String locale = CapSecurityContext.getLocale().toString();
+		String divFtItmNo = request.get("factorNo");
+		String[] sary = request.getParamsAsStringArray("grid");
 		DivFtItm ftItm = factorMntService.findByDivFtItmNo(divFtItmNo);
 
 		if ("A".equals(type)) {
 			if (ftItm != null) {
 				// factorMnt.0001 代碼重覆!
-				throw new CapMessageException(
-						CapAppContext.getMessage("factorMnt.0001"), getClass());
+//				throw new CapMessageException(
+//						CapAppContext.getMessage("factorMnt.0001"), getClass());
 			}
 			ftItm = new DivFtItm();
 		} else {
 			if (ftItm != null && !ftItm.getOid().equals(request.get("oid"))) {
 				// factorMnt.0001 代碼重覆!
-				throw new CapMessageException(
-						CapAppContext.getMessage("factorMnt.0001"), getClass());
-			} else if (ftItm == null) {
+//				throw new CapMessageException(
+//						CapAppContext.getMessage("factorMnt.0001"), getClass());
+			} else if (ftItm == null && !CapString.isEmpty(request.get("oid"))) {
 				ftItm = factorMntService.getById(request.get("oid"));
+			} else if (ftItm == null){
+				ftItm = new DivFtItm();
 			}
 		}
 		CapBeanUtil.map2Bean(request, ftItm);
 		if ("A".equals(type)) {
 			ftItm.setOid(null);
 		}
-		ftItm.setUpdater(CapSecurityContext.getUserId());
+		if(sary!=null){
+			List<DivFtDtl> ftDtls = new ArrayList<DivFtDtl>();
+			for(int i = 0 ; i<sary.length; i++){
+				JSONObject gridData = JSONObject.fromObject(sary[i]);
+				DivFtDtl ftDtl = new DivFtDtl();
+				CapBeanUtil.map2Bean(gridData, ftDtl);
+				ftDtl.setFactorNo(ftItm.getFactorNo());
+				ftDtl.setRangeNo(CapString.fillString(String.valueOf(i), 5, true, '0'));
+				ftDtl.setRangeSor(new BigDecimal(i));
+				ftDtl.setDivFtItm(ftItm);
+				ftDtls.add(ftDtl);
+			}
+			ftItm.setDivFtDtls(ftDtls);
+		}
+		String userId = CapSecurityContext.getUserId();
+		if(userId.length()>6)userId = userId.substring(0,6);
+		ftItm.setUpdater(userId);
 		ftItm.setUpdateTime(CapDate.getCurrentTimestamp());
 		factorMntService.saveDivFtItm(ftItm);
 		return result;
 	}
 
 	/**
-	 * delete codetype
-	 * 
-	 * @param request
-	 *            request
+	 * delete Division Factor Item and Detail
+	 * @param request request
 	 * @return IResult
 	 */
 	public IResult delete(IRequest request) {
@@ -141,50 +152,5 @@ public class FactorMntHandler extends MFormHandler {
 		factorMntService.deleteById(request.get("oid"));
 		return result;
 	}
-
-	/**
-	 * get combo list By Keys
-	 * 
-	 * @param request
-	 *            request
-	 * @return IResult
-	 */
-	@SuppressWarnings("rawtypes")
-	public IResult queryByKeys(IRequest request) {
-		factorMntService.insertTestCaseInfoData();
-		if(true){
-			return new AjaxFormResult();
-		}
-		
-//		String locale = CapSecurityContext.getLocale().toString();
-		String[] ftItmNos = request.getParamsAsStringArray("ftItmNos");
-		AjaxFormResult mresult = new AjaxFormResult();
-		if (ftItmNos.length > 0 && !CapString.isEmpty(ftItmNos[0])) {
-			Set<String> k = new HashSet<String>(Arrays.asList(ftItmNos));// 排除重覆的key
-			Map<String, AjaxFormResult> m = factorMntService.getDivFtItmByNos(
-					k.toArray(new String[k.size()]));
-			mresult.setResultMap(m);
-		}
-//		if (aKeys.length > 0 && !CapString.isEmpty(aKeys[0])) {
-//			Class[] paramTypes = { IRequest.class };
-//			IResult rtn = null;
-//			for (String key : aKeys) {
-//				if (mresult.containsKey(key)) {
-//					continue;
-//				}
-//				Method method = ReflectionUtils.findMethod(this.getClass(),
-//						key, paramTypes);
-//				if (method != null) {
-//					try {
-//						rtn = (IResult) method.invoke(this, request);
-//					} catch (Exception e) {
-//						logger.error("load ComboBox error : key = " + key, e);
-//					}
-//					mresult.set(key, (AjaxFormResult) rtn);
-//				}
-//			}
-//		}
-		return mresult;
-	}// ;
 
 }

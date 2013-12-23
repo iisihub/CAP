@@ -36,10 +36,19 @@
 	<bean id="divCtItmDao" class="com.iisigroup.cap.base.dao.impl.DivCtItmDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
+	<bean id="divCtDtlDao" class="com.iisigroup.cap.base.dao.impl.DivCtDtlDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
 	<bean id="divFtItmDao" class="com.iisigroup.cap.base.dao.impl.DivFtItmDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
+	<bean id="divFtDtlDao" class="com.iisigroup.cap.base.dao.impl.DivFtDtlDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
 	<bean id="divRlItmDao" class="com.iisigroup.cap.base.dao.impl.DivRlItmDaoImpl">
+		<property name="entityManager" ref="capEntityManager" />
+	</bean>
+	<bean id="divRlDtlDao" class="com.iisigroup.cap.base.dao.impl.DivRlDtlDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
 

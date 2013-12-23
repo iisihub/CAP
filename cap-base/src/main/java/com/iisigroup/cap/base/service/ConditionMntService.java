@@ -9,8 +9,10 @@
  */
 package com.iisigroup.cap.base.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.iisigroup.cap.base.model.DivCtDtl;
 import com.iisigroup.cap.base.model.DivCtItm;
 import com.iisigroup.cap.response.AjaxFormResult;
 
@@ -37,10 +39,10 @@ public interface ConditionMntService {
 
 	/**
 	 * 查詢因子項目
-	 * @param divCtItmNo 因子代碼
+	 * @param divCtNo 因子代碼
 	 * @return DivCtItm
 	 */
-	DivCtItm findByDivCtItmNo(String divCtItmNo);
+	DivCtItm findByDivCtItmNo(String divCtNo);
 	
 	/**
 	 * get Map by ctItmNos
@@ -97,5 +99,7 @@ public interface ConditionMntService {
 	 *            oid
 	 */
 	void deleteById(String oid);
+
+	void deleteCtDtlByList(List<DivCtDtl> ctDtls);
 
 }
