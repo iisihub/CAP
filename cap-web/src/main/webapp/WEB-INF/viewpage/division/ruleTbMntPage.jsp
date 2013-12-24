@@ -37,9 +37,9 @@
 		<button type="button" id="save_btn">
 			<span class="ui-icon ui-icon-jcs-04"></span>儲存
 		</button>
-		<!-- <button type="button" id="">
+		<button type="button" id="">
 			<span class="ui-icon ui-icon-circle-zoomout"></span>試算
-		</button> -->
+		</button>
 		<button type="button" id="close_btn" onclick="window.close();">
 			<span class="ui-icon ui-icon-jcs-01"></span>離開
 		</button>
@@ -57,74 +57,55 @@
 					cellpadding="0">
 					<tbody>
 						<tr>
-							<td width="13%" class="hd1"><span class="color-red">＊</span>條件代碼</td>
-							<td width="20%"><input type="text" id="divCtNo" name="divCtNo" size='10' value="C000001"></td>
-							<td width="13%" class="hd1"><span class="color-red">＊</span>條件名稱</td>
-							<td width="20%"><input type="text" id="divCtNm" name="divCtNm" value="前置協商"></td>
+							<td width="13%" class="hd1"><span class="color-red">＊</span>規則表代碼</td>
+							<td width="20%"><input type="text" id="divRlNo" name="divRlNo" size='10' value="C000001"></td>
+							<td width="13%" class="hd1"><span class="color-red">＊</span>規則表名稱</td>
+							<td width="20%"><input type="text" id="divRlNm" name="divRlNm" value="前置協商"></td>
 						</tr>
-					<tr>
-						<td width="13%" class="hd1"><span class="color-red">＊</span>分派設定</td>
-						<td width="37%"><input type="text" id="divCtSetting" name="divCtSetting" value="前置"></td>
-						<td width="13%" class="hd1"><span class="color-red">＊</span>分派組別</td>
-						<td width="37%"><input type="text" id="divCtAction" name="divCtAction" value="協商組"></td>
-					</tr>
+						<tr>
+							<td width="13%" class="hd1">均分量化方式</td>
+							<td width="53%" colspan="3">
+								<input name="RadioGroup1" value="選項按鈕" id="RadioGroup1_1" type="radio" />金額平均
+								<input name="RadioGroup1" value="選項按鈕" id="RadioGroup1_2" type="radio" />件數平均
+								<input name="RadioGroup1" value="選項按鈕" id="RadioGroup1_3" type="radio" />人數平均
+								<input name="RadioGroup1" value="選項按鈕" id="RadioGroup1_4" type="radio" />新增金額平均
+								<input name="RadioGroup1" value="選項按鈕" id="RadioGroup1_5" type="radio" />新增件數平均
+							</td>
+						</tr>
 					</tbody>
 				</table>
 		</fieldset>
 
-		<fieldset>
-			<legend>條件內容資訊</legend>
-			<button id="add_btn" type="button">
-				<span class="text-only">新增</span>
-			</button>
-			<table class="tb2" width="100%" border="0" cellspacing="0"
-				cellpadding="0">
-				<tbody>
+		<fieldset><legend>規則資訊</legend>
+
+			<div class="RuleContainer">
+				<button type="button" id="addRuleBtn"><span class="text-only">新增</span></button>
+			</div>
+			<div id="conditionGrid" class="capgrid" />
+
+		</fieldset>
+
+		<fieldset id="ruleMap" name="ruleMap" ><legend>規則組合</legend>
+			<div class="funcContainer">
+				<button type="button" id="removeBtn"><span class="text-only">移除</span></button>
+				<!--
+				<button id="edit_btn1"><span class="text-only">修改</span></button>
+				<button id="del_btn1"><span class="text-only">刪除</span></button>
+				<button id="close_btn1"><span class="text-only">關閉</span></button>
+				-->
+			</div>
+			<div id="" style="width:100%;">
+				<table width="100%">
 					<tr>
-						<td width="13%" class="hd1"><span class="color-red">＊</span>因子項目</td>
-						<td width="30%">
-						<select id="divFtSel" name="divFtSel" style="WIDTH: 160px">
-							<!-- <option value="A000001">逾期天數</option>
-							<option value="A000002">逾期金額</option>
-							<option value="A000000">產品項目</option>
-							<option value="A000006">催收人員</option> -->
-						</select>
-						</td>
-						<td width="13%" class="hd1" rowspan="2"><span
-							class="color-red">＊</span>值域</td>
-						<td width="44%" rowspan="2">
-							<div id="ftRsGrid" class="capgrid">
-							</div>
+						<td width="60%"><div id="ruleMapGrid" class="capgrid"/></td>
+						<td width="40%">
+						<button type="button" id="up_btn"><span class="text-only">提高優先序</span></button>
+						<br/>
+						<button type="button" id="dwn_btn"><span class="text-only">降低優先序</span></button>
 						</td>
 					</tr>
-				</tbody>
-			</table>
-
-			<div class="funcContainer">
-				<button id="del_btn" type="button">
-					<span class="text-only">刪除</span>
-				</button>
-				<!-- <button id="edit_btn1">
-					<span class="text-only">修改</span>
-				</button>
-				<button id="assign_btn">
-					<span class="text-only"></span>案件分派設定
-				</button> -->
+				</table>
 			</div>
-			<table class="tb2" width="100%" border="0" cellspacing="0"
-				cellpadding="0">
-				<tr>
-					<td width="60%">
-						<div id="cndtDtlGrid" class="capgrid" >
-						</div>
-					</td>
-					<td width="40%">
-						<button id="up_btn"><span class="text-only">提高優先序</span></button>
-						<br/>
-						<button id="dwn_btn"><span class="text-only">降低優先序</span></button>
-					</td>
-				</tr>
-			</table>
 		</fieldset>
 	</form>
 		<fieldset>
@@ -169,69 +150,8 @@
 			</fieldset>
 			</form>
 		</div>
-<!-- 
-		<div id="edit_dialog2" title="分派組別/狀態" class="popup_cont"
-			style="display: none">
-
-			<fieldset>
-				<legend>分派資訊</legend>
-				<table class="tb2" border="0" cellpadding="0" cellspacing="0"
-					width="100%">
-					<tbody>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>分派組別</td>
-							<td width="30%"><select name="assignSel"
-								style="WIDTH: 150px">
-									<option value=""></option>
-									<option value="">電催組</option>
-									<option value="">協商組</option>
-									<option value="">協議組</option>
-									<option value="">法務組</option>
-									<option value="">委外組</option>
-									<option value="">特殊組</option>
-									<option value="">其他組</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>分派人員</td>
-							<td width="30%"><select name="assignSel"
-								style="WIDTH: 150px">
-									<option value=""></option>
-									<option value="">件數平均</option>
-									<option value="">金額平均</option>
-									<option value="">人數平均</option>
-									<option value="">新增金額平均</option>
-									<option value="">新增案件平均</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>分派狀態</td>
-							<td width="30%"><select name="statusSel"
-								style="WIDTH: 150px">
-									<option value=""></option>
-									<option value="">已分案</option>
-									<option value="">分案待處理</option>
-									<option value="">分案待指派</option>
-									<option value="">未分案</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>備註</td>
-							<td width="30%"><input type="text" size='30'></td>
-						</tr>
-					</tbody>
-				</table>
-			</fieldset>
-
-		</div>
- -->
- 		<!-- dialog end-->
-		<!-- dialog start-->
 		<!--Start : 啟動停用-->
-
-		<!-- dialog end-->
 	</div>
 	<!-- **********************************************內容 end *******************************************-->
-	</div>
 </body>
 </html>

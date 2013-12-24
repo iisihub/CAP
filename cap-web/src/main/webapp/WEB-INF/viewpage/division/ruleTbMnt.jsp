@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="decorator" content="none">
-<title><spring:message code="rule.title">
+<title><spring:message code="ruleTb.title">
 		<!--語系-->
 	</spring:message></title>
 </head>
