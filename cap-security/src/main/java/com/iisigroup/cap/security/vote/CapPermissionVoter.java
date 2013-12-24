@@ -65,7 +65,7 @@ public class CapPermissionVoter extends RoleVoter {
 					// Attempt to find a matching granted authority
 					for (IRole role : roles) {
 						for (GrantedAuthority auth : authorities) {
-							if (auth.getAuthority().equals(role.getOid())) {
+							if (auth.getAuthority().equals(role.getRoleId())) {
 								return ACCESS_GRANTED;
 							}
 						}

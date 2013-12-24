@@ -5,6 +5,9 @@
 	<persistence-unit name="pu-cap">
 		<mapping-file>META-INF/orm-cap.xml</mapping-file>
 		<!-- base -->
+		<class>com.iisigroup.cap.base.model.User</class>
+		<class>com.iisigroup.cap.base.model.Role</class>
+		<class>com.iisigroup.cap.base.model.CodeItem</class>
 		<class>com.iisigroup.cap.base.model.CodeType</class>
 		<class>com.iisigroup.cap.base.model.SysParm</class>
 		<class>com.iisigroup.cap.base.model.CaseInfo</class>
