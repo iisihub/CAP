@@ -58,15 +58,15 @@
 					<tbody>
 						<tr>
 							<td width="13%" class="hd1"><span class="color-red">＊</span>條件代碼</td>
-							<td width="20%"><input type="text" id="divCtNo" name="divCtNo" size='10' value="C000001"></td>
+							<td width="20%"><input type="text" id="divCtNo" name="divCtNo" size='10' value=""></td>
 							<td width="13%" class="hd1"><span class="color-red">＊</span>條件名稱</td>
-							<td width="20%"><input type="text" id="divCtNm" name="divCtNm" value="前置協商"></td>
+							<td width="20%"><input type="text" id="divCtNm" name="divCtNm" value=""></td>
 						</tr>
 					<tr>
 						<td width="13%" class="hd1"><span class="color-red">＊</span>分派設定</td>
-						<td width="37%"><input type="text" id="divCtSetting" name="divCtSetting" value="前置"></td>
+						<td width="37%"><input type="text" id="divCtSetting" name="divCtSetting" value=""></td>
 						<td width="13%" class="hd1"><span class="color-red">＊</span>分派組別</td>
-						<td width="37%"><input type="text" id="divCtAction" name="divCtAction" value="協商組"></td>
+						<td width="37%"><input type="text" id="divCtAction" name="divCtAction" value=""></td>
 					</tr>
 					</tbody>
 				</table>

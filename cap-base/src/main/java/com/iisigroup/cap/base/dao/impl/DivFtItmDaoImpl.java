@@ -41,29 +41,11 @@ public class DivFtItmDaoImpl extends CapJpaDao<DivFtItm> implements DivFtItmDao 
 	}
 
 	@Override
-	public DivFtItm findByDivFtItmNoAndInputFlg(String factorNo, String inputFlag) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
-		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		return findUniqueOrNone(search);
-	}
-
-	@Override
 	public List<DivFtItm> findByDivFtItmNo(String[] divFtItmNos) {
 		ISearch search = createSearchTemplete();
 		search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", divFtItmNos);
 		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
 		search.addOrderBy("codeOrder");
-		return find(search);
-	}
-
-	@Override
-	public List<DivFtItm> findByDivFtItmNoAndInputFlg(String[] divFtItmNos,
-			String inputFlag) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", divFtItmNos);
-		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
 		return find(search);
 	}
 

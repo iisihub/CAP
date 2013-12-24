@@ -21,6 +21,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -80,6 +81,10 @@ public class DivCtItm extends GenericBean implements IDataObject {
 	// bi-directional many-to-one association to DivCtDtl
 	@OneToMany(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<DivCtDtl> divCtDtls;
+	
+	// bi-directional many-to-one association to DivCtDtl
+//	@OneToOne(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private DivRlDtl divRlDtl;
 	
 	public String getOid() {
 		return oid;
@@ -160,6 +165,14 @@ public class DivCtItm extends GenericBean implements IDataObject {
 
 	public void setDivCtSetting(String divCtSetting) {
 		this.divCtSetting = divCtSetting;
+	}
+
+	public DivRlDtl getDivRlDtl() {
+		return divRlDtl;
+	}
+
+	public void setDivRlDtl(DivRlDtl divRlDtl) {
+		this.divRlDtl = divRlDtl;
 	}
 
 }

@@ -20,6 +20,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -70,9 +71,10 @@ public class DivRlDtl extends GenericBean implements IDataObject {
 	@JoinColumn(name = "divRlNo", referencedColumnName = "divRlNo", nullable = false, insertable=false, updatable=false)
 	private DivRlItm divRlItm;
 
-//	// bi-directional many-to-one association to DivCtDtl
-//	@OneToMany(mappedBy = "divRlDtl", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-//	private List<DivCtDtl> divCtDtls;
+	// bi-directional many-to-one association to DivRlItm
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "divCtNo", referencedColumnName = "divCtNo", nullable = false, insertable=false, updatable=false)
+	private DivCtItm divCtItm;
 	
 	public String getOid() {
 		return oid;
@@ -120,6 +122,14 @@ public class DivRlDtl extends GenericBean implements IDataObject {
 
 	public void setDivRlJson(String divRlJson) {
 		this.divRlJson = divRlJson;
+	}
+
+	public DivCtItm getDivCtItm() {
+		return divCtItm;
+	}
+
+	public void setDivCtItm(DivCtItm divCtItm) {
+		this.divCtItm = divCtItm;
 	}
 
 //	public List<DivCtDtl> getDivCtDtls() {

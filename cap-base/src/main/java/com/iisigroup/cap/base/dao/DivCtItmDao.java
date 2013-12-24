@@ -50,24 +50,24 @@ public interface DivCtItmDao extends IGenericDao<DivCtItm> {
 	public DivCtItm findByDivCtItmNoAndInputFlg(String divCtItmNo, String inputFlag);
 
 	/**
-	 * find by DivRlItmNos.
+	 * find by DivCtNos.
 	 * 
-	 * @param divRlItmNos
+	 * @param divCtNos
 	 *            多個條件代碼
 	 * @return T List
 	 */
-	public List<DivCtItm> findByDivCtItmNo(String[] divRlItmNos);
+	public List<DivCtItm> findByDivCtItmNo(String[] divCtNos);
 
 	/**
 	 * find by Division Rule Item Nos and inputFlag
 	 * 
-	 * @param divRlItmNos
+	 * @param divCtNos
 	 *            多個條件代碼
 	 * @param inputFlag
 	 *            是否啟用
 	 * @return DivCtItm
 	 */
-	public List<DivCtItm> findByDivCtItmNoAndInputFlg(String[] divRlItmNos,
+	public List<DivCtItm> findByDivCtItmNoAndInputFlg(String[] divCtNos,
 			String inputFlag);
 
 	/**

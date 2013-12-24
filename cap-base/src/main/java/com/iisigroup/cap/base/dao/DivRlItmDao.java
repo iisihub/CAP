@@ -32,42 +32,42 @@ public interface DivRlItmDao extends IGenericDao<DivRlItm> {
 	/**
 	 * find by DivRlItm.
 	 * 
-	 * @param divRlItmNo
+	 * @param divRlNo
 	 *            規則代號
 	 * @return T
 	 */
-	public DivRlItm findByDivRlItmNo(String divRlItmNo);
+	public DivRlItm findByDivRlNo(String divRlNo);
 
 	/**
 	 * find by DivRlItm and inputFlag
 	 * 
-	 * @param divRlItmNo
+	 * @param divRlNo
 	 *            規則代號
 	 * @param inputFlag
 	 *            是否啟用
 	 * @return T
 	 */
-	public DivRlItm findByDivRlItmNoAndInputFlg(String divRlItmNo, String inputFlag);
+	public DivRlItm findByDivRlNoAndInputFlg(String divRlNo, String inputFlag);
 
 	/**
-	 * find by DivRlItmNos.
+	 * find by DivRlNos.
 	 * 
-	 * @param divRlItmNos
+	 * @param divRlNos
 	 *            多個規則代號
 	 * @return T List
 	 */
-	public List<DivRlItm> findByDivRlItmNo(String[] divRlItmNos);
+	public List<DivRlItm> findByDivRlNo(String[] divRlNos);
 
 	/**
 	 * find by Division Rule Item Nos and inputFlag
 	 * 
-	 * @param divRlItmNos
+	 * @param divRlNos
 	 *            多個規則代號
 	 * @param inputFlag
 	 *            是否啟用
 	 * @return DivRlItm
 	 */
-	public List<DivRlItm> findByDivRlItmNoAndInputFlg(String[] divRlItmNos,
+	public List<DivRlItm> findByDivRlNoAndInputFlg(String[] divRlNos,
 			String inputFlag);
 
 	/**

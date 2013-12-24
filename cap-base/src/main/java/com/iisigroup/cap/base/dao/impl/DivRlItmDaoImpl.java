@@ -34,35 +34,35 @@ import com.iisigroup.cap.dao.utils.SearchMode;
 public class DivRlItmDaoImpl extends CapJpaDao<DivRlItm> implements DivRlItmDao {
 
 	@Override
-	public DivRlItm findByDivRlItmNo(String divRlItmNo) {
+	public DivRlItm findByDivRlNo(String divRlNo) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlItmNo", divRlItmNo);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
 		return findUniqueOrNone(search);
 	}
 
 	@Override
-	public DivRlItm findByDivRlItmNoAndInputFlg(String divRlItmNo, String inputFlag) {
+	public DivRlItm findByDivRlNoAndInputFlg(String divRlNo, String inputFlag) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlItmNo", divRlItmNo);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
 		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
 		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
 		return findUniqueOrNone(search);
 	}
 
 	@Override
-	public List<DivRlItm> findByDivRlItmNo(String[] divRlItmNos) {
+	public List<DivRlItm> findByDivRlNo(String[] divRlNos) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlItmNo", divRlItmNos);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
 		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
 		search.addOrderBy("codeOrder");
 		return find(search);
 	}
 
 	@Override
-	public List<DivRlItm> findByDivRlItmNoAndInputFlg(String[] divRlItmNos,
+	public List<DivRlItm> findByDivRlNoAndInputFlg(String[] divRlNos,
 			String inputFlag) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlItmNo", divRlItmNos);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
 		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
 		return find(search);
 	}

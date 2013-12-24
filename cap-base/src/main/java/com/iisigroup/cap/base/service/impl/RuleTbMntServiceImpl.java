@@ -18,9 +18,13 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.iisigroup.cap.base.dao.DivCtDtlDao;
+import com.iisigroup.cap.base.dao.DivCtItmDao;
+import com.iisigroup.cap.base.dao.DivRlDtlDao;
 import com.iisigroup.cap.base.dao.DivRlItmDao;
+import com.iisigroup.cap.base.model.DivRlDtl;
 import com.iisigroup.cap.base.model.DivRlItm;
-import com.iisigroup.cap.base.service.RuleMntService;
+import com.iisigroup.cap.base.service.RuleTbMntService;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.service.AbstractService;
 
@@ -36,20 +40,26 @@ import com.iisigroup.cap.service.AbstractService;
  *          </ul>
  */
 @Service
-public class RuleMntServiceImpl extends AbstractService implements
-		RuleMntService {
+public class RuleTbMntServiceImpl extends AbstractService implements
+		RuleTbMntService {
 
 	@Resource
-	private DivRlItmDao dao;
+	private DivRlItmDao rlItmDao;
+	@Resource
+	private DivRlDtlDao rlDtlDao;
+	@Resource
+	private DivCtDtlDao ctDtlDao;
+	@Resource
+	private DivCtItmDao ctItmDao;
 
 	@Override
 	public void saveDivRlItm(DivRlItm rlItm) {
-		dao.save(rlItm);
+		rlItmDao.save(rlItm);
 	}
 
 	@Override
-	public Map<String, String> findByDivRlItmNos(String[] DivRlItmNos) {
-		List<DivRlItm> ftList = dao.findByDivRlItmNo(DivRlItmNos);
+	public Map<String, String> findByDivRlNos(String[] DivRlNos) {
+		List<DivRlItm> ftList = rlItmDao.findByDivRlNo(DivRlNos);
 		Map<String, String> m = new LinkedHashMap<String, String>();
 		if (!ftList.isEmpty()) {
 			for (DivRlItm c : ftList) {
@@ -60,13 +70,13 @@ public class RuleMntServiceImpl extends AbstractService implements
 	}
 
 	@Override
-	public DivRlItm findByDivRlItmNo(String DivRlItmNo) {
-		return dao.findByDivRlItmNo(DivRlItmNo);
+	public DivRlItm findByDivRlNo(String DivRlNo) {
+		return rlItmDao.findByDivRlNo(DivRlNo);
 	}
 
 	@Override
-	public Map<String, Map<String, String>> findMapByRlItmNos(String[] nos) {
-		List<DivRlItm> ftList = dao.findByDivRlItmNoAndInputFlg(nos, "1");
+	public Map<String, Map<String, String>> findMapByRlNos(String[] nos) {
+		List<DivRlItm> ftList = rlItmDao.findByDivRlNoAndInputFlg(nos, "1");
 		Map<String, Map<String, String>> m = new LinkedHashMap<String, Map<String, String>>();
 		if (!ftList.isEmpty()) {
 			for (int i = 0; i < nos.length; i++) {
@@ -84,7 +94,7 @@ public class RuleMntServiceImpl extends AbstractService implements
 
 	@Override
 	public Map<String, AjaxFormResult> getDivRlItmsByNos(String[] nos) {
-		List<DivRlItm> ftList = dao.findByDivRlItmNoAndInputFlg(nos, "1");
+		List<DivRlItm> ftList = rlItmDao.findByDivRlNoAndInputFlg(nos, "1");
 		Map<String, AjaxFormResult> m = new LinkedHashMap<String, AjaxFormResult>();
 		if (!ftList.isEmpty()) {
 			for (DivRlItm c : ftList) {
@@ -102,19 +112,26 @@ public class RuleMntServiceImpl extends AbstractService implements
 
 	@Override
 	public DivRlItm getByRlItmNo(String rlItmNo) {
-		return dao.findByDivRlItmNo(rlItmNo);
+		return rlItmDao.findByDivRlNo(rlItmNo);
 	}
 
 	@Override
 	public DivRlItm getById(String oid) {
-		return dao.find(oid);
+		return rlItmDao.find(oid);
 	}
 
 	@Override
 	public void deleteById(String oid) {
-		DivRlItm rlItm = dao.find(oid);
+		DivRlItm rlItm = rlItmDao.find(oid);
 		if (rlItm != null) {
-			dao.delete(rlItm);
+			rlItmDao.delete(rlItm);
+		}
+	}
+	
+	@Override
+	public void deleteRlDtlByList(List<DivRlDtl> list){
+		if(list!=null && !list.isEmpty()){
+			rlDtlDao.delete(list);
 		}
 	}
 }

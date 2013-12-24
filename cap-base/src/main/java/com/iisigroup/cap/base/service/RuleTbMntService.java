@@ -9,8 +9,10 @@
  */
 package com.iisigroup.cap.base.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.iisigroup.cap.base.model.DivRlDtl;
 import com.iisigroup.cap.base.model.DivRlItm;
 import com.iisigroup.cap.response.AjaxFormResult;
 
@@ -25,7 +27,7 @@ import com.iisigroup.cap.response.AjaxFormResult;
  *          <li>2013/12/13,TimChiang,new
  *          </ul>
  */
-public interface RuleMntService {
+public interface RuleTbMntService {
 
 	/**
 	 * save DivRlItm
@@ -37,20 +39,20 @@ public interface RuleMntService {
 
 	/**
 	 * 查詢因子項目
-	 * @param divRlItmNo 因子代碼
+	 * @param divRlNo 因子代碼
 	 * @return DivRlItm
 	 */
-	DivRlItm findByDivRlItmNo(String divRlItmNo);
+	DivRlItm findByDivRlNo(String divRlNo);
 	
 	/**
-	 * get Map by ftItmNos
+	 * get Map by RlNos
 	 * 
-	 * @param ftItmNos
+	 * @param divRlNos
 	 *            代碼s
 	 * @return Map
 	 * 
 	 */
-	Map<String, String> findByDivRlItmNos(String[] ctItmNos);
+	Map<String, String> findByDivRlNos(String[] divRlNos);
 
 	/**
 	 * get divRlItm by numbers
@@ -59,7 +61,7 @@ public interface RuleMntService {
 	 *            numbers
 	 * @return Map<String, Map<String,String>>
 	 */
-	Map<String, Map<String, String>> findMapByRlItmNos(String[] nos);
+	Map<String, Map<String, String>> findMapByRlNos(String[] nos);
 
 	/**
 	 * get divRlItm by types
@@ -97,5 +99,11 @@ public interface RuleMntService {
 	 *            oid
 	 */
 	void deleteById(String oid);
+
+	/**
+	 * Delete Rule Detail by list
+	 * @param list
+	 */
+	void deleteRlDtlByList(List<DivRlDtl> list);
 
 }

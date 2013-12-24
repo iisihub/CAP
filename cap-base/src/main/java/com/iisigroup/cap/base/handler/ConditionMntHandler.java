@@ -170,7 +170,7 @@ public class ConditionMntHandler extends MFormHandler {
 		List<DivCtDtl> delCtDtl = new ArrayList<DivCtDtl>();
 		if(ftGridData!=null){
 			List<DivCtDtl> ctDtls = new LinkedList<DivCtDtl>();
-			if(!ctItm.getDivCtDtls().isEmpty()){
+			if(ctItm.getDivCtDtls()!=null&&!ctItm.getDivCtDtls().isEmpty()){
 				delCtDtl = ctItm.getDivCtDtls();
 			}
 			for(int i = 0; i<ftGridData.length; i++){

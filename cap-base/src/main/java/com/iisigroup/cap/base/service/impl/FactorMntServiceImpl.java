@@ -115,7 +115,7 @@ public class FactorMntServiceImpl extends AbstractService implements
 
 	@Override
 	public Map<String, Map<String, String>> findMapByFtItmNos(String[] nos) {
-		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNoAndInputFlg(nos, "1");
+		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNo(nos);
 		Map<String, Map<String, String>> m = new LinkedHashMap<String, Map<String, String>>();
 		if (!ftList.isEmpty()) {
 			for (int i = 0; i < nos.length; i++) {
@@ -133,7 +133,7 @@ public class FactorMntServiceImpl extends AbstractService implements
 
 	@Override
 	public Map<String, AjaxFormResult> getDivFtItmByNos(String[] nos) {
-		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNoAndInputFlg(nos, "1");
+		List<DivFtItm> ftList = ftItmDao.findByDivFtItmNo(nos);
 		Map<String, AjaxFormResult> m = new LinkedHashMap<String, AjaxFormResult>();
 		if (!ftList.isEmpty()) {
 			for (DivFtItm c : ftList) {

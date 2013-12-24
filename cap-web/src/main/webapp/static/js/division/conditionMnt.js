@@ -57,5 +57,26 @@ pageInit(function(){
 				CommonAPI.showErrorMessage("請先選擇要修改的資料");
 			}
         });
+        
+        //刪除
+        $("#delete").click(function(){
+ 			var selrow = grid.getSelRowDatas();
+ 			if (selrow) {
+ 				var _divCtNm = selrow.divCtNm;
+ 				$.ajax({
+ 					data : {
+ 						oid: selrow.oid
+ 					},
+ 					url : "webroot/conditionMnthandler/delete",
+ 					success : function() {
+ 						CommonAPI.showPopMessage("條件資料"+_divCtNm+"刪除完成");
+ 						grid.trigger("reloadGrid");
+ 					}
+ 				});
+ 			} else {
+ 				CommonAPI.showErrorMessage("請先選擇要修改的資料");
+ 			}
+        });
+
     });
 });

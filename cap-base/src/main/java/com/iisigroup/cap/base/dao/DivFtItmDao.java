@@ -39,36 +39,14 @@ public interface DivFtItmDao extends IGenericDao<DivFtItm> {
 	public DivFtItm findByDivFtItmNo(String divFtItmNo);
 
 	/**
-	 * find by DivFtItm and inputFlag
+	 * find by factorNos.
 	 * 
-	 * @param divRlItmNo
-	 *            因子代號
-	 * @param inputFlag
-	 *            代碼值
-	 * @return T
-	 */
-	public DivFtItm findByDivFtItmNoAndInputFlg(String divFtItmNo, String inputFlag);
-
-	/**
-	 * find by DivRlItmNos.
-	 * 
-	 * @param divFtItmNos
+	 * @param factorNos
 	 *            多個因子代號
 	 * @return T List
 	 */
-	public List<DivFtItm> findByDivFtItmNo(String[] divFtItmNos);
+	public List<DivFtItm> findByDivFtItmNo(String[] factorNos);
 
-	/**
-	 * find by Division Rule Item Nos and inputFlag
-	 * 
-	 * @param divRlItmNos
-	 *            多個因子代號
-	 * @param inputFlag
-	 *            代碼值
-	 * @return DivFtItm
-	 */
-	public List<DivFtItm> findByDivFtItmNoAndInputFlg(String[] divFtItmNos,
-			String inputFlag);
 
 	/**
 	 * 查詢OID

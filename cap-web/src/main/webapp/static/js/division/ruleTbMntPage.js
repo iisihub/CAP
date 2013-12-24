@@ -7,122 +7,96 @@ pageInit(function(){
 		/**
 		 * form initial
 		 */
-		$.ajax({
-	        url:"webroot/conditionMnthandler/query",
-	        data:{
-	        	mainOid: _mainOid,
-                factorNo: _factorNo,
-	        },
-	        success:function(d){
-	        	mform.injectData(d);
-	        	cndtDtlGrid.jqGrid('setGridParam', {
-	                postData: {
-	                	divCtNo:mform.find("#divCtNo").val()
-	                }
-	            });
-	        	cndtDtlGrid.trigger("reloadGrid");
-	        }
-		});
-		
-		var divFtSel = mform.find("#divFtSel");
-		$.ajax({
-	        url:"webroot/conditionMnthandler/getFtSelOption",
-	        data:{
+//		$.ajax({
+//	        url:"webroot/ruleTbMnthandler/query",
+//	        data:{
 //	        	mainOid: _mainOid,
 //                factorNo: _factorNo,
-	        },
-	        success:function(d){
-	        	divFtSel.setOptions(d);
-	        }
-		});
-		divFtSel.change(function(){
-        	ftRsGrid.jqGrid('setGridParam', {
-                postData: {
-                	factorNo : divFtSel.val()
-                }
-            });
-        	ftRsGrid.trigger("reloadGrid");
-		});
+//	        },
+//	        success:function(d){
+//	        	mform.injectData(d);
+//	        	ruleMapGrid.jqGrid('setGridParam', {
+//	                postData: {
+//	                	divRlNo:mform.find("#divRlNo").val()
+//	                }
+//	            });
+//	        	ruleMapGrid.trigger("reloadGrid");
+//	        }
+//		});
 		
-		/**因子值域*/
-		var ftRsGrid = $("#ftRsGrid").jqGrid({
-	        url:"webroot/conditionMnthandler/queryFactorDetailByFactorNo",
+		/**條件列表*/
+		var conditionGrid = $("#conditionGrid").jqGrid({
+	        url:"webroot/ruleTbMnthandler/queryConditionDetail",
 			height : '150',
 			localFirst : true,
             rownumbers: true,
-			needPager : false,
-//			multiselect : true,
+            sortname:'divCtNo',
             postData:{factorNo : mform.find("#divFtSel").val()},
 			colModel : [
-				{ header : "值域註解", name : "rangeNm", align : "left", width : 10 }
-			    ,{ header : "值域代號", name : "rangeNo", hidden:true}
-			    ,{ header : "因子代碼", name : "factorNo", hidden:true}
-				,{ header : "值域代號", name : "rangeNo", hidden:true }
-			    ,{ header : "因子名稱", name : "factorNm", hidden:true}
+				{ header : "條件名稱", name : "divCtNm", align : "left", width : 10 }
+			    ,{ header : "條件內容", name : "divCtCont", align : "left", width : 20 }
+			    ,{ header : "分派組別", name : "divCtAction", align : "left", width : 5 }
+				,{ name : "divCtNo", hidden:true }
+			    ,{ name : "factorNo", hidden:true}
+			    ,{ name : "rangeNo", hidden:true}
 				,{name : "oid", hidden: true}
 			]
-		});
-//		.addGridData(
-//				[ [ '逾期天數  1 ~ 30','A00001' ], [ '逾期天數 31 ~ 60','00002' ],
-//						[ '逾期天數 61 ~ 90','00003' ], [ '逾期天數 91 ~180','00004' ],
-//						[ '逾期天數 181~99999','00005' ] ]);
+		}).addGridData([
+			['前置協商','產品項目 信貸; 逾期天數 1~30; 逾期金額 >100,00','協商組','10'],
+			['前置協議','產品項目 信用卡; 逾期天數 1~30; 逾期金額 >500,00','協議組', '9'],
+			['更新','產品項目 信貸; 逾期天數 30~60; 逾期金額 >100,00','電催組', '8'],
+			['清算','產品項目 信貸; 逾期天數 60~120; 逾期金額 >100,00','法務組', '7'],
+			['特殊分案','產品項目 信用卡; 逾期天數 >120; 逾期金額 100,00','委外組', '6']]);
 		
-		/**條件內的因子列表*/
-		var cndtDtlGrid = $("#cndtDtlGrid").jqGrid({
-        	url: 'webroot/conditionMnthandler/queryConditionDtlGridByDivCtNo',
+		/**規則表內容列表*/
+		var ruleMapGrid = $("#ruleMapGrid").jqGrid({
+        	url: 'webroot/ruleTbMnthandler/queryRuleTbDetailByDivRlNo',
             height: '150',
             width: '100%',
             rownumbers: true,
-            multiselect: false,
-            hideMultiselect: false,
             autowidth: true,
             localFirst: true,
             loadonce:true,
-            sortname:'divCtSor',
+            sortname:'divRlSor',
 			colModel : [
-				{ header : "條件項目", name : "factorNm", align : "left", width : 10 }
-				,{ header : "條件內容", name : "rangeNm", align : "left", width : 40 }
-				,{ header : "排序", name : "divCtSor", align : "left", width : 5 }
-				,{ header : "因子代號", name : "factorNo", hidden:true }
-				,{ header : "值域代號", name : "rangeNo", hidden:true }
+				{ header : "條件名稱", name : "divCtNm", align : "left", width : 10 }
+				,{ header : "排序", name : "divRlSor", align : "left", width : 5 }
+				,{ header : "條件代號", name : "divCtNo", hidden:true }
+				,{ header : "規則表代號", name : "divRlNo", hidden:true }
+				,{ header : "divCtOid", name : "divCtOid", hidden:true }
 	            ,{name : "oid", hidden: true}
 			]
 		});
-//		.addGridData([
-//						['產品項目','信貸,信用卡','1'],
-//						['逾期天數','逾期天數  1 ~ 30','2',''],
-//						['逾期金額','100,000 ~ 5,000,000','3'],]);
 	
 		//新增條件的因子列表中的一筆資料
-		$("#add_btn").click(function(){
-			var selrow = ftRsGrid.getGridParam('selrow');
-			var records = cndtDtlGrid.getGridParam('records');
+		$("#addRuleBtn").click(function(){
+			var selrow = conditionGrid.getGridParam('selrow');
+			var records = ruleMapGrid.getGridParam('records');
 	    	if (selrow) {
 				//show 規則組合
-				var ret = ftRsGrid.getSelRowDatas();
+				var ret = conditionGrid.getSelRowDatas();
 				if(ret !=null){
 //					debugger;
 					var newRecord = new Array(5);
-					newRecord[0] = ret.factorNm;
-					newRecord[1] = ret.rangeNm;
-					newRecord[2] = parseInt(records)+1;
-					newRecord[3] = mform.find("#divFtSel").val();
-					newRecord[4] = ret.rangeNo;
-//						newRecord[4] = oid;
-					cndtDtlGrid.addGridData([newRecord]);
+					newRecord[0] = ret.divCtNm;
+					newRecord[1] = parseInt(records)+1;
+					newRecord[2] = ret.divCtNo;
+					newRecord[3] = mform.find("#divRlNo").val();
+					newRecord[4] = ret.oid;	//存放DivCtItm.Oid
+					ruleMapGrid.addGridData([newRecord]);
 				}
-				cndtDtlGrid.trigger("reload");
+				ruleMapGrid.trigger("reload");
 	    	} else {
 	    		alert("請先選取因子值域資料");
 	    	}
 		});
 		
 		//移除條件的因子列表中的一筆資料
-		$("#del_btn").click(function(){
-			var selrow = cndtDtlGrid.getGridParam('selrow');
+		$("#removeBtn").click(function(){
+			var selrow = ruleMapGrid.getGridParam('selrow');
 	    	if (selrow) {
-				cndtDtlGrid.removeSelected();
-//				cndtDtlGrid.trigger("reloadGrid");
+				ruleMapGrid.removeSelected();
+//				ruleMapGrid.trigger("reloadGrid");
 	    	} else {
 	    		alert("請先選取一筆條件資料");
 	    	}
@@ -130,33 +104,33 @@ pageInit(function(){
 		
 		/**排序按鈕*/
 		$("#up_btn").click(function(){
-			var selrow = cndtDtlGrid.getGridParam('selrow');
-			var records = cndtDtlGrid.getGridParam('records');
+			var selrow = ruleMapGrid.getGridParam('selrow');
+			var records = ruleMapGrid.getGridParam('records');
 	    	if (selrow) {
 //	    		debugger;
-	    		var index = cndtDtlGrid.jqGrid('getInd',selrow);
-	    		var selRet = cndtDtlGrid.getSelRowDatas();//xxxGrid[selrow-1];
-	    		var orgSeq = selRet.divCtSor;
+	    		var index = ruleMapGrid.jqGrid('getInd',selrow);
+	    		var selRet = ruleMapGrid.getSelRowDatas();//xxxGrid[selrow-1];
+	    		var orgSeq = selRet.divRlSor;
 	    		//debugger;
 	    		if(orgSeq > 1){
-	    			selRet.divCtSor = (parseInt(selRet.divCtSor) - 1);
-	    			var xxxGrid = cndtDtlGrid.serializeGridData();
-	    			cndtDtlGrid.clearGridData();
+	    			selRet.divRlSor = (parseInt(selRet.divRlSor) - 1);
+	    			var xxxGrid = ruleMapGrid.serializeGridData();
+	    			ruleMapGrid.clearGridData();
 	    			xxxGrid[index-1] = selRet;
 		    		//更新其他資料排序值
 					for(var i=1; i<=records; i++){
 						if(i!=index){
 							var ret = xxxGrid[i-1];
-							var retSeq = parseInt(ret.divCtSor);
-							if(ret !=null && retSeq == selRet.divCtSor){
-								ret.divCtSor = (retSeq+1);
+							var retSeq = parseInt(ret.divRlSor);
+							if(ret !=null && retSeq == selRet.divRlSor){
+								ret.divRlSor = (retSeq+1);
 								break;
 							}
 						}
 					}
 					selRet = null;	
-					cndtDtlGrid.addGridData(xxxGrid);
-					cndtDtlGrid.trigger("reloadGrid");
+					ruleMapGrid.addGridData(xxxGrid);
+					ruleMapGrid.trigger("reloadGrid");
 	    		}
 	    	} else {
 	    		alert("請先選取一筆規則資料");
@@ -164,33 +138,33 @@ pageInit(function(){
 		});
 
 		$("#dwn_btn").click(function(){
-			var selrow = cndtDtlGrid.getGridParam('selrow');
-			var records = cndtDtlGrid.getGridParam('records');
+			var selrow = ruleMapGrid.getGridParam('selrow');
+			var records = ruleMapGrid.getGridParam('records');
 	    	if (selrow) {
 //	    		debugger;
-	    		var index = cndtDtlGrid.jqGrid('getInd',selrow);
-	    		var selRet = cndtDtlGrid.getSelRowDatas();//xxxGrid[selrow-1];
-	    		var orgSeq = selRet.divCtSor;
+	    		var index = ruleMapGrid.jqGrid('getInd',selrow);
+	    		var selRet = ruleMapGrid.getSelRowDatas();//xxxGrid[selrow-1];
+	    		var orgSeq = selRet.divRlSor;
 //	    		debugger;
 	    		if(orgSeq < records){
-	    			selRet.divCtSor = (parseInt(selRet.divCtSor) + 1);
-	    			var xxxGrid = cndtDtlGrid.serializeGridData();
-	    			cndtDtlGrid.clearGridData();
+	    			selRet.divRlSor = (parseInt(selRet.divRlSor) + 1);
+	    			var xxxGrid = ruleMapGrid.serializeGridData();
+	    			ruleMapGrid.clearGridData();
 	    			xxxGrid[index-1] = selRet;
 		    		//更新其他資料排序值
 					for(var i=records; i>=1; i--){
 						if(i!=index){
 							var ret = xxxGrid[i-1];
-							var retSeq = parseInt(ret.divCtSor);
-							if(ret !=null && retSeq == selRet.divCtSor){
-								ret.divCtSor = (retSeq-1);
+							var retSeq = parseInt(ret.divRlSor);
+							if(ret !=null && retSeq == selRet.divRlSor){
+								ret.divRlSor = (retSeq-1);
 								break;
 							}
 						}
 					}
 					selRet = null;	
-					cndtDtlGrid.addGridData(xxxGrid);
-					cndtDtlGrid.trigger("reloadGrid");
+					ruleMapGrid.addGridData(xxxGrid);
+					ruleMapGrid.trigger("reloadGrid");
 	    		}
 	    	} else {
 	    		alert("請先選取一筆條件資料");
@@ -199,7 +173,7 @@ pageInit(function(){
 
 		/**儲存*/
 		$("#save_btn").click(function(){
-			var xxxData = cndtDtlGrid.serializeGridData();
+			var xxxData = ruleMapGrid.serializeGridData();
 			var array = new Array(xxxData.length);
 			var datas = $.extend({}, mform.serializeData());
 			for(var i = 0; i<array.length ; i++){
@@ -209,10 +183,10 @@ pageInit(function(){
 			$.extend(datas, gridData);
 			/**儲存 連後端儲存*/
 			$.ajax({
-				url : "webroot/conditionMnthandler/saveConditionDtl",
+				url : "webroot/ruleTbMnthandler/saveRuleTbDtl",
 				data : datas,
 				success : function() {
-					CommonAPI.showPopMessage("儲存條件資料完成");
+					CommonAPI.showPopMessage("儲存規則表資料完成");
 				}
 			});
 		});
