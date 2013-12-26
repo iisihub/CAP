@@ -2713,7 +2713,7 @@ nav.top {
 nav ul {
   margin: 0px;
   padding: 0px;
-  float: right;
+  float: left;
 }
 nav.top ul {
   margin: auto;
@@ -2731,7 +2731,7 @@ nav.top ul.navmenu li {
   float: left;
   margin-right: 2px;
   text-align: center;
-  width: 161px;
+  width: 150px;
 }
 nav.top ul.navmenu li a {
   background: none repeat scroll 0 0 #6F6F6F;
@@ -2820,7 +2820,7 @@ nav.sub {
   height: 400px;
   float: left;
   left: 0px;
-  overflow: hidden;
+  overflow: auto;
   padding-bottom: 10px;
   padding-top: 30px;
 }
@@ -2861,6 +2861,7 @@ nav.sub ul {
     list-style: none outside none;
     margin: 0 0 0 -4px;
     padding: 0 0 0 4px;
+    width: 100%;
 }
 nav.sub ul li {
     background: none repeat scroll 0 0 #DDDDDD;
@@ -2896,12 +2897,13 @@ nav.sub ul ul li a {
     padding-left: 20px;
     padding-right: 10px;
 }
+/*
 nav.sub ul ul li a:hover {
     background: none repeat scroll 0 0 #FFFFFF;
     color: #C90915;
     margin-left: -4px;
 }
-
+*/
 /*content*/
 article {
   width: 740px;

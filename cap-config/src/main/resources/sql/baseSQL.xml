@@ -7,6 +7,21 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<util:map id="baseSql" map-class="java.util.HashMap"
 		key-type="java.lang.String">
+		
+		<!-- Common -->
+		<entry key="Role.auth">
+			<value><![CDATA[select
+			  rle.ROLCODE AS ROLE,
+			  rlf.PGMCODE AS AUTHCODE,
+			  rlf.PGMAUTH AS AUTH
+			from DEF_RLE rle
+			  inner join DEF_RLF rlf
+			  on rlf.ROLCODE=rle.ROLCODE
+			where rle.SYSTYP= :system and rle.STU='0'
+			order by rle.ROLCODE, rlf.PGMCODE]]></value>
+		</entry>
+		
+		<!-- Sequence -->
 		<entry key="Sequence.listAll">
 			<value><![CDATA[select * from cfg_Sequence order by seqNode]]></value>
 		</entry>

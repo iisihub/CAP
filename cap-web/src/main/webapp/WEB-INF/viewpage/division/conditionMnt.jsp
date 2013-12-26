@@ -15,11 +15,11 @@
 	</script>
 	<div>
 		<div class="btns" colspan="4" style="text-align: right">
-			<button id="qry" type="button" class="btn1">
+			<%-- <button id="qry" type="button" class="btn1">
 				<spring:message code="btn.query">
 					<!--查詢-->
 				</spring:message>
-			</button>
+			</button> --%>
 			<button id="add" type="button" class="btn1">
 				<spring:message code="btn.add">
 					<!--新增-->

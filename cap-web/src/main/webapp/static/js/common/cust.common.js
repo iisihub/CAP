@@ -37,29 +37,40 @@
         // }]
 // 
     // }]
-// }
+// }
 
 // init
 $(document).ready(function() {
     logDebug("cust common ready init");
     var navTop = $("nav.top"), navSub = $("nav.sub ol");
-    $.get("webroot/samplehandler/queryMenu").done(function(res) {
-        var _menu = res.menu, ul = $("nav.top ul.navmenu");
-        $("#userName").val(res.userName);
+    $.get("webroot/menuhandler/queryMenu").done(function(res) {
+        var _menu = res.child, ul = $("nav.top ul.navmenu");
+//        $("#userName").val(res.userName);
         navTop.on("click", "li a", function(ev) {
             ev.preventDefault();
             router.to($(this).attr("url"));
+            $("article").empty();
         });
 
         navSub.on("click", "li a", function(ev) {
-            router.to($(this).attr("url"));
+        	var $this = $(this);
+        	if($this.attr("url")){
+        		router.to($(this).attr("url"));
+        	}else{
+        		if ($this.siblings("ul").size()) {
+                	var sel = $this.siblings("ul");
+                	sel.is(":visible") ? 
+                			sel.hide().parent("li").children("a").removeClass('clicked').children("span").removeClass('icon-5').addClass('icon-1')
+                			: sel.show().parent("li").children("a").addClass('clicked').children("span").removeClass('icon-1').addClass('icon-5');
+                }
+        	}
             ev.preventDefault();
             return false;
         });
 
         // render menu
         for (var m in _menu) {
-            ul.append($("<li/>").append($("<a/>", {
+    		ul.append($("<li/>").append($("<a/>", {
                 href : "#",
                 url : _menu[m].url,
                 data : {
@@ -74,7 +85,7 @@ $(document).ready(function() {
             routes : {
                 "" : "loadfirst", //default route
                 ":page" : "loadsub", // http://xxxxx/xxx/#page
-                ":page/:page2" : "loadpage" // http://xxxxx/xxx/#page
+                ":page/:page2" : "loadpage" // http://xxxxx/xxx/#page/page2
             },
             loadfirst : function() {
                 ul.find("li a:first").click();
@@ -91,19 +102,43 @@ $(document).ready(function() {
                     navSub.css("opacity", "0.01");
                     _f();
                 }
+                
+                function _s(root, s_menu){
+                	for (var sm in s_menu) {
+	                	if(s_menu[sm].child.length != 0){
+	                		root.append($("<li/>").append($("<a/>", {
+	                			url : "",
+	                            data : {
+	                                url : ""
+	                            },
+	                            text : s_menu[sm].name
+	                        })
+	                        .prepend("<span class='menu-icon icon-1'></span>")).append("<ul class='menu_sub'></ul>"));
+
+	                		_s(root.find("li ul").last(), s_menu[sm].child);
+	                	}else if(s_menu[sm].url){
+	                		root.append($("<li/>").append($("<a/>", {
+	                            url : s_menu[sm].url || "",
+	                            data : {
+	                                url : s_menu[sm].url || ""
+	
+	                            },
+	                            text : s_menu[sm].name
+	                        })
+//	                        .prepend("<span class='menu-icon icon-5'></span>")
+	                        ));
+	                	}else{
+	                		root.append($("<li/>").append($("<a/>", {
+	                            url : '#', data : { url : '#' },
+	                            text : s_menu[sm].name
+	                        })));
+	                	}
+                	}
+                }
 
                 function _f() {
                     navSub.empty().data("cmenu", folder);
-                    for (var sm in smenu) {
-                        navSub.append($("<li/>").append($("<a/>", {
-                            url : tlink.data("url") + "/" + smenu[sm].url || "",
-                            data : {
-                                url : tlink.data("url") + "/" + smenu[sm].url || ""
-
-                            },
-                            text : smenu[sm].name
-                        })));
-                    }
+                    _s(navSub, smenu);
                     navSub.animate({
                         opacity : 1
                     });
@@ -112,9 +147,9 @@ $(document).ready(function() {
             },
             //router method
             loadpage : function(folder, page) {
-                if (!(navSub.data("cmenu") == folder)) {
-                    this.loadsub(folder);
-                }
+//                if (!(navSub.data("cmenu") == folder)) {
+//                    this.loadsub(folder);
+//                }
                 navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
                 API.loadPage(folder + '/' + page);
             }
@@ -135,7 +170,7 @@ $(document).ready(function() {
             });
         }
         return false;
-    });
+    });
     $.datepicker._gotoTodayOriginal = $.datepicker._gotoToday;
     $.datepicker._gotoToday = function(id) {
         // now, call the original handler
@@ -154,4 +189,3 @@ $(document).ready(function() {
     	}
     });
 });
-

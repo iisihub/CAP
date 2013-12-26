@@ -94,7 +94,7 @@ public class SampleHandler extends MFormHandler {
 				+ ",{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]}"
 				+ ",{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'},{'name':'WebSocket','url':'webSocket'}]}"
 				+ ",{'name':'分案管理','url':'division','child':[{'name':'群組設定','url':'groupStng'},{'name':'因子維護','url':'factorMnt'}"
-				+ ",{'name':'條件維護','url':'conditionMnt'},{'name':'規則維護','url':'RuleMnt'},{'name':'計劃維護','url':'batchPlaneMnt'}]}"
+				+ ",{'name':'條件維護','url':'conditionMnt'},{'name':'規則維護','url':'ruleTbMnt'},{'name':'計劃維護','url':'batchPlaneMnt'}]}"
 				+ ",{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
 	}
 }

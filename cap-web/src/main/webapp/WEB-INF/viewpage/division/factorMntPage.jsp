@@ -34,13 +34,13 @@
 		</div>
 	</div> -->
 	<div class="button-menu funcContainer">
-		<button type="button">
+		<button type="button" id="save_btn">
 			<span class="ui-icon ui-icon-jcs-04"></span>儲存
 		</button>
-		<button type="button">
+		<!-- <button type="button" id="">
 			<span class="ui-icon ui-icon-circle-zoomout"></span>試算
-		</button>
-		<button type="button" onclick="window.close();">
+		</button> -->
+		<button type="button" id="close_btn" onclick="window.close();">
 			<span class="ui-icon ui-icon-jcs-01"></span>離開
 		</button>
 	</div>
@@ -49,185 +49,89 @@
 	<div class="tit2 color-black"></div>
 
 	<div class="tabCtx-warp ui-widget-content" style="padding: 1em 1.4em;">
-		<fieldset>
-			<legend>基本資訊</legend>
-			<form action="">
-				<table class="tb2" width="100%" border="0" cellspacing="0"
-					cellpadding="0">
-					<tbody>
-						<tr>
-							<td width="13%" class="hd1"><span class="color-red">＊</span>條件代碼</td>
-							<td width="20%"><input type="text" size='10' value="A000001"></td>
-							<td width="13%" class="hd1"><span class="color-red">＊</span>條件名稱</td>
-							<td width="20%"><input type="text" value="協商組-前置協商"></td>
-							<td width="13%" class="hd1">狀態</td>
-							<td width="20%"><input type="radio" name="normal" />啟動&nbsp;
-								<input type="radio" name="normal" />停用</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
-		</fieldset>
-
-		<fieldset>
-			<legend>組合資訊</legend>
-			<table class="tb2" width="100%" border="0" cellspacing="0"
-				cellpadding="0">
+	
+	<form id="mform" onsubmit="return false;">
+	<input type="text" class="hide" style="display:none" id="oid" name="oid"/>
+		<fieldset><legend>因子資訊</legend>
+			<table class="tb2" width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tbody>
 					<tr>
-						<td width="13%" class="hd1"><span class="color-red">＊</span>因子項目</td>
-						<td width="20%"><select name="sel3" style="WIDTH: 150px">
-								<option value="">產品項目</option>
-								<option value="">催收人員</option>
-								<option value="">逾期天數</option>
-								<option value="">逾期金額</option>
-						</select>
-							<button id="">
-								<span class="text-only">查詢</span>
-							</button></td>
-						<td width="13%" class="hd1" rowspan="2"><span
-							class="color-red">＊</span>值域</td>
-						<td width="53%" rowspan="2">
-							<div id="ftRsGrid" class="capgrid">
-							</div>
+						<td width="13%" class="hd1"><span class="color-red">＊</span>因子代碼</td>
+						<td width="20%"><input type="text" id="factorNo" name="factorNo" size='10' value=""></td>
+						<td width="13%" class="hd1"><span class="color-red">＊</span>因子名稱</td>
+						<td width="40%" ><input type="text" id="factorNm" name="factorNm" size='40' value=""></td>
+						<td width="13%" class="hd1"><span class="color-red">＊</span>屬性</td>
+						<td>
+							<select id="dataType" name="dataType" style="WIDTH: 150px">
+							<option value="1">數值</option>
+							<option value="2">字串</option>
+							<option value="3">布林</option>
+							</select>	
 						</td>
 					</tr>
 					<tr>
-						<td width="13%" class="hd1"><span class="color-red"></span>排序</td>
-						<td width="20%"><select name="sel3" style="WIDTH: 100px">
-								<option value="">無</option>
-								<option value="">遞增</option>
-								<option value="">遞減</option>
-						</select></td>
+						<td width="13%" class="hd1"><span class="color-red">＊</span>資料表明稱</td>
+						<td width="20%"><input type="text" id="tableNm" name="tableNm" size='10' value=""></td>
+						<td width="13%" class="hd1"><span class="color-red">＊</span>因子欄位名稱</td>
+						<td width="40%" ><input type="text" id="columnNm" name="columnNm" size='40' value=""></td>
+						<td width="13%" class="hd1"></td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>
-
-			<div class="funcContainer">
-				<button id="new_btn1">
-					<span class="text-only">新增</span>
-				</button>
-				<button id="edit_btn1">
-					<span class="text-only">修改</span>
-				</button>
-				<button id="del_btn1">
-					<span class="text-only">刪除</span>
-				</button>
-				<button id="assign_btn">
-					<span class="text-only"></span>案件分派設定
-				</button>
-			</div>
-			<div id="ftDtlGrid" class="capgrid" >
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<legend>異動記錄</legend>
-			<table class="tb2" border="0" cellpadding="0" cellspacing="0"
-				width="100%">
-				<tbody>
-					<tr>
-						<td class="hd1" width="20%">文件建立人員</td>
-						<td width="30%">翁小芳(YYY-MM-DD HH:MM)</td>
-						<td class="hd1" width="20%">最後異動人員</td>
-						<td width="30%">翁小芳(YYY-MM-DD HH:MM)</td>
-					</tr>
-				</tbody>
-			</table>
-		</fieldset>
-		
-		<!-- dialog start-->
-		<!--Start : 設定催收人員權限-->
-		<div id="edit_dialog1" title="新增因子值域明細" class="popup_cont"
-			style="display: none">
-
-			<fieldset>
-				<legend>值域資訊</legend>
-				<table class="tb2" border="0" cellpadding="0" cellspacing="0"
-					width="100%">
+			</fieldset>
+			
+			<fieldset><legend>因子值域明細</legend>
+				<div class="funcContainer">
+					<button id="new_btn"><span class="text-only">新增</span></button>
+					<button id="mod_btn"><span class="text-only">修改</span></button>
+					<button id="del_btn"><span class="text-only">刪除</span></button>
+				</div>
+				<div id="ftDtlGrid" class="capgrid" />
+			</fieldset>
+			<fieldset><legend>異動記錄</legend>
+				<table class="tb2" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tbody>
 						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>值域註解</td>
-							<td width="30%"><input type="text" size='40'></td>
+							<td class="hd1" width="20%">文件建立人員</td>
+							<td width="30%">翁小芳(YYY-MM-DD  HH:MM)</td>
+							<td class="hd1" width="20%">最後異動人員</td>
+							<td width="30%">翁小芳(YYY-MM-DD  HH:MM)</td>
 						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>值域一</td>
-							<td width="30%"><input type="text" size='20'></td>
+					</tbody>
+				</table>
+			</fieldset>
+		</form>	
+			<!-- dialog start-->
+			<!--Start : 設定催收人員權限-->
+			<div id="edit_dialog" title="因子值域明細" class="popup_cont" style="display:none">
+			<form id="facform" name="facform" onsubmit="return false;">
+			<fieldset><legend>值域資訊</legend>
+				<table class="tb2" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tbody>
+						<tr class="ftType1" >
+							<td class="hd1" width="20%">值域一</td>
+							<td width="30%"><input type="text" id="range1" name="range1" size='20'></td>
 						</tr>
-						<tr>
+						<tr class="ftType2" >
+							<td class="hd1" width="20%">值域</td>
+							<td width="30%">
+							<select  id="ftTypeBlnSel" name="ftTypeBlnSel" style="WIDTH: 150px">
+							<option value="true">true</option>
+							<option value="false">false</option>
+							</select>
+							</td>
+						</tr>
+						<tr class="ftType1">
 							<td class="hd1" width="20%">值域二</td>
-							<td width="30%"><input type="text" size='20'></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>順序</td>
-							<td width="30%"><input type="text" size='10'></td>
+							<td width="30%"><input type="text" id="range2" name="range2" size='20'></td>
 						</tr>
 					</tbody>
 				</table>
-			</fieldset>
-
+			</fieldset>				
+			</form>
+			<!-- dialog end-->
 		</div>
-
-		<div id="edit_dialog2" title="分派組別/狀態" class="popup_cont"
-			style="display: none">
-
-			<fieldset>
-				<legend>分派資訊</legend>
-				<table class="tb2" border="0" cellpadding="0" cellspacing="0"
-					width="100%">
-					<tbody>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>分派組別</td>
-							<td width="30%"><select name="assignSel"
-								style="WIDTH: 150px">
-									<option value=""></option>
-									<option value="">電催組</option>
-									<option value="">協商組</option>
-									<option value="">協議組</option>
-									<option value="">法務組</option>
-									<option value="">委外組</option>
-									<option value="">特殊組</option>
-									<option value="">其他組</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>分派人員</td>
-							<td width="30%"><select name="assignSel"
-								style="WIDTH: 150px">
-									<option value=""></option>
-									<option value="">件數平均</option>
-									<option value="">金額平均</option>
-									<option value="">人數平均</option>
-									<option value="">新增金額平均</option>
-									<option value="">新增案件平均</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>分派狀態</td>
-							<td width="30%"><select name="statusSel"
-								style="WIDTH: 150px">
-									<option value=""></option>
-									<option value="">已分案</option>
-									<option value="">分案待處理</option>
-									<option value="">分案待指派</option>
-									<option value="">未分案</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td class="hd1" width="20%"><span class="color-red">＊</span>備註</td>
-							<td width="30%"><input type="text" size='30'></td>
-						</tr>
-					</tbody>
-				</table>
-			</fieldset>
-
-		</div>
-		<!-- dialog end-->
-		<!-- dialog start-->
-		<!--Start : 啟動停用-->
-
-		<!-- dialog end-->
-	</div>
 	<!-- **********************************************內容 end *******************************************-->
 	</div>
 </body>
