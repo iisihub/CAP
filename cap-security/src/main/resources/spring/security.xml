@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	
+	<http pattern="/img/**" security="none" />
+	<http pattern="/**/images/**" security="none" />
+	<http pattern="/jquery/**" security="none" />
+	<http pattern="/**/**.css" security="none" />
+	<http pattern="/**/**.js" security="none" />
+	<http pattern="/i18n/js*" security="none" />
+	<http pattern="/app/error/message*" security="none" />
+	<http pattern="/page/login*" security="none" />
+	<http auto-config="false" access-decision-manager-ref="accessDecisionManager"
+		entry-point-ref="capAuthenticationEntryPoint" access-denied-page="/page/login?error">
+		
+		<intercept-url pattern="/page/home/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
+
+		<anonymous enabled="false" />
+		<form-login always-use-default-target="true" login-page="/page/login"
+			default-target-url="/page/index" authentication-failure-url="/page/login?error"/> 
+			<!-- authentication-details-source-ref="capWebAuthenticationDetailsSource" -->
+			
+		<session-management>
+			<concurrency-control max-sessions="1"
+				expired-url="/page/login?error" /> <!-- exception-if-maximum-exceeded="true" -->
+		</session-management>
+		<logout logout-url="/j_spring_security_logout"
+			logout-success-url="/page/login" />
+	</http>
+	
+	<beans:bean id="userDetailsServiceImpl"
+		class="com.iisigroup.cap.security.service.impl.CapUserDetailsService">
+		<beans:property name="userDao" ref="userDao" />
+	</beans:bean>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="userDetailsServiceImpl" />
+	</authentication-manager>
+
+	<beans:bean id="capAuthenticationEntryPoint"
+		class="com.iisigroup.cap.security.web.CapAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/page/login" />
+		<beans:property name="forceHttps" value="false" />
+	</beans:bean>
+	
+	<!-- <beans:bean id="capWebAuthenticationDetailsSource"
+		class="com.iisigroup.cap.security.web.CapWebAuthenticationDetailsSource">
+	</beans:bean> -->
+
+	<beans:bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property name="allowIfAllAbstainDecisions"
+			value="false" />
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:bean class="com.iisigroup.cap.security.vote.CapPermissionVoter">
+					<beans:property name="rolePrefix" value="${systemType}" />
+					<beans:property name="securityService" ref="accessControlService" />
+					<beans:property name="stripQueryStringFromUrls"
+						value="true" />
+				</beans:bean>
+				<beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="loggerListener"
+		class="org.springframework.security.access.event.LoggerListener" />
+		
+	<!-- Security context -->
+	<beans:bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
+		scope="session" />
+
+</beans:beans>
