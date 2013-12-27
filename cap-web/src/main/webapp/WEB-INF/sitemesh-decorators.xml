@@ -9,6 +9,7 @@
 <decorators defaultdir="/WEB-INF/sitemesh">
 	<decorator name="minimal" page="minimal.jsp" />
 	<decorator name="none" page="none.jsp" />
+	<decorator name="form" page="form.jsp" />
 	<decorator name="default" page="view.jsp">
 		<pattern>/*</pattern>
 	</decorator>

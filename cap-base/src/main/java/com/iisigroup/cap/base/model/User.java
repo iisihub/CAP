@@ -17,7 +17,11 @@ import java.util.Locale;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.iisigroup.cap.model.GenericBean;
@@ -71,6 +75,11 @@ public class User extends GenericBean implements IUser {
 
 	@Column(columnDefinition = "TIMESTAMP")
 	private Timestamp UPDATETIME;
+
+	// bi-directional one-to-one association to Branch
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({ @JoinColumn(name = "unitNo", referencedColumnName = "departno", nullable = true) })
+	private Branch branch;
 
 	/**
 	 * @return Oid
@@ -168,5 +177,13 @@ public class User extends GenericBean implements IUser {
 	@Override
 	public Locale getLocale() {
 		return null;
+	}
+
+	public Branch getBranch() {
+		return this.branch;
+	}
+
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 }
