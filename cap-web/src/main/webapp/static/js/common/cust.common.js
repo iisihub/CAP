@@ -124,9 +124,7 @@ $(document).ready(function() {
 	
 	                            },
 	                            text : s_menu[sm].name
-	                        })
-//	                        .prepend("<span class='menu-icon icon-5'></span>")
-	                        ));
+	                        })));
 	                	}else{
 	                		root.append($("<li/>").append($("<a/>", {
 	                            url : '#', data : { url : '#' },
@@ -159,12 +157,12 @@ $(document).ready(function() {
     $("a[href='#language']").click(function() {
         var o = $(this).parents("ol");
         if (o.height() == 18) {
-            $(this).parent("li.lang").css('background-image', 'url(webroot/static/images/icon-down.png)');
+            $(this).parent("li.lang").css('background-image', 'url('+baseUrl+'/images/icon-down.png)');
             $(o).animate({
                 height : 100
             });
         } else {
-            $(this).parent("li.lang").css('background-image', 'url(webroot/static/images/icon-right.png)');
+            $(this).parent("li.lang").css('background-image', 'url('+baseUrl+'/images/icon-right.png)');
             $(o).animate({
                 height : 18
             });

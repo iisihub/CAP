@@ -70,7 +70,7 @@ public class LogContextFilter implements Filter {
 			LogContext.setLogin(DEFAULT_LOGIN);
 		} else {
 			// 用戶端IP
-			LogContext.seClientAddr(req.getRemoteAddr());
+			LogContext.setClientAddr(req.getRemoteAddr());
 			// Session ID
 			LogContext.setSessionId(session.getId());
 			LogContext.setRequestURL(CapWebUtil.getRequestURL(req));
