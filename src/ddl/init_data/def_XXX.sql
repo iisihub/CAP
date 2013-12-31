@@ -19,7 +19,7 @@ INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGM
 INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (939181, '3', 929180, 'A', 241, '共用參數',7, 'system/codetype', '','','1', 'system', current timestamp);
 INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (939182, '3', 929180, 'A', 242, '系統設定維護',7, 'system/sysparm', '','','1', 'system', current timestamp);
 INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (939183, '3', 929180, 'A', 243, '訊息代碼維護',7, 'system/adm2080', '','','1', 'system', current timestamp);
-INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (939184, '3', 929180, 'A', 244, '操作紀錄設定',7, 'system/adm2090', '','','1', 'system', current timestamp);
+INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (939184, '3', 929180, 'A', 244, '操作紀錄設定',7, 'system/auditConfig', '','','1', 'system', current timestamp);
 INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (919210, '1', 0, 'A', 300, '管理工具',7, 'admin', '','','1', 'system', current timestamp);
 INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (929220, '2', 919210, 'A', 310, '使用者管理',7, '', '','','1', 'system', current timestamp);
 INSERT INTO DEF_PGM(PGMCODE, PGMTYPE, PGMTYP, SYSTYP, SEQ, PGMNAME, PGMAUTH, PGMPATH, PGMDESC, DOCID, INPUTFLG, UPDATER, UPDTIME) values (939221, '3', 929220, 'A', 311, '操作記錄查詢',7, 'admin/adm5010', '','','1', 'system', current timestamp);
@@ -81,3 +81,13 @@ INSERT INTO DEF_RLF(PGMCODE,ROLCODE, UPDATER, UPDTIME) values (919510,'AI0001', 
 INSERT INTO DEF_RLF(PGMCODE,ROLCODE, UPDATER, UPDTIME) values (919910,'AI0001', 'system', current timestamp);
 
 INSERT INTO DEF_RLSET ( STAFFPID, ROLCODE, UPDATER, UPDATETIME ) VALUES ('1','AI0001',null,null);
+
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('1','DisableType','A','全部不記錄(LOG+DATA)',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('2','DisableType','D','不記錄明細(DATA)',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('3','DisableType','C','記錄全部',3,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('4','DisableType','A','全部不記錄(LOG+DATA)_EN',1,'en','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('5','DisableType','D','不記錄明細(DATA)_EN',2,'en','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('6','DisableType','C','記錄全部_EN',3,'en','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('7','lang','zh_TW','繁',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('8','lang','en','英',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('9','lang','zh_CN','簡',3,'zh_TW','system',current timestamp);
