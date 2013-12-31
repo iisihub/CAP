@@ -28,7 +28,7 @@
 		<!-- <property name="defaultLocale" value="zh_TW" /> -->
 	</bean>
 
-	<!-- Syste config -->
+	<!-- System config -->
 	<bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
 		<constructor-arg index="0">
 			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -48,6 +48,7 @@
 	<import resource="classpath:spring/security.xml" />
 	<import resource="classpath:spring/operation.xml" />
 	<import resource="classpath:batch/batch.xml" />
+	<import resource="classpath:spring/auditlog.xml" />
 	<!-- web socket -->
 	<import resource="classpath:websocket/websocket.xml"/>
 </beans>
