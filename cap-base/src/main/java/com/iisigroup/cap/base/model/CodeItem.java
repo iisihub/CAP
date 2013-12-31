@@ -44,8 +44,8 @@ public class CodeItem extends GenericBean {
 	private String path;
 	
 	/** 權限選項 **/
-	@Column(name="PGMAUTH")
-	private String auth;
+//	@Column(name="PGMAUTH")
+//	private String auth;
 
 	/** DESC **/
 	@Column(name="PGMDESC")
@@ -178,13 +178,13 @@ public class CodeItem extends GenericBean {
 		this.sysTyp = sysTyp;
 	}
 
-	public String getAuth() {
-		return auth;
-	}
-
-	public void setAuth(String auth) {
-		this.auth = auth;
-	}
+//	public String getAuth() {
+//		return auth;
+//	}
+//
+//	public void setAuth(String auth) {
+//		this.auth = auth;
+//	}
 
 	public String getInputFlg() {
 		return inputFlg;

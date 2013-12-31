@@ -85,7 +85,7 @@ public class CodeItemServiceImpl implements CodeItemService {
 					authes = new HashMap<Integer, Integer>();
 					roleAuthes.put(role, authes);
 				}
-				authes.put(rs.getInt("AUTHCODE"), rs.getInt("AUTH"));
+				authes.put(rs.getInt("AUTHCODE"), rs.getInt("AUTHCODE"));
 			}
 		});
 

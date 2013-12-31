@@ -12,8 +12,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<entry key="Role.auth">
 			<value><![CDATA[select
 			  rle.ROLCODE AS ROLE,
-			  rlf.PGMCODE AS AUTHCODE,
-			  rlf.PGMAUTH AS AUTH
+			  rlf.PGMCODE AS AUTHCODE
 			from DEF_RLE rle
 			  inner join DEF_RLF rlf
 			  on rlf.ROLCODE=rle.ROLCODE
