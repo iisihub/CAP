@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.dao.AuditLogDao;
 import com.iisigroup.cap.base.model.AuditLog;
 import com.iisigroup.cap.base.service.AuditLogService;
+import com.iisigroup.cap.service.AbstractService;
 
 /**
  * <pre>
@@ -21,7 +22,7 @@ import com.iisigroup.cap.base.service.AuditLogService;
  *          </ul>
  */
 @Service
-public class AuditLogServiceImpl implements AuditLogService {
+public class AuditLogServiceImpl extends AbstractService implements AuditLogService {
 
 	@Resource
 	AuditLogDao auditLogDao;

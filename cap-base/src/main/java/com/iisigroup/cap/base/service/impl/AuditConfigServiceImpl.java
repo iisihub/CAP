@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.dao.AuditLogConfigDao;
 import com.iisigroup.cap.base.model.AuditConfig;
 import com.iisigroup.cap.base.service.AuditConfigService;
+import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.ManagementUtils;
 
 /**
@@ -31,7 +32,7 @@ import com.iisigroup.cap.utils.ManagementUtils;
  *          </ul>
  */
 @Service
-public class AuditConfigServiceImpl implements AuditConfigService {
+public class AuditConfigServiceImpl extends AbstractService implements AuditConfigService {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(AuditConfigServiceImpl.class);
 

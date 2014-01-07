@@ -48,7 +48,8 @@ public class AuditData extends GenericBean implements IDataObject{
 	@Column(length = 30, name = "sno", nullable = false)
 	private String sno;
 
-//	private String logSno;
+	@Column(length = 30)
+	private String logSno;
 
 	@Column(length = 1)
 	private String flag;
@@ -57,13 +58,14 @@ public class AuditData extends GenericBean implements IDataObject{
 	private String data;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumns({ @JoinColumn(name = "logSno", referencedColumnName = "sno", nullable = false) })
+	@JoinColumns({ @JoinColumn(name = "logSno", referencedColumnName = "sno", nullable = false, insertable=false, updatable=false) })
 	private AuditLog auditLog;
 
 	public AuditData() {
 	}
 
 	public AuditData(String flag, String data, AuditLog auditLog) {
+		this.logSno = auditLog.getSno();
 		this.flag = flag;
 		this.data = data;
 		this.auditLog = auditLog;
@@ -108,24 +110,24 @@ public class AuditData extends GenericBean implements IDataObject{
 		this.sno = sno;
 	}
 
-//	/**
-//	 * get the logSno
-//	 * 
-//	 * @return the logSno
-//	 */
-//	public String getLogSno() {
-//		return logSno;
-//	}
-//
-//	/**
-//	 * set the logSno
-//	 * 
-//	 * @param logSno
-//	 *            the logSno to set
-//	 */
-//	public void setLogSno(String logSno) {
-//		this.logSno = logSno;
-//	}
+	/**
+	 * get the logSno
+	 * 
+	 * @return the logSno
+	 */
+	public String getLogSno() {
+		return logSno;
+	}
+
+	/**
+	 * set the logSno
+	 * 
+	 * @param logSno
+	 *            the logSno to set
+	 */
+	public void setLogSno(String logSno) {
+		this.logSno = logSno;
+	}
 
 	/**
 	 * get the flag

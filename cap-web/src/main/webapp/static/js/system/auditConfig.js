@@ -9,13 +9,13 @@ pageInit(function(){
             hideMultiselect: false,
             autowidth: true,
             localFirst: true,
-            colModel: [{header: i18n['auditConfig']['grid1'],//"不需記錄的Handler名稱",
+            colModel: [{header: i18n['auditConfig']['targetName'],//"不需記錄的Handler名稱",
                 name: 'targetName',align: "left",width: 20,
-            }, {header: i18n['auditConfig']['grid2'],//"不需記錄的類型",
+            }, {header: i18n['auditConfig']['disableType'],//"不需記錄的類型",
                 name: 'disableType',align: "left",width: 10,sortable: true
-            }, {header: i18n['auditConfig']['grid3'],//"最後修改人",
+            }, {header: i18n['auditConfig']['lastModifyBy'],//"最後修改人",
                 name: 'lastModifyBy',align: "left",width: 5,   sortable: true
-            }, {header: i18n['auditConfig']['grid4'],//"最後修改時間",
+            }, {header: i18n['auditConfig']['lastModifyTime'],//"最後修改時間",
                 name: 'lastModifyTime',align: "left",width: 5
             }, {name: 'oid',hidden: true
             }],
@@ -65,7 +65,7 @@ pageInit(function(){
                         rowObject = grid.jqGrid('getRowData', id);
                     }
                     else {
-                        API.showMessage(i18n.auditConfig['selectd.msg']);
+                        API.showMessage(i18n.def['selectd.msg']);
                         return;
                     }
                 }
@@ -99,7 +99,7 @@ pageInit(function(){
                                 success: function(responseData){
                                     if (responseData.exist) {
                                     	edit.dialog('close');
-                                        API.showMessage(i18n.auditConfig['data.exists']);
+                                        API.showMessage(i18n.def['data.exists']);
                                     }
                                     else {
                                     	grid.trigger("reloadGrid");
@@ -128,7 +128,7 @@ pageInit(function(){
 	        var id = grid.jqGrid('getGridParam', 'selrow');
 	        if (id) {
 	            var rowObject = grid.jqGrid('getRowData', id);
-	            API.showConfirmMessage(i18n.auditConfig['del.confrim'], function(b){
+	            API.showConfirmMessage(i18n.def['del.confrim'], function(b){
 	                if (b) {
 	                    $.ajax({
 	                    	url: 'webroot/audithandler/delete',
@@ -143,7 +143,7 @@ pageInit(function(){
 	            });
 	        }
 	        else {
-	            API.showMessage(i18n.auditConfig['selectd.msg']);
+	            API.showMessage(i18n.def['selectd.msg']);
 	        }
 	    });
 		$(".btns").find("#qry").trigger( "click" );

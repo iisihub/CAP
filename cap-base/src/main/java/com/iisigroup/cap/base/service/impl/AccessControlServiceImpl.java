@@ -7,9 +7,10 @@ import javax.annotation.Resource;
 import com.iisigroup.cap.security.dao.IRoleDao;
 import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.service.ISecurityService;
+import com.iisigroup.cap.service.AbstractService;
 
 //@Service
-public class AccessControlServiceImpl implements ISecurityService {
+public class AccessControlServiceImpl extends AbstractService implements ISecurityService {
 
 	@Resource
 	private IRoleDao<IRole> dao;

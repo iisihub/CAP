@@ -22,10 +22,11 @@ import com.iisigroup.cap.base.dao.CodeItemDao;
 import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.base.service.CodeItemService;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
+import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.StringUtil;
 
 //@Service
-public class CodeItemServiceImpl implements CodeItemService {
+public class CodeItemServiceImpl extends AbstractService implements CodeItemService {
 
 	@Resource
 	private CodeItemDao dao;

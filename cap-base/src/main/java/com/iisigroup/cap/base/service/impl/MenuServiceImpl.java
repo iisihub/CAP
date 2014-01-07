@@ -4,15 +4,12 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
-
-import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -21,10 +18,11 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.base.service.CodeItemService;
 import com.iisigroup.cap.base.service.MenuService;
+import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapAppContext;
 
 @Service
-public class MenuServiceImpl implements MenuService {
+public class MenuServiceImpl extends AbstractService implements MenuService {
 
 	@Resource
 	CodeItemService cis;
