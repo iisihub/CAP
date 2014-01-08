@@ -64,10 +64,10 @@ $(document).ready(function() {
                 			: sel.show().parent("li").children("a").addClass('clicked').children("span").removeClass('icon-1').addClass('icon-5');
                 }
         	}
-            ev.preventDefault();
+        	ev.preventDefault();
             return false;
         });
-
+        
         // render menu
         for (var m in _menu) {
     		ul.append($("<li/>").append($("<a/>", {
@@ -91,7 +91,6 @@ $(document).ready(function() {
                 ul.find("li a:first").click();
             },
             loadsub : function(folder) {
-            
                 var tlink = navTop.find("a").removeClass("select").filter("a[url=" + folder + "]").addClass("select");
                 var smenu = tlink.data("smenu");
                 if (navSub.find('a').size()) {
@@ -145,10 +144,15 @@ $(document).ready(function() {
             },
             //router method
             loadpage : function(folder, page) {
-//                if (!(navSub.data("cmenu") == folder)) {
-//                    this.loadsub(folder);
-//                }
+            	var refresh = !(navSub.data("cmenu") == folder);
+                if (refresh) {
+                    this.loadsub(folder);
+                }
                 navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
+                if (refresh) {
+                	navSub.find('.selected').parents(".menu_sub").siblings("a").click();
+                }
+                
                 API.loadPage(folder + '/' + page);
             }
         });
