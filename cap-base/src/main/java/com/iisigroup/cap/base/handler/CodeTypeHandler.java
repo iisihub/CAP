@@ -70,11 +70,11 @@ public class CodeTypeHandler extends MFormHandler {
 
 	@HandlerType(HandlerTypeEnum.GRID)
 	public GridResult query(ISearch search, IRequest params) {
-		if (params.containsKey("locale")) {
+		if (!CapString.isEmpty(params.get("locale"))) {
 			search.addSearchModeParameters(SearchMode.EQUALS, "locale",
 					params.get("locale"));
 		}
-		if (params.containsKey("codeType")) {
+		if (!CapString.isEmpty(params.get("codeType"))) {
 			search.addSearchModeParameters(SearchMode.EQUALS, "codeType",
 					params.get("codeType"));
 		}
