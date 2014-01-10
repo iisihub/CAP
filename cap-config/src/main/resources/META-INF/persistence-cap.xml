@@ -7,6 +7,7 @@
 		<!-- base -->
 		<class>com.iisigroup.cap.base.model.CodeType</class>
 		<class>com.iisigroup.cap.base.model.SysParm</class>
+		<class>com.iisigroup.cap.base.model.ErrorCode</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>

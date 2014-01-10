@@ -9,7 +9,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 	<bean id="CapPluginManager" class="com.iisigroup.cap.plugin.PluginManager" />
 	<bean id="CapDefaultRequest" class="com.iisigroup.cap.component.CapSpringMVCRequest"
 		scope="prototype" />
-	<bean id="CapDefaultErrorResult" class="com.iisigroup.cap.response.ErrorResult"
+	<bean id="CapDefaultErrorResult" class="com.iisigroup.cap.base.response.CapErrorResult"
 		scope="prototype" />
 
 	<bean id="simpleOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation">
