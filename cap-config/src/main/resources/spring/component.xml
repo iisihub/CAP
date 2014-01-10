@@ -90,6 +90,12 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="errorCodeService" class="com.iisigroup.cap.base.service.impl.ErrorCodeServiceImpl" />
+
+	<bean class="com.iisigroup.cap.base.response.RespMsgFactoryProcessor">
+		<property name="errorCodeService" ref="errorCodeService" />
+	</bean>
 
 	<!-- freemarker config -->
 	<bean id="freemarkerConfig"

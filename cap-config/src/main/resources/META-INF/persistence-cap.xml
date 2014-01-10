@@ -14,6 +14,7 @@
 		<class>com.iisigroup.cap.base.model.CodeItem</class>
 		<class>com.iisigroup.cap.base.model.CodeType</class>
 		<class>com.iisigroup.cap.base.model.SysParm</class>
+		<class>com.iisigroup.cap.base.model.ErrorCode</class>
 		<class>com.iisigroup.cap.base.model.CaseInfo</class>
 		<class>com.iisigroup.cap.base.model.DivFtItm</class>
 		<class>com.iisigroup.cap.base.model.DivFtDtl</class>
