@@ -1,34 +1,52 @@
-/*
- * Copyright (c) 2009-2012 International Integrated System, Inc. 
- * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
- * All Rights Reserved.
- * 
- * Licensed Materials - Property of International Integrated System, Inc.
- * 
- * This software is confidential and proprietary information of 
- * International Integrated System, Inc. (&quot;Confidential Information&quot;).
- */
-
 package com.iisigroup.cap.base.dao.impl;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.dao.BranchDao;
 import com.iisigroup.cap.base.model.Branch;
+import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.utils.SearchMode;
 
 /**
  * <pre>
- * DAO
+ * 分行資訊DAOImpl
  * </pre>
  * 
- * @since 2013/12/20
- * @author tammy
+ * @since 2011/8/30
+ * @author Fantasy
  * @version <ul>
- *          <li>2013/12/20,tammy,new
+ *          <li>2011/8/30,Fantasy,new
  *          </ul>
  */
 @Repository
-public class BranchDaoImpl extends BaseDao<Branch> implements BranchDao {
+public class BranchDaoImpl extends BaseDao<Branch> implements
+		BranchDao {
+
+	@Override
+	public List<Branch> findByAllBranch() {
+		ISearch search = createSearchTemplete();
+		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+		search.addOrderBy("departno");
+		return find(search);
+	}
+	
+	@Override
+	public List<Branch> findByAllActBranch() {
+		ISearch search = createSearchTemplete();
+		search.addSearchModeParameters(SearchMode.NOT_EQUALS, "abrekflg", "Y");
+		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+		search.addOrderBy("departno");
+		return find(search);
+	}
+
+	@Override
+	public Branch findByBrno(String brNo) {
+		ISearch search = createSearchTemplete();
+		search.addSearchModeParameters(SearchMode.EQUALS, "departno", brNo);
+		return findUniqueOrNone(search);
+	}
 
 }
