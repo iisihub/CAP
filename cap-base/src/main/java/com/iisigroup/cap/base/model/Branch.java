@@ -19,6 +19,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.iisigroup.cap.model.GenericBean;
+import com.iisigroup.cap.model.IDataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -35,7 +36,8 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DEF_BRN", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
-public class Branch extends GenericBean {
+public class Branch extends GenericBean implements IDataObject {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * OID:char(32)
