@@ -78,7 +78,7 @@ public class User extends GenericBean implements IUser {
 
 	// bi-directional one-to-one association to Branch
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({ @JoinColumn(name = "unitNo", referencedColumnName = "departno", nullable = true) })
+	@JoinColumns({ @JoinColumn(name = "DEPARTNO", referencedColumnName = "departno", nullable = true, insertable=false, updatable=false) })
 	private Branch branch;
 
 	/**
