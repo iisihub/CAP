@@ -56,4 +56,11 @@ public interface DivRlDtlDao extends IGenericDao<DivRlDtl> {
 	 */
 	public DivRlDtl findByOid(String oid);
 
+	/**
+	 * 使用RuleNo查詢Details，並且排序divRlSor
+	 * @param ruleNo String
+	 * @return
+	 */
+	List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
+
 }

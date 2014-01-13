@@ -65,6 +65,8 @@ public interface CaseInfoDao extends IGenericDao<CaseInfo> {
 	 * @return
 	 */
 	List<CaseInfo> findCaseInfosByGrpUppId(String[] grpUppId);
+
+	List<CaseInfo> findNoneDispatchCaseInfoOrderByCaseNo();
 	
 	
 }

@@ -12,6 +12,7 @@ package com.iisigroup.cap.base.service;
 import java.util.List;
 import java.util.Map;
 
+import com.iisigroup.cap.base.model.CaseInfo;
 import com.iisigroup.cap.base.model.DivRlDtl;
 import com.iisigroup.cap.base.model.DivRlItm;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -105,5 +106,16 @@ public interface RuleTbMntService {
 	 * @param list
 	 */
 	void deleteRlDtlByList(List<DivRlDtl> list);
+
+	/**
+	 * 使用RuleNo查詢Details，並且排序divRlSor
+	 * @param ruleNo String
+	 * @return
+	 */
+	List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
+
+	List<CaseInfo> getNoneDispatchCaseInfo();
+
+	void updateCaseInfo(List<CaseInfo> list);
 
 }

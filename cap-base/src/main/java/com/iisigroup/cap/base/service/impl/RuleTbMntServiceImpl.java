@@ -18,15 +18,18 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.iisigroup.cap.base.dao.CaseInfoDao;
 import com.iisigroup.cap.base.dao.DivCtDtlDao;
 import com.iisigroup.cap.base.dao.DivCtItmDao;
 import com.iisigroup.cap.base.dao.DivRlDtlDao;
 import com.iisigroup.cap.base.dao.DivRlItmDao;
+import com.iisigroup.cap.base.model.CaseInfo;
 import com.iisigroup.cap.base.model.DivRlDtl;
 import com.iisigroup.cap.base.model.DivRlItm;
 import com.iisigroup.cap.base.service.RuleTbMntService;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -51,6 +54,8 @@ public class RuleTbMntServiceImpl extends AbstractService implements
 	private DivCtDtlDao ctDtlDao;
 	@Resource
 	private DivCtItmDao ctItmDao;
+	@Resource
+	private CaseInfoDao caseInfoDao;
 
 	@Override
 	public void saveDivRlItm(DivRlItm rlItm) {
@@ -123,6 +128,9 @@ public class RuleTbMntServiceImpl extends AbstractService implements
 	@Override
 	public void deleteById(String oid) {
 		DivRlItm rlItm = rlItmDao.find(oid);
+		if(rlItm.getDivRlDtls()!=null && !rlItm.getDivRlDtls().isEmpty()){
+			rlDtlDao.delete(rlItm.getDivRlDtls());
+		}
 		if (rlItm != null) {
 			rlItmDao.delete(rlItm);
 		}
@@ -133,5 +141,23 @@ public class RuleTbMntServiceImpl extends AbstractService implements
 		if(list!=null && !list.isEmpty()){
 			rlDtlDao.delete(list);
 		}
+	}
+	
+	@Override
+	public List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo){
+		if(!CapString.isEmpty(ruleNo)){
+			return rlDtlDao.findRlDtlsByRlNoAndSort(ruleNo);
+		}
+		return null;
+	}
+	
+	@Override
+	public List<CaseInfo> getNoneDispatchCaseInfo(){
+		return caseInfoDao.findNoneDispatchCaseInfoOrderByCaseNo();
+	}
+	
+	@Override
+	public void updateCaseInfo(List<CaseInfo> list){
+		caseInfoDao.saveCaseInfos(list);
 	}
 }

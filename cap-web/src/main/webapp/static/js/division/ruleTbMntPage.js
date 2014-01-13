@@ -2,27 +2,27 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var _mainOid = reqJSON.mainOid;
-		var _factorNo = reqJSON.factorNo;
+		var _divRlNo = reqJSON.divRlNo;
 		
 		/**
 		 * form initial
 		 */
-//		$.ajax({
-//	        url:"webroot/ruleTbMnthandler/query",
-//	        data:{
-//	        	mainOid: _mainOid,
-//                factorNo: _factorNo,
-//	        },
-//	        success:function(d){
-//	        	mform.injectData(d);
-//	        	ruleMapGrid.jqGrid('setGridParam', {
-//	                postData: {
-//	                	divRlNo:mform.find("#divRlNo").val()
-//	                }
-//	            });
-//	        	ruleMapGrid.trigger("reloadGrid");
-//	        }
-//		});
+		$.ajax({
+	        url:"webroot/ruleTbMnthandler/query",
+	        data:{
+	        	mainOid: _mainOid,
+                divRlNo: _divRlNo,
+	        },
+	        success:function(d){
+	        	mform.injectData(d);
+	        	ruleMapGrid.jqGrid('setGridParam', {
+	                postData: {
+	                	divRlNo:mform.find("#divRlNo").val()
+	                }
+	            });
+	        	ruleMapGrid.trigger("reloadGrid");
+	        }
+		});
 		
 		/**條件列表*/
 		var conditionGrid = $("#conditionGrid").jqGrid({
@@ -56,7 +56,7 @@ pageInit(function(){
             rownumbers: true,
             autowidth: true,
             localFirst: true,
-            loadonce:true,
+//            loadonce:true,
             sortname:'divRlSor',
 			colModel : [
 				{ header : "條件名稱", name : "divCtNm", align : "left", width : 10 }
@@ -187,6 +187,38 @@ pageInit(function(){
 				data : datas,
 				success : function() {
 					CommonAPI.showPopMessage("儲存規則表資料完成");
+				}
+			});
+		});
+		
+		/**匯出RuleTable-->DecisionTable*/
+        $("#dwnload").click(function() {
+//        	CommonAPI.formSubmit({
+//            $.capFileDownload({
+//                type : 'post',
+//                target : "_blank",
+//            	url : "./ruleTbMnthandler/dwnload",
+        	$.ajax({
+                url : "webroot/ruleTbMnthandler/dwnload",
+                data : {
+                	divRlNo: _divRlNo,
+                	oid: _mainOid,
+                    fileName : "test.xls"
+                }
+            });
+        });
+        
+        /**試算*/
+		$("#testDrools").click(function() {
+			$.ajax({
+				url : "webroot/ruleTbMnthandler/testDrools",
+				data : {
+					divRlNo : _divRlNo,
+					oid : _mainOid,
+				},
+				ajaxTimeOut : 60000 * 1000 * 3, // timeOut: 180
+				success:function(d){
+					d.tMsg && CommonAPI.showPopMessage(d.tMsg);
 				}
 			});
 		});
