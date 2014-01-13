@@ -1,3 +1,28 @@
+-- *********************************
+-- 使用者操作記錄設定檔
+-- *********************************
+--drop TABLE DEF_AUDITCONFIG;
+CREATE TABLE DEF_AUDITCONFIG(
+ oid          CHARACTER(32)   NOT NULL,
+ targetName      VARCHAR(128)     NOT NULL,
+ disableType     CHAR(1)        NOT NULL DEFAULT 'A',
+ lastModifyBy CHARACTER(6)    NOT NULL,
+ lastModifyTime  TIMESTAMP DEFAULT CURRENT TIMESTAMP,
+ CONSTRAINT P_AUDITCONFIG PRIMARY KEY (oid)
+);
+
+CREATE UNIQUE INDEX XAUDITCONFIG01
+    ON DEF_AUDITCONFIG (targetName ASC);
+
+COMMENT ON TABLE DEF_AUDITCONFIG IS '使用者操作記錄設定檔';
+
+COMMENT ON DEF_AUDITCONFIG(
+ oid           IS 'oid',
+ targetName      IS '不需記錄的 Handler名稱',
+ disableType     IS '不需記錄的類型: A:ALL(LOG+DATA),D:DATA,C:CANCEL',
+ lastModifyBy    IS '最後修改人',
+ lastModifyTime  IS '最後修改時間'
+);
 
 --drop TABLE DEF_AUDITLOG;
 CREATE TABLE DEF_AUDITLOG(
