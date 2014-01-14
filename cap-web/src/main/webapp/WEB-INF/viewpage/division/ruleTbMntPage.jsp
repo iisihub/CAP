@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta name="decorator" content="minimal">
+<meta name="decorator" content="form">
 <title><spring:message code="ruleTb.title">
 		<!--語系-->
 	</spring:message></title>
@@ -41,11 +41,11 @@
 		<button type="button" id="testDrools">
 			<span class="ui-icon ui-icon-circle-zoomout"></span>試算
 		</button>
-		<button type="button" id="close_btn" onclick="window.close();">
-			<span class="ui-icon ui-icon-jcs-01"></span>離開
-		</button>
 		<button type="button" id="dwnload">
 			<span class="ui-icon ui-icon-jcs-01"></span>匯出DecisionXls
+		</button>
+		<button type="button" id="close_btn" onclick="window.close();">
+			<span class="ui-icon ui-icon-jcs-01"></span>離開
 		</button>
 	</div>
 	<div class="clear"></div>

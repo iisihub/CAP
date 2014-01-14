@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta name="decorator" content="minimal">
+<meta name="decorator" content="form">
 <title><spring:message code="factor.title">
 		<!--語系-->
 	</spring:message></title>

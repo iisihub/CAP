@@ -274,12 +274,12 @@ public class RuleTbMntHandler extends MFormHandler {
 	
 	public File createDecisionTable(IRequest request){
 //		String packageName = "com.iisigroup.cap.service";
-		String importClass = "com.iisigroup.cap.base.model.CaseInfo,com.iisigroup.cap.utils.CapDroolsUtil";
+//		String importClass = "com.iisigroup.cap.base.model.CaseInfo,com.iisigroup.cap.utils.CapDroolsUtil";r
 //		String variablesName = "com.iisigroup.cap.utils.CapDroolsUtil comUtil";
 		String divRlNo = request.get("divRlNo");
 		String oid = request.get("oid");
 		DivRlItm rlItm = ruleTbMntService.getByRlItmNo(divRlNo);
-		if(rlItm==null && rlItm.getDivRlDtls()==null){
+		if(rlItm==null || rlItm.getDivRlDtls()==null){
 			return null;
 		}
 		//取得排序的Rule明細
