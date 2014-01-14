@@ -33,15 +33,19 @@
 			</table>
 		</div>
 	</div> -->
+	<form id="mform" onsubmit="return false;">
 	<div class="button-menu funcContainer">
 		<button type="button" id="save_btn">
 			<span class="ui-icon ui-icon-jcs-04"></span>儲存
 		</button>
-		<button type="button" id="">
+		<button type="button" id="testDrools">
 			<span class="ui-icon ui-icon-circle-zoomout"></span>試算
 		</button>
 		<button type="button" id="close_btn" onclick="window.close();">
 			<span class="ui-icon ui-icon-jcs-01"></span>離開
+		</button>
+		<button type="button" id="dwnload">
+			<span class="ui-icon ui-icon-jcs-01"></span>匯出DecisionXls
 		</button>
 	</div>
 	<div class="clear"></div>
@@ -49,7 +53,7 @@
 	<div class="tit2 color-black"></div>
 
 	<div class="tabCtx-warp ui-widget-content" style="padding: 1em 1.4em;">
-	<form id="mform" onsubmit="return false;">
+
 	<input type="text" class="hide" style="display:none" id="oid" name="oid"/>
 		<fieldset>
 			<legend>條件設定</legend>
@@ -58,9 +62,9 @@
 					<tbody>
 						<tr>
 							<td width="13%" class="hd1"><span class="color-red">＊</span>規則表代碼</td>
-							<td width="20%"><input type="text" id="divRlNo" name="divRlNo" size='10' value="C000001"></td>
+							<td width="20%"><input type="text" id="divRlNo" name="divRlNo" size='10' value=""></td>
 							<td width="13%" class="hd1"><span class="color-red">＊</span>規則表名稱</td>
-							<td width="20%"><input type="text" id="divRlNm" name="divRlNm" value="前置協商"></td>
+							<td width="20%"><input type="text" id="divRlNm" name="divRlNm" value=""></td>
 						</tr>
 						<tr>
 							<td width="13%" class="hd1">均分量化方式</td>
@@ -107,7 +111,7 @@
 				</table>
 			</div>
 		</fieldset>
-	</form>
+
 		<fieldset>
 			<legend>異動記錄</legend>
 			<table class="tb2" border="0" cellpadding="0" cellspacing="0"
@@ -122,7 +126,8 @@
 				</tbody>
 			</table>
 		</fieldset>
-		
+	</div>
+	</form>
 		<!-- dialog start-->
 		<!--Start : 新增修改值域-->
 		<div id="factorVal_Dialog" title="編輯因子值域明細" class="popup_cont"

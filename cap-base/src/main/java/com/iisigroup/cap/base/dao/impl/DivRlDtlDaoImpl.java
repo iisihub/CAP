@@ -34,18 +34,26 @@ import com.iisigroup.cap.dao.utils.SearchMode;
 public class DivRlDtlDaoImpl extends CapJpaDao<DivRlDtl> implements DivRlDtlDao {
 
 	@Override
-	public DivRlDtl findByRuleNo(String ruleNo) {
+	public DivRlDtl findByRuleNo(String divRlNo) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "ruleNo", ruleNo);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
 		return findUniqueOrNone(search);
+	}
+	
+	@Override
+	public List<DivRlDtl> findRlDtlsByRlNoAndSort(String divRlNo) {
+		ISearch search = createSearchTemplete();
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
+		search.addOrderBy("divRlSor");
+		return find(search);
 	}
 
 	@Override
-	public List<DivRlDtl> findByRuleNos(String[] ruleNos) {
+	public List<DivRlDtl> findByRuleNos(String[] divRlNos) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "ruleNo", ruleNos);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
 		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
+		search.addOrderBy("divRlSor");
 		return find(search);
 	}
 

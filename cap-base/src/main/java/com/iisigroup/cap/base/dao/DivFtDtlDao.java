@@ -72,4 +72,6 @@ public interface DivFtDtlDao extends IGenericDao<DivFtDtl> {
 	 */
 	List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos);
 
+	void merge(List<DivFtDtl> divFtDtls);
+
 }

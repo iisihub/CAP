@@ -13,6 +13,7 @@ package com.iisigroup.cap.base.handler;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
+import com.iisigroup.cap.base.model.DivCtDtl;
 import com.iisigroup.cap.base.model.DivFtDtl;
 import com.iisigroup.cap.base.model.DivFtItm;
 import com.iisigroup.cap.base.service.FactorMntService;
@@ -120,6 +122,10 @@ public class FactorMntHandler extends MFormHandler {
 		if ("A".equals(type)) {
 			ftItm.setOid(null);
 		}
+		List<DivFtDtl> delFtDtl = new ArrayList<DivFtDtl>();	
+		if(ftItm.getDivFtDtls()!=null&&!ftItm.getDivFtDtls().isEmpty()){
+			delFtDtl = ftItm.getDivFtDtls();
+		}
 		if(sary!=null){
 			List<DivFtDtl> ftDtls = new ArrayList<DivFtDtl>();
 			for(int i = 0 ; i<sary.length; i++){
@@ -127,7 +133,14 @@ public class FactorMntHandler extends MFormHandler {
 				DivFtDtl ftDtl = new DivFtDtl();
 				CapBeanUtil.map2Bean(gridData, ftDtl);
 				ftDtl.setFactorNo(ftItm.getFactorNo());
-				ftDtl.setRangeNo(CapString.fillString(String.valueOf(i), 5, true, '0'));
+				if(!CapString.isEmpty(gridData.optString("rangeNo"))){
+					ftDtl.setRangeNo(gridData.optString("rangeNo"));
+				}else{
+					ftDtl.setRangeNo(CapString.fillString(String.valueOf(i), 5, true, '0'));
+				}
+				if(!CapString.isEmpty(gridData.optString("oid"))){
+					ftDtl.setOid(gridData.optString("oid"));
+				}
 				ftDtl.setRangeSor(new BigDecimal(i));
 				ftDtl.setDivFtItm(ftItm);
 				ftDtls.add(ftDtl);
@@ -139,6 +152,8 @@ public class FactorMntHandler extends MFormHandler {
 		ftItm.setUpdater(userId);
 		ftItm.setUpdateTime(CapDate.getCurrentTimestamp());
 		factorMntService.saveDivFtItm(ftItm);
+		if(!delFtDtl.isEmpty())
+			factorMntService.deleteFtDtlByList(delFtDtl);
 		return result;
 	}
 
@@ -150,6 +165,12 @@ public class FactorMntHandler extends MFormHandler {
 	public IResult delete(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		factorMntService.deleteById(request.get("oid"));
+		return result;
+	}
+
+	public IResult insertTestCases(IRequest request) {
+		AjaxFormResult result = new AjaxFormResult();
+		factorMntService.insertTestCaseInfoData();
 		return result;
 	}
 

@@ -84,7 +84,7 @@ public class DivCtItm extends GenericBean implements IDataObject {
 	
 	// bi-directional many-to-one association to DivCtDtl
 //	@OneToOne(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private DivRlDtl divRlDtl;
+//	private DivRlDtl divRlDtl;
 	
 	public String getOid() {
 		return oid;
@@ -167,12 +167,12 @@ public class DivCtItm extends GenericBean implements IDataObject {
 		this.divCtSetting = divCtSetting;
 	}
 
-	public DivRlDtl getDivRlDtl() {
-		return divRlDtl;
-	}
-
-	public void setDivRlDtl(DivRlDtl divRlDtl) {
-		this.divRlDtl = divRlDtl;
-	}
+//	public DivRlDtl getDivRlDtl() {
+//		return divRlDtl;
+//	}
+//
+//	public void setDivRlDtl(DivRlDtl divRlDtl) {
+//		this.divRlDtl = divRlDtl;
+//	}
 
 }

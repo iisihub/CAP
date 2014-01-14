@@ -74,7 +74,7 @@ public class DivRlDtl extends GenericBean implements IDataObject {
 	// bi-directional many-to-one association to DivRlItm
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "divCtNo", referencedColumnName = "divCtNo", nullable = false, insertable=false, updatable=false)
-	private DivCtItm divCtItm;
+//	private DivCtItm divCtItm;
 	
 	public String getOid() {
 		return oid;
@@ -124,13 +124,13 @@ public class DivRlDtl extends GenericBean implements IDataObject {
 		this.divRlJson = divRlJson;
 	}
 
-	public DivCtItm getDivCtItm() {
-		return divCtItm;
-	}
-
-	public void setDivCtItm(DivCtItm divCtItm) {
-		this.divCtItm = divCtItm;
-	}
+//	public DivCtItm getDivCtItm() {
+//		return divCtItm;
+//	}
+//
+//	public void setDivCtItm(DivCtItm divCtItm) {
+//		this.divCtItm = divCtItm;
+//	}
 
 //	public List<DivCtDtl> getDivCtDtls() {
 //		return divCtDtls;

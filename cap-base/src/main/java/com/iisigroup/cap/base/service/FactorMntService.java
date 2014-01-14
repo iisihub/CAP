@@ -122,5 +122,7 @@ public interface FactorMntService {
 	 */
 	DivFtDtl findByFactorNoAndRangeNo(String factorNo, String rangeNos);
 
+	void deleteFtDtlByList(List<DivFtDtl> list);
+
 	void insertTestCaseInfoData();
 }

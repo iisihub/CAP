@@ -55,5 +55,12 @@ public interface DivCtDtlDao extends IGenericDao<DivCtDtl> {
 	 * @return DivFtItm
 	 */
 	public DivCtDtl findByOid(String oid);
+	
+	/**
+	 * 使用ConditionNo查詢Details，並且排序divCtSor
+	 * @param conditionNo String
+	 * @return
+	 */
+	List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo);
 
 }

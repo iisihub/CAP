@@ -103,9 +103,9 @@
 			</fieldset>
 		</form>	
 			<!-- dialog start-->
-			<!--Start : 設定催收人員權限-->
 			<div id="edit_dialog" title="因子值域明細" class="popup_cont" style="display:none">
 			<form id="facform" name="facform" onsubmit="return false;">
+			<input type="hidden" id="mod_colId" name="mod_colId"/>
 			<fieldset><legend>值域資訊</legend>
 				<table class="tb2" border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tbody>

@@ -33,6 +33,8 @@ pageInit(function(){
 			, { colHeader : "值域一", name : "range1", align: "left", width: 10 }
 			, { colHeader : "值域二", name : "range2", align: "left", width: 10 }
 			, { colHeader : "順序", name : "rangesor", align: "left", width: 10, hidden:true }
+			, { colHeader : "rangeNo", name : "rangeNo", hidden:false,width: 4 }
+			, { colHeader : "oid", name : "oid", hidden:false,width: 6 }
 			]
 		});
 //		.addGridData([
@@ -45,15 +47,22 @@ pageInit(function(){
 	
 		mform.find("#mod_btn").click(function() {
 			//open dialog
-			var test = $("#dataType").val();
-			if(test=="3"){
-				$("#edit_dialog").find(".ftType1").hide();
-				$("#edit_dialog").find(".ftType2").show();
-			}else{
-				$("#edit_dialog").find(".ftType1").show();
-				$("#edit_dialog").find(".ftType2").hide();
+			var selrow = ftDtlGrid.getGridParam('selrow');
+			if (selrow) {
+				var test = $("#dataType").val();
+				if(test=="3"){
+					$("#edit_dialog").find(".ftType1").hide();
+					$("#edit_dialog").find(".ftType2").show();
+				}else{
+					$("#edit_dialog").find(".ftType1").show();
+					$("#edit_dialog").find(".ftType2").hide();
+				}
+				fDialog.dialog('open');
+				var index = ftDtlGrid.jqGrid('getInd',selrow);
+				fDialog.find("#mod_colId").val(index);
+			} else {
+				CommonAPI.showErrorMessage("請先選擇要修改的資料");
 			}
-			fDialog.dialog('open');
 		}).end().find("#new_btn").click(function() {
 			//open dialog
 			var test = $("#dataType").val();
@@ -107,7 +116,11 @@ pageInit(function(){
 //        			debugger;
         			var facform = fDialog.find("#facform");
         			var ftDtlGridRecords = ftDtlGrid.getGridParam("records");
+    				var _modId = fDialog.find("#mod_colId").val();
         			var rowData = {};
+        			if(_modId){
+        				rowData = ftDtlGrid.getSelRowDatas();
+        			}
         			if(facform.find("#range1").val() && facform.find("#range2").val()){        				
         				rowData = {
     						rangeNm:mform.find("#factorNm").val()+" "
@@ -131,8 +144,13 @@ pageInit(function(){
         						,range1 : facform.find("#ftTypeBlnSel").val()
             				};
         			}
-        			facform.validationEngine('validate') &&
-        			ftDtlGrid.addRowData(parseInt(ftDtlGridRecords)+1, rowData);
+        			if(facform.validationEngine('validate')){
+        				if(_modId){
+        					ftDtlGrid.setRowData(_modId, rowData);
+        				}else{
+        					ftDtlGrid.addRowData(parseInt(ftDtlGridRecords)+1, rowData);
+        				}
+        			}
         			fDialog.dialog('close');
         		}
         	},{

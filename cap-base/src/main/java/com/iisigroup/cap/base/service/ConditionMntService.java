@@ -102,4 +102,11 @@ public interface ConditionMntService {
 
 	void deleteCtDtlByList(List<DivCtDtl> ctDtls);
 
+	/**
+	 * 使用ConditionNo查詢Details，並且排序divCtSor
+	 * @param conditionNo String
+	 * @return
+	 */
+	List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo);
+
 }

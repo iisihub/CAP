@@ -97,7 +97,7 @@ pageInit(function(){
 				data : {
 					ftItmNos : [ 1, 2, 3, 4 ]
 				},
-				url : "webroot/factorMnthandler/queryByKeys",
+				url : "webroot/factorMnthandler/insertTestCases",
 				success : function() {
 					CommonAPI.showPopMessage(" test insert action");
 				}
