@@ -14,9 +14,10 @@ pageInit(function(){
 			, {header: i18n['ruleTbMnt']['divRlNo'],name : "divRlNo",align: "left",width: 10}
 			, {name : "oid",hidden : true,width: 5}
 			]
-		}).addGridData([['大型分案規則表','M0新件分案,回沖分案,月底分案,月初分案,馬上分案','件數平均','R000001']
-		   ,['特殊案件規則表','M0新件分案,回沖分案,處分分案','件數平均','R000002']
-		   ,['一般案件規則表','M0新件分案,回沖分案,月底分案,月初分案','金額平均','R000003']]);
+		});
+//        .addGridData([['大型分案規則表','M0新件分案,回沖分案,月底分案,月初分案,馬上分案','件數平均','R000001']
+//		   ,['特殊案件規則表','M0新件分案,回沖分案,處分分案','件數平均','R000002']
+//		   ,['一般案件規則表','M0新件分案,回沖分案,月底分案,月初分案','金額平均','R000003']]);
 
         function openDoc(cellvalue, options, rowObject){
         	CommonAPI.formSubmit({
