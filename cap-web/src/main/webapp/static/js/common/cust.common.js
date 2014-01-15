@@ -140,20 +140,36 @@ $(document).ready(function() {
                         opacity : 1
                     });
                 }
-
             },
             //router method
-            loadpage : function(folder, page) {
-            	var refresh = !(navSub.data("cmenu") == folder);
+            loadpage : function(folder, page) {            	
+            	var topMenu = navTop.find("a").filter(function(){
+            		return filter($(this).data("smenu"), folder + "/" + page);
+            	});
+            	var topFolder = topMenu.attr("url");
+            	var refresh = !(navSub.data("cmenu") == topFolder);
                 if (refresh) {
-                    this.loadsub(folder);
+                    this.loadsub(topFolder);
                 }
+                
                 navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
                 if (refresh) {
                 	navSub.find('.selected').parents(".menu_sub").siblings("a").click();
                 }
-                
                 API.loadPage(folder + '/' + page);
+                
+                function filter(topSmenu, target)
+                {	
+                    for (var m in topSmenu) {
+                    	if(topSmenu[m].url == target){
+                    		return true;
+                    	}
+                    	if(topSmenu[m].child){
+                    		if(filter(topSmenu[m].child, target)){return true};
+                    	}
+                    }
+                    return false;
+                }
             }
         });
     });
