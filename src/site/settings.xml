@@ -1,0 +1,56 @@
+<settings>
+	<!-- <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd"> -->
+	<servers>
+		<server>
+			<id>maven-public</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+		<server>
+			<id>maven-snapshots</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+	</servers>
+	<profiles>
+		<profile>
+			<id>prop</id>
+			<!-- <activation> <activeByDefault>true</activeByDefault> </activation> -->
+			<properties>
+				<maven.url>http://{ip}:{port}/nexus/content</maven.url>
+				<maven.deploy.release.url>${maven.url}/repositories/releases
+				</maven.deploy.release.url>
+				<maven.deploy.snapshots.url>${maven.url}/repositories/snapshots
+				</maven.deploy.snapshots.url>
+				<maven.public.repository>${maven.url}/groups/public
+				</maven.public.repository>
+				<maven.snapshots.repository>${maven.url}/repositories/snapshots
+				</maven.snapshots.repository>
+			</properties>
+			<repositories>
+				<repository>
+					<id>maven-public</id>
+					<name>Maven Managed Internal Repository</name>
+					<url>${maven.public.repository}</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>maven-snapshots</id>
+					<url>${maven.snapshots.repository}</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+</settings>	 	

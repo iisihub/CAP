@@ -1,0 +1,12 @@
+cap-web/work
+bin*
+target*
+.project
+.settings
+.classpath
+.tomcatplugin
+.tmp*
+h2db/capdb.h2.db
+h2db/capdb.lock.db
+/h2db
+.pmd

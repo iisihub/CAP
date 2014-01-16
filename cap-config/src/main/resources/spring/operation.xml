@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+	<bean id="CapPluginManager" class="com.iisigroup.cap.plugin.PluginManager" />
+	<bean id="CapDefaultRequest" class="com.iisigroup.cap.component.CapSpringMVCRequest"
+		scope="prototype" />
+	<bean id="CapDefaultErrorResult" class="com.iisigroup.cap.response.ErrorResult"
+		scope="prototype" />
+
+	<bean id="simpleOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation">
+		<property name="name" value="simpleOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<entry key="doActionStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="fileUploadOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation">
+		<property name="name" value="fileUploadOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="tw.com.iisi.cap.operation.OperationStep">
+				<entry key="fileUploadStep" value-ref="fileUploadStep" />
+				<entry key="afterUploadStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="fileDownloadOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation">
+		<property name="name" value="fileDownloadOperation" />
+		<property name="ruleMap">
+			<util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String"
+				value-type="com.iisigroup.cap.operation.OperationStep">
+				<entry key="fileDownloadStep" value-ref="doActionStep" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="doActionStep" class="com.iisigroup.cap.operation.step.CapHandleOpStep"
+		scope="prototype" />
+
+	<bean id="fileUploadStep" class="com.iisigroup.cap.operation.step.CapFileUploadOpStep"
+		scope="prototype">
+		<property name="fileSizeLimitErrorCode" value="fileUpload.limitSize" />
+		<property name="multipartResolver" ref="multipartResolver" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" /> <!-- 預設為10MB -->
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+	<bean id="handlerOpMapping" class="com.iisigroup.cap.context.CapParameter">
+		<constructor-arg>
+			<util:map>
+				<entry key="FORM" value="simpleOperation" />
+				<entry key="GRID" value="simpleOperation" />
+				<entry key="FileUpload" value="fileUploadOperation" />
+				<entry key="FileDownload" value="fileDownloadOperation" />
+			</util:map>
+		</constructor-arg>
+	</bean>
+
+</beans>
