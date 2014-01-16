@@ -18,6 +18,7 @@ import com.iisigroup.cap.base.dao.DivFtDtlDao;
 import com.iisigroup.cap.base.model.DivFtDtl;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -73,4 +74,13 @@ public class DivFtDtlDaoImpl extends CapJpaDao<DivFtDtl> implements DivFtDtlDao 
 		search.addOrderBy("rangeNo");
 		return find(search);
 	}
+
+	@Override
+	public void merge(List<DivFtDtl> divFtDtls) {
+		for(DivFtDtl ftDtl : divFtDtls){
+			if(!CapString.isEmpty(ftDtl.getOid()))
+			merge(ftDtl);
+		}
+	}
+	
 }

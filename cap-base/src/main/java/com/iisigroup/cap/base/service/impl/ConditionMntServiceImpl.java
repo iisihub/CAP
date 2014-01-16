@@ -25,6 +25,7 @@ import com.iisigroup.cap.base.model.DivCtItm;
 import com.iisigroup.cap.base.service.ConditionMntService;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -132,5 +133,13 @@ public class ConditionMntServiceImpl extends AbstractService implements
 	@Override
 	public void deleteCtDtlByList(List<DivCtDtl> ctDtls){
 		ctDtlDao.delete(ctDtls);
+	}
+	
+	@Override
+	public List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo){
+		if(!CapString.isEmpty(conditionNo)){
+			return ctDtlDao.findCtDtlsByCtNoAndSort(conditionNo);
+		}
+		return null;
 	}
 }

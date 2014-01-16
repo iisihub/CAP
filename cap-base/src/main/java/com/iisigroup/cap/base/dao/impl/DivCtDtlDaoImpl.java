@@ -36,16 +36,25 @@ public class DivCtDtlDaoImpl extends CapJpaDao<DivCtDtl> implements DivCtDtlDao 
 	@Override
 	public DivCtDtl findByConditionNo(String conditionNo) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "conditionNo", conditionNo);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
 		return findUniqueOrNone(search);
+	}
+	
+	@Override
+	public List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo) {
+		ISearch search = createSearchTemplete();
+		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
+		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+		search.addOrderBy("divCtSor");
+		return find(search);
 	}
 
 	@Override
 	public List<DivCtDtl> findByConditionNos(String[] conditionNos) {
 		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "conditionNo", conditionNos);
+		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNos);
 		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
+		search.addOrderBy("divCtSor");
 		return find(search);
 	}
 

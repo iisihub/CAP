@@ -59,35 +59,43 @@ public class FactorMntServiceImpl extends AbstractService implements
 	
 	@Override
 	public void insertTestCaseInfoData(){
-		BigDecimal[] amount = new BigDecimal[]{new BigDecimal(100000),new BigDecimal(150000),new BigDecimal(900000),new BigDecimal(999999),new BigDecimal(50000),new BigDecimal(330000)
-		,new BigDecimal(550000),new BigDecimal(330000),new BigDecimal(150000),new BigDecimal(260000),new BigDecimal(440000),new BigDecimal(100000)
-		,new BigDecimal(880000),new BigDecimal(330000),new BigDecimal(150000),new BigDecimal(150000),new BigDecimal(250000),new BigDecimal(440000)
+		BigDecimal[] amount = new BigDecimal[]{new BigDecimal(100000)
+		,new BigDecimal(150000),new BigDecimal(900000)
+		,new BigDecimal(999999),new BigDecimal(50000),new BigDecimal(330000)
+		,new BigDecimal(550000),new BigDecimal(330000),new BigDecimal(150000)
+		,new BigDecimal(260000),new BigDecimal(440000),new BigDecimal(100000)
+		,new BigDecimal(880000),new BigDecimal(330000),new BigDecimal(150000)
+		,new BigDecimal(150000),new BigDecimal(250000),new BigDecimal(440000)
 		,new BigDecimal(130000),new BigDecimal(300000)};
 		
 		Integer[] overDueDay = new Integer[]{20,90,20,31,20,20,44,29,20,77
 				,30,66,88,20,66,90,11,30,20,15};
 		List<CaseInfo> caseList = new ArrayList<CaseInfo>();
 		Calendar cal = Calendar.getInstance();
-		for(int i = 500; i<=600; i++){
-			CaseInfo cas = new CaseInfo();
-			cas.setCasNo(StringUtils.leftPad(String.valueOf(i), 20, '0'));
-			int result = (int) (Math.random()*(20-1)+1);
-			cas.setAmount(amount[result]);
-			result = (int) (Math.random()*(20-1)+1);
-			cas.setOverDueDay(overDueDay[result]);
-			cas.setCreator("System");
-			cas.setCreateTime(new Timestamp(cal.getTimeInMillis()));
-			caseList.add(cas);
+		int count = 1;
+		for(int j = 1; j<=20; j++){
+			for(int i = count; i<=(5000*j); i++){
+				CaseInfo cas = new CaseInfo();
+				cas.setCasNo(StringUtils.leftPad(String.valueOf(i), 20, '0'));
+				int result = (int) (Math.random()*(20-1)+1);
+				cas.setAmount(amount[result]);
+				result = (int) (Math.random()*(20-1)+1);
+				cas.setOverDueDay(overDueDay[result]);
+				cas.setCreator("System");
+				cas.setCreateTime(new Timestamp(cal.getTimeInMillis()));
+				caseList.add(cas);
+				count++;
+			}
+			caseInfoDao.save(caseList);
+			System.out.println(" case info records :: " + caseList.size());
 		}
-		caseInfoDao.save(caseList);
-		System.out.println(" case info records :: " + caseList.size());
 	}
 
 	@Override
 	public void saveDivFtItm(DivFtItm ftItm) {
 		ftItmDao.save(ftItm);
 		if(ftItm.getDivFtDtls()!=null){
-			ftDtlDao.save(ftItm.getDivFtDtls());
+			ftDtlDao.merge(ftItm.getDivFtDtls());
 		}
 	}
 
@@ -178,5 +186,10 @@ public class FactorMntServiceImpl extends AbstractService implements
 	@Override
 	public List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos){
 		return ftDtlDao.findByFactorNoAndRangeNos(factorNo, rangeNos);
+	}
+	
+	@Override
+	public void deleteFtDtlByList(List<DivFtDtl> list){
+		ftDtlDao.delete(list);
 	}
 }

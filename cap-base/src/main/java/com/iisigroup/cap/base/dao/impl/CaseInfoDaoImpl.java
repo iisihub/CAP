@@ -45,7 +45,16 @@ public class CaseInfoDaoImpl extends CapJpaDao<CaseInfo> implements CaseInfoDao 
 		ISearch search = createSearchTemplete();
 		search.addSearchModeParameters(SearchMode.EQUALS, "grpUppId", grpUppId);
 		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
+		search.addOrderBy("casNo");
+		return find(search);
+	}
+	
+	@Override
+	public List<CaseInfo> findNoneDispatchCaseInfoOrderByCaseNo() {
+		ISearch search = createSearchTemplete();
+		search.addSearchModeParameters(SearchMode.IS_NULL, "docStatus", true);
+		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+		search.addOrderBy("casNo");
 		return find(search);
 	}
 

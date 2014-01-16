@@ -54,15 +54,15 @@ public class CaseInfo extends GenericBean implements IDataObject {
 	private String casNo;
 
 	/** 部門ID */
-	@Column(length = 4)
+	@Column(length = 20)
 	private String departNo;
 
 	/** 群組ID */
-	@Column(length = 4)
+	@Column(length = 20)
 	private String grpUppId;
 
 	/** 經辦ID */
-	@Column(length = 4)
+	@Column(length = 20)
 	private String cpsGrpId;
 
 	@Column(length = 6)
@@ -83,7 +83,7 @@ public class CaseInfo extends GenericBean implements IDataObject {
 	@Column
 	private Timestamp deletedTime;
 
-	@Column(length = 4)
+	@Column(length = 20)
 	private String docStatus;
 
 	@Column(precision=12, scale=3)
