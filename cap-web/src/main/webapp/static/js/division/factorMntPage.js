@@ -29,12 +29,12 @@ pageInit(function(){
 //			needPager : true,
 //			multiselect: true,
 			postData:{factorNo:$("#factorNo").val()},
-			colModel : [ { colHeader : "值域註解", name : "rangeNm", align: "left", width: 20 }
-			, { colHeader : "值域一", name : "range1", align: "left", width: 10 }
-			, { colHeader : "值域二", name : "range2", align: "left", width: 10 }
-			, { colHeader : "順序", name : "rangesor", align: "left", width: 10, hidden:true }
-			, { colHeader : "rangeNo", name : "rangeNo", hidden:false,width: 4 }
-			, { colHeader : "oid", name : "oid", hidden:false,width: 6 }
+			colModel : [ { header: i18n['factorMntPage']['rangeNm'], name : "rangeNm", align: "left", width: 20 }
+			, { header: i18n['factorMntPage']['range1'], name : "range1", align: "left", width: 10 }
+			, { header: i18n['factorMntPage']['range2'], name : "range2", align: "left", width: 10 }
+			, { header: i18n['factorMntPage']['rangesor'], name : "rangesor", align: "left", width: 10, hidden:true }
+			, { header: i18n['factorMntPage']['rangeNo'], name : "rangeNo", hidden:true,width: 4 }
+			, { colHeader : "oid", name : "oid", hidden:true,width: 6 }
 			]
 		});
 //		.addGridData([
