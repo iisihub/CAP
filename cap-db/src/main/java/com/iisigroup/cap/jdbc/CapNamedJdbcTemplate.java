@@ -495,9 +495,10 @@ public class CapNamedJdbcTemplate {
 
 	public List<Map<String, Object>> queryPaging(String sqlId,
 			Map<String, Object> args, int startRow, int fetchSize) {
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(CapJdbcContants.SQLPaging_SourceSQL,
-				sqlp.getValue(sqlId, sqlId));
+				getSourceSql(sqlId, args, startRow, fetchSize));
 		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_Query),
 				params, sqltemp.getParserContext()));
@@ -526,9 +527,10 @@ public class CapNamedJdbcTemplate {
 
 	public Page<Map<String, Object>> queryForPage(String sqlId,
 			Map<String, Object> args, int startRow, int fetchSize) {
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(CapJdbcContants.SQLPaging_SourceSQL,
-				sqlp.getValue(sqlId, sqlId));
+				getSourceSql(sqlId, args, startRow, fetchSize));
 		StringBuffer sql = new StringBuffer().append(CapDbUtil.spelParser(
 				(String) sqltemp.getValue(CapJdbcContants.SQLPaging_TotalPage),
 				params, sqlp.getParserContext()));
@@ -553,6 +555,23 @@ public class CapNamedJdbcTemplate {
 					(System.currentTimeMillis() - cur));
 		}
 	}// ;
+
+	private String getSourceSql(String sqlId, Map<String, Object> args,
+			int startRow, int fetchSize) {
+		// Rewrite sql map. (ex: SQL Server => top n)
+		String countAllSqlId = sqlId + ".countAll()";
+		if (sqltemp.containsKey(sqlId)) {
+			Map<String, Object> preParams = new HashMap<String, Object>();
+			if (sqltemp.containsKey(countAllSqlId)) {
+				preParams.put("countAll",
+						sqltemp.getValue(countAllSqlId, countAllSqlId));
+			}
+			return CapDbUtil.spelParser(sqltemp.getValue(sqlId, sqlId),
+					preParams, sqltemp.getParserContext());
+		} else {
+			return sqlp.getValue(sqlId, sqlId);
+		}
+	}
 
 	public Page<Map<String, Object>> queryForPage(String sqlId, ISearch search) {
 		CapSqlSearchQueryProvider provider = new CapSqlSearchQueryProvider(
