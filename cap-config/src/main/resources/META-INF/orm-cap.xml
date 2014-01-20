@@ -2,33 +2,9 @@
 <entity-mappings version="2.0"
 	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
-	<!-- common
-	<named-native-query name="Role.user">
-		<query>
-			<![CDATA[select rle.* from DEF_RLE rle inner join DEF_RLSET rls inner join DEF_USR usr
-			  on usr.STAFFPID=rls.STAFFPID on rle.ROLCODE=rls.ROLCODE where rle.STU='0' and usr.STAFFPID=:userId]]>
-		</query>
-	</named-native-query>
-		<named-native-query name="Role.auth">
-			<query><![CDATA[select
-			  rle.ROLCODE AS ROLE,
-			  rlf.PGMCODE AS AUTHCODE,
-			  rlf.PGMAUTH AS AUTH
-			from DEF_RLE rle
-			  inner join DEF_RLF rlf
-			  on rlf.ROLCODE=rle.ROLCODE
-			where rle.SYSTYP= :system and rle.STU='0'
-			order by rle.ROLCODE, rlf.PGMCODE]]></query>
-		</named-native-query>
-		<named-native-query name="AuthRoles.findByUrl">
-			<query><![CDATA[select
-			  rle.*
-			from DEF_RLE rle
-			  inner join DEF_RLF rlf
-			  inner join DEF_PGM pgm
-			  on rlf.ROLCODE=rle.ROLCODE
-			  on rlf.PGMCODE=pgm.PGMCODE
-			where rle.SYSTYP= :system and rle.STU='0' and pgm.PGMPATH= :url]]></query>
-		</named-native-query>
-		-->
+	<!-- common ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+	<named-query name="getCodeOnly">
+		<query>from CodeType as code where code.cdeType = :cdeType</query>
+	</named-query>
+	-->
 </entity-mappings>
