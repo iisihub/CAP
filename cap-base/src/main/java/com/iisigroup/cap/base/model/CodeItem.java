@@ -1,8 +1,14 @@
 package com.iisigroup.cap.base.model;
 
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,45 +23,54 @@ public class CodeItem extends GenericBean {
 
 	/** 權限代碼 **/
 	@Id
-	@Column(name="PGMCODE")
+	@Column(name = "PGMCODE")
 	private int code;
-	
+
 	/** 功能隸屬系統別 **/
 	private String sysTyp;
 
 	/** 排列順序 **/
-	@Column(name="SEQ")
+	@Column(name = "SEQ")
 	private int seq;
 
 	/** 權限階層 **/
-	@Column(name="PGMTYPE")
+	@Column(name = "PGMTYPE")
 	private int step;
 
 	/** 權限上層代碼 **/
-	@Column(name="PGMTYP")
+	@Column(name = "PGMTYP")
 	private int parent;
 
 	/** 代碼名稱 **/
-	@Column(name="PGMNAME")
+	@Column(name = "PGMNAME")
 	private String name;
 
 	/** URL位置 **/
-	@Column(name="PGMPATH")
+	@Column(name = "PGMPATH")
 	private String path;
-	
+
 	/** 權限選項 **/
-//	@Column(name="PGMAUTH")
-//	private String auth;
+	// @Column(name="PGMAUTH")
+	// private String auth;
 
 	/** DESC **/
-	@Column(name="PGMDESC")
+	@Column(name = "PGMDESC")
 	private String desc;
 
 	/** 文件ID **/
 	private String docid;
-	
+
 	/** 是否啟用 **/
 	private String inputFlg;
+
+	@Column(length = 6)
+	private String UPDATER;
+
+	@Column(columnDefinition = "TIMESTAMP")
+	private Timestamp UPDATETIME;
+
+	@OneToMany(mappedBy = "pgm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<RoleFunction> rlfList;
 
 	public String getName() {
 		return name;
@@ -178,13 +193,13 @@ public class CodeItem extends GenericBean {
 		this.sysTyp = sysTyp;
 	}
 
-//	public String getAuth() {
-//		return auth;
-//	}
-//
-//	public void setAuth(String auth) {
-//		this.auth = auth;
-//	}
+	// public String getAuth() {
+	// return auth;
+	// }
+	//
+	// public void setAuth(String auth) {
+	// this.auth = auth;
+	// }
 
 	public String getInputFlg() {
 		return inputFlg;
@@ -192,5 +207,29 @@ public class CodeItem extends GenericBean {
 
 	public void setInputFlg(String inputFlg) {
 		this.inputFlg = inputFlg;
+	}
+
+	public String getUPDATER() {
+		return UPDATER;
+	}
+
+	public void setUPDATER(String uPDATER) {
+		UPDATER = uPDATER;
+	}
+
+	public Timestamp getUPDATETIME() {
+		return UPDATETIME;
+	}
+
+	public void setUPDATETIME(Timestamp uPDATETIME) {
+		UPDATETIME = uPDATETIME;
+	}
+
+	public List<RoleFunction> getRlfList() {
+		return rlfList;
+	}
+
+	public void setRlfList(List<RoleFunction> rlfList) {
+		this.rlfList = rlfList;
 	}
 }

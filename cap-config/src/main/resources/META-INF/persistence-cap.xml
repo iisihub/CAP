@@ -8,6 +8,7 @@
 		<class>com.iisigroup.cap.base.model.User</class>
 		<class>com.iisigroup.cap.base.model.Branch</class>
 		<class>com.iisigroup.cap.base.model.Role</class>
+		<class>com.iisigroup.cap.base.model.RoleFunction</class>
 		<class>com.iisigroup.cap.base.model.AuditConfig</class>
 		<class>com.iisigroup.cap.base.model.AuditLog</class>
 		<class>com.iisigroup.cap.base.model.AuditData</class>

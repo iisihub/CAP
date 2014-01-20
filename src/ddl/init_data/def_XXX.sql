@@ -89,3 +89,8 @@ insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,update
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('5','lang','en','英',2,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('6','lang','zh_CN','簡',3,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('7','subsystem','ADM','ADM',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('8','pgmType','1','功能導覽第一層(功能列)',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('9','pgmType','2','功能導覽第二層(大項)',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('10','pgmType','3','功能導覽第三層(細項)',3,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('11','authSysId','A','ADM',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('12','sysTyp','9','A',1,'zh_TW','system',current timestamp);

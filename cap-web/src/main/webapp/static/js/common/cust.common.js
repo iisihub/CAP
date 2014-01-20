@@ -43,7 +43,7 @@
 $(document).ready(function() {
     logDebug("cust common ready init");
     var navTop = $("nav.top"), navSub = $("nav.sub ol");
-    $.get("webroot/menuhandler/queryMenu").done(function(res) {
+    navTop.length && $.get("webroot/menuhandler/queryMenu").done(function(res) {
         var _menu = res.child, ul = $("nav.top ul.navmenu");
 //        $("#userName").val(res.userName);
         navTop.on("click", "li a", function(ev) {
