@@ -24,6 +24,7 @@ pageInit(function(){
             },  {name: 'oid', hidden: true
             },  {name: 'deparzip', hidden: true
             },  {name: 'abrekflg', hidden: true
+            },  {name: 'departel', hidden: true
             }],
             ondblClickRow: function(){
                 openEditWindow(true);
