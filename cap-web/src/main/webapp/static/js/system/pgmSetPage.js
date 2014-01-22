@@ -36,22 +36,19 @@ pageInit(function(){
 				}//close success function
 			});
 		}
-		var grid = $("#gridview").jqGrid({
+		var grid = $form.find("#gridview").jqGrid({
 			url: 'webroot/pgmsethandler/queryRle',
-			height: "380", width: "100%", page: false,
+			height: "380", width: "100%", pager: false,
 			postData: { sysTyp : '', pgmCode: code },
             multiselect: false, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
                 header: i18n['pgmSetPage']['rolCode'],//"角色代碼",
-                name: 'rolCode', align: "center", sortable: false
+                name: 'roleId', align: "center", sortable: false
             },  {
                 header: i18n['pgmSetPage']['rolName'],//"角色名稱",
                 name: 'rolName', align: "left", sortable: true
             }]
         });
-		function openEditWindow(isEdit, rowObject){
-	        
-		}
 		if(code){
 			$.ajax({
 		        url:"webroot/pgmsethandler/queryForm",
@@ -105,69 +102,63 @@ pageInit(function(){
 	                }
 	            });
 	        });
-		});		
+		});
+		
+		var gridRole = $("#gridviewRole").jqGrid({
+			url: 'webroot/pgmsethandler/queryAllRle',
+			height: "220", width: "620", pager: false,
+			postData: { sysTyp : '' },
+            multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
+            pager:false,
+            colModel: [{
+                header: i18n['pgmSetPage']['rolCode'],//"角色代碼",
+                name: 'roleId', align: "center", sortable: false
+            },  {
+                header: i18n['pgmSetPage']['rolName'],//"角色名稱",
+                name: 'rolName', align: "left", sortable: true
+            }],
+            loadComplete: function(){
+            	var data = grid.serializeGridData();
+            	var rowIds = $(this).jqGrid('getDataIDs');
+        		for(var row in data){
+        			for (i = 1; i <= rowIds.length; i++) {
+            	        rowData = $(this).jqGrid('getRowData', i);
+            	        if (rowData.roleId == data[row].roleId ) {
+            	           $(this).jqGrid('setSelection',i);
+            	           break;
+            	        } //if
+            	    } //for
+        		}
+            }
+        });
+		var eDialog = $("#editRole").dialog({
+        	height: 400,width: 650,modal: true,
+        	open:function(){
+        		gridRole.jqGrid('setGridParam', {
+                    postData: {
+                    	sysTyp: $form.find('#sysTyp').val()
+                    }
+                });
+        		gridRole.trigger("reloadGrid");
+        	},
+        	close:function(){
+        		gridRole.clearGridData(true);
+        	},
+        	buttons:API.createJSON([{
+        		key:i18n.def.sure,
+        		value:function(){
+        			grid.clearGridData(true);
+        			grid.addGridData(gridRole.getSelRowDatas());
+        			eDialog.dialog('close');
+        		}
+        	},{
+        		key:i18n.def.close,
+        		value:function(){
+        			eDialog.dialog('close');
+        		}
+        	}])
+        });
 		$("#modify").click(function(){//修改
-			var eDialog = $("#editRole").dialog({
-	        	height: 200,width: 250,modal: true,
-	        	open:function(){
-	        		var form = eDialog.find("#mform");
-	        		$.ajax({
-                        url: "webroot/pgmsethandler/queryRole",
-                        data : {
-    						SYSTYP : $form.find('#sysTyp').val()
-                        },
-                        success: function(json){
-                        	if(json.roles){
-                        		for(var index in json.roles){
-                        			var role = json.roles[index];
-                        			form.append('<input type="checkbox" id="code' + role.ROLCODE + '" name="code' + role.ROLCODE + '" value="' + role.ROLCODE +'||'+ role.ROLNAME + '" />' + role.ROLNAME + '<br/>');
-                        			//form.find("#code"+role.ROLCODE).attr('checked', role.SELECTED);
-                        		}
-                        		var data = grid.serializeGridData();
-                        		for(var row in data){
-                        			form.find("#code"+data[row].rolCode).attr('checked', true);
-                        		}
-                        	}
-                        }
-                    });
-	        	},
-	        	close:function(){
-	        		eDialog.find("#mform").empty();
-	        	},
-	        	buttons:API.createJSON([{
-	        		key:i18n.def.sure,
-	        		value:function(){
-	        			var mform = eDialog.find("#mform");
-	        			var checkItem = new Array();
-	        			
-	        			grid.clearGridData(true);
-	        			mform.find(":checked").each(function(){
-	        				checkItem.push($(this).val().split('||'));
-	        			});
-	        			grid.addGridData(checkItem);
-	        			eDialog.dialog('close');
-//	        			var checkItem = new Array();
-//	        			mform.find(":checked").each(function(){
-//	        				return checkItem.push($(this).val());
-//	        			});
-//	        			$.ajax({
-//	                        url: "webroot/pgmsethandler/modifyRle",
-//	                        data: {
-//	                        	
-//	                        	role:checkItem
-//	                        },
-//	                        success: function(){
-//	                            grid.trigger("reloadGrid");
-//	                        }
-//	                    });
-	        		}
-	        	},{
-	        		key:i18n.def.close,
-	        		value:function(){
-	        			eDialog.dialog('close');
-	        		}
-	        	}])
-	        });
 			eDialog.dialog('open');
 		});
 	});

@@ -53,9 +53,9 @@ public class RoleFunction extends GenericBean implements Serializable {
 	private String pgmCode;
 
 	@Column(length = 10)
-	private String UPDATER;
+	private String updater;
 
-	private Timestamp UPDTIME;
+	private Timestamp updTime;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumns({ @JoinColumn(name = "rolCode", referencedColumnName = "rolCode", nullable = false, insertable = false, updatable = false) })
@@ -81,20 +81,20 @@ public class RoleFunction extends GenericBean implements Serializable {
 		this.pgmCode = pgmCode;
 	}
 
-	public String getUPDATER() {
-		return UPDATER;
+	public String getUpdater() {
+		return updater;
 	}
 
-	public void setUPDATER(String uPDATER) {
-		UPDATER = uPDATER;
+	public void setUpdater(String updater) {
+		this.updater = updater;
 	}
 
-	public Timestamp getUPDTIME() {
-		return UPDTIME;
+	public Timestamp getUpdTime() {
+		return updTime;
 	}
 
-	public void setUPDTIME(Timestamp uPDTIME) {
-		UPDTIME = uPDTIME;
+	public void setUpdTime(Timestamp updTime) {
+		this.updTime = updTime;
 	}
 
 	public Role getRole() {

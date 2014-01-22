@@ -30,7 +30,7 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.CodeItem;
-import com.iisigroup.cap.base.model.RoleFunction;
+import com.iisigroup.cap.base.model.Role;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.base.service.PgmSetService;
 import com.iisigroup.cap.component.IRequest;
@@ -117,6 +117,15 @@ public class PgmSetHandler extends MFormHandler {
 		return new MapGridResult(page.getContent(), page.getTotalRow(), null);
 	}// ;
 
+	@HandlerType(HandlerTypeEnum.GRID)
+	public GridResult queryAllRle(ISearch search, IRequest params) {
+		String sysTyp = params.get("sysTyp");
+		search.addSearchModeParameters(SearchMode.EQUALS, "sysTyp", sysTyp);
+
+		Page<Role> page = commonSrv.findPage(Role.class, search);
+		return new GridResult(page.getContent(), page.getTotalRow(), null);
+	}// ;
+
 	public IResult queryForm(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		String code = request.get("pgmCode");
@@ -144,7 +153,7 @@ public class PgmSetHandler extends MFormHandler {
 
 		if (!CollectionUtils.isEmpty(codeItems)) {
 			JSONArray codeItem = new JSONArray();
-			for(CodeItem item : codeItems){
+			for (CodeItem item : codeItems) {
 				codeItem.add(item.toJSONObject(
 						CapEntityUtil.getColumnName(item), null));
 			}
@@ -154,19 +163,19 @@ public class PgmSetHandler extends MFormHandler {
 		return result;
 	}
 
-	public IResult queryRole(IRequest request) throws CapException {
-		AjaxFormResult result = new AjaxFormResult();
-		String SYSTYP = request.get("SYSTYP");
-		// String code = request.get("pgmCode");
-
-		List<Map<String, Object>> roleItems = pgmSetService.findAllRole(SYSTYP);
-
-		if (!CollectionUtils.isEmpty(roleItems)) {
-			result.set("roles", JSONArray.fromObject(roleItems).toString());
-		}
-
-		return result;
-	}
+	// public IResult queryRole(IRequest request) throws CapException {
+	// AjaxFormResult result = new AjaxFormResult();
+	// String sysTyp = request.get("sysTyp");
+	// // String code = request.get("pgmCode");
+	//
+	// List<Map<String, Object>> roleItems = pgmSetService.findAllRole(sysTyp);
+	//
+	// if (!CollectionUtils.isEmpty(roleItems)) {
+	// result.set("roles", JSONArray.fromObject(roleItems).toString());
+	// }
+	//
+	// return result;
+	// }
 
 	/**
 	 * 編輯資料
@@ -195,24 +204,19 @@ public class PgmSetHandler extends MFormHandler {
 			codeItem = new CodeItem();
 		}
 		CapBeanUtil.map2Bean(request, codeItem, CodeItem.class);
-		codeItem.setUPDATER(CapSecurityContext.getUserId());
-		codeItem.setUPDATETIME(CapDate.getCurrentTimestamp());
+		codeItem.setUpdater(CapSecurityContext.getUserId());
+		codeItem.setUpdateTime(CapDate.getCurrentTimestamp());
 
-		List<RoleFunction> rlfList = new ArrayList<RoleFunction>();
+		List<String> setRole = new ArrayList<String>();
+
 		if (roleItem != null) {
 			for (Object role : roleItem) {
 				JSONObject rle = (JSONObject) role;
-				RoleFunction rlf = new RoleFunction();
-				rlf.setRolCode(rle.getString("rolCode"));
-				rlf.setPgmCode(Integer.toString(codeItem.getCode()));
-				rlf.setUPDATER(CapSecurityContext.getUserId());
-				rlf.setUPDTIME(CapDate.getCurrentTimestamp());
-				rlfList.add(rlf);
+				setRole.add(rle.getString("roleId"));
 			}
 		}
-		codeItem.setRlfList(rlfList);
 
-		pgmSetService.savePgm(codeItem);
+		pgmSetService.savePgm(codeItem, setRole);
 
 		return result;
 	}

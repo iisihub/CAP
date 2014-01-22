@@ -31,52 +31,52 @@
 	                            <td width="20%" class="hd1">
 	                                <span class="color-red">＊</span><spring:message code="sysTyp"></spring:message></td>
 	                            <td width="30%">
-	                                <select id="sysTyp" name="sysTyp" combokey="authSysId" combotype="2" class="required"></select>
+	                                <select id="sysTyp" name="sysTyp" combokey="authSysId" combotype="2" class="validate[required]"></select>
 	                                <select id="sysCode" combokey="sysTyp" class="hide"></select>
 	                            </td>
 	                            <td width="20%" class="hd1">
 	                                <span class="color-red">＊</span><spring:message code="pgmType"></spring:message></td>
 	                            <td width="30%">
-	                                <select id="step" name="step" combokey="pgmType" combotype="2" class="required"></select>
+	                                <select id="step" name="step" combokey="pgmType" combotype="2" class="validate[required]"></select>
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td width="20%" class="hd1">
 	                                <span class="color-red">＊</span><spring:message code="pgmCode"></spring:message></td>
 	                            <td width="30%">
-	                                <span id="PGM"></span><input type="text" size="6" id="PGMCODE" name="PGMCODE" maxlength="4" class="required"/><input type="text" id="code" name="code" class="hide"/>
+	                                <span id="PGM"></span><input type="text" size="6" id="PGMCODE" name="PGMCODE" maxlength="4" class="validate[required]"/><input type="text" id="code" name="code" class="hide"/>
 	                            </td>
 	                            <td width="20%" class="hd1">
 	                            	<span class="color-red">＊</span><spring:message code="pgmName"></spring:message></td>
 	                            <td width="30%">
-	                                <input type="text" size="15" id="name" name="name" maxlength="162" class="required"/>
+	                                <input type="text" size="15" id="name" name="name" maxlength="162" class="validate[required]"/>
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td width="20%" class="hd1">
 	                            	<span class="color-red">＊</span><spring:message code="pgmTyp"></spring:message></td>
 	                            <td>
-	                                <select id="parent" name="parent" class="required"></select>
+	                                <select id="parent" name="parent" class="validate[required]"></select>
 	                            </td>
 	                            <td width="20%" class="hd1">
 	                            	<span class="color-red">＊</span><spring:message code="seq"></spring:message></td>
 	                            <td>
-	                                <input type="text" id="seq" name="seq" size="5" maxlength="5" class="required number">
+	                                <input type="text" id="seq" name="seq" size="5" maxlength="5" class="validate[required] number">
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td width="20%" class="hd1">
+	                            	<span class="color-red">＊</span><spring:message code="inputFlg"></spring:message></td>
+	                            <td colspan="3">
+	                            	<input type="radio" id="inputFlg" name="inputFlg" class="validate[required]" value="1"/><spring:message code="on"></spring:message>
+	                            	<input type="radio" id="inputFlg" name="inputFlg" class="validate[required]" value="0"/><spring:message code="off"></spring:message>
+	                            </td>
+	                            <!-- <td width="20%" class="hd1">
 	                            	<span class="color-red">＊</span><spring:message code="autoFlag"></spring:message></td>
 	                            <td>
-	                            	<input type="radio" id="autoFlag" name="autoFlag" class="required" value="1"/><spring:message code="js.yes"></spring:message>
-	                            	<input type="radio" id="autoFlag" name="autoFlag" class="required" value="0"/><spring:message code="js.no"></spring:message>
-	                            </td>
-	                            <td width="20%" class="hd1">
-	                            	<span class="color-red">＊</span><spring:message code="inputFlg"></spring:message></td>
-	                            <td>
-	                            	<input type="radio" id="inputFlg" name="inputFlg" class="required" value="1"/><spring:message code="on"></spring:message>
-	                            	<input type="radio" id="inputFlg" name="inputFlg" class="required" value="0"/><spring:message code="off"></spring:message>
-	                            </td>
+	                            	<input type="radio" id="autoFlag" name="autoFlag" class="validate[required]" value="1"/><spring:message code="js.yes"></spring:message>
+	                            	<input type="radio" id="autoFlag" name="autoFlag" class="validate[required]" value="0"/><spring:message code="js.no"></spring:message>
+	                            </td> -->
 	                        </tr>
 	                        <tr>
 	                            <td width="20%" class="hd1"><spring:message code="pgmPath"></spring:message></td>
@@ -106,9 +106,9 @@
 				</fieldset>
             </form>
         </div>
-        <div id="editRole">
+        <div id="editRole" style="display:none">
             <form id="mform">
-            	
+            	<div id="gridviewRole"></div>
             </form>
         </div>
 		<!-- dialog end-->

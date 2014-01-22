@@ -64,12 +64,12 @@ public class CodeItem extends GenericBean {
 	private String inputFlg;
 
 	@Column(length = 6)
-	private String UPDATER;
+	private String updater;
 
 	@Column(columnDefinition = "TIMESTAMP")
-	private Timestamp UPDATETIME;
+	private Timestamp updateTime;
 
-	@OneToMany(mappedBy = "pgm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pgm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<RoleFunction> rlfList;
 
 	public String getName() {
@@ -209,20 +209,20 @@ public class CodeItem extends GenericBean {
 		this.inputFlg = inputFlg;
 	}
 
-	public String getUPDATER() {
-		return UPDATER;
+	public String getUpdater() {
+		return updater;
 	}
 
-	public void setUPDATER(String uPDATER) {
-		UPDATER = uPDATER;
+	public void setUpdater(String updater) {
+		this.updater = updater;
 	}
 
-	public Timestamp getUPDATETIME() {
-		return UPDATETIME;
+	public Timestamp getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setUPDATETIME(Timestamp uPDATETIME) {
-		UPDATETIME = uPDATETIME;
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public List<RoleFunction> getRlfList() {
