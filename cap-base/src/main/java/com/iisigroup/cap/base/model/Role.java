@@ -46,124 +46,150 @@ public class Role extends GenericBean implements IRole {
 	private String roleId;
 
 	@Column(length = 48)
-	private String roleName;
+	private String rolName;
 
 	@Column(length = 1)
-	private String SYSTYP;
+	private String sysTyp;
 
 	@Column(length = 1)
-	private String UNIT;
+	private String unit;
 
 	@Column(length = 1)
-	private String STU;
+	private String stu;
 
 	@Column(length = 60)
-	private String NOTE;
+	private String note;
 
 	@Column(length = 10)
-	private String UPDATER;
+	private String updater;
 
-	private Timestamp UPDTIME;
+	private Timestamp updTime;
 
 	@Column(length = 10)
-	private String APPRID;
+	private String apprId;
 
-	private Timestamp APPRTIME;
-	
+	private Timestamp apprTime;
+
 	@OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<RoleFunction> rlfList;
+
+	@OneToMany(mappedBy = "roleSet_role", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private List<RoleSet> rlSet;
 
 	@Override
 	public String getRoleId() {
 		return roleId;
 	}
+
 	@Override
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
+
 	@Override
 	public String getRoleName() {
-		return roleName;
+		return rolName;
 	}
+
 	@Override
 	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+		this.rolName = roleName;
 	}
 
-	public String getSYSTYP() {
-		return SYSTYP;
+	public String getRolName() {
+		return rolName;
 	}
 
-	public void setSYSTYP(String sYSTYP) {
-		SYSTYP = sYSTYP;
+	public void setRolName(String rolName) {
+		this.rolName = rolName;
 	}
 
-	public String getUNIT() {
-		return UNIT;
+	public String getSysTyp() {
+		return sysTyp;
 	}
 
-	public void setUNIT(String uNIT) {
-		UNIT = uNIT;
+	public void setSysTyp(String sysTyp) {
+		this.sysTyp = sysTyp;
 	}
 
-	public String getSTU() {
-		return STU;
+	public String getUnit() {
+		return unit;
 	}
 
-	public void setSTU(String sTU) {
-		STU = sTU;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
-	public String getNOTE() {
-		return NOTE;
+	public String getStu() {
+		return stu;
 	}
 
-	public void setNOTE(String nOTE) {
-		NOTE = nOTE;
+	public void setStu(String stu) {
+		this.stu = stu;
 	}
 
-	public String getUPDATER() {
-		return UPDATER;
+	public String getNote() {
+		return note;
 	}
 
-	public void setUPDATER(String uPDATER) {
-		UPDATER = uPDATER;
+	public void setNote(String note) {
+		this.note = note;
 	}
 
-	public Timestamp getUPDTIME() {
-		return UPDTIME;
+	public String getUpdater() {
+		return updater;
 	}
 
-	public void setUPDTIME(Timestamp uPDTIME) {
-		UPDTIME = uPDTIME;
+	public void setUpdater(String updater) {
+		this.updater = updater;
 	}
 
-	public String getAPPRID() {
-		return APPRID;
+	public Timestamp getUpdTime() {
+		return updTime;
 	}
 
-	public void setAPPRID(String aPPRID) {
-		APPRID = aPPRID;
+	public void setUpdTime(Timestamp updTime) {
+		this.updTime = updTime;
 	}
 
-	public Timestamp getAPPRTIME() {
-		return APPRTIME;
+	public String getApprId() {
+		return apprId;
 	}
 
-	public void setAPPRTIME(Timestamp aPPRTIME) {
-		APPRTIME = aPPRTIME;
+	public void setApprId(String apprId) {
+		this.apprId = apprId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Timestamp getApprTime() {
+		return apprTime;
 	}
-	
+
+	public void setApprTime(Timestamp apprTime) {
+		this.apprTime = apprTime;
+	}
+
+	public List<RoleSet> getRlSet() {
+		return rlSet;
+	}
+
+	public void setRlSet(List<RoleSet> rlSet) {
+		this.rlSet = rlSet;
+	}
+
 	public List<RoleFunction> getRlfList() {
 		return rlfList;
 	}
 
 	public void setRlfList(List<RoleFunction> rlfList) {
 		this.rlfList = rlfList;
+	}
+
+	public List<RoleSet> getrSetList() {
+		return rlSet;
+	}
+
+	public void setrSetList(List<RoleSet> rSetList) {
+		this.rlSet = rSetList;
 	}
 
 }

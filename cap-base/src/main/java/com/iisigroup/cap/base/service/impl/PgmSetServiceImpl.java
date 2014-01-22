@@ -1,5 +1,6 @@
 package com.iisigroup.cap.base.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeItemDao;
+import com.iisigroup.cap.base.dao.RoleDao;
 import com.iisigroup.cap.base.model.CodeItem;
+import com.iisigroup.cap.base.model.RoleFunction;
 import com.iisigroup.cap.base.service.PgmSetService;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -36,7 +41,10 @@ public class PgmSetServiceImpl extends AbstractService implements PgmSetService 
 			.getLogger(PgmSetServiceImpl.class);
 
 	@Resource
-	private CodeItemDao dao;
+	private CodeItemDao codeItemDao;
+
+	@Resource
+	private RoleDao roleDao;
 
 	private CapNamedJdbcTemplate jdbc;
 
@@ -47,21 +55,37 @@ public class PgmSetServiceImpl extends AbstractService implements PgmSetService 
 	@Override
 	public CodeItem find(String code) {
 		if (!CapString.isEmpty(code)) {
-			return dao.find(Integer.parseInt(code));
+			return codeItemDao.find(Integer.parseInt(code));
 		}
 		return null;
 	}
 
 	@Override
 	public List<CodeItem> findBySystypAndStep(String systyp, String step) {
-		return dao.findBySystypAndStep(systyp, step);
+		return codeItemDao.findBySystypAndStep(systyp, step);
 	}
 
 	@Override
-	public void savePgm(CodeItem model) {
-		deleteRlf(Integer.toString(model.getCode()));
-		
-		dao.save(model);
+	public void savePgm(CodeItem model, List<String> setRole) {
+		for (RoleFunction rlf : model.getRlfList()) {
+			if (!setRole.contains(rlf.getRolCode())) {
+				roleDao.delete(rlf);
+			} else {
+				setRole.remove(rlf.getRolCode());
+			}
+		}
+		List<RoleFunction> rlfList = new ArrayList<RoleFunction>();
+		for (String role : setRole) {
+			RoleFunction rlf = new RoleFunction();
+			rlf.setRolCode(role);
+			rlf.setPgmCode(Integer.toString(model.getCode()));
+			rlf.setUpdater(CapSecurityContext.getUserId());
+			rlf.setUpdTime(CapDate.getCurrentTimestamp());
+			rlfList.add(rlf);
+		}
+		model.setRlfList(rlfList);
+
+		codeItemDao.save(model);
 	}
 
 	@Override
@@ -71,23 +95,7 @@ public class PgmSetServiceImpl extends AbstractService implements PgmSetService 
 		param.put("systyp", systyp);
 		param.put("pgmCode", pgmCode);
 
-		return jdbc.queryForPage("pamSet_role", param, search.getFirstResult(),
+		return jdbc.queryForPage("pgmSet_role", param, search.getFirstResult(),
 				search.getMaxResults());
-	}
-	
-	@Override
-	public List<Map<String, Object>> findAllRole(String systyp){
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("systyp", systyp);
-
-		return jdbc.query("pamSet_AllRole", param);
-	}
-	
-//	@Override
-	public void deleteRlf(String pgmCode) {
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("pgmCode", pgmCode);
-
-		jdbc.update("pamSet_delRlf", param);
 	}
 }

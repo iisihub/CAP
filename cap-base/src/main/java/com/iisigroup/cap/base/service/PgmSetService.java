@@ -31,12 +31,8 @@ public interface PgmSetService {
 	
 	public List<CodeItem> findBySystypAndStep(String systyp, String step);
 
-	public void savePgm(CodeItem model);
+	public void savePgm(CodeItem model, List<String> setRole);
 	
 	public Page<Map<String, Object>> findPage(ISearch search, String systyp, String pgmCode);
-	
-	public List<Map<String, Object>> findAllRole(String systyp);
-	
-//	public void deleteRlf(List<RoleFunction> rlfs);
 
 }
