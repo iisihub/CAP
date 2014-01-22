@@ -69,7 +69,7 @@ public class CodeItem extends GenericBean {
 	@Column(columnDefinition = "TIMESTAMP")
 	private Timestamp updateTime;
 
-	@OneToMany(mappedBy = "pgm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pgm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<RoleFunction> rlfList;
 
 	public String getName() {

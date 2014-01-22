@@ -1,5 +1,6 @@
 package com.iisigroup.cap.base.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeItemDao;
+import com.iisigroup.cap.base.dao.RoleDao;
 import com.iisigroup.cap.base.model.CodeItem;
+import com.iisigroup.cap.base.model.RoleFunction;
 import com.iisigroup.cap.base.service.PgmSetService;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
 
 /**
