@@ -27,7 +27,6 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.base.model.Role;
 import com.iisigroup.cap.base.model.RoleFunction;
 import com.iisigroup.cap.base.model.RoleSet;
