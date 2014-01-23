@@ -95,10 +95,15 @@
                 </fieldset>
                 <fieldset>
 					<legend><spring:message code="role"></spring:message></legend>
-					<div class="btns">
-						<button id="modify" type="button" class="btn1">
-							<spring:message code="btn.modify">
-								<!--修改-->
+					<div id="btns">
+						<button id="add" type="button" class="btn1">
+							<spring:message code="btn.add">
+								<!--新增-->
+							</spring:message>
+						</button>
+						<button id="delete" type="button" class="btn1">
+							<spring:message code="btn.delete">
+								<!--刪除-->
 							</spring:message>
 						</button>
 					</div>

@@ -72,7 +72,7 @@
                             <td width="20%" class="hd1">
                                 <span class="color-red">＊</span><spring:message code="js.code"></spring:message></td>
                             <td width="30%">
-                                <input type="text" size="20" id="code" name="code" maxlength="20" class="required">
+                                <input type="text" size="20" id="code" name="code" maxlength="20" class="validate[required]">
                             </td>
                             <td width="20%" class="hd1">
                                 <span class="color-red">＊</span><spring:message code="js.locale"></spring:message></td>

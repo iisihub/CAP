@@ -15,6 +15,7 @@
 <script type="text/javascript">
 var baseUrl = "../../static";
 </script>
+<title><decorator:title default="CapWebMVC" /></title>
 <script src="../../static/requirejs/2.0.6/require.min.js"></script>
 <script src="../../static/main.js"></script>
 <decorator:getProperty property="reqJSON" default="" />
