@@ -13,9 +13,9 @@ package com.iisigroup.cap.base.dao.impl;
 
 import java.util.List;
 
-import com.iisigroup.cap.base.dao.CapJpaDao;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
+import com.iisigroup.cap.dao.impl.CapJpaDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
