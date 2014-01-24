@@ -46,7 +46,6 @@
 		<div class="main">
 			<nav class="sub">
 				<ol>
-					<li><a href="fileUpdDwn">檔案上下傳</a></li>
 				</ol>
 			</nav>
 			<article id="article"></article>

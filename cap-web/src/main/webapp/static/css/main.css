@@ -2856,7 +2856,7 @@ nav.sub li a.selected {
 }
 nav.sub ul {
     background: none repeat scroll 0 0 #454545;
-    border-bottom: 2px solid #454545;
+    border-bottom: 0px solid #454545;
     display: none;
     list-style: none outside none;
     margin: 0 0 0 -4px;
@@ -2875,7 +2875,7 @@ nav.sub ul li a {
     background: none repeat scroll 0 0 #F4F4F4;
     color: #454545;
     display: block;
-    padding: 9px 0 9px 10px;
+    padding: 9px 0 9px 25px;
 }
 nav.sub ul li a:hover {
     background: none repeat scroll 0 0 #DDDDDD;
@@ -2884,6 +2884,7 @@ nav.sub ul li a:hover {
 nav.sub ul li a.selected {
     background: none repeat scroll 0 0 #717171;
     color: #FFFFFF;
+    padding: 9px 0 9px 29px;
 }
 nav.sub ul ul {
     background: none repeat scroll 0 0 #717171;

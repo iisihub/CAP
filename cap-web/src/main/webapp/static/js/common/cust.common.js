@@ -123,7 +123,7 @@ $(document).ready(function() {
 	
 	                            },
 	                            text : s_menu[sm].name
-	                        })));
+	                        }).prepend("<span class='menu-icon icon-4'></span>")));
 	                	}else{
 	                		root.append($("<li/>").append($("<a/>", {
 	                            url : '#', data : { url : '#' },
@@ -151,11 +151,11 @@ $(document).ready(function() {
                 if (refresh) {
                     this.loadsub(topFolder);
                 }
-                
                 navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
                 if (refresh) {
                 	navSub.find('.selected').parents(".menu_sub").siblings("a").click();
                 }
+
                 API.loadPage(folder + '/' + page);
                 
                 function filter(topSmenu, target)
@@ -165,7 +165,7 @@ $(document).ready(function() {
                     		return true;
                     	}
                     	if(topSmenu[m].child){
-                    		if(filter(topSmenu[m].child, target)){return true};
+                            if(filter(topSmenu[m].child, target)){return true;};
                     	}
                     }
                     return false;
