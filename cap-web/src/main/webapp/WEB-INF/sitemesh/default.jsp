@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title><decorator:title default="CapWebMVC" /></title>
 <link rel="stylesheet" href="../static/css/main.css" />
+<link rel="stylesheet" href="../static/css/menu.css" />
 <!--[if lt IE 9]>
             <script src="../static/lib/js/html5.js"></script>
         <![endif]-->
