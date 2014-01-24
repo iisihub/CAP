@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeItemDao;
-import com.iisigroup.cap.base.dao.RoleDao;
 import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.base.service.PgmSetService;
 import com.iisigroup.cap.dao.utils.ISearch;
