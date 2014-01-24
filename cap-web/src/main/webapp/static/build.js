@@ -17,6 +17,7 @@
         'common.properties' : 'lib/js/common/common.properties',
         'common.jqgrid' : 'lib/js/common/common.jqgrid',
         'commonjs' : 'lib/js/common/common',
+        'common.message' : 'lib/js/common/common.message',
 
         'libjs' : 'lib/js/libjs', //third party lib
         'capjs' : 'lib/js/capjs', //cap lib
