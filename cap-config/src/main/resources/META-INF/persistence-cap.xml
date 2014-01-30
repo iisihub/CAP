@@ -25,6 +25,10 @@
 		<class>com.iisigroup.cap.base.model.DivRlItm</class>
 		<class>com.iisigroup.cap.base.model.DivRlDtl</class>
 		
+		<class>com.iisigroup.cap.base.model.Bulletin</class>
+		<class>com.iisigroup.cap.base.model.Remind</class>
+		<class>com.iisigroup.cap.base.model.Reminds</class>
+		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>
 </persistence>

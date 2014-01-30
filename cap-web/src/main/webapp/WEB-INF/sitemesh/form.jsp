@@ -12,6 +12,7 @@
 <head>
 <link rel="stylesheet" href="../../static/css/main.css" />
 <link rel="stylesheet" href="../../static/css/form.css" />
+<link rel="stylesheet" href="../../static/lib/css/common.message.css" />
 <script type="text/javascript">
 var baseUrl = "../../static";
 </script>

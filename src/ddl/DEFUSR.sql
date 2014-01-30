@@ -6,9 +6,11 @@
 --DROP TABLE DEF_USR;
 create table DEF_USR (
    OID                  CHAR(32)               not null,
-   STAFFPID               CHAR(10)               not null,
+   STAFFPID             CHAR(10)               not null,
    STAFFPNM             CHAR(12),
-   DEPARTNO               CHAR(4),
+   DEPARTNO             CHAR(4),
+   STAFFTEL             VARCHAR(20),
+   STAFFEML             VARCHAR(50),
    APPLYYNF             CHAR(1)                default '1',
    APPLYREM             VARCHAR(30),
    WEIGHTS              DECIMAL(5, 2),
@@ -27,6 +29,8 @@ COMMENT ON DEF_USR(
 	STAFFPID   is '行員編號',
 	STAFFPNM is '行員姓名',
 	DEPARTNO   is '分行代碼',
+	STAFFTEL   is '連絡電話',
+    STAFFEML   is '連絡電郵',
 	APPLYYNF is '0.停用 1.啟用',
 	APPLYREM is '停用原因',
 	WEIGHTS is 'Weights',

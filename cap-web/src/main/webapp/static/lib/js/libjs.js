@@ -13,7 +13,8 @@ require.config({
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
         'underscore' : 'lib/js/backbone/underscore',
         'backbone' : 'lib/js/backbone/backbone',
-        'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min'
+        'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min',
+        'fullcalendar' : 'lib/js/calendar/fullcalendar'
     },
     shim : {
         'blockui' : ['jquery'],
@@ -24,11 +25,12 @@ require.config({
         'validate' : ['jquery', 'validate-i18n'],
         'fileupload' : ['jquery'],
         'backbone' : ['underscore', 'jquery'],
-	    'sceditor' : ['jquery']
+	    'sceditor' : ['jquery'],
+	    'fullcalendar' : ['jquery']
     }
 });
 
-define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor'], function() {
+define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor', 'fullcalendar'], function() {
    // $.holdReady(true); // enable at common.js
     logDebug('lib init');
 });

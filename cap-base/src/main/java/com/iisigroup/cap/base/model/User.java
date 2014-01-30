@@ -63,6 +63,12 @@ public class User extends GenericBean implements IUser {
 	@Column(name = "DEPARTNO", length = 4)
 	private String unitNo;
 
+	@Column(length = 20)
+	private String staffTel;
+
+	@Column(length = 50)
+	private String staffEml;
+
 	@Column(length = 1)
 	private String applyNf;
 
@@ -127,6 +133,22 @@ public class User extends GenericBean implements IUser {
 
 	public void setUnitNo(String unitNo) {
 		this.unitNo = unitNo;
+	}
+
+	public String getStaffTel() {
+		return staffTel;
+	}
+
+	public void setStaffTel(String staffTel) {
+		this.staffTel = staffTel;
+	}
+
+	public String getStaffEml() {
+		return staffEml;
+	}
+
+	public void setStaffEml(String staffEml) {
+		this.staffEml = staffEml;
 	}
 
 	public String getApplyNf() {

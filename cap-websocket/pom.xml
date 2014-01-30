@@ -7,8 +7,11 @@
 		<version>2.0.0</version>
 	</parent>
 	<artifactId>cap-websocket</artifactId>
-	<version>0.0.1</version>
 	<dependencies>
+		<dependency>
+			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-base</artifactId>
+		</dependency>
 		<dependency>
 			 <groupId>com.corundumstudio.socketio</groupId>
 			 <artifactId>netty-socketio</artifactId>

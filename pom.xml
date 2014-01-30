@@ -53,7 +53,7 @@
             <dependency>
                 <groupId>com.iisigroup.cap</groupId>
                 <artifactId>cap-websocket</artifactId>
-                <version>0.0.1</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

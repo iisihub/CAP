@@ -20,4 +20,5 @@
 .logit {vertical-align: top;margin:-15px 0px 5px 30px;padding-bottom: 5px;width: 90%;border-bottom: 1px solid #DDD;}
 .log_debug,.log_clinet {color: blue;}
 .log_server {color: #D90000;font-size: 13px}
+.notify {color: #C80000;font-size: 13px}
 #sduarea {margin:5px 0px 0px 5px;cursor: pointer;}

@@ -63,6 +63,10 @@
         level: "client",
         css: "log_client"
     });
+    defaultMsg.push({
+        level: "notify",
+        css: "notify"
+    });
     ilog.addMessageLevel(defaultMsg);
     function init(){
         parent = $((s.parentID) ? ("#" + s.parentID) : 'body');

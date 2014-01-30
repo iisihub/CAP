@@ -26,7 +26,7 @@
 			
 		<session-management>
 			<concurrency-control max-sessions="1"
-				expired-url="/page/login?error" /> <!-- exception-if-maximum-exceeded="true" -->
+				expired-url="/page/login?error" session-registry-alias="sessionRegistry"/> <!-- exception-if-maximum-exceeded="true" -->
 		</session-management>
 		<logout logout-url="/j_spring_security_logout"
 			logout-success-url="/page/login" />
