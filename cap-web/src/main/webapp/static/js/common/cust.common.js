@@ -123,7 +123,7 @@ $(document).ready(function() {
 	
 	                            },
 	                            text : s_menu[sm].name
-	                        })));
+	                        }).prepend("<span class='menu-icon icon-4'></span>")));
 	                	}else{
 	                		root.append($("<li/>").append($("<a/>", {
 	                            url : '#', data : { url : '#' },
