@@ -9,6 +9,7 @@
  */
 package com.iisigroup.cap.base.model;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -22,6 +23,7 @@ import javax.persistence.UniqueConstraint;
 import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.IDataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
+import com.iisigroup.cap.utils.CapMath;
 
 /**
  * <p>
@@ -52,7 +54,7 @@ public class Bulletin extends GenericBean implements IDataObject {
 	@Column(length = 2000)
 	private String content;
 
-	private int level;
+	private BigDecimal level;
 
 	@Column(columnDefinition = "DATE")
 	private Date startDate;
@@ -99,12 +101,16 @@ public class Bulletin extends GenericBean implements IDataObject {
 		this.content = content;
 	}
 
-	public int getLevel() {
+	public BigDecimal getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(BigDecimal level) {
 		this.level = level;
+	}
+	
+	public void setLevel(String level) {
+		this.level = CapMath.getBigDecimal(level);
 	}
 
 	public Date getStartDate() {

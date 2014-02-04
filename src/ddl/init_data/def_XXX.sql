@@ -107,3 +107,10 @@ insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,update
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('22','styleTyp','0','文字',1,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('23','styleTyp','1','彈出對話框',2,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('24','styleTyp','2','電子郵件',3,'zh_TW','system',current timestamp);
+
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('25','status','0','啟用',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('26','status','1','停用',2,'zh_TW','system',current timestamp);
+
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('27','level','0','置頂',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('28','level','1','重要',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('29','level','2','普通',3,'zh_TW','system',current timestamp);
