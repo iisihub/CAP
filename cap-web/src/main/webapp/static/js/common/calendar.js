@@ -69,16 +69,15 @@ $(document).ready(function() {
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {
-//				var title = prompt('Event Title:');
-//				if (title) {
-//					calendar.fullCalendar('renderEvent',
-//						{
-//							title: title,
-//							start: start,
-//							end: end,
-//							allDay: allDay
-//						}, true );
-//				}
+			CommonAPI.formSubmit({
+	            url: '../admin/remindPage',
+	            data: {
+	            	fromCal:true,
+	                startDate:$.fullCalendar.formatDate( start, 'yyyy-MM-dd'),
+	                endDate:$.fullCalendar.formatDate( end, 'yyyy-MM-dd')
+	            },
+	            target: "_blank"
+	        });
 			calendar.fullCalendar('unselect');
 		}
 	});

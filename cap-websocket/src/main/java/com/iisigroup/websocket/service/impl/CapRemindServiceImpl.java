@@ -22,11 +22,11 @@ import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
-import com.iisigroup.websocket.service.CapReminderService;
+import com.iisigroup.websocket.service.CapRemindService;
 
 @Service
-public class CapReminderServiceImpl extends AbstractService implements
-		CapReminderService {
+public class CapRemindServiceImpl extends AbstractService implements
+		CapRemindService {
 
 	// private static final Logger logger = LoggerFactory
 	// .getLogger(CapReminderService.class);

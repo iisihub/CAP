@@ -7,7 +7,7 @@ import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.model.Reminds;
 import com.iisigroup.cap.security.model.CapUserDetails;
 
-public interface CapReminderService {
+public interface CapRemindService {
 
 	public List<Reminds> getRemindItems(String[] styleTyp, String locale);
 

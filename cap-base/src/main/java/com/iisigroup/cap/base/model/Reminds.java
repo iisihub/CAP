@@ -65,7 +65,7 @@ public class Reminds extends GenericBean implements IDataObject {
 	@Column(precision = 5)
 	private BigDecimal style;
 	/** 單位 */
-	private int unit;
+	private BigDecimal unit;
 	/** 是否完成 */
 	@Column(length = 1)
 	private String ynFlag;
@@ -122,11 +122,11 @@ public class Reminds extends GenericBean implements IDataObject {
 		this.style = style;
 	}
 
-	public int getUnit() {
+	public BigDecimal getUnit() {
 		return unit;
 	}
 
-	public void setUnit(int unit) {
+	public void setUnit(BigDecimal unit) {
 		this.unit = unit;
 	}
 

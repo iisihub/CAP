@@ -44,7 +44,6 @@
 	<br />
 
 	<div id='calendar'></div>
-
-</body>
+	
 </body>
 </html>

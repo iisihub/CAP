@@ -17,23 +17,22 @@
 	    	logDebug("SocketId = " + socket.socket.sessionid);
 	    });
 	
-//	    socket.on('textEvent', function(data) {
-	    	var data = {"startTime":"xx:xx:xx","endTime":"oo:oo:oo","content":"測試內容12345678901234567890123456789012345678901234567890"};
+	    socket.on('textEvent', function(data) {
 	    	var message = "".concat("<a class='toCalendar'><br/>"+i18n.def['remind.startDate']+data.startTime+"<br/>")
 	    	.concat(i18n.def['remind.endDate']+data.endTime+"<br/>")
 	    	.concat("<div class='text-breakAll'>"+i18n.def['remind.content']+data.content+"</div>")
 	    	.concat("</a>");
 	    	ilog.notify(message);
-//	    });
-	    	$(".toCalendar").click(function(){
-	    		CommonAPI.formSubmit({
-		            url: './common/calendar',
-		            data: {
-		                
-		            },
-		            target: "_blank"
-		        });
-	    	});
+	    });
+    	$(".toCalendar").click(function(){
+    		CommonAPI.formSubmit({
+	            url: './common/calendar',
+	            data: {
+	                
+	            },
+	            target: "_blank"
+	        });
+    	});
 	    
 	    socket.on('popUpEvent', function(data) {
 	        var _idd = $("#remindDialog");

@@ -31,7 +31,7 @@ import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.websocket.RemindEnum;
 import com.iisigroup.websocket.bean.NotifyObject;
-import com.iisigroup.websocket.service.CapReminderService;
+import com.iisigroup.websocket.service.CapRemindService;
 
 /**
  */
@@ -41,7 +41,7 @@ public class CapReminderTimerTask extends TimerTask {
 			.getLogger(CapReminderTimerTask.class);
 
 	@Resource
-	private CapReminderService reminderService;
+	private CapRemindService reminderService;
 	@Resource
 	private EmailService emailService;
 

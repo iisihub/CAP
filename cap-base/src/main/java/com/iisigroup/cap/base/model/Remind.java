@@ -72,7 +72,7 @@ public class Remind extends GenericBean implements IDataObject {
 	/** 修改時間 */
 	private Timestamp updTime;
 
-	@OneToMany(mappedBy = "remind", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "remind", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Reminds> reminds;
 
 	public String getOid() {

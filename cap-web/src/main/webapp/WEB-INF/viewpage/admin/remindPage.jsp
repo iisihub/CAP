@@ -4,44 +4,51 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta name="decorator" content="none">
+<meta name="decorator" content="form">
+<title><spring:message code="event.title"><!--提醒通知--></spring:message></title>
 </head>
 <body>
 	<script>
-		loadScript('js/common/eventPage');
+		loadScript('js/admin/remindPage');
 	</script>
+	<div class="button-menu funcContainer">
+		<button type="button" id="save_btn">
+			<spring:message code="btn.save"></spring:message><!-- 儲存  -->
+		</button>
+		<button type="button" id="close_btn" onclick="window.close();">
+			<spring:message code="btn.leave"></spring:message><!-- 離開  -->
+		</button>
+	</div>
 	<div class="clear"></div>
 		<!--Start : 提醒通知登錄-->
 		<div id="EDIT">
-            <form id="JForm">
+            <form id="mForm">
 	            <fieldset>
 					<legend><spring:message code="event.title"><!--提醒通知登錄--></spring:message></legend>
 	                <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
 	                    <tbody>
 	                        <tr>
-	                            <td width="20%" class="hd1">
+	                            <td width="8%" class="hd2 rt">
 	                                <spring:message code="scopeTyp"></spring:message></td>
-	                            <td width="30%">
+	                            <td width="22%">
 	                                <select id="scopeTyp" name="scopeTyp" combokey="scopeTyp" combotype="2"></select>
 	                                <input type="text" size="12" id="scopePid" name="scopePid" maxlength="10" class="validate[required]"/>
 	                            </td>
-	                            <td width="20%" class="hd1">
+	                            <td width="8%" class="hd2 rt">
 	                                <spring:message code="startDate"></spring:message></td>
-	                            <td width="30%">
-	                                <input type="text" id="startDate" name="startDate" class="date validate[required]"/>
-	                                <select id="sHour" name="sHour" combokey="hours" combotype="2"></select><spring:message code="hour"></spring:message></td>
-	                                <select id="sMinute" name="sMinute" combokey="minutes" combotype="2"></select><spring:message code="minute"></spring:message></td>
+	                            <td width="25%">
+	                                <input type="text" id="startDate" name="startDate" class="validate[required] date"/>
+	                                <input type="text" id="startTime" name="startTime" class="validate[required] time" size="7" maxlength="5" value="00:00" />
 	                            </td>
-	                            <td width="20%" class="hd1">
+	                            <td width="8%" class="hd2 rt">
 	                                <spring:message code="endDate"></spring:message></td>
-	                            <td width="30%">
-	                                <input type="text" id="endDate" name="endDate" class="date validate[required]"/>
-	                                <select id="eHour" name="eHour" combokey="hours" combotype="2"></select><spring:message code="hour"></spring:message></td>
-	                                <select id="eMinute" name="eMinute" combokey="minutes" combotype="2"></select><spring:message code="minute"></spring:message></td>
+	                            <td width="25%">
+	                                <input type="text" id="endDate" name="endDate" class="validate[required] date"/>
+	                                <input type="text" id="endTime" name="endTime" class="validate[required] time" size="7" maxlength="5" value="00:00" />
 	                            </td>
 	                        </tr>
 	                        <tr>
-	                            <td class="hd1">
+	                            <td class="hd2 rt">
 	                                <spring:message code="content"></spring:message></td>
 	                            <td colspan="5">
 	                                <textarea name="content" id="content" cols="33" rows="3" class="txt_mult" style="width:580px;height:40px;"></textarea>
@@ -49,7 +56,7 @@
 	                        </tr>
 	                    </tbody>
 	                </table>
-	                <div id="btns">
+	                <div class="btns">
 						<button id="add" type="button" class="btn1">
 							<spring:message code="btn.add">
 								<!--新增-->
@@ -68,7 +75,7 @@
 		<!-- dialog end-->
 		<!--Start : 新增通知方式-->
 		<div id="DETAIL" style="display:none">
-            <form id="mForm">
+            <form id="dForm">
                 <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr>

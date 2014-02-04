@@ -49,7 +49,7 @@ public class RemindDaoImpl extends BaseDao<Remind> implements RemindDao {
 			Timestamp start, Timestamp end, String locale) {
 		Query query = getEntityManager()
 				.createNativeQuery(
-						"select distinct r.* from CFG_remind r inner join CFG_reminds s on r.oid = s.pid where r.endDate > :start and r.startDate < :end and s.scopePid=:userId and r.LOCALE = :locale", Remind.class);
+						"select distinct r.* from CFG_remind r inner join CFG_reminds s on r.oid = s.pid where r.endDate > :start and r.startDate < :end and (s.scopePid=:userId or r.scopePid=:userId) and r.LOCALE = :locale", Remind.class);
 		query.setParameter("start", start);
 		query.setParameter("end", end);
 		query.setParameter("userId", userId);
