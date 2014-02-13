@@ -68,6 +68,7 @@
 		<module>cap-base</module>
 		<module>cap-batch</module>
 		<module>cap-websocket</module>
+		<module>cap-captcha</module>
 	</modules>
 	<profiles>
 		<profile>
