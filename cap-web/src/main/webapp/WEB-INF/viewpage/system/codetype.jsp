@@ -11,7 +11,10 @@
 </head>
 <body>
 	<script>
+	<!--
+		var baseUrl = "../static";
 		loadScript('js/system/codetype');
+	//-->
 	</script>
 	<div>
 		<form id="mform" onsubmit="return false;">
