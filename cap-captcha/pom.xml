@@ -11,5 +11,12 @@
   		<groupId>com.iisigroup.cap</groupId>
   		<artifactId>cap-core</artifactId>
   	</dependency>
+
+	<dependency>
+		<groupId>com.jhlabs</groupId>
+		<artifactId>simplecaptcha</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+
   </dependencies>
 </project>
