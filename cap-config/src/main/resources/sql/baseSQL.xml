@@ -14,7 +14,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			<value><![CDATA[select * from cfg_Sequence where seqNode = :seqNode]]></value>
 		</entry>
 		<entry key="Sequence.updateByNodeAndNextSeq">
-			<value><![CDATA[update cfg_Sequence seq set seq.nextSeq=:nextSeq,seq.rounds=:rounds,seq.updateTime=:updateTime where seq.seqNode=:seqNode and seq.nextSeq=:oldSeq]]></value>
+			<value><![CDATA[update cfg_Sequence set nextSeq=:nextSeq,rounds=:rounds,updateTime=:updateTime where seqNode=:seqNode and nextSeq=:oldSeq]]></value>
 		</entry>
 		<entry key="Sequence.insert">
 			<value><![CDATA[INSERT INTO cfg_Sequence (seqNode, NEXTSEQ, ROUNDS,updateTime ) VALUES (:seqNode,:nextSeq,:rounds,:updateTime)]]></value>
