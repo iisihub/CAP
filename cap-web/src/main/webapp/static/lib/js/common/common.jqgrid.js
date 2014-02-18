@@ -54,7 +54,7 @@
 
             if ( datas instanceof Array) {
                 for (var data in datas) {
-                    var _data = (datas[data] instanceof Array) ? _convertJson(datas[data]) : datas[data], rowId = _data[$this[0].colKey];
+                    var _data = (datas[data] instanceof Array) ? _convertJson(datas[data]) : datas[data], rowId = _data[$this[0].p.colKey];
                     var _new = !$this[0].rows.namedItem(rowId);
                     $this[_new ? "addRowData" : "setRowData"](rowId, _data);
                 }
