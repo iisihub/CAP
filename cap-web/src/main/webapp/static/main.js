@@ -5,7 +5,7 @@ var logDebug = function() {
 
 };
 require.config({
-	urlArgs : 'cache=' + parseInt(Math.random() * 1000),
+	urlArgs : 'cache=' + new Date().getTime(),
 	baseUrl : '../static',
 	paths : {
 		'libjs' : 'lib/js/libjs',          //third party lib
