@@ -42,7 +42,7 @@
          * @param {Object} datas
          */
         addGridData : function(datas) {
-            var $this = $(this), ids = $this.jqGrid("getGridParam", "colIds")
+            var $this = $(this), ids = $this.jqGrid("getGridParam", "colIds");
 
             function _convertJson(d) {
                 var td = {};
@@ -97,7 +97,7 @@
             $this.each(function() {
                 if (this.p.autowidth) {
                     maxWidth = maxWidth || self.parent().width();
-                    maxWidth = (maxWidth > 960) ? 960 : maxWidth
+                    maxWidth = (maxWidth > 960) ? 960 : maxWidth;
                 } else {
                     maxWidth = maxWidth || this.p.freezeWidth;
                 }
@@ -185,10 +185,14 @@
             //add header
             var _colNames = s.colNames || [];
             s.colNames = [];
-            s.colIds = []
+            s.colIds = [];
+            //bind colKey
+            s.colKey = undefined;
             for (var col in s.colModel) {
                 s.colNames.push(_colNames[col] || s.colModel[col].header || s.colModel[col].name);
                 s.colIds.push(s.colModel[col].name);
+                (s.colModel[col].key == true) && !s.colKey && (s.colKey = (s.colModel[col].id || s.colModel[col].name));
+                
             }
             // add columns info
             s = $.extend({}, s, {
