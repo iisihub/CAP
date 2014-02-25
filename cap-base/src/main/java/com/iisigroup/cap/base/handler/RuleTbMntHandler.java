@@ -288,7 +288,7 @@ public class RuleTbMntHandler extends MFormHandler {
 		WritableWorkbook workbook = null;
 		File relFile = null;
 		try{
-			File fileDir = new File("/Volumes/RamDisk/Temp");
+			File fileDir = new File("../Temp");
 			FileUtils.forceMkdir(fileDir);
 			// 使用Char(3.6) 取得承辦分行資料。
 			List<Map<String, Object>> lnf312Data = new ArrayList<Map<String,Object>>();
@@ -302,7 +302,7 @@ public class RuleTbMntHandler extends MFormHandler {
 				}
 			}
 
-			relFile = new File(fileDir + File.separator + "" + "_tempDEB1010V02_export.xls");
+			relFile = new File(fileDir + File.separator + "" + "_ruleExport.xls");
 			relFile.createNewFile();
 			// 2. 產生 workbook
 			workbook = Workbook.createWorkbook(relFile);
