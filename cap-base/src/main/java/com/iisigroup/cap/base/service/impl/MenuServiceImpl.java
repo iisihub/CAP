@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.base.service.CodeItemService;
 import com.iisigroup.cap.base.service.MenuService;
+import com.iisigroup.cap.utils.CapAppContext;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -63,7 +64,7 @@ public class MenuServiceImpl implements MenuService {
 		for (CodeItem code : list) {
 			MenuItem item = new MenuItem();
 			item.setCode(code.getCode());
-			item.setName(code.getName());
+			item.setName(CapAppContext.getMessage("menu."+code.getCode()));
 			item.setUrl(code.getPath());
 			menuMap.put(item.getCode(), item);
 
