@@ -164,4 +164,60 @@ public class CodeItemServiceImpl implements CodeItemService {
 		}
 		return Arrays.asList(set.toArray(new CodeItem[set.size()]));
 	}
+	
+	@Override
+	public CodeItem getCodeItemByCode(int code) {
+		return codes.get(code);
+	}
+	
+	@Override
+	public List<CodeItem> findByParentAndSteps(String pgmDept,
+			Set<String> roles, int parent, int... steps) {
+
+		Set<Integer> pSet = new HashSet<Integer>();
+		pSet.add(parent);
+
+		Set<CodeItem> set = new HashSet<CodeItem>();
+		if (roles == null) {
+			roles = Collections.emptySet();
+		}
+		Arrays.sort(steps);
+
+		for (String role : roles) {
+			for (int step : steps) {
+				String key = getRoleStepKey(role, step);
+				List<CodeItem> stepCodes = roleStepCodes.get(key);
+
+				if (stepCodes == null) {
+					continue;
+				} else if (parent == NO_PARENT) {
+					set.addAll(stepCodes);
+					for (CodeItem code : stepCodes) {
+						// ************************
+//						if (!isPGMDeptCheckOK(roleAuthDepts, role,
+//								code.getCode(), pgmDept)) {
+//							continue;
+//						}
+						// ************************
+						pSet.add(code.getCode());
+
+					}
+				} else {
+					for (CodeItem code : stepCodes) {
+						// ************************
+//						if (!isPGMDeptCheckOK(roleAuthDepts, role,
+//								code.getCode(), pgmDept)) {
+//							continue;
+//						}
+						// ************************
+						if (pSet.contains(code.getParent())) {
+							set.add(code);
+							pSet.add(code.getCode());
+						}
+					}
+				}
+			}
+		}
+		return Arrays.asList(set.toArray(new CodeItem[set.size()]));
+	}
 }

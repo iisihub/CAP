@@ -51,6 +51,15 @@
 		<property name="jdbc" ref="capJdbcTemplate" />
 	</bean>
 	
+	<!-- <bean id="memberService" class="com.iisigroup.cap.base.service.impl.MemberServiceImpl">
+		<property name="systemType" value="${systemType}" />
+		<property name="jdbc" ref="capJdbcTemplate" />
+	</bean> -->
+	
+	<bean id="pgmSetService" class="com.iisigroup.cap.base.service.impl.PgmSetServiceImpl">
+		<property name="jdbc" ref="capJdbcTemplate" />
+	</bean>
+	
 	<bean id="accessControlService" class="com.iisigroup.cap.base.service.impl.AccessControlServiceImpl">
 		<property name="systemType" value="${systemType}" />
 	</bean>

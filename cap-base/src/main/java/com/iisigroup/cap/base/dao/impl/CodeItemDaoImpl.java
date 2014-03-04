@@ -45,4 +45,12 @@ public class CodeItemDaoImpl extends BaseDao<CodeItem> implements CodeItemDao {
 		search.addOrderBy("seq");
 		return find(search);
 	}
+	
+	@Override
+	public List<CodeItem> findBySystypAndStep(String systyp, String step){
+		ISearch search = createSearchTemplete();
+		search.addSearchModeParameters(SearchMode.EQUALS, "sysTyp", systyp);
+		search.addSearchModeParameters(SearchMode.EQUALS, "step", step);
+		return find(search);
+	}
 }

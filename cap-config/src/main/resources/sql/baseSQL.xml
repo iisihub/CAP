@@ -19,6 +19,33 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			where rle.SYSTYP= :system and rle.STU='0'
 			order by rle.ROLCODE, rlf.PGMCODE]]></value>
 		</entry>
+		<entry key="role">
+			<value><![CDATA[select ROLCODE
+   			from DEF_RLE
+   			where STU='0'
+   			order by ROLCODE]]></value>
+		</entry>
+		<entry key="docAuth">
+			<value><![CDATA[select * from DEF_RDA
+   			where SYSTYP=:system
+			order by ROLCODE]]></value>
+		</entry>
+		<entry key="pamSet_role">
+			<value><![CDATA[select rle.* from 
+			DEF_RLE rle inner join DEF_RLF rlf on rlf.ROLCODE=rle.ROLCODE 
+			where rle.SYSTYP= :systyp and rlf.pgmCode= :pgmCode]]></value>
+		</entry>
+		<!-- select rle.rolcode, rle.rolName, 
+			(select count(rlf.*)<>0 from DEF_RLF rlf where rlf.pgmCode= :pgmCode and rlf.rolcode = rle.rolcode) as selected from 
+			(select rle.* from DEF_RLE rle where rle.SYSTYP= :systyp) as rle -->
+		<entry key="pamSet_AllRole">
+			<value><![CDATA[select rle.rolcode, rle.rolName from 
+			(select rle.* from DEF_RLE rle where rle.SYSTYP= :systyp) as rle]]></value>
+		</entry>
+		<entry key="pamSet_delRlf">
+			<value><![CDATA[delete from DEF_RLF rlf where pgmCode=:pgmCode]]></value>
+		</entry>
+		
 		
 		<!-- Sequence -->
 		<entry key="Sequence.listAll">

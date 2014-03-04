@@ -19,6 +19,23 @@ import com.iisigroup.cap.base.model.CodeItem;
 public interface CodeItemService {
 
 	/**
+	 * 依交易代碼取得CodeItem
+	 * 
+	 * @since 2011/05/31
+	 * @author Fantasy
+	 */
+	CodeItem getCodeItemByCode(int code);
+	
+	/**
+	 * findByParentAndSteps
+	 * 
+	 * @since 2011/05/10
+	 * @author Fantasy
+	 */
+	List<CodeItem> findByParentAndSteps(String pgmDept, Set<String> roles,
+			int parent, int... steps);
+	
+	/**
 	 * findByStep
 	 * 
 	 * @since 2011/05/10

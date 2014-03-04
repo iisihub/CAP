@@ -10,10 +10,14 @@
 package com.iisigroup.cap.base.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -65,6 +69,9 @@ public class Role extends GenericBean implements IRole {
 	private String APPRID;
 
 	private Timestamp APPRTIME;
+	
+	@OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	private List<RoleFunction> rlfList;
 
 	@Override
 	public String getRoleId() {
@@ -149,6 +156,14 @@ public class Role extends GenericBean implements IRole {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public List<RoleFunction> getRlfList() {
+		return rlfList;
+	}
+
+	public void setRlfList(List<RoleFunction> rlfList) {
+		this.rlfList = rlfList;
 	}
 
 }

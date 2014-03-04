@@ -36,4 +36,7 @@ public interface CodeItemDao extends IGenericDao<CodeItem> {
 	 * @return List<CodeItem>
 	 */
 	public List<CodeItem> findAll(String system);
+	
+	
+	public List<CodeItem> findBySystypAndStep(String systyp, String step);
 }
