@@ -52,11 +52,14 @@ public class CapSecurityContext {
 	public static <T extends CapUserDetails> T getUser() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		if (auth != null
-				&& auth.getDetails() instanceof CapAuthenticationDetails) {
-			CapAuthenticationDetails detail = (CapAuthenticationDetails) auth
-					.getDetails();
-			return ((T) detail.getUserDetails());
+//		if (auth != null
+//				&& auth.getDetails() instanceof CapAuthenticationDetails) {
+//			CapAuthenticationDetails detail = (CapAuthenticationDetails) auth
+//					.getDetails();
+//			return ((T) detail.getUserDetails());
+//		}
+		if (auth != null) {
+			return (T) auth.getPrincipal();
 		}
 		return (T) getDefautlUserDetails();
 	}
