@@ -30,7 +30,7 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.CodeItem;
-import com.iisigroup.cap.base.model.Role;
+import com.iisigroup.cap.base.model.RoleFunction;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.base.service.PgmSetService;
 import com.iisigroup.cap.component.IRequest;
@@ -109,7 +109,7 @@ public class PgmSetHandler extends MFormHandler {
 		String sysTyp = params.get("sysTyp");
 		String pgmCode = params.get("pgmCode");
 		if (CapString.isEmpty(pgmCode)) {
-			new GridResult();
+			return new MapGridResult();
 		}
 
 		Page<Map<String, Object>> page = pgmSetService.findPage(search, sysTyp,
@@ -118,12 +118,16 @@ public class PgmSetHandler extends MFormHandler {
 	}// ;
 
 	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult queryAllRle(ISearch search, IRequest params) {
+	public MapGridResult queryAllRle(ISearch search, IRequest params) {
 		String sysTyp = params.get("sysTyp");
-		search.addSearchModeParameters(SearchMode.EQUALS, "sysTyp", sysTyp);
+		String pgmCode = params.get("pgmCode");
+		if (CapString.isEmpty(pgmCode)) {
+			return new MapGridResult();
+		}
 
-		Page<Role> page = commonSrv.findPage(Role.class, search);
-		return new GridResult(page.getContent(), page.getTotalRow(), null);
+		Page<Map<String, Object>> page = pgmSetService.findEditPage(search,
+				sysTyp, pgmCode);
+		return new MapGridResult(page.getContent(), page.getTotalRow(), null);
 	}// ;
 
 	public IResult queryForm(IRequest request) {
@@ -163,20 +167,6 @@ public class PgmSetHandler extends MFormHandler {
 		return result;
 	}
 
-	// public IResult queryRole(IRequest request) throws CapException {
-	// AjaxFormResult result = new AjaxFormResult();
-	// String sysTyp = request.get("sysTyp");
-	// // String code = request.get("pgmCode");
-	//
-	// List<Map<String, Object>> roleItems = pgmSetService.findAllRole(sysTyp);
-	//
-	// if (!CollectionUtils.isEmpty(roleItems)) {
-	// result.set("roles", JSONArray.fromObject(roleItems).toString());
-	// }
-	//
-	// return result;
-	// }
-
 	/**
 	 * 編輯資料
 	 * 
@@ -188,7 +178,6 @@ public class PgmSetHandler extends MFormHandler {
 	public IResult save(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		String code = request.get("code");
-		JSONArray roleItem = JSONArray.fromObject(request.get("roleItem"));
 		String isNew = request.get("isNew");
 		CodeItem codeItem = null;
 
@@ -207,16 +196,47 @@ public class PgmSetHandler extends MFormHandler {
 		codeItem.setUpdater(CapSecurityContext.getUserId());
 		codeItem.setUpdateTime(CapDate.getCurrentTimestamp());
 
-		List<String> setRole = new ArrayList<String>();
+		commonSrv.save(codeItem);
 
-		if (roleItem != null) {
-			for (Object role : roleItem) {
-				JSONObject rle = (JSONObject) role;
-				setRole.add(rle.getString("roleId"));
-			}
+		return result;
+	}
+
+	/**
+	 * 編輯資料
+	 * 
+	 * @param request
+	 *            IRequest
+	 * @return {@link tw.com.iisi.cap.response.IResult}
+	 * @throws CapException
+	 */
+	public IResult saveRlf(IRequest request) {
+		AjaxFormResult result = new AjaxFormResult();
+		String code = request.get("pgmCode");
+		JSONArray roleItem = JSONArray.fromObject(request.get("roleItem"));
+		CodeItem codeItem = null;
+
+		if (!CapString.isEmpty(code)) {
+			codeItem = pgmSetService.find(code);
+		}
+		if (codeItem == null) {
+			throw new CapMessageException(
+					CapAppContext.getMessage("EXCUE_ERROR"),
+					RoleSetHandler.class);
 		}
 
-		pgmSetService.savePgm(codeItem, setRole);
+		List<RoleFunction> setRole = new ArrayList<RoleFunction>();
+		if (roleItem != null) {
+			for (Object item : roleItem) {
+				JSONObject role = (JSONObject) item;
+				RoleFunction rlf = new RoleFunction();
+				rlf.setRolCode(role.getString("roleId"));
+				rlf.setPgmCode(Integer.toString(codeItem.getCode()));
+				rlf.setUpdater(CapSecurityContext.getUserId());
+				rlf.setUpdTime(CapDate.getCurrentTimestamp());
+				setRole.add(rlf);
+			}
+		}
+		commonSrv.save(setRole);
 
 		return result;
 	}
@@ -235,6 +255,37 @@ public class PgmSetHandler extends MFormHandler {
 		if (code != null) {
 			commonSrv.delete(code);
 		}
+		return result;
+	}
+
+	/**
+	 * 刪除資料
+	 * 
+	 * @param request
+	 *            IRequest
+	 * @return {@link tw.com.iisi.cap.response.IResult}
+	 * @throws CapException
+	 */
+	public IResult deleteRlf(IRequest request) {
+		AjaxFormResult result = new AjaxFormResult();
+		String code = request.get("pgmCode");
+		JSONArray roleItem = JSONArray.fromObject(request.get("roleItem"));
+
+		if (CapString.isEmpty(code)) {
+			throw new CapMessageException(
+					CapAppContext.getMessage("EXCUE_ERROR"),
+					RoleSetHandler.class);
+		}
+
+		List<String> delRole = new ArrayList<String>();
+		if (roleItem != null) {
+			for (Object item : roleItem) {
+				JSONObject usr = (JSONObject) item;
+				delRole.add(usr.getString("roleId"));
+			}
+		}
+		pgmSetService.deleteRlf(code, delRole);
+
 		return result;
 	}
 

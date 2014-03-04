@@ -30,22 +30,48 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
    			where SYSTYP=:system
 			order by ROLCODE]]></value>
 		</entry>
-		<entry key="pamSet_role">
-			<value><![CDATA[select rle.* from 
+		<entry key="pgmSet_role">
+			<value><![CDATA[select rle.rolCode as roleId, rle.rolName from 
 			DEF_RLE rle inner join DEF_RLF rlf on rlf.ROLCODE=rle.ROLCODE 
 			where rle.SYSTYP= :systyp and rlf.pgmCode= :pgmCode]]></value>
 		</entry>
-		<!-- select rle.rolcode, rle.rolName, 
-			(select count(rlf.*)<>0 from DEF_RLF rlf where rlf.pgmCode= :pgmCode and rlf.rolcode = rle.rolcode) as selected from 
-			(select rle.* from DEF_RLE rle where rle.SYSTYP= :systyp) as rle -->
-		<entry key="pamSet_AllRole">
-			<value><![CDATA[select rle.rolcode, rle.rolName from 
-			(select rle.* from DEF_RLE rle where rle.SYSTYP= :systyp) as rle]]></value>
+		<entry key="pgmSet_getEditRole">
+			<value><![CDATA[select rle.rolCode as roleId, rle.rolName from 
+			DEF_RLE rle where rle.SYSTYP= :systyp and rle.ROLCODE not in (select rolcode from DEF_RLF where pgmCode = :pgmCode)]]></value>
 		</entry>
-		<entry key="pamSet_delRlf">
-			<value><![CDATA[delete from DEF_RLF rlf where pgmCode=:pgmCode]]></value>
+		<entry key="pgmSet_deleteRlf">
+			<value><![CDATA[delete from DEF_RLF rlf where rlf.pgmCode = :pgmCode and rlf.ROLCODE in (:delRole)]]></value>
 		</entry>
-		
+		<entry key="roleSet_getUser">
+			<value><![CDATA[select usr.STAFFPID as userId, usr.STAFFPNM as userName, 
+			usr.DEPARTNO as unitNo, brn.DEPARTNM from DEF_USR usr 
+			inner join DEF_RLSET rls on usr.staffPId = rls.staffPId 
+			inner join DEF_BRN brn on brn.departNo = usr.departNo 
+			where rls.rolCode = :rolCode]]></value>
+		</entry>
+		<entry key="roleSet_getEditUser">
+			<value><![CDATA[select usr.STAFFPID as userId, usr.STAFFPNM as userName from DEF_USR usr 
+			inner join DEF_BRN brn on brn.departNo = usr.departNo 
+			where usr.STAFFPID not in (select staffPId from DEF_RLSET where rolcode = :rolCode) and (:unitNo = 'All' or brn.departNo = :unitNo)]]></value>
+		</entry>
+		<entry key="roleSet_getFunc">
+			<value><![CDATA[select pgm.PGMCODE as code, pgm.PGMNAME as name, 
+			pgm.PGMTYP as parent from DEF_PGM pgm inner join DEF_RLF rlf 
+			on pgm.PGMCODE = rlf.PGMCODE where rlf.ROLCODE = :rolCode]]></value>
+		</entry>
+		<entry key="roleSet_getEditFunc">
+			<value><![CDATA[select distinct pgm.PGMCODE as code, pgm.PGMNAME as name, 
+			pgm.PGMTYP as parent from DEF_PGM pgm,
+			(select * from DEF_PGM where (:pgmTyp = 'All' or (pgmTyp = :pgmTyp or pgmCode= :pgmTyp))) pgm1
+			where (pgm.PGMCODE=pgm1.PGMCODE or pgm.PGMTYP=pgm1.PGMCODE) and pgm.sysTyp=:sysTyp
+			and pgm.pgmCode not in (select pgmCode from DEF_RLF where rolcode = :rolCode)]]></value>
+		</entry>
+		<entry key="roleSet_deleteRlset">
+			<value><![CDATA[delete from DEF_RLSET rls where rls.rolCode = :rolCode and rls.STAFFPID in (:delUsrs)]]></value>
+		</entry>
+		<entry key="roleSet_deleteRlf">
+			<value><![CDATA[delete from DEF_RLF rlf where rlf.rolCode = :rolCode and rlf.pgmCode in (:delFunc)]]></value>
+		</entry>
 		
 		<!-- Sequence -->
 		<entry key="Sequence.listAll">

@@ -37,15 +37,15 @@ public interface IUser extends Serializable {
 
 	String getUnitNo();
 	
-	String getAPPLYYNF();
+	String getApplyNf();
 	
-	String getAPPLYREM();
+	String getApplyRem();
 	
-	BigDecimal getWEIGHTS();
+	BigDecimal getWeights();
 	
-	String getUPDATER();
+	String getUpdater();
 	
-	Timestamp getUPDATETIME();
+	Timestamp getUpdateTime();
 
 	List<? extends IRole> getRoles();
 

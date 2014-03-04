@@ -40,7 +40,7 @@
                             <td width="20%" class="hd1">
                                 <span class="color-red">＊</span><spring:message code="js.departno"></spring:message></td>
                             <td width="30%">
-                                <input type="text" size="4" id="departno" name="departno" maxlength="4" class="required"/>
+                                <input type="text" size="4" id="departno" name="departno" maxlength="4" class="validate[required]"/>
                             </td>
                             <td width="20%" class="hd1">
                                 <spring:message code="js.departnm"></spring:message></td>

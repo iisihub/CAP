@@ -9,6 +9,7 @@
 		<class>com.iisigroup.cap.base.model.Branch</class>
 		<class>com.iisigroup.cap.base.model.Role</class>
 		<class>com.iisigroup.cap.base.model.RoleFunction</class>
+		<class>com.iisigroup.cap.base.model.RoleSet</class>
 		<class>com.iisigroup.cap.base.model.CodeItem</class>
 		<class>com.iisigroup.cap.base.model.CodeType</class>
 		<class>com.iisigroup.cap.base.model.SysParm</class>
