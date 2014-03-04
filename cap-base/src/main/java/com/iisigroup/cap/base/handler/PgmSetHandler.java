@@ -30,7 +30,7 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.CodeItem;
-import com.iisigroup.cap.base.model.Role;
+import com.iisigroup.cap.base.model.RoleFunction;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.base.service.PgmSetService;
 import com.iisigroup.cap.component.IRequest;
