@@ -13,6 +13,8 @@ package com.iisigroup.cap.base.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.dao.CodeItemDao;
 import com.iisigroup.cap.base.model.CodeItem;
@@ -30,14 +32,14 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          <li>2013/12/20,tammy,new
  *          </ul>
  */
-// @Repository
+@Repository
 public class CodeItemDaoImpl extends BaseDao<CodeItem> implements CodeItemDao {
 
 	@Override
 	public List<CodeItem> findAll(String system) {
 		ISearch search = createSearchTemplete();
 		search.addSearchModeParameters(SearchMode.EQUALS, "sysTyp", system);
-		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlg", "1"); //啟用
+		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlg", "1"); // 啟用
 		search.addOrderBy("step");
 		search.addOrderBy("parent");
 		search.addOrderBy("seq");

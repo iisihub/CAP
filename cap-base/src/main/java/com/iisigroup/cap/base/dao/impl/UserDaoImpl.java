@@ -43,7 +43,7 @@ import com.iisigroup.cap.security.dao.IUserDao;
  *          <li>2013/12/20,tammy,new
  *          </ul>
  */
-@Repository
+@Repository("userDao")
 public class UserDaoImpl extends BaseDao<User> implements IUserDao<User> {
 
 	@Override

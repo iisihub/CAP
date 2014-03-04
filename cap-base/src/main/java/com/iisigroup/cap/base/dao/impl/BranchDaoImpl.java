@@ -11,6 +11,8 @@
 
 package com.iisigroup.cap.base.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.dao.BranchDao;
 import com.iisigroup.cap.base.model.Branch;
@@ -26,7 +28,7 @@ import com.iisigroup.cap.base.model.Branch;
  *          <li>2013/12/20,tammy,new
  *          </ul>
  */
-// @Repository
+@Repository
 public class BranchDaoImpl extends BaseDao<Branch> implements BranchDao {
 
 }

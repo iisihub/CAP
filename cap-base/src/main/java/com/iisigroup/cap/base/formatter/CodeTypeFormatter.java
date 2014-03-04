@@ -12,7 +12,6 @@
 package com.iisigroup.cap.base.formatter;
 
 import java.math.BigDecimal;
-import java.util.Locale;
 import java.util.Map;
 
 import com.iisigroup.cap.Constants;
@@ -42,19 +41,20 @@ public class CodeTypeFormatter implements IFormatter {
 	KeyValueFormatTypeEnum show;
 	Map<String, String> codeMap;
 
-	public CodeTypeFormatter(CodeTypeService service, String codeType,
-			Locale locale) {
+	public CodeTypeFormatter(CodeTypeService service, String codeType) {
 		this.service = service;
 		this.codeType = codeType;
-		this.codeMap = service.findByCodeType(codeType, locale.toString());
+		this.codeMap = service.findByCodeType(codeType, SimpleContextHolder
+				.get(CapWebUtil.localeKey).toString());
 		this.show = KeyValueFormatTypeEnum.Value;
 	}
 
 	public CodeTypeFormatter(CodeTypeService service, String codeType,
-			Locale locale, KeyValueFormatTypeEnum show) {
+			KeyValueFormatTypeEnum show) {
 		this.service = service;
 		this.codeType = codeType;
-		this.codeMap = service.findByCodeType(codeType, locale.toString());
+		this.codeMap = service.findByCodeType(codeType, SimpleContextHolder
+				.get(CapWebUtil.localeKey).toString());
 		this.show = show;
 	}
 
