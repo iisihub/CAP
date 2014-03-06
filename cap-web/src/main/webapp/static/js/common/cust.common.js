@@ -91,6 +91,37 @@ $(document).ready(function() {
                     navSub.css("opacity", "0.01");
                     _f();
                 }
+                
+                function _s(root, s_menu){
+                	for (var sm in s_menu) {
+	                	if(s_menu[sm].child.length != 0){
+	                		root.append($("<li/>").append($("<a/>", {
+	                			url : "",
+	                            data : {
+	                                url : ""
+	                            },
+	                            text : s_menu[sm].name
+	                        })
+	                        .prepend("<span class='menu-icon icon-1'></span>")).append("<ul class='menu_sub'></ul>"));
+
+	                		_s(root.find("li ul").last(), s_menu[sm].child);
+	                	}else if(s_menu[sm].url){
+	                		root.append($("<li/>").append($("<a/>", {
+	                            url : s_menu[sm].url || "",
+	                            data : {
+	                                url : s_menu[sm].url || ""
+	
+	                            },
+	                            text : s_menu[sm].name
+	                        })));
+	                	}else{
+	                		root.append($("<li/>").append($("<a/>", {
+	                            url : '#', data : { url : '#' },
+	                            text : s_menu[sm].name
+	                        })));
+	                	}
+                	}
+                }
 
                 function _f() {
                     navSub.empty().data("cmenu", folder);
@@ -124,12 +155,12 @@ $(document).ready(function() {
     $("a[href='#language']").click(function() {
         var o = $(this).parents("ol");
         if (o.height() == 18) {
-            $(this).parent("li.lang").css('background-image', 'url(webroot/static/images/icon-down.png)');
+            $(this).parent("li.lang").css('background-image', 'url('+baseUrl+'/images/icon-down.png)');
             $(o).animate({
                 height : 100
             });
         } else {
-            $(this).parent("li.lang").css('background-image', 'url(webroot/static/images/icon-right.png)');
+            $(this).parent("li.lang").css('background-image', 'url('+baseUrl+'/images/icon-right.png)');
             $(o).animate({
                 height : 18
             });

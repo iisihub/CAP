@@ -63,7 +63,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 		Map<String, String> m = new LinkedHashMap<String, String>();
 		if (!codeList.isEmpty()) {
 			for (CodeType c : codeList) {
-				m.put(c.getCodeType(), c.getCodeDesc());
+				m.put(c.getCodeValue(), c.getCodeDesc());
 			}
 		}
 		return m;
