@@ -18,8 +18,9 @@ import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.formatter.KeyValueFormatTypeEnum;
-import com.iisigroup.cap.security.CapSecurityContext;
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
  * <pre>
@@ -43,8 +44,8 @@ public class CodeTypeFormatter implements IFormatter {
 	public CodeTypeFormatter(CodeTypeService service, String codeType) {
 		this.service = service;
 		this.codeType = codeType;
-		this.codeMap = service.findByCodeType(codeType, CapSecurityContext
-				.getLocale().toString());
+		this.codeMap = service.findByCodeType(codeType, SimpleContextHolder
+				.get(CapWebUtil.localeKey).toString());
 		this.show = KeyValueFormatTypeEnum.Value;
 	}
 
@@ -52,8 +53,8 @@ public class CodeTypeFormatter implements IFormatter {
 			KeyValueFormatTypeEnum show) {
 		this.service = service;
 		this.codeType = codeType;
-		this.codeMap = service.findByCodeType(codeType, CapSecurityContext
-				.getLocale().toString());
+		this.codeMap = service.findByCodeType(codeType, SimpleContextHolder
+				.get(CapWebUtil.localeKey).toString());
 		this.show = show;
 	}
 
