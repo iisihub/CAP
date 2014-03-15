@@ -46,7 +46,7 @@ public class StrMessageFormatter implements IFormatter {
 	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String reformat(Object in) {
 		final Map<String, Object> params = (Map<String, Object>) in;
 		final StringBuffer buffer = new StringBuffer();

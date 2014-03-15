@@ -50,7 +50,7 @@ public class CapPlugInNotFoundException extends CapException {
 	 * 
 	 * @see java.lang.Throwable#getLocalizedMessage()
 	 */
-	@Override
+	
 	public String getLocalizedMessage() {
 		return new StringBuffer("Plugin id: ")
 				.append(pluginId)
@@ -62,7 +62,7 @@ public class CapPlugInNotFoundException extends CapException {
 	 * 
 	 * @see java.lang.Throwable#getMessage()
 	 */
-	@Override
+	
 	public String getMessage() {
 		return getLocalizedMessage();
 	}

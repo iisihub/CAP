@@ -94,12 +94,12 @@ public class SysParm extends GenericBean implements IDataObject {
 		this.updateTime = updateTime;
 	}
 
-	@Override
+	
 	public String getOid() {
 		return this.parmId;
 	}
 
-	@Override
+	
 	public void setOid(String oid) {
 		this.parmId = oid;
 	}

@@ -57,7 +57,7 @@ public class CapI18nMapper extends AbstractDecoratorMapper {
 	 * (javax.servlet.http.HttpServletRequest,
 	 * com.opensymphony.module.sitemesh.Page)
 	 */
-	@Override
+	
 	public Decorator getDecorator(HttpServletRequest request,
 			com.opensymphony.module.sitemesh.Page page) {
 		String pathInfo = CapWebUtil.getRequestURL(request);

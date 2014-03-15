@@ -41,7 +41,7 @@ import com.iisigroup.cap.utils.CapAppContext;
 public class CapCaptchaServlet extends HttpServlet {
 
 	public static String DEF_RENDERER = "capCaptcha";
-	@Override
+	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		DEF_RENDERER = config.getInitParameter("captchaBean");

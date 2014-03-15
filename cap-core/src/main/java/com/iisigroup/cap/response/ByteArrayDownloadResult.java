@@ -64,7 +64,7 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 		this._contentType = contentType;
 	}// ;
 
-	@Override
+	
 	public String getLogMessage() {
 		if (_outputName == null) {
 			return _contentType + " byteArrayDownload complete!!";
@@ -86,7 +86,7 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 		return _contentType;
 	}
 
-	@Override
+	
 	public void add(IResult result) {
 		if (result instanceof ByteArrayDownloadResult) {
 			ByteArrayDownloadResult r = (ByteArrayDownloadResult) result;
@@ -98,7 +98,7 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 		}
 	}// ;
 
-	@Override
+	
 	public void respondResult(ServletResponse response) {
 		int length = -1;
 		InputStream in = null;

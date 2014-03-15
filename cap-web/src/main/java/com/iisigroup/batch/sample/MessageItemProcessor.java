@@ -28,7 +28,6 @@ import org.springframework.stereotype.Component;
 @Component("messageProcessor")
 public class MessageItemProcessor implements ItemProcessor<User, Message> {
 
-	@Override
 	public Message process(User user) throws Exception {
 		Message m =  new Message();
 		m.setContent("Hello " + user.getName()

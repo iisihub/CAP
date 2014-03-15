@@ -37,7 +37,7 @@ public class CapDateFormatter implements IFormatter {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String reformat(Object in) {
 		if (in != null) {
 			String str = (String) in;

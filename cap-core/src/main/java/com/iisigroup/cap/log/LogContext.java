@@ -60,7 +60,7 @@ public class LogContext extends InheritableThreadLocal {
 		}
 	}
 
-	@Override
+	
 	protected Object childValue(Object parentValue) {
 		return new LinkedHashMap((Map) parentValue);
 	}

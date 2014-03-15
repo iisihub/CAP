@@ -174,7 +174,6 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 		return createQuery(getType(), search).getResultList().iterator();
 	}// ;
 
-	@Override
 	public int count(ISearch search) {
 		return count(getType(), search);
 	}

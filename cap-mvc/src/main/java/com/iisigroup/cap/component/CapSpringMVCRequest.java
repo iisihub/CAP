@@ -52,7 +52,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see
 	 * tw.com.iisi.cap.component.ICapRequest#SetRequestObject(java.lang.Object)
 	 */
-	@Override
 	public void setRequestObject(Object obj) {
 		this.request = (HttpServletRequest) obj;
 		super.putAll(getReqParameter(request));
@@ -84,7 +83,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * 
 	 * @see tw.com.iisi.cap.component.ICapRequest#getParameter(java.lang.String)
 	 */
-	@Override
 	public String get(String key) {
 		return get(key, null);
 	}
@@ -95,7 +93,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see tw.com.iisi.cap.component.ICapRequest#getParameter(java.lang.String,
 	 * java.lang.String)
 	 */
-	@Override
 	public String get(String key, String defaultValue) {
 		Object value = null;
 		value = super.containsKey(key) ? super.get(key) : request
@@ -118,7 +115,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see tw.com.iisi.cap.component.ICapRequest#setParameter(java.lang.String,
 	 * java.lang.Object)
 	 */
-	@Override
 	public void setParameter(String key, Object value) {
 		super.put(key, value);
 	}
@@ -129,7 +125,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see tw.com.iisi.cap.component.ICapRequest#getServletRequest()
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public ServletRequest getServletRequest() {
 		return request;
 	}
@@ -140,7 +135,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see
 	 * tw.com.iisi.cap.component.ICapRequest#containsParamsKey(java.lang.String)
 	 */
-	@Override
 	public boolean containsParamsKey(String key) {
 		return request.getParameter(key) != null || super.containsKey(key);
 	}
@@ -152,7 +146,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * tw.com.iisi.cap.component.ICapRequest#getParamsAsInteger(java.lang.String
 	 * )
 	 */
-	@Override
 	public int getParamsAsInteger(String key) {
 		return Integer.valueOf(get(key, "0"));
 	}
@@ -164,12 +157,10 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * tw.com.iisi.cap.component.ICapRequest#getParamsAsInteger(java.lang.String
 	 * , int)
 	 */
-	@Override
 	public int getParamsAsInteger(String key, int defaultValue) {
 		return Integer.valueOf(get(key, String.valueOf(defaultValue)));
 	}
 
-	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -181,7 +172,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * com.iisi.cap.component.ICapRequest#getParamsAsStringArray(java.lang.String
 	 * )
 	 */
-	@Override
 	public String[] getParamsAsStringArray(String key) {
 		Object values = super.get(key);
 		if (values instanceof String[]) {
@@ -193,7 +183,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 		}
 	}
 
-	@Override
 	public String getParamsArrayAsString(String key) {
 		String[] ary = getParamsAsStringArray(key);
 		return CapString.array2String(ary);
@@ -204,7 +193,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * 
 	 * @see com.iisi.cap.component.ICapRequest#get(java.lang.String)
 	 */
-	@Override
 	public Object getObject(String key) {
 		Object value = null;
 		value = super.containsKey(key) ? super.get(key) : request
@@ -227,7 +215,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see com.iisi.cap.component.ICapRequest#getFile(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public <T> T getFile(String key) {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		return (T) multipartRequest.getFile(key);
@@ -239,7 +226,6 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 	 * @see com.iisi.cap.component.ICapRequest#getFiles(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public <T> List<T> getFiles(String key) {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		return (List<T>) multipartRequest.getFiles(key);

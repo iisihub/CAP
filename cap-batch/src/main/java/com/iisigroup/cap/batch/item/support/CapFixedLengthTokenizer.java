@@ -42,7 +42,7 @@ public class CapFixedLengthTokenizer extends FixedLengthTokenizer {
 		this.encoding = encoding;
 	}
 
-	@Override
+	
 	protected List<String> doTokenize(String line) {
 		List<String> tokens = new ArrayList<String>(columns.length);
 		int lineLength;

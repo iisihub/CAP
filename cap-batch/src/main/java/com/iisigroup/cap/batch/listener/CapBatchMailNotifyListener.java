@@ -69,7 +69,6 @@ public class CapBatchMailNotifyListener implements JobListener,
 	 * org.quartz.JobListener#jobWasExecuted(org.quartz.JobExecutionContext,
 	 * org.quartz.JobExecutionException)
 	 */
-	@Override
 	public void jobWasExecuted(JobExecutionContext context,
 			JobExecutionException jobException) {
 		String jobName = context.getJobDetail().getKey().getName();
@@ -135,7 +134,6 @@ public class CapBatchMailNotifyListener implements JobListener,
 	 * 
 	 * @see org.quartz.JobListener#getName()
 	 */
-	@Override
 	public String getName() {
 		return "CapBatchMailNotifyListener";
 	}
@@ -146,7 +144,6 @@ public class CapBatchMailNotifyListener implements JobListener,
 	 * @see
 	 * org.quartz.JobListener#jobToBeExecuted(org.quartz.JobExecutionContext)
 	 */
-	@Override
 	public void jobToBeExecuted(JobExecutionContext context) {
 		logger.debug("Job : {} is going to start...", new String[] { context
 				.getJobDetail().getKey().getName() });
@@ -158,13 +155,11 @@ public class CapBatchMailNotifyListener implements JobListener,
 	 * @see
 	 * org.quartz.JobListener#jobExecutionVetoed(org.quartz.JobExecutionContext)
 	 */
-	@Override
 	public void jobExecutionVetoed(JobExecutionContext context) {
 		logger.debug("Job : {} execution vetoed", new String[] { context
 				.getJobDetail().getKey().getName() });
 	}
 
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		jobParametersExtractor = new JobParametersExtractor();
 	}

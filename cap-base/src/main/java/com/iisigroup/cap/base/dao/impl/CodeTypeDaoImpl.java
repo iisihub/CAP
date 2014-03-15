@@ -34,7 +34,7 @@ import com.iisigroup.cap.dao.utils.SearchMode;
 //@Repository
 public class CodeTypeDaoImpl extends CapJpaDao<CodeType> implements CodeTypeDao {
 
-	@Override
+	
 	public List<CodeType> findByCodeType(String codetype, String locale) {
 		ISearch search = createSearchTemplete();
 		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
@@ -45,7 +45,7 @@ public class CodeTypeDaoImpl extends CapJpaDao<CodeType> implements CodeTypeDao 
 		return list;
 	}
 
-	@Override
+	
 	public CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
 			String locale) {
 		ISearch search = createSearchTemplete();
@@ -56,7 +56,7 @@ public class CodeTypeDaoImpl extends CapJpaDao<CodeType> implements CodeTypeDao 
 		return findUniqueOrNone(search);
 	}
 
-	@Override
+	
 	public List<CodeType> findByCodeType(String[] codetypes, String locale) {
 		ISearch search = createSearchTemplete();
 		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
@@ -66,7 +66,7 @@ public class CodeTypeDaoImpl extends CapJpaDao<CodeType> implements CodeTypeDao 
 		return find(search);
 	}
 
-	@Override
+	
 	public List<CodeType> findByCodeTypeAndCodeDesc(String cType,
 			String codeDesc, String locale) {
 		ISearch search = createSearchTemplete();
@@ -76,7 +76,7 @@ public class CodeTypeDaoImpl extends CapJpaDao<CodeType> implements CodeTypeDao 
 		return find(search);
 	}
 
-	@Override
+	
 	public CodeType findByOid(String oid) {
 		return find(oid);
 	}

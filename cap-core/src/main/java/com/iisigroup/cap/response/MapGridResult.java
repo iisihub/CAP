@@ -162,13 +162,13 @@ public class MapGridResult extends AjaxFormResult implements
 		return this;
 	}
 
-	@Override
+	
 	public String getResult() {
 		resultMap.put(IGridEnum.PAGEROWS.getCode(), getRowDataToJSON());
 		return resultMap.toString();
 	}
 
-	@Override
+	
 	public String getLogMessage() {
 		StringBuffer b = new StringBuffer();
 		b.append("page=").append(resultMap.get(IGridEnum.PAGE.getCode()))
@@ -179,7 +179,7 @@ public class MapGridResult extends AjaxFormResult implements
 		return b.toString();
 	}
 
-	@Override
+	
 	public void add(IResult result) {
 		JSONObject json = JSONObject.fromObject(result);
 		resultMap.putAll(json);
@@ -317,12 +317,12 @@ public class MapGridResult extends AjaxFormResult implements
 		return this.orderBy;
 	}
 
-	@Override
+	
 	public Map<String, IFormatter> getDataReformatter() {
 		return this.dataReformatter;
 	}
 
-	@Override
+	
 	public void respondResult(ServletResponse response) {
 		new StringResponse(getContextType(), getEncoding(), getResult())
 				.respond(response);

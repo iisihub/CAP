@@ -52,7 +52,7 @@ public class SequenceServiceImpl implements SequenceService {
 		this.jdbc = jdbc;
 	}
 
-	@Override
+	
 	public Page<Map<String, Object>> findPage(int start, int fetch) {
 		return jdbc.queryForPage("Sequence.listAll", null, start, fetch);
 	}
@@ -154,7 +154,7 @@ public class SequenceServiceImpl implements SequenceService {
 		args.put("seqNode", seqNode);
 		Sequence thisSeq = jdbc.queryForObject("Sequence.findBySeqNode", args,
 				new RowMapper<Sequence>() {
-					@Override
+					
 					public Sequence mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
 						Sequence seq = new Sequence();

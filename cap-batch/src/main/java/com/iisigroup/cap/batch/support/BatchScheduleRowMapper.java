@@ -29,7 +29,7 @@ import com.iisigroup.cap.batch.model.BatchSchedule;
  */
 public class BatchScheduleRowMapper implements RowMapper<BatchSchedule> {
 
-	@Override
+	
 	public BatchSchedule mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BatchSchedule sch = new BatchSchedule();
 		sch.setSchId(rs.getString("SCHID"));

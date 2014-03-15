@@ -41,7 +41,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
 	 */
-	@Override
+	
 	public void setTxnCd(String txnCd) {
 		txnBean.setTxnCd(txnCd);
 	}
@@ -73,7 +73,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
 	 */
-	@Override
+	
 	public void setSendData(Object requestData) {
 		txnBean.setSendData(requestData);
 	}
@@ -83,7 +83,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
 	 */
-	@Override
+	
 	public void execute() throws CapException {
 		beforeAction();
 		new excuteThread().start();
@@ -94,7 +94,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
 	 */
-	@Override
+	
 	public Object getResultData() {
 		return null;
 	}
@@ -136,7 +136,7 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
 	 */
 	private class excuteThread extends Thread {
 
-		@Override
+		
 		public void run() {
 			try {
 				logger.info("send Message Start");

@@ -52,12 +52,12 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	 * com.bqd.mci.service.CodeTypeService#saveCodeType(com.bqd.mci.model.CodeType
 	 * )
 	 */
-	@Override
+	
 	public void saveCodeType(CodeType codeType) {
 		dao.save(codeType);
 	}
 
-	@Override
+	
 	public Map<String, String> findByCodeType(String codeType, String locale) {
 		List<CodeType> codeList = dao.findByCodeType(codeType, locale);
 		Map<String, String> m = new LinkedHashMap<String, String>();
@@ -69,7 +69,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 		return m;
 	}
 
-	@Override
+	
 	public Map<String, Map<String, String>> findByCodeTypes(String[] types,
 			String locale) {
 		List<CodeType> codes = dao.findByCodeType(types, locale);
@@ -88,7 +88,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 		return m;
 	}
 
-	@Override
+	
 	public Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types,
 			String locale) {
 		List<CodeType> codes = dao.findByCodeType(types, locale);
@@ -105,18 +105,18 @@ public class CodeTypeServiceImpl extends AbstractService implements
 		return m;
 	}
 
-	@Override
+	
 	public CodeType getByCodeTypeAndValue(String type, String value,
 			String locale) {
 		return dao.findByCodeTypeAndCodeValue(type, value, locale);
 	}
 
-	@Override
+	
 	public CodeType getById(String oid) {
 		return dao.find(oid);
 	}
 
-	@Override
+	
 	public void deleteById(String oid) {
 		CodeType codeType = dao.find(oid);
 		if (codeType != null) {
@@ -131,7 +131,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	 * com.iisigroup.cap.base.service.CodeTypeService#findByCodeType(java.lang
 	 * .String)
 	 */
-	@Override
+	
 	public Map<String, String> findByCodeType(String codeType) {
 		return findByCodeType(codeType,
 				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
@@ -144,7 +144,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	 * com.iisigroup.cap.base.service.CodeTypeService#findByCodeTypes(java.lang
 	 * .String[])
 	 */
-	@Override
+	
 	public Map<String, Map<String, String>> findByCodeTypes(String[] types) {
 		return findByCodeTypes(types,
 				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
@@ -157,7 +157,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	 * com.iisigroup.cap.base.service.CodeTypeService#getCodeTypeByTypes(java
 	 * .lang.String[])
 	 */
-	@Override
+	
 	public Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types) {
 		return getCodeTypeByTypes(types,
 				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
@@ -170,7 +170,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	 * com.iisigroup.cap.base.service.CodeTypeService#getByCodeTypeAndValue(
 	 * java.lang.String, java.lang.String)
 	 */
-	@Override
+	
 	public CodeType getByCodeTypeAndValue(String type, String value) {
 		return getByCodeTypeAndValue(type, value,
 				SimpleContextHolder.get(CapWebUtil.localeKey).toString());

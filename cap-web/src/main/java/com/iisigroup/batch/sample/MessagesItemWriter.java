@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 @Component("messageWriter")
 public class MessagesItemWriter implements ItemWriter<Message>{
 
-	@Override
+	
 	public void write(List<? extends Message> items) throws Exception {
 		for (Message m : items){
 			System.out.println(m.getContent());

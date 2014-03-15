@@ -49,7 +49,7 @@ public class SearchModeParameter {
 		return value;
 	}
 
-	@Override
+	
 	public String toString() {
 		return new StringBuffer().append(key).append(" ").append(mode)
 				.append(" ").append(value).toString();

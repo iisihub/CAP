@@ -42,7 +42,7 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
 		return this;
 	}
 
-	@Override
+	
 	public Map<String, Object> mapRow(ResultSet rs, int rowNum)
 			throws SQLException {
 		ResultSetMetaData rsmd = rs.getMetaData();
@@ -62,7 +62,7 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
 		return mapOfColValues;
 	}// ;
 
-	@Override
+	
 	protected Object getColumnValue(ResultSet rs, int index)
 			throws SQLException {
 		Object obj = super.getColumnValue(rs, index);

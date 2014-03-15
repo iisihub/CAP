@@ -78,7 +78,6 @@ public class CapReloadableResourceBundleMessageSource
 		this.basePath = basePath;
 	}
 
-	@Override
 	public void setApplicationContext(ApplicationContext ctx) {
 		applicationContext = ctx;
 	}
@@ -91,7 +90,6 @@ public class CapReloadableResourceBundleMessageSource
 	 * @see
 	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		Set<String> l = new HashSet<String>();
 		String i18nPattern = basePath + "/**/*.properties";

@@ -31,7 +31,7 @@ import com.iisigroup.cap.batch.model.BatchJob;
  */
 public class BatchJobRowMapper implements RowMapper<BatchJob> {
 
-	@Override
+	
 	public BatchJob mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BatchJob job = new BatchJob();
 		job.setJobId(rs.getString("JOBID"));

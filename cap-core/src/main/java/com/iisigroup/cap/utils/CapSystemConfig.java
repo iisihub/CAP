@@ -54,7 +54,6 @@ public class CapSystemConfig implements InitializingBean {
 		return properties;
 	}
 
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		//do nothing
 	}

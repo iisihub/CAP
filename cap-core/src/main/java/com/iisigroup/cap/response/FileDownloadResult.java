@@ -75,17 +75,14 @@ public class FileDownloadResult implements IResult {
 	 * 
 	 * @see tw.com.iisi.cap.response.IResult#getResult()
 	 */
-	@Override
 	public String getResult() {
 		return "";
 	}// ;
 
-	@Override
 	public String getLogMessage() {
 		return new StringBuffer("Download file:").append(_file).toString();
 	}
 
-	@Override
 	public void add(IResult result) {
 		if (result instanceof FileDownloadResult) {
 			FileDownloadResult r = (FileDownloadResult) result;
@@ -96,22 +93,18 @@ public class FileDownloadResult implements IResult {
 		}
 	}
 
-	@Override
 	public String getContextType() {
 		return this._contentType;
 	}
 
-	@Override
 	public String getEncoding() {
 		return this.encoding;
 	}
 
-	@Override
 	public void setContextType(String cxtType) {
 		this._contentType = cxtType;
 	}
 
-	@Override
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}

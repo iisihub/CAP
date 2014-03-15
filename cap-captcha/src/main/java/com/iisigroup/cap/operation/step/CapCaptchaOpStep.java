@@ -44,7 +44,7 @@ public class CapCaptchaOpStep extends AbstractCustomizeOpStep {
 
 	protected static Log logger = LogFactory.getLog(CapCaptchaOpStep.class);
 
-	@Override
+	
 	public OpStepContext execute(OpStepContext ctx, IRequest params,
 			IHandler handler) {
 		String methodId = params.get(FormHandler.FORM_ACTION, "");

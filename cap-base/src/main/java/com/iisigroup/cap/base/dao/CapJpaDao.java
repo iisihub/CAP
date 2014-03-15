@@ -33,7 +33,7 @@ public class CapJpaDao<T> extends GenericDao<T> {
 	// @PersistenceContext(unitName = "pu-cap")
 	private EntityManager entityManager;
 
-	@Override
+	
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}

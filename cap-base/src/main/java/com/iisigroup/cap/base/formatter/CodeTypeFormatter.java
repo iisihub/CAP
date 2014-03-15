@@ -62,7 +62,7 @@ public class CodeTypeFormatter implements IFormatter {
 	 * @see com.iisigroup.cap.formatter.IFormatter#reformat(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String reformat(Object in) {
 		if (in instanceof BigDecimal) {
 			in = ((BigDecimal) in).toPlainString();

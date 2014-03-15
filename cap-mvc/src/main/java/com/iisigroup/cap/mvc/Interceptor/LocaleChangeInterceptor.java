@@ -33,7 +33,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
 public class LocaleChangeInterceptor extends
 		org.springframework.web.servlet.i18n.LocaleChangeInterceptor {
 
-	@Override
+	
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler)
 			throws ServletException {

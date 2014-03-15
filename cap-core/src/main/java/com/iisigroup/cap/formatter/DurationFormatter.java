@@ -59,7 +59,7 @@ public class DurationFormatter implements IBeanFormatter {
 	 * @see com.iisigroup.cap.formatter.IFormatter#reformat(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String reformat(Object in) {
 		Timestamp start = null, end = null;
 		if (in instanceof GenericBean) {

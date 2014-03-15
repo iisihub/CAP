@@ -34,7 +34,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 public class FieldSetItemSqlParameterSourceProvider implements
 		ItemSqlParameterSourceProvider<FieldSet> {
 
-	@Override
 	public SqlParameterSource createSqlParameterSource(FieldSet item) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : item.getProperties().entrySet()) {

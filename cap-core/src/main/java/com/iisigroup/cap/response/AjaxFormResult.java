@@ -263,17 +263,14 @@ public class AjaxFormResult implements IResult {
 		return resultMap.get(key);
 	}
 
-	@Override
 	public String getResult() {
 		return resultMap.toString();
 	}
 
-	@Override
 	public String getLogMessage() {
 		return getResult();
 	}
 
-	@Override
 	public void add(IResult result) {
 		if (result != null) {
 			JSONObject json = JSONObject.fromObject(result.getResult());
@@ -281,7 +278,6 @@ public class AjaxFormResult implements IResult {
 		}
 	}
 
-	@Override
 	public String getContextType() {
 		if (contentType != null) {
 			return this.contentType;
@@ -290,7 +286,6 @@ public class AjaxFormResult implements IResult {
 		}
 	}
 
-	@Override
 	public String getEncoding() {
 		if (encoding != null) {
 			return this.encoding;
@@ -299,17 +294,14 @@ public class AjaxFormResult implements IResult {
 		}
 	}
 
-	@Override
 	public void setContextType(String cxtType) {
 		this.contentType = cxtType;
 	}
 
-	@Override
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 
-	@Override
 	public void respondResult(ServletResponse response) {
 		new StringResponse(getContextType(), getEncoding(), getResult())
 				.respond(response);

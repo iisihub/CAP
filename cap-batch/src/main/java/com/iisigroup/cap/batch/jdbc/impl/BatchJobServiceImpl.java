@@ -66,7 +66,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * @see com.iisigroup.cap.batch.service.BatchJobService#listJobResources()
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<org.springframework.core.io.Resource> listJobResources() {
 		List<BatchJob> list = jdbc.query("batchJob.findPage", null,
 				MapUtils.EMPTY_MAP, new BatchJobRowMapper());
@@ -78,25 +77,21 @@ public class BatchJobServiceImpl implements BatchJobService {
 		return resources;
 	}// ;
 
-	@Override
 	public org.springframework.core.io.Resource getJobResource(BatchJob job) {
 		return CapAppContext.getResource(new StringBuffer(config.getProperty(
 				"batch.jobsroot", "")).append(job.getJobResource()).toString());
 	}
 
-	@Override
 	public Page<BatchJob> findJobsPage(ISearch search) {
 		return jdbc.queryForPage("batchJob.findPage", search,
 				new BatchJobRowMapper());
 	}
 
-	@Override
 	public List<BatchJob> listJobs() {
 		return jdbc.query("batchJob.findPage", null, null,
 				new BatchJobRowMapper());
 	}
 
-	@Override
 	public BatchJob findJobById(String jobId) {
 		Map<String, Object> job = new HashMap<String, Object>();
 		job.put("jobId", jobId);
@@ -104,21 +99,18 @@ public class BatchJobServiceImpl implements BatchJobService {
 				new BatchJobRowMapper());
 	}
 
-	@Override
 	public void updateJob(BatchJob job) {
 		Map<String, Object> args = CapBeanUtil.bean2Map(job,
 				CapBeanUtil.getFieldName(BatchJob.class, true));
 		jdbc.update("batchJob.update", args);
 	}
 
-	@Override
 	public void insertJob(BatchJob job) {
 		Map<String, Object> args = CapBeanUtil.bean2Map(job,
 				CapBeanUtil.getFieldName(BatchJob.class, true));
 		jdbc.update("batchJob.insert", args);
 	}
 
-	@Override
 	public void deleteJob(String jobId) {
 		Map<String, Object> job = new HashMap<String, Object>();
 		job.put("jobId", jobId);
@@ -126,13 +118,11 @@ public class BatchJobServiceImpl implements BatchJobService {
 		jdbc.update("batchSch.deleteByJob", job);
 	}
 
-	@Override
 	public Page<BatchSchedule> findSchPage(ISearch search) {
 		return jdbc.queryForPage("batchSch.findPage", search,
 				new BatchScheduleRowMapper());
 	}
 
-	@Override
 	public List<BatchSchedule> findSchByHostId(List<String> hostIds) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("hostIds", hostIds);
@@ -140,7 +130,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 				new BatchScheduleRowMapper());
 	}
 
-	@Override
 	public BatchSchedule findSchById(String schId) {
 		Map<String, Object> sch = new HashMap<String, Object>();
 		sch.put("schId", schId);
@@ -148,52 +137,44 @@ public class BatchJobServiceImpl implements BatchJobService {
 				new BatchScheduleRowMapper());
 	}
 
-	@Override
 	public void updateSch(BatchSchedule schedule) {
 		Map<String, Object> args = CapBeanUtil.bean2Map(schedule,
 				CapBeanUtil.getFieldName(BatchSchedule.class, true));
 		jdbc.update("batchSch.update", args);
 	}
 
-	@Override
 	public void insertSch(BatchSchedule schedule) {
 		Map<String, Object> args = CapBeanUtil.bean2Map(schedule,
 				CapBeanUtil.getFieldName(BatchSchedule.class, true));
 		jdbc.update("batchSch.insert", args);
 	}
 
-	@Override
 	public void deleteSch(String schId) {
 		Map<String, Object> sch = new HashMap<String, Object>();
 		sch.put("schId", schId);
 		jdbc.update("batchSch.delete", sch);
 	}
 
-	@Override
 	public Page<Map<String, Object>> findExecutionsPage(ISearch search) {
 		return jdbc.queryForPage("JobExecution.findPage", search);
 	}// ;
 
-	@Override
 	public List<Map<String, Object>> findSteps(String executionId) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("jobExecutionId", executionId);
 		return jdbc.query("stepExecution.findByExId", args);
 	}// ;
 
-	@Override
 	public Map<String, Object> findExecutionDetail(String executionId) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("jobExecutionId", executionId);
 		return jdbc.queryForMap("jobExecution.findById", args);
 	}
 
-	@Override
 	public JobParameters findJobParams(String executionId) {
 		final Map<String, JobParameter> map = new HashMap<String, JobParameter>();
 		RowCallbackHandler handler = new RowCallbackHandler() {
 
-			@Override
 			public void processRow(ResultSet rs) throws SQLException {
 				ParameterType type = ParameterType.valueOf(rs
 						.getString("TYPE_CD"));
@@ -216,7 +197,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 		return new JobParameters(map);
 	}// ;
 
-	@Override
 	public void updateExecution(Long executionId, String executor) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("jobExecutionId", executionId);

@@ -43,7 +43,7 @@ public class CapUserSecurityInterceptor extends HandlerInterceptorAdapter {
 	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
 	 * java.lang.Object)
 	 */
-	@Override
+	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		CapUserDetails user = CapSecurityContext.getUser();
 		// try {

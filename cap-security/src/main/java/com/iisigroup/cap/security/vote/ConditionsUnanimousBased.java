@@ -63,7 +63,6 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 	 * @param configAttributes
 	 *            ConfigAttributeDefinition
 	 */
-	@Override
 	public void decide(Authentication authentication, Object object,
 			Collection<ConfigAttribute> configAttributes) {
 		int grant = 0;
@@ -123,13 +122,11 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 
 	}// ;
 
-	@Override
 	public boolean supports(ConfigAttribute attribute) {
 		return (getConditionVoters().containsKey(attribute.toString()));
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Override
 	public boolean supports(Class clazz) {
 		return true;
 	}
@@ -143,12 +140,10 @@ public class ConditionsUnanimousBased implements AccessDecisionManager,
 		this.conditionVoters = conditionVoters;
 	}
 
-	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		this.messages = new MessageSourceAccessor(messageSource);
 	}
 
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		Assert.notEmpty(this.conditionVoters,
 				"AccessDecisionVoters is required");

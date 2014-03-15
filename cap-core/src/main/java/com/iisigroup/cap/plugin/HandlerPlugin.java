@@ -55,7 +55,7 @@ public abstract class HandlerPlugin implements IPlugin, IHandler {
 		this.request = request;
 	}
 
-	@Override
+	
 	public String getPluginName() {
 		return this.getClass().getSimpleName();
 	}

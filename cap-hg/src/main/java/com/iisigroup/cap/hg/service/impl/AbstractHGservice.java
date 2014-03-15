@@ -37,7 +37,7 @@ public abstract class AbstractHGservice implements IHGService {
 	/* (non-Javadoc)
 	 * @see com.iisi.cap.hg.service.IHGService#setProperties(java.util.Map)
 	 */
-	@Override
+	
 	public void setProperties(Map<String, Object> property){
 		if (property == null) {
 			throw new CapException("http property error", getClass());
@@ -52,7 +52,7 @@ public abstract class AbstractHGservice implements IHGService {
 	/* (non-Javadoc)
 	 * @see com.iisi.cap.hg.service.IHGService#setProperty(java.lang.String, java.lang.Object)
 	 */
-	@Override
+	
 	public void setProperty(String name, Object value) {
 		if (properties == null) {
 			properties = new HashMap<String, Object>();
@@ -65,7 +65,7 @@ public abstract class AbstractHGservice implements IHGService {
 	 * @see com.iisi.cap.hg.service.IHGService#getProperties(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public <T> T getProperty(Object name) {
 		return (T) (properties != null && properties.containsKey(name) ? properties
 				.get(name) : null);

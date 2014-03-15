@@ -68,7 +68,6 @@ public class ErrorResult implements IErrorResult {
 	 * 
 	 * @see tw.com.iisi.cap.response.IResult#getResult()
 	 */
-	@Override
 	public String getResult() {
 		return errorMessage.toString();
 	}
@@ -116,14 +115,12 @@ public class ErrorResult implements IErrorResult {
 		}
 	}// ;
 
-	@Override
 	public void add(IResult result) {
 		JSONObject json = JSONObject.fromObject(result);
 		this.errorMessage.putAll(json);
 		this.logMessage = result.getLogMessage();
 	}
 
-	@Override
 	public String getContextType() {
 		if (contentType != null) {
 			return this.contentType;
@@ -132,7 +129,6 @@ public class ErrorResult implements IErrorResult {
 		}
 	}
 
-	@Override
 	public String getEncoding() {
 		if (encoding != null) {
 			return this.encoding;
@@ -141,17 +137,14 @@ public class ErrorResult implements IErrorResult {
 		}
 	}
 
-	@Override
 	public void setContextType(String cxtType) {
 		this.contentType = cxtType;
 	}
 
-	@Override
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 
-	@Override
 	public void respondResult(ServletResponse response) {
 		new StringResponse(getContextType(), getEncoding(), getResult())
 				.respond(response);

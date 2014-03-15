@@ -52,7 +52,7 @@ public class NumericFormatter implements IFormatter {
 	 * @throws CapFormatException
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String reformat(Object in) {
 
 		BigDecimal dec = in instanceof BigDecimal ? (BigDecimal) in : CapMath

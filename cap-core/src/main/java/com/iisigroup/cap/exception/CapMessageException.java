@@ -98,7 +98,7 @@ public class CapMessageException extends CapException {
 		super(message, cause, causeClass);
 	}
 
-	@Override
+	
 	public String getMessage() {
 		return CapString.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
 	}

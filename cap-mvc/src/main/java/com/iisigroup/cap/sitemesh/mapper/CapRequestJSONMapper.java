@@ -72,7 +72,7 @@ public class CapRequestJSONMapper extends AbstractDecoratorMapper {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public Decorator getDecorator(HttpServletRequest request, Page page) {
 		if ((decoratorFile == null || decoratorFile.contains(page
 				.getProperties().get("meta.decorator")))

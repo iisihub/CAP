@@ -26,7 +26,7 @@ import java.util.Locale;
  */
 public class SessionLocaleResolver extends org.springframework.web.servlet.i18n.SessionLocaleResolver {
 
-	@Override
+	
 	public void setDefaultLocale(Locale defaultLocale) {
 		Locale.setDefault(defaultLocale);
 		super.setDefaultLocale(defaultLocale);

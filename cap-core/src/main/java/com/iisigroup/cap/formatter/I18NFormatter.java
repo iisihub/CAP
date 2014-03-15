@@ -47,7 +47,7 @@ public class I18NFormatter implements IFormatter {
 	 * @see com.iisigroup.cap.formatter.IFormatter#reformat(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String reformat(Object in) {
 		String key = CapString.trimNull(in);
 		if (!CapString.isEmpty(key)) {

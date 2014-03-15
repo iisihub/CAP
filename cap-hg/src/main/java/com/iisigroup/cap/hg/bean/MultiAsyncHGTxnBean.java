@@ -56,7 +56,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
 	 */
-	@Override
+	
 	public void execute() throws CapException {
 		List<IHGService> rService = new ArrayList<IHGService>();
 		List<IHGService> nrService = new ArrayList<IHGService>();
@@ -134,7 +134,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
 	 */
-	@Override
+	
 	public void setSendData(Object sendData) {
 		this.sendData = sendData;
 	}
@@ -148,7 +148,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
 	 */
-	@Override
+	
 	public void setTxnCd(String txnCd) {
 		this.txnCd = txnCd;
 	}
@@ -158,7 +158,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
 	 * 
 	 * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
 	 */
-	@Override
+	
 	public Object getResultData() {
 		return resultData;
 	}

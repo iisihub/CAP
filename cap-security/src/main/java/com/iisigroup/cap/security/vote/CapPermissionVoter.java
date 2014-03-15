@@ -40,7 +40,7 @@ public class CapPermissionVoter extends RoleVoter {
 	protected ISecurityService securityService;
 
 	@SuppressWarnings("rawtypes")
-	@Override
+	
 	public int vote(Authentication authentication, Object object,
 			Collection<ConfigAttribute> attributes) {
 		int result = ACCESS_ABSTAIN;

@@ -45,7 +45,7 @@ public class ForwardFilter implements Filter {
 	 * @throws ServletException
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public void init(FilterConfig filterConfig) throws ServletException {
 		filterRules = new LinkedHashMap<String, String>();
 		Enumeration<String> filter = filterConfig.getInitParameterNames();
@@ -70,7 +70,7 @@ public class ForwardFilter implements Filter {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	@Override
+	
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
@@ -111,7 +111,7 @@ public class ForwardFilter implements Filter {
 	 * destroy
 	 * </pre>
 	 */
-	@Override
+	
 	public void destroy() {
 		// do nothing
 	}

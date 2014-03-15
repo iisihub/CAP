@@ -84,12 +84,12 @@ public class CapHttpService extends AbstractHGservice {
 	 * @see com.iisi.cap.hg.service.IHGService#getStatus()
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public ConnStatusEnum getStatus() {
 		return status;
 	}
 
-	@Override
+	
 	public void setStatus(ConnStatusEnum status) {
 		this.status = status;
 	}
@@ -109,7 +109,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * @see com.iisi.cap.hg.service.IHGService#getMessage()
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public Object getReceiveData() throws CapException {
 		return responseData;
 	}
@@ -128,7 +128,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * @see com.iisigroup.cap.hg.service.IHGService#setHeader(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public void setHeader(Object data) {
 		this.header = (Map<String, String>) data;
 
@@ -146,7 +146,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * 
 	 * @see com.iisi.cap.hg.service.IHGService#setSendMessage(java.lang.Object)
 	 */
-	@Override
+	
 	public void setSendData(Object data) throws CapException {
 		this.sendData = data;
 	}
@@ -224,7 +224,7 @@ public class CapHttpService extends AbstractHGservice {
 			httpClient.getConnectionManager().shutdown();
 		}
 		// httpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
-		// @Override
+		// 
 		// public boolean retryRequest(IOException exception, int count,
 		// HttpContext context) {
 		// return !(count > 3);
@@ -244,7 +244,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * 
 	 * @see com.iisi.cap.hg.service.IHGService#execute()
 	 */
-	@Override
+	
 	public void execute() throws Exception {
 		if (!ConnStatusEnum.INIT.equals(status)) {
 			throw new CapException("init error", getClass());
@@ -270,7 +270,7 @@ public class CapHttpService extends AbstractHGservice {
 	 *          </ul>
 	 */
 	private class Async extends Thread {
-		@Override
+		
 		public void run() {
 			try {
 				excuteHttp();
@@ -286,7 +286,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * @see com.iisi.cap.hg.service.IHGService#initConnection()
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public void initConnection() throws CapException {
 		httpPost = new HttpPost();
 		if (this.header instanceof Map) {
@@ -309,7 +309,7 @@ public class CapHttpService extends AbstractHGservice {
 			httpClient
 					.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
 
-						@Override
+						
 						public boolean retryRequest(IOException exception,
 								int executionCount, HttpContext context) {
 							if (executionCount > count) {
@@ -344,7 +344,7 @@ public class CapHttpService extends AbstractHGservice {
 	 * @see com.iisi.cap.hg.service.IHGService#errorHandle(java.lang.Exception)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public String errorHandle(Exception e) {
 		logger.error(e.getMessage(), e);
 		if (e instanceof HttpHostConnectException) {

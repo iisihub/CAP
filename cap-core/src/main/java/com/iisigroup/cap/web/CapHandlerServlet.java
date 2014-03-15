@@ -63,7 +63,7 @@ public class CapHandlerServlet extends HttpServlet {
 
 	protected PluginManager pluginMgr;
 
-	@Override
+	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		String manager = config.getInitParameter("pluginManager");
@@ -78,13 +78,13 @@ public class CapHandlerServlet extends HttpServlet {
 		}
 	}
 
-	@Override
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		doHandlerAction(req, resp);
 	}
 
-	@Override
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		doHandlerAction(req, resp);

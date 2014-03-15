@@ -31,7 +31,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 public class MapItemSqlParameterSourceProvider implements
 		ItemSqlParameterSourceProvider<Map<String, Object>> {
 
-	@Override
 	public SqlParameterSource createSqlParameterSource(Map<String, Object> item) {
 		return new MapSqlParameterSource(item);
 	}

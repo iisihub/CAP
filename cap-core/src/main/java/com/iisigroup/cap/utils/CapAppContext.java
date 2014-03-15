@@ -26,7 +26,7 @@ import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 public class CapAppContext implements ApplicationContextAware {
 	protected static Log logger = LogFactory.getLog(CapAppContext.class);
 
-	@Override
+	
 	public void setApplicationContext(ApplicationContext ctx) {
 		applicationContext = ctx;
 	}

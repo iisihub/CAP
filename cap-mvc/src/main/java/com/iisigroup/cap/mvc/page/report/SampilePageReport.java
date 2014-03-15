@@ -36,7 +36,7 @@ public class SampilePageReport implements IPageReport {
 
 	
 
-	@Override
+	
 	public Map<String, Object> excute(IRequest request) {
 		Map<String, Object> m = new HashMap<String, Object>();
 		// TODO put data to m

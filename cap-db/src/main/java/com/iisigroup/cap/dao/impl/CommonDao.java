@@ -37,13 +37,13 @@ public class CommonDao<T extends IDataObject> extends GenericDao<IDataObject>
 		this.entityManager = entityManager;
 	}
 
-	@Override
+	
 	public EntityManager getEntityManager() {
 		return this.entityManager;
 	}
 
 	@SuppressWarnings("hiding")
-	@Override
+	
 	public <T> T findById(Class<T> clazz, String id) {
 		return getEntityManager().find(clazz, id);
 	}

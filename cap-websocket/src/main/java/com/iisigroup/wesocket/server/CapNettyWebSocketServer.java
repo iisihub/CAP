@@ -39,7 +39,6 @@ public class CapNettyWebSocketServer {
 	        
 	        server.addConnectListener(new ConnectListener() {
 				
-				@Override
 				public void onConnect(SocketIOClient client) {
 					// TODO Auto-generated method stub
 					System.out.println(client);
@@ -48,7 +47,6 @@ public class CapNettyWebSocketServer {
 				}
 			});
 	        server.addEventListener("chatevent", ChatObject.class, new DataListener<ChatObject>() {
-	            @Override
 	            public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest) {
 	            		Collection<SocketIOClient> clients = server.getAllClients();
 	            		for(SocketIOClient c : clients){
