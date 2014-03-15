@@ -32,6 +32,7 @@ import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.ByteArrayDownloadResult;
 import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.security.annotation.Captcha;
 
 /**
  * <pre>
@@ -88,6 +89,17 @@ public class SampleHandler extends MFormHandler {
 	
 	
 	public IResult queryMenu(IRequest request){
-		return new AjaxFormResult("{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}, {'name':'WebSocket','url':'webSocket'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
+		return new AjaxFormResult("{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}, {'name':'WebSocket','url':'webSocket'},{'name':'動態驗証碼','url':'captcha'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
+	}
+	
+	/**
+	 * 動態驗証測試 
+	 * 掛上 @Captcha 即可自動檢查 captcha 欄位 
+	 * @param request
+	 * @return IResult
+	 */
+	@Captcha
+	public IResult checkCaptcha(IRequest request){
+		return new AjaxFormResult().set(Constants.AJAX_NOTIFY_MESSAGE, "check ok!");
 	}
 }
