@@ -15,9 +15,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import net.sf.json.JSONArray;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.iisigroup.cap.action.IAction;
 import com.iisigroup.cap.annotation.HandlerType;
@@ -56,7 +57,8 @@ import com.iisigroup.cap.utils.CapString;
  */
 public abstract class MFormHandler extends HandlerPlugin {
 
-	@Resource(name = "handlerOpMapping")
+	@Autowired
+	@Qualifier("handlerOpMapping")
 	private CapParameter handlerOp;
 
 	/**

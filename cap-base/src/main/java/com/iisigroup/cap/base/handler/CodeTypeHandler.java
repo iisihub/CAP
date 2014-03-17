@@ -17,8 +17,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
@@ -62,10 +62,11 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("codetypehandler")
 public class CodeTypeHandler extends MFormHandler {
 
-	@Resource
+	@Autowired
 	private CodeTypeService codeTypeService;
 
-	@Resource(name = "CommonBeanService")
+	@Autowired
+	@Qualifier("CommonBeanService")
 	private ICommonService commonService;
 
 	@HandlerType(HandlerTypeEnum.GRID)

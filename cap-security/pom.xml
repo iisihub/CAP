@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>cap-security</artifactId>
 	<properties>
-		<spring-security.version>3.1.1.RELEASE</spring-security.version>
+		<spring-security.version>3.1.2.RELEASE</spring-security.version>
 	</properties>
 	<dependencies>
 		<!-- Project ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

@@ -15,7 +15,7 @@
 	<dependency>
 		<groupId>com.jhlabs</groupId>
 		<artifactId>simplecaptcha</artifactId>
-		<version>1.2.1</version>
+		<version>1.2.1-jdk1.5</version>
 	</dependency>
 
   </dependencies>

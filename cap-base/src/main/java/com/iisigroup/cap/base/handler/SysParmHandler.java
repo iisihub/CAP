@@ -14,8 +14,8 @@ package com.iisigroup.cap.base.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -51,7 +51,8 @@ import com.iisigroup.cap.utils.CapDate;
 @Controller("sysparmhandler")
 public class SysParmHandler extends MFormHandler {
 
-	@Resource(name = "CommonBeanService")
+	@Autowired
+	@Qualifier("CommonBeanService")
 	private ICommonService commonSrv;
 
 	@HandlerType(HandlerTypeEnum.GRID)

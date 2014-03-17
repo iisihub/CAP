@@ -18,12 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.MapUtils;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameter.ParameterType;
 import org.springframework.batch.core.JobParameters;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
 import com.iisigroup.cap.batch.model.BatchJob;
@@ -53,7 +52,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 
 	private CapNamedJdbcTemplate jdbc;
 
-	@Resource
+	@Autowired
 	private CapSystemConfig config;
 
 	public void setJdbc(CapNamedJdbcTemplate jdbc) {

@@ -13,8 +13,7 @@ package com.iisigroup.cap.base.handler;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -44,7 +43,7 @@ import com.iisigroup.cap.response.MapGridResult;
 @Controller("sequencehandler")
 public class SequenceHandler extends MFormHandler {
 
-	@Resource
+	@Autowired
 	private SequenceService seqSrv;
 
 	@HandlerType(HandlerTypeEnum.GRID)

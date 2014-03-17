@@ -14,8 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeTypeDao;
@@ -42,7 +41,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
 public class CodeTypeServiceImpl extends AbstractService implements
 		CodeTypeService {
 
-	@Resource
+	@Autowired
 	private CodeTypeDao dao;
 
 	/*
@@ -134,7 +133,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	
 	public Map<String, String> findByCodeType(String codeType) {
 		return findByCodeType(codeType,
-				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+				SimpleContextHolder.<Object>get(CapWebUtil.localeKey).toString());
 	}
 
 	/*
@@ -147,7 +146,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	
 	public Map<String, Map<String, String>> findByCodeTypes(String[] types) {
 		return findByCodeTypes(types,
-				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+				SimpleContextHolder.<Object>get(CapWebUtil.localeKey).toString());
 	}
 
 	/*
@@ -160,7 +159,7 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	
 	public Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types) {
 		return getCodeTypeByTypes(types,
-				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+				SimpleContextHolder.<Object>get(CapWebUtil.localeKey).toString());
 	}
 
 	/*
@@ -173,6 +172,6 @@ public class CodeTypeServiceImpl extends AbstractService implements
 	
 	public CodeType getByCodeTypeAndValue(String type, String value) {
 		return getByCodeTypeAndValue(type, value,
-				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+				SimpleContextHolder.<Object>get(CapWebUtil.localeKey).toString());
 	}
 }

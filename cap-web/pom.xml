@@ -36,10 +36,12 @@
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-batch</artifactId>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-websocket</artifactId>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>

@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.collections.MapUtils;
 import org.quartz.SchedulerException;
 import org.springframework.batch.admin.service.JobService;
@@ -40,6 +38,7 @@ import org.springframework.batch.core.launch.NoSuchJobExecutionException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -91,15 +90,15 @@ import com.iisigroup.cap.utils.CapSystemConfig;
 @Controller("batchshandler")
 public class BatchHandler extends MFormHandler {
 
-	@Resource
+	@Autowired
 	private CapSystemConfig config;
-	@Resource
+	@Autowired
 	private JobRegistry jobRegistry;
-	@Resource
+	@Autowired
 	private JobService jobService;
-	@Resource
+	@Autowired
 	private BatchJobService batchSrv;
-	@Resource
+	@Autowired
 	private CapBatchScheduler capScheduler;
 
 	private JobParametersExtractor jobParametersExtractor = new JobParametersExtractor();
