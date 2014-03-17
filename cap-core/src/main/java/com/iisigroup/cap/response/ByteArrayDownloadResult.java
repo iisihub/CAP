@@ -17,9 +17,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -109,8 +111,16 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
 			if (getOutputName() != null
 					&& response instanceof HttpServletResponse) {
 				HttpServletResponse resp = (HttpServletResponse) response;
-				resp.setHeader("Content-Disposition", "attachment;filename=\""
-						+ getOutputName() + "\"");
+				HttpServletRequest req = (HttpServletRequest) _request
+						.getServletRequest();
+				String userAgent = req.getHeader("USER-AGENT");
+				if (StringUtils.contains(userAgent, "MSIE")) {
+					resp.setHeader("Content-Disposition",
+							"attachment; filename=\"" + _outputName + "\"");
+				} else {
+					resp.setHeader("Content-Disposition",
+							"attachment; filename*=UTF-8''" + _outputName);
+				}
 				resp.setHeader("Cache-Control", "public");
 				resp.setHeader("Pragma", "public");
 			}

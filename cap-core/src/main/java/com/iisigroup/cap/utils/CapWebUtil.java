@@ -17,8 +17,6 @@ import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.iisigroup.cap.component.IRequest;
 
 /**
@@ -46,21 +44,9 @@ public class CapWebUtil {
 	 * @return String
 	 */
 	public static String encodeFileName(IRequest request, String fileName) {
-		HttpServletRequest req = (HttpServletRequest) request.getServletRequest();
 		try {
 			fileName = URLDecoder.decode(fileName, "utf-8");
-			String agent = req.getHeader("USER-AGENT");
-
-			if (null != agent && -1 != agent.indexOf("MSIE")) {
-
-				return URLEncoder.encode(fileName, "UTF8");
-
-			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
-				return "=?UTF-8?B?" + (new String(Base64.encodeBase64(fileName.getBytes("UTF-8"))))
-						+ "?=";
-			} else {
-				return fileName;
-			}
+			return URLEncoder.encode(fileName, "UTF8");
 		} catch (UnsupportedEncodingException e) {
 			return fileName;
 		}
