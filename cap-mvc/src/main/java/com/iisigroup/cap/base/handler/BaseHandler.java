@@ -1,7 +1,5 @@
 package com.iisigroup.cap.base.handler;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -25,7 +23,6 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2012/8/23,RodesChen,add default locale
  *          </ul>
  */
-@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("basehandler")
 public class BaseHandler extends MFormHandler {
 

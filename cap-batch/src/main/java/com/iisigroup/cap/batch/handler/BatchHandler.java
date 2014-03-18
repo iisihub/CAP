@@ -40,8 +40,6 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -87,7 +85,6 @@ import com.iisigroup.cap.utils.CapSystemConfig;
  *          <li>2012/11/5,iristu,new
  *          </ul>
  */
-@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("batchshandler")
 public class BatchHandler extends MFormHandler {
 

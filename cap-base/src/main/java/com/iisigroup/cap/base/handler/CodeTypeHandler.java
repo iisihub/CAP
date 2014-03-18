@@ -19,8 +19,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
 
@@ -59,7 +57,6 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2012/3/1,rodeschen,增加判斷重覆及更改程式名稱
  *          </ul>
  */
-@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("codetypehandler")
 public class CodeTypeHandler extends MFormHandler {
 

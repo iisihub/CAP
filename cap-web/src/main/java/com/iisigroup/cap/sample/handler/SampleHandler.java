@@ -19,8 +19,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,7 +44,6 @@ import com.iisigroup.cap.security.annotation.Captcha;
  *          <li>2012/9/24,iristu,new
  *          </ul>
  */
-@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("samplehandler")
 public class SampleHandler extends MFormHandler {
 

@@ -16,8 +16,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -48,7 +46,6 @@ import com.iisigroup.cap.utils.CapDate;
  *          <li>2012/10/25,iristu,new
  *          </ul>
  */
-@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("sysparmhandler")
 public class SysParmHandler extends MFormHandler {
 
