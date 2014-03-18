@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
-		<hibernate.version>4.1.5.Final</hibernate.version>
+		<hibernate.version>3.6.10.Final</hibernate.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -47,7 +47,7 @@
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.3</version>
 		</dependency>
-		<!-- HIBERNATE DEPENDENCIES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<!-- HIBERNATE DEPENDENCIES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -63,14 +63,30 @@
 			<artifactId>hibernate-ehcache</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId> 
-			<version>2.2.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
 		</dependency>
-		<!-- provided：在編譯和測試的過程有效,在最後生成war時不加入 runtime：在運行的時候依賴,在編譯的時候不依賴 -->
+		-->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>4.2.0.Final</version>
+		    <type>jar</type>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		    <type>jar</type>
+		</dependency>
+		<dependency>
+	        <groupId>net.sf.ehcache</groupId>
+	        <artifactId>ehcache-core</artifactId>
+	        <version>2.3.1</version>
+	    </dependency>
+    	<!-- provided：在編譯和測試的過程有效,在最後生成war時不加入 runtime：在運行的時候依賴,在編譯的時候不依賴 -->
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>

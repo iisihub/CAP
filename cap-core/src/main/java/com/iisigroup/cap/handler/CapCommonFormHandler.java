@@ -12,6 +12,7 @@
 package com.iisigroup.cap.handler;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.component.IRequest;
@@ -29,7 +30,7 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2011/3/22,RodesChen,new
  *          </ul>
  */
-@Scope("request")
+@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("commonformhandler")
 public class CapCommonFormHandler extends MFormHandler {
 

@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.component.IRequest;
@@ -30,7 +31,7 @@ import com.iisigroup.cap.component.IRequest;
  *          <li>2012/3/14,rodeschen,new
  *          </ul>
  */
-@Scope("request")
+@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Service("SamplePR")
 public class SampilePageReport implements IPageReport {
 

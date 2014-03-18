@@ -1,11 +1,13 @@
 package com.iisigroup.cap.base.handler;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.mvc.i18n.MessageBundleScriptCreator;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -23,7 +25,7 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2012/8/23,RodesChen,add default locale
  *          </ul>
  */
-@Scope("request")
+@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Controller("basehandler")
 public class BaseHandler extends MFormHandler {
 
