@@ -2,7 +2,7 @@ pageInit(function() {
     $(document).ready(function() {
         $("#upload").click(function() {
             $.capFileUpload({
-                url : "webroot/samplehandler/upload",
+                url : url("samplehandler/upload"),
                 fileElementId : "ufile",
                 // fileCheck: ["jpg", "jpeg", "png", "gif", "txt"],
                 successMsg : false,
@@ -18,7 +18,7 @@ pageInit(function() {
         });
         $("#dwnload").click(function() {
             $.capFileDownload({
-                url : "webroot/samplehandler/dwnload",
+                url : url("samplehandler/dwnload"),
                 data : {
                     fileName : "我是log.log"
                 }
