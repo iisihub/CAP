@@ -1,8 +1,8 @@
 ;
 $.holdReady(true);
 (function(_jQuery, window) {
-    _jQuery.browser.msie7 = !!(_jQuery.browser.msie && parseInt(_jQuery.browser.version, 10) < 8);
-    _jQuery.ajaxSettings.traditional = true;
+    var msie = /MSIE/.test(navigator.userAgent);
+    var msie7  = /MSIE 7.0/.test(navigator.userAgent);
     _jQuery.ajaxSetup({
         jsonp : null,
         jsonpCallback : null,
@@ -135,7 +135,7 @@ $.holdReady(true);
                 realclosefunc : window.close,
                 close : function() {
                     window.closeConfirm = false;
-                    if ($.browser.msie) {
+                    if (msie) {
                         var win = window.open("", "_top", "", "true");
                         win.opener = true;
                         win.realclosefunc();
@@ -300,7 +300,7 @@ $.holdReady(true);
                                 bgiframe : false,
                                 autoOpen : false,
                                 modal : true,
-                                maxWidth : $.browser.msie7 ? 600 : null
+                                maxWidth : msie7 ? 600 : null
                             }, $.extend(s, {
                                 close : function() {
                                     tmpClose();
@@ -310,7 +310,7 @@ $.holdReady(true);
                                 buttons : $.extend(s.buttons, s.noClose === true && {} || defaultButton)
                             }));
                             cDialog.dialog('open');
-                            $.browser.msie7 && cDialog.dialog('option', 'width', cDialog.find('#' + dialogId + 'Message').width());
+                            msie7 && cDialog.dialog('option', 'width', cDialog.find('#' + dialogId + 'Message').width());
                             cDialog.dialog("option", "position", 'center');
                             return cDialog;
                         }

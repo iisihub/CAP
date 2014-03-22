@@ -2,16 +2,16 @@
     
     paths : {
         'json3' : 'lib/js/json3.min',
-        'jquery' : 'lib/js/jquery/jquery-1.8.2',
-        'jquery-ui' : 'lib/js/jquery/ui/js/jquery-ui-1.8.23.custom.min',
-        'jqgrid-i18n' : 'lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/i18n/grid.locale-cn',
-        'jqgrid' : 'lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/jquery.jqGrid.min',
-        'validate-i18n' : 'lib/js/jquery/plugin/formValidator/languages/jquery.validationEngine-zh_CN',
+        'jquery' : 'lib/js/jquery/jquery-1.10.2',
+        'jquery-ui' : 'lib/js/jquery/ui/js/jquery-ui-1.10.4.custom.min',
+        'jqgrid-i18n' : 'lib/js/jquery/plugin/jquery.jqGrid-4.5.4/js/i18n/grid.locale-tw',
+        'jqgrid' : 'lib/js/jquery/plugin/jquery.jqGrid-4.5.4/js/jquery.jqGrid.min',
+        'validate-i18n' : 'lib/js/jquery/plugin/formValidator/languages/jquery.validationEngine-zh_TW',
         'validate' : 'lib/js/jquery/plugin/formValidator/jquery.validationEngine',
         'fileupload' : 'lib/js/jquery/plugin/ajaxfileupload/ajaxfileupload',
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
-        'underscore' : 'lib/js/backbone/underscore',
-        'backbone' : 'lib/js/backbone/backbone',
+        'underscore' : 'lib/js/backbone/underscore-min',
+        'backbone' : 'lib/js/backbone/backbone-min',
         'socketio' : 'lib/js/socket.io',
 
         'common.properties' : 'lib/js/common/common.properties',

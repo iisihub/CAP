@@ -12,7 +12,7 @@ require.config({
 		'capjs' : 'lib/js/capjs',          //cap lib
 		'common.properties' : 'lib/js/common/common.properties', 
 		'cust-properties' : 'js/common/cust.properties', // 客制化設定檔
-		'cust-common' : 'js/common/cust.common'　 // 客制化 CommonJS檔
+		'cust-common' : 'js/common/cust.common' // 客制化 CommonJS檔
 	},
 	shim : {
 		'cust-properties' : ['libjs', 'common.properties' ],
