@@ -165,6 +165,57 @@
 			</build>
 		</profile>
 		<profile>
+			<id>optimize</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.bringking</groupId>
+						<artifactId>requirejs-maven-plugin</artifactId>
+						<version>2.0.4</version>
+						<executions>
+							<execution>
+								<phase>compile</phase>
+								<goals>
+									<goal>optimize</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<!-- optional path to a nodejs executable -->
+							<!-- <nodeExecutable>
+								C:/Program Files/nodejs/node
+							</nodeExecutable> -->
+							<!-- path to optimizer json config file -->
+							<configFile>
+								${basedir}/src/main/webapp/static/build.js
+							</configFile>
+							<!-- optional path to optimizer executable -->
+							<optimizerFile>
+								${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js
+							</optimizerFile>
+							<!-- optional parameters to optimizer executable -->
+							<optimizerParameters>
+								<parameter>optimize=uglify</parameter>
+								<parameter>name=main</parameter>
+								<parameter>baseUrl=${basedir}/src/main/webapp/static</parameter>
+								<parameter>out=${basedir}/src/main/webapp/static/build-main.js</parameter>
+							</optimizerParameters>
+							<!-- Whether or not to process configFile with maven filters. If you use 
+								this option, some options in your configFile must resolve to absolute paths 
+								(see below) -->
+							<filterConfig>
+								false
+							</filterConfig>
+							<!-- Skip requirejs optimization if true -->
+							<skip>
+								false
+							</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>reqOpNone</id>
 			<build>
 				<plugins>

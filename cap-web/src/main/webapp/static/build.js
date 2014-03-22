@@ -12,6 +12,7 @@
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
         'underscore' : 'lib/js/backbone/underscore-min',
         'backbone' : 'lib/js/backbone/backbone-min',
+        'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min',
         'socketio' : 'lib/js/socket.io',
 
         'common.properties' : 'lib/js/common/common.properties',
