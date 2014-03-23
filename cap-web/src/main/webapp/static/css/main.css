@@ -2780,7 +2780,7 @@ nav.top ul.navmenu li a {
   text-decoration: none;
 }
 nav.top ul.navmenu li a:hover {
-  background: none repeat scroll 0 0 #e6000f;
+  background: none repeat scroll 0 0 #C90915;
   border-color: #B90000;
   text-decoration: none;
 }
@@ -2864,7 +2864,7 @@ nav.sub ol {
     padding: 0;
 }
 nav.sub li {
-    background: none repeat scroll 0 0 #014287;
+    background: none repeat scroll 0 0 #C90915;
     border-bottom: 1px solid #D5D5D5;
     padding-left: 4px;
 }
@@ -2877,7 +2877,7 @@ nav.sub li a {
     cursor: pointer;
 }
 nav.sub li a:hover, nav.sub li a.selected {
-    background: none repeat scroll 0 0 #014287;
+    background: none repeat scroll 0 0 #C90915;
     color: #FFFFFF;
     text-decoration: none;
 }
@@ -2931,7 +2931,7 @@ nav.sub ul ul li a {
 }
 nav.sub ul ul li a:hover {
     background: none repeat scroll 0 0 #FFFFFF;
-    color: #e6000f;
+    color: #C90915;
     margin-left: -4px;
 }
 
@@ -2982,7 +2982,7 @@ header .logo {
     right: -10px;
 }
 header li a:hover {
-    color: #2191c0;
+    color: #CC0000;
     text-decoration: none;
 }
 header ol, header ul {
