@@ -304,7 +304,7 @@ $.holdReady(true);
                             }, $.extend(s, {
                                 close : function() {
                                     tmpClose();
-                                    cDialog.dialog('destroy');
+                                    $.isFunction(cDialog.dialog())?cDialog.dialog('destroy'):cDialog.dialog().dialog('destroy');
                                 }
                             }), {
                                 buttons : $.extend(s.buttons, s.noClose === true && {} || defaultButton)
