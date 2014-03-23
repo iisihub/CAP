@@ -160,7 +160,7 @@ a {cursor: pointer;}
  *
  * http://docs.jquery.com/UI/Theming/API
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Arial,sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=6px&bgColorHeader=2191c0&bgTextureHeader=14_loop.png&bgImgOpacityHeader=15&borderColorHeader=2191c0&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=eeeeee&fcContent=080808&iconColorContent=2191c0&bgColorDefault=eeeeee&bgTextureDefault=15_carbon_fiber.png&bgImgOpacityDefault=100&borderColorDefault=d8dcdf&fcDefault=004276&iconColorDefault=2191c0&bgColorHover=f6f6f6&bgTextureHover=04_highlight_hard.png&bgImgOpacityHover=100&borderColorHover=cdd5da&fcHover=111111&iconColorHover=2191c0&bgColorActive=ffffff&bgTextureActive=01_flat.png&bgImgOpacityActive=65&borderColorActive=eeeeee&fcActive=2191c0&iconColorActive=2191c0&bgColorHighlight=fbf8ee&bgTextureHighlight=11_white_lines.png&bgImgOpacityHighlight=55&borderColorHighlight=fcd3a1&fcHighlight=444444&iconColorHighlight=004276&bgColorError=1484e6&bgTextureError=08_diagonals_thick.png&bgImgOpacityError=75&borderColorError=2191c0&fcError=2e2e2e&iconColorError=2191c0&bgColorOverlay=a6a6a6&bgTextureOverlay=09_dots_small.png&bgImgOpacityOverlay=65&opacityOverlay=40&bgColorShadow=333333&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=10&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Arial,sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=6px&bgColorHeader=cc0000&bgTextureHeader=14_loop.png&bgImgOpacityHeader=15&borderColorHeader=e3a1a1&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=eeeeee&fcContent=080808&iconColorContent=cc0000&bgColorDefault=eeeeee&bgTextureDefault=15_carbon_fiber.png&bgImgOpacityDefault=100&borderColorDefault=d8dcdf&fcDefault=004276&iconColorDefault=cc0000&bgColorHover=f6f6f6&bgTextureHover=04_highlight_hard.png&bgImgOpacityHover=100&borderColorHover=cdd5da&fcHover=111111&iconColorHover=cc0000&bgColorActive=ffffff&bgTextureActive=01_flat.png&bgImgOpacityActive=65&borderColorActive=eeeeee&fcActive=cc0000&iconColorActive=cc0000&bgColorHighlight=fbf8ee&bgTextureHighlight=11_white_lines.png&bgImgOpacityHighlight=55&borderColorHighlight=fcd3a1&fcHighlight=444444&iconColorHighlight=004276&bgColorError=f3d8d8&bgTextureError=08_diagonals_thick.png&bgImgOpacityError=75&borderColorError=cc0000&fcError=2e2e2e&iconColorError=cc0000&bgColorOverlay=a6a6a6&bgTextureOverlay=09_dots_small.png&bgImgOpacityOverlay=65&opacityOverlay=40&bgColorShadow=333333&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=10&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
  */
 /* Component containers
 ----------------------------------*/
@@ -186,8 +186,8 @@ a {cursor: pointer;}
 }
 
 .ui-widget-header {
-  border: 1px solid #2191c0;
-  background: #2191c0 url(images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) 50% 50% repeat;
+  border: 1px solid #e3a1a1;
+  background: #cc0000 url(images/ui-bg_loop_15_cc0000_21x21.png) 50% 50% repeat;
   color: #ffffff;
   font-weight: bold;
 }
@@ -233,15 +233,15 @@ a {cursor: pointer;}
   border: 1px solid #eeeeee;
   background: white url(images/ui-bg_flat_65_ffffff_40x100.png) 50% 50% repeat-x;
   font-weight: bold;
-  color: #2191c0;
+  color: #cc0000;
 }
 
 .ui-state-active a {
-  color: #2191c0;
+  color: #cc0000;
   text-decoration: none;
 }
 .ui-state-active a:link, .ui-state-active a:visited {
-  color: #2191c0;
+  color: #cc0000;
   text-decoration: none;
 }
 
@@ -253,8 +253,8 @@ a {cursor: pointer;}
 ----------------------------------*/
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
   border: 1px solid #fcd3a1;
-  background: #0066FF;
-  color: #FAFAFA;
+  background: #fbf8ee url(images/ui-bg_white-lines_55_fbf8ee_40x100.png) 50% 50% repeat;
+  color: #444444;
 }
 
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
@@ -262,8 +262,8 @@ a {cursor: pointer;}
 }
 
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
-  border: 1px solid #2191c0;
-  background: #1484e6 url(images/ui-bg_diagonals-thick_22_1484e6_40x40.png) 50% 50% repeat;
+  border: 1px solid #cc0000;
+  background: #f3d8d8 url(images/ui-bg_diagonals-thick_75_f3d8d8_40x40.png) 50% 50% repeat;
   color: #2e2e2e;
 }
 
@@ -293,11 +293,11 @@ a {cursor: pointer;}
 .ui-icon {
   width: 16px;
   height: 16px;
-  background-image: url(images/ui-icons_056b93_256x240.png);
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-widget-content .ui-icon {
-  background-image: url(images/ui-icons_056b93_256x240.png);
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-widget-header .ui-icon {
@@ -305,7 +305,7 @@ a {cursor: pointer;}
 }
 
 .ui-state-default .ui-icon, .ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-active .ui-icon {
-  background-image: url(images/ui-icons_056b93_256x240.png);
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-state-highlight .ui-icon {
@@ -313,7 +313,7 @@ a {cursor: pointer;}
 }
 
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
-  background-image: url(images/ui-icons_056b93_256x240.png);
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 /* positioning */
@@ -2644,7 +2644,7 @@ input {
   height: 20px;
   border: #CCCCCC 1px solid;
 }
-input[disabled], input[readonly] {
+input[disabled] {
   background-color: #FFF;
   border: 0px;
   color: #000;
@@ -2959,7 +2959,6 @@ header {
   width: 100%;
   height: 70px;
   background-color: #FFFFFF;
-  position: fixed;
   z-index: 999;
 }
 header div {
@@ -3041,7 +3040,6 @@ footer {
   padding: 16px 0;
   color: #8B8B8B;
   text-align: right;
-  height: 20px;
 }
 
 footer .logo {
@@ -3056,7 +3054,6 @@ footer .copyright {
   line-height: 1.4em;
   float: right;
   margin-top: 5px;
-  width: 80%;
 }
 
 .bg-around {
