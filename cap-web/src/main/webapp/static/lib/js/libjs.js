@@ -5,7 +5,7 @@ require.config({
         'socketio' : 'lib/js/socket.io',
         'jquery' : 'lib/js/jquery/jquery-1.8.2',
         'jquery-ui' : 'lib/js/jquery/ui/js/jquery-ui-1.8.23.custom.min',
-        'jqgrid-i18n' : 'lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/i18n/grid.locale-cn',
+        'jqgrid-i18n' : 'lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/i18n/grid.locale-tw',
         'jqgrid' : 'lib/js/jquery/plugin/jquery.jqGrid-4.2.0/js/jquery.jqGrid.min',
         'validate-i18n' : 'lib/js/jquery/plugin/formValidator/languages/jquery.validationEngine-zh_CN',
         'validate' : 'lib/js/jquery/plugin/formValidator/jquery.validationEngine',

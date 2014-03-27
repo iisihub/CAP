@@ -769,7 +769,8 @@ $.holdReady(true);
                             uploadMsg : i18n.def.fileUploading,
                             successMsg : i18n.def.fileUploadSuccess
                         }, setting, {
-                            url : setting.url + (/[?]/.test(setting.url) ? "&" : "?") + ("limitSize=" + (setting.limitSize || 3145728)) + (setting.fileEncoding && ("&fileEncoding=" + setting.fileEncoding) || "")
+                        	// iframe = true for ie error access denied
+                            url : setting.url + (/[?]/.test(setting.url) ? "&" : "?") + ("iframe=true&limitSize=" + (setting.limitSize || 3145728)) + (setting.fileEncoding && ("&fileEncoding=" + setting.fileEncoding) || "")
                         });
                         var telm = $("#" + s.fileElementId), val = telm.val();
 
@@ -816,14 +817,11 @@ $.holdReady(true);
                             error : function(data, status, e) {
                                 $.isFunction(uploadMsg) && uploadMsg.dialog('close');
                                 CommonAPI.showErrorMessage(i18n.def.fileUploadError);
-                            },
-                            data : $.extend(s.data || {}, {
-                                iframe : true
-                                // ie
-                                // error
-                                // access
-                                // denied
-                            })
+                            }
+//                            ,
+//                            data : $.extend(s.data || {}, {
+//                                iframe : true  // ie error access denied
+//                            })
                         }));
 
                     }
