@@ -49,6 +49,7 @@ $(document).ready(function() {
         navTop.on("click", "li a", function(ev) {
             ev.preventDefault();
             router.to($(this).attr("url"));
+            $("article").empty();
         });
 
         navSub.on("click", "li a", function(ev) {
@@ -146,8 +147,9 @@ $(document).ready(function() {
                 if (!(navSub.data("cmenu") == folder)) {
                     this.loadsub(folder);
                 }
-                navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
-                API.loadPage(folder + '/' + page);
+                API.loadPage(folder + '/' + page, function() {
+                    navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
+                });
             }
         });
     });
