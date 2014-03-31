@@ -223,7 +223,7 @@
                 }
             }).delegate("a[role=gridcelldownload]", 'click', function(event){
                 var $this = $(this);
-                $.form.submit({
+                CommonAPI.formSubmit({
                     url: 'file',
                     data: {
                         id: $(this).attr("cellvalue")
