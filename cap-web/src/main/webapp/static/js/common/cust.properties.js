@@ -13,5 +13,7 @@ $.extend(Properties || {}, {
 	Grid : {
 		rowNum : 30,
 		rowList : []
-	}
+	},
+	timeOut : 'TIME_OUT',
+	remindTimeout : false
 });

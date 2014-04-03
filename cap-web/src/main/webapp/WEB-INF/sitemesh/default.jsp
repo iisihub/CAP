@@ -16,6 +16,7 @@
         <![endif]-->
 <script src="../static/requirejs/2.0.6/require.min.js"></script>
 <script src="../static/main.js"></script>
+<decorator:getProperty property="prop" default="" />
 <decorator:head />
 </head>
 <body>
@@ -45,7 +46,6 @@
 		<div class="main">
 			<nav class="sub">
 				<ol>
-					<li><a href="fileUpdDwn">檔案上下傳</a></li>
 				</ol>
 			</nav>
 			<article id="article"></article>

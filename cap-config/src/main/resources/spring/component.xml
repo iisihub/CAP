@@ -51,6 +51,14 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="sysProp" class="com.iisigroup.cap.mvc.jsp.CapSystemProperties">
+		<property name="ignoreCache">
+			<list>
+				<value>TIME_OUT</value>
+			</list>
+		</property>
+	</bean>
 
 	<!-- freemarker config -->
 	<bean id="freemarkerConfig"

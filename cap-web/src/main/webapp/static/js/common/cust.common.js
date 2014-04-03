@@ -155,5 +155,58 @@ $(document).ready(function() {
             }
     	}
     });
+    
+    /*timeout controls*/
+ // Do idle process
+	var idleDuration = 10;
+	try {
+		idleDuration = prop && prop[Properties.timeOut];
+	}catch(e){
+		logDebug("Can't find prop");
+	}
+	if(Properties.remindTimeout){		
+		//計數器(這裡是毫秒)
+		var timecount = (idleDuration-1)*60*1000;
+		logDebug("set timer time::"+timecount);
+		var timer = $.timer(timecount, function(){
+			var pathname = window.location.pathname;
+			if(!/(timeout)$|(error)$/i.test(pathname)){
+				CommonAPI.showConfirmMessage('您已閒置，請問是否繼續申請作業?',function(data){
+					$.ajax({
+						url:url('checktimeouthandler/check'),
+						asyn:true,
+						data:{isTest:data},
+						success:function(d){
+							if(d.errorPage){
+								window.setCloseConfirm(false);
+								window.location = d.errorPage;
+							}
+						}
+					});
+				});
+			}
+		}, false);
+		//IDLE留著，當user沒看到confirm pop，時間到了idle還是要導倒timeout?
+		ifvisible && ifvisible.setIdleDuration(idleDuration*60);//minute*60
+		//logDebug("idleDuration is ::: " + idleDuration);
+		ifvisible.on('idle', function() {
+			$.unblockUI();
+			$.ajax({
+				url:url('checktimeouthandler/check'),
+				asyn:true,
+				data:{},
+				success:function(d){
+					if(d.errorPage){
+						window.setCloseConfirm(false);
+						window.location = d.errorPage;
+					}
+				}
+			});
+		});
+		ifvisible.on('wakeup', function() {
+//		$(".ui-dialog-content").dialog("close");
+		});
+	};
+
 });
 
