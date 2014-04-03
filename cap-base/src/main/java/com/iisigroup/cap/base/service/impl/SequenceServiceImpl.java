@@ -9,21 +9,21 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.base.jdbc.impl;
+package com.iisigroup.cap.base.service.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
+import com.iisigroup.cap.base.dao.SequenceDao;
+import com.iisigroup.cap.base.model.Sequence;
 import com.iisigroup.cap.base.service.SequenceService;
-import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.utils.CapDate;
 
@@ -38,23 +38,21 @@ import com.iisigroup.cap.utils.CapDate;
  *          <li>2011/9/19,iristu,new
  *          </ul>
  */
+@Service
 public class SequenceServiceImpl implements SequenceService {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(SequenceServiceImpl.class);
 
-	private CapNamedJdbcTemplate jdbc;
+	@Resource
+	private SequenceDao sequenceDao;
 
 	private Map<String, NodeSeq> nodeSeq = Collections
 			.synchronizedMap(new HashMap<String, NodeSeq>());
 
-	public void setJdbc(CapNamedJdbcTemplate jdbc) {
-		this.jdbc = jdbc;
-	}
-
 	@Override
 	public Page<Map<String, Object>> findPage(int start, int fetch) {
-		return jdbc.queryForPage("Sequence.listAll", null, start, fetch);
+		return sequenceDao.listAllForPaging(start, fetch);
 	}
 
 	/**
@@ -140,31 +138,17 @@ public class SequenceServiceImpl implements SequenceService {
 		int rtn = 0;
 		Map<String, Object> map = nextSeq.getSequence();
 		if (oldSeq == -1) {
-			jdbc.update("Sequence.insert", map);
+			sequenceDao.createFromMap(map);
 			rtn = 1;
 		} else {
 			map.put("oldSeq", oldSeq);
-			rtn = jdbc.update("Sequence.updateByNodeAndNextSeq", map);
+			rtn = sequenceDao.updateByNodeAndNextSeqFromMap(map);
 		}
 		return rtn;
 	}// ;
 
 	private Sequence getSequence(String seqNode) {
-		Map<String, Object> args = new HashMap<String, Object>();
-		args.put("seqNode", seqNode);
-		Sequence thisSeq = jdbc.queryForObject("Sequence.findBySeqNode", args,
-				new RowMapper<Sequence>() {
-					@Override
-					public Sequence mapRow(ResultSet rs, int rowNum)
-							throws SQLException {
-						Sequence seq = new Sequence();
-						seq.setSeqNode(rs.getString("SEQNODE"));
-						seq.setNextSeq(rs.getInt("NEXTSEQ"));
-						seq.setRounds(rs.getInt("ROUNDS"));
-						seq.setUpdateTime(rs.getTimestamp("UPDATETIME"));
-						return seq;
-					}
-				});
+		Sequence thisSeq = sequenceDao.findBySeqNode(seqNode);
 		return thisSeq;
 	}// ;
 
@@ -183,53 +167,6 @@ public class SequenceServiceImpl implements SequenceService {
 			this.seqNode = seqNode;
 			this.nextSeqNo = 0;
 			this.currentSeq = -1;
-		}
-	}// ;
-
-	/**
-	 * <pre>
-	 * 流水號
-	 * </pre>
-	 */
-	private class Sequence {
-		Map<String, Object> thisSeq;
-
-		public Sequence() {
-			this.thisSeq = new HashMap<String, Object>();
-		}
-
-		public String getSeqNode() {
-			return (String) thisSeq.get("seqNode");
-		}
-
-		public void setSeqNode(String seqNode) {
-			thisSeq.put("seqNode", seqNode);
-		}
-
-		public Integer getNextSeq() {
-			return (Integer) thisSeq.get("nextSeq");
-		}
-
-		public void setNextSeq(Integer nextSeq) {
-			thisSeq.put("nextSeq", nextSeq);
-		}
-
-		public Integer getRounds() {
-			return (Integer) thisSeq.get("rounds");
-		}
-
-		public void setRounds(Integer rounds) {
-			thisSeq.put("rounds", rounds);
-		}
-
-		public void setUpdateTime(Timestamp updateTime) {
-			thisSeq.put("updateTime", updateTime);
-		}
-
-		public Map<String, Object> getSequence() {
-			Map<String, Object> newMap = new HashMap<String, Object>();
-			newMap.putAll(thisSeq);
-			return newMap;
 		}
 	}// ;
 

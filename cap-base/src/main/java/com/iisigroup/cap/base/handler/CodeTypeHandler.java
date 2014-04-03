@@ -65,7 +65,7 @@ public class CodeTypeHandler extends MFormHandler {
 	@Resource
 	private CodeTypeService codeTypeService;
 
-	@Resource(name = "CommonBeanService")
+	@Resource
 	private ICommonService commonService;
 
 	@HandlerType(HandlerTypeEnum.GRID)

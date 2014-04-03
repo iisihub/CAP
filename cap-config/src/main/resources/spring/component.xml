@@ -18,19 +18,6 @@
 	<!-- @Page Report -->
 	<context:component-scan base-package="com.iisigroup.cap.**.page.report" />
 
-	<bean id="SequenceService" class="com.iisigroup.cap.base.jdbc.impl.SequenceServiceImpl">
-		<property name="jdbc" ref="capJdbcTemplate" />
-	</bean>
-	<bean id="CommonBeanService" class="com.iisigroup.cap.service.impl.CommonServiceImpl">
-		<property name="commonDao" ref="CommonBeanDao" />
-	</bean>
-	<bean id="CommonBeanDao" class="com.iisigroup.cap.dao.impl.CommonDao">
-		<property name="entityManager" ref="capEntityManager" />
-	</bean>
-	<bean id="codeTypeDao" class="com.iisigroup.cap.base.dao.impl.CodeTypeDaoImpl">
-		<property name="entityManager" ref="capEntityManager" />
-	</bean>
-
 	<bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">
 		<property name="sendForm" value="${mail.sender}"/>
 		<property name="mailSender">

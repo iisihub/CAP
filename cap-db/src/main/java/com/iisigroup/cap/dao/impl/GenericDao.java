@@ -23,7 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -41,6 +43,7 @@ import com.iisigroup.cap.dao.IGenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 import com.iisigroup.cap.dao.utils.SearchModeParameter;
+import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.IDataObject;
 import com.iisigroup.cap.model.Page;
 
@@ -60,12 +63,16 @@ import com.iisigroup.cap.model.Page;
  *          </ul>
  * @param <T>
  */
-public abstract class GenericDao<T> implements IGenericDao<T> {
+public class GenericDao<T> implements IGenericDao<T> {
 
 	protected Class<T> type;
 	protected Logger logger;
 
-	public abstract EntityManager getEntityManager();
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	@Resource(name = "capJdbcTemplate")
+	private CapNamedJdbcTemplate namedJdbcTemplate;
 
 	@SuppressWarnings("unchecked")
 	public GenericDao() {
@@ -514,6 +521,18 @@ public abstract class GenericDao<T> implements IGenericDao<T> {
 	public void flush() {
 		getEntityManager().flush();
 		getEntityManager().clear();
+	}
+
+	public <S> S findById(Class<S> clazz, Serializable pk) {
+		return getEntityManager().find(clazz, pk);
+	}
+
+	protected EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	protected CapNamedJdbcTemplate getNamedJdbcTemplate() {
+		return namedJdbcTemplate;
 	}
 
 }

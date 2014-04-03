@@ -51,8 +51,8 @@ import com.iisigroup.cap.utils.CapDate;
 @Controller("sysparmhandler")
 public class SysParmHandler extends MFormHandler {
 
-	@Resource(name = "CommonBeanService")
-	private ICommonService commonSrv;
+	@Resource
+	private ICommonService commonService;
 
 	@HandlerType(HandlerTypeEnum.GRID)
 	public GridResult query(ISearch search, IRequest params) {
@@ -64,7 +64,7 @@ public class SysParmHandler extends MFormHandler {
 		if (!search.hasOrderBy()) {
 			search.addOrderBy("parmId");
 		}
-		Page<SysParm> page = commonSrv.findPage(SysParm.class, search);
+		Page<SysParm> page = commonService.findPage(SysParm.class, search);
 		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
 		fmt.put("updateTime", new ADDateFormatter());
 		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -79,13 +79,13 @@ public class SysParmHandler extends MFormHandler {
 	 */
 	public IResult modify(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
-		SysParm parm = commonSrv.findById(SysParm.class, request.get("parmId"));
+		SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
 		if (parm == null) {
 			parm = new SysParm();
 		}
 		CapBeanUtil.map2Bean(request, parm, SysParm.class);
 		parm.setUpdateTime(CapDate.getCurrentTimestamp());
-		commonSrv.save(parm);
+		commonService.save(parm);
 		return result;
 	}
 
@@ -98,9 +98,9 @@ public class SysParmHandler extends MFormHandler {
 	 */
 	public IResult delete(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
-		SysParm parm = commonSrv.findById(SysParm.class, request.get("parmId"));
+		SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
 		if (parm != null) {
-			commonSrv.delete(parm);
+			commonService.delete(parm);
 		}
 		return result;
 	}
