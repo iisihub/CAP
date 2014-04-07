@@ -16,6 +16,16 @@
         <![endif]-->
 <script src="../static/requirejs/2.0.6/require.min.js"></script>
 <script src="../static/main.js"></script>
+<style>
+	html { display:none; } 
+</style>
+<script>
+	if (self == top) {
+		document.documentElement.style.display = 'block';
+	} else {
+		top.location = self.location;
+	}
+</script>
 <decorator:head />
 </head>
 <body>
