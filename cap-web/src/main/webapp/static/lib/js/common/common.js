@@ -792,7 +792,20 @@ $.holdReady(true);
                             }
                         }
                         var uploadMsg = CommonAPI.showMessage(s.uploadMsg);
-                        $.ajaxFileUpload($.extend({}, s, {
+                        //remove settings action , all action to complete monitor
+                        var temp = {
+                            successMsg : s.successMsg,
+                            success : s.success,
+                            error : s.error,
+                            complete : s.complete
+                        }
+
+                        $.ajaxFileUpload($.extend({}, s , {
+                            successMsg : null,
+                            success : null,
+                            error : null,
+                            complete : null
+                        }, {
                             secureuri : false,
                             complete : function(xhr, status) {
                                 uploadMsg.dialog('close');
@@ -803,14 +816,14 @@ $.holdReady(true);
                                     json = {};
                                 }
                                 errorCheck(xhr) && (function() {
-                                    s.successMsg && CommonAPI.showMessage(s.successMsg);
+                                    temp.successMsg && CommonAPI.showMessage(temp.successMsg);
                                     // 如有通知訊息則顯示於畫面上
                                     json.NOTIFY_MESSAGE && API.showMessage(json.NOTIFY_MESSAGE);
-                                    s.success && s.success(json);
-                                    json.ERROR_NOTIFY_MESSAGE && s.successError && s.successError(json, status);
+                                    temp.success && temp.success(json);
+                                    json.ERROR_NOTIFY_MESSAGE && temp.successError && temp.successError(json, status);
                                     return true;
-                                })() || s.error && s.error(xhr, status, json);
-                                s.complete && s.complete(xhr, status, json);
+                                })() || temp.error && temp.error(xhr, status, json);
+                                temp.complete && temp.complete(xhr, status, json);
                                 $.post(Properties.fileUploadSuccessHandler);
 
                             },
