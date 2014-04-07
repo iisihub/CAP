@@ -22,5 +22,10 @@
 			<!--下載-->
 		</spring:message>
 	</button>
+	<button id="dwnloadPdf" type="button" class="btn1">
+		<spring:message code="btn.dwnload">
+			<!--下載-->
+		</spring:message>PDF
+	</button>
 </body>
 </html>

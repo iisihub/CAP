@@ -7,7 +7,14 @@
 	<packaging>pom</packaging>
 	<properties>
 		<slf4j.version>1.5.8</slf4j.version>
+		<localRepositoryPath>src/localRepos</localRepositoryPath>
 	</properties>
+	<repositories>
+        <repository>
+            <id>localRepository</id>
+            <url>file://${project.basedir}/../${localRepositoryPath}</url>
+        </repository>
+    </repositories>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -52,6 +59,11 @@
             </dependency>
             <dependency>
                 <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-report</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
                 <artifactId>cap-websocket</artifactId>
                 <version>0.0.1</version>
             </dependency>
@@ -68,6 +80,7 @@
 		<module>cap-base</module>
 		<module>cap-batch</module>
 		<module>cap-websocket</module>
+		<module>cap-report</module>
 	</modules>
 	<profiles>
 		<profile>

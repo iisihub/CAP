@@ -11,6 +11,7 @@
  */
 package com.iisigroup.cap.sample.handler;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,9 +30,12 @@ import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.report.enums.ContextTypeEnum;
+import com.iisigroup.cap.report.service.impl.SamplePdfRptServiceImpl;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.ByteArrayDownloadResult;
 import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -69,7 +73,7 @@ public class SampleHandler extends MFormHandler {
 
 	@HandlerType(HandlerTypeEnum.FileDownload)
 	public IResult dwnload(IRequest request) throws CapException {
-		//String outputName = request.get("fileName", "CapLog.log");
+		// String outputName = request.get("fileName", "CapLog.log");
 		File file = new File("logs/CapLog.log");
 		FileInputStream is = null;
 		try {
@@ -82,12 +86,30 @@ public class SampleHandler extends MFormHandler {
 			IOUtils.closeQuietly(is);
 		}
 		return null;
-//		return new FileDownloadResult(request, "logs/CapLog.log", outputName,
-//				"text/plain");
+		// return new FileDownloadResult(request, "logs/CapLog.log", outputName,
+		// "text/plain");
 	}// ;
-	
-	
-	public IResult queryMenu(IRequest request){
-		return new AjaxFormResult("{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}, {'name':'WebSocket','url':'webSocket'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
+
+	@HandlerType(HandlerTypeEnum.FileDownload)
+	public IResult dwnloadPdf(IRequest request) throws CapException {
+		ByteArrayOutputStream file = null;
+		try {
+			file = ((SamplePdfRptServiceImpl) CapAppContext
+					.getBean("samplePdfService")).generateReport(request);
+			return new ByteArrayDownloadResult(request, file.toByteArray(),
+					ContextTypeEnum.pdf.toString(), "test.pdf");
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		} finally {
+			IOUtils.closeQuietly(file);
+		}
+		return null;
+		// return new FileDownloadResult(request, "logs/CapLog.log", outputName,
+		// "text/plain");
+	}// ;
+
+	public IResult queryMenu(IRequest request) {
+		return new AjaxFormResult(
+				"{'menu':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'codetype'},{'name':'參數設定','url':'sysparm'},{'name':'流水號檢視','url':'sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'fileUpdDwn'}, {'name':'WebSocket','url':'webSocket'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程設定','url':'schedule'},{'name':'排程Job清單','url':'jobs'},{'name':'排程監控','url':'jobexecution'}]}]}");
 	}
 }

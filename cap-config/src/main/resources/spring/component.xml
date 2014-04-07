@@ -51,20 +51,4 @@
 			</bean>
 		</property>
 	</bean>
-
-	<!-- freemarker config -->
-	<bean id="freemarkerConfig"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPaths">
-			<list>
-				<value>${batch.freemarkDir}</value>
-			</list>
-		</property>
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="defaultEncoding">${defaultEncoding}</prop>
-				<prop key="locale">${defaultLocale}</prop>
-			</props>
-		</property>
-	</bean>
 </beans>
