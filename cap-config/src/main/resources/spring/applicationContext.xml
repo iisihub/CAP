@@ -50,4 +50,6 @@
 	<import resource="classpath:batch/batch.xml" />
 	<!-- web socket -->
 	<import resource="classpath:websocket/websocket.xml"/>
+	<!-- audit log -->
+	<import resource="classpath:spring/auditlog.xml" />
 </beans>

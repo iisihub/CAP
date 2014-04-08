@@ -52,6 +52,12 @@
 		</property>
 	</bean>
 
+	<bean id="sysProp" class="com.iisigroup.cap.base.CapSystemProperties">
+		<property name="ignoreCache">
+			<list></list>
+		</property>
+	</bean>
+	
 	<!-- freemarker config -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
