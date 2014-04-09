@@ -11,6 +11,7 @@
  */
 package com.iisigroup.cap.component;
 
+import java.io.StringWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -110,6 +112,66 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements
 			}
 			return String.valueOf(value);
 		}
+	}
+	
+	@Override
+	public String getEscapString(String key) {
+		return getEscapString(key, null);
+	}
+	
+	@Override
+	public String getEscapString(String key, String defaultValue){
+		Object value = null;
+		value = super.containsKey(key) ? super.get(key) : request
+				.getParameter(key);
+		if(value!=null){
+//			String s = ((String[]) value)[0];
+//			return StringEscapeUtils.escapeHtml(s);
+			return xssEncode(((String[]) value)[0]);
+		}
+		logger.trace("can't find request parameter :" + key);
+		return defaultValue;
+	}
+	
+	private String xssEncode(String s) {
+		if (CapString.isEmpty(s)) {
+			return s;
+		}
+		StringWriter writer = new StringWriter();
+		// 配合underscore的unescape
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			switch (c) {
+			case '&':
+				writer.write("&amp;");
+				break;
+			case '<':
+				writer.write("&lt;");
+				break;
+			case '>':
+				writer.write("&gt;");
+				break;
+			case '\"':
+				writer.write("&quot;");
+				break;
+			case '\'':
+				writer.write("&#x27;");
+				break;
+			case '/':
+				writer.write("&#x2F;");
+				break;
+			case '(':
+				writer.write("&#40;");
+				break;
+			case ')':
+				writer.write("&#41;");
+				break;
+			default:
+				writer.write(c);
+				break;
+			}
+		}
+		return writer.toString();
 	}
 
 	/*

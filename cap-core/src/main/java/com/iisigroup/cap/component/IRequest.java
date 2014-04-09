@@ -69,6 +69,27 @@ public interface IRequest extends Map<String, Object>, Serializable {
 	 * @return 回傳
 	 */
 	String get(String key, String defaultValue);
+	
+
+	/**
+	 * get request parameter use xssEncode
+	 * 
+	 * @param key
+	 *            欄位名
+	 * @return 回傳
+	 */
+	String getEscapString(String key);
+
+	/**
+	 * get request parameter use xssEncode
+	 * 
+	 * @param key
+	 *            欄位名
+	 * @param defaultValue
+	 *            預設值
+	 * @return 回傳
+	 */
+	String getEscapString(String key, String defaultValue);
 
 	/**
 	 * set customize parameter
