@@ -199,7 +199,7 @@ a {cursor: pointer;}
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   border: 1px solid #d8dcdf;
-  background: #eeeeee url(images/ui-bg_carbon-fiber_100_eeeeee_8x9.png) 50% 50% repeat;
+  background: #eeeeee url(../images/sprite.png) 50% 50% repeat;
   font-weight: bold;
   color: #004276;
 }
@@ -2626,7 +2626,7 @@ body.rtl .formError .formErrorArrow {
 body {
   background: url(../images/bg.png) #f7f7f7 top repeat-x;
   font-size: 12px;
-  font-family: Verdana, "?�細?��?", PMingLiu, Geneva, sans-serif;
+  font-family: Verdana, "新細明體", PMingLiu, Geneva, sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -2808,10 +2808,10 @@ nav.top ul.navmenu li:hover ul li a {
   width: 90px;
   text-align: center;
   border-bottom: 1px solid #f2f2f2;
-  /*底线?�白??/
+  /*底线的白色*/
 }
 
-/*?��??�接位置?�白??/
+/*图片相接位置的白色*/
 .top {
   border-top: 1px solid #f2f2f2;
 }
@@ -2846,7 +2846,7 @@ nav.top ul.navmenu li:hover ul li a {
   font-weight: bold;
 }
 
-/*左�?DIV设置*/
+/*左下DIV设置*/
 nav.sub {
   background: url("../images/sidebar-bg.png") no-repeat scroll right top transparent;
   width: 180px;
@@ -3141,4 +3141,7 @@ footer {
 }
 .text-red {
   color:red
+}
+.text-breakAll{
+	word-break:break-all
 }
