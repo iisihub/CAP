@@ -53,12 +53,14 @@
                                 <select id="locale" name="locale" combokey="lang"></select>
                             </td>
                         </tr>
+                        <!-- 
                         <tr>
                             <td class="hd1"><spring:message code="js.sysId"></spring:message></td>
                             <td>
                                 <select id="sysId" name="sysId" combokey="subsystem"></select>
                             </td>
                         </tr>
+                         -->
                     </tbody>
                 </table>
             </form>

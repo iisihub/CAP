@@ -12,9 +12,9 @@ pageInit(function(){
             },  {
                 header: i18n['errorCode']['locale'],//"語言別",
                 name: 'locale', align: 'center', width: 60, sortable: false
-            },  {
-                header: i18n['errorCode']['sysId'],//"系統別",
-                name: 'sysId', align: 'center', width: 60, sortable: true
+//            },  {
+//                header: i18n['errorCode']['sysId'],//"系統別",
+//                name: 'sysId', align: 'center', width: 60, sortable: true
             },  {
                 header: i18n['errorCode']['severity'],//"等級",
                 name: 'severity', align: 'left', width: 60, sortable: false
@@ -81,8 +81,8 @@ pageInit(function(){
 	                                oid: oid
 	                            }),
                                 success: function(responseData){
+                                	edit.dialog('close');
                                     if (responseData.exist) {
-                                    	edit.dialog('close');
                                         API.showMessage(i18n.def['data.exists']);
                                     }
                                     else {
