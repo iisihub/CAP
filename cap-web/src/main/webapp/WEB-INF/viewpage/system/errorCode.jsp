@@ -81,11 +81,13 @@
                             </td>
                         </tr>
                         <tr>
+                        	<!-- 
                             <td width="20%" class="hd1">
                                 <span class="color-red">＊</span><spring:message code="js.sysId"></spring:message></td>
                             <td width="30%">
                                 <select id="sysId" name="sysId" combokey="subsystem" space="true" class="validate[required]"></select>
                             </td>
+                             -->
                             <td width="20%" class="hd1"><span class="color-red">＊</span><spring:message code="js.severity"></spring:message></td>
                             <td width="30%">
                                 <select id="severity" name="severity">
