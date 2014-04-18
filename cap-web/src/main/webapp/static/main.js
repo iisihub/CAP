@@ -4,15 +4,16 @@ var logDebug = function() {
 	}
 
 };
+var baseUrl = baseUrl || '../static';
 require.config({
 	urlArgs : 'cache=' + new Date().getTime(),
-	baseUrl : '../static',
+	baseUrl : baseUrl,
 	paths : {
 		'libjs' : 'lib/js/libjs',          //third party lib
 		'capjs' : 'lib/js/capjs',          //cap lib
 		'common.properties' : 'lib/js/common/common.properties', 
 		'cust-properties' : 'js/common/cust.properties', // 客制化設定檔
-		'cust-common' : 'js/common/cust.common'　 // 客制化 CommonJS檔
+		'cust-common' : 'js/common/cust.common' // 客制化 CommonJS檔
 	},
 	shim : {
 		'cust-properties' : ['libjs', 'common.properties' ],

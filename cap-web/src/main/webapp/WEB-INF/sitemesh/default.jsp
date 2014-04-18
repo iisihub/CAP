@@ -16,6 +16,11 @@
             <script src="../static/lib/js/html5.js"></script>
         <![endif]-->
 <script src="../static/requirejs/2.0.6/require.min.js"></script>
+<script>
+<!-- 
+	var baseUrl = "../static";
+//-->
+</script>
 <script src="../static/main.js"></script>
 <decorator:head />
 </head>
