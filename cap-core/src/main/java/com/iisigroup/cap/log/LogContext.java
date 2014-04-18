@@ -188,7 +188,7 @@ public class LogContext extends InheritableThreadLocal {
 		put(SESSION_ID, sessionId);
 	}
 
-	public static void seClientAddr(String addr) {
+	public static void setClientAddr(String addr) {
 		put(CLIENT_ADDR, addr);
 	}
 
