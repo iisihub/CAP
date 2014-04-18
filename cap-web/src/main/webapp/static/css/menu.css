@@ -1,0 +1,246 @@
+/* menu */
+#menu {
+    padding: 0 0 0 20px;
+    background: url(../images/menu/menu_bg.gif) repeat-x left top;
+    height: 32px;
+    border-bottom: 1px solid #0B1D35;
+    /*border-top: 1px solid #0B1D35;*/
+}
+
+#menu_header {
+    padding: 0 0 0 20px;
+    background: url(../images/menu/menu_bg.gif) repeat-x left top;
+    height: 5px;
+}
+
+#menu dt, #menu dd {
+    float: left;
+    height: 32px;
+    overflow: hidden;
+}
+
+#menu b {
+    color: #464646;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 6px 6px 6px;
+    display: inline-block;
+}
+
+#menu dd {
+    padding: 0;
+    margin: 0;
+    background: url(../images/menu/menu.gif) repeat-x left top;
+}
+
+#menu dd.mLeft-move-btn {
+    padding: 4px 3px 3px 3px;
+    margin: 0;
+    background: none;
+}
+
+#menu dd.mLeft-move-btn a {
+    border: 0;
+    padding: 0;
+}
+
+#menu dd.mLeft-move-btn a:hover {
+    background: none;
+}
+
+#menu dd.subsystem {
+    background: none;
+    padding: 5px 0px 5px 5px;
+    margin: 0;
+}
+
+.subsystem-select {
+    float: right;
+}
+
+#menu a {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+	height:32px;
+    border: 1px #808080 solid;
+    padding: 0 10px;
+}
+
+#menu a:hover {
+    background: url(../images/menu/menu_hover2.gif) repeat-x left top;
+}
+
+#menu a.current {
+    background: url(../images/menu/menu_current.gif) repeat-x left top;
+}
+
+#menu a:hover b, #menu a.current b {
+    color: #ffffff;
+}
+
+#menu b.current {
+    color: #494949;
+}
+
+/* Layout-------------------------------- */
+.bottomFrame {
+    width: 100%;
+    height: 451px;
+}
+
+#leftFrame {
+    vertical-align: top;
+    width: 190px;
+    margin: 0px 5px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+#mainFrame {
+    vertical-align: top;
+    min-width: 730px;
+    padding: 5px;
+    min-height: 600px;
+}
+
+#leftFrame .menu2top {
+    background: url(../images/menu/subMenu_top.gif) no-repeat;
+    height: 10px;
+    margin: 5px 0 0 5px;
+}
+
+#leftFrame .menu2bottom {
+    background: url(../images/menu/subMenu_bottom.gif) no-repeat;
+    height: 10px;
+    margin: 0px 0 5px 5px;
+}
+
+#leftFrame a {
+    text-decoration: none;
+}
+
+#goMainHome {
+    background: url(../images/menu/mLeft-home-btn2.gif);
+    padding-top: 5px;
+    display: block;
+    color: #f7f7f7;
+    font-weight: bold;
+    *padding-top: 1px;
+    no-repeat;
+    height:35px;
+    margin:0px 0px 0px 5px;
+    text-align: center;
+}
+
+#gohome {
+	font-weight: bold;
+	margin: 0 auto;
+	margin-top: 0px;
+	display: block;
+	width: 120px;
+	height: 34px;
+	background: url(../images/menu/btn_back.gif) no-repeat;
+	color: #000;
+	cursor: pointer;
+}
+
+/* mLeft Div styles */
+#mLeft {
+    width: 181px;
+    height: 430px;
+    border: 1px solid #CCC;
+    border-top: 0px;
+    margin: -1px 5px 0px 5px;
+    overflow: auto;
+}
+
+/**
+ * Menu2
+ */
+#menu2 {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: auto;
+    width: 100%;
+    font-weight: bold;
+    color: #000000;
+    line-height: 25px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+/* -------------*/
+#menu2 li {
+    border-bottom: 1px dotted #CCC;
+}
+
+#menu2 li.selected {
+    color: #FF0000; /*FF0000*/
+}
+
+/* -------------*/
+#menu2 a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+#menu2 a:hover {
+    color: #FF0000;
+    background-color: #F0F6F8; /* #E6ECF6*/ /*f0f6f8*/
+}
+
+#menu2 a:hover {
+    background-color: #F1F2F2;
+}
+
+#menu2 a.selected {
+    color: #FF0000
+}
+
+#menu2 a.clicked .icon-4 {
+    background-position: 0 -100px;
+}
+#menu2 a.clicked .icon-1 {
+    background-position: 0 -50px;
+}
+#menu2 a.clicked .icon-3 {
+    background-position: 0 0px;
+}
+
+/* -------------*/
+#menu2 .menu_sub {
+    margin-left: 22px;
+    margin-top: 0px;
+    line-height: 22px;
+    font-weight: normal;
+	display:none;
+}
+
+.menu-icon {
+    vertical-align: middle;
+    height: 22px;
+    width: 22px;
+    display: inline-block;
+    background-image: url(../images/menu/left-menu-icon.png)
+}
+
+.icon-1 {
+    background-position: 0 0px;
+}
+.icon-2 {
+    background-position: 0 -25px;
+}
+.icon-3 {
+    background-position: 0 -50px;
+}
+.icon-4 {
+    background-position: 0 -75px;
+}
+.icon-5 {
+    background-position: 0 -100px;
+}
+
