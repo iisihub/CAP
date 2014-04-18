@@ -17,10 +17,10 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.iisigroup.cap.base.CapSystemProperties;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.mvc.jsp.CapSystemProperties;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapDate;
