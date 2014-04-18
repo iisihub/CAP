@@ -11,10 +11,10 @@
  */
 package com.iisigroup.cap.base.handler;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.base.CapSystemProperties;
@@ -35,12 +35,13 @@ import com.iisigroup.cap.utils.CapString;
  * @author TimChiang
  * @version <ul>
  *          <li>2014/4/2,new
+ *          <li>2014/4/18,Sunkist Wang,update get sysProp
  *          </ul>
  */
 @Controller("checktimeouthandler")
 public class CheckTimeoutHandler extends MFormHandler {
 
-	@Autowired
+	@Resource
 	private CapSystemProperties sysProp;
 	
 	private static final String TIME_OUT = "TIME_OUT";

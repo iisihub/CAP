@@ -14,6 +14,8 @@ package com.iisigroup.cap.base;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -31,12 +33,16 @@ import com.iisigroup.cap.utils.CapString;
  * @version <ul>
  *          <li>2013/11/6,Sunkist Wang,new
  *          <li>2014/1/17,Sunkist Wang,update
+ *          <li>2014/4/18,Sunkist Wang,update get commonSrv
  *          </ul>
  */
 @SuppressWarnings("serial")
 public class CapSystemProperties extends HashMap<String, String> {
 
 	private List<String> ignoreCache;
+
+	@Resource
+	private ICommonService commonSrv;
 
 	@Override
 	public String get(Object key) {
@@ -58,7 +64,6 @@ public class CapSystemProperties extends HashMap<String, String> {
 			return val;
 		}
 
-		ICommonService commonSrv = CapAppContext.getBean("CommonBeanService");
 		SysParm sysParm = commonSrv.findById(SysParm.class, sKey);
 		val = sysParm != null ? sysParm.getParmValue() : null;
 		put(sKey, val);
