@@ -13,6 +13,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-base</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.iisigroup.cap</groupId>
 			<artifactId>cap-security</artifactId>
 		</dependency>
 		<dependency>

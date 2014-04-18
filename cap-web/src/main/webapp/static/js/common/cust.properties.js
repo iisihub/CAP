@@ -42,5 +42,7 @@ $.extend(Properties || {}, {
             dom.after(refresh).after(img);
         });
       //for captcha end
-    }
+    },
+	timeOut : 'TIME_OUT',
+	remindTimeout : false
 });

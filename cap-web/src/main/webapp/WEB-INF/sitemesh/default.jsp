@@ -23,6 +23,7 @@
 //-->
 </script>
 <script src="../static/main.js"></script>
+<decorator:getProperty property="prop" default="" />
 <decorator:head />
 </head>
 <body>

@@ -14,6 +14,8 @@
         'backbone' : 'lib/js/backbone/backbone-min',
         'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min',
         'socketio' : 'lib/js/socket.io',
+        'ifvisible' : 'lib/js/ifvisible/ifvisible',
+        'timer' : 'lib/js/timer/jquery.timer',
 
         'common.properties' : 'lib/js/common/common.properties',
         'common.jqgrid' : 'lib/js/common/common.jqgrid',

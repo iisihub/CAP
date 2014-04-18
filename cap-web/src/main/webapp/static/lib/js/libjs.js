@@ -13,7 +13,9 @@ require.config({
         'blockui' : 'lib/js/jquery/plugin/blockUI/jquery.blockUI',
         'underscore' : 'lib/js/backbone/underscore',
         'backbone' : 'lib/js/backbone/backbone',
-        'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min'
+        'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min',
+        'ifvisible' : 'lib/js/ifvisible/ifvisible', /* idle handle */
+    	'timer' : 'lib/js/timer/jquery.timer' /* timer handle */
     },
     shim : {
         'blockui' : ['jquery'],
@@ -24,12 +26,15 @@ require.config({
         'validate' : ['jquery', 'validate-i18n'],
         'fileupload' : ['jquery'],
         'backbone' : ['underscore', 'jquery'],
-	    'sceditor' : ['jquery']
+	    'sceditor' : ['jquery'],
+        'ifvisible' : ['jquery'],
+        'timer' : ['jquery']
     }
 });
 
-define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor'], function() {
-   // $.holdReady(true); // enable at common.js
+define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor', 'ifvisible', 'timer'], function() {
+	window.ifvisible = require.s.contexts._.defined.ifvisible;
+	// $.holdReady(true); // enable at common.js
     logDebug('lib init');
 });
 

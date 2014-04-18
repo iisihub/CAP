@@ -42,6 +42,11 @@
 			<param name="decoratorFile" value="minimal"/>
 			<param name="ignoreParams" value="_isAjax,formAction,_pa"/>
 		</mapper>
+		
+		<mapper class="com.iisigroup.cap.sitemesh.mapper.CapSystemPropertiesJSONMapper">
+			<param name="property.1" value="meta.decorator" />
+			<param name="searchKeys" value="TIME_OUT"/>
+		</mapper>
 
 		<mapper class="com.opensymphony.module.sitemesh.mapper.PageDecoratorMapper">
 			<param name="property.1" value="meta.decorator" />
