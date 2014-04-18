@@ -15,8 +15,6 @@ import javax.annotation.Resource;
 
 import net.sf.json.JSONSerializer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -46,9 +44,6 @@ public class MenuHandler extends MFormHandler {
 
 	@Resource
 	private MenuService menuSrv;
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(MenuHandler.class);
 
 	public IResult queryMenu(IRequest request) {
 
