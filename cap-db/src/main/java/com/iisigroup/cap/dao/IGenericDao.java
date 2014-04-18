@@ -98,5 +98,7 @@ public interface IGenericDao<T> {
 	 * flush
 	 */
 	void flush();
-
+	
+	<S> S findById(Class<S> clazz, Serializable pk);
+	
 }

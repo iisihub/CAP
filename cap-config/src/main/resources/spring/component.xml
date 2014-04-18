@@ -18,6 +18,7 @@
 	<!-- @Page Report -->
 	<context:component-scan base-package="com.iisigroup.cap.**.page.report" />
 
+	<!--
 	<bean id="SequenceService" class="com.iisigroup.cap.base.jdbc.impl.SequenceServiceImpl">
 		<property name="jdbc" ref="capJdbcTemplate" />
 	</bean>
@@ -30,6 +31,7 @@
 	<bean id="codeTypeDao" class="com.iisigroup.cap.base.dao.impl.CodeTypeDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
+	-->
 	<bean id="errorCodeDao" class="com.iisigroup.cap.base.dao.impl.ErrorCodeDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
@@ -37,7 +39,6 @@
  	<bean class="com.iisigroup.cap.base.response.RespMsgFactoryProcessor">
  		<property name="errorCodeService" ref="errorCodeService" />
  	</bean>
-	
 
 	<bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">
 		<property name="sendForm" value="${mail.sender}"/>

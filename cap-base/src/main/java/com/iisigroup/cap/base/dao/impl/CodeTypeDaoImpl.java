@@ -13,9 +13,11 @@ package com.iisigroup.cap.base.dao.impl;
 
 import java.util.List;
 
-import com.iisigroup.cap.base.dao.CapJpaDao;
+import org.springframework.stereotype.Repository;
+
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
+import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
@@ -31,8 +33,8 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          <li>2011/11/20,RodesChen,from cap
  *          </ul>
  */
-//@Repository
-public class CodeTypeDaoImpl extends CapJpaDao<CodeType> implements CodeTypeDao {
+@Repository
+public class CodeTypeDaoImpl extends GenericDao<CodeType> implements CodeTypeDao {
 
 	@Override
 	public List<CodeType> findByCodeType(String codetype, String locale) {

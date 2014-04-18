@@ -13,6 +13,10 @@ package com.iisigroup.cap.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.iisigroup.cap.dao.ICommonDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
@@ -29,13 +33,11 @@ import com.iisigroup.cap.service.ICommonService;
  *          <li>2012/9/21,iristu,new
  *          </ul>
  */
+@Service
 public class CommonServiceImpl implements ICommonService {
 
-	ICommonDao commonDao;
-
-	public void setCommonDao(ICommonDao commonDao) {
-		this.commonDao = commonDao;
-	}
+	@Resource
+	private ICommonDao commonDao;
 
 	/*
 	 * (non-Javadoc)
@@ -56,7 +58,7 @@ public class CommonServiceImpl implements ICommonService {
 	 */
 	@Override
 	public <T> T findById(Class<T> clazz, String id) {
-		return commonDao.findById(clazz, id);
+		return (T) commonDao.findById(clazz, id);
 	}
 
 	@Override
@@ -83,5 +85,4 @@ public class CommonServiceImpl implements ICommonService {
 	public <T> List<T> list(Class<T> clazz) {
 		return commonDao.find(clazz, commonDao.createSearchTemplete());
 	}
-
 }

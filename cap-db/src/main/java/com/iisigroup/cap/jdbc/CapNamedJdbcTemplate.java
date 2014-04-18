@@ -56,12 +56,10 @@ import com.iisigroup.cap.utils.CapSqlStatement;
  *          <li>2012/8/17,iristu,new
  *          </ul>
  */
-public class CapNamedJdbcTemplate {
+public class CapNamedJdbcTemplate extends NamedParameterJdbcTemplate {
 
 	// default
 	private Logger logger = LoggerFactory.getLogger(CapNamedJdbcTemplate.class);
-
-	private NamedParameterJdbcTemplate namedjdbc;
 
 	private CapSqlStatement sqlp;
 	private CapSqlStatement sqltemp;
@@ -70,7 +68,8 @@ public class CapNamedJdbcTemplate {
 
 	DataSource dataSource;
 
-	public CapNamedJdbcTemplate() {
+	public CapNamedJdbcTemplate(DataSource dataSource) {
+		super(dataSource);
 	}
 
 	public void setSqltemp(CapSqlStatement sqltemp) {
@@ -79,7 +78,6 @@ public class CapNamedJdbcTemplate {
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-		this.namedjdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	public void setSqlProvider(CapSqlStatement privider) {
@@ -91,7 +89,7 @@ public class CapNamedJdbcTemplate {
 		// this.logger = LoggerFactory.getLogger(clazz);
 	}
 
-	public void query(String sqlId, Map<String, Object> args,
+	public void query(String sqlId, Map<String, ?> args,
 			RowCallbackHandler rch) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
@@ -108,7 +106,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			namedjdbc.query(sql.toString(), args, rch);
+			super.query(sql.toString(), args, rch);
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
 		} finally {
@@ -157,7 +155,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			return namedjdbc.query(sql.toString(), (Map<String, Object>) args,
+			return super.query(sql.toString(), (Map<String, Object>) args,
 					new CapRowMapperResultSetExtractor<T>(rm, startRow,
 							fetchSize));
 		} catch (Exception e) {
@@ -185,7 +183,7 @@ public class CapNamedJdbcTemplate {
 	 * @return List<T>
 	 */
 	public <T> List<T> query(String sqlId, String appendDynamicSql,
-			Map<String, Object> args, RowMapper<T> rm) {
+			Map<String, ?> args, RowMapper<T> rm) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		if (appendDynamicSql != null) {
@@ -204,7 +202,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			return namedjdbc.query(sql.toString(), (Map<String, Object>) args,
+			return super.query(sql.toString(), (Map<String, ?>) args,
 					new RowMapperResultSetExtractor<T>(rm));
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
@@ -236,7 +234,7 @@ public class CapNamedJdbcTemplate {
 	 * @throws GWException
 	 */
 	public <T> T queryForObject(String sqlId, String appendDynamicSql,
-			Map<String, Object> args, RowMapper<T> rm) {
+			Map<String, ?> args, RowMapper<T> rm) {
 		List<T> list = this.query(sqlId, appendDynamicSql, args, rm);
 		if (list != null && !list.isEmpty()) {
 			return list.get(0);
@@ -258,7 +256,7 @@ public class CapNamedJdbcTemplate {
 	 * @return T
 	 * @throws GWException
 	 */
-	public <T> T queryForObject(String sqlId, Map<String, Object> args,
+	public <T> T queryForObject(String sqlId, Map<String, ?> args,
 			RowMapper<T> rm) {
 		return this.queryForObject(sqlId, null, args, rm);
 	}// ;
@@ -276,7 +274,7 @@ public class CapNamedJdbcTemplate {
 	 * @throws GWException
 	 */
 	public Map<String, Object> queryForMap(String sqlId,
-			String appendDynamicSql, Map<String, Object> args) {
+			String appendDynamicSql, Map<String, ?> args) {
 		return queryForObject(sqlId, appendDynamicSql, args,
 				new CapColumnMapRowMapper());
 	}// ;
@@ -292,7 +290,7 @@ public class CapNamedJdbcTemplate {
 	 * @throws GWException
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public int queryForInt(String sqlId, Map<String, Object> args) {
+	public int queryForInt(String sqlId, Map<String, ?> args) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		sql.append(' ').append(
@@ -306,7 +304,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			return namedjdbc.queryForInt(sql.toString(), (Map) args);
+			return super.queryForInt(sql.toString(), (Map) args);
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
 		} finally {
@@ -326,7 +324,7 @@ public class CapNamedJdbcTemplate {
 	 * @throws GWException
 	 */
 	public Map<String, Object> queryForMap(String sqlId,
-			Map<String, Object> args) {
+			Map<String, ?> args) {
 		return this.queryForMap(sqlId, null, args);
 	}// ;
 
@@ -341,7 +339,7 @@ public class CapNamedJdbcTemplate {
 	 * @throws GWException
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public int update(String sqlId, Map<String, Object> args) {
+	public int update(String sqlId, Map<String, ?> args) {
 		String sql = sqlp.getValue(sqlId, sqlId);
 		if (logger.isTraceEnabled()) {
 			logger.trace(new StringBuffer("SqlId=")
@@ -352,7 +350,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			return namedjdbc.update(sql, (Map) args);
+			return super.update(sql, (Map) args);
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
 		} finally {
@@ -394,7 +392,7 @@ public class CapNamedJdbcTemplate {
 				cur = System.currentTimeMillis();
 				batchCount = NamedParameterBatchUpdateUtils
 						.executeBatchUpdateWithNamedParameters(parsedSql,
-								batch, namedjdbc.getJdbcOperations());
+								batch, super.getJdbcOperations());
 
 			} else {
 				SqlParameterSource[] batch = SqlParameterSourceUtils
@@ -403,7 +401,7 @@ public class CapNamedJdbcTemplate {
 				cur = System.currentTimeMillis();
 				batchCount = NamedParameterBatchUpdateUtils
 						.executeBatchUpdateWithNamedParameters(parsedSql,
-								batch, namedjdbc.getJdbcOperations());
+								batch, super.getJdbcOperations());
 			}
 			int rows = 0;
 			for (int i : batchCount) {
@@ -470,7 +468,7 @@ public class CapNamedJdbcTemplate {
 	 *            參數
 	 * @return SqlRowSet
 	 */
-	public SqlRowSet queryForRowSet(String sqlId, Map<String, Object> args) {
+	public SqlRowSet queryForRowSet(String sqlId, Map<String, ?> args) {
 		StringBuffer sql = new StringBuffer(
 				(String) sqlp.getValue(sqlId, sqlId));
 		sql.append(' ').append(
@@ -484,7 +482,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			return namedjdbc.queryForRowSet(sql.toString(), args);
+			return super.queryForRowSet(sql.toString(), args);
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
 		} finally {
@@ -516,7 +514,7 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			return namedjdbc.queryForList(sql.toString(), args);
+			return super.queryForList(sql.toString(), args);
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
 		} finally {
@@ -546,7 +544,7 @@ public class CapNamedJdbcTemplate {
 				startRow, fetchSize);
 		long cur = System.currentTimeMillis();
 		try {
-			return new Page<Map<String, Object>>(list, namedjdbc.queryForInt(
+			return new Page<Map<String, Object>>(list, super.queryForInt(
 					sql.toString(), args), fetchSize, startRow);
 		} catch (Exception e) {
 			throw new CapDBException(e, causeClass);
@@ -609,8 +607,8 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			int totalRows = namedjdbc.queryForInt(sqlRow, provider.getParams());
-			List<Map<String, Object>> list = namedjdbc.queryForList(
+			int totalRows = super.queryForInt(sqlRow, provider.getParams());
+			List<Map<String, Object>> list = super.queryForList(
 					sql.toString(), provider.getParams());
 			return new Page<Map<String, Object>>(list, totalRows,
 					search.getMaxResults(), search.getFirstResult());
@@ -659,8 +657,8 @@ public class CapNamedJdbcTemplate {
 		}
 		long cur = System.currentTimeMillis();
 		try {
-			int totalRows = namedjdbc.queryForInt(sqlRow, provider.getParams());
-			List<T> list = namedjdbc.query(sql.toString(),
+			int totalRows = super.queryForInt(sqlRow, provider.getParams());
+			List<T> list = super.query(sql.toString(),
 					provider.getParams(), rm);
 			return new Page<T>(list, totalRows, search.getMaxResults(),
 					search.getFirstResult());

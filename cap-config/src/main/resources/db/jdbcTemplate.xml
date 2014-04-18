@@ -16,7 +16,7 @@
 	</bean>
 
 	<bean id="capJdbcTemplate" class="com.iisigroup.cap.jdbc.CapNamedJdbcTemplate">
-		<property name="dataSource" ref="cap-db" />
+	    <constructor-arg><ref bean="cap-db"/></constructor-arg>
 		<property name="sqltemp">
 			<bean class="com.iisigroup.cap.utils.CapSqlStatement">
 				<constructor-arg index="0" ref="${jdbc.paging.default.template}" />

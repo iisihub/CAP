@@ -11,9 +11,7 @@
  */
 package com.iisigroup.cap.dao;
 
-import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.Page;
 
 /**
  * <pre>
@@ -27,9 +25,4 @@ import com.iisigroup.cap.model.Page;
  *          </ul>
  */
 public interface ICommonDao extends IGenericDao<IDataObject> {
-
-	<T> Page<T> findPage(Class<T> clazz, ISearch search);
-
-	<T> T findById(Class<T> clazz, String id);
-
 }

@@ -55,9 +55,7 @@
 		<property name="dataSource" ref="cap-db" />
 	</bean>
 
-	<bean id="batchJobService" class="com.iisigroup.cap.batch.jdbc.impl.BatchJobServiceImpl">
-		<property name="jdbc" ref="capJdbcTemplate" />
-	</bean>
+	<bean id="batchJobService" class="com.iisigroup.cap.batch.service.impl.BatchJobServiceImpl" />
 
 	<bean id="batchScheduler" class="com.iisigroup.cap.batch.core.CapBatchScheduler"
 		init-method="loadSchedule">
