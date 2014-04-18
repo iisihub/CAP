@@ -61,4 +61,26 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		</entry>
 	</util:map>
 
+	<!-- MS SQL Server 2005 paging JDBC template -->
+	<util:map id="msSql2005Template" map-class="java.util.HashMap" key-type="java.lang.String">
+		<entry key="query.suffix">
+			<value></value>
+		</entry>
+		<entry key="paging.querySql">
+			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() over (order by TempColumn) ROWNM from (
+			select 0 TempColumn, ss.* from (@{['sourceSQL']} ) ss ) source ) rows where ROWNM > :startRow and ROWNM <= :endRow]]></value>
+		</entry>
+		<entry key="paging.totalPage">
+			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
+		</entry>
+		
+		<!-- Rewrite baseSQL -->
+		<entry key="Sequence.listAll">
+			<value><![CDATA[select top (@{[countAll]}) * from cfg_Sequence order by seqNode]]></value>
+		</entry>
+		<entry key="Sequence.listAll.countAll()">
+			<value><![CDATA[select count(1) as TOTAL from cfg_Sequence]]></value>
+		</entry>
+	</util:map>
+
 </beans>
