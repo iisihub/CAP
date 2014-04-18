@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+
+	<!-- ============= WordRenderers ============= -->
+	<!-- nl.captcha.text.renderer.DefaultWordRenderer -->
+	<!-- nl.captcha.text.renderer.ColoredEdgesWordRenderer -->
+
+	<bean id="capDefaultWordRenderer" class="nl.captcha.text.renderer.DefaultWordRenderer">
+		<constructor-arg index="0">
+			<list value-type="java.awt.Color">
+				<bean class="java.awt.Color">
+					<constructor-arg index="0">
+						<value type="java.lang.Integer">0</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">24</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">255</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.awt.Color">
+					<constructor-arg index="0">
+						<value type="java.lang.Integer">5</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">31</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">240</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.awt.Color">
+					<constructor-arg index="0">
+						<value type="java.lang.Integer">16</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">64</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">14</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.awt.Color">
+					<constructor-arg index="0">
+						<value type="java.lang.Integer">10</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">80</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">23</value>
+					</constructor-arg>
+				</bean>
+				<!-- <value>BLACK</value>
+				<value>GREEN</value>
+				<value>DARK_GRAY</value>
+				<value>BLUE</value>
+				 -->
+
+			</list>
+		</constructor-arg>
+		<constructor-arg index="1">
+			<list>
+				<bean class="java.awt.Font">
+					<constructor-arg index="0">
+						<value type="java.lang.String">Arial</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">4</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">18</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.awt.Font">
+					<constructor-arg index="0">
+						<value type="java.lang.String">Arial</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">3</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">18</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.awt.Font">
+					<constructor-arg index="0">
+						<value type="java.lang.String">Arial</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">4</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">18</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.awt.Font">
+					<constructor-arg index="0">
+						<value type="java.lang.String">Arial</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value type="java.lang.Integer">3</value>
+					</constructor-arg>
+					<constructor-arg index="2">
+						<value type="java.lang.Integer">18</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+
+	</bean>
+
+	<!-- ========== BackgroundProducers ========== -->
+	<!-- nl.captcha.backgrounds.TransparentBackgroundProducer -->
+	<!-- nl.captcha.backgrounds.FlatColorBackgroundProducer -->
+	<!-- nl.captcha.backgrounds.GradiatedBackgroundProducer -->
+	<!-- nl.captcha.backgrounds.SquigglesBackgroundProducer -->
+
+	<!-- ============= GimpyRenderers ============ -->
+	<!-- nl.captcha.gimpy.RippleGimpyRenderer -->
+	<!-- nl.captcha.gimpy.BlockGimpyRenderer -->
+	<!-- nl.captcha.gimpy.DropShadowGimpyRenderer -->
+	<!-- nl.captcha.gimpy.FishEyeGimpyRenderer -->
+	<!-- nl.captcha.gimpy.ShearGimpyRenderer -->
+	<!-- nl.captcha.gimpy.StretchGimpyRenderer -->
+
+	<!-- ============= NoiseProducers ============= -->
+	<!-- nl.captcha.noise.CurvedLineNoiseProducer -->
+	<!-- nl.captcha.noise.StraightLineNoiseProducer -->
+
+	<bean id="capTextProducer" class="nl.captcha.text.producer.DefaultTextProducer">
+		<constructor-arg index="0" value="4" />
+		<constructor-arg index="1" value="abcdefghkmnprwxyABCDEFGHKMNPRWXY2345678" />
+	</bean>
+
+
+
+	<bean id="capCaptcha" class="com.iisigroup.cap.security.captcha.CapSecurityCaptcha" scope="session">
+		<property name="height" value="23" />
+		<property name="width" value="60" />
+		<property name="timeout" value="300000" />
+		<property name="border" value="false" />
+		<property name="textProducer" ref="capTextProducer" />
+		<!-- use mesasge key -->
+		<property name="errorMessage" value="security.captcha" />
+		<property name="wordRenderer" ref="capDefaultWordRenderer" />
+		<property name="producers">
+			<list>
+				<!-- <bean class="nl.captcha.text.renderer.DefaultWordRenderer" /> -->
+				<bean class="nl.captcha.backgrounds.GradiatedBackgroundProducer" />
+				<!-- <bean class="nl.captcha.noise.CurvedLineNoiseProducer" /> -->
+				<!-- <bean class="nl.captcha.gimpy.RippleGimpyRenderer" /> -->
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- Cap Operation -->
+	<bean id="doCaptchaStep" class="com.iisigroup.cap.operation.step.CapCaptchaOpStep"
+		scope="prototype" />
+
+</beans>

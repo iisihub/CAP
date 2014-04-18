@@ -1458,6 +1458,7 @@ $.holdReady(true);
                         $cthis.setOptions(icombos[$cthis.attr("comboKey") || $cthis.attr("comboaction")], false);
                     });
                     combos = combokeys = null;
+                    Properties.custLoadPageInit && Properties.custLoadPageInit.call($_this, isSubPage);
                 }
             });
             /** valid */
