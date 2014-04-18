@@ -26,7 +26,7 @@ import net.sf.json.JSONSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.mvc.jsp.CapSystemProperties;
+import com.iisigroup.cap.base.CapSystemProperties;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 import com.opensymphony.module.sitemesh.Config;

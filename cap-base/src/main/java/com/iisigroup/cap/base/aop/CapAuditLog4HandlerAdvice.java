@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -25,8 +26,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -53,6 +52,7 @@ import com.isigroup.cap.base.annotation.CapAuditLogAction;
  * @version <ul>
  *          <li>2014/1/13,Sunkist Wang,new
  *          <li>2014/1/20,Sunkist Wang,update 以def.properties取中文寫入
+ *          <li>2014/4/18,Sunkist Wang,update get commonSrv,sysProp
  *          </ul>
  */
 public class CapAuditLog4HandlerAdvice {
@@ -75,11 +75,10 @@ public class CapAuditLog4HandlerAdvice {
 		capFilter.add(ACTION_PREFIX);
 	}
 
-	@Autowired
-	@Qualifier("CommonBeanService")
+	@Resource
 	private ICommonService commonSrv;
 
-	@Autowired
+	@Resource
 	private CapSystemProperties sysProp;
 
 	/**
