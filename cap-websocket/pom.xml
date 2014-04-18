@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.iisigroup.cap</groupId>
 		<artifactId>cap</artifactId>
-		<version>2.0.0</version>
+		<version>2.0.1</version>
 	</parent>
 	<artifactId>cap-websocket</artifactId>
 	<version>0.0.1</version>
