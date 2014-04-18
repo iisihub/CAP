@@ -202,6 +202,7 @@
                     mtype : "post"
                 })
             });
+            
             //            console.debug(s)
             var resGrid = _jqGrid.call(this.is("table") ? this : this.find("table"), s);
             resGrid.navGrid("#" + id + "-pager", {
@@ -210,7 +211,27 @@
                 edit : false,
                 search : false
             });
-
+            
+            // add click action
+            resGrid.delegate("a[role=gridcellclick]", 'click', function(event){
+                var $this = $(this), id = $(this).attr("idname");
+                var parms = s.colModel;
+                for (var op in parms) {
+                    if (parms[op].name == id) {
+                        parms[op].onclick && parms[op].onclick.call(this, $(this).attr("cellvalue"), parms[op], resGrid.jqGrid("getRowData",$(this).attr("rowid")), event);
+                    }
+                }
+            }).delegate("a[role=gridcelldownload]", 'click', function(event){
+                var $this = $(this);
+                CommonAPI.formSubmit({
+                    url: 'file',
+                    data: {
+                        id: $(this).attr("cellvalue")
+                    },
+                    target: "_blank"
+                });
+            }); 
+            
             s.localFirst && resGrid.setGridParam({
                 datatype : url ? 'json' : 'local',
                 url : url
