@@ -52,7 +52,7 @@
 		</property>
 	</bean>
 	
-	<bean id="sysProp" class="com.iisigroup.cap.mvc.jsp.CapSystemProperties">
+	<bean id="sysProp" class="com.iisigroup.cap.base.CapSystemProperties">
 		<property name="ignoreCache">
 			<list>
 				<value>TIME_OUT</value>
