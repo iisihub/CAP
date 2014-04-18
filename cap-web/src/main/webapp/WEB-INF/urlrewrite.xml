@@ -26,6 +26,17 @@
 		<set name="Expires" type="response-header">5 days</set>
 		<to>/basehandler/queryJsI18N</to>
 	</rule>
+	<!-- api mode -->
+	<rule match-type="regex">
+		<note>redirect api to  handler</note>
+		<from>^/api/([a-zA-Z0-9]+)/(.*)</from>
+		<set name="Cache-Control" type="response-header">no-cache, no-store, max-age=0</set>
+		<set name="Pragma" type="response-header">no-cache</set>
+		<set name="Expires" type="response-header">0</set>
+		<set name="_handler">$1handler</set>
+		<set name="_action">$2</set>
+		<to>/handler/$1handler/$2</to>
+	</rule>
 	<!--- parser handler url -->
 	<rule match-type="regex">
 		<note>redirect handler</note>
@@ -37,5 +48,6 @@
 		<set name="_action">$2</set>
 		<to>/handler/$1handler/$2</to>
 	</rule>
+	
 </urlrewrite>
 
