@@ -52,4 +52,6 @@
 	<import resource="classpath:websocket/websocket.xml"/>
 	<!-- captcha -->
 	<import resource="classpath:spring/captcha.xml"/>
+	<!-- report -->
+	<import resource="classpath:report/report.xml"/>
 </beans>

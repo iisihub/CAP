@@ -41,6 +41,10 @@
 			<artifactId>cap-websocket</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-report</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.3</version>

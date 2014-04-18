@@ -24,5 +24,13 @@ pageInit(function() {
                 }
             });
         });
+        $("#dwnloadPdf").click(function() {
+            $.capFileDownload({
+                url : url("samplehandler/dwnloadPdf"),
+                data : {
+                    password : "1"
+                }
+            });
+        });
     });
 }); 
