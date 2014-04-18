@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>cap-core</artifactId>
 	<properties>
-		<spring.version>3.1.2.RELEASE</spring.version>
+		<spring.version>3.1.3.RELEASE</spring.version>
 		<slf4j.version>1.5.8</slf4j.version>
 	</properties>
 	<dependencies>
