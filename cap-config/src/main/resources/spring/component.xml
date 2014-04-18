@@ -31,10 +31,10 @@
 	<bean id="codeTypeDao" class="com.iisigroup.cap.base.dao.impl.CodeTypeDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
-	-->
 	<bean id="errorCodeDao" class="com.iisigroup.cap.base.dao.impl.ErrorCodeDaoImpl">
 		<property name="entityManager" ref="capEntityManager" />
 	</bean>
+	-->
 	
  	<bean class="com.iisigroup.cap.base.response.RespMsgFactoryProcessor">
  		<property name="errorCodeService" ref="errorCodeService" />
@@ -61,7 +61,7 @@
 		</property>
 	</bean>
 	
-	<bean id="sysProp" class="com.iisigroup.cap.mvc.jsp.CapSystemProperties">
+	<bean id="sysProp" class="com.iisigroup.cap.base.CapSystemProperties">
 		<property name="ignoreCache">
 			<list>
 				<value>TIME_OUT</value>
@@ -69,12 +69,6 @@
 		</property>
 	</bean>
 
-	<bean id="sysProp" class="com.iisigroup.cap.base.CapSystemProperties">
-		<property name="ignoreCache">
-			<list></list>
-		</property>
-	</bean>
-	
 	<!-- freemarker config -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
