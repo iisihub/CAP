@@ -10,6 +10,7 @@
 	<properties>
 		<spring.version>3.1.3.RELEASE</spring.version>
 		<slf4j.version>1.5.8</slf4j.version>
+		<hibernate.version>4.1.5.Final</hibernate.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -51,6 +52,11 @@
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
 		<!-- VALIDATION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<dependency>
