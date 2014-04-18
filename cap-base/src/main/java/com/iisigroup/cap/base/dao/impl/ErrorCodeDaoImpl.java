@@ -13,9 +13,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.base.dao.CapJpaDao;
 import com.iisigroup.cap.base.dao.ErrorCodeDao;
 import com.iisigroup.cap.base.model.ErrorCode;
+import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
@@ -31,7 +31,7 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class ErrorCodeDaoImpl extends CapJpaDao<ErrorCode> implements
+public class ErrorCodeDaoImpl extends GenericDao<ErrorCode> implements
 		ErrorCodeDao {
 
 	@Override
