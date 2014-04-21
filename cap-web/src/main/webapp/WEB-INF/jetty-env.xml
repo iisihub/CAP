@@ -6,12 +6,13 @@
 				<Set name="driverClass">org.h2.Driver</Set>
 				<Set name="jdbcUrl">jdbc:h2:../h2db/capdb</Set>
 				<Set name="user">sa</Set>
-				<Set name="password"></Set>
+				<Set name="password">
+				</Set>
 			</New>
 		</Arg>
 	</New>
 	<Call name="getServletHandler">
-
+		
 	</Call>
 	<Call name="addServlet">
 		<Arg>
@@ -29,4 +30,15 @@
 		</Arg>
 		<Arg>/</Arg>
 	</Call>
+	<!--<Set name="contextPath">/cap-web</Set>-->
+	<Set name="baseResource">
+		<New class="org.mortbay.resource.ResourceCollection">
+			<Arg>
+				<Array type="java.lang.String">
+					<Item>src/main/webapp</Item>
+					<Item>../cap-captcha/src/main/webapp</Item>
+				</Array>
+			</Arg>
+		</New>
+	</Set>
 </Configure>
