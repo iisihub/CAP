@@ -53,7 +53,7 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("branchhandler")
 public class BranchHandler extends MFormHandler {
 
-	@Resource(name = "CommonBeanService")
+	@Resource
 	private ICommonService commonSrv;
 
 	@Resource

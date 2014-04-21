@@ -15,8 +15,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.model.Role;
+import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.security.dao.IRoleDao;
 
 /**
@@ -31,7 +31,7 @@ import com.iisigroup.cap.security.dao.IRoleDao;
  *          </ul>
  */
 @Repository
-public class RoleDaoImpl extends BaseDao<Role> implements IRoleDao<Role> {
+public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role> {
 
 	@SuppressWarnings("unchecked")
 	@Override

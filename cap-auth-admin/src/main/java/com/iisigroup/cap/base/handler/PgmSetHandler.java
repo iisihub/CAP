@@ -68,7 +68,7 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("pgmsethandler")
 public class PgmSetHandler extends MFormHandler {
 
-	@Resource(name = "CommonBeanService")
+	@Resource
 	private ICommonService commonSrv;
 
 	@Autowired

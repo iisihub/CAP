@@ -15,9 +15,9 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.model.Role;
 import com.iisigroup.cap.base.model.User;
+import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 import com.iisigroup.cap.security.dao.IUserDao;
@@ -44,7 +44,7 @@ import com.iisigroup.cap.security.dao.IUserDao;
  *          </ul>
  */
 @Repository("userDao")
-public class UserDaoImpl extends BaseDao<User> implements IUserDao<User> {
+public class UserDaoImpl extends GenericDao<User> implements IUserDao<User> {
 
 	@Override
 	public User getUserByLoginId(String loginId, String unitNo) {

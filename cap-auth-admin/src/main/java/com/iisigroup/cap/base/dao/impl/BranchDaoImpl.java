@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.dao.BranchDao;
 import com.iisigroup.cap.base.model.Branch;
+import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
@@ -22,7 +22,7 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class BranchDaoImpl extends BaseDao<Branch> implements
+public class BranchDaoImpl extends GenericDao<Branch> implements
 		BranchDao {
 
 	@Override

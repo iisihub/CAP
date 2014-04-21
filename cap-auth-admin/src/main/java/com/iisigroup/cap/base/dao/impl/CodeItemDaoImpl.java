@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.base.dao.BaseDao;
 import com.iisigroup.cap.base.dao.CodeItemDao;
 import com.iisigroup.cap.base.model.CodeItem;
+import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
@@ -33,7 +33,7 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class CodeItemDaoImpl extends BaseDao<CodeItem> implements CodeItemDao {
+public class CodeItemDaoImpl extends GenericDao<CodeItem> implements CodeItemDao {
 
 	@Override
 	public List<CodeItem> findAll(String system) {

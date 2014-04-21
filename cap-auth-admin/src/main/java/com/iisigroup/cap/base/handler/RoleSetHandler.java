@@ -68,7 +68,7 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("rolesethandler")
 public class RoleSetHandler extends MFormHandler {
 
-	@Resource(name = "CommonBeanService")
+	@Resource
 	private ICommonService commonSrv;
 
 	@Autowired
