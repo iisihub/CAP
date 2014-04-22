@@ -132,6 +132,8 @@ public class CapPermissionVoter extends RoleVoter {
 		if (url.endsWith("/")) {
 			url = url.substring(0, url.length() - 1);
 		}
+		// FIXME
+		url = url.replaceAll("/page/", "");
 		return url;
 	}
 
