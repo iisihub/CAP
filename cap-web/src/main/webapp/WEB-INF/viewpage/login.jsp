@@ -17,7 +17,7 @@ pageEncoding="UTF-8" %>
             <form action="../j_spring_security_check" method="post">
                 id : <input type="text" id="j_username" name="j_username" />
                 <br/>
-                <!-- password:<input type="password" id="j_pssword" name="j_password" /> -->
+                password:<input type="password" id="j_pssword" name="j_password" />
                 <button type="submit">
                     submit
                 </button>

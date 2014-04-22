@@ -68,9 +68,10 @@ public class CapUserDetailsService implements UserDetailsService {
 					+ " could not be found");
 		}
 
-		String password = obtainPassword(username);
+		String password = obtainPassword(user);
 
 		Map<String, String> roles = obtainRole(user);
+		// TODO
 		//
 		// boolean enabled = user.isEnabled();
 		// boolean accountNonExpired = true;
@@ -118,10 +119,10 @@ public class CapUserDetailsService implements UserDetailsService {
 	}
 
 	/**
-	 * Returns null. Subclass may override it to provide their own password.
+	 * Default password encoding algorithm is SHA-256. Subclass may override it to provide their own password.
 	 */
-	protected String obtainPassword(String username) {
-		return "";
+	protected String obtainPassword(IUser user) {
+		return user.getPassword();
 	}
 
 }

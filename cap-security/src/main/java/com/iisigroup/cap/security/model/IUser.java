@@ -31,24 +31,26 @@ import java.util.Locale;
  */
 public interface IUser extends Serializable {
 
-	String getUserId();
+    String getUserId();
 
-	String getUserName();
+    String getUserName();
 
-	String getUnitNo();
-	
-	String getApplyNf();
-	
-	String getApplyRem();
-	
-	BigDecimal getWeights();
-	
-	String getUpdater();
-	
-	Timestamp getUpdateTime();
+    String getUnitNo();
 
-	List<? extends IRole> getRoles();
+    String getApplyNf();
 
-	Locale getLocale();
+    String getApplyRem();
+
+    BigDecimal getWeights();
+
+    String getUpdater();
+
+    Timestamp getUpdateTime();
+
+    List<? extends IRole> getRoles();
+
+    Locale getLocale();
+
+    String getPassword();
 
 }

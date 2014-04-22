@@ -39,7 +39,9 @@
 	</beans:bean>
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="userDetailsServiceImpl" />
+		<authentication-provider user-service-ref="userDetailsServiceImpl">
+		    <password-encoder hash="sha-256" />
+		</authentication-provider>
 	</authentication-manager>
 
 	<beans:bean id="capAuthenticationEntryPoint"
