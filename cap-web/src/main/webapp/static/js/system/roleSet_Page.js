@@ -10,16 +10,16 @@ pageInit(function(){
 			postData: { rolCode: code },
             multiselect: true, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
-                header: i18n['roleSetPage']['staffId'],//"使用者代號",
+                header: i18n['roleSet_Page']['staffId'],//"使用者代號",
                 name: 'userId', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['staffNm'],//"姓名
+                header: i18n['roleSet_Page']['staffNm'],//"姓名
                 name: 'userName', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['departNo'],//"部門代號
+                header: i18n['roleSet_Page']['departNo'],//"部門代號
                 name: 'unitNo', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['departNm'],//"部門名稱
+                header: i18n['roleSet_Page']['departNm'],//"部門名稱
                 name: 'departnm', align: "left", sortable: true
             }]
         });
@@ -29,13 +29,13 @@ pageInit(function(){
 			postData: { rolCode: code },
             multiselect: true, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
-                header: i18n['roleSetPage']['pgmCode'],//"功能代碼
+                header: i18n['roleSet_Page']['pgmCode'],//"功能代碼
                 name: 'code', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['pgmName'],//"功能名稱
+                header: i18n['roleSet_Page']['pgmName'],//"功能名稱
                 name: 'name', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['pgmTyp'],//"上層功能代碼
+                header: i18n['roleSet_Page']['pgmTyp'],//"上層功能代碼
                 name: 'parent', align: "left", sortable: true
             }]
         });
@@ -74,10 +74,10 @@ pageInit(function(){
             multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
             pager:false,
             colModel: [{
-                header: i18n['roleSetPage']['staffId'],//"使用者代號",
+                header: i18n['roleSet_Page']['staffId'],//"使用者代號",
                 name: 'userId', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['staffNm'],//"姓名
+                header: i18n['roleSet_Page']['staffNm'],//"姓名
                 name: 'userName', align: "left", sortable: true
             }]
         });
@@ -175,13 +175,13 @@ pageInit(function(){
             multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
             pager:false,
             colModel: [{
-                header: i18n['roleSetPage']['pgmCode'],//"功能代碼
+                header: i18n['roleSet_Page']['pgmCode'],//"功能代碼
                 name: 'code', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['pgmName'],//"功能名稱
+                header: i18n['roleSet_Page']['pgmName'],//"功能名稱
                 name: 'name', align: "left", sortable: true
             },  {
-                header: i18n['roleSetPage']['pgmTyp'],//"上層功能代碼
+                header: i18n['roleSet_Page']['pgmTyp'],//"上層功能代碼
                 name: 'parent', align: "left", sortable: true
             }]
         });

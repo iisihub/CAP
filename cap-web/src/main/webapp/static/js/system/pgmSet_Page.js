@@ -20,7 +20,7 @@ pageInit(function(){
 				success : function(responseData) {
 					var items = {};
 					if ($form.find('#step').val() == '1'){
-						items['0'] = i18n['pgmSetPage']['step0'];
+						items['0'] = i18n['pgmSet_Page']['step0'];
 					}else if (responseData.codeItem.length >0){
 						var size = responseData.codeItem.length;
 						for (var i=0;i<size;i++){
@@ -29,7 +29,7 @@ pageInit(function(){
 						}
 						data = responseData.codeItem[0];
 					}else{
-						items[''] = i18n['pgmSetPage']['noOption'];
+						items[''] = i18n['pgmSet_Page']['noOption'];
 					}
 					$form.find('#parent').setOptions(items);
 					value && $form.find('select[name=parent]').val(value);
@@ -42,10 +42,10 @@ pageInit(function(){
 			postData: { sysTyp : '', pgmCode: code },
             multiselect: true, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
-                header: i18n['pgmSetPage']['rolCode'],//"角色代碼",
+                header: i18n['pgmSet_Page']['rolCode'],//"角色代碼",
                 name: 'roleId', align: "center", sortable: false
             },  {
-                header: i18n['pgmSetPage']['rolName'],//"角色名稱",
+                header: i18n['pgmSet_Page']['rolName'],//"角色名稱",
                 name: 'rolName', align: "left", sortable: true
             }]
         });
@@ -99,10 +99,10 @@ pageInit(function(){
             multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
             pager:false,
             colModel: [{
-                header: i18n['pgmSetPage']['rolCode'],//"角色代碼",
+                header: i18n['pgmSet_Page']['rolCode'],//"角色代碼",
                 name: 'roleId', align: "center", sortable: false
             },  {
-                header: i18n['pgmSetPage']['rolName'],//"角色名稱",
+                header: i18n['pgmSet_Page']['rolName'],//"角色名稱",
                 name: 'rolName', align: "left", sortable: true
             }]
         });

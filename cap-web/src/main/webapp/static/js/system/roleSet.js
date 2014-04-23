@@ -41,7 +41,7 @@ pageInit(function(){
 	            }
 	        }
 			CommonAPI.formSubmit({
-	            url: './system/roleSetPage',
+	            url: './system/roleSet_Page',
 	            data: {
 	                rolCode: rowObject?rowObject.roleId:""
 	            },

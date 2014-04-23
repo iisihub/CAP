@@ -46,23 +46,6 @@
  		<property name="errorCodeService" ref="errorCodeService" />
  	</bean>
 	
-	<bean id="codeItemService" class="com.iisigroup.cap.base.service.impl.CodeItemServiceImpl">
-		<property name="systemType" value="${systemType}" />
-		<property name="jdbc" ref="capJdbcTemplate" />
-	</bean>
-	
-	<!-- <bean id="memberService" class="com.iisigroup.cap.base.service.impl.MemberServiceImpl">
-		<property name="systemType" value="${systemType}" />
-		<property name="jdbc" ref="capJdbcTemplate" />
-	</bean> -->
-	
-	<bean id="pgmSetService" class="com.iisigroup.cap.base.service.impl.PgmSetServiceImpl">
-		<property name="jdbc" ref="capJdbcTemplate" />
-	</bean>
-	<bean id="roleSetService" class="com.iisigroup.cap.base.service.impl.RoleSetServiceImpl">
-		<property name="jdbc" ref="capJdbcTemplate" />
-	</bean>
-	
 	<bean id="accessControlService" class="com.iisigroup.cap.base.service.impl.AccessControlServiceImpl">
 		<property name="systemType" value="${systemType}" />
 	</bean>

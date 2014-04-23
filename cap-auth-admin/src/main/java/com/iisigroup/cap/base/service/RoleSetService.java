@@ -19,21 +19,23 @@ import com.iisigroup.cap.model.Page;
  */
 public interface RoleSetService {
 
-	public Page<Map<String, Object>> findPageUsr(ISearch search, String rolCode);
+	Page<Map<String, Object>> findPageUsr(ISearch search, String rolCode);
 
-	public Page<Map<String, Object>> findPageEditUsr(ISearch search,
+	Page<Map<String, Object>> findPageEditUsr(ISearch search,
 			String rolCode, String unitNo);
 
-	public Page<Map<String, Object>> findPageFunc(ISearch search, String rolCode);
+	Page<Map<String, Object>> findPageFunc(ISearch search, String rolCode);
 
-	public Page<Map<String, Object>> findPageEditFunc(ISearch search,
+	Page<Map<String, Object>> findPageEditFunc(ISearch search,
 			String rolCode, String systyp, String pgmTyp);
 
-	public Map<String, String> findAllBranch();
+	Map<String, String> findAllBranch();
 
-	public Map<String, String> findAllFunc(String systyp);
+	Map<String, String> findAllFunc(String systyp);
 
-	public int deleteRlset(String rolCode, List<String> delUsr);
+	int deleteRlset(String rolCode, List<String> delUsr);
 	
-	public int deleteRlf(String rolCode, List<String> delFunc);
+	int deleteRlf(String rolCode, List<String> delFunc);
+
+    List<Map<String, Object>> findAllRoleWithSelectedByUserOid(String userOid);
 }

@@ -34,12 +34,12 @@ public interface BranchService {
 	 *            分行代碼
 	 * @return {@link com.iisigroup.cap.base.model.Branch}
 	 */
-	public Branch findByBrno(String brNo);
+	Branch findByBrno(String brNo);
 
 	/**
 	 * 取得所有的所分行(未cache)
 	 * 
 	 * @return 所有分行清單
 	 */
-	public List<Branch> findByAllBranch();
+	List<Branch> findByAllBranch();
 }

@@ -11,22 +11,26 @@ import com.iisigroup.cap.security.service.ISecurityService;
 //@Service
 public class AccessControlServiceImpl implements ISecurityService {
 
-	@Resource
-	private IRoleDao<IRole> dao;
-	
-	private String systemType;
+    @Resource
+    private IRoleDao<IRole> dao;
 
-	public void setSystemType(String systemType) {
-		this.systemType = systemType;
-	}
+    private String systemType;
 
-	public AccessControlServiceImpl() {
-		super();
-	}
+    public void setSystemType(String systemType) {
+        this.systemType = systemType;
+    }
 
-	@Override
-	public List<IRole> getAuthRolesByUrl(String url) {
-		
-		return dao.findByUrl(systemType, url);
-	}
+    public AccessControlServiceImpl() {
+        super();
+    }
+
+    @Override
+    public List<IRole> getAuthRolesByUrl(String url) {
+        // FIXME
+        url = url.replaceAll("/page/", "");
+        if (url.indexOf("_") > 0) {
+            url = url.substring(0, url.lastIndexOf("_"));
+        }
+        return dao.findByUrl(systemType, url);
+    }
 }

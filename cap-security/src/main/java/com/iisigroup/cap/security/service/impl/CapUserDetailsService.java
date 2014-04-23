@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -86,6 +88,7 @@ public class CapUserDetailsService implements UserDetailsService {
 		return new CapUserDetails(user, password, roles);
 	}
 
+	@Resource
 	private IUserDao<IUser> userDao;
 
 	public void setUserDao(IUserDao<IUser> userDao) {

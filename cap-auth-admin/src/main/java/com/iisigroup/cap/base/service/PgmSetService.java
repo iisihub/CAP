@@ -27,13 +27,13 @@ public interface PgmSetService {
 	 *            pk
 	 * @return {@link com.iisigroup.cap.base.model.CodeItem}
 	 */
-	public CodeItem find(String code);
+	CodeItem find(String code);
 	
-	public List<CodeItem> findBySystypAndStep(String systyp, String step);
+	List<CodeItem> findBySystypAndStep(String systyp, String step);
 
-	public int deleteRlf(String pgmCode, List<String> delRole);
+	int deleteRlf(String pgmCode, List<String> delRole);
 	
-	public Page<Map<String, Object>> findPage(ISearch search, String systyp, String pgmCode);
+	Page<Map<String, Object>> findPage(ISearch search, String systyp, String pgmCode);
 
-	public Page<Map<String, Object>> findEditPage(ISearch search, String systyp, String pgmCode);
+	Page<Map<String, Object>> findEditPage(ISearch search, String systyp, String pgmCode);
 }

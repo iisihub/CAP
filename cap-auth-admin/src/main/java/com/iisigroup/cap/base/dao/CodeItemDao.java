@@ -12,9 +12,12 @@
 package com.iisigroup.cap.base.dao;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.model.Page;
 
 /**
  * <pre>
@@ -28,15 +31,66 @@ import com.iisigroup.cap.dao.IGenericDao;
  *          </ul>
  */
 public interface CodeItemDao extends IGenericDao<CodeItem> {
-	/**
-	 * find All
-	 * 
-	 * @param	system
-	 * 				系統代碼
-	 * @return List<CodeItem>
-	 */
-	public List<CodeItem> findAll(String system);
-	
-	
-	public List<CodeItem> findBySystypAndStep(String systyp, String step);
+    /**
+     * find All
+     * 
+     * @param system
+     *            系統代碼
+     * @return List<CodeItem>
+     */
+    List<CodeItem> findAll(String system);
+
+    List<CodeItem> findBySystypAndStep(String systyp, String step);
+
+    Page<Map<String, Object>> findPageByRoleCode(String roleCode,
+            int firstResult, int maxResults);
+
+    int deleteByRoleCodeAndPgmCodes(String rolCode, List<String> delFunc);
+
+    Page<Map<String, Object>> findPageUnselected(String rolCode, String systyp,
+            String pgmTyp, int firstResult, int maxResults);
+
+    /**
+     * 依交易代碼取得CodeItem
+     * 
+     * @since 2011/05/31
+     * @author Fantasy
+     */
+    CodeItem getCodeItemByCodeAndSysType(int code, String sysType);
+
+    /**
+     * findByParentAndSteps
+     * 
+     * @since 2011/05/10
+     * @author Fantasy
+     */
+    List<CodeItem> findByParentAndSteps(String pgmDept, Set<String> roles,
+            int parent, String sysType, int... steps);
+
+    /**
+     * findByStep
+     * 
+     * @since 2011/05/10
+     * @author Fantasy
+     */
+    List<CodeItem> findByStep(Set<String> roles, String sysType, int... step);
+
+    /**
+     * findByParent
+     * 
+     * @since 2011/05/10
+     * @author Fantasy
+     */
+    List<CodeItem> findBySysTypeAndParent(Set<String> roles, int parent,
+            String sysType);
+
+    /**
+     * findByParentAndSteps
+     * 
+     * @since 2011/05/10
+     * @author Fantasy
+     */
+    List<CodeItem> findByParentAndSteps(Set<String> roles, int parent,
+            String sysType, int... steps);
+
 }

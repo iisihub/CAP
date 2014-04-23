@@ -1,6 +1,5 @@
 package com.iisigroup.cap.base.service.impl;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.BranchDao;
 import com.iisigroup.cap.base.dao.CodeItemDao;
+import com.iisigroup.cap.base.dao.RoleDao;
+import com.iisigroup.cap.base.dao.RoleSetDao;
+import com.iisigroup.cap.base.dao.UserDao;
 import com.iisigroup.cap.base.model.Branch;
 import com.iisigroup.cap.base.model.CodeItem;
 import com.iisigroup.cap.base.service.RoleSetService;
 import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.service.AbstractService;
 
@@ -41,51 +42,39 @@ public class RoleSetServiceImpl extends AbstractService implements
     @Resource
     private CodeItemDao codeItemDao;
 
-    private CapNamedJdbcTemplate jdbc;
+    @Resource
+    private RoleDao roleDao;
 
-    public void setJdbc(CapNamedJdbcTemplate jdbc) {
-        this.jdbc = jdbc;
-    }
+    @Resource
+    private RoleSetDao roleSetDao;
+
+    @Resource
+    private UserDao userDao;
 
     @Override
     public Page<Map<String, Object>> findPageUsr(ISearch search, String rolCode) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("rolCode", rolCode);
-
-        return jdbc.queryForPage("roleSet_getUser", param,
-                search.getFirstResult(), search.getMaxResults());
+        return userDao.findPageByRoleCode(rolCode, search.getFirstResult(),
+                search.getMaxResults());
     }
 
     @Override
     public Page<Map<String, Object>> findPageEditUsr(ISearch search,
             String rolCode, String unitNo) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("rolCode", rolCode);
-        param.put("unitNo", unitNo);
-
-        return jdbc.queryForPage("roleSet_getEditUser", param,
+        return userDao.findPageUnselectedByRoleCodeAndUnitNo(rolCode, unitNo,
                 search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
     public Page<Map<String, Object>> findPageEditFunc(ISearch search,
             String rolCode, String systyp, String pgmTyp) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("rolCode", rolCode);
-        param.put("pgmTyp", pgmTyp);
-        param.put("sysTyp", systyp);
-
-        return jdbc.queryForPage("roleSet_getEditFunc", param,
+        return codeItemDao.findPageUnselected(rolCode, systyp, pgmTyp,
                 search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
     public Page<Map<String, Object>> findPageFunc(ISearch search, String rolCode) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("rolCode", rolCode);
-
-        return jdbc.queryForPage("roleSet_getFunc", param,
-                search.getFirstResult(), search.getMaxResults());
+        return codeItemDao.findPageByRoleCode(rolCode, search.getFirstResult(),
+                search.getMaxResults());
     }
 
     @Override
@@ -116,20 +105,18 @@ public class RoleSetServiceImpl extends AbstractService implements
 
     @Override
     public int deleteRlset(String rolCode, List<String> delUsr) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("rolCode", rolCode);
-        param.put("delUsrs", delUsr);
-
-        return jdbc.update("roleSet_deleteRlset", param);
+        return roleSetDao.deleteByRoleCodeAndUserIds(rolCode, delUsr);
     }
 
     @Override
     public int deleteRlf(String rolCode, List<String> delFunc) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("rolCode", rolCode);
-        param.put("delFunc", delFunc);
+        return codeItemDao.deleteByRoleCodeAndPgmCodes(rolCode, delFunc);
+    }
 
-        return jdbc.update("roleSet_deleteRlf", param);
+    @Override
+    public List<Map<String, Object>> findAllRoleWithSelectedByUserOid(
+            String userOid) {
+        return roleDao.findAllWithSelectedByUserOid(userOid);
     }
 
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script>
-		loadScript('js/system/pgmSetPage');
+		loadScript('js/system/pgmSet_Page');
 	</script>
 	<div class="button-menu funcContainer">
 		<button type="button" id="save_btn">

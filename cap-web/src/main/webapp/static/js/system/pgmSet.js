@@ -44,7 +44,7 @@ pageInit(function(){
 	            }
 	        }
 			CommonAPI.formSubmit({
-	            url: './system/pgmSetPage',
+	            url: './system/pgmSet_Page',
 	            data: {
 	                pgmCode: rowObject?rowObject.code:""
 	            },
