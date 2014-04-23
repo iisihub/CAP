@@ -4,7 +4,7 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-	
+
 	<http pattern="/img/**" security="none" />
 	<http pattern="/**/images/**" security="none" />
 	<http pattern="/jquery/**" security="none" />
@@ -15,16 +15,17 @@
 	<http pattern="/page/login*" security="none" />
 	<http auto-config="false" access-decision-manager-ref="accessDecisionManager"
 		entry-point-ref="capAuthenticationEntryPoint" access-denied-page="/page/login?error">
-		
+
 		<intercept-url pattern="/page/home/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/page/index" access="IS_AUTHENTICATED_FULLY"/>
 		<intercept-url pattern="/page/**" access="${systemType}"/>
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
 
 		<anonymous enabled="false" />
 		<form-login always-use-default-target="true" login-page="/page/login"
-			default-target-url="/page/index" authentication-failure-url="/page/login?error"/> 
+			default-target-url="/page/index" authentication-failure-url="/page/login?error"/>
 			<!-- authentication-details-source-ref="capWebAuthenticationDetailsSource" -->
-			
+
 		<session-management>
 			<concurrency-control max-sessions="1"
 				expired-url="/page/login?error" session-registry-alias="sessionRegistry"/> <!-- exception-if-maximum-exceeded="true" -->
@@ -32,10 +33,9 @@
 		<logout logout-url="/j_spring_security_logout"
 			logout-success-url="/page/login" />
 	</http>
-	
+
 	<beans:bean id="userDetailsServiceImpl"
 		class="com.iisigroup.cap.security.service.impl.CapUserDetailsService">
-		<beans:property name="userDao" ref="userDao" />
 	</beans:bean>
 
 	<authentication-manager>
@@ -49,7 +49,7 @@
 		<beans:property name="loginFormUrl" value="/page/login" />
 		<beans:property name="forceHttps" value="false" />
 	</beans:bean>
-	
+
 	<!-- <beans:bean id="capWebAuthenticationDetailsSource"
 		class="com.iisigroup.cap.security.web.CapWebAuthenticationDetailsSource">
 	</beans:bean> -->
@@ -73,7 +73,7 @@
 
 	<beans:bean id="loggerListener"
 		class="org.springframework.security.access.event.LoggerListener" />
-		
+
 	<!-- Security context -->
 	<beans:bean id="capSecurityContext" class="com.iisigroup.cap.security.CapSecurityContext"
 		scope="session" />
