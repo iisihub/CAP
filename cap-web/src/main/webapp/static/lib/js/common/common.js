@@ -3,6 +3,7 @@ $.holdReady(true);
 (function(_jQuery, window) {
     var msie = /MSIE/.test(navigator.userAgent);
     var msie7  = /MSIE 7.0/.test(navigator.userAgent);
+    _jQuery.ajaxSettings.traditional = true;
     _jQuery.ajaxSetup({
         jsonp : null,
         jsonpCallback : null,
@@ -1325,7 +1326,7 @@ $.holdReady(true);
                                     }
                                 }).data('bindChanged', true);
                         }
-                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).val(defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
+                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).prop('value', defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
                     }).call(this, options, append);
                 },
 
