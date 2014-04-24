@@ -22,7 +22,7 @@ $.holdReady(true);
         showButtonPanel : true,
         changeMonth : true,
         changeYear : true,
-        buttonImage : '../static/images/icon_date.png',
+        buttonImage : baseUrl + '/images/icon_date.png',
         showOn : 'both'
     });
 
