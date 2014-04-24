@@ -16,10 +16,14 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.base.dao.CodeItemDao;
+import com.iisigroup.cap.base.dao.I18nDao;
 import com.iisigroup.cap.base.model.CodeItem;
+import com.iisigroup.cap.base.model.I18n;
 import com.iisigroup.cap.base.service.MenuService;
+import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapSystemConfig;
+import com.iisigroup.cap.utils.CapWebUtil;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -29,6 +33,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Resource
     private CapSystemConfig config;
+
+    @Resource
+    I18nDao i18nDao;
 
     public MenuItem getMenuByRoles(Set<String> roles) {
 
@@ -68,7 +75,12 @@ public class MenuServiceImpl implements MenuService {
         for (CodeItem code : list) {
             MenuItem item = new MenuItem();
             item.setCode(code.getCode());
-            item.setName(CapAppContext.getMessage("menu." + code.getCode()));
+            // 改為從 i18n table 取得字串
+            I18n i18n = i18nDao.findByCodeTypeAndCodeValue("menu", "menu."
+                    + code.getCode(),
+                    SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+            item.setName(i18n == null ? CapAppContext.getMessage("menu."
+                    + code.getCode()) : i18n.getCodeDesc());
             item.setUrl(code.getPath());
             menuMap.put(item.getCode(), item);
 

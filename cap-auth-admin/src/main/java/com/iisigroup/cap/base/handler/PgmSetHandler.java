@@ -49,7 +49,6 @@ import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapAppContext;
-import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
 
@@ -189,15 +188,7 @@ public class PgmSetHandler extends MFormHandler {
 						PgmSetHandler.class);
 			}
 		}
-		if (codeItem == null) {
-			codeItem = new CodeItem();
-		}
-		CapBeanUtil.map2Bean(request, codeItem, CodeItem.class);
-		codeItem.setUpdater(CapSecurityContext.getUserId());
-		codeItem.setUpdateTime(CapDate.getCurrentTimestamp());
-
-		commonSrv.save(codeItem);
-
+		pgmSetService.save(codeItem, request);
 		return result;
 	}
 

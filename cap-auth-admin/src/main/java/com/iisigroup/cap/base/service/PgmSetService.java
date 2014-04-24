@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.base.model.CodeItem;
+import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
 
@@ -20,20 +21,24 @@ import com.iisigroup.cap.model.Page;
  */
 public interface PgmSetService {
 
-	/**
-	 * CodeItem
-	 * 
-	 * @param code
-	 *            pk
-	 * @return {@link com.iisigroup.cap.base.model.CodeItem}
-	 */
-	CodeItem find(String code);
-	
-	List<CodeItem> findBySystypAndStep(String systyp, String step);
+    /**
+     * CodeItem
+     * 
+     * @param code
+     *            pk
+     * @return {@link com.iisigroup.cap.base.model.CodeItem}
+     */
+    CodeItem find(String code);
 
-	int deleteRlf(String pgmCode, List<String> delRole);
-	
-	Page<Map<String, Object>> findPage(ISearch search, String systyp, String pgmCode);
+    List<CodeItem> findBySystypAndStep(String systyp, String step);
 
-	Page<Map<String, Object>> findEditPage(ISearch search, String systyp, String pgmCode);
+    int deleteRlf(String pgmCode, List<String> delRole);
+
+    Page<Map<String, Object>> findPage(ISearch search, String systyp,
+            String pgmCode);
+
+    Page<Map<String, Object>> findEditPage(ISearch search, String systyp,
+            String pgmCode);
+
+    void save(CodeItem codeItem, IRequest request);
 }

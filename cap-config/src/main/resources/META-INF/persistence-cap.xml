@@ -16,6 +16,7 @@
 		<class>com.iisigroup.cap.base.model.ErrorCode</class>
 		<class>com.iisigroup.cap.base.model.AuditLog</class>
 		<class>com.iisigroup.cap.base.model.UserPwdHistory</class>
+		<class>com.iisigroup.cap.base.model.I18n</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>
