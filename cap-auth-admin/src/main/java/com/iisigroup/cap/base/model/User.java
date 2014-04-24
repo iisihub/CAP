@@ -27,6 +27,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.iisigroup.cap.model.GenericBean;
+import com.iisigroup.cap.model.IDataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.model.IUser;
@@ -47,7 +48,7 @@ import com.iisigroup.cap.utils.CapString;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DEF_USR")
-public class User extends GenericBean implements IUser {
+public class User extends GenericBean implements IDataObject, IUser {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -75,7 +76,7 @@ public class User extends GenericBean implements IUser {
     @Column(length = 6)
     private String updater;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column
     private Timestamp updateTime;
 
     // bi-directional one-to-one association to Branch
@@ -101,7 +102,7 @@ public class User extends GenericBean implements IUser {
     @Column
     private Timestamp createTime;
 
-    @Column(length = 64)
+    @Column(length = 6)
     private String creator;
 
     /**

@@ -8,4 +8,6 @@ import com.iisigroup.cap.dao.IGenericDao;
 public interface RoleSetDao extends IGenericDao<RoleSet> {
 
     int deleteByRoleCodeAndUserIds(String rolCode, List<String> delUsr);
+
+    RoleSet findByStaffpidAndRoleCode(String staffpid, String roleCode);
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.UserDao;
@@ -56,15 +57,37 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
 
     @Override
     public User findByUserId(String userId) {
-        // TODO Auto-generated method stub
-        return null;
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "userId", userId);
+        return findUniqueOrNone(search);
     }
 
     @Override
     public Page<Map<String, Object>> findPage(String userId, String userName,
             String[] roleOids, String[] status, int maxResults, int firstResult) {
-        // TODO Auto-generated method stub
-        return null;
+        ISearch search = createSearchTemplete();
+        search.setFirstResult(firstResult);
+        search.setMaxResults(maxResults);
+        search.addOrderBy("staffpid");
+        if (!StringUtils.isBlank(userId)) {
+            search.addSearchModeParameters(SearchMode.LIKE, "u.staffpid", "%"
+                    + userId + "%");
+        }
+        if (!StringUtils.isBlank(userName)) {
+            search.addSearchModeParameters(SearchMode.LIKE, "u.staffpnm", "%"
+                    + userName + "%");
+        }
+        if (roleOids != null && roleOids.length > 0) {
+            search.addSearchModeParameters(SearchMode.IS_NOT_NULL,
+                    "ur.staffpid", null);
+            search.addSearchModeParameters(SearchMode.IN, "ur.rolecode", roleOids);
+        }
+        if (status != null && status.length > 0) {
+            search.addSearchModeParameters(SearchMode.IN, "u.status", status);
+        } else {
+            search.addSearchModeParameters(SearchMode.NOT_EQUALS, "u.status", "9");
+        }
+        return getNamedJdbcTemplate().queryForPage("User.find", search);
     }
 
     @Override

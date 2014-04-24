@@ -7,13 +7,13 @@
         /**
          * 取得目前所選取資料行資料
          */
-        getSelRowDatas : function() {
+        getSelRowDatas : function(col) {
             var tGrid = $(this);
             if (tGrid.jqGrid('getGridParam', 'multiselect')) {
                 var sels = tGrid.jqGrid('getGridParam', 'selarrrow');
                 var res = [];
                 for (var i = 0; i < sels.length; i++) {
-                    res.push(tGrid.getRowData(sels[i]));
+                    col ? res.push(tGrid.getCell(sels[i], col)) : res.push(tGrid.getRowData(sels[i]));
                 }
                 return res.length ? res : undefined;
             } else {

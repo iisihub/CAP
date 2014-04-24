@@ -19,7 +19,19 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<property name="parserContext" ref="sqlParserContext" />
 	</bean>
 	<util:map id="userSql" map-class="java.util.HashMap" key-type="java.lang.String">
-
-	</util:map>
-
+        <entry key="User.find">
+            <value><![CDATA[
+                select distinct u.* from def_usr u left join def_rlset ur on ur.staffpid = u.staffpid
+            ]]></value>
+        </entry>
+		<entry key="Role.findAllWithSelectedByUserOid">
+			<value><![CDATA[
+                select
+                    r.*,
+                    auth.staffpid
+                from def_rle r
+                left join (select * from def_rlset ur where ur.staffpid = :userOid) auth on r.rolcode = auth.rolcode
+            ]]></value>
+		</entry>
+    </util:map>
 </beans>

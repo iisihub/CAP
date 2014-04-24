@@ -5,15 +5,21 @@
 -- ====================================
 --DROP TABLE DEF_USR;
 create table DEF_USR (
-   OID                  CHAR(32)               not null,
-   STAFFPID               CHAR(10)               not null,
-   STAFFPNM             CHAR(12),
-   DEPARTNO               CHAR(4),
-   APPLYYNF             CHAR(1)                default '1',
+   OID                  VARCHAR(32)               not null,
+   STAFFPID               VARCHAR(10)               not null,
+   STAFFPNM             VARCHAR(12),
+   DEPARTNO               VARCHAR(4),
+   APPLYNF              VARCHAR(1)                default '1',
    APPLYREM             VARCHAR(30),
    WEIGHTS              DECIMAL(5, 2),
-   UPDATER              CHAR(6),
+   UPDATER              VARCHAR(6),
    UPDATETIME           TIMESTAMP,
+   PASSWORD				VARCHAR(64),
+   EMAIL				VARCHAR(128),
+   STATUS				VARCHAR(1),
+   PRESTATUS			VARCHAR(1),
+   CREATOR              VARCHAR(6),
+   CREATETIME           TIMESTAMP,
    constraint P_DEF_USR primary key (OID)
 );
 
