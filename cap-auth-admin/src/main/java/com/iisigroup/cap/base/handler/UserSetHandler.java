@@ -224,8 +224,6 @@ public class UserSetHandler extends MFormHandler {
         String confirm = request.get("confirm");
         if (userService.validatePassword(password)) {
             String userId = CapSecurityContext.getUserId();
-            // FIXME dummy user
-            userId = "lancelot";
             checkPasswordRule(userId, newPwd, confirm);
             userService.changeUserPassword(newPwd);
         } else {

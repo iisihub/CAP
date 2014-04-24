@@ -20,9 +20,11 @@ import com.iisigroup.cap.base.model.User;
 import com.iisigroup.cap.base.model.UserPwdHistory;
 import com.iisigroup.cap.base.service.UserSetService;
 import com.iisigroup.cap.dao.ICommonDao;
+import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service
@@ -48,14 +50,12 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         user.setCreator(CapSecurityContext.getUserId());
         user = setUserFields(user, userId, userName, password, email);
         user.setRlSet(createUserRoleData(userId, roleOids));
-        commonDao.save(user);
-        //userDao.save(user);
+        userDao.save(user);
         createUserPwdHistory(user.getOid(), password);
     }
 
     public void updateUserByOid(String oid, String userId, String userName,
             boolean reset, String password, String email, String[] roleOids) {
-        deleteUserRoleByUserOid(oid);
         User user = userDao.find(oid);
         if (reset) {
             user.setStatus("1");
@@ -74,7 +74,6 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
             user.setPassword(hash(password.getBytes()));
         }
         user.setUpdateTime(CapDate.getCurrentTimestamp());
-        // TODO
         user.setUpdater(CapSecurityContext.getUserId());
         return user;
     }
@@ -104,10 +103,6 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
             h.setUpdateTime(CapDate.getCurrentTimestamp());
             userPwdHistoryDao.save(h);
         }
-    }
-
-    public void deleteUserRoleByUserOid(String userOid) {
-        // TODO
     }
 
     @Override
@@ -153,12 +148,14 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     public boolean checkPasswordRule(String userId, String password,
             String password2, String ruleType, int minLen, int maxHistory) {
         if (StringUtils.isBlank(password) || StringUtils.isBlank(password2)) {
-            return false;
+            throw new CapMessageException(CapAppContext.getMessage("error.001",
+                    new Object[] {}), getClass());
         }
         if (!password.equals(password2) || password.length() < minLen) {
-            return false;
+            throw new CapMessageException(CapAppContext.getMessage("error.002",
+                    new Object[] { minLen }), getClass());
         }
-        // TODO pwd history validate
+        // pwd history validate
         if (userId != null) {
             User user = userDao.findByUserId(userId);
             List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(user
@@ -167,7 +164,9 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
             for (UserPwdHistory h : list) {
                 if (hash(password.getBytes()).equalsIgnoreCase(
                         h.getPassword())) {
-                    return false;
+                    throw new CapMessageException(CapAppContext.getMessage(
+                            "error.003", new Object[] { maxHistory }),
+                            getClass());
                 }
                 i++;
                 if (i >= maxHistory) {
@@ -215,8 +214,15 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     public void changeUserPassword(String password) {
         String userId = CapSecurityContext.getUserId();
         User user = userDao.findByUserId(userId);
-        user.setPassword(hash(password.getBytes()));
+        String pwdHash = hash(password.getBytes());
+        user.setPassword(pwdHash);
         userDao.save(user);
+        // insert pwd history
+        UserPwdHistory uph = new UserPwdHistory();
+        uph.setUserOid(user.getOid());
+        uph.setPassword(pwdHash);
+        uph.setUpdateTime(CapDate.getCurrentTimestamp());
+        userPwdHistoryDao.save(uph);
     }
 
     private String hash(byte[] data) {

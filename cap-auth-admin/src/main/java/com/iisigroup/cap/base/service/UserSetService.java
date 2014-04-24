@@ -14,8 +14,6 @@ public interface UserSetService {
     void updateUserByOid(String oid, String userId, String userName,
             boolean reset, String password, String email, String[] roleOids);
 
-    void deleteUserRoleByUserOid(String userOid);
-
     Page<Map<String, Object>> findUser(String userId, String userName,
             String[] roleOids, String[] status, int maxResult, int firstResult);
 

@@ -28,8 +28,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_USER_PWD_HISTORY", uniqueConstraints = @UniqueConstraint(columnNames = {
-        "userOid", "password" }))
+@Table(name = "DEF_USER_PWD_HISTORY")
 public class UserPwdHistory extends GenericBean implements IDataObject {
 
     @Id
