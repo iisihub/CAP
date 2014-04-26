@@ -49,7 +49,7 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
 		int columnCount = rsmd.getColumnCount();
 		Map<String, Object> mapOfColValues = createColumnMap(columnCount);
 		for (int i = 1; i <= columnCount; i++) {
-			String key = getColumnKey(rsmd.getColumnName(i));
+			String key = getColumnKey(rsmd.getColumnLabel(i));
 			if (removePrefix != null) {
 				key = key.replaceFirst(removePrefix, "");
 			}
