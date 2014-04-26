@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -121,12 +122,8 @@ public class PasswordServiceImpl implements IPasswordService {
     public boolean validatePassword(String password) {
         String userId = CapSecurityContext.getUserId();
         User user = userDao.findByUserId(userId);
-        boolean tf = false;
-        if (encodePassword(user.getUserId(), password).equalsIgnoreCase(
-                user.getPassword())) {
-            tf = true;
-        }
-        return tf;
+        PasswordEncoder passwordEncoder = new StandardPasswordEncoder(userId);
+        return passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override

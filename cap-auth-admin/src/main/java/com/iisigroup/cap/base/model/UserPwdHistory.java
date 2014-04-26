@@ -37,7 +37,7 @@ public class UserPwdHistory extends GenericBean implements IDataObject {
     @Column(length = 32)
     private String userOid;
     @NotNull
-    @Column(length = 64)
+    @Column(length = 100)
     private String password;
     @Column
     private Timestamp updateTime;
