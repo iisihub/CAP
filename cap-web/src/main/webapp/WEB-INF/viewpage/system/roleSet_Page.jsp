@@ -59,22 +59,22 @@
 	                    </tbody>
 	                </table>
                 </fieldset>
+                <!-- 
                 <fieldset>
 					<legend><spring:message code="usr"></spring:message></legend>
 					<div id="btns_usr">
 						<button id="add" type="button" class="btn1">
 							<spring:message code="btn.add">
-								<!--新增-->
 							</spring:message>
 						</button>
 						<button id="delete" type="button" class="btn1">
 							<spring:message code="btn.delete">
-								<!--刪除-->
 							</spring:message>
 						</button>
 					</div>
 					<div id="gridview_usr"></div>
 				</fieldset>
+                 -->
 				<fieldset>
 					<legend><spring:message code="func"></spring:message></legend>
 					<div id="btns_func">
