@@ -12,13 +12,13 @@ create table DEF_USR (
    APPLYNF              VARCHAR(1)                default '1',
    APPLYREM             VARCHAR(30),
    WEIGHTS              DECIMAL(5, 2),
-   UPDATER              VARCHAR(6),
+   UPDATER              VARCHAR(10),
    UPDATETIME           TIMESTAMP,
-   PASSWORD				VARCHAR(64),
+   PASSWORD				VARCHAR(100),
    EMAIL				VARCHAR(128),
    STATUS				VARCHAR(1),
    PRESTATUS			VARCHAR(1),
-   CREATOR              VARCHAR(6),
+   CREATOR              VARCHAR(10),
    CREATETIME           TIMESTAMP,
    constraint P_DEF_USR primary key (OID)
 );

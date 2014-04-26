@@ -24,7 +24,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.iisigroup.cap.security.model.CapUserDetails;
-import com.iisigroup.cap.security.web.CapAuthenticationDetails;
 
 /**
  * <pre>

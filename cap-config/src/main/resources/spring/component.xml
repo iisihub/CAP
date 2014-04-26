@@ -50,6 +50,9 @@
 		<property name="systemType" value="${systemType}" />
 	</bean>
 
+	<bean id="passwordService" class="com.iisigroup.cap.base.service.impl.UserSetServiceImpl">
+	</bean>
+
 	<bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">
 		<property name="sendForm" value="${mail.sender}"/>
 		<property name="mailSender">

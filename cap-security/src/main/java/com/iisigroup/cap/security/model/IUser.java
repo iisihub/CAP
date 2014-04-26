@@ -53,4 +53,6 @@ public interface IUser extends Serializable {
 
     String getPassword();
 
+    String getStatus();
+
 }

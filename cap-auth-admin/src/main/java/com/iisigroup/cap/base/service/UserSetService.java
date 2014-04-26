@@ -19,15 +19,6 @@ public interface UserSetService {
 
     User findUserByUserId(String userId);
 
-    void lockUserByOid(String oid);
-
     void unlockUserByOid(String oid);
-
-    boolean checkPasswordRule(String userId, String password, String password2,
-            String ruleType, int minLen, int maxHistory);
-
-    boolean validatePassword(String password);
-
-    void changeUserPassword(String password);
 
 }

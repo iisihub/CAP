@@ -27,7 +27,6 @@ import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.model.Role;
-import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.base.model.User;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.base.service.RoleSetService;
@@ -47,6 +46,7 @@ import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
+import com.iisigroup.cap.security.service.IPasswordService;
 import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -68,6 +68,8 @@ public class UserSetHandler extends MFormHandler {
 
     @Resource
     private UserSetService userService;
+    @Resource
+    private IPasswordService passwordService;
     @Resource
     private RoleSetService roleSetService;
     @Resource
@@ -124,7 +126,7 @@ public class UserSetHandler extends MFormHandler {
         String userName = request.get("userName");
         String password = request.get("password");
         String confirm = request.get("confirm");
-        checkPasswordRule(null, password, confirm);
+        passwordService.checkPasswordRule(null, password, confirm);
         String email = request.get("email");
         String[] roleOids = request.getParamsAsStringArray("roleOids");
         userService.createUser(userId, userName, password, email, roleOids);
@@ -139,7 +141,7 @@ public class UserSetHandler extends MFormHandler {
         boolean reset = !StringUtils.isBlank(password);
         if (reset) {
             // 代表要修改密碼
-            checkPasswordRule(userId, password, confirm);
+            passwordService.checkPasswordRule(userId, password, confirm);
         }
         User user = userService.findUserByUserId(userId);
         if (user != null && !user.getOid().equals(oid)) {
@@ -185,7 +187,7 @@ public class UserSetHandler extends MFormHandler {
     public IResult lock(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
         for (String oid : oids) {
-            userService.lockUserByOid(oid);
+            passwordService.lockUserByUserId(oid);
         }
         return new AjaxFormResult();
     }
@@ -198,34 +200,14 @@ public class UserSetHandler extends MFormHandler {
         return new AjaxFormResult();
     }
 
-    private void checkPasswordRule(String userId, String password,
-            String confirm) {
-        SysParm parmPwdRule = commonService.findById(SysParm.class, "pwd_rule");
-        SysParm parmPwdMinLen = commonService.findById(SysParm.class,
-                "pwd_min_length");
-        SysParm parmPwdMaxHistory = commonService.findById(SysParm.class,
-                "pwd_max_history");
-        int minLen = Integer.parseInt(parmPwdMinLen.getParmValue());
-        int maxHistory = Integer.parseInt(parmPwdMaxHistory.getParmValue());
-        String ruleType = parmPwdRule.getParmValue();
-        CodeType rule = codeTypeService.getByCodeTypeAndValue("pwdrule",
-                ruleType);
-        if (!userService.checkPasswordRule(userId, password, confirm,
-                ruleType, minLen, maxHistory)) {
-            throw new CapMessageException(CapAppContext.getMessage(
-                    "error.008", new Object[] { rule.getCodeDesc() }),
-                    getClass());
-        }
-    }
-
     public IResult changePassword(IRequest request) {
         String password = request.get("password");
         String newPwd = request.get("newPwd");
         String confirm = request.get("confirm");
-        if (userService.validatePassword(password)) {
+        if (passwordService.validatePassword(password)) {
             String userId = CapSecurityContext.getUserId();
-            checkPasswordRule(userId, newPwd, confirm);
-            userService.changeUserPassword(newPwd);
+            passwordService.checkPasswordRule(userId, newPwd, confirm);
+            passwordService.changeUserPassword(newPwd);
         } else {
             throw new CapMessageException(
                     CapAppContext.getMessage("error.009"), getClass());

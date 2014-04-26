@@ -87,7 +87,7 @@ public class User extends GenericBean implements IDataObject, IUser {
     @OneToMany(mappedBy = "roleSet_usr", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<RoleSet> rlSet;
 
-    @Column(length = 64)
+    @Column(length = 100)
     private String password;
 
     @Column(length = 128)
