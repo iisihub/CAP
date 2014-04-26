@@ -114,9 +114,9 @@ public class RoleSetServiceImpl extends AbstractService implements
     }
 
     @Override
-    public List<Map<String, Object>> findAllRoleWithSelectedByUserOid(
+    public List<Map<String, Object>> findAllRoleWithSelectedByUserId(
             String userOid) {
-        return roleDao.findAllWithSelectedByUserOid(userOid);
+        return roleDao.findAllWithSelectedByUserId(userOid);
     }
 
 }

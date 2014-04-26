@@ -50,7 +50,7 @@
 		<property name="systemType" value="${systemType}" />
 	</bean>
 
-	<bean id="passwordService" class="com.iisigroup.cap.base.service.impl.UserSetServiceImpl">
+	<bean id="passwordService" class="com.iisigroup.cap.base.service.impl.PasswordServiceImpl">
 	</bean>
 
 	<bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">

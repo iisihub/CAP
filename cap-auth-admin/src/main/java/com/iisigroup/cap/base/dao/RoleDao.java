@@ -12,7 +12,7 @@ public interface RoleDao extends IGenericDao<Role> {
 
     Role findByRoleId(String roleId);
 
-    List<Map<String, Object>> findAllWithSelectedByUserOid(String userOid);
+    List<Map<String, Object>> findAllWithSelectedByUserId(String userOid);
 
     Page<Map<String, Object>> findPageBySysTypeAndPgmCode(String systyp,
             String pgmCode, int firstResult, int maxResults);

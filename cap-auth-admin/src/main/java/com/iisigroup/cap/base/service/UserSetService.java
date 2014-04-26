@@ -21,4 +21,6 @@ public interface UserSetService {
 
     void unlockUserByOid(String oid);
 
+    void lockUserByOid(String oid);
+
 }

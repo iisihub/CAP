@@ -24,13 +24,14 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                 select distinct u.* from def_usr u left join def_rlset ur on ur.staffpid = u.staffpid
             ]]></value>
         </entry>
-		<entry key="Role.findAllWithSelectedByUserOid">
+		<entry key="Role.findAllWithSelectedByUserId">
 			<value><![CDATA[
                 select
-                    r.*,
+                    r.rolcode as roleId,
+                    r.rolName,
                     auth.staffpid
                 from def_rle r
-                left join (select * from def_rlset ur where ur.staffpid = :userOid) auth on r.rolcode = auth.rolcode
+                left join (select * from def_rlset ur where ur.staffpid = :userId) auth on r.rolcode = auth.rolcode
             ]]></value>
 		</entry>
     </util:map>

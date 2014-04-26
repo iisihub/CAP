@@ -102,8 +102,8 @@ public class UserSetHandler extends MFormHandler {
         String type = params.get("type");
         if ("modify".equalsIgnoreCase(type)) {
             List<Map<String, Object>> roleList = null;
-            String userOid = params.get("userOid");
-            roleList = roleSetService.findAllRoleWithSelectedByUserOid(userOid);
+            String userId = params.get("userId");
+            roleList = roleSetService.findAllRoleWithSelectedByUserId(userId);
             MapGridResult gridResult = new MapGridResult();
             if (!CollectionUtils.isEmpty(roleList)) {
                 gridResult.setRowData(roleList);
@@ -159,7 +159,6 @@ public class UserSetHandler extends MFormHandler {
     public IResult delete(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
         for (String oid : oids) {
-            // userService.deleteUserRoleByUserOid(oid);
             userService.deleteUserByOid(oid);
         }
         return new AjaxFormResult();
@@ -187,7 +186,7 @@ public class UserSetHandler extends MFormHandler {
     public IResult lock(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
         for (String oid : oids) {
-            passwordService.lockUserByUserId(oid);
+            userService.lockUserByOid(oid);
         }
         return new AjaxFormResult();
     }

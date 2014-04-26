@@ -30,4 +30,11 @@ public class RoleSetDaoImpl extends GenericDao<RoleSet> implements RoleSetDao {
         search.addSearchModeParameters(SearchMode.EQUALS, "rolCode", roleCode);
         return findUniqueOrNone(search);
     }
+
+    @Override
+    public void deleteByUserId(String userId) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "userId", userId);
+        delete(find(search));
+    }
 }

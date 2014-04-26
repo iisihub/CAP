@@ -69,11 +69,11 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>,
     }
 
     @Override
-    public List<Map<String, Object>> findAllWithSelectedByUserOid(String userOid) {
+    public List<Map<String, Object>> findAllWithSelectedByUserId(String userId) {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("userOid", userOid);
+        params.put("userId", userId);
         return getNamedJdbcTemplate().query(
-                "Role.findAllWithSelectedByUserOid", params);
+                "Role.findAllWithSelectedByUserId", params);
     }
 
     @Override

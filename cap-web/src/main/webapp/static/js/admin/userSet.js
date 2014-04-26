@@ -7,7 +7,10 @@ pageInit(function() {
       sortorder : "desc",
       height : 250,
       multiselect : true,
-      colModel : [ {
+      colModel : [{
+        name : 'oid',
+        hidden : true
+      }, {
         header : i18n.userSet.userid,
         name : 'staffpid',
         width : 80,
@@ -118,7 +121,7 @@ pageInit(function() {
         } else {
           title.text(i18n.userSet.modify);
           var users = grid.getSelRowDatas();
-          aDialog.find('#oid').val(users[0].staffpid);
+          aDialog.find('#oid').val(users[0].oid);
           aDialog.find('#userId').val(users[0].staffpid);
           aDialog.find('#userName').val(users[0].staffpnm);
           aDialog.find('#email').val(users[0].email);
@@ -129,7 +132,7 @@ pageInit(function() {
           grid2.setGridParam({
             postData : {
               type : 'modify',
-              userOid : users[0].staffpid
+              userId : users[0].staffpid
             }
           }).trigger("reloadGrid");
         }
@@ -230,7 +233,7 @@ pageInit(function() {
           data && $.ajax({
             url : "webroot/usershandler/" + action,
             data : {
-              oids : grid.getSelRowDatas('staffpid')
+              oids : grid.getSelRowDatas('oid')
             },
             success : function() {
               grid.trigger("reloadGrid");

@@ -37,5 +37,5 @@ public interface RoleSetService {
 	
 	int deleteRlf(String rolCode, List<String> delFunc);
 
-    List<Map<String, Object>> findAllRoleWithSelectedByUserOid(String userOid);
+    List<Map<String, Object>> findAllRoleWithSelectedByUserId(String userOid);
 }
