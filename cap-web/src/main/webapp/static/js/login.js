@@ -8,7 +8,9 @@ pageInit(function() {
 		data : {
 		    j_username : $('#j_username').val(),
 		    j_password : $('#j_password').val(),
-		    captcha : $('#captcha').val()
+		    captcha : $('#captcha').val(),
+		    newPwd : $('#newPwd').val(),
+		    confirm : $('#confirm').val()
 		},
 		success : function() {
 		    API.formSubmit({

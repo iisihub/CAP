@@ -142,7 +142,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                     // set new password
                     getPasswordService().checkPasswordRule(username, newPwd,
                             confirm);
-                    getPasswordService().changeUserPassword(newPwd);
+                    getPasswordService().changeUserPassword(username, newPwd);
                     authedPwd = newPwd;
                 }
             } else {

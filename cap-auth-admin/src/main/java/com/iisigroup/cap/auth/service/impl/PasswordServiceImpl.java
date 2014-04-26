@@ -20,13 +20,11 @@ import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.dao.ICommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants;
 import com.iisigroup.cap.security.service.IPasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
-import com.iisigroup.cap.utils.CapWebUtil;
 
 @Service
 public class PasswordServiceImpl implements IPasswordService {
@@ -64,8 +62,7 @@ public class PasswordServiceImpl implements IPasswordService {
         int maxHistory = Integer.parseInt(parmPwdMaxHistory.getParmValue());
         String ruleType = parmPwdRule.getParmValue();
         CodeType rule = codeTypeDao.findByCodeTypeAndCodeValue("pwdrule",
-                ruleType, SimpleContextHolder.get(CapWebUtil.localeKey)
-                        .toString());
+                ruleType, CapSecurityContext.getLocale().toString());
         if (StringUtils.isBlank(password) || StringUtils.isBlank(password2)) {
             throw new CapMessageException(CapAppContext.getMessage("error.001",
                     new Object[] {}), getClass());
@@ -119,19 +116,18 @@ public class PasswordServiceImpl implements IPasswordService {
     }
 
     @Override
-    public boolean validatePassword(String password) {
-        String userId = CapSecurityContext.getUserId();
+    public boolean validatePassword(String userId, String password) {
         User user = userDao.findByUserId(userId);
         PasswordEncoder passwordEncoder = new StandardPasswordEncoder(userId);
         return passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override
-    public void changeUserPassword(String password) {
-        String userId = CapSecurityContext.getUserId();
+    public void changeUserPassword(String userId, String password) {
         User user = userDao.findByUserId(userId);
         String pwdHash = encodePassword(user.getUserId(), password);
         user.setPassword(pwdHash);
+        user.setStatus("0");
         userDao.save(user);
         // insert pwd history
         UserPwdHistory uph = new UserPwdHistory();

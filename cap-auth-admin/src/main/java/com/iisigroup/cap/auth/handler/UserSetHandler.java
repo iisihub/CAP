@@ -203,10 +203,10 @@ public class UserSetHandler extends MFormHandler {
         String password = request.get("password");
         String newPwd = request.get("newPwd");
         String confirm = request.get("confirm");
-        if (passwordService.validatePassword(password)) {
-            String userId = CapSecurityContext.getUserId();
+        String userId = CapSecurityContext.getUserId();
+        if (passwordService.validatePassword(userId, password)) {
             passwordService.checkPasswordRule(userId, newPwd, confirm);
-            passwordService.changeUserPassword(newPwd);
+            passwordService.changeUserPassword(userId, newPwd);
         } else {
             throw new CapMessageException(
                     CapAppContext.getMessage("error.009"), getClass());
