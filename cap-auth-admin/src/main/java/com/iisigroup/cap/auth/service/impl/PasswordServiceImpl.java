@@ -1,5 +1,6 @@
 package com.iisigroup.cap.auth.service.impl;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +59,12 @@ public class PasswordServiceImpl implements IPasswordService {
                 "pwd_min_length");
         SysParm parmPwdMaxHistory = commonDao.findById(SysParm.class,
                 "pwd_max_history");
+        SysParm parmPwdChangeInteval = commonDao.findById(SysParm.class,
+                "pwd_change_interval");
         int minLen = Integer.parseInt(parmPwdMinLen.getParmValue());
         int maxHistory = Integer.parseInt(parmPwdMaxHistory.getParmValue());
+        int changeInteval = Integer.parseInt(parmPwdChangeInteval
+                .getParmValue());
         String ruleType = parmPwdRule.getParmValue();
         CodeType rule = codeTypeDao.findByCodeTypeAndCodeValue("pwdrule",
                 ruleType, CapSecurityContext.getLocale().toString());
@@ -76,14 +81,23 @@ public class PasswordServiceImpl implements IPasswordService {
                     new Object[] { minLen }), getClass());
         }
         // pwd history validate
-        if (userId != null) {
-            User user = userDao.findByUserId(userId);
+        User user = userDao.findByUserId(userId);
+        if (user != null) {
             List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(user
                     .getOid());
             int i = 0;
             PasswordEncoder passwordEncoder = new StandardPasswordEncoder(
                     userId);
             for (UserPwdHistory h : list) {
+                // user status 不為 1 時，check change interval: 最近一次變更不得小於間隔
+                if (i == 0 && !"1".equals(user.getStatus())) {
+                    if (CapDate.calculateDays(h.getUpdateTime(), Calendar
+                            .getInstance().getTime()) <= changeInteval) {
+                        throw new CapMessageException(CapAppContext.getMessage(
+                                "error.005", new Object[] { changeInteval }),
+                                getClass());
+                    }
+                }
                 if (passwordEncoder.matches(password, h.getPassword())) {
                     throw new CapMessageException(CapAppContext.getMessage(
                             "error.003", new Object[] { maxHistory }),

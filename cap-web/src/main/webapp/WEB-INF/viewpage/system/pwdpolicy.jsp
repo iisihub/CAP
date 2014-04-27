@@ -53,6 +53,12 @@
           <th><spring:message code="pwdpolicy.force_change_pwd" /></th>
           <td><select id="force_change_pwd" name="force_change_pwd" comboType="2" comboKey="pwdforcechangepwd"></select></td>
         </tr>
+        <tr>
+          <th><spring:message code="pwdpolicy.change_interval" /></th>
+          <td><input type="text" id="change_interval" name="change_interval"
+            maxlength="32" size="10" class="numeric" /> <spring:message
+              code="pwdpolicy.days" /></td>
+        </tr>
       </table>
     </form>
     <div class="btns" style="text-align: right">

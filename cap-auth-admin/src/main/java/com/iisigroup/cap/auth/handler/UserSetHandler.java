@@ -126,7 +126,7 @@ public class UserSetHandler extends MFormHandler {
         String userName = request.get("userName");
         String password = request.get("password");
         String confirm = request.get("confirm");
-        passwordService.checkPasswordRule(null, password, confirm);
+        passwordService.checkPasswordRule(userName, password, confirm);
         String email = request.get("email");
         String[] roleOids = request.getParamsAsStringArray("roleOids");
         userService.createUser(userId, userName, password, email, roleOids);

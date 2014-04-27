@@ -20,7 +20,7 @@ pageInit(function() {
 		error : function(jqXHR, status, errorThrown) {
 		    console.log('status: ' + status);
 		    console.log('text: ' + jqXHR.responseText);
-		    var result = $.parseJSON(errorThrown);
+		    var result = $.parseJSON(decodeURIComponent(errorThrown));
 		    console.log('msg: ' + result.msg);
 		    console.log('capchaEnabled: ' + result.capchaEnabled);
 		    console.log('firstLogin: ' + result.firstLogin);

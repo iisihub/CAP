@@ -51,8 +51,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             throw new CapAuthenticationException("Captcha Response is Empty",
                     captchaEnabled);
         } else {
-            Map<String, String> policy = getPasswordService()
-                    .getPassworPolicy();
+            Map<String, String> policy = passwordService.getPassworPolicy();
             boolean captchaPassed = true;
             boolean firstLogin = isFirstLogin(username);
             Integer wrongCount = getWrountCount(username);
@@ -60,7 +59,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             // 密碼連錯 PWD_ACCOUNT_LOCK 次 lock user
             if (wrongCount >= Integer.parseInt(policy
                     .get(SecConstants.PWD_ACCOUNT_LOCK))) {
-                getPasswordService().lockUserByUserId(username);
+                passwordService.lockUserByUserId(username);
                 throw new CapAuthenticationException("User locked.",
                         captchaEnabled);
             }
@@ -80,7 +79,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                 resetCaptchaFields();
                 CapUserDetails user;
                 try {
-                    user = (CapUserDetails) getUserService()
+                    user = (CapUserDetails) userService
                             .loadUserByUsername(username);
                 } catch (Exception e) {
                     throw new CapAuthenticationException(e.getMessage(),
@@ -140,9 +139,14 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                             captchaEnabled, true);
                 } else {
                     // set new password
-                    getPasswordService().checkPasswordRule(username, newPwd,
-                            confirm);
-                    getPasswordService().changeUserPassword(username, newPwd);
+                    try {
+                        passwordService.checkPasswordRule(username, newPwd,
+                                confirm);
+                    } catch (Exception e) {
+                        throw new CapAuthenticationException(e.getMessage(),
+                                captchaEnabled, firstLogin);
+                    }
+                    passwordService.changeUserPassword(username, newPwd);
                     authedPwd = newPwd;
                 }
             } else {

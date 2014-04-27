@@ -45,7 +45,7 @@ public class UserSetServiceImpl extends AbstractService implements
         user = setUserFields(user, userId, userName, password, email);
         user.setRlSet(createUserRoleData(userId, roleOids));
         userDao.save(user);
-        createUserPwdHistory(user.getOid(), password);
+        createUserPwdHistory(user.getOid(), encodePassword(userId, password));
     }
 
     public void updateUserByOid(String oid, String userId, String userName,
@@ -56,7 +56,7 @@ public class UserSetServiceImpl extends AbstractService implements
         }
         user.setRlSet(createUserRoleData(userId, roleOids));
         userDao.save(setUserFields(user, userId, userName, password, email));
-        createUserPwdHistory(user.getOid(), password);
+        createUserPwdHistory(user.getOid(), encodePassword(userId, password));
     }
 
     private User setUserFields(User user, String userId, String userName,
@@ -90,11 +90,11 @@ public class UserSetServiceImpl extends AbstractService implements
         return rlSet;
     }
 
-    private void createUserPwdHistory(String userOid, String password) {
-        if (!StringUtils.isBlank(password)) {
+    private void createUserPwdHistory(String userOid, String encodedPassword) {
+        if (!StringUtils.isBlank(encodedPassword)) {
             UserPwdHistory h = new UserPwdHistory();
             h.setUserOid(userOid);
-            h.setPassword(password);
+            h.setPassword(encodedPassword);
             h.setUpdateTime(CapDate.getCurrentTimestamp());
             userPwdHistoryDao.save(h);
         }

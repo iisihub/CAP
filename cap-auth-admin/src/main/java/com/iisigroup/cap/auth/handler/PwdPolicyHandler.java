@@ -43,7 +43,7 @@ public class PwdPolicyHandler extends MFormHandler {
     private ICommonService commonService;
 
     private enum PwdKeys {
-        PWD_EXPIRED_DAY, PWD_MIN_LENGTH, PWD_RULE, PWD_MAX_HISTORY, PWD_CAPTCHA_ENABLE, PWD_ACCOUNT_LOCK, PWD_FORCE_CHANGE_PWD
+        PWD_EXPIRED_DAY, PWD_MIN_LENGTH, PWD_RULE, PWD_MAX_HISTORY, PWD_CAPTCHA_ENABLE, PWD_ACCOUNT_LOCK, PWD_FORCE_CHANGE_PWD, PWD_CHANGE_INTERVAL
     }
 
     public IResult query(IRequest request) {

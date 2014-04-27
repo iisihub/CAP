@@ -10,4 +10,5 @@ public interface SecConstants extends Constants {
     public static final String PWD_ACCOUNT_LOCK = "pwd_account_lock";
     public static final String PWD_FORCE_CHANGE_PWD = "pwd_force_change_pwd";
     public static final String PWD_RULE = "pwd_rule";
+    public static final String PWD_CHANGE_INTERVAL = "pwd_change_interval";
 }

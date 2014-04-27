@@ -1,6 +1,7 @@
 package com.iisigroup.cap.security.handler;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,8 @@ public class AjaxAuthenticationFailureHandler extends
         o.put("capchaEnabled", capchaEnabled);
         o.put("firstLogin", firstLogin);
         o.put("msg", exception.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, o.toString());
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, URLEncoder
+                .encode(o.toString(), "utf-8").replaceAll("\\+", "%20"));
     }
 
 }
