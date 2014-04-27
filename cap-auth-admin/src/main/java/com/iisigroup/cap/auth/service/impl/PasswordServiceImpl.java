@@ -71,15 +71,20 @@ public class PasswordServiceImpl implements IPasswordService {
             throw new CapMessageException(CapAppContext.getMessage("error.002",
                     new Object[] { minLen }), getClass());
         }
+        if (userId.equalsIgnoreCase(password)) {
+            throw new CapMessageException(CapAppContext.getMessage("error.004",
+                    new Object[] { minLen }), getClass());
+        }
         // pwd history validate
         if (userId != null) {
             User user = userDao.findByUserId(userId);
             List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(user
                     .getOid());
             int i = 0;
+            PasswordEncoder passwordEncoder = new StandardPasswordEncoder(
+                    userId);
             for (UserPwdHistory h : list) {
-                if (encodePassword(user.getUserId(), password)
-                        .equalsIgnoreCase(h.getPassword())) {
+                if (passwordEncoder.matches(password, h.getPassword())) {
                     throw new CapMessageException(CapAppContext.getMessage(
                             "error.003", new Object[] { maxHistory }),
                             getClass());
