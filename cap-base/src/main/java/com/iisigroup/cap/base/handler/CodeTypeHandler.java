@@ -163,7 +163,7 @@ public class CodeTypeHandler extends MFormHandler {
 	 *            request
 	 * @return IResult
 	 */
-	@CapAuditLogAction(functionCode=CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
+	//@CapAuditLogAction(functionCode=CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
 	@SuppressWarnings("rawtypes")
 	public IResult queryByKeys(IRequest request) {
 		String locale = CapSecurityContext.getLocale().toString();

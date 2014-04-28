@@ -27,7 +27,7 @@ public interface IRole extends Serializable {
 	 * 
 	 * @return the oid
 	 */
-	String getOid();
+//	String getOid();
 	
 	String getRoleId();
 	

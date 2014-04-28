@@ -16,12 +16,10 @@
 <!--[if lt IE 9]>
             <script src="../static/lib/js/html5.js"></script>
         <![endif]-->
-<script src="../static/requirejs/2.0.6/require.min.js"></script>
 <script>
-<!-- 
-	var baseUrl = "../static";
-//-->
+var baseUrl = "../static";
 </script>
+<script src="../static/requirejs/2.0.6/require.min.js"></script>
 <script src="../static/main.js"></script>
 <decorator:getProperty property="prop" default="" />
 <decorator:head />
@@ -38,12 +36,9 @@
 				<li>&nbsp;-<a href="?lang=zh_CN">&nbsp;简体&nbsp;</a></li>
 				<li>&nbsp;-<a href="?lang=en">&nbsp;ENGLISH&nbsp;</a></li>
 			</ol>
-			<!-- for security logout use -->
-			<!-- 
 			<ol style="height: 18px;width: 35px;right: 140px;">
 				<li class="lang"><a href="../j_spring_security_logout">登出</a></li>
 			</ol>
-			 -->
 		</header>
 		<nav class="top">
 			<ul class="block"></ul>

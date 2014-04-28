@@ -20,7 +20,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-base</artifactId>
+			<artifactId>cap-auth-admin</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>

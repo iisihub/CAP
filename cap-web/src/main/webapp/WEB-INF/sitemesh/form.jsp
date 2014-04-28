@@ -35,12 +35,9 @@ var baseUrl = "../../static";
 				<li>&nbsp;-<a href="?lang=zh_CN">&nbsp;简体&nbsp;</a></li>
 				<li>&nbsp;-<a href="?lang=en">&nbsp;ENGLISH&nbsp;</a></li>
 			</ol>
-			<!-- for security logout use -->
-			<!-- 
 			<ol style="height: 18px;width: 35px;right: 140px;">
 				<li class="lang"><a href="../../j_spring_security_logout">登出</a></li>
 			</ol>
-			-->
 		</header>
 		<div class="main">
 			<decorator:body />
