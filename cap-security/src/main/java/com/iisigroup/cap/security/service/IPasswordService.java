@@ -9,8 +9,10 @@ public interface IPasswordService {
 
     boolean validatePassword(String userId, String password);
 
-    Map<String, String> getPassworPolicy();
+    Map<String, String> getPasswordPolicy();
 
     void lockUserByUserId(String userId);
+
+    int getPasswordChangeNotifyDay(String userId);
 
 }

@@ -25,11 +25,14 @@ public class AjaxAuthenticationFailureHandler extends
             throws IOException, ServletException {
         boolean capchaEnabled = ((CapAuthenticationException) exception)
                 .isCaptchaEnabled();
-        boolean firstLogin = ((CapAuthenticationException) exception)
-                .isFirstLogin();
+        boolean forceChangePwd = ((CapAuthenticationException) exception)
+                .isForceChangePwd();
+        boolean askChangePwd = ((CapAuthenticationException) exception)
+                .isAskChangePwd();
         JSONObject o = new JSONObject();
         o.put("capchaEnabled", capchaEnabled);
-        o.put("firstLogin", firstLogin);
+        o.put("forceChangePwd", forceChangePwd);
+        o.put("askChangePwd", askChangePwd);
         o.put("msg", exception.getMessage());
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, URLEncoder
                 .encode(o.toString(), "utf-8").replaceAll("\\+", "%20"));

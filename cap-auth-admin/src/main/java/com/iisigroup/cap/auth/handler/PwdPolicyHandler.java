@@ -20,6 +20,7 @@ import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
@@ -42,13 +43,9 @@ public class PwdPolicyHandler extends MFormHandler {
     @Resource
     private ICommonService commonService;
 
-    private enum PwdKeys {
-        PWD_EXPIRED_DAY, PWD_MIN_LENGTH, PWD_RULE, PWD_MAX_HISTORY, PWD_CAPTCHA_ENABLE, PWD_ACCOUNT_LOCK, PWD_FORCE_CHANGE_PWD, PWD_CHANGE_INTERVAL
-    }
-
     public IResult query(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
-        for (PwdKeys value : PwdKeys.values()) {
+        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
             SysParm parm = commonService.findById(SysParm.class, value
                     .toString().toLowerCase());
             if (parm != null) {
@@ -60,7 +57,7 @@ public class PwdPolicyHandler extends MFormHandler {
 
     public IResult modify(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
-        for (PwdKeys value : PwdKeys.values()) {
+        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
             String key = value.toString().toLowerCase();
             String data = request.get(key.substring(4));
             SysParm parm = commonService.findById(SysParm.class, key);

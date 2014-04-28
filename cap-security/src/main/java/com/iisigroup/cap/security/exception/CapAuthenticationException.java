@@ -7,7 +7,9 @@ public class CapAuthenticationException extends AuthenticationException {
 
     private boolean captchaEnabled;
 
-    private boolean firstLogin;
+    private boolean forceChangePwd;
+
+    private boolean askChangePwd;
 
     public CapAuthenticationException(String msg) {
         this(msg, false, false);
@@ -18,10 +20,16 @@ public class CapAuthenticationException extends AuthenticationException {
     }
 
     public CapAuthenticationException(String msg, boolean captchaEnabled,
-            boolean firstLogin) {
+            boolean forceChangePwd) {
+        this(msg, captchaEnabled, forceChangePwd, false);
+    }
+
+    public CapAuthenticationException(String msg, boolean captchaEnabled,
+            boolean forceChangePwd, boolean askChangePwd) {
         super(msg);
         this.captchaEnabled = captchaEnabled;
-        this.firstLogin = firstLogin;
+        this.forceChangePwd = forceChangePwd;
+        this.askChangePwd = askChangePwd;
     }
 
     public boolean isCaptchaEnabled() {
@@ -32,11 +40,19 @@ public class CapAuthenticationException extends AuthenticationException {
         this.captchaEnabled = captchaEnabled;
     }
 
-    public boolean isFirstLogin() {
-        return firstLogin;
+    public boolean isForceChangePwd() {
+        return forceChangePwd;
     }
 
-    public void setFirstLogin(boolean firstLogin) {
-        this.firstLogin = firstLogin;
+    public void setforceChangePwd(boolean forceChangePwd) {
+        this.forceChangePwd = forceChangePwd;
+    }
+
+    public boolean isAskChangePwd() {
+        return askChangePwd;
+    }
+
+    public void setAskChangePwd(boolean askChangePwd) {
+        this.askChangePwd = askChangePwd;
     }
 }

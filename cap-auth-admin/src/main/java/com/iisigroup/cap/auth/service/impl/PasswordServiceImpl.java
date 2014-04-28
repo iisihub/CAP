@@ -22,7 +22,7 @@ import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.dao.ICommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.SecConstants;
+import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.security.service.IPasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
@@ -54,13 +54,14 @@ public class PasswordServiceImpl implements IPasswordService {
     @Override
     public boolean checkPasswordRule(String userId, String password,
             String password2) {
-        SysParm parmPwdRule = commonDao.findById(SysParm.class, "pwd_rule");
+        SysParm parmPwdRule = commonDao.findById(SysParm.class,
+                PwdPloicyKeys.PWD_RULE.toString().toLowerCase());
         SysParm parmPwdMinLen = commonDao.findById(SysParm.class,
-                "pwd_min_length");
+                PwdPloicyKeys.PWD_MIN_LENGTH.toString().toLowerCase());
         SysParm parmPwdMaxHistory = commonDao.findById(SysParm.class,
-                "pwd_max_history");
+                PwdPloicyKeys.PWD_MAX_HISTORY.toString().toLowerCase());
         SysParm parmPwdChangeInteval = commonDao.findById(SysParm.class,
-                "pwd_change_interval");
+                PwdPloicyKeys.PWD_CHANGE_INTERVAL.toString().toLowerCase());
         int minLen = Integer.parseInt(parmPwdMinLen.getParmValue());
         int maxHistory = Integer.parseInt(parmPwdMaxHistory.getParmValue());
         int changeInteval = Integer.parseInt(parmPwdChangeInteval
@@ -83,16 +84,16 @@ public class PasswordServiceImpl implements IPasswordService {
         // pwd history validate
         User user = userDao.findByUserId(userId);
         if (user != null) {
-            List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(user
-                    .getOid());
+            List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(
+                    user.getOid(), maxHistory);
             int i = 0;
             PasswordEncoder passwordEncoder = new StandardPasswordEncoder(
                     userId);
             for (UserPwdHistory h : list) {
                 // user status 不為 1 時，check change interval: 最近一次變更不得小於間隔
                 if (i == 0 && !"1".equals(user.getStatus())) {
-                    if (CapDate.calculateDays(h.getUpdateTime(), Calendar
-                            .getInstance().getTime()) <= changeInteval) {
+                    if (CapDate.calculateDays(Calendar.getInstance().getTime(),
+                            h.getUpdateTime()) <= changeInteval) {
                         throw new CapMessageException(CapAppContext.getMessage(
                                 "error.005", new Object[] { changeInteval }),
                                 getClass());
@@ -104,9 +105,6 @@ public class PasswordServiceImpl implements IPasswordService {
                             getClass());
                 }
                 i++;
-                if (i >= maxHistory) {
-                    break;
-                }
             }
         }
         String pattern = null;
@@ -157,38 +155,42 @@ public class PasswordServiceImpl implements IPasswordService {
     }
 
     @Override
-    public Map<String, String> getPassworPolicy() {
+    public Map<String, String> getPasswordPolicy() {
         Map<String, String> result = new HashMap<String, String>();
-        SysParm parmPwdRule = commonDao.findById(SysParm.class,
-                SecConstants.PWD_RULE);
-        SysParm parmPwdMinLen = commonDao.findById(SysParm.class,
-                SecConstants.PWD_MIN_LENGTH);
-        SysParm parmPwdMaxHistory = commonDao.findById(SysParm.class,
-                SecConstants.PWD_MAX_HISTORY);
-        SysParm pwdExpiredDay = commonDao.findById(SysParm.class,
-                SecConstants.PWD_EXPIRED_DAY);
-        SysParm pwdCaptchaEnable = commonDao.findById(SysParm.class,
-                SecConstants.PWD_CAPTCHA_ENABLE);
-        SysParm pwdAccountLock = commonDao.findById(SysParm.class,
-                SecConstants.PWD_ACCOUNT_LOCK);
-        SysParm pwdForceChangePwd = commonDao.findById(SysParm.class,
-                SecConstants.PWD_FORCE_CHANGE_PWD);
-        result.put(SecConstants.PWD_RULE, parmPwdRule.getParmValue());
-        result.put(SecConstants.PWD_MIN_LENGTH, parmPwdMinLen.getParmValue());
-        result.put(SecConstants.PWD_MAX_HISTORY,
-                parmPwdMaxHistory.getParmValue());
-        result.put(SecConstants.PWD_EXPIRED_DAY, pwdExpiredDay.getParmValue());
-        result.put(SecConstants.PWD_CAPTCHA_ENABLE,
-                pwdCaptchaEnable.getParmValue());
-        result.put(SecConstants.PWD_ACCOUNT_LOCK, pwdAccountLock.getParmValue());
-        result.put(SecConstants.PWD_FORCE_CHANGE_PWD,
-                pwdForceChangePwd.getParmValue());
+        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
+            SysParm parm = commonDao.findById(SysParm.class, value.toString()
+                    .toLowerCase());
+            if (parm != null) {
+                result.put(parm.getParmId(), parm.getParmValue());
+            }
+        }
         return result;
     }
 
     private String encodePassword(String userId, String password) {
         StandardPasswordEncoder spe = new StandardPasswordEncoder(userId);
         return spe.encode(password);
+    }
+
+    @Override
+    public int getPasswordChangeNotifyDay(String userId) {
+        SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class,
+                PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+        SysParm parmPwdNotifyDay = commonDao.findById(SysParm.class,
+                PwdPloicyKeys.PWD_NOTIFY_DAY.toString().toLowerCase());
+        int notifyDay = Integer.parseInt(parmPwdNotifyDay.getParmValue());
+        int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
+        User user = userDao.findByUserId(userId);
+        List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(
+                user.getOid(), 1);
+        for (UserPwdHistory h : list) {
+            int diff = CapDate.calculateDays(Calendar.getInstance().getTime(),
+                    h.getUpdateTime());
+            if (diff >= (expiredDay - notifyDay)) {
+                return (expiredDay - diff);
+            }
+        }
+        return -1;
     }
 
 }

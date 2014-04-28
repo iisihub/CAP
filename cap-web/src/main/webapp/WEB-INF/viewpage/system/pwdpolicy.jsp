@@ -50,6 +50,18 @@
             class="numeric" /> <spring:message code="pwdpolicy.times" /></td>
         </tr>
         <tr>
+          <th><spring:message code="pwdpolicy.account_disable" /></th>
+          <td><spring:message code="pwdpolicy.continuous" /><input type="text"
+            id="account_disable" name="account_disable" size="10" maxlength="100"
+            class="numeric" /> <spring:message code="pwdpolicy.not_login" /></td>
+        </tr>
+        <tr>
+          <th><spring:message code="pwdpolicy.account_delete" /></th>
+          <td><spring:message code="pwdpolicy.continuous" /><input type="text"
+            id="account_delete" name="account_delete" size="10" maxlength="100"
+            class="numeric" /> <spring:message code="pwdpolicy.not_login" /></td>
+        </tr>
+        <tr>
           <th><spring:message code="pwdpolicy.force_change_pwd" /></th>
           <td><select id="force_change_pwd" name="force_change_pwd" comboType="2" comboKey="pwdforcechangepwd"></select></td>
         </tr>
@@ -58,6 +70,12 @@
           <td><input type="text" id="change_interval" name="change_interval"
             maxlength="32" size="10" class="numeric" /> <spring:message
               code="pwdpolicy.days" /></td>
+        </tr>
+        <tr>
+          <th><spring:message code="pwdpolicy.notify_day" /></th>
+          <td><input type="text" id="notify_day" name="notify_day"
+            maxlength="32" size="10" class="numeric" /> <spring:message
+              code="pwdpolicy.daysbefore" /></td>
         </tr>
       </table>
     </form>
