@@ -29,6 +29,11 @@ pageInit(function() {
         name : 'email',
         hidden : true
       }, {
+        header : i18n.userSet.pwdExpiredTime,
+        name : 'pwdExpiredTime',
+        width : 80,
+        align : "center"
+      }, {
         header : i18n.def.lastModBy,
         name : 'updater',
         width : 80,
@@ -127,6 +132,7 @@ pageInit(function() {
           aDialog.find('#email').val(users[0].email);
           aDialog.find('#statusArea').show();
           aDialog.find('#status').text(users[0].status);
+          aDialog.find('#pwdExpiredTime').text(users[0].pwdExpiredTime);
           aDialog.find('#password').removeClass();
           aDialog.find('#confirm').removeClass();
           grid2.setGridParam({

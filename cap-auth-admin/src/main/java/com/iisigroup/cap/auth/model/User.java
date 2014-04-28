@@ -105,6 +105,12 @@ public class User extends GenericBean implements IDataObject, IUser {
     @Column(length = 6)
     private String creator;
 
+    @Column
+    private Timestamp pwdExpiredTime;
+
+    @Column
+    private Timestamp loginTime;
+
     /**
      * @return Oid
      */
@@ -260,6 +266,22 @@ public class User extends GenericBean implements IDataObject, IUser {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public Timestamp getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Timestamp loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public Timestamp getPwdExpiredTime() {
+        return pwdExpiredTime;
+    }
+
+    public void setPwdExpiredTime(Timestamp pwdExpiredTime) {
+        this.pwdExpiredTime = pwdExpiredTime;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.iisigroup.cap.auth.service.impl;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,20 +42,8 @@ public class PasswordServiceImpl implements IPasswordService {
     private CodeTypeDao codeTypeDao;
 
     @Override
-    public void lockUserByUserId(String userId) {
-        User user = userDao.findByUserId(userId);
-        if (!"2".equals(user.getStatus())) {
-            user.setPreStatus(user.getStatus());
-            user.setStatus("2");
-            user.setUpdateTime(CapDate.getCurrentTimestamp());
-            user.setUpdater(CapSecurityContext.getUserId());
-            userDao.save(user);
-        }
-    }
-
-    @Override
     public boolean checkPasswordRule(String userId, String password,
-            String password2) {
+            String password2, boolean forcePwdChange) {
         SysParm parmPwdRule = commonDao.findById(SysParm.class,
                 PwdPloicyKeys.PWD_RULE.toString().toLowerCase());
         SysParm parmPwdMinLen = commonDao.findById(SysParm.class,
@@ -91,7 +81,7 @@ public class PasswordServiceImpl implements IPasswordService {
                     userId);
             for (UserPwdHistory h : list) {
                 // user status 不為 1 時，check change interval: 最近一次變更不得小於間隔
-                if (i == 0 && !"1".equals(user.getStatus())) {
+                if (i == 0 && !"1".equals(user.getStatus()) && !forcePwdChange) {
                     if (CapDate.calculateDays(Calendar.getInstance().getTime(),
                             h.getUpdateTime()) <= changeInteval) {
                         throw new CapMessageException(CapAppContext.getMessage(
@@ -141,8 +131,14 @@ public class PasswordServiceImpl implements IPasswordService {
 
     @Override
     public void changeUserPassword(String userId, String password) {
+        SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class,
+                PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+        int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
+        Date now = Calendar.getInstance().getTime();
         User user = userDao.findByUserId(userId);
         String pwdHash = encodePassword(user.getUserId(), password);
+        user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now, expiredDay)
+                .getTime()));
         user.setPassword(pwdHash);
         user.setStatus("0");
         userDao.save(user);
@@ -150,7 +146,7 @@ public class PasswordServiceImpl implements IPasswordService {
         UserPwdHistory uph = new UserPwdHistory();
         uph.setUserOid(user.getOid());
         uph.setPassword(pwdHash);
-        uph.setUpdateTime(CapDate.getCurrentTimestamp());
+        uph.setUpdateTime(new Timestamp(now.getTime()));
         userPwdHistoryDao.save(uph);
     }
 

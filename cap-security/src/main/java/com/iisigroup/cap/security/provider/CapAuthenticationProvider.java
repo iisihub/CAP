@@ -22,6 +22,7 @@ import com.iisigroup.cap.security.captcha.servlet.CapCaptchaServlet;
 import com.iisigroup.cap.security.exception.CapAuthenticationException;
 import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.CapUserDetails;
+import com.iisigroup.cap.security.service.IAccessControlService;
 import com.iisigroup.cap.security.service.IPasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 
@@ -29,6 +30,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
 
     private UserDetailsService userService;
     private IPasswordService passwordService;
+    private IAccessControlService accessControlService;
     private Logger logger = LoggerFactory
             .getLogger(CapAuthenticationProvider.class);
     private CaptchaCaptureFilter captchaCaptureFilter;
@@ -60,7 +62,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             if (wrongCount >= Integer.parseInt(policy
                     .get(PwdPloicyKeys.PWD_ACCOUNT_LOCK.toString()
                             .toLowerCase()))) {
-                passwordService.lockUserByUserId(username);
+                accessControlService.lockUserByUserId(username);
                 throw new CapAuthenticationException("User locked.",
                         captchaEnabled);
             }
@@ -98,6 +100,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                     // 檢核是否要提醒使用者變更密碼
                     notifyPasswordChange(username, captchaEnabled,
                             forceChangePwd);
+                    accessControlService.login(username);
                     return new UsernamePasswordAuthenticationToken(user,
                             authedPwd, user.getAuthorities());
                 } else {
@@ -193,7 +196,8 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
         } else {
             // set new password
             try {
-                passwordService.checkPasswordRule(username, newPwd, confirm);
+                passwordService.checkPasswordRule(username, newPwd, confirm,
+                        true);
             } catch (Exception e) {
                 throw new CapAuthenticationException(e.getMessage(),
                         captchaEnabled, forceChangePwd);
@@ -283,6 +287,15 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
     private void setCaptchaEnabled(boolean captchaEnabled) {
         HttpSession session = captchaCaptureFilter.getRequest().getSession();
         session.setAttribute("captchaEnabled", captchaEnabled);
+    }
+
+    public IAccessControlService getAccessControlService() {
+        return accessControlService;
+    }
+
+    public void setAccessControlService(
+            IAccessControlService accessControlService) {
+        this.accessControlService = accessControlService;
     }
 
 }

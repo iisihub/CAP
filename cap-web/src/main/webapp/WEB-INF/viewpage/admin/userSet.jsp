@@ -60,8 +60,12 @@
           <th><spring:message code="users.email" /></th>
           <td><input type="text" id="email" maxlength="48" name="email"
             class="validate[required,funcCall[maxUTF8[48]]]" /></td>
+          <th><spring:message code="users.pwdExpiredTime" /></th>
+          <td><span id="pwdExpiredTime"></span></td>
+        </tr>
+        <tr>
           <th id="statusArea"><spring:message code="users.status" /></th>
-          <td><span id="status"></span></td>
+          <td colSpan="3"><span id="status"></span></td>
         </tr>
       </table>
       <div id="roleGrid"></div>

@@ -26,8 +26,12 @@ import com.iisigroup.cap.security.model.IRole;
  *          <li>2010/11/29,iristu,new
  *          </ul>
  */
-public interface ISecurityService {
+public interface IAccessControlService {
 
-	List<IRole> getAuthRolesByUrl(String url);
+    List<IRole> getAuthRolesByUrl(String url);
+
+    void lockUserByUserId(String userId);
+
+    void login(String userId);
 
 }
