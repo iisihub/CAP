@@ -9,7 +9,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.wesocket.server;
+package com.iisigroup.websocket.bean;
 
 /**<pre>
  * TODO Write a short description on the purpose of the program

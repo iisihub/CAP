@@ -15,7 +15,8 @@ require.config({
         'backbone' : 'lib/js/backbone/backbone',
         'sceditor' : 'lib/js/jquery/plugin/sceditor/jquery.sceditor.xhtml.min',
         'ifvisible' : 'lib/js/ifvisible/ifvisible', /* idle handle */
-    	'timer' : 'lib/js/timer/jquery.timer' /* timer handle */
+    	'timer' : 'lib/js/timer/jquery.timer', /* timer handle */
+    	'fullcalendar' : 'lib/js/calendar/fullcalendar'
     },
     shim : {
         'blockui' : ['jquery'],
@@ -28,11 +29,12 @@ require.config({
         'backbone' : ['underscore', 'jquery'],
 	    'sceditor' : ['jquery'],
         'ifvisible' : ['jquery'],
-        'timer' : ['jquery']
+        'timer' : ['jquery'],
+        'fullcalendar' : ['jquery']
     }
 });
 
-define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor', 'ifvisible', 'timer'], function() {
+define('libjs', ['json3','socketio', 'jquery', 'blockui', 'jquery-ui', 'jqgrid-i18n', 'jqgrid', 'validate-i18n', 'validate', 'fileupload', 'underscore', 'backbone', 'sceditor', 'ifvisible', 'timer', 'fullcalendar'], function() {
 	window.ifvisible = require.s.contexts._.defined.ifvisible;
 	// $.holdReady(true); // enable at common.js
     logDebug('lib init');

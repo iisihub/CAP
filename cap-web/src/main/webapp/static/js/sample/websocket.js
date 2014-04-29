@@ -3,7 +3,7 @@ pageInit(function() {
 
         var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 
-        window.socket = io.connect('http://' + window.location.hostname + ':9092');
+        window.socket = io.connect('http://' + window.location.hostname);
 
         socket.on('connect', function() {
             output('<span class="connect-msg">Client has connected to the server!</span>');

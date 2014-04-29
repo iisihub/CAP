@@ -25,6 +25,10 @@ var baseUrl = "../static";
 <decorator:head />
 </head>
 <body>
+	<script>
+		loadScript('js/common/cust.socket');
+	</script>
+
 	<div class="mainBody">
 		<header>
 			<div class="logo">
