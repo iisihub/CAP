@@ -1,7 +1,8 @@
 pageInit(function() {
     $(document).ready(function() {
 	window.setCloseConfirm(false);
-	$('#submit').click(function() {
+	var agreeChange = false;
+	function login(ignoreNotify) {
 	    $.ajax({
 		url : "../j_spring_security_check",
 		dataType : 'html',
@@ -10,7 +11,9 @@ pageInit(function() {
 		    j_password : $('#j_password').val(),
 		    captcha : $('#captcha').val(),
 		    newPwd : $('#newPwd').val(),
-		    confirm : $('#confirm').val()
+		    confirm : $('#confirm').val(),
+		    ignoreNotify : ignoreNotify,
+		    agreeChange : agreeChange
 		},
 		success : function() {
 		    API.formSubmit({
@@ -23,19 +26,34 @@ pageInit(function() {
 		    var result = $.parseJSON(decodeURIComponent(errorThrown));
 		    console.log('msg: ' + result.msg);
 		    console.log('capchaEnabled: ' + result.capchaEnabled);
-		    console.log('firstLogin: ' + result.firstLogin);
-		    result.firstLogin ? $('#pwdchgArea').show() : $('#pwdchgArea').hide();
+		    console.log('forceChangePwd: ' + result.forceChangePwd);
+		    result.forceChangePwd ? $('#pwdchgArea').show() : $('#pwdchgArea').hide();
 		    result.capchaEnabled ? $('#captchaArea').show() : $('#captchaArea').hide();
-		    API.showErrorMessage(result.msg);
+		    if(result.askChangePwd) {
+		        API.showConfirmMessage(result.msg, function(confirm) {
+		            // 不 reset 密碼
+		            if(confirm) {
+				$('#pwdchgArea').show();
+				agreeChange = true;
+		            } else {
+				$('#pwdchgArea').hide();
+				login(true);
+		            }
+		          });
+		    } else {
+			API.showErrorMessage(result.msg);
+			$('#j_password').val("");
+		    }
 		},
 		complete : function(jqXHR, status) {
 		    $("#captcha").trigger("refresh");
-		    $('#j_username').val("");
-		    $('#j_password').val("");
 		    $('#newPwd').val("");
 		    $('#confirm').val("");
 		}
 	    });
+	}
+	$('#submit').click(function() {
+	    login(false);
 	});
     });
 });

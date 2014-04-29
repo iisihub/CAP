@@ -47,7 +47,7 @@
 	<beans:bean id="customAuthenticationProvider"
 		class="com.iisigroup.cap.security.provider.CapAuthenticationProvider"
 		p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
-		p:passwordService-ref="passwordService" />
+		p:passwordService-ref="passwordService" p:accessControlService-ref="accessControlService" />
 
 	<authentication-manager>
 		<authentication-provider ref="customAuthenticationProvider" />

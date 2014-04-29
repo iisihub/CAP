@@ -6,5 +6,5 @@ import com.iisigroup.cap.auth.model.UserPwdHistory;
 import com.iisigroup.cap.dao.IGenericDao;
 
 public interface UserPwdHistoryDao extends IGenericDao<UserPwdHistory> {
-    List<UserPwdHistory> findByUserOid(String userOid);
+    List<UserPwdHistory> findByUserOid(String userOid, int maxHistory);
 }

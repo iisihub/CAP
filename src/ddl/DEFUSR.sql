@@ -20,6 +20,8 @@ create table DEF_USR (
    PRESTATUS			VARCHAR(1),
    CREATOR              VARCHAR(10),
    CREATETIME           TIMESTAMP,
+   PWDEXPIREDTIME       TIMESTAMP,
+   LOGINTIME            TIMESTAMP,
    constraint P_DEF_USR primary key (OID)
 );
 

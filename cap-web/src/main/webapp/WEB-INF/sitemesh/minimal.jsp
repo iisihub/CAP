@@ -6,6 +6,7 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 <link rel="stylesheet" href="../../static/css/main.css" />
+<link rel="stylesheet" href="../../static/lib/css/common.message.css" /><!-- common.message (iLog) -->
 <script type="text/javascript">
 var baseUrl = "../../static";
 </script>

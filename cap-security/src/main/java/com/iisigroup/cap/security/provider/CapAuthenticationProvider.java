@@ -15,13 +15,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
-import com.iisigroup.cap.security.SecConstants;
+import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha.CaptchaStatus;
 import com.iisigroup.cap.security.captcha.servlet.CapCaptchaServlet;
 import com.iisigroup.cap.security.exception.CapAuthenticationException;
 import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.CapUserDetails;
+import com.iisigroup.cap.security.service.IAccessControlService;
 import com.iisigroup.cap.security.service.IPasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 
@@ -29,6 +30,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
 
     private UserDetailsService userService;
     private IPasswordService passwordService;
+    private IAccessControlService accessControlService;
     private Logger logger = LoggerFactory
             .getLogger(CapAuthenticationProvider.class);
     private CaptchaCaptureFilter captchaCaptureFilter;
@@ -51,21 +53,22 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             throw new CapAuthenticationException("Captcha Response is Empty",
                     captchaEnabled);
         } else {
-            Map<String, String> policy = passwordService.getPassworPolicy();
+            Map<String, String> policy = passwordService.getPasswordPolicy();
             boolean captchaPassed = true;
-            boolean firstLogin = isFirstLogin(username);
+            boolean forceChangePwd = isForceChangePwd(username);
             Integer wrongCount = getWrountCount(username);
             logger.debug("wrongCount-{}: {}", username, wrongCount);
             // 密碼連錯 PWD_ACCOUNT_LOCK 次 lock user
             if (wrongCount >= Integer.parseInt(policy
-                    .get(SecConstants.PWD_ACCOUNT_LOCK))) {
-                passwordService.lockUserByUserId(username);
+                    .get(PwdPloicyKeys.PWD_ACCOUNT_LOCK.toString()
+                            .toLowerCase()))) {
+                accessControlService.lockUserByUserId(username);
                 throw new CapAuthenticationException("User locked.",
                         captchaEnabled);
             }
             // 驗證 captcha
             if (captchaEnabled) {
-                String cpatchaData = (String) captchaCaptureFilter.getRequest()
+                String cpatchaData = captchaCaptureFilter.getRequest()
                         .getParameter("captcha");
                 CapSecurityCaptcha captcha = CapAppContext
                         .getBean(CapCaptchaServlet.DEF_RENDERER);
@@ -83,7 +86,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                             .loadUserByUsername(username);
                 } catch (Exception e) {
                     throw new CapAuthenticationException(e.getMessage(),
-                            captchaEnabled, firstLogin);
+                            captchaEnabled, forceChangePwd);
                 }
                 boolean currentPwdVerified = verifyPassword(username,
                         authentication.getCredentials().toString(),
@@ -91,33 +94,38 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                 if (currentPwdVerified) {
                     setWrountCount(username, 0);
                     String authedPwd = checkStatus(user, username, password,
-                            policy, captchaEnabled, firstLogin);
+                            policy, captchaEnabled, forceChangePwd);
                     // 登入成功
-                    setFirstLogin(username, false);
+                    setForceChangePwd(username, false);
+                    // 檢核是否要提醒使用者變更密碼
+                    notifyPasswordChange(username, captchaEnabled,
+                            forceChangePwd);
+                    accessControlService.login(username);
                     return new UsernamePasswordAuthenticationToken(user,
                             authedPwd, user.getAuthorities());
                 } else {
                     setWrountCount(username, getWrountCount(username) + 1);
                     // 連錯 N 次，enable captcha
                     if (wrongCount >= Integer.parseInt(policy
-                            .get(SecConstants.PWD_CAPTCHA_ENABLE))) {
+                            .get(PwdPloicyKeys.PWD_CAPTCHA_ENABLE.toString()
+                                    .toLowerCase()))) {
                         setCaptchaEnabled(true);
                     }
                     throw new CapAuthenticationException("Invalid Password.",
-                            isCaptchaEnabled(), firstLogin);
+                            isCaptchaEnabled(), forceChangePwd);
                 }
             } else {
                 logger.debug("Captcha is invalid!");
                 resetCaptchaFields();
                 throw new CapAuthenticationException("Invalid Captcha.",
-                        captchaEnabled, firstLogin);
+                        captchaEnabled, forceChangePwd);
             }
         }
     }
 
     private String checkStatus(CapUserDetails user, String username,
             String password, Map<String, String> policy,
-            boolean captchaEnabled, boolean firstLogin) {
+            boolean captchaEnabled, boolean forceChangePwd) {
         String authedPwd = "";
         int status = StringUtils.isBlank(user.getStatus()) ? -1 : Integer
                 .parseInt(user.getStatus());
@@ -127,43 +135,76 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             break;
         case 1:// 初始
                // 若「首次登入是否強制更換密碼」為1，則強制更換密碼，否則用原密碼登入。
-            if ("1".equals(policy.get(SecConstants.PWD_FORCE_CHANGE_PWD))) {
-                String newPwd = (String) captchaCaptureFilter.getRequest()
-                        .getParameter("newPwd");
-                String confirm = (String) captchaCaptureFilter.getRequest()
-                        .getParameter("confirm");
-                if (StringUtils.isBlank(newPwd) || StringUtils.isBlank(confirm)) {
-                    setFirstLogin(username, true);
-                    throw new CapAuthenticationException(
-                            "First time login. Please change password.",
-                            captchaEnabled, true);
-                } else {
-                    // set new password
-                    try {
-                        passwordService.checkPasswordRule(username, newPwd,
-                                confirm);
-                    } catch (Exception e) {
-                        throw new CapAuthenticationException(e.getMessage(),
-                                captchaEnabled, firstLogin);
-                    }
-                    passwordService.changeUserPassword(username, newPwd);
-                    authedPwd = newPwd;
-                }
+            if ("1".equals(policy.get(PwdPloicyKeys.PWD_FORCE_CHANGE_PWD
+                    .toString().toLowerCase()))) {
+                authedPwd = forceChangePassword(username, captchaEnabled,
+                        forceChangePwd, CapAppContext.getMessage("error.011"));
             } else {
                 authedPwd = password;
             }
             break;
         case 2: // 禁用
-            // TODO handle this user status
+            throw new CapAuthenticationException(CapAppContext.getMessage(
+                    "error.006", new Object[] { username }), captchaEnabled,
+                    forceChangePwd);
         case 3: // 密碼過期
-            // TODO handle this user status
+            authedPwd = forceChangePassword(username, captchaEnabled,
+                    forceChangePwd, CapAppContext.getMessage("error.012"));
+            break;
         case 9: // 刪除
-            // TODO handle this user status
+            throw new CapAuthenticationException(CapAppContext.getMessage(
+                    "error.007", new Object[] { username }), captchaEnabled,
+                    forceChangePwd);
         default:
             throw new CapAuthenticationException("Invalid User Status.",
-                    captchaEnabled, firstLogin);
+                    captchaEnabled, forceChangePwd);
+        }
+        String agreeChange = captchaCaptureFilter.getRequest().getParameter(
+                "agreeChange");
+        if (Boolean.valueOf(agreeChange)) {
+            authedPwd = forceChangePassword(username, captchaEnabled,
+                    forceChangePwd, "");
         }
         return authedPwd;
+    }
+
+    private void notifyPasswordChange(String userId, boolean captchaEnabled,
+            boolean forceChangePwd) {
+        String ignoreNotify = captchaCaptureFilter.getRequest().getParameter(
+                "ignoreNotify");
+        if (!Boolean.valueOf(ignoreNotify)) {
+            int diff = passwordService.getPasswordChangeNotifyDay(userId) + 1;
+            if (diff > 0) {
+                throw new CapAuthenticationException(CapAppContext.getMessage(
+                        "error.013", new Object[] { diff }), captchaEnabled,
+                        forceChangePwd, true);
+            }
+        }
+    }
+
+    private String forceChangePassword(String username, boolean captchaEnabled,
+            boolean forceChangePwd, String reason) {
+        String newPwd = captchaCaptureFilter.getRequest()
+                .getParameter("newPwd");
+        String confirm = captchaCaptureFilter.getRequest().getParameter(
+                "confirm");
+        if (StringUtils.isBlank(newPwd) || StringUtils.isBlank(confirm)) {
+            setForceChangePwd(username, true);
+            throw new CapAuthenticationException(reason
+                    + CapAppContext.getMessage("error.010"), captchaEnabled,
+                    true);
+        } else {
+            // set new password
+            try {
+                passwordService.checkPasswordRule(username, newPwd, confirm,
+                        true);
+            } catch (Exception e) {
+                throw new CapAuthenticationException(e.getMessage(),
+                        captchaEnabled, forceChangePwd);
+            }
+            passwordService.changeUserPassword(username, newPwd);
+            return newPwd;
+        }
     }
 
     private boolean verifyPassword(String username, String presentedPassword,
@@ -211,17 +252,17 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
         this.passwordService = passwordService;
     }
 
-    private boolean isFirstLogin(String username) {
+    private boolean isForceChangePwd(String username) {
         HttpSession session = captchaCaptureFilter.getRequest().getSession();
-        if (session.getAttribute("firstLogin-" + username) == null) {
-            session.setAttribute("firstLogin-" + username, false);
+        if (session.getAttribute("forceChangePwd-" + username) == null) {
+            session.setAttribute("forceChangePwd-" + username, false);
         }
-        return (Boolean) session.getAttribute("firstLogin-" + username);
+        return (Boolean) session.getAttribute("forceChangePwd-" + username);
     }
 
-    private void setFirstLogin(String username, boolean firstLogin) {
+    private void setForceChangePwd(String username, boolean forceChangePwd) {
         HttpSession session = captchaCaptureFilter.getRequest().getSession();
-        session.setAttribute("firstLogin-" + username, firstLogin);
+        session.setAttribute("forceChangePwd-" + username, forceChangePwd);
     }
 
     private int getWrountCount(String username) {
@@ -246,6 +287,15 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
     private void setCaptchaEnabled(boolean captchaEnabled) {
         HttpSession session = captchaCaptureFilter.getRequest().getSession();
         session.setAttribute("captchaEnabled", captchaEnabled);
+    }
+
+    public IAccessControlService getAccessControlService() {
+        return accessControlService;
+    }
+
+    public void setAccessControlService(
+            IAccessControlService accessControlService) {
+        this.accessControlService = accessControlService;
     }
 
 }

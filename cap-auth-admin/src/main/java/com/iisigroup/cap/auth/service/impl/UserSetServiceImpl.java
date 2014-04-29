@@ -1,6 +1,9 @@
 package com.iisigroup.cap.auth.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +20,11 @@ import com.iisigroup.cap.auth.model.RoleSet;
 import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.auth.model.UserPwdHistory;
 import com.iisigroup.cap.auth.service.UserSetService;
+import com.iisigroup.cap.base.model.SysParm;
+import com.iisigroup.cap.dao.ICommonDao;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.CapSecurityContext;
+import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapDate;
 
@@ -27,6 +33,8 @@ public class UserSetServiceImpl extends AbstractService implements
         UserSetService {
     @Resource
     private UserDao userDao;
+    @Resource
+    private ICommonDao commonDao;
     @Resource
     private UserPwdHistoryDao userPwdHistoryDao;
     @Resource
@@ -61,13 +69,19 @@ public class UserSetServiceImpl extends AbstractService implements
 
     private User setUserFields(User user, String userId, String userName,
             String password, String email) {
+        Date now = Calendar.getInstance().getTime();
         user.setUserId(userId);
         user.setUserName(userName);
         user.setEmail(email);
         if (!StringUtils.isBlank(password)) {
+            SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class,
+                    PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+            int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
+            user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now,
+                    expiredDay).getTime()));
             user.setPassword(encodePassword(user.getUserId(), password));
         }
-        user.setUpdateTime(CapDate.getCurrentTimestamp());
+        user.setUpdateTime(new Timestamp(now.getTime()));
         user.setUpdater(CapSecurityContext.getUserId());
         return user;
     }

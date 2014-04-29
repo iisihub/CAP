@@ -4,6 +4,10 @@
 <head>
 <link rel="stylesheet" href="../static/css/main.css" />
 <link rel="stylesheet" href="../static/css/form.css" />
+<style>
+/*login hide common.message(iLog)*/
+#newSysMsgArea {display: none;}
+</style>
 <script type="text/javascript">
 var baseUrl = "../static";
 </script>

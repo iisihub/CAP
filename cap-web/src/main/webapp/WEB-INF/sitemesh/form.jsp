@@ -12,7 +12,10 @@
 <head>
 <link rel="stylesheet" href="../../static/css/main.css" />
 <link rel="stylesheet" href="../../static/css/form.css" />
-<link rel="stylesheet" href="../../static/lib/css/common.message.css" />
+<link rel="stylesheet" href="../../static/lib/css/common.message.css" /><!-- common.message (iLog) -->
+<!--[if lt IE 9]>
+            <script src="../../static/lib/js/html5.js"></script>
+        <![endif]-->
 <script type="text/javascript">
 var baseUrl = "../../static";
 </script>
@@ -29,14 +32,14 @@ var baseUrl = "../../static";
 			<div class="logo">
 				<a><img src="../../static/images/logo.png"></a>
 			</div>
+			<ol style="height: 18px;width: 35px;right: 140px;">
+				<li class="lang"><a href="../../j_spring_security_logout">登出</a></li>
+			</ol>
 			<ol style="height: 18px;">
 				<li class="lang"><a href="#language">&nbsp;LANGUAGE&nbsp;</a></li>
 				<li>&nbsp;-<a href="?lang=zh_TW">&nbsp;正體&nbsp;</a></li>
 				<li>&nbsp;-<a href="?lang=zh_CN">&nbsp;简体&nbsp;</a></li>
 				<li>&nbsp;-<a href="?lang=en">&nbsp;ENGLISH&nbsp;</a></li>
-			</ol>
-			<ol style="height: 18px;width: 35px;right: 140px;">
-				<li class="lang"><a href="../../j_spring_security_logout">登出</a></li>
 			</ol>
 		</header>
 		<div class="main">

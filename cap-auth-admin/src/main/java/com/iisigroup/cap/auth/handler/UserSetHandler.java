@@ -90,6 +90,7 @@ public class UserSetHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("createTime", new ADDateFormatter());
         fmt.put("updateTime", new ADDateFormatter());
+        fmt.put("pwdExpiredTime", new ADDateFormatter());
         fmt.put("status", new CodeTypeFormatter(codeTypeService, "userStatus",
                 (Locale) SimpleContextHolder.get(CapWebUtil.localeKey)));
         return new MapGridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -126,7 +127,7 @@ public class UserSetHandler extends MFormHandler {
         String userName = request.get("userName");
         String password = request.get("password");
         String confirm = request.get("confirm");
-        passwordService.checkPasswordRule(userName, password, confirm);
+        passwordService.checkPasswordRule(userName, password, confirm, true);
         String email = request.get("email");
         String[] roleOids = request.getParamsAsStringArray("roleOids");
         userService.createUser(userId, userName, password, email, roleOids);
@@ -141,7 +142,7 @@ public class UserSetHandler extends MFormHandler {
         boolean reset = !StringUtils.isBlank(password);
         if (reset) {
             // 代表要修改密碼
-            passwordService.checkPasswordRule(userId, password, confirm);
+            passwordService.checkPasswordRule(userId, password, confirm, true);
         }
         User user = userService.findUserByUserId(userId);
         if (user != null && !user.getOid().equals(oid)) {
@@ -205,7 +206,7 @@ public class UserSetHandler extends MFormHandler {
         String confirm = request.get("confirm");
         String userId = CapSecurityContext.getUserId();
         if (passwordService.validatePassword(userId, password)) {
-            passwordService.checkPasswordRule(userId, newPwd, confirm);
+            passwordService.checkPasswordRule(userId, newPwd, confirm, false);
             passwordService.changeUserPassword(userId, newPwd);
         } else {
             throw new CapMessageException(

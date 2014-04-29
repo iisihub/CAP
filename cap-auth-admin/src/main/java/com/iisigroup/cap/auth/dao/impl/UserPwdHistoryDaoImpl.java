@@ -15,9 +15,10 @@ public class UserPwdHistoryDaoImpl extends GenericDao<UserPwdHistory> implements
         UserPwdHistoryDao {
 
     @Override
-    public List<UserPwdHistory> findByUserOid(String userOid) {
+    public List<UserPwdHistory> findByUserOid(String userOid, int maxHistory) {
         ISearch search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "userOid", userOid);
+        search.setMaxResults(maxHistory);
         search.addOrderBy("updateTime", true);
         return find(search);
     }
