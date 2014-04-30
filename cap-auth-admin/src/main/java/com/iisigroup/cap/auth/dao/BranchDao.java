@@ -18,27 +18,27 @@ import com.iisigroup.cap.dao.IGenericDao;
  */
 public interface BranchDao extends IGenericDao<Branch> {
 
-	/**
-	 * 取得所有分行資訊(含已停業)
-	 * 
-	 * @return List<Branch>
-	 */
-	public List<Branch> findByAllBranch();
+    /**
+     * 取得所有分行資訊(含已停業)
+     * 
+     * @return List<Branch>
+     */
+    List<Branch> findByAllBranch();
 
-	/**
-	 * 取得所有分行資訊(不含已停業)
-	 * 
-	 * @return List<Branch>
-	 */
-	public List<Branch> findByAllActBranch();
+    /**
+     * 取得所有分行資訊(不含已停業)
+     * 
+     * @return List<Branch>
+     */
+    List<Branch> findByAllActBranch();
 
-	/**
-	 * 查詢分行
-	 * 
-	 * @param brNo
-	 *            分行代碼
-	 * @return {@link com.mega.eloan.common.model.Branch}
-	 */
-	public Branch findByBrno(String brNo);
+    /**
+     * 查詢分行
+     * 
+     * @param brNo
+     *            分行代碼
+     * @return {@link com.mega.eloan.common.model.Branch}
+     */
+    Branch findByBrno(String brNo);
 
 }

@@ -1,8 +1,6 @@
 package com.iisigroup.cap.auth.service.impl;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,47 +36,17 @@ public class MenuServiceImpl implements MenuService {
     I18nDao i18nDao;
 
     public MenuItem getMenuByRoles(Set<String> roles) {
-
-        MenuItem root = toMenu(codeItemDao.findByStep(roles,
-                config.getProperty("systemType"), 1));
-        for (MenuItem menu : root.getChild()) {
-            menu.setChild(getSubMenuByParent(roles, menu));
-        }
-        return root;
-    }// ;
-
-    private List<MenuItem> getSubMenuByParent(Set<String> roles, MenuItem parent) {
-        List<CodeItem> codeList = codeItemDao.findBySysTypeAndParent(roles,
-                parent.getCode(), config.getProperty("systemType"));
-        if (codeList != null) {
-            List<MenuItem> subMenuList = toMenu(codeList).getChild();
-            for (MenuItem item : subMenuList) {
-                item.setChild(getSubMenuByParent(roles, item));
-            }
-            return subMenuList;
-        }
-        return null;
-    }// ;
-
-    public MenuItem toMenu(List<CodeItem> list) {
-        // private MenuItem toMenu(List<CodeItem> list) {
+        Map<String, I18n> menuI18n = i18nDao.findAsMapByCodeType("menu",
+                SimpleContextHolder.get(CapWebUtil.localeKey).toString());
         Map<Integer, MenuItem> menuMap = new HashMap<Integer, MenuItem>();
         MenuItem root = new MenuItem();
-
-        Collections.sort(list, new Comparator<CodeItem>() {
-            public int compare(CodeItem code1, CodeItem code2) {
-                return (code1.getStep() - code2.getStep()) * 100000
-                        + (code1.getParent() - code2.getParent()) * 10000
-                        + (code1.getSeq() - code2.getSeq());
-            }
-        });
+        List<CodeItem> list = codeItemDao.findMenuDataByRoles(roles,
+                config.getProperty("systemType"));
         for (CodeItem code : list) {
             MenuItem item = new MenuItem();
             item.setCode(code.getCode());
             // 改為從 i18n table 取得字串
-            I18n i18n = i18nDao.findByCodeTypeAndCodeValue("menu", "menu."
-                    + code.getCode(),
-                    SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+            I18n i18n = menuI18n.get("menu." + code.getCode());
             item.setName(i18n == null ? CapAppContext.getMessage("menu."
                     + code.getCode()) : i18n.getCodeDesc());
             item.setUrl(code.getPath());
@@ -91,7 +59,7 @@ public class MenuServiceImpl implements MenuService {
             pItem.getChild().add(item);
         }
         return root;
-    }
+    }// ;
 
     public static class MenuItem implements Serializable {
 

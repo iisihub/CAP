@@ -93,4 +93,6 @@ public interface CodeItemDao extends IGenericDao<CodeItem> {
     List<CodeItem> findByParentAndSteps(Set<String> roles, int parent,
             String sysType, int... steps);
 
+    List<CodeItem> findMenuDataByRoles(Set<String> roles, String systemType);
+
 }

@@ -72,6 +72,31 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<entry key="roleSet_deleteRlf">
 			<value><![CDATA[delete from DEF_RLF rlf where rlf.rolCode = :rolCode and rlf.pgmCode in (:delFunc)]]></value>
 		</entry>
+        <entry key="User.find">
+            <value><![CDATA[
+                select distinct u.* from def_usr u left join def_rlset ur on ur.staffpid = u.staffpid
+            ]]></value>
+        </entry>
+		<entry key="Role.findAllWithSelectedByUserId">
+			<value><![CDATA[
+                select
+                    r.rolcode as roleId,
+                    r.rolName,
+                    auth.staffpid
+                from def_rle r
+                left join (select * from def_rlset ur where ur.staffpid = :userId) auth on r.rolcode = auth.rolcode
+            ]]></value>
+		</entry>
+		<entry key="roleSet_findMenu">
+			<value><![CDATA[
+			    SELECT * FROM (
+				SELECT (P.PGMTYPE*1000+P.PGMTYP*100+P.SEQ*0.01) AS S, P.* FROM DEF_PGM P
+				INNER JOIN DEF_RLF RLF ON P.PGMCODE = RLF.PGMCODE
+				INNER JOIN DEF_RLE R ON R.ROLCODE = RLF.ROLCODE
+				WHERE RLF.ROLCODE IN (:roleCodes) AND P.INPUTFLG = '1' AND P.SYSTYP = :sysType AND R.STU = '0' AND R.SYSTYP = :sysType
+				) ORDER BY S
+            ]]></value>
+		</entry>
 		
 		<!-- Sequence -->
 		<entry key="Sequence.listAll">

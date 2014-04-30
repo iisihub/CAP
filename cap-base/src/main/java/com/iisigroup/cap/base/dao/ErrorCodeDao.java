@@ -27,10 +27,10 @@ import com.iisigroup.cap.dao.IGenericDao;
  */
 public interface ErrorCodeDao extends IGenericDao<ErrorCode> {
 
-	public List<ErrorCode> findByAll();
+    List<ErrorCode> findByAll();
 
-	public ErrorCode findByCode(String code, String locale);
+    ErrorCode findByCode(String code, String locale);
 
-	public List<ErrorCode> findListBySysId(String sysId, String locale);
+    List<ErrorCode> findListBySysId(String sysId, String locale);
 
 }

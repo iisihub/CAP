@@ -29,6 +29,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.CodeItemDao;
 import com.iisigroup.cap.auth.model.CodeItem;
+import com.iisigroup.cap.auth.support.CodeItemRowMapper;
 import com.iisigroup.cap.dao.impl.GenericDao;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
@@ -250,6 +251,16 @@ public class CodeItemDaoImpl extends GenericDao<CodeItem> implements
             roleSteps.put(role, steps);
         }
         return roleStepCodes;
+    }
+
+    @Override
+    public List<CodeItem> findMenuDataByRoles(Set<String> roles,
+            String systemType) {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("roleCodes", roles);
+        param.put("sysType", systemType);
+        return getNamedJdbcTemplate().query("roleSet_findMenu", "", param,
+                new CodeItemRowMapper());
     }
 
 }
