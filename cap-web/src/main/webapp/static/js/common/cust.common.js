@@ -258,5 +258,31 @@ $(document).ready(function() {
 //		$(".ui-dialog-content").dialog("close");
 		});
 	};
+	
+	// cust valid method
+	$.extend(window,{
+		_minSize: function(field, rules, i, options) {
+			var min = rules[i + 2], len = field.val().length,
+			mId = '#'+ field.attr('id'), custMsg ='';
+			if (len < min) {
+				if (typeof options.custom_error_messages[mId] != "undefined" &&
+						typeof options.custom_error_messages[mId]['fieldName'] != "undefined" ) {
+					custMsg = options.custom_error_messages[mId]['fieldName']['message'];
+				}
+				var rule = options.allrules.minSize;
+				return custMsg+ rule.alertText + min + rule.alertText2;
+			}
+		},
+		regex: function(field, rules, i, options){
+			var val = field.val();
+			rules.push('required');
+			var r = new RegExp(options.allrules[rules[i + 2]].regex);
+			if (val){
+				if (!r.test(val)){
+					return options.allrules[rules[i + 2]].alertText;
+				}
+			}
+		}
+	});
 
 });

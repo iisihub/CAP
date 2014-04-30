@@ -44,5 +44,22 @@ $.extend(Properties || {}, {
       //for captcha end
     },
 	timeOut : 'TIME_OUT',
-	remindTimeout : false
+	remindTimeout : false,
+	myCustMessages : {
+		custom_error_messages : {
+			"#myName" : {
+				'required' : {
+					'message' : "請輸入 myName"
+				},
+				'fieldName' : {
+					'message' : "我的名字"
+				}
+			},
+			'.mine' : {
+				'required' : {
+					'message' : '請輸入 class=mine 的欄位'
+				}
+			}
+		}
+	}
 });
