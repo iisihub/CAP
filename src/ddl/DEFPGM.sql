@@ -19,7 +19,7 @@ create table DEF_PGM (
    INPUTFLG             CHAR(1)                not null default '1',
    UPDATER              CHAR(6),
    UPDTIME              TIMESTAMP              default CURRENT TIMESTAMP,
-   DISCRIMINATOR		VARCHAR(31),
+   DISCRIMINATOR		VARCHAR(31)            not null,
    constraint P_DEF_PGM primary key (PGMCODE)
 );
 

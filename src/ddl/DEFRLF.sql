@@ -12,7 +12,6 @@ create table DEF_RLF (
 --   AUTOFLAG             CHAR(1),
    UPDATER              VARCHAR(10),
    UPDTIME              TIMESTAMP              default CURRENT TIMESTAMP,
-   DISCRIMINATOR		VARCHAR(31),
    constraint P_DEF_RLF primary key (ROLCODE, PGMCODE)
 );
 
