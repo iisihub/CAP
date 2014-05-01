@@ -21,6 +21,7 @@ create table DEF_BRN (
    ABREKFLG             CHAR(1),
    UPDATER              VARCHAR(10),
    UPDTIME              TIMESTAMP              default CURRENT TIMESTAMP,
+   DISCRIMINATOR		VARCHAR(31),
    constraint P_DEF_BRN primary key (DEPARTNO)
 );
 

@@ -3,9 +3,14 @@ package com.iisigroup.cap.auth.model;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +33,12 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DEF_USER_PWD_HISTORY")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="discriminator",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="P")
 public class UserPwdHistory extends GenericBean implements IDataObject {
 
     @Id

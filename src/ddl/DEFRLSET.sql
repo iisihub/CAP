@@ -9,6 +9,7 @@ create table DEF_RLSET (
    ROLCODE              CHAR(10)                not null,
    UPDATER              CHAR(6),
    UPDATETIME           TIMESTAMP,
+   DISCRIMINATOR		VARCHAR(31),
    constraint P_DEF_RLSET primary key (STAFFPID, ROLCODE)
 );
 

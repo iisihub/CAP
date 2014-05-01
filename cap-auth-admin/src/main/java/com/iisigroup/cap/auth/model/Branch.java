@@ -9,10 +9,15 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -36,6 +41,12 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DEF_BRN", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="discriminator",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="P")
 public class Branch extends GenericBean implements IDataObject {
 	private static final long serialVersionUID = 1L;
 

@@ -15,6 +15,7 @@ create table DEF_RLE (
    UPDTIME              TIMESTAMP              default CURRENT TIMESTAMP,
    APPRID               VARCHAR(10),
    APPRTIME             TIMESTAMP,
+   DISCRIMINATOR		VARCHAR(31),
    constraint P_DEF_RLE primary key (ROLCODE)
 );
 

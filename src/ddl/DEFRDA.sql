@@ -11,6 +11,7 @@ create table DEF_RDA (
    PGMAUTH              DECIMAL(1,0),
    UPDATER              VARCHAR(10),
    UPDTIME              TIMESTAMP              default CURRENT TIMESTAMP,
+   DISCRIMINATOR		VARCHAR(31),
    constraint P_DEF_RDA primary key (DOCID,ROLCODE,PGMAUTH,SYSTYP)
 );
 
