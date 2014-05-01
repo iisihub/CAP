@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet" href="../static/css/main.css" />
 <link rel="stylesheet" href="../static/css/form.css" />
+<link rel="stylesheet" href="../static/css/login.css" />
 <style>
 /*login hide common.message(iLog)*/
 #newSysMsgArea {display: none;}
