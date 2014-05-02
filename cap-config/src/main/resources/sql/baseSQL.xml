@@ -89,7 +89,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		</entry>
 		<entry key="roleSet_findMenu">
 			<value><![CDATA[
-			    SELECT * FROM (
+			    SELECT DISTINCT * FROM (
 				SELECT (P.PGMTYPE*1000+P.PGMTYP*100+P.SEQ*0.01) AS S, P.* FROM DEF_PGM P
 				INNER JOIN DEF_RLF RLF ON P.PGMCODE = RLF.PGMCODE
 				INNER JOIN DEF_RLE R ON R.ROLCODE = RLF.ROLCODE
