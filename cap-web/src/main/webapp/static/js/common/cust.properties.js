@@ -44,28 +44,5 @@ $.extend(Properties || {}, {
       //for captcha end
     },
 	timeOut : 'TIME_OUT',
-	remindTimeout : false,
-	myCustMessages : {
-		custom_error_messages : {
-			'#myName' : {
-				'required' : {
-					'message' : '請輸入 myName'
-				},
-				'fieldName' : {
-					'message' : '我的名字'
-				}
-			},
-			'.mine' : {
-				'required' : {
-					'message' : '請輸入 class=mine 的欄位'
-				}
-			}
-		}
-	},
-	myCustRegEx : {
-        'myCustValid': {
-        	'regex': /^[0-9]{8}$/,
-            'alertText': '只能輸入 8 位數的數字'
-        }
-	}
+	remindTimeout : false
 });

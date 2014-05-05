@@ -259,6 +259,33 @@ $(document).ready(function() {
 		});
 	};
 
+	i18n && i18n.def && 
+	$.extend(Properties, {
+		myCustMessages : {
+			custom_error_messages : {
+				'#myName' : {
+					'required' : {
+						'message' : i18n.def('請輸入 myName')
+					},
+					'fieldName' : {
+						'message' : i18n.def('[該欄位名稱]')
+					}
+				},
+				'.mine' : {
+					'required' : {
+						'message' : i18n.def('請輸入 class=mine 的欄位')
+					}
+				}
+			}
+		},
+		myCustRegEx : {
+	        'myCustValid': {
+	        	'regex': /^[0-9]{8}$/,
+	            'alertText': i18n.def('只能輸入 8 位數的數字')
+	        }
+		}	
+	});
+	
 	// cust valiation regex
 	$.extend($.validationEngineLanguage.allRules, Properties.myCustRegEx);
 
