@@ -279,8 +279,13 @@ $(document).ready(function() {
 				}
 			},
 			myCustRegEx : {
+				'minSize': {
+					'regex': 'none',
+					'alertText': i18n.messages('minSize.alertText'),
+					'alertText2': i18n.messages('minSize.alertText2')
+				},
 		        'myCustValid': {
-		        	'regex': /^[0-9]{8}$/,
+		        	'regex': /^(0)(9)([0-9]{8})?$/,
 		            'alertText': i18n.messages('myCustValid.alertText')
 		        }
 			}	
