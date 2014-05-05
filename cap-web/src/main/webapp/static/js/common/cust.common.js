@@ -258,7 +258,10 @@ $(document).ready(function() {
 //		$(".ui-dialog-content").dialog("close");
 		});
 	};
-	
+
+	// cust valiation regex
+	$.extend($.validationEngineLanguage.allRules, Properties.myCustRegEx);
+
 	// cust valid method
 	$.extend(window,{
 		_minSize: function(field, rules, i, options) {

@@ -162,10 +162,6 @@
                     "alertText2": "可接受的格式： ",
                     "alertText3": "mm/dd/yyyy hh:mm:ss AM|PM 或 ", 
                     "alertText4": "yyyy-mm-dd hh:mm:ss AM|PM"
-	            },
-	            "myCustValid": {
-	            	"regex": /^[0-9]{8}$/,
-                    "alertText": "只能輸入 8 位數的數字"
 	            }
             };
             

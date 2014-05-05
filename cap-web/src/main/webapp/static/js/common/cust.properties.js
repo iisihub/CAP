@@ -47,12 +47,12 @@ $.extend(Properties || {}, {
 	remindTimeout : false,
 	myCustMessages : {
 		custom_error_messages : {
-			"#myName" : {
+			'#myName' : {
 				'required' : {
-					'message' : "請輸入 myName"
+					'message' : '請輸入 myName'
 				},
 				'fieldName' : {
-					'message' : "我的名字"
+					'message' : '我的名字'
 				}
 			},
 			'.mine' : {
@@ -61,5 +61,11 @@ $.extend(Properties || {}, {
 				}
 			}
 		}
+	},
+	myCustRegEx : {
+        'myCustValid': {
+        	'regex': /^[0-9]{8}$/,
+            'alertText': '只能輸入 8 位數的數字'
+        }
 	}
 });
