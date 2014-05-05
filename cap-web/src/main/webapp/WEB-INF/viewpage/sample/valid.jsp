@@ -18,6 +18,7 @@
 			<span>My name</span>
 			<input id="myName" name="myName" class="validate[required, funcCall[_minSize[10]]]" type="text" />
 		</div>
+		<br/>
 		<div>
 			<span>
 			My phone
