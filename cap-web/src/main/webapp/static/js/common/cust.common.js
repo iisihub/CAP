@@ -164,26 +164,52 @@ $(document).ready(function() {
 	}catch(e){
 		logDebug("Can't find prop");
 	}
-	if(Properties.remindTimeout){		
+
+	//計數器減差(這裡是分鐘)
+	var gapTime = 1;
+	if(Properties.remindTimeout){
+		//#Cola235 增加切換頁reset timer
 		//計數器(這裡是毫秒)
-		var timecount = (idleDuration-1)*60*1000;
+		window.timecount = (idleDuration-gapTime)*60*1000;
 		logDebug("set timer time::"+timecount);
-		var timer = $.timer(timecount, function(){
+		var t1merConfirm =[];
+		var timer2 = null;
+		//TIMER FUNC1
+		var cccheckMethod = function(dxx){
+			$.ajax({
+				url:url('checktimeouthandler/check'),
+				asyn:true,
+				data:{isContinues:dxx.isForceOut},
+				success:function(d){
+					if(d.errorPage){
+						window.setCloseConfirm(false);
+						window.location = d.errorPage;
+					}
+				}
+			});
+		};
+		//TIMER FUNC2
+		var takeTimerReset = function(){
+			timer.reset(timecount);
+		};
+		window.timer = $.timer(timecount, function(){
 			var pathname = window.location.pathname;
 			if(!/(timeout)$|(error)$/i.test(pathname)){
-				CommonAPI.showConfirmMessage('您已閒置，請問是否繼續申請作業?',function(data){
-					$.ajax({
-						url:url('checktimeouthandler/check'),
-						asyn:true,
-						data:{isTest:data},
-						success:function(d){
-							if(d.errorPage){
-								window.setCloseConfirm(false);
-								window.location = d.errorPage;
-							}
-						}
+				if(t1merConfirm!=undefined && t1merConfirm[0] && t1merConfirm[0].hidden==false){
+					//DO NOTTHING
+				}else{
+					timer2 = $.timer(gapTime*60*1000, function(){
+						//超過時間沒給確認動作,就當做取消交易
+						cccheckMethod({isContinues:false});
+					}, false);
+					t1merConfirm = CommonAPI.showConfirmMessage('您已閒置，請問是否繼續申請作業?',function(data){
+						timer2.stop();
+						cccheckMethod({isContinues:data});
+						//按了之後,要重新倒數
+						t1merConfirm = [];
+						takeTimerReset();
 					});
-				});
+				}
 			}
 		}, false);
 		//IDLE留著，當user沒看到confirm pop，時間到了idle還是要導倒timeout?

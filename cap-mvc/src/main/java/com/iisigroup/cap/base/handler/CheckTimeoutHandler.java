@@ -62,7 +62,7 @@ public class CheckTimeoutHandler extends MFormHandler {
         	time3 = Long.parseLong(stout);
         	time3 = time3*60;
         }
-        String isContinues = request.get("isTest");
+        String isContinues = request.get("isContinues");
         // Calculate difference in milliseconds
         long diff = time2 - time1;
         // Difference in seconds
