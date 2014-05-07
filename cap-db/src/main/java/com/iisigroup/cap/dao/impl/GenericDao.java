@@ -30,6 +30,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -336,7 +337,8 @@ public class GenericDao<T> implements IGenericDao<T> {
 				if (pathSize > 1) {
 					Path<?> path = root.get(pathElements[0]);
 					for (int i = 1; i <= pathElements.length - 1; i++) {
-						path = path.get(pathElements[i]);
+						Join join = root.join(pathElements[i-1]);
+						path = join.get(pathElements[i]);
 					}
 					expression = path;
 				} else {
@@ -421,7 +423,8 @@ public class GenericDao<T> implements IGenericDao<T> {
 
 				Path<?> path = root.get(pathElements[0]);
 				for (int i = 1; i <= pathElements.length - 1; i++) {
-					path = path.get(pathElements[i]);
+					Join join = root.join(pathElements[i-1]);
+					path = join.get(pathElements[i]);
 				}
 
 				switch (_searchMode) {
