@@ -179,7 +179,7 @@ $(document).ready(function() {
 			$.ajax({
 				url:url('checktimeouthandler/check'),
 				asyn:true,
-				data:{isContinues:dxx.isForceOut},
+				data:{isContinues:dxx.isContinues},
 				success:function(d){
 					if(d.errorPage){
 						window.setCloseConfirm(false);
