@@ -421,10 +421,23 @@ public class GenericDao<T> implements IGenericDao<T> {
 
 				String[] pathElements = key.split("\\.");
 
+				boolean needJoin = false;
+				Join join = null;
+				if (pathElements.length > 1) {
+				    join = root.join(pathElements[0]);
+				    needJoin = true;
+				}
 				Path<?> path = root.get(pathElements[0]);
 				for (int i = 1; i <= pathElements.length - 1; i++) {
-					Join join = root.join(pathElements[i-1]);
-					path = join.get(pathElements[i]);
+				    if (needJoin) {
+				        if (i == pathElements.length - 1) {
+				            path = join.get(pathElements[i]);
+				        } else {
+				            join = join.join(pathElements[i]);
+				        }
+				    } else {
+				        path = path.get(pathElements[i]);
+				    }
 				}
 
 				switch (_searchMode) {
