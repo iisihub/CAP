@@ -1326,7 +1326,7 @@ $.holdReady(true);
                                     }
                                 }).data('bindChanged', true);
                         }
-                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).prop('value', defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
+                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).find('option[value="' + defalutValue + '"]').prop('selected', true).end().data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
                     }).call(this, options, append);
                 },
 
