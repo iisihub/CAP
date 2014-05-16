@@ -66,7 +66,7 @@ public class SamplePdfRptServiceImpl extends AbstractReportPdfService {
 	}
 
 	@Override
-	protected int[] getAllowedPrivileges() {
-		return new int[] { PdfWriter.ALLOW_PRINTING };
+	protected int getAllowedPrivileges() {
+		return PdfWriter.ALLOW_SCREENREADERS;//允許螢幕閱讀(複製內容用於協助工具)
 	}
 }
