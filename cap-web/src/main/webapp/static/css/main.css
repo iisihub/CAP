@@ -197,7 +197,14 @@ a {cursor: pointer;}
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-datepicker .ui-state-default, .innerTitle .ui-state-default {
+  border: 1px solid #d8dcdf;
+  background: #eeeeee url(images/ui-bg_carbon-fiber_100_eeeeee_8x9.png) 50% 50% repeat;
+  font-weight: bold;
+  color: #004276;
+}
+
+.ui-widget-header .ui-state-default {
   border: 1px solid #cc0000;
   background: #cc0000;
   font-weight: bold;
