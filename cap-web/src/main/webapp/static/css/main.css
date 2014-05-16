@@ -3079,6 +3079,7 @@ footer {
   line-height: 20px;
 }
 .r-grid .ui-state-default, .r-grid .ui-widget-content .ui-state-default, .r-grid .ui-widget-header .ui-state-default {
+  border: 1px solid #d8dcdf;
   background: url("../images/centercontent_tr001.jpg");
   background-repeat: repeat-x;
 }
@@ -3142,8 +3143,9 @@ footer {
 
 .errorDialogCss .ui-dialog-titlebar {
   background: #CC0000;
-  border: 1px solid #E3A1A1;
+  border: 1px solid #CC0000;
 }
+
 .text-red {
   color:red
 }
