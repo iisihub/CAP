@@ -50,6 +50,8 @@ public class UserSetServiceImpl extends AbstractService implements
             String email, String[] roleOids) {
         User user = new User();
         user.setStatus("1");
+        // 建立使用者時就塞 last login time，方便排程篩選資料
+        user.setLastLoginTime(CapDate.getCurrentTimestamp());
         user.setCreateTime(CapDate.getCurrentTimestamp());
         user.setCreator(CapSecurityContext.getUserId());
         user = setUserFields(user, userId, userName, password, email);

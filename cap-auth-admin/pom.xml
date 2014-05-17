@@ -10,7 +10,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-base</artifactId>
+			<artifactId>cap-batch</artifactId>
 		</dependency>
 	</dependencies>
 </project>

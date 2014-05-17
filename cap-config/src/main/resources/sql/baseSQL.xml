@@ -86,7 +86,26 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				) ORDER BY S
             ]]></value>
 		</entry>
-		
+		<entry key="pwdlog_lastpwd">
+			<value><![CDATA[
+			    select usercode, max(updatetime) as lastpwd from def_pwdlog group by usercode
+            ]]></value>
+		</entry>
+		<entry key="user_updatePwdExpiredTime">
+			<value><![CDATA[
+			    update def_user set pwdexpiredtime = :pwdExpiredTime where code = :userCode
+            ]]></value>
+		</entry>
+		<entry key="user_disableAccount">
+			<value><![CDATA[
+			    update def_user set prestatus = status, status = '2' where status not in ('2', '9') and now() - lastlogintime > :pwdAccountDisable
+            ]]></value>
+		</entry>
+		<entry key="user_disableDelete">
+			<value><![CDATA[
+			    update def_user set status = '9' where status != '9' and now() - lastlogintime > :pwdAccountDelete
+            ]]></value>
+		</entry>
 		<!-- Sequence -->
 		<entry key="Sequence.listAll">
 			<value><![CDATA[select * from cfg_Sequence order by seqNode]]></value>

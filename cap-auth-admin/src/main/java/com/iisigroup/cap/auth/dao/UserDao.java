@@ -18,4 +18,7 @@ public interface UserDao extends IGenericDao<User> {
     Page<Map<String, Object>> findPageUnselectedByRoleCodeAndDepCode(
             String roleCode, String depCode, int firstResult, int maxResults);
 
+    void processUserStatus(int pwdExpiredDay, int pwdAccountDisable,
+            int pwdAccountDelete);
+
 }

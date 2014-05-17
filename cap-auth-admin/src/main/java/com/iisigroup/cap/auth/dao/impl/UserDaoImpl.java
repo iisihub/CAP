@@ -1,5 +1,6 @@
 package com.iisigroup.cap.auth.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.dao.IUserDao;
+import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapSqlStatement;
 
 /**
  * <pre>
@@ -75,8 +79,8 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
                     + name + "%");
         }
         if (roleCodes != null && roleCodes.length > 0) {
-            search.addSearchModeParameters(SearchMode.IS_NOT_NULL, "ur.usercode",
-                    null);
+            search.addSearchModeParameters(SearchMode.IS_NOT_NULL,
+                    "ur.usercode", null);
             search.addSearchModeParameters(SearchMode.IN, "ur.rolecode",
                     roleCodes);
         }
@@ -94,8 +98,8 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
             int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
-        return getNamedJdbcTemplate().queryForPage("user_getUserByRoldeCode", param,
-                firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage("user_getUserByRoldeCode",
+                param, firstResult, maxResults);
     }
 
     @Override
@@ -104,8 +108,30 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
         param.put("depCode", depCode);
-        return getNamedJdbcTemplate().queryForPage("user_getEditUserByRoleCode",
-                param, firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage(
+                "user_getEditUserByRoleCode", param, firstResult, maxResults);
+    }
+
+    @Override
+    public void processUserStatus(int pwdExpiredDay, int pwdAccountDisable,
+            int pwdAccountDelete) {
+        Map<String, Object> param = new HashMap<String, Object>();
+        CapSqlStatement sqlp = (CapSqlStatement) CapAppContext
+                .getBean("userSqlStatement");
+        List<Map<String, Object>> result = getNamedJdbcTemplate().queryForList(
+                (String) sqlp.getValue("pwdlog_lastpwd"), param);
+        for (Map<String, Object> rec : result) {
+            String userCode = (String) rec.get("usercode");
+            Timestamp lastpwd = (Timestamp) rec.get("lastpwd");
+            param.put("userCode", userCode);
+            param.put("pwdExpiredTime",
+                    CapDate.shiftDays(lastpwd, pwdExpiredDay));
+            getNamedJdbcTemplate().update("user_updatePwdExpiredTime", param);
+        }
+        param.put("pwdAccountDisable", pwdAccountDisable);
+        getNamedJdbcTemplate().update("user_disableAccount", param);
+        param.put("pwdAccountDelete", pwdAccountDisable);
+        getNamedJdbcTemplate().update("user_disableDelete", param);
     }
 
 }
