@@ -36,5 +36,5 @@ public interface IRoleDao<T extends IRole> {
 	 *            系統代碼
 	 * @return List<IRole>
 	 */
-	public List<T> findByUrl(String system, String url);
+	public List<T> findBySysTypeAndPath(String system, String url);
 }

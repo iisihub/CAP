@@ -39,7 +39,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "I18N", uniqueConstraints = @UniqueConstraint(columnNames = {
+@Table(name = "DEF_I18N", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"locale", "codeType", "codeValue" }))
 public class I18n extends GenericBean implements IDataObject {
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="decorator" content="none">
-<title><spring:message code="users.title" /></title>
+<title><spring:message code="userset.title"></spring:message></title>
 </head>
 <body>
   <script>
@@ -40,31 +40,31 @@
         id="mtype" name="mtype" class="hide" />
       <table class="row-data">
         <tr>
-          <th><spring:message code="users.userid" /></th>
-          <td><input type="text" id="userId" name="userId" maxlength="20"
+          <th><spring:message code="js.usercode" /></th>
+          <td><input type="text" id="code" name="code" maxlength="20"
             class="validate[required,funcCall[maxUTF8[60]]]" /></td>
-          <th><spring:message code="users.username" /></th>
-          <td><input type="text" id="userName" maxlength="48"
-            name="userName" class="validate[required,funcCall[maxUTF8[48]]]" />
+          <th><spring:message code="js.username" /></th>
+          <td><input type="text" id="name" maxlength="48"
+            name="name" class="validate[required,funcCall[maxUTF8[48]]]" />
           </td>
         </tr>
         <tr id="pwdArea">
-          <th><spring:message code="users.password1" /></th>
+          <th><spring:message code="userset.password1" /></th>
           <td><input type="password" id="password" name="password"
             maxlength="48" class="validate[required]" /></td>
-          <th><spring:message code="users.password2" /></th>
+          <th><spring:message code="userset.password2" /></th>
           <td><input type="password" id="confirm" maxlength="48" name="confirm"
             class="validate[required]" /></td>
         </tr>
         <tr>
-          <th><spring:message code="users.email" /></th>
+          <th><spring:message code="userset.email" /></th>
           <td><input type="text" id="email" maxlength="48" name="email"
             class="validate[required,funcCall[maxUTF8[48]]]" /></td>
-          <th><spring:message code="users.pwdExpiredTime" /></th>
+          <th><spring:message code="js.pwdExpiredTime" /></th>
           <td><span id="pwdExpiredTime"></span></td>
         </tr>
-        <tr>
-          <th id="statusArea"><spring:message code="users.status" /></th>
+        <tr id="statusArea">
+          <th><spring:message code="js.userstatus" /></th>
           <td colSpan="3"><span id="status"></span></td>
         </tr>
       </table>
@@ -75,9 +75,9 @@
     <form id="qform" onsubmit="return false;">
       <table class="row-data">
         <tr>
-          <th><spring:message code="users.userid" /></th>
-          <td><input type="text" id="qUserId" name="qUserId" maxlength="32" /></td>
-          <th><spring:message code="users.username" /></th>
+          <th><spring:message code="js.usercode" /></th>
+          <td><input type="text" id="qUserCode" name="qUserCode" maxlength="32" /></td>
+          <th><spring:message code="js.username" /></th>
           <td><input type="text" id="qUserName" maxlength="48"
             name="qUserName" /></td>
         </tr>

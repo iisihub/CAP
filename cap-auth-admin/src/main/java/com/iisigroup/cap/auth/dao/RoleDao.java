@@ -10,15 +10,13 @@ import com.iisigroup.cap.model.Page;
 public interface RoleDao extends IGenericDao<Role> {
     List<Role> findAll();
 
-    Role findByRoleId(String roleId);
+    Role findByCode(String code);
 
-    List<Map<String, Object>> findAllWithSelectedByUserId(String userOid);
+    List<Map<String, Object>> findAllWithSelectedByUserCode(String userCode);
 
-    Page<Map<String, Object>> findPageBySysTypeAndPgmCode(String systyp,
-            String pgmCode, int firstResult, int maxResults);
+    Page<Map<String, Object>> findPageBySysTypeAndFuncCode(String sysType,
+            String funcCode, int firstResult, int maxResults);
 
-    Page<Map<String, Object>> findPageUnselectedBySysTypeAndPgmCode(
-            String systyp, String pgmCode, int firstResult, int maxResults);
-
-    int deleteByPgmCodeAndRoleCodes(String pgmCode, List<String> delRole);
+    Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(
+            String sysType, String funcCode, int firstResult, int maxResults);
 }

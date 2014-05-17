@@ -115,7 +115,7 @@ public class CapUserDetailsService implements UserDetailsService {
         if (roles != null) {
             for (int i = 0; i < roles.size(); i++) {
                 IRole role = roles.get(i);
-                mRoles.put(role.getRoleId(), role.getRoleName());
+                mRoles.put(role.getCode(), role.getName());
             }
         }
         return mRoles;

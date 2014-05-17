@@ -6,7 +6,7 @@ import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.model.Page;
 
 public interface UserSetService {
-    void deleteUserByOid(String oid);
+    void deleteUserByOids(String[] oids);
 
     void createUser(String userId, String userName, String password,
             String email, String[] roleOids);
@@ -17,10 +17,10 @@ public interface UserSetService {
     Page<Map<String, Object>> findUser(String userId, String userName,
             String[] roleOids, String[] status, int maxResult, int firstResult);
 
-    User findUserByUserId(String userId);
+    User findUserByUserCode(String userId);
 
-    void unlockUserByOid(String oid);
+    void unlockUserByOids(String[] oids);
 
-    void lockUserByOid(String oid);
+    void lockUserByOids(String[] oids);
 
 }

@@ -38,12 +38,12 @@ public class AccessControlServiceImpl implements IAccessControlService {
         if (url.indexOf("_") > 0) {
             url = url.substring(0, url.lastIndexOf("_"));
         }
-        return dao.findByUrl(systemType, url);
+        return dao.findBySysTypeAndPath(systemType, url);
     }
 
     @Override
     public void lockUserByUserId(String userId) {
-        User user = userDao.findByUserId(userId);
+        User user = userDao.findByCode(userId);
         if (!"2".equals(user.getStatus())) {
             user.setPreStatus(user.getStatus());
             user.setStatus("2");
@@ -55,8 +55,8 @@ public class AccessControlServiceImpl implements IAccessControlService {
 
     @Override
     public void login(String userId) {
-        User user = userDao.findByUserId(userId);
-        user.setLoginTime(CapDate.getCurrentTimestamp());
+        User user = userDao.findByCode(userId);
+        user.setLastLoginTime(CapDate.getCurrentTimestamp());
         userDao.save(user);
     }
 

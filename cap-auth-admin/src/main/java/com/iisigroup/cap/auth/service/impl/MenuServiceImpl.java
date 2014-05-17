@@ -13,8 +13,8 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.stereotype.Service;
 
-import com.iisigroup.cap.auth.dao.CodeItemDao;
-import com.iisigroup.cap.auth.model.CodeItem;
+import com.iisigroup.cap.auth.dao.FunctionDao;
+import com.iisigroup.cap.auth.model.Function;
 import com.iisigroup.cap.auth.service.MenuService;
 import com.iisigroup.cap.base.dao.I18nDao;
 import com.iisigroup.cap.base.model.I18n;
@@ -27,7 +27,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
 public class MenuServiceImpl implements MenuService {
 
     @Resource
-    CodeItemDao codeItemDao;
+    FunctionDao codeItemDao;
 
     @Resource
     private CapSystemConfig config;
@@ -40,9 +40,9 @@ public class MenuServiceImpl implements MenuService {
                 SimpleContextHolder.get(CapWebUtil.localeKey).toString());
         Map<Integer, MenuItem> menuMap = new HashMap<Integer, MenuItem>();
         MenuItem root = new MenuItem();
-        List<CodeItem> list = codeItemDao.findMenuDataByRoles(roles,
+        List<Function> list = codeItemDao.findMenuDataByRoles(roles,
                 config.getProperty("systemType"));
-        for (CodeItem code : list) {
+        for (Function code : list) {
             MenuItem item = new MenuItem();
             item.setCode(code.getCode());
             // 改為從 i18n table 取得字串

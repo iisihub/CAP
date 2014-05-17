@@ -7,7 +7,7 @@ import com.iisigroup.cap.dao.IGenericDao;
 import com.iisigroup.cap.model.Page;
 
 public interface UserDao extends IGenericDao<User> {
-    User findByUserId(String userId);
+    User findByCode(String userId);
 
     Page<Map<String, Object>> findPage(String userId, String userName,
             String[] roleOids, String[] status, int maxResults, int firstResult);
@@ -15,7 +15,7 @@ public interface UserDao extends IGenericDao<User> {
     Page<Map<String, Object>> findPageByRoleCode(String roleCode,
             int firstResult, int maxResults);
 
-    Page<Map<String, Object>> findPageUnselectedByRoleCodeAndUnitNo(
-            String rolCode, String unitNo, int firstResult, int maxResults);
+    Page<Map<String, Object>> findPageUnselectedByRoleCodeAndDepCode(
+            String roleCode, String depCode, int firstResult, int maxResults);
 
 }

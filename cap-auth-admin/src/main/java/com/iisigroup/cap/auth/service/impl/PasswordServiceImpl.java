@@ -15,9 +15,9 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.auth.dao.UserDao;
-import com.iisigroup.cap.auth.dao.UserPwdHistoryDao;
+import com.iisigroup.cap.auth.dao.PwdLogDao;
 import com.iisigroup.cap.auth.model.User;
-import com.iisigroup.cap.auth.model.UserPwdHistory;
+import com.iisigroup.cap.auth.model.PwdLog;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.model.SysParm;
@@ -37,7 +37,7 @@ public class PasswordServiceImpl implements IPasswordService {
     @Resource
     private ICommonDao commonDao;
     @Resource
-    private UserPwdHistoryDao userPwdHistoryDao;
+    private PwdLogDao userPwdHistoryDao;
     @Resource
     private CodeTypeDao codeTypeDao;
 
@@ -72,14 +72,14 @@ public class PasswordServiceImpl implements IPasswordService {
                     new Object[] { minLen }), getClass());
         }
         // pwd history validate
-        User user = userDao.findByUserId(userId);
+        User user = userDao.findByCode(userId);
         if (user != null) {
-            List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(
+            List<PwdLog> list = userPwdHistoryDao.findByUserCode(
                     user.getOid(), maxHistory);
             int i = 0;
             PasswordEncoder passwordEncoder = new StandardPasswordEncoder(
                     userId);
-            for (UserPwdHistory h : list) {
+            for (PwdLog h : list) {
                 // user status 不為 1 時，check change interval: 最近一次變更不得小於間隔
                 if (i == 0 && !"1".equals(user.getStatus()) && !forcePwdChange) {
                     if (CapDate.calculateDays(Calendar.getInstance().getTime(),
@@ -120,11 +120,11 @@ public class PasswordServiceImpl implements IPasswordService {
                     new Object[] { rule.getCodeDesc() }), getClass());
         }
         return true;
-    }
+    }// ;
 
     @Override
     public boolean validatePassword(String userId, String password) {
-        User user = userDao.findByUserId(userId);
+        User user = userDao.findByCode(userId);
         PasswordEncoder passwordEncoder = new StandardPasswordEncoder(userId);
         return passwordEncoder.matches(password, user.getPassword());
     }
@@ -135,16 +135,16 @@ public class PasswordServiceImpl implements IPasswordService {
                 PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
         int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
         Date now = Calendar.getInstance().getTime();
-        User user = userDao.findByUserId(userId);
-        String pwdHash = encodePassword(user.getUserId(), password);
+        User user = userDao.findByCode(userId);
+        String pwdHash = encodePassword(user.getCode(), password);
         user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now, expiredDay)
                 .getTime()));
         user.setPassword(pwdHash);
         user.setStatus("0");
         userDao.save(user);
         // insert pwd history
-        UserPwdHistory uph = new UserPwdHistory();
-        uph.setUserOid(user.getOid());
+        PwdLog uph = new PwdLog();
+        uph.setUserCode(user.getCode());
         uph.setPassword(pwdHash);
         uph.setUpdateTime(new Timestamp(now.getTime()));
         userPwdHistoryDao.save(uph);
@@ -176,10 +176,10 @@ public class PasswordServiceImpl implements IPasswordService {
                 PwdPloicyKeys.PWD_NOTIFY_DAY.toString().toLowerCase());
         int notifyDay = Integer.parseInt(parmPwdNotifyDay.getParmValue());
         int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
-        User user = userDao.findByUserId(userId);
-        List<UserPwdHistory> list = userPwdHistoryDao.findByUserOid(
+        User user = userDao.findByCode(userId);
+        List<PwdLog> list = userPwdHistoryDao.findByUserCode(
                 user.getOid(), 1);
-        for (UserPwdHistory h : list) {
+        for (PwdLog h : list) {
             int diff = CapDate.calculateDays(Calendar.getInstance().getTime(),
                     h.getUpdateTime());
             if (diff >= (expiredDay - notifyDay)) {

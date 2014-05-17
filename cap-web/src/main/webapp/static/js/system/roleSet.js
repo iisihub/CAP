@@ -6,22 +6,22 @@ pageInit(function(){
 			height: "380", width: "100%",
             multiselect: false, hideMultiselect: false, autowidth: true, localFirst: false,
             colModel: [{
-                header: i18n['roleSet']['rolCode'],//"角色代碼",
-                name: 'roleId', align: "left", width: 15, sortable: false
+                header: i18n['roleSet']['rolecode'],//"角色代碼",
+                name: 'code', align: "left", width: 15, sortable: false
             },  {
-                header: i18n['roleSet']['rolName'],//"角色名稱
-                name: 'rolName', align: "left", width: 15, sortable: true
+                header: i18n['roleSet']['rolename'],//"角色名稱
+                name: 'name', align: "left", width: 15, sortable: true
             },  {
-                header: i18n['roleSet']['usrCount'],//"使用人員數
-                name: 'usrCount', align: "center", width: 10, sortable: true
+                header: i18n['roleSet']['usercount'],//"使用人員數
+                name: 'userCount', align: "center", width: 10, sortable: true
             },  {
-                header: i18n['roleSet']['stu'],//"停用
-                name: 'stu', align: "center", width: 5, sortable: true, formatter: function(val){
-                    return i18n['roleSet']['stu.'+val];
+                header: i18n['roleSet']['rolestatus'],//"停用
+                name: 'status', align: "center", width: 5, sortable: true, formatter: function(val){
+                    return i18n['roleSet']['rolestatus.'+val];
                 }
             },  {
-                header: i18n['roleSet']['note'],//"停用原因
-                name: 'note', align: "center", width: 15, sortable: true
+                header: i18n['roleSet']['roledesc'],//"停用原因
+                name: 'desc', align: "center", width: 15, sortable: true
             }],
             ondblClickRow: function(){
                 openEditWindow(true);
@@ -43,9 +43,9 @@ pageInit(function(){
 			CommonAPI.formSubmit({
 	            url: './system/roleSet_Page',
 	            data: {
-	                rolCode: rowObject?rowObject.roleId:""
+	                code: rowObject?rowObject.code:""
 	            },
-	            target: rowObject?rowObject.roleId:"_blank"//rowObject.oid
+	            target: rowObject?rowObject.code:"_blank"//rowObject.oid
 	        });
 		}
 		
@@ -62,7 +62,7 @@ pageInit(function(){
 	                    $.ajax({
 	                    	url: 'webroot/rolesethandler/delete',
 	                        data: {
-	                            rolCode: rowObject.roleId
+	                            code: rowObject.code
 	                        },
 	                        success: function(responseData){
 	                        	grid.trigger("reloadGrid");

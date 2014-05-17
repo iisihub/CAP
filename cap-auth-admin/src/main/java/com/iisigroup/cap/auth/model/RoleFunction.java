@@ -9,12 +9,12 @@
  */
 package com.iisigroup.cap.auth.model;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,6 +24,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.iisigroup.cap.model.GenericBean;
+import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -38,78 +40,90 @@ import com.iisigroup.cap.model.GenericBean;
  */
 
 @Entity
-@Table(name = "DEF_RLF", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"ROLCODE", "PGMCODE" }))
-public class RoleFunction extends GenericBean implements Serializable {
+@EntityListeners({ CapOidGeneratorListener.class })
+@Table(name = "DEF_ROLEFUNC", uniqueConstraints = @UniqueConstraint(columnNames = {
+        "ROLECODE", "FUNCCODE" }))
+public class RoleFunction extends GenericBean implements IDataObject {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(length = 10)
-	private String rolCode;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@Id
-	@Column(length = 6)
-	private String pgmCode;
+    @Column(length = 10)
+    private String roleCode;
 
-	@Column(length = 10)
-	private String updater;
+    @Column(length = 6)
+    private String funcCode;
 
-	private Timestamp updTime;
+    @Column(length = 10)
+    private String updater;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumns({ @JoinColumn(name = "rolCode", referencedColumnName = "rolCode", nullable = false, insertable = false, updatable = false) })
-	private Role role;
+    @Column
+    private Timestamp updateTime;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumns({ @JoinColumn(name = "pgmCode", referencedColumnName = "pgmCode", nullable = false, insertable = false, updatable = false) })
-	private CodeItem pgm;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumns({ @JoinColumn(name = "ROLECODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false) })
+    private Role role;
 
-	public String getRolCode() {
-		return rolCode;
-	}
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumns({ @JoinColumn(name = "FUNCCODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false) })
+    private Function function;
 
-	public void setRolCode(String rolCode) {
-		this.rolCode = rolCode;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public String getPgmCode() {
-		return pgmCode;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public void setPgmCode(String pgmCode) {
-		this.pgmCode = pgmCode;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public Function getFunction() {
+        return function;
+    }
 
-	public Timestamp getUpdTime() {
-		return updTime;
-	}
+    public void setFunction(Function function) {
+        this.function = function;
+    }
 
-	public void setUpdTime(Timestamp updTime) {
-		this.updTime = updTime;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public String getRoleCode() {
+        return roleCode;
+    }
 
-	public CodeItem getPgm() {
-		return pgm;
-	}
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 
-	public void setPgm(CodeItem pgm) {
-		this.pgm = pgm;
-	}
+    public String getFuncCode() {
+        return funcCode;
+    }
+
+    public void setFuncCode(String funcCode) {
+        this.funcCode = funcCode;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 }

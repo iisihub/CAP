@@ -54,9 +54,9 @@ public class CapUserDetails implements UserDetails {
 
     public CapUserDetails(IUser user, String password, Map<String, String> roles) {
         this.password = password;
-        this.userId = user.getUserId();
-        this.userName = user.getUserName();
-        this.unitNo = user.getUnitNo();
+        this.userId = user.getCode();
+        this.userName = user.getName();
+        this.unitNo = user.getDepCode();
         this.roles = new LinkedHashMap<String, String>();
         this.roles.putAll(roles);
         this.locale = user.getLocale();
