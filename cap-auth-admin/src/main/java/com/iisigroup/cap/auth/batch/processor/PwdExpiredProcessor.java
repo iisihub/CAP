@@ -19,11 +19,12 @@ public class PwdExpiredProcessor implements
             throws Exception {
         String userCode = (String) item.get("code");
         Timestamp lastpwd = (Timestamp) item.get("pwdexpiredtime");
-        Map<String, Object> result = new HashMap<String, Object>();
         if (CapDate.calculateDays(lastpwd, new Date()) < 0) {
+            Map<String, Object> result = new HashMap<String, Object>();
             result.put("userCode", userCode);
+            return result;
         }
-        return result;
+        return null;
     }
 
 }
