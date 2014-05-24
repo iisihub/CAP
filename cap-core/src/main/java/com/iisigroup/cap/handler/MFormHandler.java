@@ -13,13 +13,18 @@ package com.iisigroup.cap.handler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import javax.annotation.Resource;
 
 import net.sf.json.JSONArray;
 
+import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.action.IAction;
+import com.iisigroup.cap.annotation.GridQueryMapping;
+import com.iisigroup.cap.annotation.GridQueryMapping.TableMapping;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
@@ -38,6 +43,7 @@ import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapCommonUtil;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapSystemConfig;
 
 /**
  * <pre>
@@ -58,6 +64,13 @@ public abstract class MFormHandler extends HandlerPlugin {
 
 	@Resource(name = "handlerOpMapping")
 	private CapParameter handlerOp;
+
+	private boolean gridMappingRequired;
+
+	public MFormHandler() {
+		gridMappingRequired = Boolean.valueOf(CapAppContext
+				.getSystemProperty(Constants.GRID_MAPPING_REQUIRED));
+	}
 
 	/**
 	 * <pre>
@@ -147,6 +160,7 @@ public abstract class MFormHandler extends HandlerPlugin {
 	@SuppressWarnings({ "rawtypes" })
 	private IResult getGridData(Method method, IRequest params) {
 		ISearch search = createSearchTemplete();
+		Map<String, String> mappings = getGridQueryMapping(method);
 		boolean pages = params.containsParamsKey(IGridEnum.PAGE.getCode());
 		int page = 0, pageRows = 0, startRow = 0;
 		if (pages) {
@@ -165,15 +179,15 @@ public abstract class MFormHandler extends HandlerPlugin {
 					.split("\\|");
 			for (int i = 0; i < sortBy.length; i++) {
 				String isAsc = (i < isAscAry.length) ? isAscAry[i] : "asc";
-				search.addOrderBy(sortBy[i], !IGridEnum.SORTASC.getCode()
-						.equals(isAsc));
+				search.addOrderBy(getColumnByMapping(sortBy[i], mappings),
+						!IGridEnum.SORTASC.getCode().equals(isAsc));
 			}
 		}
 		IGridResult result = null;
 		try {
 			result = (IGridResult) method.invoke(this, search, params);
-			result.setColumns(getColumns(params.get(IGridEnum.COL_PARAM
-					.getCode())));
+			result.setColumns(getColumns(
+					params.get(IGridEnum.COL_PARAM.getCode()), mappings));
 			result.setPage(page);
 			result.setPageCount(result.getRecords(), pageRows);
 		} catch (InvocationTargetException e) {
@@ -190,6 +204,24 @@ public abstract class MFormHandler extends HandlerPlugin {
 		return result;
 	}// ;
 
+	protected Map<String, String> getGridQueryMapping(Method method) {
+		GridQueryMapping gqm = method.getAnnotation(GridQueryMapping.class);
+		Map<String, String> mappings = null;
+		if (gqm == null) {
+			gqm = method.getDeclaringClass().getAnnotation(
+					GridQueryMapping.class);
+		}
+
+		if (gqm != null) {
+			mappings = new HashMap<String, String>();
+			for (TableMapping mapping : gqm.value()) {
+				mappings.put(mapping.from(), mapping.to());
+			}
+			return mappings;
+		}
+		return mappings;
+	}
+
 	/**
 	 * 取得iGrid中的Column Name
 	 * 
@@ -198,23 +230,47 @@ public abstract class MFormHandler extends HandlerPlugin {
 	 * @return String string[]
 	 */
 	@SuppressWarnings("unchecked")
-	protected String[] getColumns(String params) {
+	protected String[] getColumns(String params, Map<String, String> mappings) {
 		JSONArray arr = JSONArray.fromObject(params);
 		String[] colNames = new String[arr.size()];
 		for (int i = 0; i < arr.size(); i++) {
 			Map<String, String> m = (Map<String, String>) arr.get(i);
 			if (m.containsKey(IGridEnum.COL_INDEX.getCode())) {
 				colNames[i] = new StringBuffer()
-						.append(m.get(IGridEnum.COL_NAME.getCode()))
+						.append(getColumnByMapping(
+								m.get(IGridEnum.COL_NAME.getCode()), mappings))
 						.append("|")
-						.append(m.get(IGridEnum.COL_INDEX.getCode()))
+						.append(getColumnByMapping(
+								m.get(IGridEnum.COL_INDEX.getCode()), mappings))
 						.toString();
 			} else {
-				colNames[i] = m.get(IGridEnum.COL_NAME.getCode());
+				colNames[i] = getColumnByMapping(
+						m.get(IGridEnum.COL_NAME.getCode()), mappings);
 			}
 		}
 		return colNames;
 	};
+
+	protected String getColumnByMapping(String column,
+			Map<String, String> mappings) {
+		String mColumn = null;
+		if (mappings != null) {
+			if (mappings.containsKey(column)) {
+				mColumn = mappings.get(column);
+			} else if (gridMappingRequired) {
+				throw new CapException("can't found mapping: " + column,
+						getClass());
+			} else {
+				mColumn = column;
+			}
+		} else if (gridMappingRequired) {
+			throw new CapException("can't found mapping: " + column, getClass());
+		} else {
+			mColumn = column;
+		}
+		return mColumn;
+
+	}
 
 	/**
 	 * <pre>

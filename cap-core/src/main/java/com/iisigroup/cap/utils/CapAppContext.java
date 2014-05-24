@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.core.io.Resource;
 
+import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 
 /**
@@ -25,6 +26,8 @@ import com.iisigroup.cap.operation.simple.SimpleContextHolder;
  */
 public class CapAppContext implements ApplicationContextAware {
 	protected static Log logger = LogFactory.getLog(CapAppContext.class);
+
+	protected static CapSystemConfig systemConfig;
 
 	@Override
 	public void setApplicationContext(ApplicationContext ctx) {
@@ -54,12 +57,14 @@ public class CapAppContext implements ApplicationContextAware {
 
 	public static String getMessage(String key) {
 		Locale locale = (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
-		return getMessage(key, null, locale == null ? Locale.getDefault() : locale);
+		return getMessage(key, null, locale == null ? Locale.getDefault()
+				: locale);
 	}
 
 	public static String getMessage(String key, Object[] args) {
 		Locale locale = (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
-		return getMessage(key, args, locale == null ? Locale.getDefault() : locale);
+		return getMessage(key, args, locale == null ? Locale.getDefault()
+				: locale);
 	}
 
 	public static String getMessage(String key, Locale locale) {
@@ -74,6 +79,14 @@ public class CapAppContext implements ApplicationContextAware {
 			return key;
 		}
 
+	}
+
+	public static String getSystemProperty(String key) {
+		if (systemConfig == null) {
+			systemConfig = (CapSystemConfig) applicationContext
+					.getBean(Constants.SYSTEM_CONFIG);
+		}
+		return systemConfig.getProperty(key);
 	}
 
 }
