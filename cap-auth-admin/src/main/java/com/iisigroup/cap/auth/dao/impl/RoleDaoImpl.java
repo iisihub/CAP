@@ -27,7 +27,7 @@ import com.iisigroup.cap.security.dao.IRoleDao;
 
 /**
  * <pre>
- * 使用者資訊Dao
+ * 角色者資訊Dao
  * </pre>
  * 
  * @since 2013/12/20
@@ -42,13 +42,13 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>,
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Role> findByUrl(String system, String url) {
+    public List<Role> findBySysTypeAndPath(String sysType, String path) {
         Query query = getEntityManager()
                 .createNativeQuery(
-                        "select rle.* from DEF_RLE rle inner join DEF_RLF rlf inner join DEF_PGM pgm on rlf.ROLCODE=rle.ROLCODE on rlf.PGMCODE=pgm.PGMCODE where rle.SYSTYP= ?1 and rle.STU='0' and pgm.PGMPATH= ?2",
+                        "select r.* from DEF_ROLE r inner join DEF_ROLEFUNC rf inner join DEF_FUNC func on rf.ROLECODE=r.CODE on rf.FUNCCODE=func.CODE where r.SYSTYPE= ?1 and r.STATUS='0' and func.PATH= ?2",
                         Role.class);
-        query.setParameter(1, system);
-        query.setParameter(2, url);
+        query.setParameter(1, sysType);
+        query.setParameter(2, path);
         return (List<Role>) query.getResultList();
     }
 
@@ -56,51 +56,45 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>,
     public List<Role> findAll() {
         ISearch search = createSearchTemplete();
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-        search.addOrderBy("roleId");
+        search.addOrderBy("code");
         List<Role> list = find(search);
         return list;
     }
 
     @Override
-    public Role findByRoleId(String roleId) {
+    public Role findByCode(String code) {
         ISearch search = createSearchTemplete();
-        search.addSearchModeParameters(SearchMode.EQUALS, "roleId", roleId);
+        search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);
-    }
+    }// ;
 
     @Override
-    public List<Map<String, Object>> findAllWithSelectedByUserId(String userId) {
+    public List<Map<String, Object>> findAllWithSelectedByUserCode(
+            String userCode) {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("userId", userId);
+        params.put("userCode", userCode);
         return getNamedJdbcTemplate().query(
-                "Role.findAllWithSelectedByUserId", params);
-    }
+                "role_findAllWithSelectedByUserCode", params);
+    }// ;
 
     @Override
-    public int deleteByPgmCodeAndRoleCodes(String pgmCode, List<String> delRole) {
+    public Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(
+            String sysType, String funcCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("pgmCode", pgmCode);
-        param.put("delRole", delRole);
-        return getNamedJdbcTemplate().update("pgmSet_deleteRlf", param);
-    }
+        param.put("sysType", sysType);
+        param.put("funcCode", funcCode);
+        return getNamedJdbcTemplate().queryForPage(
+                "role_findUnSelectedRoleByFuncCode", param, firstResult,
+                maxResults);
+    }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageUnselectedBySysTypeAndPgmCode(
-            String systyp, String pgmCode, int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageBySysTypeAndFuncCode(
+            String sysType, String funcCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("systyp", systyp);
-        param.put("pgmCode", pgmCode);
-        return getNamedJdbcTemplate().queryForPage("pgmSet_getEditRole", param,
-                firstResult, maxResults);
-    }
-
-    @Override
-    public Page<Map<String, Object>> findPageBySysTypeAndPgmCode(String systyp,
-            String pgmCode, int firstResult, int maxResults) {
-        Map<String, Object> param = new HashMap<String, Object>();
-        param.put("systyp", systyp);
-        param.put("pgmCode", pgmCode);
-        return getNamedJdbcTemplate().queryForPage("pgmSet_role", param,
-                firstResult, maxResults);
+        param.put("sysType", sysType);
+        param.put("funcCode", funcCode);
+        return getNamedJdbcTemplate().queryForPage("role_findRoleByFuncCode",
+                param, firstResult, maxResults);
     }
 }

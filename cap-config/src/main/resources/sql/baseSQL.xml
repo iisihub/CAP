@@ -9,70 +9,103 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		key-type="java.lang.String">
 		
 		<!-- Common -->
-		<entry key="Role.auth">
+		<entry key="function_auth">
 			<value><![CDATA[select
-			  rle.ROLCODE AS ROLE,
-			  rlf.PGMCODE AS AUTHCODE
-			from DEF_RLE rle
-			  inner join DEF_RLF rlf
-			  on rlf.ROLCODE=rle.ROLCODE
-			where rle.SYSTYP= :system and rle.STU='0'
-			order by rle.ROLCODE, rlf.PGMCODE]]></value>
+			  r.code AS ROLE,
+			  rf.funccode AS AUTHCODE
+			from DEF_ROLE r
+			  inner join DEF_ROLEFUNC rf
+			  on rf.ROLECODE=r.CODE
+			where r.SYSTYPE= :sysType and r.status='0'
+			order by r.code, rf.funccode]]></value>
 		</entry>
-		<entry key="role">
-			<value><![CDATA[select ROLCODE
-   			from DEF_RLE
-   			where STU='0'
-   			order by ROLCODE]]></value>
+		<entry key="role_findRoleByFuncCode">
+			<value><![CDATA[select r.code, r.name from 
+			DEF_ROLE r inner join DEF_ROLEFUNC rf on rf.ROLECODE=r.CODE 
+			where r.SYSTYPE= :sysType and rf.funcCode= :funcCode]]></value>
 		</entry>
-		<entry key="docAuth">
-			<value><![CDATA[select * from DEF_RDA
-   			where SYSTYP=:system
-			order by ROLCODE]]></value>
+		<entry key="role_findUnSelectedRoleByFuncCode">
+			<value><![CDATA[select r.code, r.name from 
+			DEF_ROLE r where r.SYSTYPE= :sysType and r.CODE not in (select rolecode from DEF_ROLEFUNC where funcCode = :funcCode)]]></value>
 		</entry>
-		<entry key="pgmSet_role">
-			<value><![CDATA[select rle.rolCode as roleId, rle.rolName from 
-			DEF_RLE rle inner join DEF_RLF rlf on rlf.ROLCODE=rle.ROLCODE 
-			where rle.SYSTYP= :systyp and rlf.pgmCode= :pgmCode]]></value>
+		<entry key="roleFunc_deleteRoleFuncByFuncCodeAndRoleCodes">
+			<value><![CDATA[delete from DEF_ROLEFUNC rf where rf.funcCode = :funcCode and rf.ROLECODE in (:delRole)]]></value>
 		</entry>
-		<entry key="pgmSet_getEditRole">
-			<value><![CDATA[select rle.rolCode as roleId, rle.rolName from 
-			DEF_RLE rle where rle.SYSTYP= :systyp and rle.ROLCODE not in (select rolcode from DEF_RLF where pgmCode = :pgmCode)]]></value>
+		<entry key="user_getUserByRoldeCode">
+			<value><![CDATA[select u.code as userCode, u.name as userName, 
+			u.depcode as depCode, dep.name as depName from DEF_USER u 
+			inner join DEF_USERROLE ur on u.code = ur.usercode 
+			inner join DEF_DEP dep on dep.code = u.depCode 
+			where ur.roleCode = :roleCode]]></value>
 		</entry>
-		<entry key="pgmSet_deleteRlf">
-			<value><![CDATA[delete from DEF_RLF rlf where rlf.pgmCode = :pgmCode and rlf.ROLCODE in (:delRole)]]></value>
+		<entry key="user_getEditUserByRoleCode">
+			<value><![CDATA[select usr.code, usr.name from DEF_USER usr 
+			inner join DEF_DEP dep on dep.code = usr.depcode 
+			where usr.code not in (select usercode from DEF_USERROLE where rolecode = :roleCode) and (:depCode = 'All' or dep.code = :depCode)]]></value>
 		</entry>
-		<entry key="roleSet_getUser">
-			<value><![CDATA[select usr.STAFFPID as userId, usr.STAFFPNM as userName, 
-			usr.DEPARTNO as unitNo, brn.DEPARTNM from DEF_USR usr 
-			inner join DEF_RLSET rls on usr.staffPId = rls.staffPId 
-			inner join DEF_BRN brn on brn.departNo = usr.departNo 
-			where rls.rolCode = :rolCode]]></value>
+		<entry key="function_getFuncByRoldCode">
+			<value><![CDATA[select func.code, func.name, 
+			func.parent from DEF_FUNC func inner join DEF_ROLEFUNC rf 
+			on func.code = rf.funccode where rf.rolecode = :roleCode]]></value>
 		</entry>
-		<entry key="roleSet_getEditUser">
-			<value><![CDATA[select usr.STAFFPID as userId, usr.STAFFPNM as userName from DEF_USR usr 
-			inner join DEF_BRN brn on brn.departNo = usr.departNo 
-			where usr.STAFFPID not in (select staffPId from DEF_RLSET where rolcode = :rolCode) and (:unitNo = 'All' or brn.departNo = :unitNo)]]></value>
+		<entry key="function_getEditFuncByRole">
+			<value><![CDATA[select distinct func.code, func.name, 
+			func.parent from DEF_FUNC func,
+			(select * from DEF_FUNC where (:parent = 'All' or (parent = :parent or code= :parent))) func1
+			where (func.code=func1.code or func.parent=func1.code) and func.sysType=:sysType
+			and func.code not in (select funccode from DEF_ROLEFUNC where rolecode = :roleCode)]]></value>
 		</entry>
-		<entry key="roleSet_getFunc">
-			<value><![CDATA[select pgm.PGMCODE as code, pgm.PGMNAME as name, 
-			pgm.PGMTYP as parent from DEF_PGM pgm inner join DEF_RLF rlf 
-			on pgm.PGMCODE = rlf.PGMCODE where rlf.ROLCODE = :rolCode]]></value>
+		<entry key="userRole_deleteUserRole">
+			<value><![CDATA[delete from DEF_USERROLE ur where ur.roleCode = :roleCode and ur.USERCODE in (:delUsrs)]]></value>
 		</entry>
-		<entry key="roleSet_getEditFunc">
-			<value><![CDATA[select distinct pgm.PGMCODE as code, pgm.PGMNAME as name, 
-			pgm.PGMTYP as parent from DEF_PGM pgm,
-			(select * from DEF_PGM where (:pgmTyp = 'All' or (pgmTyp = :pgmTyp or pgmCode= :pgmTyp))) pgm1
-			where (pgm.PGMCODE=pgm1.PGMCODE or pgm.PGMTYP=pgm1.PGMCODE) and pgm.sysTyp=:sysTyp
-			and pgm.pgmCode not in (select pgmCode from DEF_RLF where rolcode = :rolCode)]]></value>
+		<entry key="roleFunc_deleteRoleFunc">
+			<value><![CDATA[delete from DEF_ROLEFUNC rf where rf.roleCode = :roleCode and rf.funccode in (:delFunc)]]></value>
 		</entry>
-		<entry key="roleSet_deleteRlset">
-			<value><![CDATA[delete from DEF_RLSET rls where rls.rolCode = :rolCode and rls.STAFFPID in (:delUsrs)]]></value>
+        <entry key="user_find">
+            <value><![CDATA[
+                select distinct u.* from DEF_USER u left join DEF_USERROLE ur on ur.USERCODE = u.code
+            ]]></value>
+        </entry>
+		<entry key="role_findAllWithSelectedByUserCode">
+			<value><![CDATA[
+                select
+                    r.code,
+                    r.name,
+                    auth.usercode
+                from def_role r
+                left join (select * from def_userrole ur where ur.usercode = :userCode) auth on r.code = auth.rolecode
+            ]]></value>
 		</entry>
-		<entry key="roleSet_deleteRlf">
-			<value><![CDATA[delete from DEF_RLF rlf where rlf.rolCode = :rolCode and rlf.pgmCode in (:delFunc)]]></value>
+		<entry key="function_findMenu">
+			<value><![CDATA[
+			    SELECT DISTINCT * FROM (
+				SELECT (P.LEVEL*1000+P.PARENT*100+P.SEQUENCE*0.01) AS S, P.* FROM DEF_FUNC P
+				INNER JOIN DEF_ROLEFUNC RF ON P.CODE = RF.FUNCCODE
+				INNER JOIN DEF_ROLE R ON R.CODE = RF.ROLECODE
+				WHERE RF.ROLECODE IN (:roleCodes) AND P.STATUS = '1' AND P.SYSTYPE = :sysType AND R.STATUS = '0' AND R.SYSTYPE = :sysType
+				) ORDER BY S
+            ]]></value>
 		</entry>
-		
+		<entry key="pwdlog_lastpwd">
+			<value><![CDATA[
+			    select usercode, max(updatetime) as lastpwd from def_pwdlog group by usercode
+            ]]></value>
+		</entry>
+		<entry key="user_updatePwdExpiredTime">
+			<value><![CDATA[
+			    update def_user set pwdexpiredtime = :pwdExpiredTime where code = :userCode
+            ]]></value>
+		</entry>
+		<entry key="user_disableAccount">
+			<value><![CDATA[
+			    update def_user set prestatus = status, status = '2' where status not in ('2', '9') and now() - lastlogintime > :pwdAccountDisable
+            ]]></value>
+		</entry>
+		<entry key="user_disableDelete">
+			<value><![CDATA[
+			    update def_user set status = '9' where status != '9' and now() - lastlogintime > :pwdAccountDelete
+            ]]></value>
+		</entry>
 		<!-- Sequence -->
 		<entry key="Sequence.listAll">
 			<value><![CDATA[select * from cfg_Sequence order by seqNode]]></value>

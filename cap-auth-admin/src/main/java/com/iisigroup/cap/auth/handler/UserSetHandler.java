@@ -63,7 +63,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          </ul>
  */
 @Scope("request")
-@Controller("usershandler")
+@Controller("usersethandler")
 public class UserSetHandler extends MFormHandler {
 
     @Resource
@@ -79,13 +79,12 @@ public class UserSetHandler extends MFormHandler {
 
     @HandlerType(HandlerTypeEnum.GRID)
     public MapGridResult query(ISearch search, IRequest params) {
-        logger.debug("UsersHandler : " + this.getClass().hashCode());
-        String userId = params.get("userId");
-        String userName = params.get("userName");
-        String[] roleOids = params.getParamsAsStringArray("roleOids");
+        String code = params.get("code");
+        String name = params.get("name");
+        String[] roleCodes = params.getParamsAsStringArray("roleCodes");
         String[] status = params.getParamsAsStringArray("status");
-        Page<Map<String, Object>> page = userService.findUser(userId, userName,
-                roleOids, status, search.getMaxResults(),
+        Page<Map<String, Object>> page = userService.findUser(code, name,
+                roleCodes, status, search.getMaxResults(),
                 search.getFirstResult());
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("createTime", new ADDateFormatter());
@@ -99,75 +98,72 @@ public class UserSetHandler extends MFormHandler {
     @SuppressWarnings("rawtypes")
     @HandlerType(HandlerTypeEnum.GRID)
     public IGridResult findRole(ISearch search, IRequest params) {
-        logger.debug("UsersHandler : " + this.getClass().hashCode());
         String type = params.get("type");
         if ("modify".equalsIgnoreCase(type)) {
             List<Map<String, Object>> roleList = null;
-            String userId = params.get("userId");
-            roleList = roleSetService.findAllRoleWithSelectedByUserId(userId);
+            String userCode = params.get("userCode");
+            roleList = roleSetService.findAllRoleWithSelectedByUserCode(userCode);
             MapGridResult gridResult = new MapGridResult();
             if (!CollectionUtils.isEmpty(roleList)) {
                 gridResult.setRowData(roleList);
             }
             return gridResult;
         } else {
-            search.addOrderBy("roleId", false);
+            search.addOrderBy("code", false);
             Page<Role> page = commonService.findPage(Role.class, search);
             return new GridResult(page.getContent(), page.getTotalRow(), null);
         }
-    }
+    }// ;
 
     public IResult add(IRequest request) {
-        String userId = request.get("userId");
-        User user = userService.findUserByUserId(userId);
+        String code = request.get("code");
+        User user = userService.findUserByUserCode(code);
         if (user != null) {
             throw new CapMessageException(CapAppContext.getMessage(
-                    "users.exist", new Object[] { userId }), getClass());
+                    "users.exist", new Object[] { code }), getClass());
         }
-        String userName = request.get("userName");
+        String name = request.get("name");
         String password = request.get("password");
         String confirm = request.get("confirm");
-        passwordService.checkPasswordRule(userName, password, confirm, true);
+        passwordService.checkPasswordRule(code, password, confirm, true);
         String email = request.get("email");
-        String[] roleOids = request.getParamsAsStringArray("roleOids");
-        userService.createUser(userId, userName, password, email, roleOids);
+        String[] roleCodes = request.getParamsAsStringArray("roleCodes");
+        userService.createUser(code, name, password, email, roleCodes);
         return new AjaxFormResult();
-    }
+    }// ;
 
     public IResult modify(IRequest request) {
         String oid = request.get("oid");
-        String userId = request.get("userId");
+        String code = request.get("code");
         String password = request.get("password");
         String confirm = request.get("confirm");
         boolean reset = !StringUtils.isBlank(password);
         if (reset) {
             // 代表要修改密碼
-            passwordService.checkPasswordRule(userId, password, confirm, true);
+            passwordService.checkPasswordRule(code, password, confirm, true);
         }
-        User user = userService.findUserByUserId(userId);
+        User user = userService.findUserByUserCode(code);
         if (user != null && !user.getOid().equals(oid)) {
             throw new CapMessageException(CapAppContext.getMessage(
-                    "users.exist", new Object[] { userId }), getClass());
+                    "users.exist", new Object[] { code }), getClass());
         }
-        String userName = request.get("userName");
+        String name = request.get("name");
         String email = request.get("email");
-        String[] roleOids = request.getParamsAsStringArray("roleOids");
-        userService.updateUserByOid(oid, userId, userName, reset, password,
-                email, roleOids);
+        String[] roleCodes = request.getParamsAsStringArray("roleCodes");
+        userService.updateUserByOid(oid, code, name, reset, password,
+                email, roleCodes);
         return new AjaxFormResult();
-    }
+    }// ;
 
     public IResult delete(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
-        for (String oid : oids) {
-            userService.deleteUserByOid(oid);
-        }
+        userService.deleteUserByOids(oids);
         return new AjaxFormResult();
-    }
+    }// ;
 
     @HandlerType(HandlerTypeEnum.GRID)
     public GridResult queryAllRole(ISearch search, IRequest params) {
-        search.addOrderBy("roleId", false);
+        search.addOrderBy("code", false);
         Page<Role> page = commonService.findPage(Role.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), null);
     }// ;
@@ -186,19 +182,15 @@ public class UserSetHandler extends MFormHandler {
 
     public IResult lock(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
-        for (String oid : oids) {
-            userService.lockUserByOid(oid);
-        }
+        userService.lockUserByOids(oids);
         return new AjaxFormResult();
-    }
+    }// ;
 
     public IResult unlock(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
-        for (String oid : oids) {
-            userService.unlockUserByOid(oid);
-        }
+        userService.unlockUserByOids(oids);
         return new AjaxFormResult();
-    }
+    }// ;
 
     public IResult changePassword(IRequest request) {
         String password = request.get("password");

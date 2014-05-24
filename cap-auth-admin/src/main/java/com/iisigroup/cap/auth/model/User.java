@@ -9,17 +9,21 @@
  */
 package com.iisigroup.cap.auth.model;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -31,7 +35,6 @@ import com.iisigroup.cap.model.IDataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.model.IUser;
-import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
@@ -47,7 +50,10 @@ import com.iisigroup.cap.utils.CapString;
 
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_USR")
+@Table(name = "DEF_USER")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "P")
 public class User extends GenericBean implements IDataObject, IUser {
     private static final long serialVersionUID = 1L;
 
@@ -55,23 +61,17 @@ public class User extends GenericBean implements IDataObject, IUser {
     @Column(nullable = false, length = 32)
     private String oid;
 
-    @Column(name = "STAFFPID", length = 10)
-    private String userId;
+    @Column(length = 10)
+    private String code;
 
-    @Column(name = "STAFFPNM", length = 12)
-    private String userName;
+    @Column(length = 12)
+    private String name;
 
-    @Column(name = "DEPARTNO", length = 4)
-    private String unitNo;
-
-    @Column(length = 1)
-    private String applyNf;
+    @Column(length = 4)
+    private String depCode;
 
     @Column(length = 30)
-    private String applyRem;
-
-    @Column(precision = 5, scale = 2)
-    private BigDecimal weights;
+    private String statusDesc;
 
     @Column(length = 6)
     private String updater;
@@ -81,11 +81,11 @@ public class User extends GenericBean implements IDataObject, IUser {
 
     // bi-directional one-to-one association to Branch
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumns({ @JoinColumn(name = "DEPARTNO", referencedColumnName = "departno", nullable = true, insertable = false, updatable = false) })
-    private Branch branch;
+    @JoinColumns({ @JoinColumn(name = "DEPCODE", referencedColumnName = "code", nullable = true, insertable = false, updatable = false) })
+    private Department department;
 
-    @OneToMany(mappedBy = "roleSet_usr", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<RoleSet> rlSet;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<UserRole> urList;
 
     @Column(length = 100)
     private String password;
@@ -109,7 +109,7 @@ public class User extends GenericBean implements IDataObject, IUser {
     private Timestamp pwdExpiredTime;
 
     @Column
-    private Timestamp loginTime;
+    private Timestamp lastLoginTime;
 
     /**
      * @return Oid
@@ -124,58 +124,6 @@ public class User extends GenericBean implements IDataObject, IUser {
      */
     public void setOid(String oid) {
         this.oid = oid;
-    }
-
-    /**
-     * @return
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        userName = CapString.trimFullSpace(userName);
-        this.userName = userName;
-    }
-
-    public String getUnitNo() {
-        return unitNo;
-    }
-
-    public void setUnitNo(String unitNo) {
-        this.unitNo = unitNo;
-    }
-
-    public String getApplyNf() {
-        return applyNf;
-    }
-
-    public void setApplyNf(String applyNf) {
-        this.applyNf = applyNf;
-    }
-
-    public String getApplyRem() {
-        return applyRem;
-    }
-
-    public void setApplyRem(String applyRem) {
-        this.applyRem = applyRem;
-    }
-
-    public BigDecimal getWeights() {
-        return weights;
-    }
-
-    public void setWeights(BigDecimal weights) {
-        this.weights = weights;
     }
 
     public String getUpdater() {
@@ -202,22 +150,6 @@ public class User extends GenericBean implements IDataObject, IUser {
     @Override
     public Locale getLocale() {
         return null;
-    }
-
-    public Branch getBranch() {
-        return this.branch;
-    }
-
-    public void setBranch(Branch branch) {
-        this.branch = branch;
-    }
-
-    public List<RoleSet> getRlSet() {
-        return rlSet;
-    }
-
-    public void setRlSet(List<RoleSet> rlSet) {
-        this.rlSet = rlSet;
     }
 
     public String getPassword() {
@@ -268,20 +200,68 @@ public class User extends GenericBean implements IDataObject, IUser {
         this.creator = creator;
     }
 
-    public Timestamp getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(Timestamp loginTime) {
-        this.loginTime = loginTime;
-    }
-
     public Timestamp getPwdExpiredTime() {
         return pwdExpiredTime;
     }
 
     public void setPwdExpiredTime(Timestamp pwdExpiredTime) {
         this.pwdExpiredTime = pwdExpiredTime;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDepCode() {
+        return depCode;
+    }
+
+    public void setDepCode(String depCode) {
+        this.depCode = depCode;
+    }
+
+    public String getStatusDesc() {
+        return statusDesc;
+    }
+
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
+    }
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public List<UserRole> getUrList() {
+        return urList;
+    }
+
+    public void setUrList(List<UserRole> urList) {
+        this.urList = urList;
     }
 
 }

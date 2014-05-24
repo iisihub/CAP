@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.iisigroup.cap.auth.service.PwdPolicyService;
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.handler.MFormHandler;
@@ -22,8 +23,6 @@ import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.service.ICommonService;
-import com.iisigroup.cap.utils.CapAppContext;
-import com.iisigroup.cap.utils.CapDate;
 
 /**
  * <pre>
@@ -42,6 +41,8 @@ public class PwdPolicyHandler extends MFormHandler {
 
     @Resource
     private ICommonService commonService;
+    @Resource
+    private PwdPolicyService pwdPolicyService;
 
     public IResult query(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
@@ -57,21 +58,7 @@ public class PwdPolicyHandler extends MFormHandler {
 
     public IResult modify(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
-        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
-            String key = value.toString().toLowerCase();
-            String data = request.get(key.substring(4));
-            SysParm parm = commonService.findById(SysParm.class, key);
-            if (parm == null) {
-                parm = new SysParm();
-            }
-            parm.setParmId(key);
-            parm.setParmValue(data);
-            parm.setParmDesc(CapAppContext.getMessage("pwdpolicy."
-                    + key.substring(4)));
-            parm.setUpdater("XXXX");
-            parm.setUpdateTime(CapDate.getCurrentTimestamp());
-            commonService.save(parm);
-        }
+        pwdPolicyService.updatePwdPolicy(request);
         return result;
     }
 }

@@ -40,123 +40,123 @@ import com.corundumstudio.socketio.SocketIOClient;
 @SuppressWarnings("serial")
 public class CapUserDetails implements UserDetails {
 
-	private String password;
-	private String userId;
-	private String userName;
-	private String unitNo;
-	private Map<String, String> roles;
-	private JSONArray menu;
-	private Locale locale;
-	private String status;
-	private SocketIOClient socketClient;
+    private String password;
+    private String userId;
+    private String userName;
+    private String unitNo;
+    private Map<String, String> roles;
+    private JSONArray menu;
+    private Locale locale;
+    private String status;
+    private SocketIOClient socketClient;
 
-	private Collection<GrantedAuthority> authorities;
+    private Collection<GrantedAuthority> authorities;
 
-	public CapUserDetails() {
-	}
+    public CapUserDetails() {
+    }
 
-	public CapUserDetails(IUser user, String password, Map<String, String> roles) {
-		this.password = password;
-		this.userId = user.getUserId();
-		this.userName = user.getUserName();
-		this.unitNo = user.getUnitNo();
-		this.roles = new LinkedHashMap<String, String>();
-		this.roles.putAll(roles);
-		this.locale = user.getLocale();
-		this.status = user.getStatus();
-		setAuthorities(roles);
-	}
+    public CapUserDetails(IUser user, String password, Map<String, String> roles) {
+        this.password = password;
+        this.userId = user.getCode();
+        this.userName = user.getName();
+        this.unitNo = user.getDepCode();
+        this.roles = new LinkedHashMap<String, String>();
+        this.roles.putAll(roles);
+        this.locale = user.getLocale();
+        this.status = user.getStatus();
+        setAuthorities(roles);
+    }
 
-	protected void setAuthorities(Map<String, String> roles) {
-		authorities = new ArrayList<GrantedAuthority>();
-		for (String roleOid : roles.keySet()) {
-			authorities.add(new SimpleGrantedAuthority(roleOid));
-		}
-	}
+    protected void setAuthorities(Map<String, String> roles) {
+        authorities = new ArrayList<GrantedAuthority>();
+        for (String roleOid : roles.keySet()) {
+            authorities.add(new SimpleGrantedAuthority(roleOid));
+        }
+    }
 
-	public Collection<GrantedAuthority> getAuthorities() {
-		return this.authorities;
-	}
+    public Collection<GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getUsername() {
-		return userName;
-	}
+    public String getUsername() {
+        return userName;
+    }
 
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-	public boolean isEnabled() {
-		return true;
-	}
+    public boolean isEnabled() {
+        return true;
+    }
 
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-	public JSONArray getMenu() {
-		return menu;
-	}
+    public JSONArray getMenu() {
+        return menu;
+    }
 
-	public void setMenu(JSONArray menu) {
-		this.menu = menu;
-	}
+    public void setMenu(JSONArray menu) {
+        this.menu = menu;
+    }
 
-	public Map<String, String> getRoles() {
-		return roles;
-	}
+    public Map<String, String> getRoles() {
+        return roles;
+    }
 
-	public void setRoles(Map<String, String> roles) {
-		this.roles = roles;
-	}
+    public void setRoles(Map<String, String> roles) {
+        this.roles = roles;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public String getUnitNo() {
-		return unitNo;
-	}
+    public String getUnitNo() {
+        return unitNo;
+    }
 
-	public Locale getLocale() {
-		return locale;
-	}
+    public Locale getLocale() {
+        return locale;
+    }
 
-	public void setLocale(Locale locale) {
-		this.locale = locale;
+    public void setLocale(Locale locale) {
+        this.locale = locale;
 
-	}
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
 
-	}
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public void setUnitNo(String unitNo) {
-		this.unitNo = unitNo;
-	}
-	
-	public String getStatus() {
+    public void setUnitNo(String unitNo) {
+        this.unitNo = unitNo;
+    }
+
+    public String getStatus() {
         return status;
     }
 
@@ -164,12 +164,12 @@ public class CapUserDetails implements UserDetails {
         this.status = status;
     }
 
-	public SocketIOClient getSocketClient() {
-		return socketClient;
-	}
+    public SocketIOClient getSocketClient() {
+        return socketClient;
+    }
 
-	public void setSocketClient(SocketIOClient socketClient) {
-		this.socketClient = socketClient;
-	}
+    public void setSocketClient(SocketIOClient socketClient) {
+        this.socketClient = socketClient;
+    }
 
 }

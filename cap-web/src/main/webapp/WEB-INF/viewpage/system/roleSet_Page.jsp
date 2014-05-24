@@ -29,31 +29,31 @@
 	                    <tbody>
 	                        <tr>
 	                            <td width="20%" class="hd1">
-	                                <span class="color-red">＊</span><spring:message code="rolCode"></spring:message></td>
+	                                <span class="color-red">＊</span><spring:message code="rolecode"></spring:message></td>
 	                            <td width="30%">
-	                                <input type="text" size="10" id="roleId" name="roleId" maxlength="10" class="validate[required]"/>
+	                                <input type="text" size="10" id="code" name="code" maxlength="10" class="validate[required]"/>
 	                            </td>
 	                            <td width="20%" class="hd1">
-	                                <span class="color-red">＊</span><spring:message code="rolName"></spring:message></td>
+	                                <span class="color-red">＊</span><spring:message code="rolename"></spring:message></td>
 	                            <td width="30%">
-	                                <input type="text" size="15" id="rolName" name="rolName" maxlength="48" class="validate[required]"/>
+	                                <input type="text" size="15" id="name" name="name" maxlength="48" class="validate[required]"/>
 	                            </td>
 	                            <td width="20%" class="hd1">
-	                            	<spring:message code="sysTyp"></spring:message></td>
+	                            	<spring:message code="systype"></spring:message></td>
 	                            <td>
-	                                <select id="sysTyp" name="sysTyp" combokey="authSysId" combotype="2"></select>
+	                                <select id="sysType" name="sysType" combokey="authSysId" combotype="2"></select>
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td width="20%" class="hd1">
-	                            	<spring:message code="stu"></spring:message></td>
+	                            	<spring:message code="status"></spring:message></td>
 	                            <td>
-	                            	<input type="radio" id="stu" name="stu" checked class="validate[required]" value="0"/><spring:message code="on"></spring:message>
-	                            	<input type="radio" id="stu" name="stu" class="validate[required]" value="1"/><spring:message code="off"></spring:message>
+	                            	<input type="radio" id="status" name="status" checked class="validate[required]" value="0"/><spring:message code="on"></spring:message>
+	                            	<input type="radio" id="status" name="status" class="validate[required]" value="1"/><spring:message code="off"></spring:message>
 	                            </td>
-	                            <td width="20%" class="hd1"><spring:message code="note"></spring:message></td>
+	                            <td width="20%" class="hd1"><spring:message code="desc"></spring:message></td>
 	                            <td colspan="3">
-	                                <input type="text" id="note" name="note" size="60" maxlength="40"/>
+	                                <input type="text" id="desc" name="desc" size="60" maxlength="40"/>
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -98,9 +98,9 @@
 	            <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
 	            	<tr>
 	                	<td width="40%" class="hd1">
-	                    	<spring:message code="js.departNm"></spring:message></td>
+	                    	<spring:message code="js.depname"></spring:message></td>
 	                    <td>
-	                    	<select id="unit" name="unit" combotype="2"></select>
+	                    	<select id="department" name="department" combotype="2"></select>
 	                    	<button id="query" type="button" class="btn1">
 								<spring:message code="btn.query">
 									<!--查詢-->
@@ -117,9 +117,9 @@
             	<table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
 	            	<tr>
 	                	<td width="20%" class="hd1">
-	                    	<spring:message code="js.topItem"></spring:message></td>
+	                    	<spring:message code="js.topitem"></spring:message></td>
 	                    <td>
-	                    	<select id="pgmTyp" name="pgmTyp" combotype="2"></select>
+	                    	<select id="parent" name="parent" combotype="2"></select>
 	                    	<button id="query" type="button" class="btn1">
 								<spring:message code="btn.query">
 									<!--查詢-->

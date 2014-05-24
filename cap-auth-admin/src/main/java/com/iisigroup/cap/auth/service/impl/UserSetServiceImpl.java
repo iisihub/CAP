@@ -13,12 +13,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.iisigroup.cap.auth.dao.RoleSetDao;
+import com.iisigroup.cap.auth.dao.UserRoleDao;
 import com.iisigroup.cap.auth.dao.UserDao;
-import com.iisigroup.cap.auth.dao.UserPwdHistoryDao;
-import com.iisigroup.cap.auth.model.RoleSet;
+import com.iisigroup.cap.auth.dao.PwdLogDao;
+import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.model.User;
-import com.iisigroup.cap.auth.model.UserPwdHistory;
+import com.iisigroup.cap.auth.model.PwdLog;
 import com.iisigroup.cap.auth.service.UserSetService;
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.dao.ICommonDao;
@@ -36,42 +36,46 @@ public class UserSetServiceImpl extends AbstractService implements
     @Resource
     private ICommonDao commonDao;
     @Resource
-    private UserPwdHistoryDao userPwdHistoryDao;
+    private PwdLogDao userPwdHistoryDao;
     @Resource
-    private RoleSetDao roleSetDao;
+    private UserRoleDao roleSetDao;
 
-    public void deleteUserByOid(String oid) {
-        changeUserStatus(oid, "9");
-    }
+    public void deleteUserByOids(String[] oids) {
+        for (String oid : oids) {
+            changeUserStatus(oid, "9");
+        }
+    }// ;
 
     public void createUser(String userId, String userName, String password,
             String email, String[] roleOids) {
         User user = new User();
         user.setStatus("1");
+        // 建立使用者時就塞 last login time，方便排程篩選資料
+        user.setLastLoginTime(CapDate.getCurrentTimestamp());
         user.setCreateTime(CapDate.getCurrentTimestamp());
         user.setCreator(CapSecurityContext.getUserId());
         user = setUserFields(user, userId, userName, password, email);
-        user.setRlSet(createUserRoleData(userId, roleOids));
+        user.setUrList(createUserRoleData(userId, roleOids));
         userDao.save(user);
-        createUserPwdHistory(user.getOid(), encodePassword(userId, password));
-    }
+        createUserPwdHistory(user.getCode(), encodePassword(userId, password));
+    }// ;
 
-    public void updateUserByOid(String oid, String userId, String userName,
-            boolean reset, String password, String email, String[] roleOids) {
+    public void updateUserByOid(String oid, String code, String name,
+            boolean reset, String password, String email, String[] roleCodes) {
         User user = userDao.find(oid);
         if (reset) {
             user.setStatus("1");
         }
-        user.setRlSet(createUserRoleData(userId, roleOids));
-        userDao.save(setUserFields(user, userId, userName, password, email));
-        createUserPwdHistory(user.getOid(), encodePassword(userId, password));
-    }
+        user.setUrList(createUserRoleData(code, roleCodes));
+        userDao.save(setUserFields(user, code, name, password, email));
+        createUserPwdHistory(user.getCode(), encodePassword(code, password));
+    }// ;
 
-    private User setUserFields(User user, String userId, String userName,
+    private User setUserFields(User user, String code, String name,
             String password, String email) {
         Date now = Calendar.getInstance().getTime();
-        user.setUserId(userId);
-        user.setUserName(userName);
+        user.setCode(code);
+        user.setName(name);
         user.setEmail(email);
         if (!StringUtils.isBlank(password)) {
             SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class,
@@ -79,61 +83,63 @@ public class UserSetServiceImpl extends AbstractService implements
             int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
             user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now,
                     expiredDay).getTime()));
-            user.setPassword(encodePassword(user.getUserId(), password));
+            user.setPassword(encodePassword(user.getCode(), password));
         }
         user.setUpdateTime(new Timestamp(now.getTime()));
         user.setUpdater(CapSecurityContext.getUserId());
         return user;
-    }
+    }// ;
 
-    private List<RoleSet> createUserRoleData(String userId, String[] roleOids) {
-        roleSetDao.deleteByUserId(userId);
-        List<RoleSet> rlSet = new ArrayList<RoleSet>();
-        for (String roleOid : roleOids) {
-            RoleSet roleSet = roleSetDao.findByStaffpidAndRoleCode(userId,
-                    roleOid);
-            if (roleSet == null) {
-                roleSet = new RoleSet();
+    private List<UserRole> createUserRoleData(String userCode, String[] roleCodes) {
+        roleSetDao.deleteByUserCode(userCode);
+        List<UserRole> rlSet = new ArrayList<UserRole>();
+        for (String roleCode : roleCodes) {
+            UserRole userRole = roleSetDao.findByUserCodeAndRoleCode(userCode,
+                    roleCode);
+            if (userRole == null) {
+                userRole = new UserRole();
             }
-            roleSet.setUserId(userId);
-            roleSet.setRolCode(roleOid);
-            roleSet.setUpdater(CapSecurityContext.getUserId());
-            roleSet.setUpdateTime(CapDate.getCurrentTimestamp());
-            rlSet.add(roleSet);
+            userRole.setUserCode(userCode);
+            userRole.setRoleCode(roleCode);
+            userRole.setUpdater(CapSecurityContext.getUserId());
+            userRole.setUpdateTime(CapDate.getCurrentTimestamp());
+            rlSet.add(userRole);
         }
         return rlSet;
-    }
+    }// ;
 
-    private void createUserPwdHistory(String userOid, String encodedPassword) {
+    private void createUserPwdHistory(String userCode, String encodedPassword) {
         if (!StringUtils.isBlank(encodedPassword)) {
-            UserPwdHistory h = new UserPwdHistory();
-            h.setUserOid(userOid);
+            PwdLog h = new PwdLog();
+            h.setUserCode(userCode);
             h.setPassword(encodedPassword);
             h.setUpdateTime(CapDate.getCurrentTimestamp());
             userPwdHistoryDao.save(h);
         }
-    }
+    }// ;
 
     @Override
-    public User findUserByUserId(String userId) {
-        return userDao.findByUserId(userId);
-    }
+    public User findUserByUserCode(String code) {
+        return userDao.findByCode(code);
+    }// ;
 
     @Override
     public Page<Map<String, Object>> findUser(String userId, String userName,
-            String[] roleOids, String[] status, int maxResult, int firstResult) {
-        return userDao.findPage(userId, userName, roleOids, status, maxResult,
+            String[] roleCodes, String[] status, int maxResult, int firstResult) {
+        return userDao.findPage(userId, userName, roleCodes, status, maxResult,
                 firstResult);
-    }
+    }// ;
 
     @Override
-    public void unlockUserByOid(String oid) {
-        User user = userDao.find(oid);
-        user.setStatus(user.getPreStatus());
-        user.setUpdateTime(CapDate.getCurrentTimestamp());
-        user.setUpdater(CapSecurityContext.getUserId());
-        userDao.save(user);
-    }
+    public void unlockUserByOids(String[] oids) {
+        for (String oid : oids) {
+            User user = userDao.find(oid);
+            user.setStatus(user.getPreStatus());
+            user.setUpdateTime(CapDate.getCurrentTimestamp());
+            user.setUpdater(CapSecurityContext.getUserId());
+            userDao.save(user);
+        }
+    }// ;
 
     private void changeUserStatus(String oid, String status) {
         User user = userDao.find(oid);
@@ -141,23 +147,25 @@ public class UserSetServiceImpl extends AbstractService implements
         user.setUpdateTime(CapDate.getCurrentTimestamp());
         user.setUpdater(CapSecurityContext.getUserId());
         userDao.save(user);
-    }
+    }// ;
 
     private String encodePassword(String userId, String password) {
         StandardPasswordEncoder spe = new StandardPasswordEncoder(userId);
         return spe.encode(password);
-    }
+    }// ;
 
     @Override
-    public void lockUserByOid(String oid) {
-        User user = userDao.find(oid);
-        if (!"2".equals(user.getStatus())) {
-            user.setPreStatus(user.getStatus());
-            user.setStatus("2");
-            user.setUpdateTime(CapDate.getCurrentTimestamp());
-            user.setUpdater(CapSecurityContext.getUserId());
-            userDao.save(user);
+    public void lockUserByOids(String[] oids) {
+        for (String oid : oids) {
+            User user = userDao.find(oid);
+            if (!"2".equals(user.getStatus())) {
+                user.setPreStatus(user.getStatus());
+                user.setStatus("2");
+                user.setUpdateTime(CapDate.getCurrentTimestamp());
+                user.setUpdater(CapSecurityContext.getUserId());
+                userDao.save(user);
+            }
         }
-    }
+    }// ;
 
 }

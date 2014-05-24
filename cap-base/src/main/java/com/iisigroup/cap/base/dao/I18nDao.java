@@ -12,6 +12,7 @@
 package com.iisigroup.cap.base.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.iisigroup.cap.base.model.I18n;
 import com.iisigroup.cap.dao.IGenericDao;
@@ -38,7 +39,7 @@ public interface I18nDao extends IGenericDao<I18n> {
 	 *            語言別
 	 * @return T
 	 */
-	public List<I18n> findByCodeType(String codetype, String locale);
+	List<I18n> findByCodeType(String codetype, String locale);
 
 	/**
 	 * find by CodeType and CodeValue
@@ -51,7 +52,7 @@ public interface I18nDao extends IGenericDao<I18n> {
 	 *            語言別
 	 * @return T
 	 */
-	public I18n findByCodeTypeAndCodeValue(String cType, String cValue,
+	I18n findByCodeTypeAndCodeValue(String cType, String cValue,
 			String locale);
 
 	/**
@@ -63,7 +64,7 @@ public interface I18nDao extends IGenericDao<I18n> {
 	 *            語言別
 	 * @return T List
 	 */
-	public List<I18n> findByCodeType(String[] codetypes, String locale);
+	List<I18n> findByCodeType(String[] codetypes, String locale);
 
 	/**
 	 * find by code Desc
@@ -76,7 +77,7 @@ public interface I18nDao extends IGenericDao<I18n> {
 	 *            語言別
 	 * @return CodeType
 	 */
-	public List<I18n> findByCodeTypeAndCodeDesc(String cType,
+	List<I18n> findByCodeTypeAndCodeDesc(String cType,
 			String codeDesc, String locale);
 
 	/**
@@ -86,6 +87,8 @@ public interface I18nDao extends IGenericDao<I18n> {
 	 *            OID
 	 * @return CodeType
 	 */
-	public I18n findByOid(String oid);
+	I18n findByOid(String oid);
+
+	Map<String, I18n> findAsMapByCodeType(String codetype, String locale);
 
 }

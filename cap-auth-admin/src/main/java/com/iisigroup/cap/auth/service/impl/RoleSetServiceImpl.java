@@ -9,13 +9,15 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
-import com.iisigroup.cap.auth.dao.BranchDao;
-import com.iisigroup.cap.auth.dao.CodeItemDao;
+import com.iisigroup.cap.auth.dao.DepartmentDao;
+import com.iisigroup.cap.auth.dao.FunctionDao;
 import com.iisigroup.cap.auth.dao.RoleDao;
-import com.iisigroup.cap.auth.dao.RoleSetDao;
+import com.iisigroup.cap.auth.dao.RoleFunctionDao;
 import com.iisigroup.cap.auth.dao.UserDao;
-import com.iisigroup.cap.auth.model.Branch;
-import com.iisigroup.cap.auth.model.CodeItem;
+import com.iisigroup.cap.auth.dao.UserRoleDao;
+import com.iisigroup.cap.auth.model.Department;
+import com.iisigroup.cap.auth.model.Function;
+import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.service.RoleSetService;
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
@@ -37,86 +39,95 @@ public class RoleSetServiceImpl extends AbstractService implements
         RoleSetService {
 
     @Resource
-    private BranchDao brnDao;
+    private DepartmentDao departmentDao;
 
     @Resource
-    private CodeItemDao codeItemDao;
+    private FunctionDao functionDao;
+
+    @Resource
+    private RoleFunctionDao roleFunctionDao;
 
     @Resource
     private RoleDao roleDao;
 
     @Resource
-    private RoleSetDao roleSetDao;
+    private UserRoleDao userRoleDao;
 
     @Resource
     private UserDao userDao;
 
     @Override
-    public Page<Map<String, Object>> findPageUsr(ISearch search, String rolCode) {
-        return userDao.findPageByRoleCode(rolCode, search.getFirstResult(),
+    public Page<Map<String, Object>> findPageUser(ISearch search,
+            String roleCode) {
+        return userDao.findPageByRoleCode(roleCode, search.getFirstResult(),
                 search.getMaxResults());
     }
 
     @Override
     public Page<Map<String, Object>> findPageEditUsr(ISearch search,
-            String rolCode, String unitNo) {
-        return userDao.findPageUnselectedByRoleCodeAndUnitNo(rolCode, unitNo,
-                search.getFirstResult(), search.getMaxResults());
+            String roleCode, String depCode) {
+        return userDao.findPageUnselectedByRoleCodeAndDepCode(roleCode,
+                depCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
     public Page<Map<String, Object>> findPageEditFunc(ISearch search,
-            String rolCode, String systyp, String pgmTyp) {
-        return codeItemDao.findPageUnselected(rolCode, systyp, pgmTyp,
+            String roleCode, String sysType, String parent) {
+        return functionDao.findPageUnselected(roleCode, sysType, parent,
                 search.getFirstResult(), search.getMaxResults());
-    }
+    }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageFunc(ISearch search, String rolCode) {
-        return codeItemDao.findPageByRoleCode(rolCode, search.getFirstResult(),
-                search.getMaxResults());
-    }
+    public Page<Map<String, Object>> findPageFunc(ISearch search, String code) {
+        return functionDao.findPageByRoleCode(code,
+                search.getFirstResult(), search.getMaxResults());
+    }// ;
 
     @Override
-    public Map<String, String> findAllBranch() {
+    public Map<String, String> findAllDepartment() {
         Map<String, String> map = new LinkedHashMap<String, String>();
-        List<Branch> brns = brnDao.findByAllBranch();
+        List<Department> deps = departmentDao.findByAllDepartment();
 
-        if (!CollectionUtils.isEmpty(brns)) {
-            for (Branch brn : brns) {
-                map.put(brn.getDepartno(), brn.getDepartnm());
+        if (!CollectionUtils.isEmpty(deps)) {
+            for (Department dep : deps) {
+                map.put(dep.getCode(), dep.getName());
             }
         }
         return map;
     }
 
     @Override
-    public Map<String, String> findAllFunc(String systyp) {
+    public Map<String, String> findAllFunc(String sysType) {
         Map<String, String> map = new LinkedHashMap<String, String>();
-        List<CodeItem> pgms = codeItemDao.findBySystypAndStep(systyp, "1");
+        List<Function> funcs = functionDao.findBySysTypeAndLevel(sysType, "1");
 
-        if (!CollectionUtils.isEmpty(pgms)) {
-            for (CodeItem pgm : pgms) {
-                map.put(Integer.toString(pgm.getCode()), pgm.getName());
+        if (!CollectionUtils.isEmpty(funcs)) {
+            for (Function func : funcs) {
+                map.put(Integer.toString(func.getCode()), func.getName());
             }
         }
         return map;
+    }// ;
+
+    @Override
+    public int deleteUrList(String rolCode, List<String> delUsr) {
+        return userRoleDao.deleteByRoleCodeAndUserCodes(rolCode, delUsr);
     }
 
     @Override
-    public int deleteRlset(String rolCode, List<String> delUsr) {
-        return roleSetDao.deleteByRoleCodeAndUserIds(rolCode, delUsr);
+    public int deleteRfList(String rolCode, List<String> delFunc) {
+        return roleFunctionDao.deleteByRoleCodeAndFuncCodes(rolCode, delFunc);
     }
 
     @Override
-    public int deleteRlf(String rolCode, List<String> delFunc) {
-        return codeItemDao.deleteByRoleCodeAndPgmCodes(rolCode, delFunc);
-    }
+    public List<Map<String, Object>> findAllRoleWithSelectedByUserCode(
+            String userCode) {
+        return roleDao.findAllWithSelectedByUserCode(userCode);
+    }// ;
 
     @Override
-    public List<Map<String, Object>> findAllRoleWithSelectedByUserId(
-            String userOid) {
-        return roleDao.findAllWithSelectedByUserId(userOid);
-    }
+    public Role findRoleByCode(String code) {
+        return roleDao.findByCode(code);
+    }// ;
 
 }

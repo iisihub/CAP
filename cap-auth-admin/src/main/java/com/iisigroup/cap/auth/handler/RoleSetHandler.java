@@ -29,7 +29,7 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.model.RoleFunction;
-import com.iisigroup.cap.auth.model.RoleSet;
+import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.service.RoleSetService;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
@@ -68,318 +68,316 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("rolesethandler")
 public class RoleSetHandler extends MFormHandler {
 
-	@Resource
-	private ICommonService commonSrv;
+    @Resource
+    private ICommonService commonSrv;
 
-	@Autowired
-	private CodeTypeService codeTypeService;
+    @Autowired
+    private CodeTypeService codeTypeService;
 
-	@Resource
-	private RoleSetService roleSetService;
+    @Resource
+    private RoleSetService roleSetService;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(ISearch search, IRequest params) {
+    @HandlerType(HandlerTypeEnum.GRID)
+    public GridResult query(ISearch search, IRequest params) {
 
-		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		fmt.put("usrCount", new IBeanFormatter() {
-			private static final long serialVersionUID = 1L;
+        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        fmt.put("userCount", new IBeanFormatter() {
+            private static final long serialVersionUID = 1L;
 
-			@SuppressWarnings("unchecked")
-			public Integer reformat(Object in) throws CapFormatException {
-				if (in instanceof Role) {
-					return ((Role) in).getrSetList().size();
-				}
-				return 0;
-			}
-		});
+            @SuppressWarnings("unchecked")
+            public Integer reformat(Object in) throws CapFormatException {
+                if (in instanceof Role) {
+                    return ((Role) in).getUrList().size();
+                }
+                return 0;
+            }
+        });
 
-		Page<Role> page = commonSrv.findPage(Role.class, search);
-		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-	}// ;
+        Page<Role> page = commonSrv.findPage(Role.class, search);
+        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+    }// ;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public MapGridResult queryGridUsr(ISearch search, IRequest params) {
-		String code = params.get("rolCode");
-		if (CapString.isEmpty(code)) {
-			return new MapGridResult();
-		}
+    @HandlerType(HandlerTypeEnum.GRID)
+    public MapGridResult queryGridUser(ISearch search, IRequest params) {
+        String code = params.get("code");
+        if (CapString.isEmpty(code)) {
+            return new MapGridResult();
+        }
 
-		Page<Map<String, Object>> page = roleSetService.findPageUsr(search,
-				code);
-		return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-	}// ;
+        Page<Map<String, Object>> page = roleSetService.findPageUser(search,
+                code);
+        return new MapGridResult(page.getContent(), page.getTotalRow(), null);
+    }
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public MapGridResult queryGridFunc(ISearch search, IRequest params) {
-		String code = params.get("rolCode");
-		if (CapString.isEmpty(code)) {
-			return new MapGridResult();
-		}
+    @HandlerType(HandlerTypeEnum.GRID)
+    public MapGridResult queryGridFunc(ISearch search, IRequest params) {
+        String code = params.get("code");
+        if (CapString.isEmpty(code)) {
+            return new MapGridResult();
+        }
 
-		Page<Map<String, Object>> page = roleSetService.findPageFunc(search,
-				code);
-		return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-	}// ;
+        Page<Map<String, Object>> page = roleSetService.findPageFunc(search,
+                code);
+        return new MapGridResult(page.getContent(), page.getTotalRow(), null);
+    }// ;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public MapGridResult queryEditUsr(ISearch search, IRequest params)
-			throws CapException {
-		String unit = params.get("unit");
-		String code = params.get("rolCode");
+    @HandlerType(HandlerTypeEnum.GRID)
+    public MapGridResult queryEditUsr(ISearch search, IRequest params)
+            throws CapException {
+        String depCode = params.get("depCode");
+        String roleCode = params.get("roleCode");
 
-		Page<Map<String, Object>> page = roleSetService.findPageEditUsr(search,
-				code, unit);
-		return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-	}
+        Page<Map<String, Object>> page = roleSetService.findPageEditUsr(search,
+                roleCode, depCode);
+        return new MapGridResult(page.getContent(), page.getTotalRow(), null);
+    }
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public MapGridResult queryEditFunc(ISearch search, IRequest params)
-			throws CapException {
-		String pgmTyp = params.get("pgmTyp");
-		String code = params.get("rolCode");
-		String systyp = params.get("systyp");
+    @HandlerType(HandlerTypeEnum.GRID)
+    public MapGridResult queryEditFunc(ISearch search, IRequest params)
+            throws CapException {
+        String parent = params.get("parent");
+        String code = params.get("code");
+        String sysType = params.get("sysType");
 
-		Page<Map<String, Object>> page = roleSetService.findPageEditFunc(
-				search, code, systyp, pgmTyp);
-		return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-	}
+        Page<Map<String, Object>> page = roleSetService.findPageEditFunc(
+                search, code, sysType, parent);
+        return new MapGridResult(page.getContent(), page.getTotalRow(), null);
+    }// ;
 
-	public IResult queryForm(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String code = request.get("rolCode");
-		Role role = null;
+    public IResult queryForm(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        Role role = null;
 
-		if (!CapString.isEmpty(code)) {
-			role = commonSrv.findById(Role.class, code);
-		}
+        if (!CapString.isEmpty(code)) {
+            role = roleSetService.findRoleByCode(code);
+        }
 
-		if (role != null) {
-			result.putAll(new AjaxFormResult(role.toJSONObject(
-					CapEntityUtil.getColumnName(role), null)));
-		}
+        if (role != null) {
+            result.putAll(new AjaxFormResult(role.toJSONObject(
+                    CapEntityUtil.getColumnName(role), null)));
+        }
 
-		return result;
-	}
+        return result;
+    }// ;
 
-	public IResult getAllBranch(IRequest request) throws CapException {
-		AjaxFormResult result = new AjaxFormResult();
-		result.set("All", CapAppContext.getMessage("All"));
-		result.putAll(roleSetService.findAllBranch());
+    public IResult getAllDepartment(IRequest request) throws CapException {
+        AjaxFormResult result = new AjaxFormResult();
+        result.set("All", CapAppContext.getMessage("All"));
+        result.putAll(roleSetService.findAllDepartment());
 
-		return result;
-	}
+        return result;
+    }
 
-	public IResult getAllFunc(IRequest request) throws CapException {
-		AjaxFormResult result = new AjaxFormResult();
-		String systyp = request.get("systyp");
-		if (CapString.isEmpty(systyp)) {
-			return result;
-		}
+    public IResult getAllFunc(IRequest request) throws CapException {
+        AjaxFormResult result = new AjaxFormResult();
+        String sysType = request.get("sysType");
+        if (CapString.isEmpty(sysType)) {
+            return result;
+        }
 
-		result.set("All", CapAppContext.getMessage("All"));
-		result.putAll(roleSetService.findAllFunc(systyp));
+        result.set("All", CapAppContext.getMessage("All"));
+        result.putAll(roleSetService.findAllFunc(sysType));
 
-		return result;
-	}
+        return result;
+    }// ;
 
-	/**
-	 * 編輯資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult save(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String code = request.get("roleId");
-		String isNew = request.get("isNew");
-		Role role = null;
+    /**
+     * 編輯資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult save(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        String isNew = request.get("isNew");
+        Role role = null;
 
-		if (!CapString.isEmpty(code)) {
-			role = commonSrv.findById(Role.class, code);
-			if (isNew.equals("true") && role != null) {
-				throw new CapMessageException(
-						CapAppContext.getMessage("js.data.exists"),
-						RoleSetHandler.class);
-			}
-		} else {
-			throw new CapMessageException(
-					CapAppContext.getMessage("EXCUE_ERROR"),
-					RoleSetHandler.class);
-		}
-		if (role == null) {
-			role = new Role();
-		}
-		CapBeanUtil.map2Bean(request, role, Role.class);
-		role.setUpdater(CapSecurityContext.getUserId());
-		role.setUpdTime(CapDate.getCurrentTimestamp());
-		role.setApprId(CapSecurityContext.getUserId());
-		role.setApprTime(CapDate.getCurrentTimestamp());
+        if (!CapString.isEmpty(code)) {
+            role = roleSetService.findRoleByCode(code);
+            if (isNew.equals("true") && role != null) {
+                throw new CapMessageException(
+                        CapAppContext.getMessage("js.data.exists"),
+                        RoleSetHandler.class);
+            }
+        } else {
+            throw new CapMessageException(
+                    CapAppContext.getMessage("EXCUE_ERROR"),
+                    RoleSetHandler.class);
+        }
+        if (role == null) {
+            role = new Role();
+        }
+        CapBeanUtil.map2Bean(request, role, Role.class);
+        role.setUpdater(CapSecurityContext.getUserId());
+        role.setUpdateTime(CapDate.getCurrentTimestamp());
 
-		commonSrv.save(role);
+        commonSrv.save(role);
 
-		return result;
-	}
+        return result;
+    }// ;
 
-	/**
-	 * 編輯資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult saveRlSet(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String code = request.get("rolCode");
-		JSONArray usrItem = JSONArray.fromObject(request.get("usrItem"));
-		Role role = null;
+    /**
+     * 編輯資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult saveUrList(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        JSONArray users = JSONArray.fromObject(request.get("users"));
+        Role role = null;
 
-		if (!CapString.isEmpty(code)) {
-			role = commonSrv.findById(Role.class, code);
-		}
-		if (role == null) {
-			throw new CapMessageException(
-					CapAppContext.getMessage("EXCUE_ERROR"),
-					RoleSetHandler.class);
-		}
+        if (!CapString.isEmpty(code)) {
+            role = roleSetService.findRoleByCode(code);
+        }
+        if (role == null) {
+            throw new CapMessageException(
+                    CapAppContext.getMessage("EXCUE_ERROR"),
+                    RoleSetHandler.class);
+        }
 
-		List<RoleSet> setUsr = new ArrayList<RoleSet>();
-		if (usrItem != null) {
-			for (Object item : usrItem) {
-				JSONObject usr = (JSONObject) item;
-				RoleSet rlset = new RoleSet();
-				rlset.setUserId(usr.getString("userId"));
-				rlset.setRolCode(role.getRoleId());
-				rlset.setUpdater(CapSecurityContext.getUserId());
-				rlset.setUpdateTime(CapDate.getCurrentTimestamp());
-				setUsr.add(rlset);
-			}
-		}
-		commonSrv.save(setUsr);
+        List<UserRole> list = new ArrayList<UserRole>();
+        if (users != null) {
+            for (Object item : users) {
+                JSONObject user = (JSONObject) item;
+                UserRole userRole = new UserRole();
+                userRole.setUserCode(user.getString("code"));
+                userRole.setRoleCode(role.getCode());
+                userRole.setUpdater(CapSecurityContext.getUserId());
+                userRole.setUpdateTime(CapDate.getCurrentTimestamp());
+                list.add(userRole);
+            }
+        }
+        commonSrv.save(list);
 
-		return result;
-	}
-	
-	/**
-	 * 編輯資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult saveRlf(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String code = request.get("rolCode");
-		JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
-		Role role = null;
+        return result;
+    }
 
-		if (!CapString.isEmpty(code)) {
-			role = commonSrv.findById(Role.class, code);
-		}
-		if (role == null) {
-			throw new CapMessageException(
-					CapAppContext.getMessage("EXCUE_ERROR"),
-					RoleSetHandler.class);
-		}
+    /**
+     * 編輯資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult saveRfList(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
+        Role role = null;
 
-		List<RoleFunction> setFunc = new ArrayList<RoleFunction>();
-		if (funcItem != null) {
-			for (Object item : funcItem) {
-				JSONObject func = (JSONObject) item;
-				RoleFunction rlf = new RoleFunction();
-				rlf.setRolCode(role.getRoleId());
-				rlf.setPgmCode(func.getString("code"));
-				rlf.setUpdater(CapSecurityContext.getUserId());
-				rlf.setUpdTime(CapDate.getCurrentTimestamp());
-				setFunc.add(rlf);
-			}
-		}
-		commonSrv.save(setFunc);
+        if (!CapString.isEmpty(code)) {
+            role = roleSetService.findRoleByCode(code);
+        }
+        if (role == null) {
+            throw new CapMessageException(
+                    CapAppContext.getMessage("EXCUE_ERROR"),
+                    RoleSetHandler.class);
+        }
 
-		return result;
-	}
+        List<RoleFunction> list = new ArrayList<RoleFunction>();
+        if (funcItem != null) {
+            for (Object item : funcItem) {
+                JSONObject func = (JSONObject) item;
+                RoleFunction roleFunc = new RoleFunction();
+                roleFunc.setRoleCode(role.getCode());
+                roleFunc.setFuncCode(func.getString("code"));
+                roleFunc.setUpdater(CapSecurityContext.getUserId());
+                roleFunc.setUpdateTime(CapDate.getCurrentTimestamp());
+                list.add(roleFunc);
+            }
+        }
+        commonSrv.save(list);
 
-	/**
-	 * 刪除資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult delete(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String roleId = request.get("rolCode");
-		Role role = commonSrv.findById(Role.class, roleId);
-		if (role != null) {
-			commonSrv.delete(role);
-		}
-		return result;
-	}
+        return result;
+    }// ;
 
-	/**
-	 * 刪除資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult deleteRlSet(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String code = request.get("rolCode");
-		JSONArray usrItem = JSONArray.fromObject(request.get("usrItem"));
+    /**
+     * 刪除資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult delete(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        Role role = roleSetService.findRoleByCode(code);
+        if (role != null) {
+            commonSrv.delete(role);
+        }
+        return result;
+    }// ;
 
-		if (CapString.isEmpty(code)) {
-			throw new CapMessageException(
-					CapAppContext.getMessage("EXCUE_ERROR"),
-					RoleSetHandler.class);
-		}
+    /**
+     * 刪除資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult deleteUrList(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        JSONArray users = JSONArray.fromObject(request.get("users"));
 
-		List<String> delUsr = new ArrayList<String>();
-		if (usrItem != null) {
-			for (Object item : usrItem) {
-				JSONObject usr = (JSONObject) item;
-				delUsr.add(usr.getString("userId"));
-			}
-		}
-		roleSetService.deleteRlset(code, delUsr);
+        if (CapString.isEmpty(code)) {
+            throw new CapMessageException(
+                    CapAppContext.getMessage("EXCUE_ERROR"),
+                    RoleSetHandler.class);
+        }
 
-		return result;
-	}
-	
-	/**
-	 * 刪除資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult deleteRlf(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String code = request.get("rolCode");
-		JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
+        List<String> delUsr = new ArrayList<String>();
+        if (users != null) {
+            for (Object item : users) {
+                JSONObject usr = (JSONObject) item;
+                delUsr.add(usr.getString("code"));
+            }
+        }
+        roleSetService.deleteUrList(code, delUsr);
 
-		if (CapString.isEmpty(code)) {
-			throw new CapMessageException(
-					CapAppContext.getMessage("EXCUE_ERROR"),
-					RoleSetHandler.class);
-		}
+        return result;
+    }
 
-		List<String> delFunc = new ArrayList<String>();
-		if (funcItem != null) {
-			for (Object item : funcItem) {
-				JSONObject usr = (JSONObject) item;
-				delFunc.add(usr.getString("code"));
-			}
-		}
-		roleSetService.deleteRlf(code, delFunc);
+    /**
+     * 刪除資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult deleteRfList(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String code = request.get("code");
+        JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
 
-		return result;
-	}
+        if (CapString.isEmpty(code)) {
+            throw new CapMessageException(
+                    CapAppContext.getMessage("EXCUE_ERROR"),
+                    RoleSetHandler.class);
+        }
+
+        List<String> delFunc = new ArrayList<String>();
+        if (funcItem != null) {
+            for (Object item : funcItem) {
+                JSONObject usr = (JSONObject) item;
+                delFunc.add(usr.getString("code"));
+            }
+        }
+        roleSetService.deleteRfList(code, delFunc);
+
+        return result;
+    }// ;
 
 }

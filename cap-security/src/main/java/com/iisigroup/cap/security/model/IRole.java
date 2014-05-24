@@ -9,31 +9,28 @@
  *
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
-*/
+ */
 package com.iisigroup.cap.security.model;
 
 import java.io.Serializable;
 
-/**<p> 角色.</p>
+/**
+ * <p>
+ * 角色.
+ * </p>
+ * 
  * @author iristu
  * @version <ul>
- *           <li>2010/7/26,iristu,new
+ *          <li>2010/7/26,iristu,new
  *          </ul>
  */
 public interface IRole extends Serializable {
-	
-	/**
-	 * Gets the oid.
-	 * 
-	 * @return the oid
-	 */
-//	String getOid();
-	
-	String getRoleId();
-	
-	void setRoleId(String roleId);
-	
-	String getRoleName();
-	
-	void setRoleName(String roleName);
+
+    String getCode();
+
+    void setCode(String code);
+
+    String getName();
+
+    void setName(String name);
 }

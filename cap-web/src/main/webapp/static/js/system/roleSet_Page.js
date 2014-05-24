@@ -1,53 +1,53 @@
 pageInit(function(){
 	$(document).ready(function(){
 		var $form = $("#JForm");
-		var code = reqJSON.rolCode;
+		var code = reqJSON.code;
 		var isNew = code? false:true;
 		
 		var gridUsr = $("#gridview_usr").jqGrid({
-			url: 'webroot/rolesethandler/queryGridUsr',
+			url: 'webroot/rolesethandler/queryGridUser',
 			height: "180", width: "100%", pager: false,
-			postData: { rolCode: code },
+			postData: { code: code },
             multiselect: true, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
-                header: i18n['roleSet_Page']['staffId'],//"使用者代號",
-                name: 'userId', align: "left", sortable: true
+                header: i18n['roleSet_Page']['usercode'],//"使用者代號",
+                name: 'userCode', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['staffNm'],//"姓名
+                header: i18n['roleSet_Page']['username'],//"姓名
                 name: 'userName', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['departNo'],//"部門代號
-                name: 'unitNo', align: "left", sortable: true
+                header: i18n['roleSet_Page']['depcode'],//"部門代號
+                name: 'depCode', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['departNm'],//"部門名稱
-                name: 'departnm', align: "left", sortable: true
+                header: i18n['roleSet_Page']['depname'],//"部門名稱
+                name: 'depName', align: "left", sortable: true
             }]
         });
 		var gridFunc = $("#gridview_func").jqGrid({
 			url: 'webroot/rolesethandler/queryGridFunc',
 			height: "180", width: "100%", pager: false,
-			postData: { rolCode: code },
+			postData: { code: code },
             multiselect: true, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
-                header: i18n['roleSet_Page']['pgmCode'],//"功能代碼
+                header: i18n['roleSet_Page']['funccode'],//"功能代碼
                 name: 'code', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['pgmName'],//"功能名稱
+                header: i18n['roleSet_Page']['funcname'],//"功能名稱
                 name: 'name', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['pgmTyp'],//"上層功能代碼
+                header: i18n['roleSet_Page']['funcparent'],//"上層功能代碼
                 name: 'parent', align: "left", sortable: true
             }]
         });
 		var init = function(){
-			$form.find('#roleId').attr('disabled', !isNew);
-			$form.find('#sysTyp').attr('disabled', !isNew);
+			$form.find('#code').attr('disabled', !isNew);
+			$form.find('#sysType').attr('disabled', !isNew);
 		}
 		if(code){
 			$.ajax({
 		        url:"webroot/rolesethandler/queryForm",
 		        data:{
-		        	rolCode: code
+		        	code: code
 		        },
 		        success:function(json){
 		        	$form.injectData(json);
@@ -70,15 +70,15 @@ pageInit(function(){
 		var gridEditUsr = $("#gridviewUsr").jqGrid({
 			url: 'webroot/rolesethandler/queryEditUsr',
 			height: "220", width: "550", pager: false,
-			postData: { unit : '',rolCode: code },
+			postData: { depCode : '',roleCode: code },
             multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
             pager:false,
             colModel: [{
-                header: i18n['roleSet_Page']['staffId'],//"使用者代號",
-                name: 'userId', align: "left", sortable: true
+                header: i18n['roleSet_Page']['usercode'],//"使用者代號",
+                name: 'code', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['staffNm'],//"姓名
-                name: 'userName', align: "left", sortable: true
+                header: i18n['roleSet_Page']['username'],//"姓名
+                name: 'name', align: "left", sortable: true
             }]
         });
 		var eDialog = $("#editUsr").dialog({
@@ -86,16 +86,16 @@ pageInit(function(){
         	open:function(){
         		var form = eDialog.find("#mform");
         		$.ajax({
-                    url: "webroot/rolesethandler/getAllBranch",
+                    url: "webroot/rolesethandler/getAllDepartment",
                     success: function(json){
-                    	form.find("#unit").setOptions(json);
+                    	form.find("#department").setOptions(json);
                     }
                 });
         		form.find("#query").click(function(){//查詢
         			gridEditUsr.jqGrid('setGridParam', {
                         postData: {
-                        	rolCode : code,
-                        	unit : form.find('#unit').val()
+                        	roleCode : code,
+                        	depCode : form.find('#department').val()
                         }
                     });
         			gridEditUsr.trigger("reloadGrid");
@@ -109,15 +109,15 @@ pageInit(function(){
         		value:function(){
         			if(gridEditUsr.getSelRowDatas()){
 	        			$.ajax({
-	    	                url: "webroot/rolesethandler/saveRlSet",
+	    	                url: "webroot/rolesethandler/saveUrList",
 	    	                data: {
-	    	                	rolCode: code,
-	    	                	usrItem: JSON.stringify(gridEditUsr.getSelRowDatas())
+	    	                	code: code,
+	    	                	users: JSON.stringify(gridEditUsr.getSelRowDatas())
 	    	                },
 	    	                success: function(rtn){
 	    	                	gridUsr.jqGrid('setGridParam', {
 	    	                        postData: {
-	    	                        	rolCode : code
+	    	                        	code : code
 	    	                        }
 	    	                    });
 	    	                	gridUsr.trigger("reloadGrid");
@@ -148,15 +148,15 @@ pageInit(function(){
 		}).end().find("#delete").click(function(){//刪除
 			if(gridUsr.getSelRowDatas()){
 				$.ajax({
-	                url: "webroot/rolesethandler/deleteRlSet",
+	                url: "webroot/rolesethandler/deleteUrList",
 	                data: {
-	                	rolCode: code,
-	                	usrItem: JSON.stringify(gridUsr.getSelRowDatas())
+	                	code: code,
+	                	users: JSON.stringify(gridUsr.getSelRowDatas())
 	                },
 	                success: function(rtn){
 	                	gridUsr.jqGrid('setGridParam', {
 	                        postData: {
-	                        	rolCode : code
+	                        	code : code
 	                        }
 	                    });
 	                	gridUsr.trigger("reloadGrid");
@@ -171,17 +171,17 @@ pageInit(function(){
 		var gridEditFunc = $("#gridviewFunc").jqGrid({
 			url: 'webroot/rolesethandler/queryEditFunc',
 			height: "220", width: "550", pager: false,
-			postData: { pgmTyp : '',rolCode: code },
+			postData: { parent : '',code: code },
             multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
             pager:false,
             colModel: [{
-                header: i18n['roleSet_Page']['pgmCode'],//"功能代碼
+                header: i18n['roleSet_Page']['funccode'],//"功能代碼
                 name: 'code', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['pgmName'],//"功能名稱
+                header: i18n['roleSet_Page']['funcname'],//"功能名稱
                 name: 'name', align: "left", sortable: true
             },  {
-                header: i18n['roleSet_Page']['pgmTyp'],//"上層功能代碼
+                header: i18n['roleSet_Page']['funcparent'],//"上層功能代碼
                 name: 'parent', align: "left", sortable: true
             }]
         });
@@ -191,17 +191,17 @@ pageInit(function(){
         		var form = pDialog.find("#mform");
         		$.ajax({
                     url: "webroot/rolesethandler/getAllFunc",
-                    data : {systyp: $form.find("#sysTyp").val()},
+                    data : {sysType: $form.find("#sysType").val()},
                     success: function(json){
-                    	form.find("#pgmTyp").setOptions(json);
+                    	form.find("#parent").setOptions(json);
                     }
                 });
         		form.find("#query").click(function(){//查詢
         			gridEditFunc.jqGrid('setGridParam', {
                         postData: {
-                        	rolCode : code,
-                        	systyp: $form.find("#sysTyp").val(),
-                        	pgmTyp : form.find('#pgmTyp').val()
+                        	code : code,
+                        	sysType: $form.find("#sysType").val(),
+                        	parent : form.find('#parent').val()
                         }
                     });
         			gridEditFunc.trigger("reloadGrid");
@@ -215,15 +215,15 @@ pageInit(function(){
         		value:function(){
         			if(gridEditFunc.getSelRowDatas()){
 	        			$.ajax({
-	    	                url: "webroot/rolesethandler/saveRlf",
+	    	                url: "webroot/rolesethandler/saveRfList",
 	    	                data: {
-	    	                	rolCode: code,
+	    	                	code: code,
 	    	                	funcItem: JSON.stringify(gridEditFunc.getSelRowDatas())
 	    	                },
 	    	                success: function(rtn){
 	    	                	gridFunc.jqGrid('setGridParam', {
 	    	                        postData: {
-	    	                        	rolCode : code
+	    	                        	code : code
 	    	                        }
 	    	                    });
 	    	                	gridFunc.trigger("reloadGrid");
@@ -254,15 +254,15 @@ pageInit(function(){
 		}).end().find("#delete").click(function(){//刪除
 			if(gridFunc.getSelRowDatas()){
 				$.ajax({
-	                url: "webroot/rolesethandler/deleteRlf",
+	                url: "webroot/rolesethandler/deleteRfList",
 	                data: {
-	                	rolCode: code,
+	                	code: code,
 	                	funcItem: JSON.stringify(gridFunc.getSelRowDatas())
 	                },
 	                success: function(rtn){
 	                	gridFunc.jqGrid('setGridParam', {
 	                        postData: {
-	                        	rolCode : code
+	                        	code : code
 	                        }
 	                    });
 	                	gridFunc.trigger("reloadGrid");
@@ -282,7 +282,7 @@ pageInit(function(){
                 	isNew:isNew
                 }),
                 success: function(rtn){
-                	code = reqJSON.rolCode = $form.find("#roleId").val();
+                	code = reqJSON.code = $form.find("#code").val();
                 	isNew = false;
                 	init();
                 	API.triggerOpener();

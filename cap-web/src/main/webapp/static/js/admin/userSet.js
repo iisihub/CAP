@@ -2,8 +2,8 @@ pageInit(function() {
   $(document).ready(function() {
     var grid, mform = $("#mform"), qform = $('#qform');
     grid = $("#gridview").jqGrid({
-      url : 'webroot/usershandler/query',
-      sortname : 'staffpid',
+      url : 'webroot/usersethandler/query',
+      sortname : 'code',
       sortorder : "desc",
       height : 250,
       multiselect : true,
@@ -11,17 +11,17 @@ pageInit(function() {
         name : 'oid',
         hidden : true
       }, {
-        header : i18n.userSet.userid,
-        name : 'staffpid',
+        header : i18n.userSet.usercode,
+        name : 'code',
         width : 80,
         align : "center"
       }, {
         header : i18n.userSet.username,
-        name : 'staffpnm',
+        name : 'name',
         width : 80,
         align : "center"
       }, {
-        header : i18n.userSet.status,
+        header : i18n.userSet.userstatus,
         name : 'status',
         width : 80,
         align : "center"
@@ -46,23 +46,23 @@ pageInit(function() {
       } ]
     });
     grid2 = $("#roleGrid").jqGrid({
-      url : 'webroot/usershandler/findRole',
-      sortname : 'roleId',
+      url : 'webroot/usersethandler/findRole',
+      sortname : 'code',
       sortorder : "desc",
       height : 250,
       multiselect : true,
       colModel : [ {
-        header : i18n.userSet.roleid,
-        name : 'roleId',
+        header : i18n.userSet.rolecode,
+        name : 'code',
         width : 80,
         align : "center",
         hidden : true
       }, {
         header : i18n.userSet.rolename,
-        name : 'rolName',
+        name : 'name',
         width : 80
       }, {
-        name : 'staffpid',
+        name : 'usercode',
         hidden : true
       } ],
       loadComplete : function(data) {
@@ -75,27 +75,26 @@ pageInit(function() {
       }
     });
     grid3 = $("#qRoleGrid").jqGrid({
-      // caption:'角色',
-      url : 'webroot/usershandler/queryAllRole',
-      sortname : 'roleId',
+      url : 'webroot/usersethandler/queryAllRole',
+      sortname : 'code',
       sortorder : "desc",
       height : 150,
       multiselect : true,
       colModel : [ {
-        header : i18n.userSet.roleid,
-        name : 'roleId',
+        header : i18n.userSet.rolecode,
+        name : 'code',
         width : 80,
         align : "center",
         hidden : true
       }, {
         header : i18n.userSet.rolename,
-        name : 'rolName',
+        name : 'name',
         width : 80
       } ]
     });
     grid4 = $("#statusGrid").jqGrid({
       // caption:'狀態',
-      url : 'webroot/usershandler/queryAllUserStatus',
+      url : 'webroot/usersethandler/queryAllUserStatus',
       sortname : 'codeValue',
       sortorder : "desc",
       height : 150,
@@ -105,7 +104,7 @@ pageInit(function() {
         name : 'codeValue',
         hidden : true
       }, {
-        header : i18n.userSet.status,
+        header : i18n.userSet.userstatus,
         name : 'codeDesc',
         width : 80
       } ]
@@ -120,6 +119,7 @@ pageInit(function() {
         if (aDialog.data('type') == 'add') {
           title.text(i18n.userSet.add);
           aDialog.find('#statusArea').hide();
+          aDialog.find('#code').removeAttr("readonly");
           aDialog.find('#password').addClass("validate[required]");
           aDialog.find('#confirm').addClass("validate[required]");
           grid2.trigger("reloadGrid");
@@ -127,8 +127,8 @@ pageInit(function() {
           title.text(i18n.userSet.modify);
           var users = grid.getSelRowDatas();
           aDialog.find('#oid').val(users[0].oid);
-          aDialog.find('#userId').val(users[0].staffpid);
-          aDialog.find('#userName').val(users[0].staffpnm);
+          aDialog.find('#code').val(users[0].code).attr("readonly","readonly");
+          aDialog.find('#name').val(users[0].name);
           aDialog.find('#email').val(users[0].email);
           aDialog.find('#statusArea').show();
           aDialog.find('#status').text(users[0].status);
@@ -138,7 +138,7 @@ pageInit(function() {
           grid2.setGridParam({
             postData : {
               type : 'modify',
-              userId : users[0].staffpid
+              userCode : users[0].code
             }
           }).trigger("reloadGrid");
         }
@@ -153,9 +153,9 @@ pageInit(function() {
         value : function() {
           var mform = aDialog.find("#mform");
           mform.validationEngine('validate') && $.ajax({
-            url : "webroot/usershandler/" + aDialog.data('type'),
+            url : "webroot/usersethandler/" + aDialog.data('type'),
             data : $.extend(mform.serializeData(), {
-              roleOids : grid2.getSelRowDatas('roleId')
+              roleCodes : grid2.getSelRowDatas('code')
             }),
             success : function() {
               grid.trigger("reloadGrid");
@@ -183,15 +183,13 @@ pageInit(function() {
         key : i18n.def.sure,
         value : function() {
           // 得這樣清 postData = =?
-          // grid.jqGrid('getGridParam', 'postData')['userId'] = null;
-          // grid.jqGrid('getGridParam', 'postData')['userName'] = null;
-          grid.jqGrid('getGridParam', 'postData')['roleOids'] = [];
+          grid.jqGrid('getGridParam', 'postData')['roleCodes'] = [];
           grid.jqGrid('getGridParam', 'postData')['status'] = [];
           grid.jqGrid('setGridParam', {
             postData : {
-              userId : qform.find("#qUserId").val(),
-              userName : qform.find("#qUserName").val(),
-              roleOids : grid3.getSelRowDatas('roleId'),
+              code : qform.find("#qUserCode").val(),
+              name : qform.find("#qUserName").val(),
+              roleCodes : grid3.getSelRowDatas('code'),
               status : grid4.getSelRowDatas('codeValue')
             }
           });
@@ -237,7 +235,7 @@ pageInit(function() {
       if (grid.getSelRowDatas()) {
         API.showConfirmMessage(i18n.def.actoin_001, function(data) {
           data && $.ajax({
-            url : "webroot/usershandler/" + action,
+            url : "webroot/usersethandler/" + action,
             data : {
               oids : grid.getSelRowDatas('oid')
             },

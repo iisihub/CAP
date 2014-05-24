@@ -11,7 +11,9 @@
 
 package com.iisigroup.cap.base.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -36,51 +38,61 @@ import com.iisigroup.cap.dao.utils.SearchMode;
 @Repository
 public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
 
-	@Override
-	public List<I18n> findByCodeType(String codetype, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeType", codetype);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
-		List<I18n> list = find(search);
-		return list;
-	}
+    @Override
+    public List<I18n> findByCodeType(String codetype, String locale) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", codetype);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("codeOrder");
+        List<I18n> list = find(search);
+        return list;
+    }
 
-	@Override
-	public I18n findByCodeTypeAndCodeValue(String cType, String cValue,
-			String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeValue", cValue);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public I18n findByCodeTypeAndCodeValue(String cType, String cValue,
+            String locale) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeValue", cValue);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<I18n> findByCodeType(String[] codetypes, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.IN, "codeType", codetypes);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
-		return find(search);
-	}
+    @Override
+    public List<I18n> findByCodeType(String[] codetypes, String locale) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.IN, "codeType", codetypes);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("codeOrder");
+        return find(search);
+    }
 
-	@Override
-	public List<I18n> findByCodeTypeAndCodeDesc(String cType,
-			String codeDesc, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeDesc", codeDesc);
-		return find(search);
-	}
+    @Override
+    public List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc,
+            String locale) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeDesc", codeDesc);
+        return find(search);
+    }
 
-	@Override
-	public I18n findByOid(String oid) {
-		return find(oid);
-	}
+    @Override
+    public I18n findByOid(String oid) {
+        return find(oid);
+    }
+
+    @Override
+    public Map<String, I18n> findAsMapByCodeType(String codetype, String locale) {
+        List<I18n> list = findByCodeType(codetype, locale);
+        Map<String, I18n> map = new HashMap<String, I18n>();
+        for (I18n i18n : list) {
+            map.put(i18n.getCodeValue(), i18n);
+        }
+        return map;
+    }
 
 }
