@@ -3147,3 +3147,6 @@ footer {
 .text-red {
   color:red
 }
+.text-breakAll{
+	word-break:break-all
+}

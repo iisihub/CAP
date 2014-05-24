@@ -12,7 +12,7 @@ pageInit(function() {
                     testStr : "test!!test!!"
                 },
                 success : function(data) {
-                    //API.showMessage(data.mktMatlType, data.mktMatl, $("#showMessage"), data.size);
+                    //API.showMessage(data.mktMatlType, data.mktMatl, $("#showMessage"), data.size);
                 }
             });
         });

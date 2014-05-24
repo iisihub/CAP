@@ -23,7 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 
 import com.iisigroup.cap.security.model.IRole;
-import com.iisigroup.cap.security.service.ISecurityService;
+import com.iisigroup.cap.security.service.IAccessControlService;
 
 /**
  * <p>
@@ -37,7 +37,7 @@ import com.iisigroup.cap.security.service.ISecurityService;
  */
 public class CapPermissionVoter extends RoleVoter {
 
-	protected ISecurityService securityService;
+	protected IAccessControlService securityService;
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -65,7 +65,7 @@ public class CapPermissionVoter extends RoleVoter {
 					// Attempt to find a matching granted authority
 					for (IRole role : roles) {
 						for (GrantedAuthority auth : authorities) {
-							if (auth.getAuthority().equals(role.getOid())) {
+							if (auth.getAuthority().equals(role.getRoleId())) {
 								return ACCESS_GRANTED;
 							}
 						}
@@ -76,7 +76,7 @@ public class CapPermissionVoter extends RoleVoter {
 		return result;
 	}// ;
 
-	public void setSecurityService(ISecurityService securityService) {
+	public void setSecurityService(IAccessControlService securityService) {
 		this.securityService = securityService;
 	}
 

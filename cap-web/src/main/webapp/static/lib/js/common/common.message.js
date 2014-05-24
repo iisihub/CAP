@@ -1,4 +1,5 @@
 (function($){
+	logDebug("common message init");
     var msgButton, msg, newMsg, msgContainer, parent, index = 0;
     var s = $.extend({
         hide: false,
@@ -62,6 +63,10 @@
     defaultMsg.push({
         level: "client",
         css: "log_client"
+    });
+    defaultMsg.push({
+        level: "notify",
+        css: "notify"
     });
     ilog.addMessageLevel(defaultMsg);
     function init(){

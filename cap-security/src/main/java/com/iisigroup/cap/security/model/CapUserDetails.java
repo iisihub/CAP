@@ -23,6 +23,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.corundumstudio.socketio.SocketIOClient;
+
 /**
  * <pre>
  * CapUserDetails
@@ -45,6 +47,8 @@ public class CapUserDetails implements UserDetails {
 	private Map<String, String> roles;
 	private JSONArray menu;
 	private Locale locale;
+	private String status;
+	private SocketIOClient socketClient;
 
 	private Collection<GrantedAuthority> authorities;
 
@@ -59,6 +63,7 @@ public class CapUserDetails implements UserDetails {
 		this.roles = new LinkedHashMap<String, String>();
 		this.roles.putAll(roles);
 		this.locale = user.getLocale();
+		this.status = user.getStatus();
 		setAuthorities(roles);
 	}
 
@@ -149,6 +154,22 @@ public class CapUserDetails implements UserDetails {
 
 	public void setUnitNo(String unitNo) {
 		this.unitNo = unitNo;
+	}
+	
+	public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+	public SocketIOClient getSocketClient() {
+		return socketClient;
+	}
+
+	public void setSocketClient(SocketIOClient socketClient) {
+		this.socketClient = socketClient;
 	}
 
 }

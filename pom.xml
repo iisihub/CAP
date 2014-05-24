@@ -54,6 +54,11 @@
             </dependency>
             <dependency>
                 <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-auth-admin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
                 <artifactId>cap-batch</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -70,7 +75,7 @@
             <dependency>
                 <groupId>com.iisigroup.cap</groupId>
                 <artifactId>cap-websocket</artifactId>
-                <version>0.0.1</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -83,6 +88,7 @@
 		<module>cap-hg</module>
 		<module>cap-db</module>
 		<module>cap-base</module>
+		<module>cap-auth-admin</module>
 		<module>cap-batch</module>
 		<module>cap-websocket</module>
 		<module>cap-captcha</module>

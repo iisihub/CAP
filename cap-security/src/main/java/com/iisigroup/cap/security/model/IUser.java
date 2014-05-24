@@ -13,6 +13,8 @@
 package com.iisigroup.cap.security.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,14 +31,28 @@ import java.util.Locale;
  */
 public interface IUser extends Serializable {
 
-	String getUserId();
+    String getUserId();
 
-	String getUserName();
+    String getUserName();
 
-	String getUnitNo();
+    String getUnitNo();
 
-	List<? extends IRole> getRoles();
+    String getApplyNf();
 
-	Locale getLocale();
+    String getApplyRem();
+
+    BigDecimal getWeights();
+
+    String getUpdater();
+
+    Timestamp getUpdateTime();
+
+    List<? extends IRole> getRoles();
+
+    Locale getLocale();
+
+    String getPassword();
+
+    String getStatus();
 
 }

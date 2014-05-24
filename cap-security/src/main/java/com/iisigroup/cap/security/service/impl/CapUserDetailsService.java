@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,88 +42,91 @@ import com.iisigroup.cap.utils.CapString;
  */
 public class CapUserDetailsService implements UserDetailsService {
 
-	private static final Log logger = LogFactory
-			.getLog(CapUserDetailsService.class);
+    private static final Log logger = LogFactory
+            .getLog(CapUserDetailsService.class);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.springframework.security.userdetails.UserDetailsService#
-	 * loadUserByUsername(java.lang.String)
-	 */
-	public UserDetails loadUserByUsername(String username) {
-		if (CapString.isEmpty(username)) {
-			throw new UsernameNotFoundException("Empty login");
-		}
+    /*
+     * (non-Javadoc)
+     * 
+     * @seeorg.springframework.security.userdetails.UserDetailsService#
+     * loadUserByUsername(java.lang.String)
+     */
+    public UserDetails loadUserByUsername(String username) {
+        if (CapString.isEmpty(username)) {
+            throw new UsernameNotFoundException("Empty login");
+        }
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Security verification for user '" + username + "'");
-		}
+        if (logger.isDebugEnabled()) {
+            logger.debug("Security verification for user '" + username + "'");
+        }
 
-		IUser user = obtainAccount(username);
+        IUser user = obtainAccount(username);
 
-		if (user == null) {
-			if (logger.isInfoEnabled()) {
-				logger.info("Account " + username + " could not be found");
-			}
-			throw new UsernameNotFoundException("account " + username
-					+ " could not be found");
-		}
+        if (user == null) {
+            if (logger.isInfoEnabled()) {
+                logger.info("Account " + username + " could not be found");
+            }
+            throw new UsernameNotFoundException("account " + username
+                    + " could not be found");
+        }
 
-		String password = obtainPassword(username);
+        String password = obtainPassword(user);
 
-		Map<String, String> roles = obtainRole(user);
-		//
-		// boolean enabled = user.isEnabled();
-		// boolean accountNonExpired = true;
-		// boolean credentialsNonExpired = true;
-		// boolean accountNonLocked = true;
-		return obtainUserDetails(user, password, roles);
+        Map<String, String> roles = obtainRole(user);
+        // TODO
+        //
+        // boolean enabled = user.isEnabled();
+        // boolean accountNonExpired = true;
+        // boolean credentialsNonExpired = true;
+        // boolean accountNonLocked = true;
+        return obtainUserDetails(user, password, roles);
 
-	}
+    }
 
-	public UserDetails obtainUserDetails(IUser user, String password,
-			Map<String, String> roles) {
-		return new CapUserDetails(user, password, roles);
-	}
+    public UserDetails obtainUserDetails(IUser user, String password,
+            Map<String, String> roles) {
+        return new CapUserDetails(user, password, roles);
+    }
 
-	private IUserDao<IUser> userDao;
+    @Resource
+    private IUserDao<IUser> userDao;
 
-	public void setUserDao(IUserDao<IUser> userDao) {
-		this.userDao = userDao;
-	}
+    public void setUserDao(IUserDao<IUser> userDao) {
+        this.userDao = userDao;
+    }
 
-	public IUserDao<IUser> getUserDao() {
-		return userDao;
-	}
+    public IUserDao<IUser> getUserDao() {
+        return userDao;
+    }
 
-	/**
-	 * Return the user depending on the login provided by spring security.
-	 * 
-	 * @return the user if found
-	 */
-	protected IUser obtainAccount(String login) {
-		return userDao.getUserByLoginId(login, null);
-	}
+    /**
+     * Return the user depending on the login provided by spring security.
+     * 
+     * @return the user if found
+     */
+    protected IUser obtainAccount(String login) {
+        return userDao.getUserByLoginId(login, null);
+    }
 
-	@SuppressWarnings("unchecked")
-	protected Map<String, String> obtainRole(IUser user) {
-		Map<String, String> mRoles = new HashMap<String, String>();
-		List<IRole> roles = (List<IRole>) userDao.getRoleByUser(user);
-		if (roles != null) {
-			for (int i = 0; i < roles.size(); i++) {
-				IRole role = roles.get(i);
-				mRoles.put(role.getOid(), role.getRoleName());
-			}
-		}
-		return mRoles;
-	}
+    @SuppressWarnings("unchecked")
+    protected Map<String, String> obtainRole(IUser user) {
+        Map<String, String> mRoles = new HashMap<String, String>();
+        List<IRole> roles = (List<IRole>) userDao.getRoleByUser(user);
+        if (roles != null) {
+            for (int i = 0; i < roles.size(); i++) {
+                IRole role = roles.get(i);
+                mRoles.put(role.getRoleId(), role.getRoleName());
+            }
+        }
+        return mRoles;
+    }
 
-	/**
-	 * Returns null. Subclass may override it to provide their own password.
-	 */
-	protected String obtainPassword(String username) {
-		return "";
-	}
+    /**
+     * Default password encoding algorithm is SHA-256. Subclass may override it
+     * to provide their own password.
+     */
+    protected String obtainPassword(IUser user) {
+        return user.getPassword();
+    }
 
 }

@@ -36,10 +36,10 @@
 			/> <param name="parameter.value" value="true" /> </mapper> -->
 
 		<mapper class="com.iisigroup.cap.sitemesh.mapper.CapI18nMapper">
-			<param name="ignorePathReg" value="(page/index|page/login)" />
+			<param name="ignorePathReg" value="(page/index)" />
 		</mapper>
 		<mapper class="com.iisigroup.cap.sitemesh.mapper.CapRequestJSONMapper">
-			<param name="decoratorFile" value="minimal,form"/>
+			<param name="decoratorFile" value="minimal,form,login"/>
 			<param name="ignoreParams" value="_isAjax,formAction,_pa"/>
 		</mapper>
 		
