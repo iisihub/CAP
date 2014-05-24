@@ -38,16 +38,16 @@
 				<li>&nbsp;-<a href="?lang=zh_CN">&nbsp;简体&nbsp;</a></li>
 				<li>&nbsp;-<a href="?lang=en">&nbsp;ENGLISH&nbsp;</a></li>
 			</ol>
+			<!-- for security logout use -->
+			<!-- 
+			<ol style="height: 18px;width: 35px;right: 140px;">
+				<li class="lang"><a href="../j_spring_security_logout">登出</a></li>
+			</ol>
+			 -->
 		</header>
 		<nav class="top">
 			<ul class="block"></ul>
-			<ul class="navmenu">
-				<!-- 	<li><a href="index">關於我們</a></li>
-                	<li><a href="system/system">系統設定</a></li>
-                	<li><a href="sample/sample">範例交易</a></li>
-                	<li><a href="batch/batch">排程管理</a></li>
-                	 -->
-			</ul>
+			<ul class="navmenu"></ul>
 		</nav>
 		<div class="clear"></div>
 		<div class="main">
