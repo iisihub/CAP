@@ -12,7 +12,8 @@ package com.iisigroup.cap.report.enums;
  *          </ul>
  */
 public enum ReportParamEnum {
-	templateName("templateName"), defaultEncoding("defaultEncoding"), encrypt("encryptPassword");
+	templateName("templateName"), defaultEncoding("defaultEncoding"), encrypt(
+			"encryptPassword"), defaultFont("defaultFont");
 
 	private String code;
 

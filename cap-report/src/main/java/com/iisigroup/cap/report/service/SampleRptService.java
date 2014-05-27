@@ -1,4 +1,4 @@
-package com.iisigroup.cap.report.service.impl;
+package com.iisigroup.cap.report.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ import com.iisigroup.cap.utils.CapDate;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Scope("request")
-@Service("samplePdfService")
-public class SamplePdfRptServiceImpl extends AbstractReportPdfService {
+@Service
+public class SampleRptService extends AbstractReportPdfService {
 
 	@Override
 	public Map<String, Object> excute(IRequest request) {
@@ -66,7 +66,7 @@ public class SamplePdfRptServiceImpl extends AbstractReportPdfService {
 	}
 
 	@Override
-	protected int[] getAllowedPrivileges() {
-		return new int[] { PdfWriter.ALLOW_PRINTING };
+	protected int getAllowedPrivileges() {
+		return PdfWriter.ALLOW_SCREENREADERS;//允許螢幕閱讀(複製內容用於協助工具)
 	}
 }

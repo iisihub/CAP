@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -31,12 +33,11 @@ import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.report.enums.ContextTypeEnum;
-import com.iisigroup.cap.report.service.impl.SamplePdfRptServiceImpl;
+import com.iisigroup.cap.report.service.SampleRptService;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.ByteArrayDownloadResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.annotation.Captcha;
-import com.iisigroup.cap.utils.CapAppContext;
 
 /**
  * <pre>
@@ -90,14 +91,14 @@ public class SampleHandler extends MFormHandler {
 		// return new FileDownloadResult(request, "logs/CapLog.log", outputName,
 		// "text/plain");
 	}// ;
-	
+	@Resource
+	private SampleRptService sampleRptService;
 	
 	@HandlerType(HandlerTypeEnum.FileDownload)
 	public IResult dwnloadPdf(IRequest request) throws CapException {
 		ByteArrayOutputStream file = null;
 		try {
-			file = ((SamplePdfRptServiceImpl) CapAppContext
-					.getBean("samplePdfService")).generateReport(request);
+			file = sampleRptService.generateReport(request);
 			return new ByteArrayDownloadResult(request, file.toByteArray(),
 					ContextTypeEnum.pdf.toString(), "test.pdf");
 		} catch (Exception e) {
