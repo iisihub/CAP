@@ -21,6 +21,13 @@
 		<class>com.iisigroup.cap.base.model.Remind</class>
 		<class>com.iisigroup.cap.base.model.Reminds</class>
 		
+		<class>com.iisigroup.cap.rule.model.CaseInfo</class>
+		<class>com.iisigroup.cap.rule.model.DivFtItm</class>
+		<class>com.iisigroup.cap.rule.model.DivFtDtl</class>
+		<class>com.iisigroup.cap.rule.model.DivCtItm</class>
+		<class>com.iisigroup.cap.rule.model.DivCtDtl</class>
+		<class>com.iisigroup.cap.rule.model.DivRlItm</class>
+		<class>com.iisigroup.cap.rule.model.DivRlDtl</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes> 
 	</persistence-unit>

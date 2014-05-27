@@ -111,7 +111,13 @@ public class SampleHandler extends MFormHandler {
 	}// ;
 
     public IResult queryMenu(IRequest request){
-        return new AjaxFormResult("{'child':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'def/about'}]},{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'system/codetype'},{'name':'參數設定','url':'system/sysparm'},{'name':'流水號檢視','url':'system/sequence'}]},{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'sample/fileUpdDwn'}, {'name':'WebSocket','url':'sample/webSocket'}]},{'name':'排程管理','url':'batch','child':[{'name':'排程控管','url':'','child':[{'name':'排程設定','url':'batch/schedule'},{'name':'排程Job清單','url':'batch/jobs'}]},{'name':'排程監控','url':'batch/jobexecution'}]}]}");
+        return new AjaxFormResult(
+                  "{'child':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'def/about'}]}"
+                  + ",{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'system/codetype'}"
+                  + ",{'name':'參數設定','url':'system/sysparm'},{'name':'流水號檢視','url':'system/sequence'}]}"
+                  + ",{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'sample/fileUpdDwn'},{'name':'WebSocket','url':'sample/webSocket'}]}"
+                  + ",{'name':'分案管理','url':'division','child':[{'name':'因子維護','url':'division/factorMnt'},{'name':'條件維護','url':'division/conditionMnt'},{'name':'規則維護','url':'division/ruleTbMnt'},{'name':'計劃維護','url':'division/batchPlaneMnt'}]}"
+                  + ",{'name':'排程管理','url':'batch','child':[{'name':'排程控管','url':'','child':[{'name':'排程設定','url':'batch/schedule'},{'name':'排程Job清單','url':'batch/jobs'}]},{'name':'排程監控','url':'batch/jobexecution'}]}]}");
     }
     
     /**

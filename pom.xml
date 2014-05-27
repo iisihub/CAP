@@ -74,6 +74,11 @@
             </dependency>
             <dependency>
                 <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-rule</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
                 <artifactId>cap-websocket</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -90,6 +95,7 @@
 		<module>cap-base</module>
 		<module>cap-auth-admin</module>
 		<module>cap-batch</module>
+		<module>cap-rule</module>
 		<module>cap-websocket</module>
 		<module>cap-captcha</module>
 		<module>cap-report</module>
