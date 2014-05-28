@@ -88,7 +88,7 @@ pageInit(function(){
 				}
 				ruleMapGrid.trigger("reload");
 	    	} else {
-	    		API.showPopMessage(i18n.ruleTbMntPage.ruleTb0001);
+	    		API.showPopMessage(i18n.ruleTbMnt_Page.ruleTb0001);
 	    	}
 		});
 		
@@ -99,7 +99,7 @@ pageInit(function(){
 				ruleMapGrid.removeSelected();
 //				ruleMapGrid.trigger("reloadGrid");
 	    	} else {
-	    		API.showPopMessage(i18n.ruleTbMntPage.ruleTb0003);
+	    		API.showPopMessage(i18n.ruleTbMnt_Page.ruleTb0003);
 	    	}
 		});
 		
@@ -134,7 +134,7 @@ pageInit(function(){
 					ruleMapGrid.trigger("reloadGrid");
 	    		}
 	    	} else {
-	    		API.showPopMessage(i18n.ruleTbMntPage.ruleTb0002);
+	    		API.showPopMessage(i18n.ruleTbMnt_Page.ruleTb0002);
 	    	}
 		});
 
@@ -168,7 +168,7 @@ pageInit(function(){
 					ruleMapGrid.trigger("reloadGrid");
 	    		}
 	    	} else {
-	    		API.showPopMessage(i18n.ruleTbMntPage.ruleTb0002);
+	    		API.showPopMessage(i18n.ruleTbMnt_Page.ruleTb0002);
 	    	}
 		});
 

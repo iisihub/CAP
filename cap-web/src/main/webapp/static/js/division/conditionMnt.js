@@ -22,7 +22,7 @@ pageInit(function(){
         
         function openDoc(cellvalue, options, rowObject){
         	CommonAPI.formSubmit({
-                url: './division/conditionMntPage',
+                url: './division/conditionMnt_Page',
                 data: {
                     mainOid: rowObject.oid,
                     factorNo: rowObject.divCtNo
@@ -45,7 +45,7 @@ pageInit(function(){
 				data : {
 					type : 'A'
 				},
-				url : './division/conditionMntPage',
+				url : './division/conditionMnt_Page',
 				target : "_blank"
 			});
 		});

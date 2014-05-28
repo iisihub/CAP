@@ -11,7 +11,7 @@
 </head>
 <body>
 <script>
-	loadScript('js/division/factorMntPage');
+	loadScript('js/division/factorMnt_Page');
 </script>
 <!-- 	<div id="headerarea">
 		<div class="header_wrap">

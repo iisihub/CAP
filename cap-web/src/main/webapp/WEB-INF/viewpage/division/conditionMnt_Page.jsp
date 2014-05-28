@@ -11,7 +11,7 @@
 </head>
 <body>
 <script>
-	loadScript('js/division/conditionMntPage');
+	loadScript('js/division/conditionMnt_Page');
 </script>
 <!-- 	<div id="headerarea">
 		<div class="header_wrap">

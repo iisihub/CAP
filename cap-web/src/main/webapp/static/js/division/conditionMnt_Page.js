@@ -113,7 +113,7 @@ pageInit(function(){
 				}
 				cndtDtlGrid.trigger("reload");
 	    	} else {
-	    		API.showPopMessage(i18n.conditionMntPage.cond0001);
+	    		API.showPopMessage(i18n.conditionMnt_Page.cond0001);
 //	    		alert("請先選取因子值域資料");
 	    	}
 		});
@@ -125,7 +125,7 @@ pageInit(function(){
 				cndtDtlGrid.removeSelected();
 //				cndtDtlGrid.trigger("reloadGrid");
 	    	} else {
-	    		API.showPopMessage(i18n.conditionMntPage.cond0001);
+	    		API.showPopMessage(i18n.conditionMnt_Page.cond0001);
 //	    		alert("請先選取一筆條件資料");
 	    	}
 		});
@@ -161,7 +161,7 @@ pageInit(function(){
 					cndtDtlGrid.trigger("reloadGrid");
 	    		}
 	    	} else {
-	    		API.showPopMessage(i18n.conditionMntPage.cond0003);
+	    		API.showPopMessage(i18n.conditionMnt_Page.cond0003);
 //	    		alert("請先選取一筆條件資料");
 	    	}
 		});
@@ -196,7 +196,7 @@ pageInit(function(){
 					cndtDtlGrid.trigger("reloadGrid");
 	    		}
 	    	} else {
-	    		API.showPopMessage(i18n.conditionMntPage.cond0003);
+	    		API.showPopMessage(i18n.conditionMnt_Page.cond0003);
 //	    		alert("請先選取一筆條件資料");
 	    	}
 		});

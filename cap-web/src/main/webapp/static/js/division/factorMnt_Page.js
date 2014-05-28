@@ -13,11 +13,11 @@ pageInit(function(){
 //			needPager : true,
 //			multiselect: true,
 			postData:{factorNo:$("#factorNo").val()},
-			colModel : [ { header: i18n['factorMntPage']['rangeNm'], name : "rangeNm", align: "left", width: 20 }
-			, { header: i18n['factorMntPage']['range1'], name : "range1", align: "left", width: 10 }
-			, { header: i18n['factorMntPage']['range2'], name : "range2", align: "left", width: 10 }
-			, { header: i18n['factorMntPage']['rangesor'], name : "rangesor", align: "left", width: 10, hidden:true }
-			, { header: i18n['factorMntPage']['rangeNo'], name : "rangeNo", hidden:true,width: 4 }
+			colModel : [ { header: i18n['factorMnt_Page']['rangeNm'], name : "rangeNm", align: "left", width: 20 }
+			, { header: i18n['factorMnt_Page']['range1'], name : "range1", align: "left", width: 10 }
+			, { header: i18n['factorMnt_Page']['range2'], name : "range2", align: "left", width: 10 }
+			, { header: i18n['factorMnt_Page']['rangesor'], name : "rangesor", align: "left", width: 10, hidden:true }
+			, { header: i18n['factorMnt_Page']['rangeNo'], name : "rangeNo", hidden:true,width: 4 }
 			, { colHeader : "oid", name : "oid", hidden:true,width: 6 }
 			]
 		});
