@@ -2,7 +2,7 @@ pageInit(function(){
     $(document).ready(function(){
         var grid, mform = $("#mform");
         grid = $("#gridview").jqGrid({
-            url: 'webroot/codetypehandler/query',
+            url: url('codetypehandler/query'),
             sortname: 'codeType',sortorder: "desc",height: 250,
             colModel: [{name: 'oid',hidden: true
             }, {header: i18n['codetype']['codetype.codeType'],
@@ -38,7 +38,7 @@ pageInit(function(){
             API.showConfirmMessage(i18n.def.actoin_001, function(data){
                 data &&
                 $.ajax({
-                    url: "webroot/codetypehandler/modify",
+                    url: url("codetypehandler/modify"),
                     data: $.extend(mform.serializeData(), {
                         type: "A"
                     }),
@@ -55,7 +55,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/codetypehandler/modify",
+                        url: url("codetypehandler/modify"),
                         data: $.extend(mform.serializeData(), {
                             type: "M"
                         }),
@@ -75,7 +75,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/codetypehandler/delete",
+                        url: url("codetypehandler/delete"),
                         data: {
                             oid: $("#oid").val()
                         },

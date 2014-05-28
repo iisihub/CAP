@@ -2,7 +2,7 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var grid = $("#gridview").jqGrid({
-			url: 'webroot/departmenthandler/query',
+			url: url('departmenthandler/query'),
 			height: "380", width: "100%",
             multiselect: false, hideMultiselect: false, autowidth: true, localFirst: false,
             colModel: [{
@@ -65,7 +65,7 @@ pageInit(function(){
             		value:function(){
             			if ($form.validationEngine('validate')) {
                             $.ajax({
-                            	url: 'webroot/departmenthandler/save',
+                            	url: url('departmenthandler/save'),
                             	data: $.extend($form.serializeData(), {
 	                                oid: oid
 	                            }),
@@ -104,7 +104,7 @@ pageInit(function(){
 	            API.showConfirmMessage(i18n.def['del.confrim'], function(b){
 	                if (b) {
 	                    $.ajax({
-	                    	url: 'webroot/departmenthandler/delete',
+	                    	url: url('departmenthandler/delete'),
 	                        data: {
 	                            oid: rowObject.oid
 	                        },

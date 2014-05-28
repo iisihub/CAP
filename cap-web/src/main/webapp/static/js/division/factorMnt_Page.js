@@ -6,7 +6,7 @@ pageInit(function(){
 		var mform = $("#mform");
 
 		var ftDtlGrid = $("#ftDtlGrid").jqGrid({
-			url: 'webroot/factorMntGridhandler/queryFactorDtlGridByFactorNo',
+			url: url('factorMntGridhandler/queryFactorDtlGridByFactorNo'),
 			height : 150,
 			autowidth: true,
 			localFirst : true,
@@ -30,7 +30,7 @@ pageInit(function(){
 //		]);
 		
 		$.ajax({
-	        url:"webroot/factorMnthandler/query",
+	        url:url("factorMnthandler/query"),
 	        data:{
 	        	mainOid: _mainOid,
                 factorNo: _factorNo,
@@ -90,7 +90,7 @@ pageInit(function(){
 			$.extend(datas, gridData);
 			/**儲存 連後端儲存*/
 			$.ajax({
-				url : "webroot/factorMnthandler/saveFactorDtl",
+				url : url("factorMnthandler/saveFactorDtl"),
 				data : datas,
 				success : function(json) {
 //					ftDtlGrid.jqGrid('setGridParam', {

@@ -2,7 +2,7 @@ pageInit(function(){
     $(document).ready(function(){
         var mform = $("#mform");
         var grid = $("#gridview").jqGrid({
-	        url:"webroot/ruleTbMnthandler/queryRuleItmByDivRlNo",
+	        url:url("ruleTbMnthandler/queryRuleItmByDivRlNo"),
             height: "380",
             width: "100%",
             rownumbers: true,
@@ -69,7 +69,7 @@ pageInit(function(){
  					data : {
  						oid: selrow.oid
  					},
- 					url : "webroot/ruleTbMnthandler/delete",
+ 					url : url("ruleTbMnthandler/delete"),
  					success : function() {
  						grid.trigger("reloadGrid");
  					}

@@ -2,7 +2,7 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var grid = $("#gridview").jqGrid({
-			url: 'webroot/errorCodehandler/query',
+			url: url('errorCodehandler/query'),
 			height: "380", width: "100%",
             multiselect: false, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
@@ -76,7 +76,7 @@ pageInit(function(){
             		value:function(){
             			if ($form.validationEngine('validate')) {
                             $.ajax({
-                            	url: 'webroot/errorCodehandler/save',
+                            	url: url('errorCodehandler/save'),
                             	data: $.extend($form.serializeData(), {
 	                                oid: oid
 	                            }),
@@ -147,7 +147,7 @@ pageInit(function(){
 	            API.showConfirmMessage(i18n.def['del.confrim'], function(b){
 	                if (b) {
 	                    $.ajax({
-	                    	url: 'webroot/errorCodehandler/delete',
+	                    	url: url('errorCodehandler/delete'),
 	                        data: {
 	                            oid: rowObject.oid
 	                        },

@@ -8,7 +8,7 @@ pageInit(function(){
 		 * form initial
 		 */
 		$.ajax({
-	        url:"webroot/conditionMnthandler/query",
+	        url:url("conditionMnthandler/query"),
 	        data:{
 	        	mainOid: _mainOid,
                 factorNo: _factorNo,
@@ -26,7 +26,7 @@ pageInit(function(){
 		
 		var divFtSel = mform.find("#divFtSel");
 		$.ajax({
-	        url:"webroot/conditionMnthandler/getFtSelOption",
+	        url:url("conditionMnthandler/getFtSelOption"),
 	        data:{
 //	        	mainOid: _mainOid,
 //                factorNo: _factorNo,
@@ -46,7 +46,7 @@ pageInit(function(){
 		
 		/**因子值域*/
 		var ftRsGrid = $("#ftRsGrid").jqGrid({
-	        url:"webroot/conditionMnthandler/queryFactorDetailByFactorNo",
+	        url:url("conditionMnthandler/queryFactorDetailByFactorNo"),
 			height : '150',
 			localFirst : true,
             rownumbers: true,
@@ -69,7 +69,7 @@ pageInit(function(){
 		
 		/**條件內的因子列表*/
 		var cndtDtlGrid = $("#cndtDtlGrid").jqGrid({
-        	url: 'webroot/conditionMnthandler/queryConditionDtlGridByDivCtNo',
+        	url: url('conditionMnthandler/queryConditionDtlGridByDivCtNo'),
             height: '150',
             width: '100%',
             rownumbers: true,
@@ -213,7 +213,7 @@ pageInit(function(){
 			$.extend(datas, gridData);
 			/**儲存 連後端儲存*/
 			$.ajax({
-				url : "webroot/conditionMnthandler/saveConditionDtl",
+				url : url("conditionMnthandler/saveConditionDtl"),
 				data : datas,
 				success : function() {
 				}

@@ -1,7 +1,7 @@
 pageInit(function(){
     $(document).ready(function(){
         var grid = $("#gridview").jqGrid({
-            url: 'webroot/batchshandler/jobQuery',
+            url: url('batchshandler/jobQuery'),
             sortname: 'jobId',sortorder: "asc",height: 350,
             colModel: [{header: ' ',
                 name: 'jobStatus',width: 5,align:'center',sortable:false
@@ -32,7 +32,7 @@ pageInit(function(){
         		value:function(){
         			eDialog.find("#mform").validationEngine('validate') &&
         			$.ajax({
-                        url: "webroot/batchshandler/jobModify",
+                        url: url("batchshandler/jobModify"),
                         data: eDialog.find("#mform").serializeData(),
                         success: function(){
                         	grid.jqGrid('setGridParam', {
@@ -78,7 +78,7 @@ pageInit(function(){
         		key:i18n.def.sure,
         		value:function(){
         			$.ajax({
-                        url: "webroot/batchshandler/jobExecute",
+                        url: url("batchshandler/jobExecute"),
                         data: {
                         	jobId : exeDialog.find("#exeJobId").text(),
                         	jobParams : exeDialog.find("#jobParams").val()
@@ -104,7 +104,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/batchshandler/jobDelete",
+                        url: url("batchshandler/jobDelete"),
                         data: {
                         	jobId: ret.jobId
                         },
@@ -124,7 +124,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/batchshandler/jobLoad",
+                        url: url("batchshandler/jobLoad"),
                         data: {
                         	jobId: ret.jobId
                         },
@@ -147,7 +147,7 @@ pageInit(function(){
         
         exeDialog.find("#jglp").click(function(){//取得最後一次的執行參數
         	$.ajax({
-                url: "webroot/batchshandler/jobGetParam",
+                url: url("batchshandler/jobGetParam"),
                 data: {
                 	jobId: exeDialog.find("#exeJobId").val()
                 },

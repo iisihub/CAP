@@ -3,7 +3,7 @@ pageInit(function(){
     	var mform = $("#mform");
         var grid = $("#gridview").jqGrid({
 //    		handler : 'factorMnthandler',
-        	url: 'webroot/factorMntGridhandler/queryFactorItmGridByFactorNo',
+        	url: url('factorMntGridhandler/queryFactorItmGridByFactorNo'),
             height: "380",
             width: "100%",
             rownumbers: true,
@@ -81,7 +81,7 @@ pageInit(function(){
 					data : {
 						oid: selrow.oid
 					},
-					url : "webroot/factorMnthandler/delete",
+					url : url("factorMnthandler/delete"),
 					success : function() {
 						CommonAPI.showPopMessage("因子資料"+_factNo+"刪除完成");
 						grid.trigger("reloadGrid");
@@ -97,7 +97,7 @@ pageInit(function(){
 				data : {
 					ftItmNos : [ 1, 2, 3, 4 ]
 				},
-				url : "webroot/factorMnthandler/insertTestCases",
+				url : url("factorMnthandler/insertTestCases"),
 				success : function() {
 					CommonAPI.showPopMessage(" test insert action");
 				}

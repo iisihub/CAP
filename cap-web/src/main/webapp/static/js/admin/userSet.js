@@ -2,7 +2,7 @@ pageInit(function() {
   $(document).ready(function() {
     var grid, mform = $("#mform"), qform = $('#qform');
     grid = $("#gridview").jqGrid({
-      url : 'webroot/usersethandler/query',
+      url : url('usersethandler/query'),
       sortname : 'code',
       sortorder : "desc",
       height : 250,
@@ -46,7 +46,7 @@ pageInit(function() {
       } ]
     });
     grid2 = $("#roleGrid").jqGrid({
-      url : 'webroot/usersethandler/findRole',
+      url : url('usersethandler/findRole'),
       sortname : 'code',
       sortorder : "desc",
       height : 250,
@@ -75,7 +75,7 @@ pageInit(function() {
       }
     });
     grid3 = $("#qRoleGrid").jqGrid({
-      url : 'webroot/usersethandler/queryAllRole',
+      url : url('usersethandler/queryAllRole'),
       sortname : 'code',
       sortorder : "desc",
       height : 150,
@@ -94,7 +94,7 @@ pageInit(function() {
     });
     grid4 = $("#statusGrid").jqGrid({
       // caption:'狀態',
-      url : 'webroot/usersethandler/queryAllUserStatus',
+      url : url('usersethandler/queryAllUserStatus'),
       sortname : 'codeValue',
       sortorder : "desc",
       height : 150,
@@ -153,7 +153,7 @@ pageInit(function() {
         value : function() {
           var mform = aDialog.find("#mform");
           mform.validationEngine('validate') && $.ajax({
-            url : "webroot/usersethandler/" + aDialog.data('type'),
+            url : url("usersethandler/" + aDialog.data('type')),
             data : $.extend(mform.serializeData(), {
               roleCodes : grid2.getSelRowDatas('code')
             }),
@@ -235,7 +235,7 @@ pageInit(function() {
       if (grid.getSelRowDatas()) {
         API.showConfirmMessage(i18n.def.actoin_001, function(data) {
           data && $.ajax({
-            url : "webroot/usersethandler/" + action,
+            url : url("usersethandler/" + action),
             data : {
               oids : grid.getSelRowDatas('oid')
             },
