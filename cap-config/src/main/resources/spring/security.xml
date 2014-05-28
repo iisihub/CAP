@@ -21,6 +21,7 @@
 		<intercept-url pattern="/page/home/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/page/index" access="IS_AUTHENTICATED_FULLY" />
 		<intercept-url pattern="/page/common/*" access="IS_AUTHENTICATED_FULLY" />
+		<intercept-url pattern="/page/division/*" access="IS_AUTHENTICATED_FULLY" />
 		<intercept-url pattern="/page/**" access="${systemType}" />
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
 

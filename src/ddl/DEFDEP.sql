@@ -22,7 +22,7 @@ create table DEF_DEP (
    UPDATER              VARCHAR(10),
    UPDATETIME           TIMESTAMP              default CURRENT TIMESTAMP,
    DISCRIMINATOR		VARCHAR(31)            not null,
-   constraint P_DEF_BRN primary key (OID)
+   constraint P_DEF_DEP primary key (OID)
 );
 
 CREATE UNIQUE INDEX XDEFBRN01
