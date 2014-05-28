@@ -13,11 +13,9 @@ INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE,
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('07', 'P', 939132, '3', 929130, 'A', 222, '角色權限', 'system/roleSet', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('08', 'P', 939133, '3', 929180, 'A', 245, '使用者密碼政策', 'system/pwdpolicy', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('09', 'P', 929140, '2', 919110, 'A', 230, '分案管理', '', '','1', 'system', current timestamp);
-INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('10', 'P', 939141, '3', 929140, 'A', 231, '群組設定', 'division/groupStng', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('11', 'P', 939142, '3', 929140, 'A', 232, '因子維護', 'division/factorMnt', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('12', 'P', 939143, '3', 929140, 'A', 233, '條件維護', 'division/conditionMnt', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('13', 'P', 939144, '3', 929140, 'A', 234, '規則維護', 'division/ruleMnt', '','1', 'system', current timestamp);
-INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('14', 'P', 939145, '3', 929140, 'A', 235, '計畫維護', 'division/batchPlaneMnt', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('15', 'P', 929180, '2', 919110, 'A', 240, '參數設定', '', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('16', 'P', 939181, '3', 929180, 'A', 241, '共用參數', 'system/codetype', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('17', 'P', 939182, '3', 929180, 'A', 242, '系統設定維護', 'system/sysparm', '','1', 'system', current timestamp);
@@ -53,11 +51,9 @@ INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('9
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939131', 939131,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939132', 939132,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('929140', 929140,'AI0001', 'system', current timestamp);
-INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939141', 939141,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939142', 939142,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939143', 939143,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939144', 939144,'AI0001', 'system', current timestamp);
-INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939145', 939145,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('929180', 929180,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939181', 939181,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939182', 939182,'AI0001', 'system', current timestamp);
@@ -90,8 +86,8 @@ insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,update
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('2','DisableType','D','不記錄明細(DATA)',2,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('3','DisableType','C','記錄全部',3,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('4','lang','zh_TW','繁',1,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('5','lang','en','英',2,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('6','lang','zh_CN','簡',3,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('5','lang','en','英',2,'en','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('6','lang','zh_CN','簡',3,'zh_CN','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('7','subsystem','ADM','ADM',1,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('8','funcLevel','1','功能導覽第一層(功能列)',1,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('9','funcLevel','2','功能導覽第二層(大項)',2,'zh_TW','system',current timestamp);
