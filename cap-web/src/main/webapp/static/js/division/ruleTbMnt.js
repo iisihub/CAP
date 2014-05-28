@@ -21,7 +21,7 @@ pageInit(function(){
 
         function openDoc(cellvalue, options, rowObject){
         	CommonAPI.formSubmit({
-                url: './division/ruleTbMntPage',
+                url: './division/ruleTbMnt_Page',
                 data: {
                     mainOid: rowObject.oid,
                     divRlNo: rowObject.divRlNo
@@ -45,7 +45,7 @@ pageInit(function(){
 				data : {
 					type : 'A'
 				},
-				url : './division/ruleTbMntPage',
+				url : './division/ruleTbMnt_Page',
 				target : "_blank"
 			});
 		});

@@ -11,7 +11,7 @@
 </head>
 <body>
 <script>
-	loadScript('js/division/ruleTbMntPage');
+	loadScript('js/division/ruleTbMnt_Page');
 </script>
 <!-- 	<div id="headerarea">
 		<div class="header_wrap">

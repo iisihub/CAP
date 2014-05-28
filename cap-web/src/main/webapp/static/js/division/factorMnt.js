@@ -35,7 +35,7 @@ pageInit(function(){
 
         function openDoc(cellvalue, options, rowObject){
         	CommonAPI.formSubmit({
-                url: './division/factorMntPage',
+                url: './division/factorMnt_Page',
                 data: {
                     mainOid: rowObject.oid,
                     factorNo: rowObject.factorNo
@@ -58,7 +58,7 @@ pageInit(function(){
 				data : {
 					type : 'A'
 				},
-				url : './division/factorMntPage',
+				url : './division/factorMnt_Page',
 				target : "_blank"
 			});
 		});
