@@ -155,7 +155,8 @@ $.holdReady(true);
                     if (form.find(".data-error,.item-data-error").size()) {
                         return false;
                     }
-                    if (!form.valid()) {
+//                    if (!form.valid()) {
+                    if (!form.validationEngine('validate')) {
                         return false;
                     }
                     return true;
@@ -1313,7 +1314,8 @@ $.holdReady(true);
                                             subtitle : s.attr("addTitle") || i18n.def.selectOption,
                                             buttonName : i18n.def.sure,
                                             buttonAction : function() {
-                                                if ($("#searchForm").valid()) {
+//                                                if ($("#searchForm").valid()) {
+                                            	if ($("#searchForm").validationEngine('validate')) {
                                                     var options = s.data("viewOptions") || {};
                                                     options[$("#sseid").val()] = $("#sseid").val();
                                                     delete options[i18n.def.newData];
