@@ -54,7 +54,7 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("errorCodehandler")
 public class ErrorCodeHandler extends MFormHandler {
 
-	@Resource(name = "CommonBeanService")
+	@Resource
 	private ICommonService commonSrv;
 
 	@Resource
