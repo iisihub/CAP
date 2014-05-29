@@ -1015,6 +1015,18 @@ $.holdReady(true);
                     return this.__dialog(arg1, arg2, arg3);
                 },
                 /**
+                 * reverse field validate return value
+                 */
+                __validationEngine : $.fn.validationEngine,
+                validationEngine : function(method) {
+                	if(method=='validate'){
+                		if(!this.is('form')){
+                			return !this.__validationEngine(method);
+                		}
+                	}
+                	return this.__validationEngine(method);
+                },
+                /**
                  * form reset
                  */
                 reset : function() {
