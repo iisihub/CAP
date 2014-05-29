@@ -83,7 +83,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				INNER JOIN DEF_ROLEFUNC RF ON P.CODE = RF.FUNCCODE
 				INNER JOIN DEF_ROLE R ON R.CODE = RF.ROLECODE
 				WHERE RF.ROLECODE IN (:roleCodes) AND P.STATUS = '1' AND P.SYSTYPE = :sysType AND R.STATUS = '0' AND R.SYSTYPE = :sysType
-				) ORDER BY S
+				) TT ORDER BY S
             ]]></value>
 		</entry>
 		<entry key="pwdlog_lastpwd">

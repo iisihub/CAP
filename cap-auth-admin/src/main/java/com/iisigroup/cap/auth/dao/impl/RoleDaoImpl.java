@@ -45,7 +45,7 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>,
     public List<Role> findBySysTypeAndPath(String sysType, String path) {
         Query query = getEntityManager()
                 .createNativeQuery(
-                        "select r.* from DEF_ROLE r inner join DEF_ROLEFUNC rf inner join DEF_FUNC func on rf.ROLECODE=r.CODE on rf.FUNCCODE=func.CODE where r.SYSTYPE= ?1 and r.STATUS='0' and func.PATH= ?2",
+                        "select r.* from DEF_ROLE r inner join DEF_ROLEFUNC rf on rf.ROLECODE=r.CODE inner join DEF_FUNC func on rf.FUNCCODE=func.CODE where r.SYSTYPE= ?1 and r.STATUS='0' and func.PATH= ?2",
                         Role.class);
         query.setParameter(1, sysType);
         query.setParameter(2, path);
