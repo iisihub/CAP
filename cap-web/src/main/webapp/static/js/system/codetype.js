@@ -3,20 +3,20 @@ pageInit(function(){
         var grid, mform = $("#mform");
         grid = $("#gridview").jqGrid({
             url: 'webroot/codetypehandler/query',
-            sortname: 'codeTypeT',sortorder: "desc",height: 250,
-            colModel: [{name: 'oidT',hidden: true
+            sortname: 'codeType',sortorder: "desc",height: 250,
+            colModel: [{name: 'oid',hidden: true
             }, {header: i18n['codetype']['codetype.codeType'],
-                name: 'codeTypeT',width: 110,align: "center"
+                name: 'codeType',width: 110,align: "center"
             }, {header: i18n['codetype']['codetype.codeVal'],
-                name: 'codeValueT',width: 80,align: "center"
+                name: 'codeValue',width: 80,align: "center"
             }, {header: i18n['codetype']['codetype.codeDesc'],
-                name: 'codeDescT',width: 80,align: "center"
+                name: 'codeDesc',width: 80,align: "center"
             }, {header: i18n['codetype']['codetype.codeOrder'],
-                name: 'codeOrderT',width: 80,align: "center"
+                name: 'codeOrder',width: 80,align: "center"
             }, {header: i18n.def.lastModBy,
-                name: 'updaterT',width: 80,align: "center"
+                name: 'updater',width: 80,align: "center"
             }, {header: i18n.def.lastModTm,
-                name: 'updateTimeT',width: 80,align: "center"
+                name: 'updateTime',width: 80,align: "center"
             }],
             onSelectRow: function(){
                 var ret = grid.getSelRowDatas();

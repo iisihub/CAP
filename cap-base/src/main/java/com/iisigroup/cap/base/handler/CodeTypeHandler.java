@@ -23,8 +23,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
 
-import com.iisigroup.cap.annotation.GridQueryMapping;
-import com.iisigroup.cap.annotation.GridQueryMapping.TableMapping;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.CapFunctionCode;
@@ -65,14 +63,6 @@ import com.isigroup.cap.base.annotation.CapAuditLogAction.CapActionTypeEnum;
  */
 @Scope("request")
 @Controller("codetypehandler")
-@GridQueryMapping({ @TableMapping(from = "localeT", to = "locale"),
-		@TableMapping(from = "oidT", to = "oid"),
-		@TableMapping(from = "codeTypeT", to = "codeType"),
-		@TableMapping(from = "codeOrderT", to = "codeOrder"),
-		@TableMapping(from = "codeValueT", to = "codeValue"),
-		@TableMapping(from = "codeDescT", to = "codeDesc"),
-		@TableMapping(from = "updaterT", to = "updater"),
-		@TableMapping(from = "updateTimeT", to = "updateTime") })
 public class CodeTypeHandler extends MFormHandler {
 
 	@Resource
@@ -81,7 +71,8 @@ public class CodeTypeHandler extends MFormHandler {
 	@Resource
 	private ICommonService commonService;
 
-	@CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
+
+	@CapAuditLogAction(functionCode=CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
 	@HandlerType(HandlerTypeEnum.GRID)
 	public GridResult query(ISearch search, IRequest params) {
 		if (!CapString.isEmpty(params.get("locale"))) {
@@ -117,8 +108,7 @@ public class CodeTypeHandler extends MFormHandler {
 	 *            request
 	 * @return IResult
 	 */
-
-	@CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Update)
+	@CapAuditLogAction(functionCode=CapFunctionCode.F101, actionType = CapActionTypeEnum.Update)
 	public IResult modify(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		String type = request.get("type");
@@ -159,7 +149,7 @@ public class CodeTypeHandler extends MFormHandler {
 	 *            request
 	 * @return IResult
 	 */
-	@CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Delete)
+	@CapAuditLogAction(functionCode=CapFunctionCode.F101, actionType = CapActionTypeEnum.Delete)
 	public IResult delete(IRequest request) {
 		AjaxFormResult result = new AjaxFormResult();
 		codeTypeService.deleteById(request.get("oid"));

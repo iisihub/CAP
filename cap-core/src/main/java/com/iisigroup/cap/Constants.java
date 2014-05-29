@@ -125,10 +125,8 @@ public interface Constants {
 	/**
 	 * system config
 	 */
-	public static final String SYSTEM_CONFIG = "systemConfig";
+	public final static String SYSTEM_CONFIG = "systemConfig";
 
 	public static final String TXNCD = "transCde";
-	
-	public static final String GRID_MAPPING_REQUIRED = "gridMappingRequired";
 
 }
