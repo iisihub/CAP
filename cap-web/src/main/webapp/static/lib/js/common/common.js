@@ -1064,17 +1064,17 @@ $.holdReady(true);
                                             item.val(value).data("realData", value);
                                             break;
                                         case "radio":
-                                            obj.find("input[name='" + jid + "']").attr('checked', false).filter("[value='" + json[jid] + "']").trigger('click').attr("checked", true);
+                                            obj.find("input[name='" + jid + "']").prop('checked', false).filter("[value='" + json[jid] + "']").trigger('click').prop("checked", true);
                                             break;
 
                                         case "checkbox":
                                             if ($.isArray(json[jid])) {
-                                                var _cbs = obj.find("input[name='" + jid + "']").attr('checked', false);
+                                                var _cbs = obj.find("input[name='" + jid + "']").prop('checked', false);
                                                 for (var _i in json[jid]) {
-                                                    _cbs.filter("[value='" + json[jid][_i] + "']").attr("checked", true).trigger('click').attr("checked", true);
+                                                    _cbs.filter("[value='" + json[jid][_i] + "']").trigger('click').prop("checked", true);
                                                 }
                                             } else {
-                                                obj.find("input[name='" + jid + "']").attr('checked', false).filter("[value='" + json[jid] + "']").attr("checked", true).trigger('click').attr("checked", true);
+                                            	obj.find("input[name='" + jid + "']").prop('checked', false).filter("[value='" + json[jid] + "']").trigger('click').prop("checked", true);
                                             }
                                             break;
                                         default:
