@@ -6,7 +6,7 @@ pageInit(function(){
 		
 		/**條件列表*/
 		var conditionGrid = $("#conditionGrid").jqGrid({
-	        url:"webroot/ruleTbMnthandler/queryConditionDetail",
+	        url:url("ruleTbMnthandler/queryConditionDetail"),
 			height : '150',
 //			localFirst : true,
             rownumbers: true,
@@ -31,7 +31,7 @@ pageInit(function(){
 		
 		/**規則表內容列表*/
 		var ruleMapGrid = $("#ruleMapGrid").jqGrid({
-        	url: 'webroot/ruleTbMnthandler/queryRuleTbDetailByDivRlNo',
+        	url: url('ruleTbMnthandler/queryRuleTbDetailByDivRlNo'),
             height: '150',
             width: '100%',
             rownumbers: true,
@@ -53,7 +53,7 @@ pageInit(function(){
 		 * form initial
 		 */
 		$.ajax({
-	        url:"webroot/ruleTbMnthandler/query",
+	        url:url("ruleTbMnthandler/query"),
 	        data:{
 	        	mainOid: _mainOid,
                 divRlNo: _divRlNo,
@@ -184,7 +184,7 @@ pageInit(function(){
 			$.extend(datas, gridData);
 			/**儲存 連後端儲存*/
 			$.ajax({
-				url : "webroot/ruleTbMnthandler/saveRuleTbDtl",
+				url : url("ruleTbMnthandler/saveRuleTbDtl"),
 				data : datas,
 				success : function() {
 				}
@@ -194,7 +194,7 @@ pageInit(function(){
 		/**匯出RuleTable-->DecisionTable*/
         $("#dwnload").click(function() {
             $.capFileDownload({
-            	url : "webroot/ruleTbMnthandler/dwnload",
+            	url : url("ruleTbMnthandler/dwnload"),
             	data : {
                 	divRlNo: _divRlNo,
                 	oid: _mainOid
@@ -205,7 +205,7 @@ pageInit(function(){
         /**試算*/
 		$("#testDrools").click(function() {
 			$.ajax({
-				url : "webroot/ruleTbMnthandler/testDrools",
+				url : url("ruleTbMnthandler/testDrools"),
 				data : {
 					divRlNo : _divRlNo,
 					oid : _mainOid,

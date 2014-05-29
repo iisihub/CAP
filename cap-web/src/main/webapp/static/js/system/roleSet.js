@@ -2,7 +2,7 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var grid = $("#gridview").jqGrid({
-			url: 'webroot/rolesethandler/query',
+			url: url('rolesethandler/query'),
 			height: "380", width: "100%",
             multiselect: false, hideMultiselect: false, autowidth: true, localFirst: false,
             colModel: [{
@@ -60,7 +60,7 @@ pageInit(function(){
 	            API.showConfirmMessage(i18n.def['del.confrim'], function(b){
 	                if (b) {
 	                    $.ajax({
-	                    	url: 'webroot/rolesethandler/delete',
+	                    	url: url('rolesethandler/delete'),
 	                        data: {
 	                            code: rowObject.code
 	                        },

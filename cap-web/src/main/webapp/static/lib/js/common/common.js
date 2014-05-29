@@ -580,7 +580,7 @@ $.holdReady(true);
                             $.ajax({
                                 type : 'post',
                                 async : false,
-                                url : Properties.ComboBoxHandler,
+                                url : url(Properties.ComboBoxHandler),
                                 data : {
                                     keys : ukeys || [],
                                     akeys : comboaction || []
@@ -826,7 +826,7 @@ $.holdReady(true);
                                     return true;
                                 })() || temp.error && temp.error(xhr, status, json);
                                 temp.complete && temp.complete(xhr, status, json);
-                                $.post(Properties.fileUploadSuccessHandler);
+                                $.post(url(Properties.fileUploadSuccessHandler));
 
                             },
                             error : function(data, status, e) {

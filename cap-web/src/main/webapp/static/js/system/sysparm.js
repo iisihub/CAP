@@ -2,7 +2,7 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var grid = $("#gridview").jqGrid({
-            url: 'webroot/sysparmhandler/query',
+            url: url('sysparmhandler/query'),
             sortname: 'parmId',height: 350,
             colModel: [{header: i18n['sysparm']['parmId'],//代碼
                 name: 'parmId', width: 20
@@ -32,7 +32,7 @@ pageInit(function(){
         			var mform = eDialog.find("#mform");
         			mform.validationEngine('validate') &&
         			$.ajax({
-                        url: "webroot/sysparmhandler/modify",
+                        url: url("sysparmhandler/modify"),
                         data: mform.serializeData(),
                         success: function(){
                             grid.trigger("reloadGrid");
@@ -76,7 +76,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/sysparmhandler/delete",
+                        url: url("sysparmhandler/delete"),
                         data: {
                             parmId: ret.parmId
                         },

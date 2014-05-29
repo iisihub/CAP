@@ -2,7 +2,7 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var grid = $("#gridview").jqGrid({
-            url: 'webroot/sequencehandler/query',height: 310,
+            url: url('sequencehandler/query'),height: 310,
             colModel: [{header: i18n['sequence']['seqNode'],//流水號代碼
                 name: 'seqNode', width: 20
             }, {header: i18n['sequence']['nextSeq'],//下一個序號
@@ -22,7 +22,7 @@ pageInit(function(){
 	        API.showConfirmMessage(i18n.def.actoin_001, function(data){
 	            data &&
 	            $.ajax({
-	                url: "webroot/sequencehandler/getNewSeq",
+	                url: url("sequencehandler/getNewSeq"),
 	                data: mform.serializeData(),
 	                success: function(rtn){
 	                	mform.find("#theSeq").text(rtn.theSeq);

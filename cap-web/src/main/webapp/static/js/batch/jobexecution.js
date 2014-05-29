@@ -1,7 +1,7 @@
 pageInit(function(){
     $(document).ready(function(){
         var grid = $("#gridview").jqGrid({
-            url: 'webroot/batchshandler/executinsQuery',localFirst:true,
+            url: url('batchshandler/executinsQuery'),localFirst:true,
             sortname: 'START_TIME',sortorder:"desc",height: 350,
             colModel: [{header: 'ID',
                 name: 'JOB_EXECUTION_ID',width: 5
@@ -67,7 +67,7 @@ pageInit(function(){
         	var ret = grid.getSelRowDatas();
 			if (ret) {
 				$.ajax({
-	                url: "webroot/batchshandler/executionStop",
+	                url: url("batchshandler/executionStop"),
 	                data: {jobExeId:ret.JOB_EXECUTION_ID},
 	                success: function(je){
 	                	grid.jqGrid('setGridParam', {
@@ -83,7 +83,7 @@ pageInit(function(){
         	var ret = grid.getSelRowDatas();
 			if (ret) {
 				$.ajax({
-	                url: "webroot/batchshandler/executionRestart",
+	                url: url("batchshandler/executionRestart"),
 	                data: {jobId:ret.JOB_NAME,jobInsId:ret.JOB_INSTANCE_ID},
 	                success: function(je){
 	                	grid.jqGrid('setGridParam', {
@@ -113,7 +113,7 @@ pageInit(function(){
         });
         var openExeDetail = function(eid,instId){
         	$.ajax({
-                url: "webroot/batchshandler/executionDetail",
+                url: url("batchshandler/executionDetail"),
                 data: {jobExeId:eid,jobInstId:instId},
                 success: function(je){
                 	exeDetail.find("#jdform").injectData(je);
@@ -127,7 +127,7 @@ pageInit(function(){
         	jdgrid.trigger("reloadGrid");
         };
         var jdgrid = $("#jobDetailgrid").jqGrid({
-            url: 'webroot/batchshandler/stepsQuery',localFirst:true,
+            url: url('batchshandler/stepsQuery'),localFirst:true,
             //caption:i18n['jobexecution']['step.gridtit'],
             pager:false,height: 150,cmTemplate: {sortable:false},
             colModel: [{header: i18n['jobexecution']['step.name'],

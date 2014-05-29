@@ -12,7 +12,7 @@ pageInit(function(){
 		}
 		var getParentCode = function(value){
 			$.ajax({
-				url: 'webroot/functionsethandler/loadFunc',
+				url: url('functionsethandler/loadFunc'),
 				data : {
 					sysType : $form.find('#sysType').val(),
 					level : $form.find('#level').val()-1
@@ -37,7 +37,7 @@ pageInit(function(){
 			});
 		}
 		var grid = $form.find("#gridview").jqGrid({
-			url: 'webroot/functionsethandler/queryRole',
+			url: url('functionsethandler/queryRole'),
 			height: "380", width: "100%", pager: false,
 			postData: { sysType : '', code: code },
             multiselect: true, hideMultiselect: false, autowidth: true, localFirst: true,
@@ -57,7 +57,7 @@ pageInit(function(){
 		}
 		if(code){
 			$.ajax({
-		        url:"webroot/functionsethandler/queryForm",
+		        url:url("functionsethandler/queryForm"),
 		        data:{
 		        	code: code
 		        },
@@ -93,7 +93,7 @@ pageInit(function(){
 		});
 		
 		var gridRole = $("#gridviewRole").jqGrid({
-			url: 'webroot/functionsethandler/queryAllRole',
+			url: url('functionsethandler/queryAllRole'),
 			height: "220", width: "620", pager: false,
 			postData: { sysType : '' ,code: code},
             multiselect: true, hideMultiselect: false, autowidth: false, localFirst: true,
@@ -125,7 +125,7 @@ pageInit(function(){
         		value:function(){
         			if(gridRole.getSelRowDatas()){
 	        			$.ajax({
-	    	                url: "webroot/functionsethandler/saveRfList",
+	    	                url: url("functionsethandler/saveRfList"),
 	    	                data: {
 	    	                	code: code,
 	    	                	roleItem: JSON.stringify(gridRole.getSelRowDatas())
@@ -164,7 +164,7 @@ pageInit(function(){
 		}).end().find("#delete").click(function(){//刪除
 			if(grid.getSelRowDatas()){
 				$.ajax({
-	                url: "webroot/functionsethandler/deleteRfList",
+	                url: url("functionsethandler/deleteRfList"),
 	                data: {
 	                	code: code,
 	                	roleItem: JSON.stringify(grid.getSelRowDatas())
@@ -188,7 +188,7 @@ pageInit(function(){
 		var save = function(action){
 			$form.validationEngine('validate') && 
 			$.ajax({
-                url: "webroot/functionsethandler/save",
+                url: url("functionsethandler/save"),
                 data: $.extend($form.serializeData(),{
                 	isNew:isNew
                 }),

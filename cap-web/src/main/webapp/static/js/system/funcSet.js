@@ -2,7 +2,7 @@ pageInit(function(){
 	$(document).ready(function(){
 		var mform = $("#mform");
 		var grid = $("#gridview").jqGrid({
-			url: 'webroot/functionsethandler/query',
+			url: url('functionsethandler/query'),
 			height: "380", width: "100%",
             multiselect: false, hideMultiselect: false, autowidth: true, localFirst: true,
             colModel: [{
@@ -88,7 +88,7 @@ pageInit(function(){
 	            API.showConfirmMessage(i18n.def['del.confrim'], function(b){
 	                if (b) {
 	                    $.ajax({
-	                    	url: 'webroot/functionsethandler/delete',
+	                    	url: url('functionsethandler/delete'),
 	                        data: {
 	                            code: rowObject.code
 	                        },
