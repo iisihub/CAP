@@ -43,7 +43,7 @@
 $(document).ready(function() {
     logDebug("cust common ready init");
     var navTop = $("nav.top"), navSub = $("nav.sub ol");
-    navTop.length && $.get("webroot/samplehandler/queryMenu").done(function(res) {
+    navTop.length && $.get(url("menuhandler/queryMenu")).done(function(res) {
         var _menu = res.child, ul = $("nav.top ul.navmenu");
 //        $("#userName").val(res.userName);
         navTop.on("click", "li a", function(ev) {
@@ -215,26 +215,52 @@ $(document).ready(function() {
 	}catch(e){
 		logDebug("Can't find prop");
 	}
-	if(Properties.remindTimeout){		
+
+	//計數器減差(這裡是分鐘)
+	var gapTime = 1;
+	if(Properties.remindTimeout){
+		//#Cola235 增加切換頁reset timer
 		//計數器(這裡是毫秒)
-		var timecount = (idleDuration-1)*60*1000;
+		window.timecount = (idleDuration-gapTime)*60*1000;
 		logDebug("set timer time::"+timecount);
-		var timer = $.timer(timecount, function(){
+		var t1merConfirm =[];
+		var timer2 = null;
+		//TIMER FUNC1
+		var cccheckMethod = function(dxx){
+			$.ajax({
+				url:url('checktimeouthandler/check'),
+				asyn:true,
+				data:{isContinues:dxx.isContinues},
+				success:function(d){
+					if(d.errorPage){
+						window.setCloseConfirm(false);
+						window.location = d.errorPage;
+					}
+				}
+			});
+		};
+		//TIMER FUNC2
+		var takeTimerReset = function(){
+			timer.reset(timecount);
+		};
+		window.timer = $.timer(timecount, function(){
 			var pathname = window.location.pathname;
 			if(!/(timeout)$|(error)$/i.test(pathname)){
-				CommonAPI.showConfirmMessage('您已閒置，請問是否繼續申請作業?',function(data){
-					$.ajax({
-						url:url('checktimeouthandler/check'),
-						asyn:true,
-						data:{isTest:data},
-						success:function(d){
-							if(d.errorPage){
-								window.setCloseConfirm(false);
-								window.location = d.errorPage;
-							}
-						}
+				if(t1merConfirm!=undefined && t1merConfirm[0] && t1merConfirm[0].hidden==false){
+					//DO NOTTHING
+				}else{
+					timer2 = $.timer(gapTime*60*1000, function(){
+						//超過時間沒給確認動作,就當做取消交易
+						cccheckMethod({isContinues:false});
+					}, false);
+					t1merConfirm = CommonAPI.showConfirmMessage('您已閒置，請問是否繼續申請作業?',function(data){
+						timer2.stop();
+						cccheckMethod({isContinues:data});
+						//按了之後,要重新倒數
+						t1merConfirm = [];
+						takeTimerReset();
 					});
-				});
+				}
 			}
 		}, false);
 		//IDLE留著，當user沒看到confirm pop，時間到了idle還是要導倒timeout?
@@ -258,5 +284,67 @@ $(document).ready(function() {
 //		$(".ui-dialog-content").dialog("close");
 		});
 	};
+
+	window.i18n.load("messages").done(function(){
+		$.extend(Properties, {
+			myCustMessages : {
+				custom_error_messages : {
+					'#myName' : {
+						'required' : {
+							'message' : i18n.messages('myName.required')
+						},
+						'fieldName' : {
+							'message' : i18n.messages('myName.fieldName')
+						}
+					},
+					'.mine' : {
+						'required' : {
+							'message' : i18n.messages('mine.required')
+						}
+					}
+				}
+			},
+			myCustRegEx : {
+				'minSize': {
+					'regex': 'none',
+					'alertText': i18n.messages('minSize.alertText'),
+					'alertText2': i18n.messages('minSize.alertText2')
+				},
+		        'myCustValid': {
+		        	'regex': /^(0)(9)([0-9]{8})?$/,
+		            'alertText': i18n.messages('myCustValid.alertText')
+		        }
+			}	
+		});
+	});
+	
+	// cust valiation regex
+	$.extend($.validationEngineLanguage.allRules, Properties.myCustRegEx);
+
+	// cust valid method
+	$.extend(window,{
+		_minSize: function(field, rules, i, options) {
+			var min = rules[i + 2], len = field.val().length,
+			mId = '#'+ field.attr('id'), custMsg ='';
+			if (len < min) {
+				if (typeof options.custom_error_messages[mId] != "undefined" &&
+						typeof options.custom_error_messages[mId]['fieldName'] != "undefined" ) {
+					custMsg = options.custom_error_messages[mId]['fieldName']['message'];
+				}
+				var rule = options.allrules.minSize;
+				return custMsg+ rule.alertText + min + rule.alertText2;
+			}
+		},
+		regex: function(field, rules, i, options){
+			var val = field.val();
+			rules.push('required');
+			var r = new RegExp(options.allrules[rules[i + 2]].regex);
+			if (val){
+				if (!r.test(val)){
+					return options.allrules[rules[i + 2]].alertText;
+				}
+			}
+		}
+	});
 
 });

@@ -16,6 +16,7 @@
         'socketio' : 'lib/js/socket.io',
         'ifvisible' : 'lib/js/ifvisible/ifvisible',
         'timer' : 'lib/js/timer/jquery.timer',
+        'fullcalendar' : 'lib/js/calendar/fullcalendar.min',
 
         'common.properties' : 'lib/js/common/common.properties',
         'common.jqgrid' : 'lib/js/common/common.jqgrid',

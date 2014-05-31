@@ -33,14 +33,12 @@ import org.xhtmlrenderer.resource.XMLResource;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.report.enums.FontTypeEnum;
 import com.iisigroup.cap.report.enums.ReportParamEnum;
 import com.iisigroup.cap.report.factory.ItextFontFactory;
 import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapSystemConfig;
 import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import freemarker.template.Template;
 
@@ -120,10 +118,8 @@ public abstract class AbstractReportPdfService extends AbstractService
 				}
 			}
 			// 設定權限
-			if (getAllowedPrivileges() != null) {
-				for (int privilege : getAllowedPrivileges()) {
-					pdfEncryption.setAllowedPrivileges(privilege);
-				}
+			if (getAllowedPrivileges() != -1) {
+				pdfEncryption.setAllowedPrivileges(getAllowedPrivileges());
 			}
 			iTextRenderer.setPDFEncryption(pdfEncryption);
 
@@ -182,13 +178,18 @@ public abstract class AbstractReportPdfService extends AbstractService
 	}
 
 	// 設定PDF權限
-	protected int[] getAllowedPrivileges() {
-		return new int[] { PdfWriter.ALLOW_SCREENREADERS };
+	protected int getAllowedPrivileges() {
+		return -1;
+		// return PdfWriter.ALLOW_ASSEMBLY; //全禁止
 	}
 
 	// 設定PDF權限
 	protected String getFontPath() throws IOException {
-		return getFontFactory().getFontPath(FontTypeEnum.微軟正黑體.toString(), "");
+		return getFontFactory()
+				.getFontPath(
+						getSysConfig().getProperty(
+								ReportParamEnum.defaultFont.toString(),
+								"MSJH.TTF"), "");
 	}
 
 	@Override

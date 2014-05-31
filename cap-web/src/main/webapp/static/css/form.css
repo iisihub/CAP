@@ -1,0 +1,161 @@
+/*fieldset--------- */
+fieldset {
+    clear: both;
+    border: 2px solid #3B7092;
+    margin: 1em 0;
+    /*padding: 0.1em;*/
+    padding: 0 0.5em 0.5em 0.5em;
+}
+
+.tit2 {
+    color: #3B7092;
+    padding: 0 0 0 16px;
+    margin: 0 0 10px;
+    font-weight: bold; 
+}
+
+.tit2.color-black {
+    font-size: 16px;
+    color: #000;
+}
+
+.color-black {
+    color: #000;
+}
+
+.bgcolor2 {
+    background: #EEE;
+}
+
+tbody td {
+    color: #000;
+}
+
+.color-black b {
+    color: #000; /*666*/
+}
+
+.tit2 span.color-blue, span.color-blue {
+    color: #3B7092;
+}
+
+.tit2 span.color-red, span.color-red {
+    color: #900;
+}
+
+/*tb2------------------*/
+.tb2, .tb4 {
+    margin: 0 0 10px 0;
+    border-collapse: collapse;
+}
+
+.tb2 td, .tb4 td,.tb2_fss td {
+    padding: 4px;
+    border: 1px #C8C8C8 solid;
+}
+
+.tb2 .hd1,.tb2_fss .hd1 {
+    font-weight: bold;
+    text-align: right;
+    background: #F4F4F4;
+    color: #000000;
+    width: 15%
+}
+
+.tb2 .hd2, .tb4 .hd4, .tb4 .hd1,.tb2_fss .hd2 {
+    font-weight: bold;
+    background: #F4F4F4;
+    color: #000000
+}
+/*tb2_fss--------------*/
+.tb2_fss {margin-left: 15%;margin-right: 15%;border-collapse: collapse;}
+.fss_cash {margin-left: 10%;margin-right: 10%;border-collapse: collapse;}
+.tb2_fss .nopadding {padding: 0px;border: 0px #E0E0E0 solid;}
+.tb2 .noborder {border: 0px;}
+
+.button-menu {
+    background: url(../images/menu/menu_bg.gif) repeat-x left top;
+    margin-bottom: 10px;
+}
+
+.ui-helper-hidden-accessible {
+    clip: auto !important;
+}
+
+.rt {
+    text-align: right;
+}
+
+.rt td, td.rt {
+    padding-right: 10px;
+}
+
+.ct {
+    text-align: center;
+}
+
+.lt {
+    text-align: left;
+}
+
+/* Input ------------------------- */
+input, select, textarea {
+    border: #716c6a solid 1px;
+    margin: 1px;
+}
+
+input {
+    padding: 2px;
+}
+
+input[readonly], input[disabled], select[disabled], textarea[readonly] {
+    border-color: #FFFFFF;
+    background-color: transparent;
+    color: #000000;
+    margin: 1px;
+}
+
+textarea {
+    padding: 2px;
+    font-size: 13px;
+}
+
+label {
+    padding: 3px;
+    font-weight: bolder;
+    color: #383838;
+    letter-spacing: 3px;
+}
+
+/*input.date{border:#716c6a solid 1px;}*/
+input[type ="radio"], input[type = "checkbox"] {
+    border: #FFF;
+}
+
+input.numeric,input.number {
+    text-align: right;
+    padding-right: 2px;
+}
+
+input[type ="file"] {
+    background-color: #D4D0C8;
+}
+
+/* textarea -------------------------*/
+.txt_mult {
+    font-size: 13px !important;
+    line-height: 20px !important;
+    margin: 0;
+    font-family: 'Courier New', Monospace, "新細明體" !important;
+}
+
+.tbnm {
+    font-size: 13px !important;
+    line-height: 20px !important;
+    padding-top: 5px !important;
+}
+
+.lrnm {
+    font-size: 13px !important;
+    padding-left: 5px;
+}

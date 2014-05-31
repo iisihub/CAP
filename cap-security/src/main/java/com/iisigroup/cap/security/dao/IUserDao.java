@@ -34,7 +34,7 @@ import com.iisigroup.cap.security.model.IUser;
  */
 public interface IUserDao<T extends IUser> {
 	
-	T getUserByLoginId(String loginId,String unitNo);
+	T getUserByLoginId(String loginId,String depCode);
 
 	List<? extends IRole> getRoleByUser(T user);
 }

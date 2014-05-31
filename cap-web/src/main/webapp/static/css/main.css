@@ -199,7 +199,7 @@ a {cursor: pointer;}
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   border: 1px solid #d8dcdf;
-  background: #eeeeee url(images/ui-bg_carbon-fiber_100_eeeeee_8x9.png) 50% 50% repeat;
+  background: #eeeeee;
   font-weight: bold;
   color: #004276;
 }
@@ -304,7 +304,7 @@ a {cursor: pointer;}
   background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 
-.ui-state-default .ui-icon, .ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-active .ui-icon {
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-active .ui-icon {
   background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
@@ -3130,9 +3130,14 @@ footer {
   background: #fafafa;
 }
 
-.defDialogCss .ui-dialog-titlebar {
+.defDialogCss .ui-dialog-titlebar, .defDialogCss .ui-state-default {
   background: #005BA1;
   border: 1px solid #005BA1;
+}
+
+.defDialogCss .ui-state-hover {
+  background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+  border: 1px solid #cdd5da;
 }
 
 .errorDialogCss .ui-dialog-titlebar {
@@ -3141,4 +3146,7 @@ footer {
 }
 .text-red {
   color:red
+}
+.text-breakAll{
+	word-break:break-all
 }

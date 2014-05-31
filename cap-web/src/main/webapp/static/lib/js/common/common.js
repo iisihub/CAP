@@ -3,6 +3,7 @@ $.holdReady(true);
 (function(_jQuery, window) {
     var msie = /MSIE/.test(navigator.userAgent);
     var msie7  = /MSIE 7.0/.test(navigator.userAgent);
+    _jQuery.ajaxSettings.traditional = true;
     _jQuery.ajaxSetup({
         jsonp : null,
         jsonpCallback : null,
@@ -21,7 +22,7 @@ $.holdReady(true);
         showButtonPanel : true,
         changeMonth : true,
         changeYear : true,
-        buttonImage : '../static/images/icon_date.png',
+        buttonImage : baseUrl + '/images/icon_date.png',
         showOn : 'both'
     });
 
@@ -154,7 +155,8 @@ $.holdReady(true);
                     if (form.find(".data-error,.item-data-error").size()) {
                         return false;
                     }
-                    if (!form.valid()) {
+//                    if (!form.valid()) {
+                    if (!form.validationEngine('validate')) {
                         return false;
                     }
                     return true;
@@ -578,7 +580,7 @@ $.holdReady(true);
                             $.ajax({
                                 type : 'post',
                                 async : false,
-                                url : Properties.ComboBoxHandler,
+                                url : url(Properties.ComboBoxHandler),
                                 data : {
                                     keys : ukeys || [],
                                     akeys : comboaction || []
@@ -824,7 +826,7 @@ $.holdReady(true);
                                     return true;
                                 })() || temp.error && temp.error(xhr, status, json);
                                 temp.complete && temp.complete(xhr, status, json);
-                                $.post(Properties.fileUploadSuccessHandler);
+                                $.post(url(Properties.fileUploadSuccessHandler));
 
                             },
                             error : function(data, status, e) {
@@ -1014,6 +1016,18 @@ $.holdReady(true);
                     return this.__dialog(arg1, arg2, arg3);
                 },
                 /**
+                 * reverse field validate return value
+                 */
+                __validationEngine : $.fn.validationEngine,
+                validationEngine : function(method) {
+                	if(method=='validate'){
+                		if(!this.is('form')){
+                			return !this.__validationEngine(method);
+                		}
+                	}
+                	return this.__validationEngine(method);
+                },
+                /**
                  * form reset
                  */
                 reset : function() {
@@ -1050,17 +1064,17 @@ $.holdReady(true);
                                             item.val(value).data("realData", value);
                                             break;
                                         case "radio":
-                                            obj.find("input[name='" + jid + "']").attr('checked', false).filter("[value='" + json[jid] + "']").trigger('click').attr("checked", true);
+                                            obj.find("input[name='" + jid + "']").prop('checked', false).filter("[value='" + json[jid] + "']").trigger('click').prop("checked", true);
                                             break;
 
                                         case "checkbox":
                                             if ($.isArray(json[jid])) {
-                                                var _cbs = obj.find("input[name='" + jid + "']").attr('checked', false);
+                                                var _cbs = obj.find("input[name='" + jid + "']").prop('checked', false);
                                                 for (var _i in json[jid]) {
-                                                    _cbs.filter("[value='" + json[jid][_i] + "']").attr("checked", true).trigger('click').attr("checked", true);
+                                                    _cbs.filter("[value='" + json[jid][_i] + "']").trigger('click').prop("checked", true);
                                                 }
                                             } else {
-                                                obj.find("input[name='" + jid + "']").attr('checked', false).filter("[value='" + json[jid] + "']").attr("checked", true).trigger('click').attr("checked", true);
+                                            	obj.find("input[name='" + jid + "']").prop('checked', false).filter("[value='" + json[jid] + "']").trigger('click').prop("checked", true);
                                             }
                                             break;
                                         default:
@@ -1312,7 +1326,8 @@ $.holdReady(true);
                                             subtitle : s.attr("addTitle") || i18n.def.selectOption,
                                             buttonName : i18n.def.sure,
                                             buttonAction : function() {
-                                                if ($("#searchForm").valid()) {
+//                                                if ($("#searchForm").valid()) {
+                                            	if ($("#searchForm").validationEngine('validate')) {
                                                     var options = s.data("viewOptions") || {};
                                                     options[$("#sseid").val()] = $("#sseid").val();
                                                     delete options[i18n.def.newData];
@@ -1325,7 +1340,7 @@ $.holdReady(true);
                                     }
                                 }).data('bindChanged', true);
                         }
-                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).val(defalutValue).data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
+                        return s.html( ops = ((s.attr("space") != undefined && s.attr("space") != 'false' ? ("<option value=''>" + (s.attr("space") == "true" ? i18n.def.comboSpace : s.attr("space")) + "</option>") : "") + ops)).find('option[value="' + defalutValue + '"]').prop('selected', true).end().data('realOptions', o || {}).data('viewOptions', to || {}).attr("list", okey || s.attr("list"));
                     }).call(this, options, append);
                 },
 

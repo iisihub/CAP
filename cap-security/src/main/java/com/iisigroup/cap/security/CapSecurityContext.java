@@ -24,7 +24,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.iisigroup.cap.security.model.CapUserDetails;
-import com.iisigroup.cap.security.web.CapAuthenticationDetails;
 
 /**
  * <pre>
@@ -52,11 +51,14 @@ public class CapSecurityContext {
 	public static <T extends CapUserDetails> T getUser() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		if (auth != null
-				&& auth.getDetails() instanceof CapAuthenticationDetails) {
-			CapAuthenticationDetails detail = (CapAuthenticationDetails) auth
-					.getDetails();
-			return ((T) detail.getUserDetails());
+//		if (auth != null
+//				&& auth.getDetails() instanceof CapAuthenticationDetails) {
+//			CapAuthenticationDetails detail = (CapAuthenticationDetails) auth
+//					.getDetails();
+//			return ((T) detail.getUserDetails());
+//		}
+		if (auth != null) {
+			return (T) auth.getPrincipal();
 		}
 		return (T) getDefautlUserDetails();
 	}

@@ -1,7 +1,7 @@
 pageInit(function(){
     $(document).ready(function(){
         var grid = $("#gridview").jqGrid({
-            url: 'webroot/batchshandler/schQuery',
+            url: url('batchshandler/schQuery'),
             sortname: 'schId',sortorder: "asc",height: 350,
             colModel: [{header: i18n['schedule']['isenable'],
                 name: 'isEnabled',width: 15,align: "center"
@@ -19,7 +19,7 @@ pageInit(function(){
             ondblClickRow: function(){
                 var ret = grid.getSelRowDatas();
                 $.ajax({
-                    url: "webroot/batchshandler/schDetail",
+                    url: url("batchshandler/schDetail"),
                     data: {schId:ret.schId},
                     success: function(r){
                     	eDialog.find("#schId").readOnly(true);
@@ -45,7 +45,7 @@ pageInit(function(){
         		value:function(){
         			eDialog.find("#mform").validationEngine('validate') &&
         			$.ajax({
-                        url: "webroot/batchshandler/schModify",
+                        url: url("batchshandler/schModify"),
                         data: eDialog.find("#mform").serializeData(),
                         success: function(){
                         	eDialog.dialog('close');
@@ -94,7 +94,7 @@ pageInit(function(){
                 API.showConfirmMessage(i18n.def.actoin_001, function(data){
                     data &&
                     $.ajax({
-                        url: "webroot/batchshandler/schDelete",
+                        url: url("batchshandler/schDelete"),
                         data: {
                         	schId: ret.schId
                         },

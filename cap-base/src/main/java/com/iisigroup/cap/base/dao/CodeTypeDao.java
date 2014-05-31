@@ -29,63 +29,63 @@ import com.iisigroup.cap.dao.IGenericDao;
  */
 public interface CodeTypeDao extends IGenericDao<CodeType> {
 
-	/**
-	 * find by codetype.
-	 * 
-	 * @param codetype
-	 *            代碼類型
-	 * @param locale
-	 *            語言別
-	 * @return T
-	 */
-	public List<CodeType> findByCodeType(String codetype, String locale);
+    /**
+     * find by codetype.
+     * 
+     * @param codetype
+     *            代碼類型
+     * @param locale
+     *            語言別
+     * @return T
+     */
+    List<CodeType> findByCodeType(String codetype, String locale);
 
-	/**
-	 * find by CodeType and CodeValue
-	 * 
-	 * @param cType
-	 *            代碼類型
-	 * @param cValue
-	 *            代碼值
-	 * @param locale
-	 *            語言別
-	 * @return T
-	 */
-	public CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
-			String locale);
+    /**
+     * find by CodeType and CodeValue
+     * 
+     * @param cType
+     *            代碼類型
+     * @param cValue
+     *            代碼值
+     * @param locale
+     *            語言別
+     * @return T
+     */
+    CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
+            String locale);
 
-	/**
-	 * find by codetype.
-	 * 
-	 * @param codetypes
-	 *            多個代碼類型
-	 * @param locale
-	 *            語言別
-	 * @return T List
-	 */
-	public List<CodeType> findByCodeType(String[] codetypes, String locale);
+    /**
+     * find by codetype.
+     * 
+     * @param codetypes
+     *            多個代碼類型
+     * @param locale
+     *            語言別
+     * @return T List
+     */
+    List<CodeType> findByCodeType(String[] codetypes, String locale);
 
-	/**
-	 * find by code Desc
-	 * 
-	 * @param cType
-	 *            代碼類型
-	 * @param codeDesc
-	 *            代碼內容
-	 * @param locale
-	 *            語言別
-	 * @return CodeType
-	 */
-	public List<CodeType> findByCodeTypeAndCodeDesc(String cType,
-			String codeDesc, String locale);
+    /**
+     * find by code Desc
+     * 
+     * @param cType
+     *            代碼類型
+     * @param codeDesc
+     *            代碼內容
+     * @param locale
+     *            語言別
+     * @return CodeType
+     */
+    List<CodeType> findByCodeTypeAndCodeDesc(String cType, String codeDesc,
+            String locale);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return CodeType
-	 */
-	public CodeType findByOid(String oid);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return CodeType
+     */
+    CodeType findByOid(String oid);
 
 }

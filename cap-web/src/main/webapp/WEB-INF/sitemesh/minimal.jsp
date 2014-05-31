@@ -2,8 +2,14 @@
 	prefix="decorator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
 <head>
-<link rel="stylesheet" href="../static/css/main.css" />
+<link rel="stylesheet" href="../../static/css/main.css" />
+<link rel="stylesheet" href="../../static/lib/css/common.message.css" /><!-- common.message (iLog) -->
+<script type="text/javascript">
+var baseUrl = "../../static";
+</script>
 <script src="../../static/requirejs/2.0.6/require.min.js"></script>
 <script src="../../static/main.js"></script>
 <decorator:getProperty property="reqJSON" default="" />

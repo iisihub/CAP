@@ -19,7 +19,5 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<property name="parserContext" ref="sqlParserContext" />
 	</bean>
 	<util:map id="userSql" map-class="java.util.HashMap" key-type="java.lang.String">
-
 	</util:map>
-
 </beans>

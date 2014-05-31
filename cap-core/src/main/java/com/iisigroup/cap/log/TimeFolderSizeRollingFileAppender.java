@@ -99,7 +99,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 	 * The date pattern. By default, the pattern is set to "'.'yyyy-MM-dd"
 	 * meaning daily rollover.
 	 */
-	private String datePattern = "'.'yyyy-MM-dd";
+	private String datePattern = "yyyy-MM-dd";
 
 	/**
 	 * The log file will be renamed to the value of the scheduledFilename
