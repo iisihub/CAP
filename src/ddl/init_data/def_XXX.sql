@@ -15,7 +15,7 @@ INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE,
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('09', 'P', 929140, '2', 919110, 'A', 230, '分案管理', '', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('11', 'P', 939142, '3', 929140, 'A', 232, '因子維護', 'division/factorMnt', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('12', 'P', 939143, '3', 929140, 'A', 233, '條件維護', 'division/conditionMnt', '','1', 'system', current timestamp);
-INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('13', 'P', 939144, '3', 929140, 'A', 234, '規則維護', 'division/ruleMnt', '','1', 'system', current timestamp);
+INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('13', 'P', 939144, '3', 929140, 'A', 234, '規則維護', 'division/ruleTbMnt', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('15', 'P', 929180, '2', 919110, 'A', 240, '參數設定', '', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('16', 'P', 939181, '3', 929180, 'A', 241, '共用參數', 'system/codetype', '','1', 'system', current timestamp);
 INSERT INTO DEF_FUNC(OID, DISCRIMINATOR, CODE, LEVEL, PARENT, SYSTYPE, SEQUENCE, NAME, PATH, DESC, STATUS, UPDATER, UPDATETIME) values ('17', 'P', 939182, '3', 929180, 'A', 242, '系統設定維護', 'system/sysparm', '','1', 'system', current timestamp);
@@ -50,6 +50,7 @@ INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('9
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('929130', 929130,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939131', 939131,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939132', 939132,'AI0001', 'system', current timestamp);
+INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939133', 939133,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('929140', 929140,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939142', 939142,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939143', 939143,'AI0001', 'system', current timestamp);
@@ -66,6 +67,7 @@ INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('9
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939223', 939223,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939224', 939224,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939225', 939225,'AI0001', 'system', current timestamp);
+INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939226', 939226,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('929230', 929230,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939231', 939231,'AI0001', 'system', current timestamp);
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('939232', 939232,'AI0001', 'system', current timestamp);
@@ -81,16 +83,3 @@ INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('9
 INSERT INTO DEF_ROLEFUNC(OID, FUNCCODE,ROLECODE, UPDATER, UPDATETIME) values ('919910', 919910,'AI0001', 'system', current timestamp);
 
 INSERT INTO DEF_USERROLE ( OID, USERCODE, ROLECODE, UPDATER, UPDATETIME ) VALUES ('', '1','AI0001',null,null);
-
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('1','DisableType','A','全部不記錄(LOG+DATA)',1,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('2','DisableType','D','不記錄明細(DATA)',2,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('3','DisableType','C','記錄全部',3,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('4','lang','zh_TW','繁',1,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('5','lang','en','英',2,'en','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('6','lang','zh_CN','簡',3,'zh_CN','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('7','subsystem','ADM','ADM',1,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('8','funcLevel','1','功能導覽第一層(功能列)',1,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('9','funcLevel','2','功能導覽第二層(大項)',2,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('10','funcLevel','3','功能導覽第三層(細項)',3,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('11','authSysId','A','ADM',1,'zh_TW','system',current timestamp);
-insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('12','sysType','9','A',1,'zh_TW','system',current timestamp);

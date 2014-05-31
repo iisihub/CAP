@@ -1,10 +1,4 @@
 --語系
-insert into CFG_CODETYPE(OID,LOCALE,CodeType,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) values('lang0000000000000000000000000001','zh_TW','lang','zh_TW','zh_TW',1,'System',current timestamp);
-insert into CFG_CODETYPE(OID,LOCALE,CodeType,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) values('lang0000000000000000000000000002','zh_TW','lang','zh_CN','zh_CN',2,'System',current timestamp);
-insert into CFG_CODETYPE(OID,LOCALE,CodeType,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) values('lang0000000000000000000000000003','zh_TW','lang','en','en',3,'System',current timestamp);
-
-insert into CFG_CODETYPE(OID,LOCALE,CodeType,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) values('subsystem00000000000000000000001','zh_TW','subsystem','ADM','ADM',1,'System',current timestamp);
-
 INSERT INTO CFG_CODETYPE (OID,LOCALE,CODETYPE,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) VALUES ('6f2766b7393f4f47af98b91615b8c172','zh_TW','userStatus','0','正常',1,'System',current timestamp);
 INSERT INTO CFG_CODETYPE (OID,LOCALE,CODETYPE,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) VALUES ('33f733ea9b4e41fda25f3a67af2d6dee','zh_TW','userStatus','1','初始',2,'System',current timestamp);
 INSERT INTO CFG_CODETYPE (OID,LOCALE,CODETYPE,CODEVALUE,CODEDESC,CODEORDER,UPDATER,UPDATETIME) VALUES ('72ab6b4de0b4462695715ed92c70c2a0','zh_TW','userStatus','2','禁用',3,'System',current timestamp);
@@ -36,3 +30,16 @@ insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,update
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('level000000000000000000000000001','level','0','置頂',1,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('level000000000000000000000000002','level','1','重要',2,'zh_TW','system',current timestamp);
 insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('level000000000000000000000000003','level','2','普通',3,'zh_TW','system',current timestamp);
+
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('1','DisableType','A','全部不記錄(LOG+DATA)',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('2','DisableType','D','不記錄明細(DATA)',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('3','DisableType','C','記錄全部',3,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('4','lang','zh_TW','繁',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('5','lang','en','英',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('6','lang','zh_CN','簡',3,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('7','subsystem','ADM','ADM',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('8','funcLevel','1','功能導覽第一層(功能列)',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('9','funcLevel','2','功能導覽第二層(大項)',2,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('10','funcLevel','3','功能導覽第三層(細項)',3,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('11','authSysId','A','ADM',1,'zh_TW','system',current timestamp);
+insert into cfg_CodeType(oid,codeType,codeValue,CodeDesc,codeOrder,locale,updater,updateTime) values('12','sysType','9','A',1,'zh_TW','system',current timestamp);

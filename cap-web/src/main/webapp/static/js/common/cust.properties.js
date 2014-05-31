@@ -9,7 +9,7 @@ $.extend(Properties || {}, {
 	contextName : "/cap-web/",
 	ajaxTimeOut : 60 * 1000 * 3, // timeOut: 1000
 	// 下拉選單handler
-	ComboBoxHandler : '/cap-web/codetypehandler/queryByKeys',
+	ComboBoxHandler : 'codetypehandler/queryByKeys',
 	Grid : {
 		rowNum : 30,
 		rowList : []
