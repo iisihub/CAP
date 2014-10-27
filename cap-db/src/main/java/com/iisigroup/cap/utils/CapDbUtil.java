@@ -200,14 +200,18 @@ public class CapDbUtil {
 			} else if (o instanceof Collection) {
 				rtn = getSqlValue(((Collection) o).toArray());
 			} else if (o.getClass().isArray()) {
-				StringBuffer sb = new StringBuffer();
-				for (int i = 0; i < Array.getLength(o); ++i) {
-					sb.append(i == 0 ? "" : "'").append(Array.get(o, i))
-							.append("',");
-				}
-				sb.deleteCharAt(sb.length() - 1);
-				sb.deleteCharAt(sb.length() - 1);
-				rtn = sb.toString();
+                if (Array.getLength(o) > 0) {
+                    StringBuffer sb = new StringBuffer();
+                    for (int i = 0; i < Array.getLength(o); ++i) {
+                        sb.append(i == 0 ? "" : "'").append(Array.get(o, i))
+                                .append("',");
+                    }
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+                    rtn = sb.toString();
+                } else {
+                    rtn = "empty?";
+                }
 			} else {
 				rtn = "?";
 			}
