@@ -49,6 +49,11 @@
 			<artifactId>cap-rule</artifactId>
 		</dependency>
 		<dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>cap-captcha</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.3</version>
@@ -129,6 +134,38 @@
 						</resource>
 					</webResources>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<!--  <version>6.1.10</version> -->
+				<configuration>
+					<webAppConfig>
+						<extraClasspath>target/cap-web-2.2.0/WEB-INF/classes</extraClasspath>
+					</webAppConfig>
+					<contextPath>/cap-web</contextPath>
+					<stopKey>foo</stopKey>
+					<stopPort>8080</stopPort>
+					<!-- <systemProperties>
+						<systemProperty>
+							<name>cola.cas.host</name>
+							<value>https://citi/citi-cas</value>
+						</systemProperty>
+						<systemProperty>
+							<name>cola.ap.host</name>
+							<value>http://localhost:8080</value>
+						</systemProperty>
+					</systemProperties> -->
+				</configuration>
+				<executions>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
