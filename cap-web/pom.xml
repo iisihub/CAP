@@ -331,6 +331,38 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>css</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jasig.maven</groupId>
+						<artifactId>sass-maven-plugin</artifactId>
+						<version>1.1.0</version>
+						<configuration>
+							<sassOptions>
+								<always_update>true</always_update>
+								<style>:compressed</style>
+								<debug_info>true</debug_info>
+							</sassOptions>
+							<resources>
+								<resource>
+									<source>
+										<directory>${basedir}/src/WebDev/compass/sass</directory>
+										<includes>
+											<include>*.scss</include>
+										</includes>
+										<excludes />
+									</source>
+									<destination>${basedir}/src/main/webapp/static/css</destination>
+								</resource>
+							</resources>
+							<useCompass>false</useCompass>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 </project>
