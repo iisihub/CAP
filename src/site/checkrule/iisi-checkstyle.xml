@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: iisi-checkstyle
+    Checkstyle-Configuration: iisi
     Description: none
 -->
 <module name="Checker">
@@ -15,8 +15,8 @@
       <property name="scope" value="public"/>
       <property name="allowUndeclaredRTE" value="true"/>
       <property name="allowMissingThrowsTags" value="true"/>
+      <property name="allowMissingJavadoc" value="true"/>
       <property name="allowMissingPropertyJavadoc" value="true"/>
-      <property name="allowMissingJavadoc " value="true"/>
     </module>
     <module name="JavadocType">
       <property name="authorFormat" value="\S"/>
@@ -28,7 +28,10 @@
     </module>
     <module name="AvoidNestedBlocks"/>
     <module name="EmptyBlock"/>
-    <module name="DoubleCheckedLocking"/>
+    <module name="DoubleCheckedLocking">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode"/>
     <module name="IllegalInstantiation"/>
