@@ -141,7 +141,7 @@
 				<!--  <version>6.1.10</version> -->
 				<configuration>
 					<webAppConfig>
-						<extraClasspath>target/cap-web-2.2.0/WEB-INF/classes</extraClasspath>
+						<extraClasspath>target/cap-web-2.2.1/WEB-INF/classes</extraClasspath>
 					</webAppConfig>
 					<contextPath>/cap-web</contextPath>
 					<stopKey>foo</stopKey>
