@@ -113,7 +113,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 	/**
 	 * The next time we estimate a rollover should occur.
 	 */
-	private long nextCheck = System.currentTimeMillis() - 1;
+	private long nextCheck;
 
 	Date now = new Date();
 
@@ -243,6 +243,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 			int type = computeCheckPeriod();
 			printPeriodicity(type);
 			rc.setType(type);
+			nextCheck = rc.getNextCheckMillis(now);
 			currFile = new File(fileName);
 			scheduledFilename = fileName
 					+ sdf.format(new Date(currFile.lastModified()));
