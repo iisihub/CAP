@@ -25,7 +25,11 @@
 		</property>
 		<property name="sqlProvider" ref="userSqlStatement" />
 	</bean>
-	
+
+	<bean id="capJdbcCall" class="org.springframework.jdbc.core.simple.SimpleJdbcCall">
+	    <constructor-arg><ref bean="cap-db"/></constructor-arg>
+	</bean>
+
 	<bean id="capJdbcTxManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="cap-db" />
