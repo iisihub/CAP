@@ -613,7 +613,7 @@ $.holdReady(true);
                 // 轉全型
                 toFull : function() {
                     var result = "";
-                    var str = String.trim(this);
+                    var str = $.trim(this);
                     for (var i = 0; i < str.length; i++) {
                         var tmp;
                         var c = str.charCodeAt(i);
@@ -625,7 +625,7 @@ $.holdReady(true);
                 // 轉半型
                 toHalf : function() {
                     var result = "";
-                    var str = String.trim(this);
+                    var str = $.trim(this);
                     for (var i = 0; i < str.length; i++) {
                         var tmp;
                         var c = str.charCodeAt(i);
@@ -1113,7 +1113,7 @@ $.holdReady(true);
                         var value = json[jid];
                         // 當整個html上無此欄位時,才自動產生隱藏欄位
                         try {
-                            var hItem = $("#" + jid);
+                            var hItem = obj.find("#" + jid);
                             if (!hItem.size()) {
                                 obj.append($("<input type='hidden' id='" + jid + "'" + " name='" + jid + "'" + " value='" + value + "'" + " />"));
                             } else {
