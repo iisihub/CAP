@@ -10,11 +10,14 @@
  */
 package com.iisigroup.cap.base.service.impl;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 
@@ -94,13 +97,18 @@ public class CodeTypeServiceImpl extends AbstractService implements
 		List<CodeType> codes = dao.findByCodeType(types, locale);
 		Map<String, AjaxFormResult> m = new LinkedHashMap<String, AjaxFormResult>();
 		for (CodeType c : codes) {
-			String type = c.getCodeType();
-			AjaxFormResult sm = m.get(type);
-			if (sm == null) {
-				sm = new AjaxFormResult();
-			}
-			sm.set(c.getCodeValue(), c.getCodeDesc());
-			m.put(type, sm);
+				String type = c.getCodeType();
+				Map ssm = new HashMap();
+				ssm.put(c.getCodeValue(), c.getCodeDesc());
+
+				AjaxFormResult sm = m.get(type);
+				if (sm == null) {
+						sm = new AjaxFormResult();
+						sm.set("_", new JSONArray());
+				}
+
+				((JSONArray) sm.get("_")).add(ssm);
+				m.put(type, sm);
 		}
 		return m;
 	}
