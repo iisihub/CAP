@@ -39,6 +39,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * @version <ul>
  *          <li>2011/11/28,rodeschen,new
  *          <li>2013/4/10,rodeschen,增加預設語系
+ *          <li>2015/1/29,sunkist,調整JSON格式
  *          </ul>
  */
 @Service
