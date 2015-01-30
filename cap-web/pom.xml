@@ -343,7 +343,7 @@
 							<sassOptions>
 								<always_update>true</always_update>
 								<style>:compressed</style>
-								<debug_info>true</debug_info>
+								<debug_info>false</debug_info>
 							</sassOptions>
 							<resources>
 								<resource>

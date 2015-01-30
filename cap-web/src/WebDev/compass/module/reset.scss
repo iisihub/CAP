@@ -3,14 +3,6 @@
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \000038;
-  }
-}
 
 html {
   font-family: sans-serif;
@@ -23,14 +15,6 @@ html {
 
 /*
  * Remove default margin. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000319;
-  }
-}
 
 body {
   margin: 0;
@@ -43,14 +27,6 @@ body {
  * Correct `block` display not defined for `details` or `summary` in IE 10/11
  * and Firefox.
  * Correct `block` display not defined for `main` in IE 11. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000331;
-  }
-}
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
@@ -59,14 +35,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /*
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000338;
-  }
-}
 
 audio, canvas, progress, video {
   display: inline-block;
@@ -78,14 +46,6 @@ audio, canvas, progress, video {
 /*
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000348;
-  }
-}
 
 audio:not([controls]) {
   display: none;
@@ -95,14 +55,6 @@ audio:not([controls]) {
 /*
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000356;
-  }
-}
 
 [hidden], template {
   display: none;
@@ -112,28 +64,11 @@ audio:not([controls]) {
  * ========================================================================== */
 /*
  * Remove the gray background color from active links in IE 10. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000365;
-  }
-}
 
 a {
   background-color: transparent;
   &:active, &:hover {
     outline: 0;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000367;
   }
 }
 
@@ -143,14 +78,6 @@ a {
  * ========================================================================== */
 /*
  * Address styling not present in IE 8/9/10/11, Safari, and Chrome. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000379;
-  }
-}
 
 abbr[title] {
   border-bottom: 1px dotted;
@@ -158,14 +85,6 @@ abbr[title] {
 
 /*
  * Address style set to `bolder` in Firefox 4+, Safari, and Chrome. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000385;
-  }
-}
 
 b, strong {
   font-weight: bold;
@@ -173,14 +92,6 @@ b, strong {
 
 /*
  * Address styling not present in Safari and Chrome. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000391;
-  }
-}
 
 dfn {
   font-style: italic;
@@ -189,14 +100,6 @@ dfn {
 /*
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari, and Chrome. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \0000398;
-  }
-}
 
 h1 {
   font-size: 2em;
@@ -205,14 +108,6 @@ h1 {
 
 /*
  * Address styling not present in IE 8/9. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003105;
-  }
-}
 
 mark {
   background: yellow;
@@ -221,14 +116,6 @@ mark {
 
 /*
  * Address inconsistent and variable font size in all browsers. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003112;
-  }
-}
 
 small {
   font-size: 80%;
@@ -236,29 +123,12 @@ small {
 
 /*
  * Prevent `sub` and `sup` affecting `line-height` in all browsers. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003118;
-  }
-}
 
 sub {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003124;
-  }
 }
 
 sup {
@@ -269,15 +139,6 @@ sup {
   top: -0.5em;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003131;
-  }
-}
-
 sub {
   bottom: -0.25em;
 }
@@ -286,14 +147,6 @@ sub {
  * ========================================================================== */
 /*
  * Remove border when inside `a` element in IE 8/9/10. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003140;
-  }
-}
 
 img {
   border: 0;
@@ -301,14 +154,6 @@ img {
 
 /*
  * Correct overflow not hidden in IE 9/10/11. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003146;
-  }
-}
 
 svg:not(:root) {
   overflow: hidden;
@@ -318,14 +163,6 @@ svg:not(:root) {
  * ========================================================================== */
 /*
  * Address margin not present in IE 8/9 and Safari. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003155;
-  }
-}
 
 figure {
   margin: 1em 40px;
@@ -333,14 +170,6 @@ figure {
 
 /*
  * Address differences between Firefox and other browsers. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003161;
-  }
-}
 
 hr {
   -moz-box-sizing: content-box;
@@ -350,14 +179,6 @@ hr {
 
 /*
  * Contain overflow in all browsers. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003169;
-  }
-}
 
 pre {
   overflow: auto;
@@ -365,14 +186,6 @@ pre {
 
 /*
  * Address odd `em`-unit font size rendering in all browsers. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003175;
-  }
-}
 
 code, kbd, pre, samp {
   font-family: monospace, monospace;
@@ -389,14 +202,6 @@ code, kbd, pre, samp {
  *    Known issue: affects color of disabled elements.
  * 2. Correct font properties not being inherited.
  * 3. Address margins set differently in Firefox 4+, Safari, and Chrome. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003192;
-  }
-}
 
 button, input, optgroup, select, textarea {
   color: inherit;
@@ -409,14 +214,6 @@ button, input, optgroup, select, textarea {
 
 /*
  * Address `overflow` set to `hidden` in IE 8/9/10/11. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003203;
-  }
-}
 
 button {
   overflow: visible;
@@ -428,14 +225,6 @@ button {
  * All other form control elements do not inherit `text-transform` values.
  * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
  * Correct `select` style inheritance in Firefox. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003213;
-  }
-}
 
 select {
   text-transform: none;
@@ -447,29 +236,12 @@ select {
  * 2. Correct inability to style clickable `input` types in iOS.
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003223;
-  }
-}
 
 button, html input[type="button"] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
   /* 3 */
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003230;
-  }
 }
 
 input {
@@ -483,14 +255,6 @@ input {
 
 /*
  * Re-set default cursor for disabled elements. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003239;
-  }
-}
 
 button[disabled], html input[disabled] {
   cursor: default;
@@ -498,27 +262,10 @@ button[disabled], html input[disabled] {
 
 /*
  * Remove inner padding and border in Firefox 4+. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003245;
-  }
-}
 
 button::-moz-focus-inner {
   border: 0;
   padding: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003249;
-  }
 }
 
 input {
@@ -551,51 +298,6 @@ input {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003250;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003254;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003260;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003262;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003269;
-  }
-}
-
 /*
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet. */
@@ -619,14 +321,6 @@ input {
  * padding (and `textfield` appearance). */
 /*
  * Define consistent border, margin, and padding. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003301;
-  }
-}
 
 fieldset {
   border: 1px solid silver;
@@ -637,14 +331,6 @@ fieldset {
 /*
  * 1. Correct `color` not being inherited in IE 8/9/10/11.
  * 2. Remove padding so people aren't caught out if they zero out fieldsets. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003310;
-  }
-}
 
 legend {
   border: 0;
@@ -655,14 +341,6 @@ legend {
 
 /*
  * Remove default vertical scrollbar in IE 8/9/10/11. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003319;
-  }
-}
 
 textarea {
   overflow: auto;
@@ -671,14 +349,6 @@ textarea {
 /*
  * Don't inherit the `font-weight` (applied by a rule above).
  * NOTE: the default cannot safely be changed in Chrome and Safari on OS X. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003326;
-  }
-}
 
 optgroup {
   font-weight: bold;
@@ -688,40 +358,14 @@ optgroup {
  * ========================================================================== */
 /*
  * Remove most spacing between table cells. */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003335;
-  }
-}
 
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003339;
-  }
-}
-
 td, th {
   padding: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/reset\.sass;
-  }
-  line {
-    font-family: \00003342;
-  }
 }
 
 ol, ul {

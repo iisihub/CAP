@@ -5,26 +5,9 @@
  ** Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
 /* Layout helpers
  *---------------------------------- */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000310;
-  }
-}
 
 .ui-helper-hidden {
   display: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000313;
-  }
 }
 
 .ui-helper-hidden-accessible {
@@ -38,15 +21,6 @@
   width: 1px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000323;
-  }
-}
-
 .ui-helper-reset {
   margin: 0;
   padding: 0;
@@ -56,15 +30,6 @@
   text-decoration: none;
   font-size: 100%;
   list-style: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000333;
-  }
 }
 
 .ui-helper-clearfix {
@@ -83,33 +48,6 @@
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000334;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000338;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000346;
-  }
-}
-
 .ui-helper-zfix {
   width: 100%;
   height: 100%;
@@ -120,29 +58,12 @@
   filter: Alpha(Opacity = 0);
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000355;
-  }
-}
-
 .ui-front {
   z-index: 100;
 }
 
 /* Interaction Cues
  *---------------------------------- */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000361;
-  }
-}
 
 .ui-state-disabled {
   cursor: default !important;
@@ -151,14 +72,6 @@
 /* Icons
  *---------------------------------- */
 /* states and images */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000369;
-  }
-}
 
 .ui-icon {
   display: block;
@@ -170,14 +83,6 @@
 /* Misc visuals
  *---------------------------------- */
 /* Overlays */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000380;
-  }
-}
 
 .ui-widget-overlay {
   position: fixed;
@@ -187,26 +92,8 @@
   height: 100%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000387;
-  }
-}
-
 .ui-resizable {
   position: relative;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000390;
-  }
 }
 
 .ui-resizable-handle {
@@ -215,26 +102,8 @@
   display: block;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000395;
-  }
-}
-
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
   display: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \0000398;
-  }
 }
 
 .ui-resizable-n {
@@ -245,30 +114,12 @@
   left: 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003105;
-  }
-}
-
 .ui-resizable-s {
   cursor: s-resize;
   height: 7px;
   width: 100%;
   bottom: -5px;
   left: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003112;
-  }
 }
 
 .ui-resizable-e {
@@ -279,30 +130,12 @@
   height: 100%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003119;
-  }
-}
-
 .ui-resizable-w {
   cursor: w-resize;
   width: 7px;
   left: -5px;
   top: 0;
   height: 100%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003126;
-  }
 }
 
 .ui-resizable-se {
@@ -313,30 +146,12 @@
   bottom: 1px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003133;
-  }
-}
-
 .ui-resizable-sw {
   cursor: sw-resize;
   width: 9px;
   height: 9px;
   left: -5px;
   bottom: -5px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003140;
-  }
 }
 
 .ui-resizable-nw {
@@ -347,15 +162,6 @@
   top: -5px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003147;
-  }
-}
-
 .ui-resizable-ne {
   cursor: ne-resize;
   width: 9px;
@@ -364,28 +170,10 @@
   top: -5px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003154;
-  }
-}
-
 .ui-selectable-helper {
   position: absolute;
   z-index: 100;
   border: 1px dotted black;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003160;
-  }
 }
 
 .ui-accordion {
@@ -420,74 +208,11 @@
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003168;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003170;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003172;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003174;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003179;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003184;
-  }
-}
-
 .ui-autocomplete {
   position: absolute;
   top: 0;
   left: 0;
   cursor: default;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003190;
-  }
 }
 
 .ui-button {
@@ -507,63 +232,20 @@
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003202;
-  }
-}
-
 /* to make room for the icon, a width needs to be set here */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003207;
-  }
-}
 
 .ui-button-icon-only {
   width: 2.2em;
 }
 
 /* button elements seem to need a little more width */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003212;
-  }
-}
 
 button.ui-button-icon-only {
   width: 2.4em;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003215;
-  }
-}
-
 .ui-button-icons-only {
   width: 3.4em;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003218;
-  }
 }
 
 button.ui-button-icons-only {
@@ -571,40 +253,14 @@ button.ui-button-icons-only {
 }
 
 /* button text element */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003223;
-  }
-}
 
 .ui-button .ui-button-text {
   display: block;
   line-height: normal;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003227;
-  }
-}
-
 .ui-button-text-only .ui-button-text {
   padding: 0.4em 1em;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003230;
-  }
 }
 
 .ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text {
@@ -612,39 +268,12 @@ button.ui-button-icons-only {
   text-indent: -9999999px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003234;
-  }
-}
-
 .ui-button-text-icon-primary .ui-button-text, .ui-button-text-icons .ui-button-text {
   padding: 0.4em 1em 0.4em 2.1em;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003237;
-  }
-}
-
 .ui-button-text-icon-secondary .ui-button-text {
   padding: 0.4em 2.1em 0.4em 1em;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003240;
-  }
 }
 
 .ui-button-text-icons .ui-button-text {
@@ -654,28 +283,12 @@ button.ui-button-icons-only {
 }
 
 /* no icon support for input elements, provide padding by default */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003247;
-  }
-}
 
 input.ui-button {
   padding: 0.4em 1em;
 }
 
 /* button icon element(s) */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003252;
-  }
-}
 
 .ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon {
   position: absolute;
@@ -683,40 +296,13 @@ input.ui-button {
   margin-top: -8px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003257;
-  }
-}
-
 .ui-button-icon-only .ui-icon {
   left: 50%;
   margin-left: -8px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003261;
-  }
-}
-
 .ui-button-text-icon-primary .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary {
   left: 0.5em;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003264;
-  }
 }
 
 .ui-button-text-icon-secondary .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary {
@@ -724,14 +310,6 @@ input.ui-button {
 }
 
 /* button sets */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003269;
-  }
-}
 
 .ui-buttonset {
   margin-right: 7px;
@@ -741,38 +319,12 @@ input.ui-button {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003271;
-  }
-}
-
 /* workarounds */
 /* reset extra padding in Firefox, see h5bp.com/l */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003278;
-  }
-}
 
 input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   border: 0;
   padding: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003282;
-  }
 }
 
 .ui-datepicker {
@@ -872,186 +424,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003286;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003289;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003294;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003296;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003298;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003300;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003302;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003304;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003311;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003315;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003319;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003321;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003326;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003331;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003334;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003339;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003346;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003353;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003355;
-  }
-}
-
 /* with multiple calendars */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003360;
-  }
-}
 
 .ui-datepicker-multi .ui-datepicker-group {
   float: left;
@@ -1061,61 +434,16 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003362;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003366;
-  }
-}
-
 .ui-datepicker-multi-2 .ui-datepicker-group {
   width: 50%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003369;
-  }
 }
 
 .ui-datepicker-multi-3 .ui-datepicker-group {
   width: 33.3%;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003372;
-  }
-}
-
 .ui-datepicker-multi-4 .ui-datepicker-group {
   width: 25%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003376;
-  }
 }
 
 .ui-datepicker-multi {
@@ -1127,24 +455,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003378;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003381;
-  }
-}
-
 .ui-datepicker-row-break {
   clear: both;
   width: 100%;
@@ -1152,14 +462,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 }
 
 /* RTL support */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003388;
-  }
-}
 
 .ui-datepicker-rtl {
   direction: rtl;
@@ -1194,96 +496,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   .ui-datepicker-group-last .ui-datepicker-header, .ui-datepicker-group-middle .ui-datepicker-header {
     border-right-width: 0;
     border-left-width: 1px;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003390;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003393;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003396;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003399;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003402;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003404;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003406;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003408;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003410;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003414;
   }
 }
 
@@ -1345,98 +557,8 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003421;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003424;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003431;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003439;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003445;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003451;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003453;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003456;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003463;
-  }
-}
-
 .ui-draggable .ui-dialog-titlebar {
   cursor: move;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003466;
-  }
 }
 
 .ui-menu {
@@ -1486,78 +608,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003472;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003475;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003481;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003487;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003495;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003498;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003502;
-  }
-}
-
 /* icon support */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003507;
-  }
-}
 
 .ui-menu-icons {
   position: relative;
@@ -1567,24 +618,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003509;
-  }
-}
-
 /* left-aligned */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003516;
-  }
-}
 
 .ui-menu {
   .ui-icon {
@@ -1598,24 +632,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003520;
-  }
-}
-
 /* right-aligned */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003526;
-  }
-}
 
 .ui-progressbar {
   height: 2em;
@@ -1633,44 +650,8 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003530;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003533;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003539;
-  }
-}
-
 .ui-progressbar-indeterminate .ui-progressbar-value {
   background-image: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003542;
-  }
 }
 
 .ui-slider {
@@ -1698,42 +679,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003545;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003551;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003559;
-  }
-}
-
 /* For IE8 - See #6727 */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003564;
-  }
-}
 
 .ui-slider-horizontal {
   height: 0.8em;
@@ -1750,51 +696,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
   .ui-slider-range-max {
     right: 0;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003566;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003569;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003572;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003574;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003577;
   }
 }
 
@@ -1818,66 +719,12 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003580;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003584;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003587;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003589;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003592;
-  }
-}
-
 .ui-spinner {
   position: relative;
   display: inline-block;
   overflow: hidden;
   padding: 0;
   vertical-align: middle;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003599;
-  }
 }
 
 .ui-spinner-input {
@@ -1889,15 +736,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   vertical-align: middle;
   margin-left: 0.4em;
   margin-right: 22px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003609;
-  }
 }
 
 .ui-spinner-button {
@@ -1915,14 +753,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 }
 
 /* more specificity required here to override default borders */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003625;
-  }
-}
 
 .ui-spinner {
   a.ui-spinner-button {
@@ -1938,36 +768,10 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003629;
-  }
-}
-
 /* vertically center icon */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003637;
-  }
-}
 
 .ui-spinner-up {
   top: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003640;
-  }
 }
 
 .ui-spinner-down {
@@ -1975,27 +779,10 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 }
 
 /* TR overrides */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003645;
-  }
-}
 
 .ui-spinner .ui-icon-triangle-1-s {
   /* need to fix icons sprite */
   background-position: -65px -16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003649;
-  }
 }
 
 .ui-tabs {
@@ -2035,80 +822,8 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003653;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003656;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003665;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003670;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003673;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003675;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003678;
-  }
-}
-
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
   cursor: pointer;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003681;
-  }
 }
 
 .ui-tabs .ui-tabs-panel {
@@ -2116,15 +831,6 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   border-width: 0;
   padding: 1em 1.4em;
   background: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003687;
-  }
 }
 
 .ui-tooltip {
@@ -2136,29 +842,12 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   box-shadow: 0 0 5px #aaaaaa;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003695;
-  }
-}
-
 body .ui-tooltip {
   border-width: 2px;
 }
 
 /* Component containers
  *---------------------------------- */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003701;
-  }
-}
 
 .ui-widget {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
@@ -2172,63 +861,18 @@ body .ui-tooltip {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003704;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003706;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003710;
-  }
-}
-
 .ui-widget-content {
-  border: 1px solid #dddddd;
-  background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
-  color: #333333;
+  border: 1px solid #eeeeee;
+  background: white;
+  color: #080808;
   a {
-    color: #333333;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003714;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003717;
+    color: #080808;
   }
 }
 
 .ui-widget-header {
-  border: 1px solid #e78f08;
-  background: #f6a828 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
+  border: 1px solid #e3a1a1;
+  background: #cc0000 url(images/ui-bg_loop_15_cc0000_21x21.png) 50% 50% repeat-x;
   color: white;
   font-weight: bold;
   a {
@@ -2236,109 +880,45 @@ body .ui-tooltip {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003722;
-  }
-}
-
 /* Interaction states
  *---------------------------------- */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003728;
-  }
-}
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-  border: 1px solid #cccccc;
-  background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
+.ui-state-default, .ui-widget-content .ui-state-default {
+  border: 1px solid #d8dcdf;
+  background: #eeeeee;
   font-weight: bold;
-  color: #1c94c4;
+  color: #004276;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003734;
-  }
+.ui-widget-header .ui-state-default {
+  border: 1px solid #cc0000;
+  background: #cc0000;
+  font-weight: bold;
+  color: #004276;
 }
 
 .ui-state-default a {
-  color: #1c94c4;
+  color: #004276;
   text-decoration: none;
   &:link, &:visited {
-    color: #1c94c4;
+    color: #004276;
     text-decoration: none;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003737;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003741;
   }
 }
 
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-  border: 1px solid #fbcb09;
-  background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
+  border: 1px solid #cdd5da;
+  background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
   font-weight: bold;
-  color: #c77405;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003747;
-  }
+  color: #111111;
 }
 
 .ui-state-hover a {
-  color: #c77405;
+  color: #111111;
   text-decoration: none;
   &:hover, &:link, &:visited {
-    color: #c77405;
+    color: #111111;
     text-decoration: none;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003750;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003754;
   }
 }
 
@@ -2351,136 +931,47 @@ body .ui-tooltip {
   }
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003757;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003761;
-  }
-}
-
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-  border: 1px solid #fbd850;
-  background: white url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+  border: 1px solid #eeeeee;
+  background: white url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
   font-weight: bold;
-  color: #eb8f00;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003767;
-  }
+  color: #cc0000;
 }
 
 .ui-state-active a {
-  color: #eb8f00;
+  color: #cc0000;
   text-decoration: none;
   &:link, &:visited {
-    color: #eb8f00;
+    color: #cc0000;
     text-decoration: none;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003770;
   }
 }
 
 /* Interaction Cues
  *---------------------------------- */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003777;
-  }
-}
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-  border: 1px solid #fed22f;
-  background: #ffe45c url(images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% top repeat-x;
-  color: #363636;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003782;
-  }
+  border: 1px solid #fcd3a1;
+  background: #fbf8ee url(images/ui-bg_white-lines_55_fbf8ee_40x100.png) 50% top repeat-x;
+  color: #444444;
 }
 
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
-  color: #363636;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003785;
-  }
+  color: #444444;
 }
 
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
-  border: 1px solid #cd0a0a;
-  background: #b81900 url(images/ui-bg_diagonals-thick_18_b81900_40x40.png) 50% 50% repeat;
-  color: white;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003790;
-  }
+  border: 1px solid #cc0000;
+  background: #f3d8d8 url(images/ui-bg_diagonals-thick_75_f3d8d8_40x40.png) 50% 50% repeat;
+  color: #2e2e2e;
 }
 
 .ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a, .ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text {
-  color: white;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003793;
-  }
+  color: #2e2e2e;
 }
 
 .ui-priority-primary, .ui-widget-content .ui-priority-primary, .ui-widget-header .ui-priority-primary {
   font-weight: bold;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003796;
-  }
 }
 
 .ui-priority-secondary, .ui-widget-content .ui-priority-secondary, .ui-widget-header .ui-priority-secondary {
@@ -2489,28 +980,10 @@ body .ui-tooltip {
   font-weight: normal;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003801;
-  }
-}
-
 .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
   opacity: 0.35;
   filter: Alpha(Opacity = 35);
   background-image: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003806;
-  }
 }
 
 .ui-state-disabled .ui-icon {
@@ -2521,1862 +994,577 @@ body .ui-tooltip {
 /* Icons
  *---------------------------------- */
 /* states and images */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003815;
-  }
-}
 
 .ui-icon {
   width: 16px;
   height: 16px;
-  background-image: url(images/ui-icons_222222_256x240.png);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003820;
-  }
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-widget-content .ui-icon {
-  background-image: url(images/ui-icons_222222_256x240.png);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003823;
-  }
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-widget-header .ui-icon {
   background-image: url(images/ui-icons_ffffff_256x240.png);
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003826;
-  }
-}
-
-.ui-state-default .ui-icon, .ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-active .ui-icon {
-  background-image: url(images/ui-icons_ef8c08_256x240.png);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003829;
-  }
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-active .ui-icon {
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-state-highlight .ui-icon {
-  background-image: url(images/ui-icons_228ef1_256x240.png);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003832;
-  }
+  background-image: url(images/ui-icons_004276_256x240.png);
 }
 
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
-  background-image: url(images/ui-icons_ffd27a_256x240.png);
+  background-image: url(images/ui-icons_cc0000_256x240.png);
 }
 
 /* positioning */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003837;
-  }
-}
 
 .ui-icon-blank {
   background-position: 16px 16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003840;
-  }
 }
 
 .ui-icon-carat-1-n {
   background-position: 0 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003843;
-  }
-}
-
 .ui-icon-carat-1-ne {
   background-position: -16px 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003846;
-  }
 }
 
 .ui-icon-carat-1-e {
   background-position: -32px 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003849;
-  }
-}
-
 .ui-icon-carat-1-se {
   background-position: -48px 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003852;
-  }
 }
 
 .ui-icon-carat-1-s {
   background-position: -64px 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003855;
-  }
-}
-
 .ui-icon-carat-1-sw {
   background-position: -80px 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003858;
-  }
 }
 
 .ui-icon-carat-1-w {
   background-position: -96px 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003861;
-  }
-}
-
 .ui-icon-carat-1-nw {
   background-position: -112px 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003864;
-  }
 }
 
 .ui-icon-carat-2-n-s {
   background-position: -128px 0;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003867;
-  }
-}
-
 .ui-icon-carat-2-e-w {
   background-position: -144px 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003870;
-  }
 }
 
 .ui-icon-triangle-1-n {
   background-position: 0 -16px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003873;
-  }
-}
-
 .ui-icon-triangle-1-ne {
   background-position: -16px -16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003876;
-  }
 }
 
 .ui-icon-triangle-1-e {
   background-position: -32px -16px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003879;
-  }
-}
-
 .ui-icon-triangle-1-se {
   background-position: -48px -16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003882;
-  }
 }
 
 .ui-icon-triangle-1-s {
   background-position: -64px -16px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003885;
-  }
-}
-
 .ui-icon-triangle-1-sw {
   background-position: -80px -16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003888;
-  }
 }
 
 .ui-icon-triangle-1-w {
   background-position: -96px -16px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003891;
-  }
-}
-
 .ui-icon-triangle-1-nw {
   background-position: -112px -16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003894;
-  }
 }
 
 .ui-icon-triangle-2-n-s {
   background-position: -128px -16px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003897;
-  }
-}
-
 .ui-icon-triangle-2-e-w {
   background-position: -144px -16px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003900;
-  }
 }
 
 .ui-icon-arrow-1-n {
   background-position: 0 -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003903;
-  }
-}
-
 .ui-icon-arrow-1-ne {
   background-position: -16px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003906;
-  }
 }
 
 .ui-icon-arrow-1-e {
   background-position: -32px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003909;
-  }
-}
-
 .ui-icon-arrow-1-se {
   background-position: -48px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003912;
-  }
 }
 
 .ui-icon-arrow-1-s {
   background-position: -64px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003915;
-  }
-}
-
 .ui-icon-arrow-1-sw {
   background-position: -80px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003918;
-  }
 }
 
 .ui-icon-arrow-1-w {
   background-position: -96px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003921;
-  }
-}
-
 .ui-icon-arrow-1-nw {
   background-position: -112px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003924;
-  }
 }
 
 .ui-icon-arrow-2-n-s {
   background-position: -128px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003927;
-  }
-}
-
 .ui-icon-arrow-2-ne-sw {
   background-position: -144px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003930;
-  }
 }
 
 .ui-icon-arrow-2-e-w {
   background-position: -160px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003933;
-  }
-}
-
 .ui-icon-arrow-2-se-nw {
   background-position: -176px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003936;
-  }
 }
 
 .ui-icon-arrowstop-1-n {
   background-position: -192px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003939;
-  }
-}
-
 .ui-icon-arrowstop-1-e {
   background-position: -208px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003942;
-  }
 }
 
 .ui-icon-arrowstop-1-s {
   background-position: -224px -32px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003945;
-  }
-}
-
 .ui-icon-arrowstop-1-w {
   background-position: -240px -32px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003948;
-  }
 }
 
 .ui-icon-arrowthick-1-n {
   background-position: 0 -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003951;
-  }
-}
-
 .ui-icon-arrowthick-1-ne {
   background-position: -16px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003954;
-  }
 }
 
 .ui-icon-arrowthick-1-e {
   background-position: -32px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003957;
-  }
-}
-
 .ui-icon-arrowthick-1-se {
   background-position: -48px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003960;
-  }
 }
 
 .ui-icon-arrowthick-1-s {
   background-position: -64px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003963;
-  }
-}
-
 .ui-icon-arrowthick-1-sw {
   background-position: -80px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003966;
-  }
 }
 
 .ui-icon-arrowthick-1-w {
   background-position: -96px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003969;
-  }
-}
-
 .ui-icon-arrowthick-1-nw {
   background-position: -112px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003972;
-  }
 }
 
 .ui-icon-arrowthick-2-n-s {
   background-position: -128px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003975;
-  }
-}
-
 .ui-icon-arrowthick-2-ne-sw {
   background-position: -144px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003978;
-  }
 }
 
 .ui-icon-arrowthick-2-e-w {
   background-position: -160px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003981;
-  }
-}
-
 .ui-icon-arrowthick-2-se-nw {
   background-position: -176px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003984;
-  }
 }
 
 .ui-icon-arrowthickstop-1-n {
   background-position: -192px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003987;
-  }
-}
-
 .ui-icon-arrowthickstop-1-e {
   background-position: -208px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003990;
-  }
 }
 
 .ui-icon-arrowthickstop-1-s {
   background-position: -224px -48px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003993;
-  }
-}
-
 .ui-icon-arrowthickstop-1-w {
   background-position: -240px -48px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003996;
-  }
 }
 
 .ui-icon-arrowreturnthick-1-w {
   background-position: 0 -64px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \00003999;
-  }
-}
-
 .ui-icon-arrowreturnthick-1-n {
   background-position: -16px -64px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031002;
-  }
 }
 
 .ui-icon-arrowreturnthick-1-e {
   background-position: -32px -64px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031005;
-  }
-}
-
 .ui-icon-arrowreturnthick-1-s {
   background-position: -48px -64px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031008;
-  }
 }
 
 .ui-icon-arrowreturn-1-w {
   background-position: -64px -64px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031011;
-  }
-}
-
 .ui-icon-arrowreturn-1-n {
   background-position: -80px -64px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031014;
-  }
 }
 
 .ui-icon-arrowreturn-1-e {
   background-position: -96px -64px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031017;
-  }
-}
-
 .ui-icon-arrowreturn-1-s {
   background-position: -112px -64px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031020;
-  }
 }
 
 .ui-icon-arrowrefresh-1-w {
   background-position: -128px -64px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031023;
-  }
-}
-
 .ui-icon-arrowrefresh-1-n {
   background-position: -144px -64px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031026;
-  }
 }
 
 .ui-icon-arrowrefresh-1-e {
   background-position: -160px -64px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031029;
-  }
-}
-
 .ui-icon-arrowrefresh-1-s {
   background-position: -176px -64px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031032;
-  }
 }
 
 .ui-icon-arrow-4 {
   background-position: 0 -80px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031035;
-  }
-}
-
 .ui-icon-arrow-4-diag {
   background-position: -16px -80px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031038;
-  }
 }
 
 .ui-icon-extlink {
   background-position: -32px -80px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031041;
-  }
-}
-
 .ui-icon-newwin {
   background-position: -48px -80px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031044;
-  }
 }
 
 .ui-icon-refresh {
   background-position: -64px -80px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031047;
-  }
-}
-
 .ui-icon-shuffle {
   background-position: -80px -80px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031050;
-  }
 }
 
 .ui-icon-transfer-e-w {
   background-position: -96px -80px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031053;
-  }
-}
-
 .ui-icon-transferthick-e-w {
   background-position: -112px -80px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031056;
-  }
 }
 
 .ui-icon-folder-collapsed {
   background-position: 0 -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031059;
-  }
-}
-
 .ui-icon-folder-open {
   background-position: -16px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031062;
-  }
 }
 
 .ui-icon-document {
   background-position: -32px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031065;
-  }
-}
-
 .ui-icon-document-b {
   background-position: -48px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031068;
-  }
 }
 
 .ui-icon-note {
   background-position: -64px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031071;
-  }
-}
-
 .ui-icon-mail-closed {
   background-position: -80px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031074;
-  }
 }
 
 .ui-icon-mail-open {
   background-position: -96px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031077;
-  }
-}
-
 .ui-icon-suitcase {
   background-position: -112px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031080;
-  }
 }
 
 .ui-icon-comment {
   background-position: -128px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031083;
-  }
-}
-
 .ui-icon-person {
   background-position: -144px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031086;
-  }
 }
 
 .ui-icon-print {
   background-position: -160px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031089;
-  }
-}
-
 .ui-icon-trash {
   background-position: -176px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031092;
-  }
 }
 
 .ui-icon-locked {
   background-position: -192px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031095;
-  }
-}
-
 .ui-icon-unlocked {
   background-position: -208px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031098;
-  }
 }
 
 .ui-icon-bookmark {
   background-position: -224px -96px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031101;
-  }
-}
-
 .ui-icon-tag {
   background-position: -240px -96px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031104;
-  }
 }
 
 .ui-icon-home {
   background-position: 0 -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031107;
-  }
-}
-
 .ui-icon-flag {
   background-position: -16px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031110;
-  }
 }
 
 .ui-icon-calendar {
   background-position: -32px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031113;
-  }
-}
-
 .ui-icon-cart {
   background-position: -48px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031116;
-  }
 }
 
 .ui-icon-pencil {
   background-position: -64px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031119;
-  }
-}
-
 .ui-icon-clock {
   background-position: -80px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031122;
-  }
 }
 
 .ui-icon-disk {
   background-position: -96px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031125;
-  }
-}
-
 .ui-icon-calculator {
   background-position: -112px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031128;
-  }
 }
 
 .ui-icon-zoomin {
   background-position: -128px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031131;
-  }
-}
-
 .ui-icon-zoomout {
   background-position: -144px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031134;
-  }
 }
 
 .ui-icon-search {
   background-position: -160px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031137;
-  }
-}
-
 .ui-icon-wrench {
   background-position: -176px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031140;
-  }
 }
 
 .ui-icon-gear {
   background-position: -192px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031143;
-  }
-}
-
 .ui-icon-heart {
   background-position: -208px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031146;
-  }
 }
 
 .ui-icon-star {
   background-position: -224px -112px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031149;
-  }
-}
-
 .ui-icon-link {
   background-position: -240px -112px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031152;
-  }
 }
 
 .ui-icon-cancel {
   background-position: 0 -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031155;
-  }
-}
-
 .ui-icon-plus {
   background-position: -16px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031158;
-  }
 }
 
 .ui-icon-plusthick {
   background-position: -32px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031161;
-  }
-}
-
 .ui-icon-minus {
   background-position: -48px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031164;
-  }
 }
 
 .ui-icon-minusthick {
   background-position: -64px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031167;
-  }
-}
-
 .ui-icon-close {
   background-position: -80px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031170;
-  }
 }
 
 .ui-icon-closethick {
   background-position: -96px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031173;
-  }
-}
-
 .ui-icon-key {
   background-position: -112px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031176;
-  }
 }
 
 .ui-icon-lightbulb {
   background-position: -128px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031179;
-  }
-}
-
 .ui-icon-scissors {
   background-position: -144px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031182;
-  }
 }
 
 .ui-icon-clipboard {
   background-position: -160px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031185;
-  }
-}
-
 .ui-icon-copy {
   background-position: -176px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031188;
-  }
 }
 
 .ui-icon-contact {
   background-position: -192px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031191;
-  }
-}
-
 .ui-icon-image {
   background-position: -208px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031194;
-  }
 }
 
 .ui-icon-video {
   background-position: -224px -128px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031197;
-  }
-}
-
 .ui-icon-script {
   background-position: -240px -128px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031200;
-  }
 }
 
 .ui-icon-alert {
   background-position: 0 -144px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031203;
-  }
-}
-
 .ui-icon-info {
   background-position: -16px -144px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031206;
-  }
 }
 
 .ui-icon-notice {
   background-position: -32px -144px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031209;
-  }
-}
-
 .ui-icon-help {
   background-position: -48px -144px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031212;
-  }
 }
 
 .ui-icon-check {
   background-position: -64px -144px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031215;
-  }
-}
-
 .ui-icon-bullet {
   background-position: -80px -144px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031218;
-  }
 }
 
 .ui-icon-radio-on {
   background-position: -96px -144px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031221;
-  }
-}
-
 .ui-icon-radio-off {
   background-position: -112px -144px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031224;
-  }
 }
 
 .ui-icon-pin-w {
   background-position: -128px -144px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031227;
-  }
-}
-
 .ui-icon-pin-s {
   background-position: -144px -144px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031230;
-  }
 }
 
 .ui-icon-play {
   background-position: 0 -160px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031233;
-  }
-}
-
 .ui-icon-pause {
   background-position: -16px -160px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031236;
-  }
 }
 
 .ui-icon-seek-next {
   background-position: -32px -160px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031239;
-  }
-}
-
 .ui-icon-seek-prev {
   background-position: -48px -160px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031242;
-  }
-}
-
 .ui-icon-seek-end {
   background-position: -64px -160px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031245;
-  }
 }
 
 .ui-icon-seek-start, .ui-icon-seek-first {
@@ -4384,481 +1572,149 @@ body .ui-tooltip {
 }
 
 /* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031250;
-  }
-}
 
 .ui-icon-stop {
   background-position: -96px -160px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031253;
-  }
 }
 
 .ui-icon-eject {
   background-position: -112px -160px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031256;
-  }
-}
-
 .ui-icon-volume-off {
   background-position: -128px -160px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031259;
-  }
 }
 
 .ui-icon-volume-on {
   background-position: -144px -160px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031262;
-  }
-}
-
 .ui-icon-power {
   background-position: 0 -176px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031265;
-  }
 }
 
 .ui-icon-signal-diag {
   background-position: -16px -176px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031268;
-  }
-}
-
 .ui-icon-signal {
   background-position: -32px -176px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031271;
-  }
 }
 
 .ui-icon-battery-0 {
   background-position: -48px -176px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031274;
-  }
-}
-
 .ui-icon-battery-1 {
   background-position: -64px -176px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031277;
-  }
 }
 
 .ui-icon-battery-2 {
   background-position: -80px -176px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031280;
-  }
-}
-
 .ui-icon-battery-3 {
   background-position: -96px -176px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031283;
-  }
 }
 
 .ui-icon-circle-plus {
   background-position: 0 -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031286;
-  }
-}
-
 .ui-icon-circle-minus {
   background-position: -16px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031289;
-  }
 }
 
 .ui-icon-circle-close {
   background-position: -32px -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031292;
-  }
-}
-
 .ui-icon-circle-triangle-e {
   background-position: -48px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031295;
-  }
 }
 
 .ui-icon-circle-triangle-s {
   background-position: -64px -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031298;
-  }
-}
-
 .ui-icon-circle-triangle-w {
   background-position: -80px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031301;
-  }
 }
 
 .ui-icon-circle-triangle-n {
   background-position: -96px -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031304;
-  }
-}
-
 .ui-icon-circle-arrow-e {
   background-position: -112px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031307;
-  }
 }
 
 .ui-icon-circle-arrow-s {
   background-position: -128px -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031310;
-  }
-}
-
 .ui-icon-circle-arrow-w {
   background-position: -144px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031313;
-  }
 }
 
 .ui-icon-circle-arrow-n {
   background-position: -160px -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031316;
-  }
-}
-
 .ui-icon-circle-zoomin {
   background-position: -176px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031319;
-  }
 }
 
 .ui-icon-circle-zoomout {
   background-position: -192px -192px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031322;
-  }
-}
-
 .ui-icon-circle-check {
   background-position: -208px -192px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031325;
-  }
 }
 
 .ui-icon-circlesmall-plus {
   background-position: 0 -208px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031328;
-  }
-}
-
 .ui-icon-circlesmall-minus {
   background-position: -16px -208px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031331;
-  }
 }
 
 .ui-icon-circlesmall-close {
   background-position: -32px -208px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031334;
-  }
-}
-
 .ui-icon-squaresmall-plus {
   background-position: -48px -208px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031337;
-  }
 }
 
 .ui-icon-squaresmall-minus {
   background-position: -64px -208px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031340;
-  }
-}
-
 .ui-icon-squaresmall-close {
   background-position: -80px -208px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031343;
-  }
 }
 
 .ui-icon-grip-dotted-vertical {
   background-position: 0 -224px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031346;
-  }
-}
-
 .ui-icon-grip-dotted-horizontal {
   background-position: -16px -224px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031349;
-  }
 }
 
 .ui-icon-grip-solid-vertical {
   background-position: -32px -224px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031352;
-  }
-}
-
 .ui-icon-grip-solid-horizontal {
   background-position: -48px -224px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031355;
-  }
-}
-
 .ui-icon-gripsmall-diagonal-se {
   background-position: -64px -224px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031358;
-  }
 }
 
 .ui-icon-grip-diagonal-se {
@@ -4868,52 +1724,17 @@ body .ui-tooltip {
 /* Misc visuals
  *---------------------------------- */
 /* Corner radius */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031366;
-  }
-}
 
 .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
   border-top-left-radius: 4px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031369;
-  }
 }
 
 .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
   border-top-right-radius: 4px;
 }
 
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031372;
-  }
-}
-
 .ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
   border-bottom-left-radius: 4px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031375;
-  }
 }
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
@@ -4921,35 +1742,21 @@ body .ui-tooltip {
 }
 
 /* Overlays */
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031380;
-  }
-}
 
 .ui-widget-overlay {
-  background: #666666 url(images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat;
-  opacity: 0.5;
-  filter: Alpha(Opacity = 50);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/\/Users\/shawnyhw6n9\/Documents\/myProject\/MEGA_CARDCOL\/cardcol\/cardcol-web\/src\/compass\/dev\/sass\/module\/jquery-ui-1\.10\.4\.custom\.sass;
-  }
-  line {
-    font-family: \000031385;
-  }
+  background: #a6a6a6 url(images/ui-bg_dots-small_65_a6a6a6_2x2.png) 50% 50% repeat;
+  opacity: 0.4;
+  filter: Alpha(Opacity = 40);
 }
 
 .ui-widget-shadow {
-  margin: -5px 0 0 -5px;
-  padding: 5px;
-  background: black url(images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x;
-  opacity: 0.2;
-  filter: Alpha(Opacity = 20);
-  border-radius: 5px;
+  margin: -8px 0 0 -8px;
+  padding: 8px;
+  background: #333333 url(images/ui-bg_flat_0_333333_40x100.png) 50% 50% repeat-x;
+  opacity: 0.1;
+  filter: Alpha(Opacity = 10);
+  -moz-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
 }
