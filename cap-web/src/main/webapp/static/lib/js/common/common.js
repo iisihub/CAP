@@ -1294,7 +1294,20 @@ $.holdReady(true);
                         } else {
                             s.empty();
                         }
-                        for (var key in o || {}) {
+                        var po =  o["_"];
+                        if (!po) {
+                          var a = [];
+                          for (var pp in o) {
+                            var t = {};
+                            t[pp] = o[pp];
+                            logDebug(t);
+                            a.push(t);
+                          }
+                          po = a;
+                        }
+                        for (var pkey in po || {}) {
+                          o = po[pkey];
+                          for (var key in o || {}) {
                             ops += ("<option key='" + key + "' value='" + (type == '3' ? o[key] : key) + "' showValue='" + o[key] + "'>" + (function(k, v, t) {
 
                                 switch (t) {
@@ -1312,6 +1325,7 @@ $.holdReady(true);
                                         return k + ' - ' + v;
                                 }
                             })(key, o[key], type) + "</option>");
+                          }
                         }
                         if (s.attr("addNew") == 'true') {
                             !ops.match("'>" + i18n.def.newData + "</option>") && (ops += ("<option value='" + i18n.def.newData + "'>" + i18n.def.newData + "</option>"));
