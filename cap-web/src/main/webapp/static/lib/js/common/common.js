@@ -1295,6 +1295,16 @@ $.holdReady(true);
                             s.empty();
                         }
                         var po =  o["_"];
+                        if (!po) {
+                          var a = [];
+                          for (var pp in o) {
+                            var t = {};
+                            t[pp] = o[pp];
+                            logDebug(t);
+                            a.push(t);
+                          }
+                          po = a;
+                        }
                         for (var pkey in po || {}) {
                           o = po[pkey];
                           for (var key in o || {}) {
