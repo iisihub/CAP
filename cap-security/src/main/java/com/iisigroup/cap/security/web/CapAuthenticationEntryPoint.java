@@ -30,28 +30,24 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
  *          </ul>
  */
 @SuppressWarnings("deprecation")
-public class CapAuthenticationEntryPoint extends
-		LoginUrlAuthenticationEntryPoint {
+public class CapAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.security.ui.AuthenticationEntryPoint#commence(javax
-	 * .servlet.ServletRequest, javax.servlet.ServletResponse,
-	 * org.springframework.security.AuthenticationException)
-	 */
-	protected String determineUrlToUseForThisRequest(
-			HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) {
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		String xReq = httpRequest.getHeader("x-requested-with");
-		if ("XMLHttpRequest".equalsIgnoreCase(xReq)) {
-			return new StringBuffer(getLoginFormUrl()).append("?ajax=1")
-					.toString();
-		} else {
-			return getLoginFormUrl();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.security.ui.AuthenticationEntryPoint#commence(javax
+     * .servlet.ServletRequest, javax.servlet.ServletResponse,
+     * org.springframework.security.AuthenticationException)
+     */
+    protected String determineUrlToUseForThisRequest(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String xReq = httpRequest.getHeader("x-requested-with");
+        if ("XMLHttpRequest".equalsIgnoreCase(xReq)) {
+            return new StringBuffer(getLoginFormUrl()).append("?ajax=1").toString();
+        } else {
+            return getLoginFormUrl();
+        }
+    }
 
 }

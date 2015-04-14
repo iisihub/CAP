@@ -83,15 +83,12 @@ public class UserSetHandler extends MFormHandler {
         String name = params.get("name");
         String[] roleCodes = params.getParamsAsStringArray("roleCodes");
         String[] status = params.getParamsAsStringArray("status");
-        Page<Map<String, Object>> page = userService.findUser(code, name,
-                roleCodes, status, search.getMaxResults(),
-                search.getFirstResult());
+        Page<Map<String, Object>> page = userService.findUser(code, name, roleCodes, status, search.getMaxResults(), search.getFirstResult());
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("createTime", new ADDateFormatter());
         fmt.put("updateTime", new ADDateFormatter());
         fmt.put("pwdExpiredTime", new ADDateFormatter());
-        fmt.put("status", new CodeTypeFormatter(codeTypeService, "userStatus",
-                (Locale) SimpleContextHolder.get(CapWebUtil.localeKey)));
+        fmt.put("status", new CodeTypeFormatter(codeTypeService, "userStatus", (Locale) SimpleContextHolder.get(CapWebUtil.localeKey)));
         return new MapGridResult(page.getContent(), page.getTotalRow(), fmt);
     }// ;
 
@@ -119,8 +116,7 @@ public class UserSetHandler extends MFormHandler {
         String code = request.get("code");
         User user = userService.findUserByUserCode(code);
         if (user != null) {
-            throw new CapMessageException(CapAppContext.getMessage(
-                    "users.exist", new Object[] { code }), getClass());
+            throw new CapMessageException(CapAppContext.getMessage("users.exist", new Object[] { code }), getClass());
         }
         String name = request.get("name");
         String password = request.get("password");
@@ -144,14 +140,12 @@ public class UserSetHandler extends MFormHandler {
         }
         User user = userService.findUserByUserCode(code);
         if (user != null && !user.getOid().equals(oid)) {
-            throw new CapMessageException(CapAppContext.getMessage(
-                    "users.exist", new Object[] { code }), getClass());
+            throw new CapMessageException(CapAppContext.getMessage("users.exist", new Object[] { code }), getClass());
         }
         String name = request.get("name");
         String email = request.get("email");
         String[] roleCodes = request.getParamsAsStringArray("roleCodes");
-        userService.updateUserByOid(oid, code, name, reset, password,
-                email, roleCodes);
+        userService.updateUserByOid(oid, code, name, reset, password, email, roleCodes);
         return new AjaxFormResult();
     }// ;
 
@@ -171,11 +165,8 @@ public class UserSetHandler extends MFormHandler {
     @HandlerType(HandlerTypeEnum.GRID)
     public GridResult queryAllUserStatus(ISearch search, IRequest params) {
         search.addOrderBy("codeValue", false);
-        search.addSearchModeParameters(SearchMode.EQUALS, "codeType",
-                "userStatus");
-        search.addSearchModeParameters(SearchMode.EQUALS, "locale",
-                ((Locale) SimpleContextHolder.get(CapWebUtil.localeKey))
-                        .toString());
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", "userStatus");
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", ((Locale) SimpleContextHolder.get(CapWebUtil.localeKey)).toString());
         Page<CodeType> page = commonService.findPage(CodeType.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), null);
     }// ;
@@ -201,8 +192,7 @@ public class UserSetHandler extends MFormHandler {
             passwordService.checkPasswordRule(userId, newPwd, confirm, false);
             passwordService.changeUserPassword(userId, newPwd);
         } else {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("error.009"), getClass());
+            throw new CapMessageException(CapAppContext.getMessage("error.009"), getClass());
         }
         return new AjaxFormResult();
     }

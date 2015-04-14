@@ -26,6 +26,6 @@ import com.iisigroup.cap.Constants;
  *          </ul>
  */
 public interface CapConstants extends Constants {
-	public static final String P_FORM_ACTION = "formAction";
-	public static final String C_AUDITLOG_START_TS = "_AuditLogTS";
+    public static final String P_FORM_ACTION = "formAction";
+    public static final String C_AUDITLOG_START_TS = "_AuditLogTS";
 }

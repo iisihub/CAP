@@ -30,26 +30,23 @@ import com.iisigroup.cap.utils.CapAppContext;
 @SuppressWarnings("serial")
 public class CapErrorResult extends ErrorResult {
 
-	public CapErrorResult() {
-	}
+    public CapErrorResult() {
+    }
 
-	public CapErrorResult(IRequest request, Exception e) {
-		super.putError(request, e);
-	}
+    public CapErrorResult(IRequest request, Exception e) {
+        super.putError(request, e);
+    }
 
-	@Override
-	protected String formatMessage(IRequest request, String msgKey,
-			Object extraInfo) {
-		Locale locale = getLocale(request);
-		if (msgKey.startsWith("EFD")) {
-			return RespMsgHelper.getMessage(request, msgKey,
-					(Object[]) extraInfo);
-		}
-		if (extraInfo != null) {
-			return CapAppContext.getMessage(msgKey, (Object[]) extraInfo,
-					locale);
-		} else {
-			return CapAppContext.getMessage(msgKey, locale);
-		}
-	}
+    @Override
+    protected String formatMessage(IRequest request, String msgKey, Object extraInfo) {
+        Locale locale = getLocale(request);
+        if (msgKey.startsWith("EFD")) {
+            return RespMsgHelper.getMessage(request, msgKey, (Object[]) extraInfo);
+        }
+        if (extraInfo != null) {
+            return CapAppContext.getMessage(msgKey, (Object[]) extraInfo, locale);
+        } else {
+            return CapAppContext.getMessage(msgKey, locale);
+        }
+    }
 }

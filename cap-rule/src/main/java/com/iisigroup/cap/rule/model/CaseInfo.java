@@ -39,175 +39,173 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  */
 @SuppressWarnings("serial")
 @Entity
-
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "CASEINFO", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"casNo" }))
+@Table(name = "CASEINFO", uniqueConstraints = @UniqueConstraint(columnNames = { "casNo" }))
 public class CaseInfo extends GenericBean implements IDataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 20, nullable = false)
-	private String casNo;
+    @NotNull
+    @Column(length = 20, nullable = false)
+    private String casNo;
 
-	/** 部門ID */
-	@Column(length = 20)
-	private String departNo;
+    /** 部門ID */
+    @Column(length = 20)
+    private String departNo;
 
-	/** 群組ID */
-	@Column(length = 20)
-	private String grpUppId;
+    /** 群組ID */
+    @Column(length = 20)
+    private String grpUppId;
 
-	/** 經辦ID */
-	@Column(length = 20)
-	private String cpsGrpId;
+    /** 經辦ID */
+    @Column(length = 20)
+    private String cpsGrpId;
 
-	@Column(length = 6)
-	private String creator;
+    @Column(length = 6)
+    private String creator;
 
-	@Column
-	private Timestamp createTime;
+    @Column
+    private Timestamp createTime;
 
-	@Column(length = 6)
-	private String updater;
-	
-	@Column
-	private Timestamp updateTime;
-	
-	@Column(length = 1)
-	private String isClosed;
-	
-	@Column
-	private Timestamp deletedTime;
+    @Column(length = 6)
+    private String updater;
 
-	@Column(length = 20)
-	private String docStatus;
+    @Column
+    private Timestamp updateTime;
 
-	@Column(precision=12, scale=3)
-	private BigDecimal amount;
+    @Column(length = 1)
+    private String isClosed;
 
-	@Column(length = 10)
-	private int overDueDay;	
-	
-	public String getOid() {
-		return oid;
-	}
+    @Column
+    private Timestamp deletedTime;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    @Column(length = 20)
+    private String docStatus;
 
-	public String getCasNo() {
-		return casNo;
-	}
+    @Column(precision = 12, scale = 3)
+    private BigDecimal amount;
 
-	public void setCasNo(String casNo) {
-		this.casNo = casNo;
-	}
+    @Column(length = 10)
+    private int overDueDay;
 
-	/** 部門ID */
-	public String getDepartNo() {
-		return departNo;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	/** 部門ID */
-	public void setDepartNo(String departNo) {
-		this.departNo = departNo;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	/** 群組ID */
-	public String getGrpUppId() {
-		return grpUppId;
-	}
-	
-	/** 群組ID */
-	public void setGrpUppId(String grpUppId) {
-		this.grpUppId = grpUppId;
-	}
-	
-	/** 經辦ID */
-	public String getCpsGrpId() {
-		return cpsGrpId;
-	}
+    public String getCasNo() {
+        return casNo;
+    }
 
-	/** 經辦ID */
-	public void setCpsGrpId(String cpsGrpId) {
-		this.cpsGrpId = cpsGrpId;
-	}
+    public void setCasNo(String casNo) {
+        this.casNo = casNo;
+    }
 
-	public String getCreator() {
-		return creator;
-	}
+    /** 部門ID */
+    public String getDepartNo() {
+        return departNo;
+    }
 
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
+    /** 部門ID */
+    public void setDepartNo(String departNo) {
+        this.departNo = departNo;
+    }
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+    /** 群組ID */
+    public String getGrpUppId() {
+        return grpUppId;
+    }
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+    /** 群組ID */
+    public void setGrpUppId(String grpUppId) {
+        this.grpUppId = grpUppId;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    /** 經辦ID */
+    public String getCpsGrpId() {
+        return cpsGrpId;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    /** 經辦ID */
+    public void setCpsGrpId(String cpsGrpId) {
+        this.cpsGrpId = cpsGrpId;
+    }
 
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
+    public String getCreator() {
+        return creator;
+    }
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
 
-	public String getIsClosed() {
-		return isClosed;
-	}
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
 
-	public void setIsClosed(String isClosed) {
-		this.isClosed = isClosed;
-	}
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
-	public Timestamp getDeletedTime() {
-		return deletedTime;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public void setDeletedTime(Timestamp deletedTime) {
-		this.deletedTime = deletedTime;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public String getDocStatus() {
-		return docStatus;
-	}
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
 
-	public void setDocStatus(String docStatus) {
-		this.docStatus = docStatus;
-	}
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    public String getIsClosed() {
+        return isClosed;
+    }
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
+    public void setIsClosed(String isClosed) {
+        this.isClosed = isClosed;
+    }
 
-	public int getOverDueDay() {
-		return overDueDay;
-	}
+    public Timestamp getDeletedTime() {
+        return deletedTime;
+    }
 
-	public void setOverDueDay(int overDueDay) {
-		this.overDueDay = overDueDay;
-	}
+    public void setDeletedTime(Timestamp deletedTime) {
+        this.deletedTime = deletedTime;
+    }
+
+    public String getDocStatus() {
+        return docStatus;
+    }
+
+    public void setDocStatus(String docStatus) {
+        this.docStatus = docStatus;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public int getOverDueDay() {
+        return overDueDay;
+    }
+
+    public void setOverDueDay(int overDueDay) {
+        this.overDueDay = overDueDay;
+    }
 
 }

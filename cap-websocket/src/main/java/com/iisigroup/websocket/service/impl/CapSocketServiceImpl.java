@@ -13,35 +13,34 @@ import com.iisigroup.websocket.server.CapNettyWebSocketServer;
 import com.iisigroup.websocket.service.CapSocketService;
 
 @Service
-public class CapSocketServiceImpl extends AbstractService implements
-		CapSocketService {
+public class CapSocketServiceImpl extends AbstractService implements CapSocketService {
 
-	@Resource
-	private CapNettyWebSocketServer server;
+    @Resource
+    private CapNettyWebSocketServer server;
 
-	// @OnConnect
-	// public void onConnectHandler(SocketIOClient client) {
-	//
-	// }
-	//
-	// @OnEvent("xxx")
-	// public void onAddEventHandler(SocketIOClient client, NotifyObject data,
-	// AckRequest ackRequest) {
-	//
-	// }
+    // @OnConnect
+    // public void onConnectHandler(SocketIOClient client) {
+    //
+    // }
+    //
+    // @OnEvent("xxx")
+    // public void onAddEventHandler(SocketIOClient client, NotifyObject data,
+    // AckRequest ackRequest) {
+    //
+    // }
 
-	@Override
-	public SocketIOClient onConnectHandler(String sessionId) {
-		SocketIOServer socket = server.getServer();
-		if (socket != null) {
-			Collection<SocketIOClient> clients = socket.getAllClients();
-			for (SocketIOClient c : clients) {
-				if (c.getSessionId().toString().equals(sessionId)) {
-					return c;
-				}
-			}
-		}
-		return null;
-	}
+    @Override
+    public SocketIOClient onConnectHandler(String sessionId) {
+        SocketIOServer socket = server.getServer();
+        if (socket != null) {
+            Collection<SocketIOClient> clients = socket.getAllClients();
+            for (SocketIOClient c : clients) {
+                if (c.getSessionId().toString().equals(sessionId)) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
 
 }

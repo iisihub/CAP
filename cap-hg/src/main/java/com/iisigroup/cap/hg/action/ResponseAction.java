@@ -12,5 +12,5 @@ package com.iisigroup.cap.hg.action;
  *          </ul>
  */
 public interface ResponseAction {
-	Object margeResponse(Object res1, Object res2);
+    Object margeResponse(Object res1, Object res2);
 }

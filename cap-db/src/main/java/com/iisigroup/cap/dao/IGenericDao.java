@@ -34,71 +34,71 @@ import com.iisigroup.cap.model.Page;
  */
 public interface IGenericDao<T> {
 
-	void save(Object models);
+    void save(Object models);
 
-	/**
-	 * Insert.
-	 * 
-	 * @param models
-	 *            the entity
-	 */
-	void save(List<?> models);
+    /**
+     * Insert.
+     * 
+     * @param models
+     *            the entity
+     */
+    void save(List<?> models);
 
-	/**
-	 * Delete.
-	 * 
-	 * @param entity
-	 *            the entity
-	 */
-	void delete(Object entity);
+    /**
+     * Delete.
+     * 
+     * @param entity
+     *            the entity
+     */
+    void delete(Object entity);
 
-	void delete(List<?> entries);
+    void delete(List<?> entries);
 
-	/**
-	 * Find.
-	 * 
-	 * @param pk
-	 *            the oid
-	 * 
-	 * @return the t
-	 */
-	T find(Serializable pk);
-	
-	<S> List<S> find(Class<S> clazz, ISearch search);
-	
-	T find(T entity);
+    /**
+     * Find.
+     * 
+     * @param pk
+     *            the oid
+     * 
+     * @return the t
+     */
+    T find(Serializable pk);
 
-	T findUniqueOrNone(ISearch search);
+    <S> List<S> find(Class<S> clazz, ISearch search);
 
-	List<T> find(ISearch search);
+    T find(T entity);
 
-	/**
-	 * Count.
-	 * 
-	 * @param search
-	 *            SearchSetting
-	 * @return the int
-	 */
-	int count(ISearch search);
+    T findUniqueOrNone(ISearch search);
 
-	Iterator<T> list(int first, int count);
+    List<T> find(ISearch search);
 
-	Page<T> findPage(ISearch search);
+    /**
+     * Count.
+     * 
+     * @param search
+     *            SearchSetting
+     * @return the int
+     */
+    int count(ISearch search);
 
-	<S> Page<S> findPage(Class<S> clazz, ISearch search);
+    Iterator<T> list(int first, int count);
 
-	/**
-	 * create new search requirement
-	 * 
-	 * @return ISearch
-	 */
-	ISearch createSearchTemplete();
+    Page<T> findPage(ISearch search);
 
-	/**
-	 * flush
-	 */
-	void flush();
-	
-	<S> S findById(Class<S> clazz, Serializable pk);
-	
+    <S> Page<S> findPage(Class<S> clazz, ISearch search);
+
+    /**
+     * create new search requirement
+     * 
+     * @return ISearch
+     */
+    ISearch createSearchTemplete();
+
+    /**
+     * flush
+     */
+    void flush();
+
+    <S> S findById(Class<S> clazz, Serializable pk);
+
 }

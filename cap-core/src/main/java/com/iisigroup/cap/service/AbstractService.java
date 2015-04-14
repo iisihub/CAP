@@ -11,7 +11,6 @@
 
 package com.iisigroup.cap.service;
 
-
 /**
  * <pre>
  * AbstractCapService
@@ -25,6 +24,5 @@ package com.iisigroup.cap.service;
  *          </ul>
  */
 public abstract class AbstractService implements IService {
-	
 
 }

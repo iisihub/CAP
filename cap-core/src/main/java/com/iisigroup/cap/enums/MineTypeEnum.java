@@ -24,16 +24,16 @@ package com.iisigroup.cap.enums;
  *          </ul>
  */
 public enum MineTypeEnum {
-	JSON("text/plain"), TEXT("text/plain");
+    JSON("text/plain"), TEXT("text/plain");
 
-	private String code;
+    private String code;
 
-	MineTypeEnum(String code) {
-		this.code = code;
-	}
+    MineTypeEnum(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
 }

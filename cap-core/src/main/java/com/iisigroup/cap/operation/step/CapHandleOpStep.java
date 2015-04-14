@@ -32,18 +32,17 @@ import com.iisigroup.cap.response.IResult;
  */
 public class CapHandleOpStep extends AbstractCustomizeOpStep {
 
-	@Override
-	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) {
-		IResult rtn = null;
-		@SuppressWarnings("static-access")
-		String actionType = params.get(handler.FORM_ACTION);
-		//setName(handler.getHandlerName() + "." + actionType);
-		IAction action = handler.getAction(actionType);
-		rtn = action.doWork(params);
-		ctx.setGoToStep(NEXT);
-		ctx.setResult(rtn);
-		return ctx;
-	}// ;
+    @Override
+    public OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler) {
+        IResult rtn = null;
+        @SuppressWarnings("static-access")
+        String actionType = params.get(handler.FORM_ACTION);
+        // setName(handler.getHandlerName() + "." + actionType);
+        IAction action = handler.getAction(actionType);
+        rtn = action.doWork(params);
+        ctx.setGoToStep(NEXT);
+        ctx.setResult(rtn);
+        return ctx;
+    }// ;
 
 }// ~

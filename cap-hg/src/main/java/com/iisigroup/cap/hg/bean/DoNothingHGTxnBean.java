@@ -32,58 +32,58 @@ import com.iisigroup.cap.utils.CapString;
  *          </ul>
  */
 public class DoNothingHGTxnBean implements IHGTxnBean {
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private Document sendData;
-	private Document resultData;
+    private Document sendData;
+    private Document resultData;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
-	 */
-	@Override
-	public void setTxnCd(String txnCd) {
-		//do nothing
-		//this.txnCd = txnCd;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
+     */
+    @Override
+    public void setTxnCd(String txnCd) {
+        // do nothing
+        // this.txnCd = txnCd;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
-	 */
-	@Override
-	public void setSendData(Object requestData) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
+     */
+    @Override
+    public void setSendData(Object requestData) {
 
-		if (requestData instanceof String && !CapString.isEmpty((String) requestData)) {
-			try {
-				this.sendData = DocumentHelper.parseText((String) requestData);
-			} catch (DocumentException e) {
-				logger.debug(e.getMessage(), e);
-			}
-		}
+        if (requestData instanceof String && !CapString.isEmpty((String) requestData)) {
+            try {
+                this.sendData = DocumentHelper.parseText((String) requestData);
+            } catch (DocumentException e) {
+                logger.debug(e.getMessage(), e);
+            }
+        }
 
-	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
-	 */
-	@Override
-	public void execute() throws CapException {
-		this.resultData = this.sendData;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#execute()
+     */
+    @Override
+    public void execute() throws CapException {
+        this.resultData = this.sendData;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
-	 */
-	@Override
-	public Object getResultData() {
-		return this.resultData;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
+     */
+    @Override
+    public Object getResultData() {
+        return this.resultData;
+    }
 
 }

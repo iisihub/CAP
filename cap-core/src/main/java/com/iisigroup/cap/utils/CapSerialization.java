@@ -33,179 +33,178 @@ import org.apache.commons.io.IOUtils;
  */
 public class CapSerialization {
 
-	private boolean compress = false;
+    private boolean compress = false;
 
-	CapSerialization(boolean compress) {
-		this.compress = compress;
-	}
+    CapSerialization(boolean compress) {
+        this.compress = compress;
+    }
 
-	private static CapSerialization inst = new CapSerialization(false);
-	private static CapSerialization compressInst = new CapSerialization(true);
+    private static CapSerialization inst = new CapSerialization(false);
+    private static CapSerialization compressInst = new CapSerialization(true);
 
-	public static CapSerialization newInstance() {
-		return inst;
-	}
+    public static CapSerialization newInstance() {
+        return inst;
+    }
 
-	public static CapSerialization newCompressInstance() {
-		return compressInst;
-	}
+    public static CapSerialization newCompressInstance() {
+        return compressInst;
+    }
 
-	public boolean isCompress() {
-		return compress;
+    public boolean isCompress() {
+        return compress;
 
-	}
+    }
 
-	public void setCompress(boolean b) {
-		compress = b;
-	}
+    public void setCompress(boolean b) {
+        compress = b;
+    }
 
-	/**
-	 * compress byte array data with GZIP.
-	 * 
-	 * @param input
-	 *            the input data
-	 * @return the compressed data
-	 * @throws java.io.IOException
-	 */
-	public byte[] compress(byte[] input) throws java.io.IOException {
-		byte[] result = null;
-		java.io.ByteArrayOutputStream baout = null;
-		GZIPOutputStream gzipout = null;
-		try {
-			baout = new java.io.ByteArrayOutputStream();
-			gzipout = new GZIPOutputStream(baout);
-			gzipout.write(input);
-			gzipout.finish();
-			result = baout.toByteArray();
-			return result;
-		} finally {
-			IOUtils.closeQuietly(baout);
-			IOUtils.closeQuietly(gzipout);
-		}
-	}
+    /**
+     * compress byte array data with GZIP.
+     * 
+     * @param input
+     *            the input data
+     * @return the compressed data
+     * @throws java.io.IOException
+     */
+    public byte[] compress(byte[] input) throws java.io.IOException {
+        byte[] result = null;
+        java.io.ByteArrayOutputStream baout = null;
+        GZIPOutputStream gzipout = null;
+        try {
+            baout = new java.io.ByteArrayOutputStream();
+            gzipout = new GZIPOutputStream(baout);
+            gzipout.write(input);
+            gzipout.finish();
+            result = baout.toByteArray();
+            return result;
+        } finally {
+            IOUtils.closeQuietly(baout);
+            IOUtils.closeQuietly(gzipout);
+        }
+    }
 
-	/**
-	 * decompress byte array data with GZIP.
-	 * 
-	 * @param input
-	 *            the input compressed data
-	 * @return the decompress data
-	 * @throws java.io.IOException
-	 */
-	public byte[] decompress(byte[] input) throws java.io.IOException {
+    /**
+     * decompress byte array data with GZIP.
+     * 
+     * @param input
+     *            the input compressed data
+     * @return the decompress data
+     * @throws java.io.IOException
+     */
+    public byte[] decompress(byte[] input) throws java.io.IOException {
 
-		byte[] buf = new byte[2048];
-		byte[] result = null;
-		java.io.ByteArrayInputStream bain = null;
-		ByteArrayOutputStream baout = null;
-		GZIPInputStream gzipin = null;
-		try {
-			bain = new java.io.ByteArrayInputStream(input);
-			gzipin = new GZIPInputStream(bain);
-			baout = new ByteArrayOutputStream();
-			int size;
-			while ((size = gzipin.read(buf)) != -1) {
-				baout.write(buf, 0, size);
-			}
-			result = baout.toByteArray();
-			return result;
-		} finally {
-			IOUtils.closeQuietly(bain);
-			IOUtils.closeQuietly(baout);
-			IOUtils.closeQuietly(gzipin);
-		}
+        byte[] buf = new byte[2048];
+        byte[] result = null;
+        java.io.ByteArrayInputStream bain = null;
+        ByteArrayOutputStream baout = null;
+        GZIPInputStream gzipin = null;
+        try {
+            bain = new java.io.ByteArrayInputStream(input);
+            gzipin = new GZIPInputStream(bain);
+            baout = new ByteArrayOutputStream();
+            int size;
+            while ((size = gzipin.read(buf)) != -1) {
+                baout.write(buf, 0, size);
+            }
+            result = baout.toByteArray();
+            return result;
+        } finally {
+            IOUtils.closeQuietly(bain);
+            IOUtils.closeQuietly(baout);
+            IOUtils.closeQuietly(gzipin);
+        }
 
-	}
+    }
 
-	/**
-	 * Load data from savedData string
-	 * 
-	 * @param in
-	 *            the saved string
-	 * @return the original data
-	 */
-	public Object loadData(String in) {
-		return loadDataFromByteArray(CapString.hexStrToByteArray(in), compress);
-	}
+    /**
+     * Load data from savedData string
+     * 
+     * @param in
+     *            the saved string
+     * @return the original data
+     */
+    public Object loadData(String in) {
+        return loadDataFromByteArray(CapString.hexStrToByteArray(in), compress);
+    }
 
-	public Object loadDataFromByteArray(byte[] in, boolean compress) {
-		if (in == null) {
-			return null;
-		}
-		ByteArrayInputStream bais = null;
-		ObjectInputStream ois = null;
-		try {
-			bais = compress ? new ByteArrayInputStream(decompress(in))
-					: new ByteArrayInputStream(in);
+    public Object loadDataFromByteArray(byte[] in, boolean compress) {
+        if (in == null) {
+            return null;
+        }
+        ByteArrayInputStream bais = null;
+        ObjectInputStream ois = null;
+        try {
+            bais = compress ? new ByteArrayInputStream(decompress(in)) : new ByteArrayInputStream(in);
 
-			ois = new ObjectInputStream(bais);
-			Object o = ois.readObject();
-			return o;
-		} catch (Exception e) {
-			e.getMessage();
-		} finally {
-			IOUtils.closeQuietly(ois);
-			IOUtils.closeQuietly(bais);
-		}
-		return null;
-	}
+            ois = new ObjectInputStream(bais);
+            Object o = ois.readObject();
+            return o;
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            IOUtils.closeQuietly(ois);
+            IOUtils.closeQuietly(bais);
+        }
+        return null;
+    }
 
-	/**
-	 * Serializate the object to string
-	 * 
-	 * @param o
-	 *            the input object
-	 * @return the object's serialized string
-	 */
-	public String saveData(Object o) {
-		return CapString.byteArrayToHexString(saveDataToByteArray(o, compress));
-	}
+    /**
+     * Serializate the object to string
+     * 
+     * @param o
+     *            the input object
+     * @return the object's serialized string
+     */
+    public String saveData(Object o) {
+        return CapString.byteArrayToHexString(saveDataToByteArray(o, compress));
+    }
 
-	public byte[] saveDataToByteArray(Object o, boolean compress) {
-		if (o == null) {
-			return null;
-		}
-		ByteArrayOutputStream baos = null;
-		ObjectOutputStream oos = null;
-		try {
-			baos = new ByteArrayOutputStream();
-			oos = new ObjectOutputStream(baos);
-			oos.writeObject(o);
-			byte[] out = baos.toByteArray();
-			return compress ? compress(out) : out;
-		} catch (Exception e) {
-			e.getMessage();
-		} finally {
-			IOUtils.closeQuietly(oos);
-			IOUtils.closeQuietly(baos);
-		}
-		return null;
-	}
+    public byte[] saveDataToByteArray(Object o, boolean compress) {
+        if (o == null) {
+            return null;
+        }
+        ByteArrayOutputStream baos = null;
+        ObjectOutputStream oos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(o);
+            byte[] out = baos.toByteArray();
+            return compress ? compress(out) : out;
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            IOUtils.closeQuietly(oos);
+            IOUtils.closeQuietly(baos);
+        }
+        return null;
+    }
 
-	// public String stringToBase64(String s) throws IOException {
-	// return stringToBase64(s, compress);
-	// }
-	//
-	// public String stringToBase64(String s, boolean compress) throws
-	// IOException {
-	// byte[] ba = s.getBytes("8859_1");
-	// if (compress) {
-	// ba = compress(ba);
-	// }
-	// return new BASE64Encoder().encode(ba);
-	// }
-	//
-	// public String base64ToString(String s) throws IOException {
-	// return base64ToString(s, compress);
-	// }
-	//
-	// public String base64ToString(String s, boolean compress) throws
-	// IOException {
-	// byte[] ba = new BASE64Decoder().decodeBuffer(s);
-	// if (compress) {
-	// ba = decompress(ba);
-	// }
-	// return new String(ba,"8859_1");
-	// }
+    // public String stringToBase64(String s) throws IOException {
+    // return stringToBase64(s, compress);
+    // }
+    //
+    // public String stringToBase64(String s, boolean compress) throws
+    // IOException {
+    // byte[] ba = s.getBytes("8859_1");
+    // if (compress) {
+    // ba = compress(ba);
+    // }
+    // return new BASE64Encoder().encode(ba);
+    // }
+    //
+    // public String base64ToString(String s) throws IOException {
+    // return base64ToString(s, compress);
+    // }
+    //
+    // public String base64ToString(String s, boolean compress) throws
+    // IOException {
+    // byte[] ba = new BASE64Decoder().decodeBuffer(s);
+    // if (compress) {
+    // ba = decompress(ba);
+    // }
+    // return new String(ba,"8859_1");
+    // }
 
 }

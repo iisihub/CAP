@@ -35,33 +35,33 @@ import com.iisigroup.cap.rule.model.DivRlDtl;
 @Repository
 public class DivRlDtlDaoImpl extends GenericDao<DivRlDtl> implements DivRlDtlDao {
 
-	@Override
-	public DivRlDtl findByRuleNo(String divRlNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
-		return findUniqueOrNone(search);
-	}
-	
-	@Override
-	public List<DivRlDtl> findRlDtlsByRlNoAndSort(String divRlNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
-		search.addOrderBy("divRlSor");
-		return find(search);
-	}
+    @Override
+    public DivRlDtl findByRuleNo(String divRlNo) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<DivRlDtl> findByRuleNos(String[] divRlNos) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("divRlSor");
-		return find(search);
-	}
+    @Override
+    public List<DivRlDtl> findRlDtlsByRlNoAndSort(String divRlNo) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
+        search.addOrderBy("divRlSor");
+        return find(search);
+    }
 
-	@Override
-	public DivRlDtl findByOid(String oid) {
-		return find(oid);
-	}
+    @Override
+    public List<DivRlDtl> findByRuleNos(String[] divRlNos) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("divRlSor");
+        return find(search);
+    }
+
+    @Override
+    public DivRlDtl findByOid(String oid) {
+        return find(oid);
+    }
 
 }

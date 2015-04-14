@@ -36,92 +36,92 @@ import com.iisigroup.cap.utils.CapString;
 @SuppressWarnings({ "serial" })
 public class CapMessageException extends CapException {
 
-	String i18nKey;
+    String i18nKey;
 
-	/**
-	 * Instantiates a new cap exception.
-	 */
-	public CapMessageException() {
-		super();
-	}
+    /**
+     * Instantiates a new cap exception.
+     */
+    public CapMessageException() {
+        super();
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapMessageException(Class causeClass) {
-		super();
-		super.setCauseSource(causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapMessageException(Class causeClass) {
+        super();
+        super.setCauseSource(causeClass);
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapMessageException(String message, Class causeClass) {
-		super(message, causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param message
+     *            the message
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapMessageException(String message, Class causeClass) {
+        super(message, causeClass);
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param cause
-	 *            the throwable
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapMessageException(Throwable cause, Class causeClass) {
-		super(cause, causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param cause
+     *            the throwable
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapMessageException(Throwable cause, Class causeClass) {
+        super(cause, causeClass);
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param cause
-	 *            the cause
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapMessageException(String message, Throwable cause, Class causeClass) {
-		super(message, cause, causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param message
+     *            the message
+     * @param cause
+     *            the cause
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapMessageException(String message, Throwable cause, Class causeClass) {
+        super(message, cause, causeClass);
+    }
 
-	@Override
-	public String getMessage() {
-		return CapString.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
-	}
+    @Override
+    public String getMessage() {
+        return CapString.isEmpty(i18nKey) ? super.getMessage() : i18nKey;
+    }
 
-	/**
-	 * set i18n key
-	 * 
-	 * @param i18nKey
-	 *            the i18n key
-	 * @return CapMessageException
-	 */
-	public CapMessageException setMessageKey(String i18nKey) {
-		this.i18nKey = i18nKey;
-		return this;
-	}
+    /**
+     * set i18n key
+     * 
+     * @param i18nKey
+     *            the i18n key
+     * @return CapMessageException
+     */
+    public CapMessageException setMessageKey(String i18nKey) {
+        this.i18nKey = i18nKey;
+        return this;
+    }
 
-	/**
-	 * get i18n key
-	 * 
-	 * @return String
-	 */
-	public String getMessageKey() {
-		return i18nKey;
-	}
+    /**
+     * get i18n key
+     * 
+     * @return String
+     */
+    public String getMessageKey() {
+        return i18nKey;
+    }
 
 }

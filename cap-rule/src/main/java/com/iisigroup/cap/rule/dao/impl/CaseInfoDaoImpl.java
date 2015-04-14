@@ -35,44 +35,44 @@ import com.iisigroup.cap.rule.model.CaseInfo;
 @Repository
 public class CaseInfoDaoImpl extends GenericDao<CaseInfo> implements CaseInfoDao {
 
-	@Override
-	public CaseInfo findByCaseNo(String caseNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtItmNo", caseNo);
-		return findUniqueOrNone(search);
-	}
-	
-	@Override
-	public List<CaseInfo> findCaseInfosByGrpUppId(String[] grpUppId) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "grpUppId", grpUppId);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("casNo");
-		return find(search);
-	}
-	
-	@Override
-	public List<CaseInfo> findNoneDispatchCaseInfoOrderByCaseNo() {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.IS_NULL, "docStatus", true);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("casNo");
-		return find(search);
-	}
+    @Override
+    public CaseInfo findByCaseNo(String caseNo) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtItmNo", caseNo);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public CaseInfo findByOid(String oid) {
-		return find(oid);
-	}
+    @Override
+    public List<CaseInfo> findCaseInfosByGrpUppId(String[] grpUppId) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "grpUppId", grpUppId);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("casNo");
+        return find(search);
+    }
 
-	@Override
-	public void saveCaseInfos(List<CaseInfo> caseInfoList) {
-		save(caseInfoList);
-	}
+    @Override
+    public List<CaseInfo> findNoneDispatchCaseInfoOrderByCaseNo() {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.IS_NULL, "docStatus", true);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("casNo");
+        return find(search);
+    }
 
-	@Override
-	public void saveCaseInfo(CaseInfo caseInfo) {
-		save(caseInfo);
-	}
+    @Override
+    public CaseInfo findByOid(String oid) {
+        return find(oid);
+    }
+
+    @Override
+    public void saveCaseInfos(List<CaseInfo> caseInfoList) {
+        save(caseInfoList);
+    }
+
+    @Override
+    public void saveCaseInfo(CaseInfo caseInfo) {
+        save(caseInfo);
+    }
 
 }

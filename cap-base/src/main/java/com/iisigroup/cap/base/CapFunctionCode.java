@@ -25,62 +25,62 @@ package com.iisigroup.cap.base;
  */
 public enum CapFunctionCode {
 
-	/**
-	 * FunctionCode 100
-	 */
-	F100("100", "system"),
-	/**
-	 * FunctionCode 101;
-	 */
-	F101("101", "codeType"),
-	/**
-	 * FunctionCode 102;
-	 */
-	F102("102", "sysParm");
+    /**
+     * FunctionCode 100
+     */
+    F100("100", "system"),
+    /**
+     * FunctionCode 101;
+     */
+    F101("101", "codeType"),
+    /**
+     * FunctionCode 102;
+     */
+    F102("102", "sysParm");
 
-	private CapFunctionCode(String code) {
-		this.code = code;
-	}
+    private CapFunctionCode(String code) {
+        this.code = code;
+    }
 
-	private CapFunctionCode(String code, String urlPath) {
-		this.code = code;
-		this.urlPath = urlPath;
-	}
+    private CapFunctionCode(String code, String urlPath) {
+        this.code = code;
+        this.urlPath = urlPath;
+    }
 
-	public String getUrlPath() {
-		return urlPath;
-	}
+    public String getUrlPath() {
+        return urlPath;
+    }
 
-	public void setUrlPath(String urlPath) {
-		this.urlPath = urlPath;
-	}
+    public void setUrlPath(String urlPath) {
+        this.urlPath = urlPath;
+    }
 
-	private String code;
-	private String urlPath;
+    private String code;
+    private String urlPath;
 
-	public String getCode() {
-		return this.code;
-	}
+    public String getCode() {
+        return this.code;
+    }
 
-	public String toString() {
-		return this.code;
-	}
+    public String toString() {
+        return this.code;
+    }
 
-	public boolean isEquals(Object other) {
-		if (other instanceof String) {
-			return code.equals(other);
-		} else {
-			return super.equals(other);
-		}
-	}
+    public boolean isEquals(Object other) {
+        if (other instanceof String) {
+            return code.equals(other);
+        } else {
+            return super.equals(other);
+        }
+    }
 
-	public static CapFunctionCode getEnum(String code) {
-		for (CapFunctionCode enums : CapFunctionCode.values()) {
-			if (enums.getCode().equals(code)) {
-				return enums;
-			}
-		}
-		return null;
-	}
+    public static CapFunctionCode getEnum(String code) {
+        for (CapFunctionCode enums : CapFunctionCode.values()) {
+            if (enums.getCode().equals(code)) {
+                return enums;
+            }
+        }
+        return null;
+    }
 
 }

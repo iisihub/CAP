@@ -35,40 +35,39 @@ import com.iisigroup.cap.utils.CapDbUtil;
  */
 public class CapColumnMapRowSetMapper {
 
-	private String removePrefix;
+    private String removePrefix;
 
-	public CapColumnMapRowSetMapper setRemovePrefix(String removePrefix) {
-		this.removePrefix = removePrefix;
-		return this;
-	}
+    public CapColumnMapRowSetMapper setRemovePrefix(String removePrefix) {
+        this.removePrefix = removePrefix;
+        return this;
+    }
 
-	public Map<String, Object> mapRow(SqlRowSet rs, int rowNum) {
-		SqlRowSetMetaData rsmd = rs.getMetaData();
-		int columnCount = rsmd.getColumnCount();
-		Map<String, Object> mapOfColValues = new HashMap<String, Object>(
-				columnCount);
-		for (int i = 1; i <= columnCount; i++) {
-			String key = rsmd.getColumnName(i);
-			if (removePrefix != null) {
-				key = key.replaceFirst(removePrefix, "");
-			}
-			Object obj = getColumnValue(rs, i);
-			if (obj instanceof String) {
-				obj = CapDbUtil.trimNull(obj);
-			}
-			mapOfColValues.put(key, obj);
-		}
-		return mapOfColValues;
-	}// ;
+    public Map<String, Object> mapRow(SqlRowSet rs, int rowNum) {
+        SqlRowSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        Map<String, Object> mapOfColValues = new HashMap<String, Object>(columnCount);
+        for (int i = 1; i <= columnCount; i++) {
+            String key = rsmd.getColumnName(i);
+            if (removePrefix != null) {
+                key = key.replaceFirst(removePrefix, "");
+            }
+            Object obj = getColumnValue(rs, i);
+            if (obj instanceof String) {
+                obj = CapDbUtil.trimNull(obj);
+            }
+            mapOfColValues.put(key, obj);
+        }
+        return mapOfColValues;
+    }// ;
 
-	protected Object getColumnValue(SqlRowSet rs, int index) {
-		Object obj = rs.getObject(index);
-		if (obj instanceof String) {
-			String str = (String) obj;
-			str = str.trim();
-			obj = CapDbUtil.trimFullSpace(str);
-		}
-		return obj;
-	}// ;
+    protected Object getColumnValue(SqlRowSet rs, int index) {
+        Object obj = rs.getObject(index);
+        if (obj instanceof String) {
+            String str = (String) obj;
+            str = str.trim();
+            obj = CapDbUtil.trimFullSpace(str);
+        }
+        return obj;
+    }// ;
 
 }// ~

@@ -26,11 +26,11 @@ import com.iisigroup.cap.exception.CapException;
  */
 public interface IHGTxnBean {
 
-	void setTxnCd(String txnCd);
+    void setTxnCd(String txnCd);
 
-	void setSendData(Object requestData);
+    void setSendData(Object requestData);
 
-	void execute() throws CapException;
+    void execute() throws CapException;
 
-	Object getResultData();
+    Object getResultData();
 }

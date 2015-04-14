@@ -26,28 +26,28 @@ import com.iisigroup.cap.response.IResult;
  */
 public class OpStepContext {
 
-	String goToStep;
-	IResult result;
+    String goToStep;
+    IResult result;
 
-	public OpStepContext(String goToStep) {
-		this.goToStep = goToStep;
-	}
+    public OpStepContext(String goToStep) {
+        this.goToStep = goToStep;
+    }
 
-	public String getGoToStep() {
-		return goToStep;
-	}
+    public String getGoToStep() {
+        return goToStep;
+    }
 
-	public OpStepContext setGoToStep(String goToStep) {
-		this.goToStep = goToStep;
-		return this;
-	}
+    public OpStepContext setGoToStep(String goToStep) {
+        this.goToStep = goToStep;
+        return this;
+    }
 
-	public IResult getResult() {
-		return result;
-	}
+    public IResult getResult() {
+        return result;
+    }
 
-	public OpStepContext setResult(IResult result) {
-		this.result = result;
-		return this;
-	}
+    public OpStepContext setResult(IResult result) {
+        this.result = result;
+        return this;
+    }
 }

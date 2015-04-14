@@ -41,43 +41,42 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("checktimeouthandler")
 public class CheckTimeoutHandler extends MFormHandler {
 
-	@Resource
-	private CapSystemProperties sysProp;
-	
-	private static final String TIME_OUT = "TIME_OUT";
+    @Resource
+    private CapSystemProperties sysProp;
 
+    private static final String TIME_OUT = "TIME_OUT";
 
-	public IResult check(IRequest request) throws CapException {
-		AjaxFormResult result = new AjaxFormResult();
-		HttpServletRequest sreq = (HttpServletRequest)request.getServletRequest();
-//		String path = sreq.getPathInfo();
-//		boolean isNewSes = sreq.getSession(false).isNew();
-		long time1 = sreq.getSession(false).getLastAccessedTime();
-		long time2 = CapDate.getCurrentTimestamp().getTime();
-		//session設定時間
+    public IResult check(IRequest request) throws CapException {
+        AjaxFormResult result = new AjaxFormResult();
+        HttpServletRequest sreq = (HttpServletRequest) request.getServletRequest();
+        // String path = sreq.getPathInfo();
+        // boolean isNewSes = sreq.getSession(false).isNew();
+        long time1 = sreq.getSession(false).getLastAccessedTime();
+        long time2 = CapDate.getCurrentTimestamp().getTime();
+        // session設定時間
         long time3 = sreq.getSession(false).getMaxInactiveInterval();
-        //讀取後台db設定（單位為分鐘）
+        // 讀取後台db設定（單位為分鐘）
         sysProp.remove(TIME_OUT);
         String stout = sysProp.get(TIME_OUT);
-        if(!CapString.isEmpty(stout)){
-        	time3 = Long.parseLong(stout);
-        	time3 = time3*60;
+        if (!CapString.isEmpty(stout)) {
+            time3 = Long.parseLong(stout);
+            time3 = time3 * 60;
         }
         String isContinues = request.get("isContinues");
         // Calculate difference in milliseconds
         long diff = time2 - time1;
         // Difference in seconds
         long diffSec = diff / 1000;
-        //session timeout 導向 error page
+        // session timeout 導向 error page
         String refPath = sreq.getHeader("referer");
         refPath = StringEscapeUtils.unescapeHtml(refPath);
-        if((diffSec>time3 && refPath.lastIndexOf("error")<0 && refPath.lastIndexOf("timeout")<0) || "false".equals(isContinues)){
-//        	if(!isNewSes){
-        		result.set("errorPage", "/cap-web/page/timeout");
-        		sreq.getSession(false).invalidate();
-//        	}
+        if ((diffSec > time3 && refPath.lastIndexOf("error") < 0 && refPath.lastIndexOf("timeout") < 0) || "false".equals(isContinues)) {
+            // if(!isNewSes){
+            result.set("errorPage", "/cap-web/page/timeout");
+            sreq.getSession(false).invalidate();
+            // }
         }
         result.set("msg", "cccheked");
-		return result;
-	}
+        return result;
+    }
 }

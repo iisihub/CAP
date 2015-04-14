@@ -35,29 +35,28 @@ import com.iisigroup.cap.utils.CapAppContext;
  */
 public abstract class FormHandler extends HandlerPlugin {
 
-	@Override
-	public IResult execute(IRequest params) {
-		Operation oper = getOperation();
-		if (oper != null) {
-			OpStepContext ctx = new OpStepContext(OperationStep.NEXT);
-			oper.execute(ctx, params, this);
-			return ctx.getResult();
-		}
-		return null;
-	}
+    @Override
+    public IResult execute(IRequest params) {
+        Operation oper = getOperation();
+        if (oper != null) {
+            OpStepContext ctx = new OpStepContext(OperationStep.NEXT);
+            oper.execute(ctx, params, this);
+            return ctx.getResult();
+        }
+        return null;
+    }
 
-	public abstract IAction getAction(String formAction);
+    public abstract IAction getAction(String formAction);
 
-	public abstract String getOperationName();
+    public abstract String getOperationName();
 
-	public Operation getOperation() {
-		return (Operation) CapAppContext.getApplicationContext().getBean(
-				getOperationName());
-	}
+    public Operation getOperation() {
+        return (Operation) CapAppContext.getApplicationContext().getBean(getOperationName());
+    }
 
-	@Override
-	public String getHandlerName() {
-		return getPluginName();
-	}
+    @Override
+    public String getHandlerName() {
+        return getPluginName();
+    }
 
 }// ~

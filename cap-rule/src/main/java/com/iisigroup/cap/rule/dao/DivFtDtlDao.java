@@ -29,49 +29,55 @@ import com.iisigroup.cap.rule.model.DivFtDtl;
  */
 public interface DivFtDtlDao extends IGenericDao<DivFtDtl> {
 
-	/**
-	 * find by factorNo.
-	 * 
-	 * @param factorNo
-	 *            因子代號
-	 * @return T
-	 */
-	public DivFtDtl findByFactorNo(String factor);
+    /**
+     * find by factorNo.
+     * 
+     * @param factorNo
+     *            因子代號
+     * @return T
+     */
+    public DivFtDtl findByFactorNo(String factor);
 
-	/**
-	 * find by factorNos.
-	 * 
-	 * @param factorNos
-	 *            多個因子代號
-	 * @return T List
-	 */
-	public List<DivFtDtl> findByFactorNos(String[] factorNos);
+    /**
+     * find by factorNos.
+     * 
+     * @param factorNos
+     *            多個因子代號
+     * @return T List
+     */
+    public List<DivFtDtl> findByFactorNos(String[] factorNos);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return DivFtItm
-	 */
-	public DivFtDtl findByOid(String oid);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return DivFtItm
+     */
+    public DivFtDtl findByOid(String oid);
 
-	/**
-	 * Factor Detail data
-	 * @param factorNo String
-	 * @param rangeNo String
-	 * @return
-	 */
-	DivFtDtl findByFactorNoAndRangeNo(String factorNo, String rangeNos);
-	
-	/**
-	 * Factor Detail data
-	 * @param factorNo String
-	 * @param rangeNos String[]
-	 * @return
-	 */
-	List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos);
+    /**
+     * Factor Detail data
+     * 
+     * @param factorNo
+     *            String
+     * @param rangeNo
+     *            String
+     * @return
+     */
+    DivFtDtl findByFactorNoAndRangeNo(String factorNo, String rangeNos);
 
-	void merge(List<DivFtDtl> divFtDtls);
+    /**
+     * Factor Detail data
+     * 
+     * @param factorNo
+     *            String
+     * @param rangeNos
+     *            String[]
+     * @return
+     */
+    List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos);
+
+    void merge(List<DivFtDtl> divFtDtls);
 
 }

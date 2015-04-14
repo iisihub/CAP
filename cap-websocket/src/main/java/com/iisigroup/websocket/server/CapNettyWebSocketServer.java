@@ -37,44 +37,39 @@ import com.iisigroup.websocket.bean.ChatObject;
  */
 public class CapNettyWebSocketServer {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(CapNettyWebSocketServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(CapNettyWebSocketServer.class);
 
-	private final SocketIOServer server;
+    private final SocketIOServer server;
 
-	public CapNettyWebSocketServer() {
-		Configuration config = new Configuration();
-		config.setPort(9092);
+    public CapNettyWebSocketServer() {
+        Configuration config = new Configuration();
+        config.setPort(9092);
 
-		server = new SocketIOServer(config);
+        server = new SocketIOServer(config);
 
-		server.addConnectListener(new ConnectListener() {
+        server.addConnectListener(new ConnectListener() {
 
-			@Override
-			public void onConnect(SocketIOClient client) {
-				logger.info(client.toString());
-			}
-		});
-		server.addEventListener("chatevent", ChatObject.class,
-				new DataListener<ChatObject>() {
-					@Override
-					public void onData(SocketIOClient client, ChatObject data,
-							AckRequest ackRequest) {
-						Collection<SocketIOClient> clients = server
-								.getAllClients();
-						for (SocketIOClient c : clients) {
-							c.getNamespace();
-						}
-						server.getBroadcastOperations().sendEvent("chatevent",
-								data);
-					}
-				});
+            @Override
+            public void onConnect(SocketIOClient client) {
+                logger.info(client.toString());
+            }
+        });
+        server.addEventListener("chatevent", ChatObject.class, new DataListener<ChatObject>() {
+            @Override
+            public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest) {
+                Collection<SocketIOClient> clients = server.getAllClients();
+                for (SocketIOClient c : clients) {
+                    c.getNamespace();
+                }
+                server.getBroadcastOperations().sendEvent("chatevent", data);
+            }
+        });
 
-		// server.addListeners(new CapReminderService());
-		server.start();
-	}
+        // server.addListeners(new CapReminderService());
+        server.start();
+    }
 
-	public SocketIOServer getServer() {
-		return server;
-	}
+    public SocketIOServer getServer() {
+        return server;
+    }
 }

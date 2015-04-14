@@ -27,19 +27,19 @@ import java.io.Serializable;
  */
 public interface IDataObject extends Serializable {
 
-	/**
-	 * Gets the oid.
-	 * 
-	 * @return the oid
-	 */
-	String getOid();
+    /**
+     * Gets the oid.
+     * 
+     * @return the oid
+     */
+    String getOid();
 
-	/**
-	 * Sets the oid.
-	 * 
-	 * @param oid
-	 *            the new oid
-	 */
-	void setOid(String oid);
+    /**
+     * Sets the oid.
+     * 
+     * @param oid
+     *            the new oid
+     */
+    void setOid(String oid);
 
 }

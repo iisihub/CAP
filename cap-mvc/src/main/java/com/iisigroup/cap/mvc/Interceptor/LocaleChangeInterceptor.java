@@ -33,22 +33,18 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          <li>2013/12/30,tammy,以RequestContextUtils.getLocale(request)取得
  *          </ul>
  */
-public class LocaleChangeInterceptor extends
-		org.springframework.web.servlet.i18n.LocaleChangeInterceptor {
+public class LocaleChangeInterceptor extends org.springframework.web.servlet.i18n.LocaleChangeInterceptor {
 
-	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler)
-			throws ServletException {
-		String newLocale = request.getParameter(getParamName());
-		if (newLocale != null) {
-			super.preHandle(request, response, handler);
-			CapUserDetails user = CapSecurityContext.getUser();
-			user.setLocale(RequestContextUtils.getLocale(request));
-			request.getSession(false).setAttribute(CapWebUtil.localeKey,
-					RequestContextUtils.getLocale(request));
-		}
-		return true;
-	}
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException {
+        String newLocale = request.getParameter(getParamName());
+        if (newLocale != null) {
+            super.preHandle(request, response, handler);
+            CapUserDetails user = CapSecurityContext.getUser();
+            user.setLocale(RequestContextUtils.getLocale(request));
+            request.getSession(false).setAttribute(CapWebUtil.localeKey, RequestContextUtils.getLocale(request));
+        }
+        return true;
+    }
 
 }

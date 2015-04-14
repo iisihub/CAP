@@ -31,27 +31,20 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
     private UserDetailsService userService;
     private IPasswordService passwordService;
     private IAccessControlService accessControlService;
-    private Logger logger = LoggerFactory
-            .getLogger(CapAuthenticationProvider.class);
+    private Logger logger = LoggerFactory.getLogger(CapAuthenticationProvider.class);
     private CaptchaCaptureFilter captchaCaptureFilter;
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = String.valueOf(authentication.getPrincipal());
         String password = String.valueOf(authentication.getCredentials());
         logger.debug("Checking authentication for user {}", username);
-        logger.debug("userResponse: {}",
-                captchaCaptureFilter.getUserCaptchaResponse());
+        logger.debug("userResponse: {}", captchaCaptureFilter.getUserCaptchaResponse());
         boolean captchaEnabled = isCaptchaEnabled();
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            throw new CapAuthenticationException(
-                    "No Username and/or Password Provided.", captchaEnabled);
-        } else if (captchaEnabled
-                && StringUtils.isBlank(captchaCaptureFilter
-                        .getUserCaptchaResponse())) {
-            throw new CapAuthenticationException("Captcha Response is Empty",
-                    captchaEnabled);
+            throw new CapAuthenticationException("No Username and/or Password Provided.", captchaEnabled);
+        } else if (captchaEnabled && StringUtils.isBlank(captchaCaptureFilter.getUserCaptchaResponse())) {
+            throw new CapAuthenticationException("Captcha Response is Empty", captchaEnabled);
         } else {
             Map<String, String> policy = passwordService.getPasswordPolicy();
             boolean captchaPassed = true;
@@ -59,21 +52,15 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             Integer wrongCount = getWrountCount(username);
             logger.debug("wrongCount-{}: {}", username, wrongCount);
             // 密碼連錯 PWD_ACCOUNT_LOCK 次 lock user
-            if (wrongCount >= Integer.parseInt(policy
-                    .get(PwdPloicyKeys.PWD_ACCOUNT_LOCK.toString()
-                            .toLowerCase()))) {
+            if (wrongCount >= Integer.parseInt(policy.get(PwdPloicyKeys.PWD_ACCOUNT_LOCK.toString().toLowerCase()))) {
                 accessControlService.lockUserByUserId(username);
-                throw new CapAuthenticationException("User locked.",
-                        captchaEnabled);
+                throw new CapAuthenticationException("User locked.", captchaEnabled);
             }
             // 驗證 captcha
             if (captchaEnabled) {
-                String cpatchaData = captchaCaptureFilter.getRequest()
-                        .getParameter("captcha");
-                CapSecurityCaptcha captcha = CapAppContext
-                        .getBean(CapCaptchaServlet.DEF_RENDERER);
-                captchaPassed = CaptchaStatus.SUCCESS.equals(captcha
-                        .valid(cpatchaData));
+                String cpatchaData = captchaCaptureFilter.getRequest().getParameter("captcha");
+                CapSecurityCaptcha captcha = CapAppContext.getBean(CapCaptchaServlet.DEF_RENDERER);
+                captchaPassed = CaptchaStatus.SUCCESS.equals(captcha.valid(cpatchaData));
                 logger.debug("Is captcha valid: " + captchaPassed);
             } else {
                 captchaPassed = true;
@@ -82,133 +69,97 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                 resetCaptchaFields();
                 CapUserDetails user;
                 try {
-                    user = (CapUserDetails) userService
-                            .loadUserByUsername(username);
+                    user = (CapUserDetails) userService.loadUserByUsername(username);
                 } catch (Exception e) {
-                    throw new CapAuthenticationException(e.getMessage(),
-                            captchaEnabled, forceChangePwd);
+                    throw new CapAuthenticationException(e.getMessage(), captchaEnabled, forceChangePwd);
                 }
-                boolean currentPwdVerified = verifyPassword(username,
-                        authentication.getCredentials().toString(),
-                        user.getPassword());
+                boolean currentPwdVerified = verifyPassword(username, authentication.getCredentials().toString(), user.getPassword());
                 if (currentPwdVerified) {
                     setWrountCount(username, 0);
-                    String authedPwd = checkStatus(user, username, password,
-                            policy, captchaEnabled, forceChangePwd);
+                    String authedPwd = checkStatus(user, username, password, policy, captchaEnabled, forceChangePwd);
                     // 登入成功
                     setForceChangePwd(username, false);
                     // 檢核是否要提醒使用者變更密碼
-                    notifyPasswordChange(username, captchaEnabled,
-                            forceChangePwd);
+                    notifyPasswordChange(username, captchaEnabled, forceChangePwd);
                     accessControlService.login(username);
-                    return new UsernamePasswordAuthenticationToken(user,
-                            authedPwd, user.getAuthorities());
+                    return new UsernamePasswordAuthenticationToken(user, authedPwd, user.getAuthorities());
                 } else {
                     setWrountCount(username, getWrountCount(username) + 1);
                     // 連錯 N 次，enable captcha
-                    if (wrongCount >= Integer.parseInt(policy
-                            .get(PwdPloicyKeys.PWD_CAPTCHA_ENABLE.toString()
-                                    .toLowerCase()))) {
+                    if (wrongCount >= Integer.parseInt(policy.get(PwdPloicyKeys.PWD_CAPTCHA_ENABLE.toString().toLowerCase()))) {
                         setCaptchaEnabled(true);
                     }
-                    throw new CapAuthenticationException("Invalid Password.",
-                            isCaptchaEnabled(), forceChangePwd);
+                    throw new CapAuthenticationException("Invalid Password.", isCaptchaEnabled(), forceChangePwd);
                 }
             } else {
                 logger.debug("Captcha is invalid!");
                 resetCaptchaFields();
-                throw new CapAuthenticationException("Invalid Captcha.",
-                        captchaEnabled, forceChangePwd);
+                throw new CapAuthenticationException("Invalid Captcha.", captchaEnabled, forceChangePwd);
             }
         }
     }
 
-    private String checkStatus(CapUserDetails user, String username,
-            String password, Map<String, String> policy,
-            boolean captchaEnabled, boolean forceChangePwd) {
+    private String checkStatus(CapUserDetails user, String username, String password, Map<String, String> policy, boolean captchaEnabled, boolean forceChangePwd) {
         String authedPwd = "";
-        int status = StringUtils.isBlank(user.getStatus()) ? -1 : Integer
-                .parseInt(user.getStatus());
+        int status = StringUtils.isBlank(user.getStatus()) ? -1 : Integer.parseInt(user.getStatus());
         switch (status) {
         case 0:// 正常
             authedPwd = password;
             break;
         case 1:// 初始
                // 若「首次登入是否強制更換密碼」為1，則強制更換密碼，否則用原密碼登入。
-            if ("1".equals(policy.get(PwdPloicyKeys.PWD_FORCE_CHANGE_PWD
-                    .toString().toLowerCase()))) {
-                authedPwd = forceChangePassword(username, captchaEnabled,
-                        forceChangePwd, CapAppContext.getMessage("error.011"));
+            if ("1".equals(policy.get(PwdPloicyKeys.PWD_FORCE_CHANGE_PWD.toString().toLowerCase()))) {
+                authedPwd = forceChangePassword(username, captchaEnabled, forceChangePwd, CapAppContext.getMessage("error.011"));
             } else {
                 authedPwd = password;
             }
             break;
         case 2: // 禁用
-            throw new CapAuthenticationException(CapAppContext.getMessage(
-                    "error.006", new Object[] { username }), captchaEnabled,
-                    forceChangePwd);
+            throw new CapAuthenticationException(CapAppContext.getMessage("error.006", new Object[] { username }), captchaEnabled, forceChangePwd);
         case 3: // 密碼過期
-            authedPwd = forceChangePassword(username, captchaEnabled,
-                    forceChangePwd, CapAppContext.getMessage("error.012"));
+            authedPwd = forceChangePassword(username, captchaEnabled, forceChangePwd, CapAppContext.getMessage("error.012"));
             break;
         case 9: // 刪除
-            throw new CapAuthenticationException(CapAppContext.getMessage(
-                    "error.007", new Object[] { username }), captchaEnabled,
-                    forceChangePwd);
+            throw new CapAuthenticationException(CapAppContext.getMessage("error.007", new Object[] { username }), captchaEnabled, forceChangePwd);
         default:
-            throw new CapAuthenticationException("Invalid User Status.",
-                    captchaEnabled, forceChangePwd);
+            throw new CapAuthenticationException("Invalid User Status.", captchaEnabled, forceChangePwd);
         }
-        String agreeChange = captchaCaptureFilter.getRequest().getParameter(
-                "agreeChange");
+        String agreeChange = captchaCaptureFilter.getRequest().getParameter("agreeChange");
         if (Boolean.valueOf(agreeChange)) {
-            authedPwd = forceChangePassword(username, captchaEnabled,
-                    forceChangePwd, "");
+            authedPwd = forceChangePassword(username, captchaEnabled, forceChangePwd, "");
         }
         return authedPwd;
     }
 
-    private void notifyPasswordChange(String userId, boolean captchaEnabled,
-            boolean forceChangePwd) {
-        String ignoreNotify = captchaCaptureFilter.getRequest().getParameter(
-                "ignoreNotify");
+    private void notifyPasswordChange(String userId, boolean captchaEnabled, boolean forceChangePwd) {
+        String ignoreNotify = captchaCaptureFilter.getRequest().getParameter("ignoreNotify");
         if (!Boolean.valueOf(ignoreNotify)) {
             int diff = passwordService.getPasswordChangeNotifyDay(userId) + 1;
             if (diff > 0) {
-                throw new CapAuthenticationException(CapAppContext.getMessage(
-                        "error.013", new Object[] { diff }), captchaEnabled,
-                        forceChangePwd, true);
+                throw new CapAuthenticationException(CapAppContext.getMessage("error.013", new Object[] { diff }), captchaEnabled, forceChangePwd, true);
             }
         }
     }
 
-    private String forceChangePassword(String username, boolean captchaEnabled,
-            boolean forceChangePwd, String reason) {
-        String newPwd = captchaCaptureFilter.getRequest()
-                .getParameter("newPwd");
-        String confirm = captchaCaptureFilter.getRequest().getParameter(
-                "confirm");
+    private String forceChangePassword(String username, boolean captchaEnabled, boolean forceChangePwd, String reason) {
+        String newPwd = captchaCaptureFilter.getRequest().getParameter("newPwd");
+        String confirm = captchaCaptureFilter.getRequest().getParameter("confirm");
         if (StringUtils.isBlank(newPwd) || StringUtils.isBlank(confirm)) {
             setForceChangePwd(username, true);
-            throw new CapAuthenticationException(reason
-                    + CapAppContext.getMessage("error.010"), captchaEnabled,
-                    true);
+            throw new CapAuthenticationException(reason + CapAppContext.getMessage("error.010"), captchaEnabled, true);
         } else {
             // set new password
             try {
-                passwordService.checkPasswordRule(username, newPwd, confirm,
-                        true);
+                passwordService.checkPasswordRule(username, newPwd, confirm, true);
             } catch (Exception e) {
-                throw new CapAuthenticationException(e.getMessage(),
-                        captchaEnabled, forceChangePwd);
+                throw new CapAuthenticationException(e.getMessage(), captchaEnabled, forceChangePwd);
             }
             passwordService.changeUserPassword(username, newPwd);
             return newPwd;
         }
     }
 
-    private boolean verifyPassword(String username, String presentedPassword,
-            String encodedPassword) {
+    private boolean verifyPassword(String username, String presentedPassword, String encodedPassword) {
         PasswordEncoder passwordEncoder = new StandardPasswordEncoder(username);
         if (passwordEncoder.matches(presentedPassword, encodedPassword)) {
             return true;
@@ -219,8 +170,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return (UsernamePasswordAuthenticationToken.class
-                .isAssignableFrom(authentication));
+        return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 
     public void resetCaptchaFields() {
@@ -231,8 +181,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
         return captchaCaptureFilter;
     }
 
-    public void setCaptchaCaptureFilter(
-            CaptchaCaptureFilter captchaCaptureFilter) {
+    public void setCaptchaCaptureFilter(CaptchaCaptureFilter captchaCaptureFilter) {
         this.captchaCaptureFilter = captchaCaptureFilter;
     }
 
@@ -280,8 +229,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
 
     private boolean isCaptchaEnabled() {
         HttpSession session = captchaCaptureFilter.getRequest().getSession();
-        return session.getAttribute("captchaEnabled") == null ? false
-                : (Boolean) session.getAttribute("captchaEnabled");
+        return session.getAttribute("captchaEnabled") == null ? false : (Boolean) session.getAttribute("captchaEnabled");
     }
 
     private void setCaptchaEnabled(boolean captchaEnabled) {
@@ -293,8 +241,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
         return accessControlService;
     }
 
-    public void setAccessControlService(
-            IAccessControlService accessControlService) {
+    public void setAccessControlService(IAccessControlService accessControlService) {
         this.accessControlService = accessControlService;
     }
 

@@ -34,20 +34,20 @@ import com.iisigroup.cap.dao.impl.GenericDao;
 @Repository
 public class RemindsDaoImpl extends GenericDao<Reminds> implements RemindsDao {
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Reminds> findCurrentRemindItem(String[] styleTyp, String locale) {
-		Query query = getEntityManager()
-				.createNativeQuery(
-						"select s.* from CFG_remind r inner join CFG_reminds s on r.oid = s.pid where datediff('SECOND', current timestamp, r.STARTDATE) < s.STYLE*s.unit+30 and datediff('SECOND', current timestamp, r.STARTDATE) >= s.STYLE*s.unit and s.YNFLAG = '0' and s.STYLETYP in (:styleTyp) and r.LOCALE = :locale",
-						Reminds.class);
-		query.setParameter("styleTyp", Arrays.asList(styleTyp));
-		query.setParameter("locale", locale);
-		return (List<Reminds>) query.getResultList();
-	}
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Reminds> findCurrentRemindItem(String[] styleTyp, String locale) {
+        Query query = getEntityManager()
+                .createNativeQuery(
+                        "select s.* from CFG_remind r inner join CFG_reminds s on r.oid = s.pid where datediff('SECOND', current timestamp, r.STARTDATE) < s.STYLE*s.unit+30 and datediff('SECOND', current timestamp, r.STARTDATE) >= s.STYLE*s.unit and s.YNFLAG = '0' and s.STYLETYP in (:styleTyp) and r.LOCALE = :locale",
+                        Reminds.class);
+        query.setParameter("styleTyp", Arrays.asList(styleTyp));
+        query.setParameter("locale", locale);
+        return (List<Reminds>) query.getResultList();
+    }
 
-	@Override
-	public void merge(Reminds entity) {
-		super.merge(entity);
-	}
+    @Override
+    public void merge(Reminds entity) {
+        super.merge(entity);
+    }
 }

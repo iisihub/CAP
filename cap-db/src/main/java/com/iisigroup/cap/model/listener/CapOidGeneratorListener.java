@@ -30,10 +30,10 @@ import com.iisigroup.cap.model.IDataObject;
  */
 public class CapOidGeneratorListener {
 
-	@PrePersist
-	public <T extends IDataObject> void perPersist(T entity) {
-		String uuid = UUID.randomUUID().toString().replace("-", "");
-		entity.setOid(uuid);
-	}// ;
+    @PrePersist
+    public <T extends IDataObject> void perPersist(T entity) {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        entity.setOid(uuid);
+    }// ;
 
 }

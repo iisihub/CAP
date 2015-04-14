@@ -36,25 +36,25 @@ import com.iisigroup.cap.Constants;
 @SuppressWarnings("serial")
 public class ADDateFormatter implements IFormatter {
 
-	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	public String reformat(Object in) {
-		if (in != null && !"".equals(in)) {
-			if (in instanceof Calendar) {
-				in = ((Calendar) in).getTime();
-			} else if (in instanceof String) {
-				return df.format(df.parse((String) in, new ParsePosition(0)));
-			}
-			return df.format(in);
-		} else {
-			return Constants.EMPTY_STRING;
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    public String reformat(Object in) {
+        if (in != null && !"".equals(in)) {
+            if (in instanceof Calendar) {
+                in = ((Calendar) in).getTime();
+            } else if (in instanceof String) {
+                return df.format(df.parse((String) in, new ParsePosition(0)));
+            }
+            return df.format(in);
+        } else {
+            return Constants.EMPTY_STRING;
+        }
+    }
 
 }

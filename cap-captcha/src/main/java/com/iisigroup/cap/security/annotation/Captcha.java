@@ -32,5 +32,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Captcha {
-	String value() default "captcha";
+    String value() default "captcha";
 }

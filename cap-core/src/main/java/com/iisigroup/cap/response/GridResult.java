@@ -42,197 +42,189 @@ import com.iisigroup.cap.model.GenericBean;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class GridResult extends AjaxFormResult implements
-		IGridResult<GridResult, GenericBean> {
+public class GridResult extends AjaxFormResult implements IGridResult<GridResult, GenericBean> {
 
-	protected List<? extends GenericBean> rowData;
+    protected List<? extends GenericBean> rowData;
 
-	protected String[] columns;
+    protected String[] columns;
 
-	protected Map<String, IFormatter> dataReformatter;
+    protected Map<String, IFormatter> dataReformatter;
 
-	public GridResult() {
-		resultMap = new JSONObject();
-	}
+    public GridResult() {
+        resultMap = new JSONObject();
+    }
 
-	public GridResult(List<? extends GenericBean> rowData, int records) {
-		this(rowData, records, null);
-	}
+    public GridResult(List<? extends GenericBean> rowData, int records) {
+        this(rowData, records, null);
+    }
 
-	public GridResult(List<? extends GenericBean> rowData, int records,
-			Map<String, IFormatter> dataReformatter) {
-		resultMap = new JSONObject();
-		setRowData(rowData);
-		setRecords(records);
-		setDataReformatter(dataReformatter);
-	}
+    public GridResult(List<? extends GenericBean> rowData, int records, Map<String, IFormatter> dataReformatter) {
+        resultMap = new JSONObject();
+        setRowData(rowData);
+        setRecords(records);
+        setDataReformatter(dataReformatter);
+    }
 
-	/**
-	 * <pre>
-	 * 設定頁碼
-	 * </pre>
-	 * 
-	 * @param page
-	 *            頁碼
-	 * @return this
-	 */
-	public GridResult setPage(int page) {
-		resultMap.put(IGridEnum.PAGE.getCode(), page);
-		return this;
-	}// ;
+    /**
+     * <pre>
+     * 設定頁碼
+     * </pre>
+     * 
+     * @param page
+     *            頁碼
+     * @return this
+     */
+    public GridResult setPage(int page) {
+        resultMap.put(IGridEnum.PAGE.getCode(), page);
+        return this;
+    }// ;
 
-	/**
-	 * 取得頁碼
-	 * 
-	 * @return 頁碼
-	 */
-	public int getPage() {
-		return (Integer) resultMap.get(IGridEnum.PAGE.getCode());
-	}
+    /**
+     * 取得頁碼
+     * 
+     * @return 頁碼
+     */
+    public int getPage() {
+        return (Integer) resultMap.get(IGridEnum.PAGE.getCode());
+    }
 
-	/**
-	 * <pre>
-	 * 設定總筆數、每頁筆數及計算總頁數
-	 * </pre>
-	 * 
-	 * @param rowCount
-	 *            總筆數
-	 * @param pageRows
-	 *            一頁筆數
-	 * @return this
-	 */
-	public GridResult setPageCount(int rowCount, int pageRows) {
-		resultMap.put(IGridEnum.TOTAL.getCode(), rowCount / pageRows
-				+ (rowCount % pageRows > 0 ? 1 : 0));
-		resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
-		resultMap.put(IGridEnum.PAGEROWS.getCode(), pageRows);
-		return this;
-	}// ;
+    /**
+     * <pre>
+     * 設定總筆數、每頁筆數及計算總頁數
+     * </pre>
+     * 
+     * @param rowCount
+     *            總筆數
+     * @param pageRows
+     *            一頁筆數
+     * @return this
+     */
+    public GridResult setPageCount(int rowCount, int pageRows) {
+        resultMap.put(IGridEnum.TOTAL.getCode(), rowCount / pageRows + (rowCount % pageRows > 0 ? 1 : 0));
+        resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
+        resultMap.put(IGridEnum.PAGEROWS.getCode(), pageRows);
+        return this;
+    }// ;
 
-	/**
-	 * 取得每頁筆數
-	 * 
-	 * @return 每頁筆數
-	 */
-	public int getPageRows() {
-		return (Integer) resultMap.get(IGridEnum.PAGEROWS.getCode());
-	}
+    /**
+     * 取得每頁筆數
+     * 
+     * @return 每頁筆數
+     */
+    public int getPageRows() {
+        return (Integer) resultMap.get(IGridEnum.PAGEROWS.getCode());
+    }
 
-	/**
-	 * <pre>
-	 * 設定總筆數
-	 * </pre>
-	 * 
-	 * @param rowCount
-	 *            總筆數
-	 * @return this
-	 */
-	public GridResult setRecords(int rowCount) {
-		resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
-		return this;
-	}// ;
+    /**
+     * <pre>
+     * 設定總筆數
+     * </pre>
+     * 
+     * @param rowCount
+     *            總筆數
+     * @return this
+     */
+    public GridResult setRecords(int rowCount) {
+        resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
+        return this;
+    }// ;
 
-	/**
-	 * <pre>
-	 * 取得總筆數
-	 * </pre>
-	 * 
-	 * @return 總筆數
-	 */
-	public Integer getRecords() {
-		Object o = resultMap.get(IGridEnum.RECORDS.getCode());
-		return o == null ? 0 : (Integer) o;
-	}// ;
+    /**
+     * <pre>
+     * 取得總筆數
+     * </pre>
+     * 
+     * @return 總筆數
+     */
+    public Integer getRecords() {
+        Object o = resultMap.get(IGridEnum.RECORDS.getCode());
+        return o == null ? 0 : (Integer) o;
+    }// ;
 
-	/**
-	 * <pre>
-	 * 設定資料行
-	 * </pre>
-	 * 
-	 * @param rowData
-	 *            資料
-	 * @return this
-	 */
-	public GridResult setRowData(List<? extends GenericBean> rowData) {
-		this.rowData = rowData;
-		return this;
-	}
+    /**
+     * <pre>
+     * 設定資料行
+     * </pre>
+     * 
+     * @param rowData
+     *            資料
+     * @return this
+     */
+    public GridResult setRowData(List<? extends GenericBean> rowData) {
+        this.rowData = rowData;
+        return this;
+    }
 
-	@Override
-	public String getResult() {
-		resultMap.put(IGridEnum.PAGEROWS.getCode(), getRowDataToJSON());
-		return resultMap.toString();
-	}
+    @Override
+    public String getResult() {
+        resultMap.put(IGridEnum.PAGEROWS.getCode(), getRowDataToJSON());
+        return resultMap.toString();
+    }
 
-	@Override
-	public String getLogMessage() {
-		StringBuffer b = new StringBuffer();
-		b.append("page=").append(resultMap.get(IGridEnum.PAGE.getCode()))
-				.append(",pagerow=")
-				.append(resultMap.get(IGridEnum.PAGEROWS.getCode()))
-				.append(",rowData=")
-				.append(resultMap.get(IGridEnum.PAGEROWS.getCode()));
-		return b.toString();
-	}
+    @Override
+    public String getLogMessage() {
+        StringBuffer b = new StringBuffer();
+        b.append("page=").append(resultMap.get(IGridEnum.PAGE.getCode())).append(",pagerow=").append(resultMap.get(IGridEnum.PAGEROWS.getCode())).append(",rowData=")
+                .append(resultMap.get(IGridEnum.PAGEROWS.getCode()));
+        return b.toString();
+    }
 
-	@Override
-	public void add(IResult result) {
-		JSONObject json = JSONObject.fromObject(result);
-		resultMap.putAll(json);
-	}
+    @Override
+    public void add(IResult result) {
+        JSONObject json = JSONObject.fromObject(result);
+        resultMap.putAll(json);
+    }
 
-	public GridResult addReformatData(String key, IFormatter formatter) {
-		if (dataReformatter == null) {
-			dataReformatter = new HashMap<String, IFormatter>();
-		}
-		dataReformatter.put(key, formatter);
-		return this;
-	}
+    public GridResult addReformatData(String key, IFormatter formatter) {
+        if (dataReformatter == null) {
+            dataReformatter = new HashMap<String, IFormatter>();
+        }
+        dataReformatter.put(key, formatter);
+        return this;
+    }
 
-	public void setColumns(String[] columns) {
-		this.columns = columns;
-	}
+    public void setColumns(String[] columns) {
+        this.columns = columns;
+    }
 
-	public List<? extends GenericBean> getRowData() {
-		return this.rowData;
-	}
+    public List<? extends GenericBean> getRowData() {
+        return this.rowData;
+    }
 
-	private JSONArray getRowDataToJSON() {
-		JSONArray rows = new JSONArray();
-		Map<String, Object> row = new HashMap<String, Object>();
-		if (rowData != null && !rowData.isEmpty()) {
-			for (GenericBean data : rowData) {
-				try {
-					row.put(IGridEnum.CELL.getCode(),
-							data.toJSONString(this.columns, dataReformatter));
-				} catch (CapException e) {
-					logger.error(e.getMessage(), e);
-				}
-				rows.add(row);
-			}
-		}
-		return rows;
-	}
+    private JSONArray getRowDataToJSON() {
+        JSONArray rows = new JSONArray();
+        Map<String, Object> row = new HashMap<String, Object>();
+        if (rowData != null && !rowData.isEmpty()) {
+            for (GenericBean data : rowData) {
+                try {
+                    row.put(IGridEnum.CELL.getCode(), data.toJSONString(this.columns, dataReformatter));
+                } catch (CapException e) {
+                    logger.error(e.getMessage(), e);
+                }
+                rows.add(row);
+            }
+        }
+        return rows;
+    }
 
-	/**
-	 * set DataReformatter
-	 * 
-	 * @param dataReformatter
-	 *            Map<String, IFormatter>
-	 */
-	public void setDataReformatter(Map<String, IFormatter> dataReformatter) {
-		this.dataReformatter = dataReformatter;
-	}
+    /**
+     * set DataReformatter
+     * 
+     * @param dataReformatter
+     *            Map<String, IFormatter>
+     */
+    public void setDataReformatter(Map<String, IFormatter> dataReformatter) {
+        this.dataReformatter = dataReformatter;
+    }
 
-	@Override
-	public Map<String, IFormatter> getDataReformatter() {
-		return this.dataReformatter;
-	}
+    @Override
+    public Map<String, IFormatter> getDataReformatter() {
+        return this.dataReformatter;
+    }
 
-	@Override
-	public void respondResult(ServletResponse response) {
-		new StringResponse(getContextType(), getEncoding(), getResult())
-				.respond(response);
-	}// ;
+    @Override
+    public void respondResult(ServletResponse response) {
+        new StringResponse(getContextType(), getEncoding(), getResult()).respond(response);
+    }// ;
 
 }// ~

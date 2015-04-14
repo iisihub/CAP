@@ -29,31 +29,31 @@ import com.iisigroup.cap.mvc.page.report.IPageReport;
  */
 public interface IReportService extends IPageReport {
 
-	/**
-	 * 報表產生的共同進入方法，帶入reportParameter，產生ByteArray的報表檔案。
-	 * 
-	 * @param params
-	 *            PageParameters
-	 * @param comp
-	 *            Component
-	 * @return ByteArrayOutputStream
-	 * @throws CapException
-	 */
-	ByteArrayOutputStream generateReport(IRequest request) throws CapException;
+    /**
+     * 報表產生的共同進入方法，帶入reportParameter，產生ByteArray的報表檔案。
+     * 
+     * @param params
+     *            PageParameters
+     * @param comp
+     *            Component
+     * @return ByteArrayOutputStream
+     * @throws CapException
+     */
+    ByteArrayOutputStream generateReport(IRequest request) throws CapException;
 
-	/**
-	 * Gets the report definition.從ReportDirectory之後的完整路徑
-	 * 如：batch/jobExecutionResult
-	 * 
-	 * @return the report definition
-	 */
-	public abstract String getReportDefinition();
+    /**
+     * Gets the report definition.從ReportDirectory之後的完整路徑
+     * 如：batch/jobExecutionResult
+     * 
+     * @return the report definition
+     */
+    public abstract String getReportDefinition();
 
-	/**
-	 * 是否寫檔
-	 * 
-	 * @return boolean
-	 */
-	public abstract boolean isWriteToFile();
+    /**
+     * 是否寫檔
+     * 
+     * @return boolean
+     */
+    public abstract boolean isWriteToFile();
 
 }

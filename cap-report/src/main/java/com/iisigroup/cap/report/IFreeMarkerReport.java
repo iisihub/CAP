@@ -16,7 +16,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import com.iisigroup.cap.mvc.page.report.IPageReport;
 import com.iisigroup.cap.utils.CapSystemConfig;
 
-
 /**
  * <pre>
  * FreeMarker report of page report

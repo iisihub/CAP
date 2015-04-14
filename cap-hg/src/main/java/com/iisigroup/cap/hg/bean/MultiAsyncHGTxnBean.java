@@ -33,144 +33,144 @@ import com.iisigroup.cap.hg.service.IHGService;
  *          </ul>
  */
 public class MultiAsyncHGTxnBean implements IHGTxnBean {
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private List<ActionBean> services;
+    private List<ActionBean> services;
 
-	private Object sendData;
-	private String txnCd;
-	private int rTimeout;
-	private int nrTimeout;
-	private Object resultData;
+    private Object sendData;
+    private String txnCd;
+    private int rTimeout;
+    private int nrTimeout;
+    private Object resultData;
 
-	public List<ActionBean> getServices() {
-		return services;
-	}
+    public List<ActionBean> getServices() {
+        return services;
+    }
 
-	public void setServices(List<ActionBean> services) {
-		this.services = services;
-	}
+    public void setServices(List<ActionBean> services) {
+        this.services = services;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
-	 */
-	@Override
-	public void execute() throws CapException {
-		List<IHGService> rService = new ArrayList<IHGService>();
-		List<IHGService> nrService = new ArrayList<IHGService>();
-		IHGService ts;
-		long startTime = System.currentTimeMillis();
-		for (ActionBean s : services) {
-			ts = s.getService();
-			int rt = s.getTimeout();
-			if (s.isRequired()) {
-				if (rt > rTimeout) {
-					rTimeout = rt;
-				}
-				rService.add(ts);
-			} else {
-				if (rt > nrTimeout) {
-					nrTimeout = rt;
-				}
-				nrService.add(ts);
-			}
-			//ts.setProperty(MCIConstants.TXNCD, getTxnCd());
-			ts.setSendData(getSendData());
-			ts.initConnection();
-			try {
-				ts.execute();
-			} catch (CapException e) {
-				throw e;
-			} catch (Exception e) {
-				throw new CapException(e, e.getClass());
-			}
-		}
-		executeService(startTime, rService, rTimeout);
-		executeService(startTime, nrService, nrTimeout);
-		// merge data
-		resultData = null;
-		for (ActionBean s : services) {
-			ts = s.getService();
-			if (s.getResponseAction() != null) {
-				resultData = s.getResponseAction().margeResponse(resultData, ts.getReceiveData());
-			} else if (resultData == null) {
-				resultData = ts.getReceiveData();
-			}
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#execute()
+     */
+    @Override
+    public void execute() throws CapException {
+        List<IHGService> rService = new ArrayList<IHGService>();
+        List<IHGService> nrService = new ArrayList<IHGService>();
+        IHGService ts;
+        long startTime = System.currentTimeMillis();
+        for (ActionBean s : services) {
+            ts = s.getService();
+            int rt = s.getTimeout();
+            if (s.isRequired()) {
+                if (rt > rTimeout) {
+                    rTimeout = rt;
+                }
+                rService.add(ts);
+            } else {
+                if (rt > nrTimeout) {
+                    nrTimeout = rt;
+                }
+                nrService.add(ts);
+            }
+            // ts.setProperty(MCIConstants.TXNCD, getTxnCd());
+            ts.setSendData(getSendData());
+            ts.initConnection();
+            try {
+                ts.execute();
+            } catch (CapException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new CapException(e, e.getClass());
+            }
+        }
+        executeService(startTime, rService, rTimeout);
+        executeService(startTime, nrService, nrTimeout);
+        // merge data
+        resultData = null;
+        for (ActionBean s : services) {
+            ts = s.getService();
+            if (s.getResponseAction() != null) {
+                resultData = s.getResponseAction().margeResponse(resultData, ts.getReceiveData());
+            } else if (resultData == null) {
+                resultData = ts.getReceiveData();
+            }
+        }
+    }
 
-	private void executeService(long startTime, List<IHGService> service, int timeout) throws CapException {
-		IHGService s;
-		while (true) {
-			for (int i = service.size() - 1; i >= 0; i--) {
-				s = service.get(i);
-				if (!ConnStatusEnum.RUNNING.equals(s.getStatus())) {
-					service.remove(s);
-				}
-			}
-			if (service.isEmpty() || System.currentTimeMillis() - startTime >= timeout) {
-				for (IHGService s2 : service) {
-					s2.setStatus(ConnStatusEnum.TIMEOUT);
-					logger.error(s2.getClass().getName() + " status: timeout");
-				}
-				break;
-			}
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-	}
+    private void executeService(long startTime, List<IHGService> service, int timeout) throws CapException {
+        IHGService s;
+        while (true) {
+            for (int i = service.size() - 1; i >= 0; i--) {
+                s = service.get(i);
+                if (!ConnStatusEnum.RUNNING.equals(s.getStatus())) {
+                    service.remove(s);
+                }
+            }
+            if (service.isEmpty() || System.currentTimeMillis() - startTime >= timeout) {
+                for (IHGService s2 : service) {
+                    s2.setStatus(ConnStatusEnum.TIMEOUT);
+                    logger.error(s2.getClass().getName() + " status: timeout");
+                }
+                break;
+            }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+    }
 
-	public Object getSendData() {
-		return sendData;
-	}
+    public Object getSendData() {
+        return sendData;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
-	 */
-	@Override
-	public void setSendData(Object sendData) {
-		this.sendData = sendData;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
+     */
+    @Override
+    public void setSendData(Object sendData) {
+        this.sendData = sendData;
+    }
 
-	public String getTxnCd() {
-		return txnCd;
-	}
+    public String getTxnCd() {
+        return txnCd;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
-	 */
-	@Override
-	public void setTxnCd(String txnCd) {
-		this.txnCd = txnCd;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
+     */
+    @Override
+    public void setTxnCd(String txnCd) {
+        this.txnCd = txnCd;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
-	 */
-	@Override
-	public Object getResultData() {
-		return resultData;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
+     */
+    @Override
+    public Object getResultData() {
+        return resultData;
+    }
 
-	/**
-	 * set resultData
-	 * 
-	 * @param resultData
-	 *            resultData
-	 */
-	protected void setResultData(Object resultData) {
-		this.resultData = resultData;
-	}
+    /**
+     * set resultData
+     * 
+     * @param resultData
+     *            resultData
+     */
+    protected void setResultData(Object resultData) {
+        this.resultData = resultData;
+    }
 
 }

@@ -6,5 +6,5 @@ import com.iisigroup.cap.base.model.Remind;
 
 public interface CalendarService {
 
-	public List<Remind> getCalendarData(String userId, String start, String end);
+    public List<Remind> getCalendarData(String userId, String start, String end);
 }

@@ -11,31 +11,36 @@
  */
 package com.iisigroup.batch.sample;
 
-/**<pre>
+/**
+ * <pre>
  * TODO Write a short description on the purpose of the program
  * </pre>
- * @since  2012/10/30
+ * 
+ * @since 2012/10/30
  * @author iristu
  * @version <ul>
- *           <li>2012/10/30,iristu,new
+ *          <li>2012/10/30,iristu,new
  *          </ul>
  */
 public class User {
-	
-	private String name;
-	private Integer age;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getAge() {
-		return age;
-	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-	
+
+    private String name;
+    private Integer age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
 }

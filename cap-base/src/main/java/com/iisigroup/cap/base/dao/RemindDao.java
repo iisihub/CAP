@@ -28,20 +28,19 @@ import com.iisigroup.cap.dao.IGenericDao;
  */
 public interface RemindDao extends IGenericDao<Remind> {
 
-	public Remind findByPid(String pid);
+    public Remind findByPid(String pid);
 
-	/**
-	 * @param userId
-	 *            登入者ID
-	 * @param start
-	 *            Timestamp
-	 * @param end
-	 *            Timestamp
-	 * @param locale
-	 *            語系
-	 * @return
-	 */
-	public List<Remind> getCalendarData(String userId,
-			Timestamp start, Timestamp end, String locale);
+    /**
+     * @param userId
+     *            登入者ID
+     * @param start
+     *            Timestamp
+     * @param end
+     *            Timestamp
+     * @param locale
+     *            語系
+     * @return
+     */
+    public List<Remind> getCalendarData(String userId, Timestamp start, Timestamp end, String locale);
 
 }

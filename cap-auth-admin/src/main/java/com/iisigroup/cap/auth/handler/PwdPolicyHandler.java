@@ -47,8 +47,7 @@ public class PwdPolicyHandler extends MFormHandler {
     public IResult query(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
         for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
-            SysParm parm = commonService.findById(SysParm.class, value
-                    .toString().toLowerCase());
+            SysParm parm = commonService.findById(SysParm.class, value.toString().toLowerCase());
             if (parm != null) {
                 result.set(parm.getParmId().substring(4), parm.getParmValue());
             }

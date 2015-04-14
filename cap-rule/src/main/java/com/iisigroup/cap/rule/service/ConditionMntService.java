@@ -29,84 +29,87 @@ import com.iisigroup.cap.rule.model.DivCtItm;
  */
 public interface ConditionMntService {
 
-	/**
-	 * save DivCtItm
-	 * 
-	 * @param ftItm
-	 *            DivCtItm
-	 */
-	void saveDivCtItm(DivCtItm ftItm);
+    /**
+     * save DivCtItm
+     * 
+     * @param ftItm
+     *            DivCtItm
+     */
+    void saveDivCtItm(DivCtItm ftItm);
 
-	/**
-	 * 查詢因子項目
-	 * @param divCtNo 因子代碼
-	 * @return DivCtItm
-	 */
-	DivCtItm findByDivCtItmNo(String divCtNo);
-	
-	/**
-	 * get Map by ctItmNos
-	 * 
-	 * @param ctItmNos
-	 *            代碼s
-	 * @return Map
-	 * 
-	 */
-	Map<String, String> findByDivCtItmNos(String[] ctItmNos);
+    /**
+     * 查詢因子項目
+     * 
+     * @param divCtNo
+     *            因子代碼
+     * @return DivCtItm
+     */
+    DivCtItm findByDivCtItmNo(String divCtNo);
 
-	/**
-	 * get divCtItm by numbers
-	 * 
-	 * @param nos
-	 *            numbers
-	 * @return Map<String, Map<String,String>>
-	 */
-	Map<String, Map<String, String>> findMapByCtItmNos(String[] nos);
+    /**
+     * get Map by ctItmNos
+     * 
+     * @param ctItmNos
+     *            代碼s
+     * @return Map
+     * 
+     */
+    Map<String, String> findByDivCtItmNos(String[] ctItmNos);
 
-	/**
-	 * get divCtItm by numbers
-	 * 
-	 * @param numbers
-	 *            type nos
-	 * @return Map<String, CapAjaxFormResult>
-	 */
-	Map<String, AjaxFormResult> getDivCtItmsByNos(String[] nos);
+    /**
+     * get divCtItm by numbers
+     * 
+     * @param nos
+     *            numbers
+     * @return Map<String, Map<String,String>>
+     */
+    Map<String, Map<String, String>> findMapByCtItmNos(String[] nos);
 
+    /**
+     * get divCtItm by numbers
+     * 
+     * @param numbers
+     *            type nos
+     * @return Map<String, CapAjaxFormResult>
+     */
+    Map<String, AjaxFormResult> getDivCtItmsByNos(String[] nos);
 
-	/**
-	 * get DivCtItm by ftCtmNo
-	 * 
-	 * @param ftCtmNo
-	 *            ftCtmNo
-	 * @return DivCtItm
-	 */
-	DivCtItm getByCtItmNo(String ftCtmNo);
+    /**
+     * get DivCtItm by ftCtmNo
+     * 
+     * @param ftCtmNo
+     *            ftCtmNo
+     * @return DivCtItm
+     */
+    DivCtItm getByCtItmNo(String ftCtmNo);
 
-	/**
-	 * get DivCtItm by oid
-	 * 
-	 * @param oid
-	 *            oid
-	 * 
-	 * @return DivCtItm
-	 */
-	DivCtItm getById(String oid);
+    /**
+     * get DivCtItm by oid
+     * 
+     * @param oid
+     *            oid
+     * 
+     * @return DivCtItm
+     */
+    DivCtItm getById(String oid);
 
-	/**
-	 * delete DivCtItm By Oid
-	 * 
-	 * @param oid
-	 *            oid
-	 */
-	void deleteById(String oid);
+    /**
+     * delete DivCtItm By Oid
+     * 
+     * @param oid
+     *            oid
+     */
+    void deleteById(String oid);
 
-	void deleteCtDtlByList(List<DivCtDtl> ctDtls);
+    void deleteCtDtlByList(List<DivCtDtl> ctDtls);
 
-	/**
-	 * 使用ConditionNo查詢Details，並且排序divCtSor
-	 * @param conditionNo String
-	 * @return
-	 */
-	List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo);
+    /**
+     * 使用ConditionNo查詢Details，並且排序divCtSor
+     * 
+     * @param conditionNo
+     *            String
+     * @return
+     */
+    List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo);
 
 }

@@ -30,54 +30,53 @@ import org.springframework.expression.ParserContext;
  */
 public class CapSqlStatement {
 
-	final Map<String, Object> parameter;
-	
-	ParserContext parserContext;
+    final Map<String, Object> parameter;
 
-	public CapSqlStatement(Map<String, Object> map) {
-		this.parameter = map;
-	}
+    ParserContext parserContext;
 
-	public CapSqlStatement(Collection<Map<String, Object>> collection) {
-		this.parameter = new HashMap<String, Object>();
-		for (Map<String, Object> map : collection) {
-			parameter.putAll(map);
-		}
-	}
+    public CapSqlStatement(Map<String, Object> map) {
+        this.parameter = map;
+    }
 
-	public Map<String, Object> getParameter() {
-		return parameter;
-	}
+    public CapSqlStatement(Collection<Map<String, Object>> collection) {
+        this.parameter = new HashMap<String, Object>();
+        for (Map<String, Object> map : collection) {
+            parameter.putAll(map);
+        }
+    }
 
-	@SuppressWarnings("unchecked")
-	public <T> T getValue(String key, T defaultValue) {
-		if (parameter.containsKey(key)) {
-			Object obj = parameter.get(key);
-			return (T) obj;
-		}
-		return defaultValue;
-	}
+    public Map<String, Object> getParameter() {
+        return parameter;
+    }
 
-	@SuppressWarnings("unchecked")
-	public <T> T getValue(String key) {
-		if (parameter.containsKey(key)) {
-			Object obj = parameter.get(key);
-			return (T) obj;
-		}
-		return null;
-	}
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(String key, T defaultValue) {
+        if (parameter.containsKey(key)) {
+            Object obj = parameter.get(key);
+            return (T) obj;
+        }
+        return defaultValue;
+    }
 
-	public boolean containsKey(String key) {
-		return parameter.containsKey(key);
-	}
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(String key) {
+        if (parameter.containsKey(key)) {
+            Object obj = parameter.get(key);
+            return (T) obj;
+        }
+        return null;
+    }
 
-	public ParserContext getParserContext() {
-		return parserContext;
-	}
+    public boolean containsKey(String key) {
+        return parameter.containsKey(key);
+    }
 
-	public void setParserContext(ParserContext parserContext) {
-		this.parserContext = parserContext;
-	}
-	
+    public ParserContext getParserContext() {
+        return parserContext;
+    }
+
+    public void setParserContext(ParserContext parserContext) {
+        this.parserContext = parserContext;
+    }
 
 }// ~

@@ -33,94 +33,84 @@ import com.iisigroup.cap.utils.CapString;
  */
 public class ForwardFilter implements Filter {
 
-	Map<String, String> filterRules;
+    Map<String, String> filterRules;
 
-	/**
-	 * <pre>
-	 * init
-	 * </pre>
-	 * 
-	 * @param filterConfig
-	 *            FilterConfig
-	 * @throws ServletException
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		filterRules = new LinkedHashMap<String, String>();
-		Enumeration<String> filter = filterConfig.getInitParameterNames();
-		String rule = null;
-		while (filter.hasMoreElements()) {
-			rule = filter.nextElement();
-			filterRules.put(rule, filterConfig.getInitParameter(rule));
-		}
-	}
+    /**
+     * <pre>
+     * init
+     * </pre>
+     * 
+     * @param filterConfig
+     *            FilterConfig
+     * @throws ServletException
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        filterRules = new LinkedHashMap<String, String>();
+        Enumeration<String> filter = filterConfig.getInitParameterNames();
+        String rule = null;
+        while (filter.hasMoreElements()) {
+            rule = filter.nextElement();
+            filterRules.put(rule, filterConfig.getInitParameter(rule));
+        }
+    }
 
-	/**
-	 * <pre>
-	 * 當url路徑符合filterPath時，則直接導到正確的路徑
-	 * </pre>
-	 * 
-	 * @param request
-	 *            ServletRequest
-	 * @param response
-	 *            ServletResponse
-	 * @param chain
-	 *            FilterChain
-	 * @throws IOException
-	 * @throws ServletException
-	 */
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+    /**
+     * <pre>
+     * 當url路徑符合filterPath時，則直接導到正確的路徑
+     * </pre>
+     * 
+     * @param request
+     *            ServletRequest
+     * @param response
+     *            ServletResponse
+     * @param chain
+     *            FilterChain
+     * @throws IOException
+     * @throws ServletException
+     */
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		HttpServletRequest req = ((HttpServletRequest) request);
-		String url = req.getRequestURL().toString();
-		Iterator<String> rules = filterRules.keySet().iterator();
-		String filterPath = null, distPath = null;
-		boolean forward = false;
-		while (rules.hasNext()) {
-			filterPath = rules.next();
-			distPath = filterRules.get(filterPath);
-			if (CapString.checkRegularMatch(url, filterPath)) {
-				forward = true;
-				if (CapString.checkRegularMatch(filterPath, "(\\*|\\+|\\?)$")) {
-					url = CapString.getRegularMatch(
-							url,
-							"(?<="
-									+ filterPath.replaceAll("(\\*|\\.|\\*)$",
-											"") + ").*");
-					forwardToPage((HttpServletRequest) request,
-							(HttpServletResponse) response, distPath + "/"
-									+ url.replaceAll("^/", ""));
-				} else {
-					forwardToPage((HttpServletRequest) request,
-							(HttpServletResponse) response, distPath);
-				}
-				break;
-			}
-		}
-		if (!forward) {
-			chain.doFilter(request, response);
-		}
+        HttpServletRequest req = ((HttpServletRequest) request);
+        String url = req.getRequestURL().toString();
+        Iterator<String> rules = filterRules.keySet().iterator();
+        String filterPath = null, distPath = null;
+        boolean forward = false;
+        while (rules.hasNext()) {
+            filterPath = rules.next();
+            distPath = filterRules.get(filterPath);
+            if (CapString.checkRegularMatch(url, filterPath)) {
+                forward = true;
+                if (CapString.checkRegularMatch(filterPath, "(\\*|\\+|\\?)$")) {
+                    url = CapString.getRegularMatch(url, "(?<=" + filterPath.replaceAll("(\\*|\\.|\\*)$", "") + ").*");
+                    forwardToPage((HttpServletRequest) request, (HttpServletResponse) response, distPath + "/" + url.replaceAll("^/", ""));
+                } else {
+                    forwardToPage((HttpServletRequest) request, (HttpServletResponse) response, distPath);
+                }
+                break;
+            }
+        }
+        if (!forward) {
+            chain.doFilter(request, response);
+        }
 
-	}
+    }
 
-	/**
-	 * <pre>
-	 * destroy
-	 * </pre>
-	 */
-	@Override
-	public void destroy() {
-		// do nothing
-	}
+    /**
+     * <pre>
+     * destroy
+     * </pre>
+     */
+    @Override
+    public void destroy() {
+        // do nothing
+    }
 
-	private void forwardToPage(HttpServletRequest request,
-			HttpServletResponse response, String page) throws IOException,
-			ServletException {
-		RequestDispatcher dispatch = request.getRequestDispatcher(page);
-		dispatch.forward(request, response);
-	}
+    private void forwardToPage(HttpServletRequest request, HttpServletResponse response, String page) throws IOException, ServletException {
+        RequestDispatcher dispatch = request.getRequestDispatcher(page);
+        dispatch.forward(request, response);
+    }
 
 }

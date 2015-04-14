@@ -28,118 +28,117 @@ import com.iisigroup.cap.response.AjaxFormResult;
  */
 public interface CodeTypeService {
 
-	/**
-	 * save CodeType
-	 * 
-	 * @param codeType
-	 *            CodeType
-	 */
-	void saveCodeType(CodeType codeType);
+    /**
+     * save CodeType
+     * 
+     * @param codeType
+     *            CodeType
+     */
+    void saveCodeType(CodeType codeType);
 
-	/**
-	 * get Map by code type
-	 * 
-	 * @param codeType
-	 *            代碼類型
-	 * @param locale
-	 *            語系
-	 * @return Map
-	 * 
-	 */
-	Map<String, String> findByCodeType(String codeType, String locale);
+    /**
+     * get Map by code type
+     * 
+     * @param codeType
+     *            代碼類型
+     * @param locale
+     *            語系
+     * @return Map
+     * 
+     */
+    Map<String, String> findByCodeType(String codeType, String locale);
 
-	/**
-	 * get Map by code type 語系預設使用
-	 * SimpleContextHolder.get(CapWebUtil.localeKey);
-	 * 
-	 * @param codeType
-	 *            代碼類型
-	 * @return Map
-	 * 
-	 */
-	Map<String, String> findByCodeType(String codeType);
+    /**
+     * get Map by code type 語系預設使用
+     * SimpleContextHolder.get(CapWebUtil.localeKey);
+     * 
+     * @param codeType
+     *            代碼類型
+     * @return Map
+     * 
+     */
+    Map<String, String> findByCodeType(String codeType);
 
-	/**
-	 * get codeType by types
-	 * 
-	 * @param types
-	 *            types
-	 * @param locale
-	 *            語系
-	 * @return Map<String, Map<String,String>>
-	 */
-	Map<String, Map<String, String>> findByCodeTypes(String[] types,
-			String locale);
+    /**
+     * get codeType by types
+     * 
+     * @param types
+     *            types
+     * @param locale
+     *            語系
+     * @return Map<String, Map<String,String>>
+     */
+    Map<String, Map<String, String>> findByCodeTypes(String[] types, String locale);
 
-	/**
-	 * get codeType by types
-	 * 
-	 * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
-	 * 
-	 * @param types
-	 *            types
-	 * @return Map<String, Map<String,String>>
-	 */
-	Map<String, Map<String, String>> findByCodeTypes(String[] types);
+    /**
+     * get codeType by types
+     * 
+     * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
+     * 
+     * @param types
+     *            types
+     * @return Map<String, Map<String,String>>
+     */
+    Map<String, Map<String, String>> findByCodeTypes(String[] types);
 
-	/**
-	 * get codeType by types
-	 * 
-	 * @param types
-	 *            type keys
-	 * @param locale
-	 *            語系
-	 * @return Map<String, CapAjaxFormResult>
-	 */
-	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types, String locale);
+    /**
+     * get codeType by types
+     * 
+     * @param types
+     *            type keys
+     * @param locale
+     *            語系
+     * @return Map<String, CapAjaxFormResult>
+     */
+    Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types, String locale);
 
-	/**
-	 * get codeType by types
-	 * 
-	 * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
-	 * 
-	 * @param types
-	 *            type keys
-	 * @return Map<String, CapAjaxFormResult>
-	 */
-	Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types);
+    /**
+     * get codeType by types
+     * 
+     * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
+     * 
+     * @param types
+     *            type keys
+     * @return Map<String, CapAjaxFormResult>
+     */
+    Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types);
 
-	/**
-	 * get CodeType by type and value
-	 * 
-	 * @param type
-	 *            typeName
-	 * @return CodeType
-	 */
-	CodeType getByCodeTypeAndValue(String type, String value, String locale);
+    /**
+     * get CodeType by type and value
+     * 
+     * @param type
+     *            typeName
+     * @return CodeType
+     */
+    CodeType getByCodeTypeAndValue(String type, String value, String locale);
 
-	/**
-	 * get CodeType by type and value
-	 * 
-	 * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
-	 * 
-	 * @param type
-	 *            typeName
-	 * @return CodeType
-	 */
-	CodeType getByCodeTypeAndValue(String type, String value);
+    /**
+     * get CodeType by type and value
+     * 
+     * 語系預設使用 SimpleContextHolder.get(CapWebUtil.localeKey);
+     * 
+     * @param type
+     *            typeName
+     * @return CodeType
+     */
+    CodeType getByCodeTypeAndValue(String type, String value);
 
-	/**
-	 * get CodeType by oid
-	 * 
-	 * @param oid
-	 *            oid
-	 * 
-	 * @return CodeType
-	 */
-	CodeType getById(String oid);
+    /**
+     * get CodeType by oid
+     * 
+     * @param oid
+     *            oid
+     * 
+     * @return CodeType
+     */
+    CodeType getById(String oid);
 
-	/**
-	 * delete CodeType By Oid
-	 * 
-	 * @param oid
-	 *            oid
-	 */
-	void deleteById(String oid);
+    /**
+     * delete CodeType By Oid
+     * 
+     * @param oid
+     *            oid
+     */
+    void deleteById(String oid);
 
 }

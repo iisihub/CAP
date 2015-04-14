@@ -22,8 +22,7 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class DepartmentDaoImpl extends GenericDao<Department> implements
-        DepartmentDao {
+public class DepartmentDaoImpl extends GenericDao<Department> implements DepartmentDao {
 
     @Override
     public List<Department> findByAllDepartment() {

@@ -38,10 +38,10 @@ import com.iisigroup.cap.security.model.IRole;
  */
 public interface IFunctionDao<T extends IFunction> {
 
-	T getFunctionByURL(String url);
+    T getFunctionByURL(String url);
 
-	List<? extends IRole> getRoleByFunction(T function);
-	
-	T getFunctionByName(String functionName);
-	
+    List<? extends IRole> getRoleByFunction(T function);
+
+    T getFunctionByName(String functionName);
+
 }

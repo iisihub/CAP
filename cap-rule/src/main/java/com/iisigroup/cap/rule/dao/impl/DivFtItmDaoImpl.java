@@ -35,33 +35,33 @@ import com.iisigroup.cap.rule.model.DivFtItm;
 @Repository
 public class DivFtItmDaoImpl extends GenericDao<DivFtItm> implements DivFtItmDao {
 
-	@Override
-	public DivFtItm findByDivFtItmNo(String factorNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public DivFtItm findByDivFtItmNo(String factorNo) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<DivFtItm> findByDivFtItmNo(String[] divFtItmNos) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", divFtItmNos);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
-		return find(search);
-	}
+    @Override
+    public List<DivFtItm> findByDivFtItmNo(String[] divFtItmNos) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", divFtItmNos);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("codeOrder");
+        return find(search);
+    }
 
-	@Override
-	public DivFtItm findByOid(String oid) {
-		return find(oid);
-	}
-	
-	@Override
-	public List<DivFtItm> findAllFtItm(){
-		ISearch search = createSearchTemplete();
-		search.addOrderBy("factorNo");
-		search.setDistinct(true);
-		return find(search);
-	}
+    @Override
+    public DivFtItm findByOid(String oid) {
+        return find(oid);
+    }
+
+    @Override
+    public List<DivFtItm> findAllFtItm() {
+        ISearch search = createSearchTemplete();
+        search.addOrderBy("factorNo");
+        search.setDistinct(true);
+        return find(search);
+    }
 
 }

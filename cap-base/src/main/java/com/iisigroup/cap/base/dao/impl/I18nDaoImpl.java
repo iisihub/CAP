@@ -50,8 +50,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
     }
 
     @Override
-    public I18n findByCodeTypeAndCodeValue(String cType, String cValue,
-            String locale) {
+    public I18n findByCodeTypeAndCodeValue(String cType, String cValue, String locale) {
         ISearch search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
@@ -71,8 +70,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
     }
 
     @Override
-    public List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc,
-            String locale) {
+    public List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale) {
         ISearch search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);

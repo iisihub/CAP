@@ -30,29 +30,29 @@ import com.iisigroup.cap.exception.CapException;
  */
 public class StringResponse {
 
-	/** the string for the response. */
-	private final String string;
+    /** the string for the response. */
+    private final String string;
 
-	/** content type for the string */
-	private final String contentType;
+    /** content type for the string */
+    private final String contentType;
 
-	/** charset of the string */
-	private final String encoding;
+    /** charset of the string */
+    private final String encoding;
 
-	public StringResponse(String contentType, String encoding, String str) {
-		this.contentType = contentType;
-		this.string = str;
-		this.encoding = encoding;
-	}
+    public StringResponse(String contentType, String encoding, String str) {
+        this.contentType = contentType;
+        this.string = str;
+        this.encoding = encoding;
+    }
 
-	public void respond(ServletResponse response) {
-		response.setContentType(contentType + ";charset=" + encoding);
-		try {
-			OutputStream out = response.getOutputStream();
-			out.write(string.getBytes(encoding));
-			out.flush();
-		} catch (Exception e) {
-			throw new CapException(e.getMessage(), e, getClass());
-		}
-	}
+    public void respond(ServletResponse response) {
+        response.setContentType(contentType + ";charset=" + encoding);
+        try {
+            OutputStream out = response.getOutputStream();
+            out.write(string.getBytes(encoding));
+            out.flush();
+        } catch (Exception e) {
+            throw new CapException(e.getMessage(), e, getClass());
+        }
+    }
 }

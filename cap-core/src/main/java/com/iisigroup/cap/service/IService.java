@@ -8,21 +8,21 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
- 
+
 package com.iisigroup.cap.service;
 
-/**<pre>
+/**
+ * <pre>
  * TODO Write a short description on the purpose of the program
  * </pre>
- * @since  2010/11/25
+ * 
+ * @since 2010/11/25
  * @author iristu
  * @version <ul>
- *           <li>2010/11/25,iristu,new
- *           <li>2011/11/1,rodeschen,from cap
+ *          <li>2010/11/25,iristu,new
+ *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
 public interface IService {
-	
-	
 
 }

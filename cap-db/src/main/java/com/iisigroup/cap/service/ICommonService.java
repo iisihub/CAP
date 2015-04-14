@@ -29,18 +29,18 @@ import com.iisigroup.cap.model.Page;
  */
 public interface ICommonService {
 
-	<T> Page<T> findPage(Class<T> clazz, ISearch search);
-	
-	<T> List<T> list(Class<T> clazz);
+    <T> Page<T> findPage(Class<T> clazz, ISearch search);
 
-	<T> T findById(Class<T> clazz, String id);
+    <T> List<T> list(Class<T> clazz);
 
-	<T> void save(T model);
+    <T> T findById(Class<T> clazz, String id);
 
-	void save(List<?> models);
+    <T> void save(T model);
 
-	<T> void delete(T model);
+    void save(List<?> models);
 
-	void delete(List<?> models);
+    <T> void delete(T model);
+
+    void delete(List<?> models);
 
 }

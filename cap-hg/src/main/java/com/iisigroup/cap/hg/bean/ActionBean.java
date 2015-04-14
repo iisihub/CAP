@@ -26,43 +26,41 @@ import com.iisigroup.cap.hg.service.IHGService;
  *          </ul>
  */
 public class ActionBean {
-	private IHGService service;
-	private boolean required;
-	private ResponseAction responseAction;
-	private int timeout;
+    private IHGService service;
+    private boolean required;
+    private ResponseAction responseAction;
+    private int timeout;
 
-	public IHGService getService() {
-		return service;
-	}
+    public IHGService getService() {
+        return service;
+    }
 
-	public void setService(IHGService service) {
-		this.service = service;
-	}
+    public void setService(IHGService service) {
+        this.service = service;
+    }
 
-	public boolean isRequired() {
-		return required;
-	}
+    public boolean isRequired() {
+        return required;
+    }
 
-	public void setRequired(boolean required) {
-		this.required = required;
-	}
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
 
-	public ResponseAction getResponseAction() {
-		return responseAction;
-	}
+    public ResponseAction getResponseAction() {
+        return responseAction;
+    }
 
-	public void setResponseAction(ResponseAction responseAction) {
-		this.responseAction = responseAction;
-	}
+    public void setResponseAction(ResponseAction responseAction) {
+        this.responseAction = responseAction;
+    }
 
-	public int getTimeout() {
-		return timeout;
-	}
+    public int getTimeout() {
+        return timeout;
+    }
 
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
-	
-	
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
 
 }

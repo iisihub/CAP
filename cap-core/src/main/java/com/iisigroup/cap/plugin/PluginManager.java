@@ -33,71 +33,69 @@ import com.iisigroup.cap.exception.CapPlugInNotFoundException;
  */
 public class PluginManager implements InitializingBean {
 
-	private final static Logger logger = LoggerFactory
-			.getLogger(PluginManager.class);
+    private final static Logger logger = LoggerFactory.getLogger(PluginManager.class);
 
-	private ApplicationContext context;
+    private ApplicationContext context;
 
-	@Autowired
-	public void setContext(ApplicationContext context) {
-		this.context = context;
-	}
+    @Autowired
+    public void setContext(ApplicationContext context) {
+        this.context = context;
+    }
 
-	/**
-	 * User Spring Bean Name to find Bean Class
-	 * 
-	 * @param <T>
-	 *            T
-	 * @param plugInBeanName
-	 *            plugInBeanName
-	 * @return T
-	 * @throws CapPlugInNotFoundException
-	 */
-	@SuppressWarnings("unchecked")
-	public <T> T getPlugin(String plugInBeanName) {
-		T plugin = null;
+    /**
+     * User Spring Bean Name to find Bean Class
+     * 
+     * @param <T>
+     *            T
+     * @param plugInBeanName
+     *            plugInBeanName
+     * @return T
+     * @throws CapPlugInNotFoundException
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T getPlugin(String plugInBeanName) {
+        T plugin = null;
 
-		long start = System.currentTimeMillis();
-		plugin = (T) context.getBean(plugInBeanName, IPlugin.class);
-		if (logger.isTraceEnabled()) {
-			logger.trace("Spring Find {} executed time: {}", plugInBeanName,
-					(System.currentTimeMillis() - start));
-		}
-		if (plugin != null) {
-			return plugin;
-		} else {
-			throw new CapPlugInNotFoundException(plugInBeanName, plugInBeanName);
-		}
-	}
+        long start = System.currentTimeMillis();
+        plugin = (T) context.getBean(plugInBeanName, IPlugin.class);
+        if (logger.isTraceEnabled()) {
+            logger.trace("Spring Find {} executed time: {}", plugInBeanName, (System.currentTimeMillis() - start));
+        }
+        if (plugin != null) {
+            return plugin;
+        } else {
+            throw new CapPlugInNotFoundException(plugInBeanName, plugInBeanName);
+        }
+    }
 
-	@SuppressWarnings("unchecked")
-	public <R> R getDefaultErrorResult() {
-		return (R) context.getBean("defaultErrorResult");
-	}
+    @SuppressWarnings("unchecked")
+    public <R> R getDefaultErrorResult() {
+        return (R) context.getBean("defaultErrorResult");
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	public void afterPropertiesSet() throws Exception {
-		String[] names = getAllPluginName();
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
+    public void afterPropertiesSet() throws Exception {
+        String[] names = getAllPluginName();
 
-		for (String name : names) {
-			if (logger.isInfoEnabled()) {
-				logger.info("Found Plugin Name: " + name);
-			}
-		}
-	}
+        for (String name : names) {
+            if (logger.isInfoEnabled()) {
+                logger.info("Found Plugin Name: " + name);
+            }
+        }
+    }
 
-	/**
-	 * Gets the plugin name.
-	 * 
-	 * @return the plugin map
-	 */
-	public String[] getAllPluginName() {
-		return context.getBeanNamesForType(IPlugin.class);
-	}
+    /**
+     * Gets the plugin name.
+     * 
+     * @return the plugin map
+     */
+    public String[] getAllPluginName() {
+        return context.getBeanNamesForType(IPlugin.class);
+    }
 
 }

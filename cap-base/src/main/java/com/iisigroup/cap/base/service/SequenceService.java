@@ -28,21 +28,21 @@ import com.iisigroup.cap.model.Page;
  */
 public interface SequenceService {
 
-	Page<Map<String, Object>> findPage(int start, int fetch);
+    Page<Map<String, Object>> findPage(int start, int fetch);
 
-	/**
-	 * 取得序號
-	 * 
-	 * @param seqNode
-	 *            序號key值
-	 * @param interval
-	 *            序號區間值
-	 * @param startSeq
-	 *            序號起啟值
-	 * @param maxSeq
-	 *            最大序號
-	 * @return next seq
-	 */
-	int getNextSeqNo(String seqNode, int interval, int startSeq, int maxSeq);
+    /**
+     * 取得序號
+     * 
+     * @param seqNode
+     *            序號key值
+     * @param interval
+     *            序號區間值
+     * @param startSeq
+     *            序號起啟值
+     * @param maxSeq
+     *            最大序號
+     * @return next seq
+     */
+    int getNextSeqNo(String seqNode, int interval, int startSeq, int maxSeq);
 
 }

@@ -29,38 +29,40 @@ import com.iisigroup.cap.rule.model.DivCtDtl;
  */
 public interface DivCtDtlDao extends IGenericDao<DivCtDtl> {
 
-	/**
-	 * find by conditionNo.
-	 * 
-	 * @param conditionNo
-	 *            條件代號
-	 * @return T
-	 */
-	public DivCtDtl findByConditionNo(String conditionNo);
+    /**
+     * find by conditionNo.
+     * 
+     * @param conditionNo
+     *            條件代號
+     * @return T
+     */
+    public DivCtDtl findByConditionNo(String conditionNo);
 
-	/**
-	 * find by conditionNo.
-	 * 
-	 * @param conditionNo
-	 *            多個條件代號
-	 * @return T List
-	 */
-	public List<DivCtDtl> findByConditionNos(String[] conditionNos);
+    /**
+     * find by conditionNo.
+     * 
+     * @param conditionNo
+     *            多個條件代號
+     * @return T List
+     */
+    public List<DivCtDtl> findByConditionNos(String[] conditionNos);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return DivFtItm
-	 */
-	public DivCtDtl findByOid(String oid);
-	
-	/**
-	 * 使用ConditionNo查詢Details，並且排序divCtSor
-	 * @param conditionNo String
-	 * @return
-	 */
-	List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return DivFtItm
+     */
+    public DivCtDtl findByOid(String oid);
+
+    /**
+     * 使用ConditionNo查詢Details，並且排序divCtSor
+     * 
+     * @param conditionNo
+     *            String
+     * @return
+     */
+    List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo);
 
 }

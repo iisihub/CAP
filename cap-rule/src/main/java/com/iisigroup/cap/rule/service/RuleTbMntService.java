@@ -30,92 +30,96 @@ import com.iisigroup.cap.rule.model.DivRlItm;
  */
 public interface RuleTbMntService {
 
-	/**
-	 * save DivRlItm
-	 * 
-	 * @param rlItm
-	 *            DivRlItm
-	 */
-	void saveDivRlItm(DivRlItm ftItm);
+    /**
+     * save DivRlItm
+     * 
+     * @param rlItm
+     *            DivRlItm
+     */
+    void saveDivRlItm(DivRlItm ftItm);
 
-	/**
-	 * 查詢因子項目
-	 * @param divRlNo 因子代碼
-	 * @return DivRlItm
-	 */
-	DivRlItm findByDivRlNo(String divRlNo);
-	
-	/**
-	 * get Map by RlNos
-	 * 
-	 * @param divRlNos
-	 *            代碼s
-	 * @return Map
-	 * 
-	 */
-	Map<String, String> findByDivRlNos(String[] divRlNos);
+    /**
+     * 查詢因子項目
+     * 
+     * @param divRlNo
+     *            因子代碼
+     * @return DivRlItm
+     */
+    DivRlItm findByDivRlNo(String divRlNo);
 
-	/**
-	 * get divRlItm by numbers
-	 * 
-	 * @param nos
-	 *            numbers
-	 * @return Map<String, Map<String,String>>
-	 */
-	Map<String, Map<String, String>> findMapByRlNos(String[] nos);
+    /**
+     * get Map by RlNos
+     * 
+     * @param divRlNos
+     *            代碼s
+     * @return Map
+     * 
+     */
+    Map<String, String> findByDivRlNos(String[] divRlNos);
 
-	/**
-	 * get divRlItm by types
-	 * 
-	 * @param numbers
-	 *            type nos
-	 * @return Map<String, CapAjaxFormResult>
-	 */
-	Map<String, AjaxFormResult> getDivRlItmsByNos(String[] nos);
+    /**
+     * get divRlItm by numbers
+     * 
+     * @param nos
+     *            numbers
+     * @return Map<String, Map<String,String>>
+     */
+    Map<String, Map<String, String>> findMapByRlNos(String[] nos);
 
+    /**
+     * get divRlItm by types
+     * 
+     * @param numbers
+     *            type nos
+     * @return Map<String, CapAjaxFormResult>
+     */
+    Map<String, AjaxFormResult> getDivRlItmsByNos(String[] nos);
 
-	/**
-	 * get DivRlItm by rlItmNo
-	 * 
-	 * @param rlItmNo
-	 *            rlItmNo
-	 * @return DivRlItm
-	 */
-	DivRlItm getByRlItmNo(String rlItmNo);
+    /**
+     * get DivRlItm by rlItmNo
+     * 
+     * @param rlItmNo
+     *            rlItmNo
+     * @return DivRlItm
+     */
+    DivRlItm getByRlItmNo(String rlItmNo);
 
-	/**
-	 * get DivRlItm by oid
-	 * 
-	 * @param oid
-	 *            oid
-	 * 
-	 * @return DivRlItm
-	 */
-	DivRlItm getById(String oid);
+    /**
+     * get DivRlItm by oid
+     * 
+     * @param oid
+     *            oid
+     * 
+     * @return DivRlItm
+     */
+    DivRlItm getById(String oid);
 
-	/**
-	 * delete DivRlItm By Oid
-	 * 
-	 * @param oid
-	 *            oid
-	 */
-	void deleteById(String oid);
+    /**
+     * delete DivRlItm By Oid
+     * 
+     * @param oid
+     *            oid
+     */
+    void deleteById(String oid);
 
-	/**
-	 * Delete Rule Detail by list
-	 * @param list
-	 */
-	void deleteRlDtlByList(List<DivRlDtl> list);
+    /**
+     * Delete Rule Detail by list
+     * 
+     * @param list
+     */
+    void deleteRlDtlByList(List<DivRlDtl> list);
 
-	/**
-	 * 使用RuleNo查詢Details，並且排序divRlSor
-	 * @param ruleNo String
-	 * @return
-	 */
-	List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
+    /**
+     * 使用RuleNo查詢Details，並且排序divRlSor
+     * 
+     * @param ruleNo
+     *            String
+     * @return
+     */
+    List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
 
-	List<CaseInfo> getNoneDispatchCaseInfo();
+    List<CaseInfo> getNoneDispatchCaseInfo();
 
-	void updateCaseInfo(List<CaseInfo> list);
+    void updateCaseInfo(List<CaseInfo> list);
 
 }

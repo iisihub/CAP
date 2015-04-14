@@ -28,6 +28,6 @@ import com.iisigroup.cap.response.IResult;
  */
 public interface IAction {
 
-	IResult doWork(IRequest params);
+    IResult doWork(IRequest params);
 
 }

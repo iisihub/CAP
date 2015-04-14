@@ -21,8 +21,7 @@ public class SqlCommandTasklet implements Tasklet {
     private DataSource dataSource;
 
     @Override
-    public RepeatStatus execute(StepContribution contribution,
-            ChunkContext chunkContext) throws Exception {
+    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
         JdbcTemplate template = new JdbcTemplate(dataSource);
         template.execute(sql);
         return RepeatStatus.FINISHED;

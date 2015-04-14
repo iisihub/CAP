@@ -31,32 +31,31 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class ErrorCodeDaoImpl extends GenericDao<ErrorCode> implements
-		ErrorCodeDao {
+public class ErrorCodeDaoImpl extends GenericDao<ErrorCode> implements ErrorCodeDao {
 
-	@Override
-	public List<ErrorCode> findByAll() {
-		ISearch search = createSearchTemplete();
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("code");
-		return find(search);
-	}
+    @Override
+    public List<ErrorCode> findByAll() {
+        ISearch search = createSearchTemplete();
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("code");
+        return find(search);
+    }
 
-	@Override
-	public ErrorCode findByCode(String code, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public ErrorCode findByCode(String code, String locale) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<ErrorCode> findListBySysId(String sysId, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "sysId", sysId);
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		return find(search);
-	}
+    @Override
+    public List<ErrorCode> findListBySysId(String sysId, String locale) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "sysId", sysId);
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        return find(search);
+    }
 
 }

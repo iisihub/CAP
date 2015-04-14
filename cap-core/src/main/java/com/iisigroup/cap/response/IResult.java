@@ -29,20 +29,20 @@ import javax.servlet.ServletResponse;
  */
 public interface IResult extends Serializable {
 
-	String getResult();
-	
-	void respondResult(ServletResponse response);
+    String getResult();
 
-	String getLogMessage();
+    void respondResult(ServletResponse response);
 
-	void add(IResult result);
+    String getLogMessage();
 
-	String getContextType();
+    void add(IResult result);
 
-	void setContextType(String cxtType);
+    String getContextType();
 
-	String getEncoding();
+    void setContextType(String cxtType);
 
-	void setEncoding(String encoding);
+    String getEncoding();
+
+    void setEncoding(String encoding);
 
 }

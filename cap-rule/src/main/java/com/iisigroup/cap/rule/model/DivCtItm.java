@@ -44,135 +44,136 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DIVCTITM", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"oid" }))
+@Table(name = "DIVCTITM", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
 public class DivCtItm extends GenericBean implements IDataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String divCtNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String divCtNo;
 
-	@NotNull
-	@Column(length = 60)
-	private String divCtNm;
+    @NotNull
+    @Column(length = 60)
+    private String divCtNm;
 
-	/** 條件屬性-動作or條件 */
-	@Column(length = 1)
-	private String divCtTyp;
-	
-	/** 分派處理/組別 */
-	@Column(length = 30)
-	private String divCtAction;
-	
-	/** 分派設定 */
-	@Column(length = 30)
-	private String divCtSetting;
+    /** 條件屬性-動作or條件 */
+    @Column(length = 1)
+    private String divCtTyp;
 
-	@Column(length = 6)
-	private String updater;
+    /** 分派處理/組別 */
+    @Column(length = 30)
+    private String divCtAction;
 
-	@Column
-	private Timestamp updateTime;
+    /** 分派設定 */
+    @Column(length = 30)
+    private String divCtSetting;
 
-	// bi-directional many-to-one association to DivCtDtl
-	@OneToMany(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private List<DivCtDtl> divCtDtls;
-	
-	// bi-directional many-to-one association to DivCtDtl
-//	@OneToOne(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-//	private DivRlDtl divRlDtl;
-	
-	public String getOid() {
-		return oid;
-	}
+    @Column(length = 6)
+    private String updater;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    @Column
+    private Timestamp updateTime;
 
+    // bi-directional many-to-one association to DivCtDtl
+    @OneToMany(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<DivCtDtl> divCtDtls;
 
-	public String getDivCtNo() {
-		return divCtNo;
-	}
+    // bi-directional many-to-one association to DivCtDtl
+    // @OneToOne(mappedBy = "divCtItm", cascade = CascadeType.PERSIST, fetch =
+    // FetchType.LAZY)
+    // private DivRlDtl divRlDtl;
 
-	public void setDivCtNo(String divCtNo) {
-		this.divCtNo = divCtNo;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public String getDivCtNm() {
-		return divCtNm;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public void setDivCtNm(String divCtNm) {
-		this.divCtNm = divCtNm;
-	}
+    public String getDivCtNo() {
+        return divCtNo;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    public void setDivCtNo(String divCtNo) {
+        this.divCtNo = divCtNo;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public String getDivCtNm() {
+        return divCtNm;
+    }
 
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
+    public void setDivCtNm(String divCtNm) {
+        this.divCtNm = divCtNm;
+    }
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	/**
-	 * 條件屬性-動作or條件
-	 * @return String
-	 */
-	public String getDivCtTyp() {
-		return divCtTyp;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	/**
-	 * 條件屬性-動作or條件
-	 * @param divCtTyp
-	 */
-	public void setDivCtTyp(String divCtTyp) {
-		this.divCtTyp = divCtTyp;
-	}
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
 
-	public List<DivCtDtl> getDivCtDtls() {
-		return divCtDtls;
-	}
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
-		this.divCtDtls = divCtDtls;
-	}
+    /**
+     * 條件屬性-動作or條件
+     * 
+     * @return String
+     */
+    public String getDivCtTyp() {
+        return divCtTyp;
+    }
 
-	public String getDivCtAction() {
-		return divCtAction;
-	}
+    /**
+     * 條件屬性-動作or條件
+     * 
+     * @param divCtTyp
+     */
+    public void setDivCtTyp(String divCtTyp) {
+        this.divCtTyp = divCtTyp;
+    }
 
-	public void setDivCtAction(String divCtAction) {
-		this.divCtAction = divCtAction;
-	}
+    public List<DivCtDtl> getDivCtDtls() {
+        return divCtDtls;
+    }
 
-	public String getDivCtSetting() {
-		return divCtSetting;
-	}
+    public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
+        this.divCtDtls = divCtDtls;
+    }
 
-	public void setDivCtSetting(String divCtSetting) {
-		this.divCtSetting = divCtSetting;
-	}
+    public String getDivCtAction() {
+        return divCtAction;
+    }
 
-//	public DivRlDtl getDivRlDtl() {
-//		return divRlDtl;
-//	}
-//
-//	public void setDivRlDtl(DivRlDtl divRlDtl) {
-//		this.divRlDtl = divRlDtl;
-//	}
+    public void setDivCtAction(String divCtAction) {
+        this.divCtAction = divCtAction;
+    }
+
+    public String getDivCtSetting() {
+        return divCtSetting;
+    }
+
+    public void setDivCtSetting(String divCtSetting) {
+        this.divCtSetting = divCtSetting;
+    }
+
+    // public DivRlDtl getDivRlDtl() {
+    // return divRlDtl;
+    // }
+    //
+    // public void setDivRlDtl(DivRlDtl divRlDtl) {
+    // this.divRlDtl = divRlDtl;
+    // }
 
 }

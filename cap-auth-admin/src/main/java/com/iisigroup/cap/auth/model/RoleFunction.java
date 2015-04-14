@@ -41,8 +41,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_ROLEFUNC", uniqueConstraints = @UniqueConstraint(columnNames = {
-        "ROLECODE", "FUNCCODE" }))
+@Table(name = "DEF_ROLEFUNC", uniqueConstraints = @UniqueConstraint(columnNames = { "ROLECODE", "FUNCCODE" }))
 public class RoleFunction extends GenericBean implements IDataObject {
 
     private static final long serialVersionUID = 1L;

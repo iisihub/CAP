@@ -27,16 +27,16 @@ import java.io.Serializable;
  */
 public interface IFormatter extends Serializable {
 
-	/**
-	 * 重新format傳入的值
-	 * 
-	 * @param <T>
-	 *            type
-	 * @param in
-	 *            the input
-	 * @return String
-	 * @throws CapFormatException
-	 */
-	public <T> T reformat(Object in);
+    /**
+     * 重新format傳入的值
+     * 
+     * @param <T>
+     *            type
+     * @param in
+     *            the input
+     * @return String
+     * @throws CapFormatException
+     */
+    public <T> T reformat(Object in);
 
 }

@@ -27,11 +27,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
  *          <li>2013/3/26,iristu,new
  *          </ul>
  */
-public class CapWebAuthenticationDetailsSource extends
-		WebAuthenticationDetailsSource {
+public class CapWebAuthenticationDetailsSource extends WebAuthenticationDetailsSource {
 
-	public CapAuthenticationDetails buildDetails(HttpServletRequest context) {
-		return new CapAuthenticationDetails(context);
-	}
+    public CapAuthenticationDetails buildDetails(HttpServletRequest context) {
+        return new CapAuthenticationDetails(context);
+    }
 
 }

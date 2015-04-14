@@ -42,16 +42,16 @@ import com.iisigroup.cap.security.CapSecurityContext;
 @Controller("menuhandler")
 public class MenuHandler extends MFormHandler {
 
-	@Resource
-	private MenuService menuSrv;
+    @Resource
+    private MenuService menuSrv;
 
-	public IResult queryMenu(IRequest request) {
+    public IResult queryMenu(IRequest request) {
 
-		MenuItem menu = menuSrv.getMenuByRoles(CapSecurityContext.getRoleIds());
-		if (menu != null) {
-			return new AjaxFormResult(JSONSerializer.toJSON(menu).toString());
-		}
-		return new AjaxFormResult();
-	}
+        MenuItem menu = menuSrv.getMenuByRoles(CapSecurityContext.getRoleIds());
+        if (menu != null) {
+            return new AjaxFormResult(JSONSerializer.toJSON(menu).toString());
+        }
+        return new AjaxFormResult();
+    }
 
 }

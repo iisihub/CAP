@@ -9,30 +9,35 @@
  *
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
-*/
+ */
 package com.iisigroup.cap.operation;
 
 import java.io.Serializable;
 
 import com.iisigroup.cap.component.IRequest;
 
-/**<p> ContextHolder.</p>
- *
+/**
+ * <p>
+ * ContextHolder.
+ * </p>
+ * 
  * @author iristu
  * @version <ul>
- *           <li>2010/7/22,iristu,new
+ *          <li>2010/7/22,iristu,new
  *          </ul>
  */
 public interface ContextHolder {
-			
-	IRequest getParameters();
-	void setParameters(IRequest params);
-	
-	
-	Serializable getResult();
-	void setResult(Serializable result);
-	
-	Object getData(String key);
-	ContextHolder setData(String key,Object value);
-	
+
+    IRequest getParameters();
+
+    void setParameters(IRequest params);
+
+    Serializable getResult();
+
+    void setResult(Serializable result);
+
+    Object getData(String key);
+
+    ContextHolder setData(String key, Object value);
+
 }

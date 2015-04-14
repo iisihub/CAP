@@ -42,32 +42,25 @@ import com.iisigroup.cap.utils.CapString;
  */
 public class CapCaptchaOpStep extends AbstractCustomizeOpStep {
 
-	protected static Log logger = LogFactory.getLog(CapCaptchaOpStep.class);
+    protected static Log logger = LogFactory.getLog(CapCaptchaOpStep.class);
 
-	@Override
-	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) {
-		String methodId = params.get(FormHandler.FORM_ACTION, "");
-		if (!CapString.isEmpty(methodId)) {
-			for (Method method : handler.getClass().getDeclaredMethods()) {
-				if (methodId.equals(method.getName())) {
-					if (method.isAnnotationPresent(Captcha.class)) {
-						String key = method.getAnnotation(Captcha.class)
-								.value();
-						CapSecurityCaptcha captcha = CapAppContext
-								.getBean(CapCaptchaServlet.DEF_RENDERER);
-						if (captcha == null
-								|| !CaptchaStatus.SUCCESS.equals(captcha
-										.valid(params.get(key)))) {
-							// 驗証碼無效請重新輸入
-							throw new CapMessageException(
-									CapAppContext.getMessage(captcha.getErrorMessage()),
-									getClass());
-						}
-					}
-				}
-			}
-		}
-		return ctx.setGoToStep(NEXT);
-	}
+    @Override
+    public OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler) {
+        String methodId = params.get(FormHandler.FORM_ACTION, "");
+        if (!CapString.isEmpty(methodId)) {
+            for (Method method : handler.getClass().getDeclaredMethods()) {
+                if (methodId.equals(method.getName())) {
+                    if (method.isAnnotationPresent(Captcha.class)) {
+                        String key = method.getAnnotation(Captcha.class).value();
+                        CapSecurityCaptcha captcha = CapAppContext.getBean(CapCaptchaServlet.DEF_RENDERER);
+                        if (captcha == null || !CaptchaStatus.SUCCESS.equals(captcha.valid(params.get(key)))) {
+                            // 驗証碼無效請重新輸入
+                            throw new CapMessageException(CapAppContext.getMessage(captcha.getErrorMessage()), getClass());
+                        }
+                    }
+                }
+            }
+        }
+        return ctx.setGoToStep(NEXT);
+    }
 }

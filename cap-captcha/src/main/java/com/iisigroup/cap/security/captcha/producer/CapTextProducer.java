@@ -4,14 +4,14 @@ import nl.captcha.text.producer.TextProducer;
 
 public class CapTextProducer implements TextProducer {
 
-	private String str;
+    private String str;
 
-	public CapTextProducer(String str) {
-		this.str = str;
-	}
+    public CapTextProducer(String str) {
+        this.str = str;
+    }
 
-	public String getText() {
-		return str;
-	}
+    public String getText() {
+        return str;
+    }
 
 }

@@ -46,110 +46,102 @@ import com.iisigroup.cap.batch.service.BatchJobService;
  *          <li>2012/11/1,iristu,new
  *          </ul>
  */
-public class JobLauncherDetail extends QuartzJobBean implements
-		CapBatchConstants {
+public class JobLauncherDetail extends QuartzJobBean implements CapBatchConstants {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(JobLauncherDetail.class);
+    private static Logger logger = LoggerFactory.getLogger(JobLauncherDetail.class);
 
-	private JobLocator jobLocator;
-	private JobLauncher jobLauncher;
-	private JobParametersIncrementer defaultIncrementer;
-	private BatchJobService batchService;
+    private JobLocator jobLocator;
+    private JobLauncher jobLauncher;
+    private JobParametersIncrementer defaultIncrementer;
+    private BatchJobService batchService;
 
-	@SuppressWarnings("rawtypes")
-	protected void executeInternal(JobExecutionContext context)
-			throws org.quartz.JobExecutionException {
-		Map jobDataMap = context.getMergedJobDataMap();
-		String jobName = (String) jobDataMap.get(JOB_NAME);
-		logger.info("Quartz trigger firing with Spring Batch jobName="
-				+ jobName);
-		JobParameters jobParameters = getJobParametersFromJobMap(jobDataMap);
-		JobExecution jobExecution = null;
-		try {
-			// 放入defaultIncrementer要確保不會有重覆的Parameters出現
-			jobParameters = defaultIncrementer.getNext(jobParameters);
-			Job job = jobLocator.getJob(jobName);
-			if (job.getJobParametersIncrementer() != null) {
-				jobParameters = job.getJobParametersIncrementer().getNext(
-						jobParameters);
-			}
-			jobExecution = jobLauncher.run(job, jobParameters);
-			context.put(K_JobExecution, jobExecution);
-			batchService.updateExecution(jobExecution.getId(),
-					(String) jobDataMap.get(EXECUTOR));
-		} catch (JobExecutionException e) {
-			logger.error("Could not execute job.", e);
-			throw new org.quartz.JobExecutionException(e);
-		}
-	}
+    @SuppressWarnings("rawtypes")
+    protected void executeInternal(JobExecutionContext context) throws org.quartz.JobExecutionException {
+        Map jobDataMap = context.getMergedJobDataMap();
+        String jobName = (String) jobDataMap.get(JOB_NAME);
+        logger.info("Quartz trigger firing with Spring Batch jobName=" + jobName);
+        JobParameters jobParameters = getJobParametersFromJobMap(jobDataMap);
+        JobExecution jobExecution = null;
+        try {
+            // 放入defaultIncrementer要確保不會有重覆的Parameters出現
+            jobParameters = defaultIncrementer.getNext(jobParameters);
+            Job job = jobLocator.getJob(jobName);
+            if (job.getJobParametersIncrementer() != null) {
+                jobParameters = job.getJobParametersIncrementer().getNext(jobParameters);
+            }
+            jobExecution = jobLauncher.run(job, jobParameters);
+            context.put(K_JobExecution, jobExecution);
+            batchService.updateExecution(jobExecution.getId(), (String) jobDataMap.get(EXECUTOR));
+        } catch (JobExecutionException e) {
+            logger.error("Could not execute job.", e);
+            throw new org.quartz.JobExecutionException(e);
+        }
+    }
 
-	/**
-	 * Copy parameters that are of the correct type over to
-	 * {@link JobParameters}, ignoring jobName.
-	 * 
-	 * @return a {@link JobParameters} instance
-	 */
-	@SuppressWarnings("rawtypes")
-	private JobParameters getJobParametersFromJobMap(Map jobDataMap) {
-		Field[] fields = this.getClass().getDeclaredFields();
-		Set<String> ignores = new HashSet<String>(fields.length);
-		for (Field f : fields) {
-			ignores.add(f.getName());
-		}
-		ignores.add(JOB_NAME);
-		ignores.add(EXECUTOR);
-		JobParametersBuilder builder = new JobParametersBuilder();
-		for (Iterator iterator = jobDataMap.entrySet().iterator(); iterator
-				.hasNext();) {
-			Entry entry = (Entry) iterator.next();
-			String key = (String) entry.getKey();
-			Object value = entry.getValue();
-			if (ignores.contains(key)) {
-				continue;
-			}
-			if (value instanceof String) {
-				builder.addString(key, (String) value);
-			} else if (value instanceof Float || value instanceof Double) {
-				builder.addDouble(key, (Double) value);
-			} else if (value instanceof Integer || value instanceof Long) {
-				builder.addLong(key, (Long) value);
-			} else if (value instanceof Date) {
-				builder.addDate(key, (Date) value);
-			} else {
-				logger.debug("JobDataMap contains values which are not job parameters (ignoring).");
-			}
-		}
-		return builder.toJobParameters();
-	}
+    /**
+     * Copy parameters that are of the correct type over to
+     * {@link JobParameters}, ignoring jobName.
+     * 
+     * @return a {@link JobParameters} instance
+     */
+    @SuppressWarnings("rawtypes")
+    private JobParameters getJobParametersFromJobMap(Map jobDataMap) {
+        Field[] fields = this.getClass().getDeclaredFields();
+        Set<String> ignores = new HashSet<String>(fields.length);
+        for (Field f : fields) {
+            ignores.add(f.getName());
+        }
+        ignores.add(JOB_NAME);
+        ignores.add(EXECUTOR);
+        JobParametersBuilder builder = new JobParametersBuilder();
+        for (Iterator iterator = jobDataMap.entrySet().iterator(); iterator.hasNext();) {
+            Entry entry = (Entry) iterator.next();
+            String key = (String) entry.getKey();
+            Object value = entry.getValue();
+            if (ignores.contains(key)) {
+                continue;
+            }
+            if (value instanceof String) {
+                builder.addString(key, (String) value);
+            } else if (value instanceof Float || value instanceof Double) {
+                builder.addDouble(key, (Double) value);
+            } else if (value instanceof Integer || value instanceof Long) {
+                builder.addLong(key, (Long) value);
+            } else if (value instanceof Date) {
+                builder.addDate(key, (Date) value);
+            } else {
+                logger.debug("JobDataMap contains values which are not job parameters (ignoring).");
+            }
+        }
+        return builder.toJobParameters();
+    }
 
-	/**
-	 * Public setter for the {@link JobLocator}.
-	 * 
-	 * @param jobLocator
-	 *            the {@link JobLocator} to set
-	 */
-	public void setJobLocator(JobLocator jobLocator) {
-		this.jobLocator = jobLocator;
-	}
+    /**
+     * Public setter for the {@link JobLocator}.
+     * 
+     * @param jobLocator
+     *            the {@link JobLocator} to set
+     */
+    public void setJobLocator(JobLocator jobLocator) {
+        this.jobLocator = jobLocator;
+    }
 
-	/**
-	 * Public setter for the {@link JobLauncher}.
-	 * 
-	 * @param jobLauncher
-	 *            the {@link JobLauncher} to set
-	 */
-	public void setJobLauncher(JobLauncher jobLauncher) {
-		this.jobLauncher = jobLauncher;
-	}
+    /**
+     * Public setter for the {@link JobLauncher}.
+     * 
+     * @param jobLauncher
+     *            the {@link JobLauncher} to set
+     */
+    public void setJobLauncher(JobLauncher jobLauncher) {
+        this.jobLauncher = jobLauncher;
+    }
 
-	public void setBatchService(BatchJobService batchService) {
-		this.batchService = batchService;
-	}
+    public void setBatchService(BatchJobService batchService) {
+        this.batchService = batchService;
+    }
 
-	public void setDefaultIncrementer(
-			JobParametersIncrementer defaultIncrementer) {
-		this.defaultIncrementer = defaultIncrementer;
-	}
+    public void setDefaultIncrementer(JobParametersIncrementer defaultIncrementer) {
+        this.defaultIncrementer = defaultIncrementer;
+    }
 
 }

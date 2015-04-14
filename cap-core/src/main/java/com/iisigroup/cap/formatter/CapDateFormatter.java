@@ -28,23 +28,22 @@ import com.iisigroup.cap.utils.CapDate;
 @SuppressWarnings("serial")
 public class CapDateFormatter implements IFormatter {
 
-	String fromDateFormat;
-	String toDateFormat;
+    String fromDateFormat;
+    String toDateFormat;
 
-	public CapDateFormatter(String fromDateFormat, String toDateFormat) {
-		this.fromDateFormat = fromDateFormat;
-		this.toDateFormat = toDateFormat;
-	}
+    public CapDateFormatter(String fromDateFormat, String toDateFormat) {
+        this.fromDateFormat = fromDateFormat;
+        this.toDateFormat = toDateFormat;
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public String reformat(Object in) {
-		if (in != null) {
-			String str = (String) in;
-			return CapDate.formatDateFromF1ToF2(str, fromDateFormat,
-					toDateFormat);
-		}
-		return Constants.EMPTY_STRING;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public String reformat(Object in) {
+        if (in != null) {
+            String str = (String) in;
+            return CapDate.formatDateFromF1ToF2(str, fromDateFormat, toDateFormat);
+        }
+        return Constants.EMPTY_STRING;
+    }
 
 }

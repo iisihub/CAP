@@ -36,19 +36,16 @@ public class MenuServiceImpl implements MenuService {
     I18nDao i18nDao;
 
     public MenuItem getMenuByRoles(Set<String> roles) {
-        Map<String, I18n> menuI18n = i18nDao.findAsMapByCodeType("menu",
-                SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+        Map<String, I18n> menuI18n = i18nDao.findAsMapByCodeType("menu", SimpleContextHolder.get(CapWebUtil.localeKey).toString());
         Map<Integer, MenuItem> menuMap = new HashMap<Integer, MenuItem>();
         MenuItem root = new MenuItem();
-        List<Function> list = codeItemDao.findMenuDataByRoles(roles,
-                config.getProperty("systemType"));
+        List<Function> list = codeItemDao.findMenuDataByRoles(roles, config.getProperty("systemType"));
         for (Function code : list) {
             MenuItem item = new MenuItem();
             item.setCode(code.getCode());
             // 改為從 i18n table 取得字串
             I18n i18n = menuI18n.get("menu." + code.getCode());
-            item.setName(i18n == null ? CapAppContext.getMessage("menu."
-                    + code.getCode()) : i18n.getCodeDesc());
+            item.setName(i18n == null ? CapAppContext.getMessage("menu." + code.getCode()) : i18n.getCodeDesc());
             item.setUrl(code.getPath());
             menuMap.put(item.getCode(), item);
 
@@ -106,8 +103,7 @@ public class MenuServiceImpl implements MenuService {
         }
 
         public String toString() {
-            return ReflectionToStringBuilder.toString(this,
-                    ToStringStyle.SHORT_PREFIX_STYLE, false, false);
+            return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE, false, false);
         }
     }
 }

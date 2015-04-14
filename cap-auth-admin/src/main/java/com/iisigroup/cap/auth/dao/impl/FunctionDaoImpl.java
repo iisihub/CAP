@@ -48,8 +48,7 @@ import com.iisigroup.cap.utils.StringUtil;
  *          </ul>
  */
 @Repository
-public class FunctionDaoImpl extends GenericDao<Function> implements
-        FunctionDao {
+public class FunctionDaoImpl extends GenericDao<Function> implements FunctionDao {
 
     private static final int NO_PARENT = -1;
 
@@ -73,23 +72,19 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageByRoleCode(String roleCode,
-            int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageByRoleCode(String roleCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
-        return getNamedJdbcTemplate().queryForPage("function_getFuncByRoldCode", param,
-                firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage("function_getFuncByRoldCode", param, firstResult, maxResults);
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageUnselected(String roleCode,
-            String sysType, String parent, int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageUnselected(String roleCode, String sysType, String parent, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
         param.put("parent", parent);
         param.put("sysType", sysType);
-        return getNamedJdbcTemplate().queryForPage("function_getEditFuncByRole",
-                param, firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage("function_getEditFuncByRole", param, firstResult, maxResults);
     }// ;
 
     @Override
@@ -98,8 +93,7 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
     }
 
     @Override
-    public List<Function> findByParentAndLevels(String pgmDept,
-            Set<String> roles, int parent, String sysType, int... levels) {
+    public List<Function> findByParentAndLevels(String pgmDept, Set<String> roles, int parent, String sysType, int... levels) {
 
         Set<Integer> pSet = new HashSet<Integer>();
         pSet.add(parent);
@@ -113,8 +107,7 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
         for (String role : roles) {
             for (int step : levels) {
                 String key = getRoleStepKey(role, step);
-                List<Function> stepCodes = getRoleLevelFuncsBySysType(sysType)
-                        .get(key);
+                List<Function> stepCodes = getRoleLevelFuncsBySysType(sysType).get(key);
 
                 if (stepCodes == null) {
                     continue;
@@ -138,22 +131,18 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
     }
 
     @Override
-    public List<Function> findByLevels(Set<String> roles, String sysType,
-            int... levels) {
+    public List<Function> findByLevels(Set<String> roles, String sysType, int... levels) {
         return findByParentAndLevels(roles, NO_PARENT, sysType, levels);
     }
 
     @Override
-    public List<Function> findBySysTypeAndParent(Set<String> roles, int parent,
-            String sysType) {
+    public List<Function> findBySysTypeAndParent(Set<String> roles, int parent, String sysType) {
         int level = getFuncsBySysType(sysType).get(parent).getLevel() + 1;
-        return findByParentAndLevels(roles, parent, sysType,
-                new int[] { level });
+        return findByParentAndLevels(roles, parent, sysType, new int[] { level });
     }
 
     @Override
-    public List<Function> findByParentAndLevels(Set<String> roles, int parent,
-            String sysType, int... levels) {
+    public List<Function> findByParentAndLevels(Set<String> roles, int parent, String sysType, int... levels) {
         Set<Integer> pSet = new HashSet<Integer>();
         pSet.add(parent);
         Set<Function> set = new HashSet<Function>();
@@ -164,8 +153,7 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
         for (String role : roles) {
             for (int step : levels) {
                 String key = getRoleStepKey(role, step);
-                List<Function> stepCodes = getRoleLevelFuncsBySysType(sysType)
-                        .get(key);
+                List<Function> stepCodes = getRoleLevelFuncsBySysType(sysType).get(key);
 
                 if (stepCodes == null) {
                     continue;
@@ -200,26 +188,24 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
         return result;
     }
 
-    private Map<String, List<Function>> getRoleLevelFuncsBySysType(
-            String sysType) {
+    private Map<String, List<Function>> getRoleLevelFuncsBySysType(String sysType) {
         Map<String, List<Function>> roleLevelCodes = new HashMap<String, List<Function>>();
         final Map<String, Map<Integer, Integer>> roleAuthes = new ConcurrentHashMap<String, Map<Integer, Integer>>();
         Map<String, Set<Integer>> roleSteps = new ConcurrentHashMap<String, Set<Integer>>();
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("sysType", sysType);
 
-        getNamedJdbcTemplate().query("function_auth", param,
-                new RowCallbackHandler() {
-                    public void processRow(ResultSet rs) throws SQLException {
-                        String role = StringUtil.trim(rs.getString("ROLE"));
-                        Map<Integer, Integer> authes = roleAuthes.get(role);
-                        if (authes == null) {
-                            authes = new HashMap<Integer, Integer>();
-                            roleAuthes.put(role, authes);
-                        }
-                        authes.put(rs.getInt("AUTHCODE"), rs.getInt("AUTHCODE"));
-                    }
-                });
+        getNamedJdbcTemplate().query("function_auth", param, new RowCallbackHandler() {
+            public void processRow(ResultSet rs) throws SQLException {
+                String role = StringUtil.trim(rs.getString("ROLE"));
+                Map<Integer, Integer> authes = roleAuthes.get(role);
+                if (authes == null) {
+                    authes = new HashMap<Integer, Integer>();
+                    roleAuthes.put(role, authes);
+                }
+                authes.put(rs.getInt("AUTHCODE"), rs.getInt("AUTHCODE"));
+            }
+        });
 
         for (Entry<String, Map<Integer, Integer>> entry : roleAuthes.entrySet()) {
             String role = entry.getKey();
@@ -247,13 +233,11 @@ public class FunctionDaoImpl extends GenericDao<Function> implements
     }
 
     @Override
-    public List<Function> findMenuDataByRoles(Set<String> roles,
-            String systemType) {
+    public List<Function> findMenuDataByRoles(Set<String> roles, String systemType) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCodes", roles);
         param.put("sysType", systemType);
-        return getNamedJdbcTemplate().query("function_findMenu", "", param,
-                new FunctionRowMapper());
+        return getNamedJdbcTemplate().query("function_findMenu", "", param, new FunctionRowMapper());
     }
 
     @Override

@@ -30,91 +30,90 @@ import javax.servlet.ServletRequest;
  */
 public interface IRequest extends Map<String, Object>, Serializable {
 
-	/**
-	 * set Request Object
-	 * 
-	 * @param obj
-	 *            request obj
-	 */
-	void setRequestObject(Object obj);
+    /**
+     * set Request Object
+     * 
+     * @param obj
+     *            request obj
+     */
+    void setRequestObject(Object obj);
 
+    <T extends ServletRequest> T getServletRequest();
 
-	<T extends ServletRequest> T getServletRequest();
+    /**
+     * get request parameter
+     * 
+     * @param key
+     *            欄位名
+     * @return 回傳
+     */
+    String get(String key);
 
-	/**
-	 * get request parameter
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @return 回傳
-	 */
-	String get(String key);
+    /**
+     * get request parameter
+     * 
+     * @param key
+     *            欄位名
+     * @return 回傳
+     */
+    Object getObject(String key);
 
-	/**
-	 * get request parameter
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @return 回傳
-	 */
-	Object getObject(String key);
+    /**
+     * get request parameter
+     * 
+     * @param key
+     *            欄位名
+     * @param defaultValue
+     *            預設值
+     * @return 回傳
+     */
+    String get(String key, String defaultValue);
 
-	/**
-	 * get request parameter
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @param defaultValue
-	 *            預設值
-	 * @return 回傳
-	 */
-	String get(String key, String defaultValue);
+    /**
+     * set customize parameter
+     * 
+     * @param key
+     *            欄位名
+     * @param value
+     *            值
+     */
+    void setParameter(String key, Object value);
 
-	/**
-	 * set customize parameter
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @param value
-	 *            值
-	 */
-	void setParameter(String key, Object value);
+    /**
+     * check parameter exist
+     * 
+     * @param key
+     *            欄位名
+     * @return 回傳
+     */
+    boolean containsParamsKey(String key);
 
-	/**
-	 * check parameter exist
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @return 回傳
-	 */
-	boolean containsParamsKey(String key);
+    /**
+     * get Integer parameter
+     * 
+     * @param key
+     *            欄位名
+     * @return 回傳
+     */
+    int getParamsAsInteger(String key);
 
-	/**
-	 * get Integer parameter
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @return 回傳
-	 */
-	int getParamsAsInteger(String key);
+    /**
+     * get Integer parameter
+     * 
+     * @param key
+     *            欄位名
+     * @param defaultValue
+     *            預設值
+     * @return 回傳
+     */
+    int getParamsAsInteger(String key, int defaultValue);
 
-	/**
-	 * get Integer parameter
-	 * 
-	 * @param key
-	 *            欄位名
-	 * @param defaultValue
-	 *            預設值
-	 * @return 回傳
-	 */
-	int getParamsAsInteger(String key, int defaultValue);
+    String[] getParamsAsStringArray(String key);
 
-	String[] getParamsAsStringArray(String key);
+    String getParamsArrayAsString(String key);
 
-	String getParamsArrayAsString(String key);
+    <T> T getFile(String key);
 
-	<T> T getFile(String key);
-
-	<T> List<T> getFiles(String key);
+    <T> List<T> getFiles(String key);
 
 }

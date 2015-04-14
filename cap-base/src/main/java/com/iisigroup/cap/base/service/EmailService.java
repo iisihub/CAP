@@ -11,7 +11,6 @@
  */
 package com.iisigroup.cap.base.service;
 
-
 /**
  * <pre>
  * send email
@@ -25,9 +24,8 @@ package com.iisigroup.cap.base.service;
  */
 public interface EmailService {
 
-	void sendEmail(String[] sendTo, String subject, String sendContext);
+    void sendEmail(String[] sendTo, String subject, String sendContext);
 
-	void sendEmail(String sendFrom, String[] sendTo, String subject,
-			String sendContext);
+    void sendEmail(String sendFrom, String[] sendTo, String subject, String sendContext);
 
 }

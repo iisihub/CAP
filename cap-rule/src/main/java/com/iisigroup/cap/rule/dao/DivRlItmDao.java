@@ -29,54 +29,53 @@ import com.iisigroup.cap.rule.model.DivRlItm;
  */
 public interface DivRlItmDao extends IGenericDao<DivRlItm> {
 
-	/**
-	 * find by DivRlItm.
-	 * 
-	 * @param divRlNo
-	 *            規則代號
-	 * @return T
-	 */
-	public DivRlItm findByDivRlNo(String divRlNo);
+    /**
+     * find by DivRlItm.
+     * 
+     * @param divRlNo
+     *            規則代號
+     * @return T
+     */
+    public DivRlItm findByDivRlNo(String divRlNo);
 
-	/**
-	 * find by DivRlItm and inputFlag
-	 * 
-	 * @param divRlNo
-	 *            規則代號
-	 * @param inputFlag
-	 *            是否啟用
-	 * @return T
-	 */
-	public DivRlItm findByDivRlNoAndInputFlg(String divRlNo, String inputFlag);
+    /**
+     * find by DivRlItm and inputFlag
+     * 
+     * @param divRlNo
+     *            規則代號
+     * @param inputFlag
+     *            是否啟用
+     * @return T
+     */
+    public DivRlItm findByDivRlNoAndInputFlg(String divRlNo, String inputFlag);
 
-	/**
-	 * find by DivRlNos.
-	 * 
-	 * @param divRlNos
-	 *            多個規則代號
-	 * @return T List
-	 */
-	public List<DivRlItm> findByDivRlNo(String[] divRlNos);
+    /**
+     * find by DivRlNos.
+     * 
+     * @param divRlNos
+     *            多個規則代號
+     * @return T List
+     */
+    public List<DivRlItm> findByDivRlNo(String[] divRlNos);
 
-	/**
-	 * find by Division Rule Item Nos and inputFlag
-	 * 
-	 * @param divRlNos
-	 *            多個規則代號
-	 * @param inputFlag
-	 *            是否啟用
-	 * @return DivRlItm
-	 */
-	public List<DivRlItm> findByDivRlNoAndInputFlg(String[] divRlNos,
-			String inputFlag);
+    /**
+     * find by Division Rule Item Nos and inputFlag
+     * 
+     * @param divRlNos
+     *            多個規則代號
+     * @param inputFlag
+     *            是否啟用
+     * @return DivRlItm
+     */
+    public List<DivRlItm> findByDivRlNoAndInputFlg(String[] divRlNos, String inputFlag);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return DivRlItm
-	 */
-	public DivRlItm findByOid(String oid);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return DivRlItm
+     */
+    public DivRlItm findByOid(String oid);
 
 }

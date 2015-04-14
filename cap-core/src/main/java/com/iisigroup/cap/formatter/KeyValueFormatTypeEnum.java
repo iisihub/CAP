@@ -23,10 +23,10 @@ package com.iisigroup.cap.formatter;
  *          </ul>
  */
 public enum KeyValueFormatTypeEnum {
-	/**print:key-value*/
-	Key_Value, 
-	/**print:value*/
-	Value, 
-	/**print:key value*/
-	KeySpaceValue
+    /** print:key-value */
+    Key_Value,
+    /** print:value */
+    Value,
+    /** print:key value */
+    KeySpaceValue
 }

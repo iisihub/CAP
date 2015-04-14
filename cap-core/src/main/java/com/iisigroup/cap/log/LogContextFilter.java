@@ -40,56 +40,54 @@ import com.iisigroup.cap.utils.CapWebUtil;
  */
 public class LogContextFilter implements Filter {
 
-	public final static String LOGIN_USERNAME = "LOGIN_USERNAME";
+    public final static String LOGIN_USERNAME = "LOGIN_USERNAME";
 
-	public final static String DEFAULT_LOGIN = "------";
+    public final static String DEFAULT_LOGIN = "------";
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.servlet.Filter#destroy()
-	 */
-	public void destroy() {
-		LogContext.resetLogContext();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javax.servlet.Filter#destroy()
+     */
+    public void destroy() {
+        LogContext.resetLogContext();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
-	 * javax.servlet.ServletResponse, javax.servlet.FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession session = req.getSession(false);
-		// Host IP
-		LogContext.setHost(req.getLocalAddr());
-		LogContext.setUUID(CapString.getUUIDString());
-		if (session == null) {
-			LogContext.setLogin(DEFAULT_LOGIN);
-		} else {
-			// 用戶端IP
-			LogContext.setClientAddr(req.getRemoteAddr());
-			// Session ID
-			LogContext.setSessionId(session.getId());
-			LogContext.setRequestURL(CapWebUtil.getRequestURL(req));
-			// User相關資訊
-			String userId = (String) session.getAttribute(LOGIN_USERNAME);
-			userId = CapString.isEmpty(userId) ? (String) request
-					.getParameter("j_username") : userId;
-			if (CapString.isEmpty(userId)) {
-				LogContext.setLogin(DEFAULT_LOGIN);
-			} else {
-				LogContext.setLogin(userId);
-			}
-		}
-		chain.doFilter(request, response);
-		LogContext.resetLogContext();
-	}// ;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
+     * javax.servlet.ServletResponse, javax.servlet.FilterChain)
+     */
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession(false);
+        // Host IP
+        LogContext.setHost(req.getLocalAddr());
+        LogContext.setUUID(CapString.getUUIDString());
+        if (session == null) {
+            LogContext.setLogin(DEFAULT_LOGIN);
+        } else {
+            // 用戶端IP
+            LogContext.setClientAddr(req.getRemoteAddr());
+            // Session ID
+            LogContext.setSessionId(session.getId());
+            LogContext.setRequestURL(CapWebUtil.getRequestURL(req));
+            // User相關資訊
+            String userId = (String) session.getAttribute(LOGIN_USERNAME);
+            userId = CapString.isEmpty(userId) ? (String) request.getParameter("j_username") : userId;
+            if (CapString.isEmpty(userId)) {
+                LogContext.setLogin(DEFAULT_LOGIN);
+            } else {
+                LogContext.setLogin(userId);
+            }
+        }
+        chain.doFilter(request, response);
+        LogContext.resetLogContext();
+    }// ;
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// do nothing
-	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+        // do nothing
+    }
 
 }

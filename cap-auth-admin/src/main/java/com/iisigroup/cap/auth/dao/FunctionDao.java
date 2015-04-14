@@ -42,11 +42,9 @@ public interface FunctionDao extends IGenericDao<Function> {
 
     List<Function> findBySysTypeAndLevel(String sysType, String level);
 
-    Page<Map<String, Object>> findPageByRoleCode(String roleCode,
-            int firstResult, int maxResults);
+    Page<Map<String, Object>> findPageByRoleCode(String roleCode, int firstResult, int maxResults);
 
-    Page<Map<String, Object>> findPageUnselected(String roleCode,
-            String sysType, String pgmTyp, int firstResult, int maxResults);
+    Page<Map<String, Object>> findPageUnselected(String roleCode, String sysType, String pgmTyp, int firstResult, int maxResults);
 
     /**
      * 依交易代碼取得CodeItem
@@ -62,8 +60,7 @@ public interface FunctionDao extends IGenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findByParentAndLevels(String pgmDept, Set<String> roles,
-            int parent, String sysType, int... levels);
+    List<Function> findByParentAndLevels(String pgmDept, Set<String> roles, int parent, String sysType, int... levels);
 
     /**
      * findByStep
@@ -71,8 +68,7 @@ public interface FunctionDao extends IGenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findByLevels(Set<String> roles, String sysType,
-            int... levels);
+    List<Function> findByLevels(Set<String> roles, String sysType, int... levels);
 
     /**
      * findByParent
@@ -80,8 +76,7 @@ public interface FunctionDao extends IGenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findBySysTypeAndParent(Set<String> roles, int parent,
-            String sysType);
+    List<Function> findBySysTypeAndParent(Set<String> roles, int parent, String sysType);
 
     /**
      * findByParentAndSteps
@@ -89,8 +84,7 @@ public interface FunctionDao extends IGenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findByParentAndLevels(Set<String> roles, int parent,
-            String sysType, int... levels);
+    List<Function> findByParentAndLevels(Set<String> roles, int parent, String sysType, int... levels);
 
     List<Function> findMenuDataByRoles(Set<String> roles, String sysType);
 

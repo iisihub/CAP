@@ -12,7 +12,6 @@
  */
 package com.iisigroup.cap.dao.utils;
 
-
 /**
  * <pre>
  * SearchModeParameter
@@ -26,33 +25,32 @@ package com.iisigroup.cap.dao.utils;
  */
 public class SearchModeParameter {
 
-	SearchMode mode;
-	Object key;
-	Object value;
+    SearchMode mode;
+    Object key;
+    Object value;
 
-	public SearchModeParameter(SearchMode searchMode, Object key, Object value) {
-		this.mode = searchMode;
-		this.key = key;
-		this.value = value;
-	}
+    public SearchModeParameter(SearchMode searchMode, Object key, Object value) {
+        this.mode = searchMode;
+        this.key = key;
+        this.value = value;
+    }
 
-	public SearchMode getMode() {
-		return mode;
-	}
+    public SearchMode getMode() {
+        return mode;
+    }
 
-	@SuppressWarnings("unchecked")
-	public <K> K getKey() {
-		return (K) key;
-	}
+    @SuppressWarnings("unchecked")
+    public <K> K getKey() {
+        return (K) key;
+    }
 
-	public Object getValue() {
-		return value;
-	}
+    public Object getValue() {
+        return value;
+    }
 
-	@Override
-	public String toString() {
-		return new StringBuffer().append(key).append(" ").append(mode)
-				.append(" ").append(value).toString();
-	}
+    @Override
+    public String toString() {
+        return new StringBuffer().append(key).append(" ").append(mode).append(" ").append(value).toString();
+    }
 
 }

@@ -27,14 +27,14 @@ import com.iisigroup.cap.security.model.IRole;
  *          </ul>
  */
 public interface IRoleDao<T extends IRole> {
-	/**
-	 * findByUrl
-	 * 
-	 * @param system
-	 *            系統代碼
-	 * @param url
-	 *            系統代碼
-	 * @return List<IRole>
-	 */
-	public List<T> findBySysTypeAndPath(String system, String url);
+    /**
+     * findByUrl
+     * 
+     * @param system
+     *            系統代碼
+     * @param url
+     *            系統代碼
+     * @return List<IRole>
+     */
+    public List<T> findBySysTypeAndPath(String system, String url);
 }

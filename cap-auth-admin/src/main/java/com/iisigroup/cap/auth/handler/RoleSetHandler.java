@@ -104,8 +104,7 @@ public class RoleSetHandler extends MFormHandler {
             return new MapGridResult();
         }
 
-        Page<Map<String, Object>> page = roleSetService.findPageUser(search,
-                code);
+        Page<Map<String, Object>> page = roleSetService.findPageUser(search, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }
 
@@ -116,31 +115,26 @@ public class RoleSetHandler extends MFormHandler {
             return new MapGridResult();
         }
 
-        Page<Map<String, Object>> page = roleSetService.findPageFunc(search,
-                code);
+        Page<Map<String, Object>> page = roleSetService.findPageFunc(search, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }// ;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryEditUsr(ISearch search, IRequest params)
-            throws CapException {
+    public MapGridResult queryEditUsr(ISearch search, IRequest params) throws CapException {
         String depCode = params.get("depCode");
         String roleCode = params.get("roleCode");
 
-        Page<Map<String, Object>> page = roleSetService.findPageEditUsr(search,
-                roleCode, depCode);
+        Page<Map<String, Object>> page = roleSetService.findPageEditUsr(search, roleCode, depCode);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryEditFunc(ISearch search, IRequest params)
-            throws CapException {
+    public MapGridResult queryEditFunc(ISearch search, IRequest params) throws CapException {
         String parent = params.get("parent");
         String code = params.get("code");
         String sysType = params.get("sysType");
 
-        Page<Map<String, Object>> page = roleSetService.findPageEditFunc(
-                search, code, sysType, parent);
+        Page<Map<String, Object>> page = roleSetService.findPageEditFunc(search, code, sysType, parent);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }// ;
 
@@ -154,8 +148,7 @@ public class RoleSetHandler extends MFormHandler {
         }
 
         if (role != null) {
-            result.putAll(new AjaxFormResult(role.toJSONObject(
-                    CapEntityUtil.getColumnName(role), null)));
+            result.putAll(new AjaxFormResult(role.toJSONObject(CapEntityUtil.getColumnName(role), null)));
         }
 
         return result;
@@ -199,14 +192,10 @@ public class RoleSetHandler extends MFormHandler {
         if (!CapString.isEmpty(code)) {
             role = roleSetService.findRoleByCode(code);
             if (isNew.equals("true") && role != null) {
-                throw new CapMessageException(
-                        CapAppContext.getMessage("js.data.exists"),
-                        RoleSetHandler.class);
+                throw new CapMessageException(CapAppContext.getMessage("js.data.exists"), RoleSetHandler.class);
             }
         } else {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
         if (role == null) {
             role = new Role();
@@ -238,9 +227,7 @@ public class RoleSetHandler extends MFormHandler {
             role = roleSetService.findRoleByCode(code);
         }
         if (role == null) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<UserRole> list = new ArrayList<UserRole>();
@@ -278,9 +265,7 @@ public class RoleSetHandler extends MFormHandler {
             role = roleSetService.findRoleByCode(code);
         }
         if (role == null) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<RoleFunction> list = new ArrayList<RoleFunction>();
@@ -332,9 +317,7 @@ public class RoleSetHandler extends MFormHandler {
         JSONArray users = JSONArray.fromObject(request.get("users"));
 
         if (CapString.isEmpty(code)) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<String> delUsr = new ArrayList<String>();
@@ -363,9 +346,7 @@ public class RoleSetHandler extends MFormHandler {
         JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
 
         if (CapString.isEmpty(code)) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<String> delFunc = new ArrayList<String>();

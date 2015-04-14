@@ -34,8 +34,7 @@ import com.iisigroup.cap.utils.CapSqlStatement;
  *          </ul>
  */
 @Repository
-public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
-        UserDao {
+public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>, UserDao {
 
     @Override
     public User getUserByLoginId(String loginId, String depCode) {
@@ -47,10 +46,8 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
     @SuppressWarnings("unchecked")
     @Override
     public List<Role> getRoleByUser(User user) {
-        Query query = getEntityManager()
-                .createNativeQuery(
-                        "select r.* from DEF_ROLE r inner join DEF_USERROLE ur inner join DEF_USER u on u.code=ur.USERCODE on r.CODE=ur.ROLECODE where r.STATUS='0' and u.code=?1",
-                        Role.class);
+        Query query = getEntityManager().createNativeQuery(
+                "select r.* from DEF_ROLE r inner join DEF_USERROLE ur inner join DEF_USER u on u.code=ur.USERCODE on r.CODE=ur.ROLECODE where r.STATUS='0' and u.code=?1", Role.class);
         // TODO: systemtype
         query.setParameter(1, user.getCode());
         return query.getResultList();
@@ -64,68 +61,54 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>,
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPage(String code, String name,
-            String[] roleCodes, String[] status, int maxResults, int firstResult) {
+    public Page<Map<String, Object>> findPage(String code, String name, String[] roleCodes, String[] status, int maxResults, int firstResult) {
         ISearch search = createSearchTemplete();
         search.setFirstResult(firstResult);
         search.setMaxResults(maxResults);
         search.addOrderBy("code");
         if (!StringUtils.isBlank(code)) {
-            search.addSearchModeParameters(SearchMode.LIKE, "u.code", "%"
-                    + code + "%");
+            search.addSearchModeParameters(SearchMode.LIKE, "u.code", "%" + code + "%");
         }
         if (!StringUtils.isBlank(name)) {
-            search.addSearchModeParameters(SearchMode.LIKE, "u.name", "%"
-                    + name + "%");
+            search.addSearchModeParameters(SearchMode.LIKE, "u.name", "%" + name + "%");
         }
         if (roleCodes != null && roleCodes.length > 0) {
-            search.addSearchModeParameters(SearchMode.IS_NOT_NULL,
-                    "ur.usercode", null);
-            search.addSearchModeParameters(SearchMode.IN, "ur.rolecode",
-                    roleCodes);
+            search.addSearchModeParameters(SearchMode.IS_NOT_NULL, "ur.usercode", null);
+            search.addSearchModeParameters(SearchMode.IN, "ur.rolecode", roleCodes);
         }
         if (status != null && status.length > 0) {
             search.addSearchModeParameters(SearchMode.IN, "u.status", status);
         } else {
-            search.addSearchModeParameters(SearchMode.NOT_EQUALS, "u.status",
-                    "9");
+            search.addSearchModeParameters(SearchMode.NOT_EQUALS, "u.status", "9");
         }
         return getNamedJdbcTemplate().queryForPage("user_find", search);
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageByRoleCode(String roleCode,
-            int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageByRoleCode(String roleCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
-        return getNamedJdbcTemplate().queryForPage("user_getUserByRoldeCode",
-                param, firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage("user_getUserByRoldeCode", param, firstResult, maxResults);
     }
 
     @Override
-    public Page<Map<String, Object>> findPageUnselectedByRoleCodeAndDepCode(
-            String roleCode, String depCode, int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageUnselectedByRoleCodeAndDepCode(String roleCode, String depCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
         param.put("depCode", depCode);
-        return getNamedJdbcTemplate().queryForPage(
-                "user_getEditUserByRoleCode", param, firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage("user_getEditUserByRoleCode", param, firstResult, maxResults);
     }
 
     @Override
-    public void processUserStatus(int pwdExpiredDay, int pwdAccountDisable,
-            int pwdAccountDelete) {
+    public void processUserStatus(int pwdExpiredDay, int pwdAccountDisable, int pwdAccountDelete) {
         Map<String, Object> param = new HashMap<String, Object>();
-        CapSqlStatement sqlp = (CapSqlStatement) CapAppContext
-                .getBean("userSqlStatement");
-        List<Map<String, Object>> result = getNamedJdbcTemplate().queryForList(
-                (String) sqlp.getValue("pwdlog_lastpwd"), param);
+        CapSqlStatement sqlp = (CapSqlStatement) CapAppContext.getBean("userSqlStatement");
+        List<Map<String, Object>> result = getNamedJdbcTemplate().queryForList((String) sqlp.getValue("pwdlog_lastpwd"), param);
         for (Map<String, Object> rec : result) {
             String userCode = (String) rec.get("usercode");
             Timestamp lastpwd = (Timestamp) rec.get("lastpwd");
             param.put("userCode", userCode);
-            param.put("pwdExpiredTime",
-                    CapDate.shiftDays(lastpwd, pwdExpiredDay));
+            param.put("pwdExpiredTime", CapDate.shiftDays(lastpwd, pwdExpiredDay));
             getNamedJdbcTemplate().update("user_updatePwdExpiredTime", param);
         }
         param.put("pwdAccountDisable", pwdAccountDisable);

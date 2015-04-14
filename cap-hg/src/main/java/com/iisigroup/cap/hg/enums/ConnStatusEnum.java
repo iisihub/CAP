@@ -13,21 +13,16 @@ package com.iisigroup.cap.hg.enums;
  */
 public enum ConnStatusEnum {
 
-	INIT("0"),
-	RUNNING("1"),
-	COMPLETE("2"),
-	ERROR("3"),
-	CONNECT_ERROR("4"),
-	TIMEOUT(	"5");
+    INIT("0"), RUNNING("1"), COMPLETE("2"), ERROR("3"), CONNECT_ERROR("4"), TIMEOUT("5");
 
-	private String code;
+    private String code;
 
-	ConnStatusEnum(String code) {
-		this.code = code;
-	}
+    ConnStatusEnum(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
 }

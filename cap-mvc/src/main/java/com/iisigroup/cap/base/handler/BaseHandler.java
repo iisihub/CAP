@@ -27,25 +27,24 @@ import com.iisigroup.cap.response.IResult;
 @Controller("basehandler")
 public class BaseHandler extends MFormHandler {
 
-	/**
-	 * <pre>
-	 * 檔案作業完成後以防IE status bar 不停止
-	 * </pre>
-	 * 
-	 * @param params
-	 *            PageParameters
-	 * @return IResult
-	 * @throws CapException
-	 */
-	public IResult fileSuccess(IRequest params) {
-		return new AjaxFormResult();
-	}
+    /**
+     * <pre>
+     * 檔案作業完成後以防IE status bar 不停止
+     * </pre>
+     * 
+     * @param params
+     *            PageParameters
+     * @return IResult
+     * @throws CapException
+     */
+    public IResult fileSuccess(IRequest params) {
+        return new AjaxFormResult();
+    }
 
-	@HandlerType(HandlerTypeEnum.FORM)
-	public IResult queryJsI18N(IRequest request) {
-		String result = MessageBundleScriptCreator.generateJson(request
-				.get("f").replaceAll("/?webroot/page", ""));
-		return new AjaxFormResult(result);
-	}// ;
+    @HandlerType(HandlerTypeEnum.FORM)
+    public IResult queryJsI18N(IRequest request) {
+        String result = MessageBundleScriptCreator.generateJson(request.get("f").replaceAll("/?webroot/page", ""));
+        return new AjaxFormResult(result);
+    }// ;
 
 }

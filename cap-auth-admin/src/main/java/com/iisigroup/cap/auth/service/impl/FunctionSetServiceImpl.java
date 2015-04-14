@@ -37,8 +37,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          </ul>
  */
 @Service
-public class FunctionSetServiceImpl extends AbstractService implements
-        FunctionSetService {
+public class FunctionSetServiceImpl extends AbstractService implements FunctionSetService {
 
     @Resource
     private FunctionDao functionDao;
@@ -63,17 +62,13 @@ public class FunctionSetServiceImpl extends AbstractService implements
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPage(ISearch search, String sysType,
-            String funcCode) {
-        return roleDao.findPageBySysTypeAndFuncCode(sysType, funcCode,
-                search.getFirstResult(), search.getMaxResults());
+    public Page<Map<String, Object>> findPage(ISearch search, String sysType, String funcCode) {
+        return roleDao.findPageBySysTypeAndFuncCode(sysType, funcCode, search.getFirstResult(), search.getMaxResults());
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findEditPage(ISearch search,
-            String sysType, String funcCode) {
-        return roleDao.findPageUnselectedBySysTypeAndFuncCode(sysType, funcCode,
-                search.getFirstResult(), search.getMaxResults());
+    public Page<Map<String, Object>> findEditPage(ISearch search, String sysType, String funcCode) {
+        return roleDao.findPageUnselectedBySysTypeAndFuncCode(sysType, funcCode, search.getFirstResult(), search.getMaxResults());
     }// ;
 
     @Override
@@ -92,8 +87,7 @@ public class FunctionSetServiceImpl extends AbstractService implements
         functionDao.save(function);
         // insert menu i18n
         String i18nKey = "menu." + function.getCode();
-        I18n i18n = i18nDao.findByCodeTypeAndCodeValue("menu", i18nKey,
-                SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+        I18n i18n = i18nDao.findByCodeTypeAndCodeValue("menu", i18nKey, SimpleContextHolder.get(CapWebUtil.localeKey).toString());
         if (i18n == null) {
             i18n = new I18n();
         }

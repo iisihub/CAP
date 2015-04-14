@@ -23,11 +23,11 @@ package com.iisigroup.cap.hg.event;
  */
 public interface IHGEventAction {
 
-	/**
-	 * excute action
-	 * 
-	 * @param object
-	 *            object
-	 */
-	void excute(Object object);
+    /**
+     * excute action
+     * 
+     * @param object
+     *            object
+     */
+    void excute(Object object);
 }

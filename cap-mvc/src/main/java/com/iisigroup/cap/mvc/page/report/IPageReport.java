@@ -29,13 +29,13 @@ import com.iisigroup.cap.service.IService;
  */
 public interface IPageReport extends IService {
 
-	/**
-	 * report action
-	 * 
-	 * @param request
-	 *            request
-	 * @return report data
-	 * @throws CapException
-	 */
-	Map<String, Object> excute(IRequest request);
+    /**
+     * report action
+     * 
+     * @param request
+     *            request
+     * @return report data
+     * @throws CapException
+     */
+    Map<String, Object> excute(IRequest request);
 }

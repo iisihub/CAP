@@ -29,38 +29,40 @@ import com.iisigroup.cap.rule.model.DivRlDtl;
  */
 public interface DivRlDtlDao extends IGenericDao<DivRlDtl> {
 
-	/**
-	 * find by ruleNo.
-	 * 
-	 * @param ruleNo
-	 *            規則代號
-	 * @return T
-	 */
-	public DivRlDtl findByRuleNo(String ruleNo);
+    /**
+     * find by ruleNo.
+     * 
+     * @param ruleNo
+     *            規則代號
+     * @return T
+     */
+    public DivRlDtl findByRuleNo(String ruleNo);
 
-	/**
-	 * find by ruleNos.
-	 * 
-	 * @param ruleNos
-	 *            多個規則代號
-	 * @return T List
-	 */
-	public List<DivRlDtl> findByRuleNos(String[] ruleNos);
+    /**
+     * find by ruleNos.
+     * 
+     * @param ruleNos
+     *            多個規則代號
+     * @return T List
+     */
+    public List<DivRlDtl> findByRuleNos(String[] ruleNos);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return DivFtItm
-	 */
-	public DivRlDtl findByOid(String oid);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return DivFtItm
+     */
+    public DivRlDtl findByOid(String oid);
 
-	/**
-	 * 使用RuleNo查詢Details，並且排序divRlSor
-	 * @param ruleNo String
-	 * @return
-	 */
-	List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
+    /**
+     * 使用RuleNo查詢Details，並且排序divRlSor
+     * 
+     * @param ruleNo
+     *            String
+     * @return
+     */
+    List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
 
 }

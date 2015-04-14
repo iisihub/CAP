@@ -38,115 +38,111 @@ import com.iisigroup.cap.operation.OperationStep;
  */
 public class SimpleOperation implements Operation {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(SimpleOperation.class);
+    private static Logger logger = LoggerFactory.getLogger(SimpleOperation.class);
 
-	String operName;
-	Map<String, OperationStep> ruleMap;
+    String operName;
+    Map<String, OperationStep> ruleMap;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.Operation#execute()
-	 */
-	public void execute(OpStepContext ctx, IRequest params, IHandler handler) {
-		OperationStep step = getStartStep();
-		long startOperation = System.currentTimeMillis();
-		try {
-			while (step != null) {
-				OpStepContext result = ctx;
-				try {
-					long startStep = System.currentTimeMillis();
-					result = step.execute(result, params, handler);
-					logger.debug("{} cost : {} ms", step.getName(),
-							(System.currentTimeMillis() - startStep));
-				} catch (CapException e) {
-					result = step.handleException(result, e);
-					throw e;
-				}
-				if (result != null) {
-					if (OperationStep.NEXT.equals(result.getGoToStep())) {
-						step = getNextStep(step.getName());
-					} else if (OperationStep.RETURN.equals(result.getGoToStep())
-							|| OperationStep.ERROR.equals(result.getGoToStep())) {
-						step = null;
-					} else {
-						step = getStep(result.getGoToStep());
-					}
-				}
-			}
-		} catch (CapException ce) {
-			throw ce;
-		} catch (Exception e) {
-			throw new CapException(e, getClass());
-		} finally {
-			logger.debug("Operation cost : {} ms",
-					(System.currentTimeMillis() - startOperation));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.Operation#execute()
+     */
+    public void execute(OpStepContext ctx, IRequest params, IHandler handler) {
+        OperationStep step = getStartStep();
+        long startOperation = System.currentTimeMillis();
+        try {
+            while (step != null) {
+                OpStepContext result = ctx;
+                try {
+                    long startStep = System.currentTimeMillis();
+                    result = step.execute(result, params, handler);
+                    logger.debug("{} cost : {} ms", step.getName(), (System.currentTimeMillis() - startStep));
+                } catch (CapException e) {
+                    result = step.handleException(result, e);
+                    throw e;
+                }
+                if (result != null) {
+                    if (OperationStep.NEXT.equals(result.getGoToStep())) {
+                        step = getNextStep(step.getName());
+                    } else if (OperationStep.RETURN.equals(result.getGoToStep()) || OperationStep.ERROR.equals(result.getGoToStep())) {
+                        step = null;
+                    } else {
+                        step = getStep(result.getGoToStep());
+                    }
+                }
+            }
+        } catch (CapException ce) {
+            throw ce;
+        } catch (Exception e) {
+            throw new CapException(e, getClass());
+        } finally {
+            logger.debug("Operation cost : {} ms", (System.currentTimeMillis() - startOperation));
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.Operation#setName(java.lang.String)
-	 */
-	public void setName(String name) {
-		this.operName = name;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.Operation#setName(java.lang.String)
+     */
+    public void setName(String name) {
+        this.operName = name;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.Operation#getName()
-	 */
-	public String getName() {
-		return operName;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.Operation#getName()
+     */
+    public String getName() {
+        return operName;
+    }
 
-	public OperationStep getStartStep() {
-		if (ruleMap != null && !ruleMap.isEmpty()) {
-			Set<Entry<String, OperationStep>> steps = ruleMap.entrySet();
-			for (Entry<String, OperationStep> entry : steps) {
-				OperationStep step = entry.getValue();
-				step.setName(entry.getKey());
-				return step;
-			}
-		}
-		return null;
-	}
+    public OperationStep getStartStep() {
+        if (ruleMap != null && !ruleMap.isEmpty()) {
+            Set<Entry<String, OperationStep>> steps = ruleMap.entrySet();
+            for (Entry<String, OperationStep> entry : steps) {
+                OperationStep step = entry.getValue();
+                step.setName(entry.getKey());
+                return step;
+            }
+        }
+        return null;
+    }
 
-	public OperationStep getNextStep(String currentStepName) {
-		if (ruleMap != null && !ruleMap.isEmpty()) {
-			Set<Entry<String, OperationStep>> steps = ruleMap.entrySet();
-			boolean b = false;
-			for (Entry<String, OperationStep> entry : steps) {
-				if (b) {
-					OperationStep step = entry.getValue();
-					step.setName(entry.getKey());
-					return step;
-				} else if (currentStepName.equals(entry.getKey())) {
-					b = true;
-				}
-			}
-		}
-		return null;
-	}
+    public OperationStep getNextStep(String currentStepName) {
+        if (ruleMap != null && !ruleMap.isEmpty()) {
+            Set<Entry<String, OperationStep>> steps = ruleMap.entrySet();
+            boolean b = false;
+            for (Entry<String, OperationStep> entry : steps) {
+                if (b) {
+                    OperationStep step = entry.getValue();
+                    step.setName(entry.getKey());
+                    return step;
+                } else if (currentStepName.equals(entry.getKey())) {
+                    b = true;
+                }
+            }
+        }
+        return null;
+    }
 
-	public OperationStep getStep(String stepName) {
-		if (ruleMap != null && ruleMap.containsKey(stepName)) {
-			OperationStep step = ruleMap.get(stepName);
-			step.setName(stepName);
-			return step;
-		}
-		return null;
-	}
+    public OperationStep getStep(String stepName) {
+        if (ruleMap != null && ruleMap.containsKey(stepName)) {
+            OperationStep step = ruleMap.get(stepName);
+            step.setName(stepName);
+            return step;
+        }
+        return null;
+    }
 
-	public Map<String, OperationStep> getRuleMap() {
-		return this.ruleMap;
-	}
+    public Map<String, OperationStep> getRuleMap() {
+        return this.ruleMap;
+    }
 
-	public void setRuleMap(final Map<String, OperationStep> ruleMap) {
-		this.ruleMap = ruleMap;
-	}
+    public void setRuleMap(final Map<String, OperationStep> ruleMap) {
+        this.ruleMap = ruleMap;
+    }
 
 }

@@ -40,21 +40,22 @@ import com.iisigroup.cap.utils.CapAppContext;
 @SuppressWarnings("serial")
 public class CapCaptchaServlet extends HttpServlet {
 
-	public static String DEF_RENDERER = "capCaptcha";
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		DEF_RENDERER = config.getInitParameter("captchaBean");
-	}
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-			IOException {
-		CapSecurityCaptcha captcha = CapAppContext.getBean(DEF_RENDERER);
-		BufferedImage img =  captcha.crateImage();
-		resp.setContentType("image/jpeg");  
-	    OutputStream os = resp.getOutputStream();  
-	    ImageIO.write(img, "jpg", os);  
-	    os.close();  
-		
-	}
+    public static String DEF_RENDERER = "capCaptcha";
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        DEF_RENDERER = config.getInitParameter("captchaBean");
+    }
+
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CapSecurityCaptcha captcha = CapAppContext.getBean(DEF_RENDERER);
+        BufferedImage img = captcha.crateImage();
+        resp.setContentType("image/jpeg");
+        OutputStream os = resp.getOutputStream();
+        ImageIO.write(img, "jpg", os);
+        os.close();
+
+    }
 
 }

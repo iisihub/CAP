@@ -29,8 +29,7 @@ import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service
-public class UserSetServiceImpl extends AbstractService implements
-        UserSetService {
+public class UserSetServiceImpl extends AbstractService implements UserSetService {
     @Resource
     private UserDao userDao;
     @Resource
@@ -46,8 +45,7 @@ public class UserSetServiceImpl extends AbstractService implements
         }
     }// ;
 
-    public void createUser(String userId, String userName, String password,
-            String email, String[] roleOids) {
+    public void createUser(String userId, String userName, String password, String email, String[] roleOids) {
         User user = new User();
         user.setStatus("1");
         // 建立使用者時就塞 last login time，方便排程篩選資料
@@ -60,8 +58,7 @@ public class UserSetServiceImpl extends AbstractService implements
         createUserPwdHistory(user.getCode(), encodePassword(userId, password));
     }// ;
 
-    public void updateUserByOid(String oid, String code, String name,
-            boolean reset, String password, String email, String[] roleCodes) {
+    public void updateUserByOid(String oid, String code, String name, boolean reset, String password, String email, String[] roleCodes) {
         User user = userDao.find(oid);
         if (reset) {
             user.setStatus("1");
@@ -71,18 +68,15 @@ public class UserSetServiceImpl extends AbstractService implements
         createUserPwdHistory(user.getCode(), encodePassword(code, password));
     }// ;
 
-    private User setUserFields(User user, String code, String name,
-            String password, String email) {
+    private User setUserFields(User user, String code, String name, String password, String email) {
         Date now = Calendar.getInstance().getTime();
         user.setCode(code);
         user.setName(name);
         user.setEmail(email);
         if (!StringUtils.isBlank(password)) {
-            SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class,
-                    PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+            SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
             int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
-            user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now,
-                    expiredDay).getTime()));
+            user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now, expiredDay).getTime()));
             user.setPassword(encodePassword(user.getCode(), password));
         }
         user.setUpdateTime(new Timestamp(now.getTime()));
@@ -94,8 +88,7 @@ public class UserSetServiceImpl extends AbstractService implements
         roleSetDao.deleteByUserCode(userCode);
         List<UserRole> rlSet = new ArrayList<UserRole>();
         for (String roleCode : roleCodes) {
-            UserRole userRole = roleSetDao.findByUserCodeAndRoleCode(userCode,
-                    roleCode);
+            UserRole userRole = roleSetDao.findByUserCodeAndRoleCode(userCode, roleCode);
             if (userRole == null) {
                 userRole = new UserRole();
             }
@@ -124,10 +117,8 @@ public class UserSetServiceImpl extends AbstractService implements
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findUser(String userId, String userName,
-            String[] roleCodes, String[] status, int maxResult, int firstResult) {
-        return userDao.findPage(userId, userName, roleCodes, status, maxResult,
-                firstResult);
+    public Page<Map<String, Object>> findUser(String userId, String userName, String[] roleCodes, String[] status, int maxResult, int firstResult) {
+        return userDao.findPage(userId, userName, roleCodes, status, maxResult, firstResult);
     }// ;
 
     @Override

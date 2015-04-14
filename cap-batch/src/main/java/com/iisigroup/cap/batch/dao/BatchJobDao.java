@@ -8,15 +8,15 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
 
 public interface BatchJobDao extends IGenericDao<BatchJob> {
-	List<BatchJob> listAll();
+    List<BatchJob> listAll();
 
-	Page<BatchJob> findForPage(ISearch search);
+    Page<BatchJob> findForPage(ISearch search);
 
-	BatchJob findByJobId(String jobId);
+    BatchJob findByJobId(String jobId);
 
-	void update(BatchJob job);
+    void update(BatchJob job);
 
-	void create(BatchJob job);
+    void create(BatchJob job);
 
-	void deleteByJobId(String jobId);
+    void deleteByJobId(String jobId);
 }

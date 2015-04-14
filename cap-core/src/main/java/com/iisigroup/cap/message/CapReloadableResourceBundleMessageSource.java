@@ -38,91 +38,82 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2013/1/23,roodeschen,fix weglogic deployment error
  *          </ul>
  */
-public class CapReloadableResourceBundleMessageSource
-		extends
-		org.springframework.context.support.ReloadableResourceBundleMessageSource
-		implements ApplicationContextAware, InitializingBean {
+public class CapReloadableResourceBundleMessageSource extends org.springframework.context.support.ReloadableResourceBundleMessageSource implements ApplicationContextAware, InitializingBean {
 
-	protected final Logger logger = LoggerFactory
-			.getLogger(CapReloadableResourceBundleMessageSource.class);
+    protected final Logger logger = LoggerFactory.getLogger(CapReloadableResourceBundleMessageSource.class);
 
-	// private final String i18nFileREG = "(_zh_CN|_en|_zh_TW).properties$";
-	// private final String i18nPattern = "classpath:/i18n/**/*.properties";
+    // private final String i18nFileREG = "(_zh_CN|_en|_zh_TW).properties$";
+    // private final String i18nPattern = "classpath:/i18n/**/*.properties";
 
-	private String[] languages;
-	private String basePath;
-	//設定預設語系 - 如有使用Spring MVC 可省略
-	private Locale defaultLocale;
+    private String[] languages;
+    private String basePath;
+    // 設定預設語系 - 如有使用Spring MVC 可省略
+    private Locale defaultLocale;
 
-	/**
-	 * @param defaultLocale
-	 *            the defaultLocale to set
-	 */
-	public void setDefaultLocale(Locale defaultLocale) {
-		this.defaultLocale = defaultLocale;
-	}
+    /**
+     * @param defaultLocale
+     *            the defaultLocale to set
+     */
+    public void setDefaultLocale(Locale defaultLocale) {
+        this.defaultLocale = defaultLocale;
+    }
 
-	/**
-	 * @param language
-	 *            the language to set
-	 */
-	public void setLanguages(String[] languages) {
-		this.languages = languages;
-	}
+    /**
+     * @param language
+     *            the language to set
+     */
+    public void setLanguages(String[] languages) {
+        this.languages = languages;
+    }
 
-	/**
-	 * @param basePath
-	 *            the basePath to set
-	 */
-	public void setBasePath(String basePath) {
-		this.basePath = basePath;
-	}
+    /**
+     * @param basePath
+     *            the basePath to set
+     */
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
+    }
 
-	@Override
-	public void setApplicationContext(ApplicationContext ctx) {
-		applicationContext = ctx;
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext ctx) {
+        applicationContext = ctx;
+    }
 
-	private static ApplicationContext applicationContext;
+    private static ApplicationContext applicationContext;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		Set<String> l = new HashSet<String>();
-		String i18nPattern = basePath + "/**/*.properties";
-		String i18nFileREG = "(" + StringUtils.join(languages, '|')
-				+ ").properties$";
-		if (defaultLocale != null) {
-			Locale.setDefault(this.defaultLocale);
-		}
-		try {
-			Resource[] resources = applicationContext.getResources(i18nPattern);
-			for (Resource resource : resources) {
-				String path = resource.getURI().toString();
-				if (CapString.checkRegularMatch(path, i18nFileREG)) {
-					path = path
-							.replaceAll(i18nFileREG, "")
-							.replaceAll(".*/i18n/", "classpath:/i18n/")
-							// for windows
-							.replaceAll(".*\\\\i18n\\\\",
-									"classpath:\\\\i18n\\\\")
-							.replaceAll("\\\\", "/");
-					if (!l.contains(path)) {
-						l.add(path);
-						logger.debug("set message path:" + path);
-					}
-				}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Set<String> l = new HashSet<String>();
+        String i18nPattern = basePath + "/**/*.properties";
+        String i18nFileREG = "(" + StringUtils.join(languages, '|') + ").properties$";
+        if (defaultLocale != null) {
+            Locale.setDefault(this.defaultLocale);
+        }
+        try {
+            Resource[] resources = applicationContext.getResources(i18nPattern);
+            for (Resource resource : resources) {
+                String path = resource.getURI().toString();
+                if (CapString.checkRegularMatch(path, i18nFileREG)) {
+                    path = path.replaceAll(i18nFileREG, "").replaceAll(".*/i18n/", "classpath:/i18n/")
+                    // for windows
+                            .replaceAll(".*\\\\i18n\\\\", "classpath:\\\\i18n\\\\").replaceAll("\\\\", "/");
+                    if (!l.contains(path)) {
+                        l.add(path);
+                        logger.debug("set message path:" + path);
+                    }
+                }
 
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		super.setBasenames(l.toArray(new String[l.size()]));
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        super.setBasenames(l.toArray(new String[l.size()]));
 
-	}
+    }
 }

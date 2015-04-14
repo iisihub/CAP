@@ -20,14 +20,14 @@ import com.iisigroup.cap.base.service.ErrorCodeService;
  */
 public class RespMsgFactoryProcessor implements InitializingBean {
 
-	private ErrorCodeService errCodeService;
+    private ErrorCodeService errCodeService;
 
-	public void setErrorCodeService(ErrorCodeService errCodeService) {
-		this.errCodeService = errCodeService;
-	}
+    public void setErrorCodeService(ErrorCodeService errCodeService) {
+        this.errCodeService = errCodeService;
+    }
 
-	public void afterPropertiesSet() throws Exception {
-		RespMsgFactory.setErrorCodeService(errCodeService);
-	}
+    public void afterPropertiesSet() throws Exception {
+        RespMsgFactory.setErrorCodeService(errCodeService);
+    }
 
 }

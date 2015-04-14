@@ -27,9 +27,8 @@ import com.iisigroup.cap.dao.IGenericDao;
  */
 public interface RemindsDao extends IGenericDao<Reminds> {
 
-	public List<Reminds> findCurrentRemindItem(String[] styleTyp,
-			String locale);
-	
-	public void merge(Reminds entity);
+    public List<Reminds> findCurrentRemindItem(String[] styleTyp, String locale);
+
+    public void merge(Reminds entity);
 
 }

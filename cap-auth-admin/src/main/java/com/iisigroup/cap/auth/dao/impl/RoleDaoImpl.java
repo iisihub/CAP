@@ -37,16 +37,14 @@ import com.iisigroup.cap.security.dao.IRoleDao;
  *          </ul>
  */
 @Repository
-public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>,
-        RoleDao {
+public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>, RoleDao {
 
     @SuppressWarnings("unchecked")
     @Override
     public List<Role> findBySysTypeAndPath(String sysType, String path) {
-        Query query = getEntityManager()
-                .createNativeQuery(
-                        "select r.* from DEF_ROLE r inner join DEF_ROLEFUNC rf on rf.ROLECODE=r.CODE inner join DEF_FUNC func on rf.FUNCCODE=func.CODE where r.SYSTYPE= ?1 and r.STATUS='0' and func.PATH= ?2",
-                        Role.class);
+        Query query = getEntityManager().createNativeQuery(
+                "select r.* from DEF_ROLE r inner join DEF_ROLEFUNC rf on rf.ROLECODE=r.CODE inner join DEF_FUNC func on rf.FUNCCODE=func.CODE where r.SYSTYPE= ?1 and r.STATUS='0' and func.PATH= ?2",
+                Role.class);
         query.setParameter(1, sysType);
         query.setParameter(2, path);
         return (List<Role>) query.getResultList();
@@ -69,32 +67,25 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>,
     }// ;
 
     @Override
-    public List<Map<String, Object>> findAllWithSelectedByUserCode(
-            String userCode) {
+    public List<Map<String, Object>> findAllWithSelectedByUserCode(String userCode) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("userCode", userCode);
-        return getNamedJdbcTemplate().query(
-                "role_findAllWithSelectedByUserCode", params);
+        return getNamedJdbcTemplate().query("role_findAllWithSelectedByUserCode", params);
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(
-            String sysType, String funcCode, int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(String sysType, String funcCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("sysType", sysType);
         param.put("funcCode", funcCode);
-        return getNamedJdbcTemplate().queryForPage(
-                "role_findUnSelectedRoleByFuncCode", param, firstResult,
-                maxResults);
+        return getNamedJdbcTemplate().queryForPage("role_findUnSelectedRoleByFuncCode", param, firstResult, maxResults);
     }// ;
 
     @Override
-    public Page<Map<String, Object>> findPageBySysTypeAndFuncCode(
-            String sysType, String funcCode, int firstResult, int maxResults) {
+    public Page<Map<String, Object>> findPageBySysTypeAndFuncCode(String sysType, String funcCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("sysType", sysType);
         param.put("funcCode", funcCode);
-        return getNamedJdbcTemplate().queryForPage("role_findRoleByFuncCode",
-                param, firstResult, maxResults);
+        return getNamedJdbcTemplate().queryForPage("role_findRoleByFuncCode", param, firstResult, maxResults);
     }
 }

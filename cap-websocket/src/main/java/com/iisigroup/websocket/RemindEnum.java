@@ -13,18 +13,18 @@ package com.iisigroup.websocket;
  */
 public enum RemindEnum {
 
-	TEXT("0"), // 0.文字
-	POPUP("1"), // 1.彈出對話框
-	MAIL("2"); // 2.電子郵件
+    TEXT("0"), // 0.文字
+    POPUP("1"), // 1.彈出對話框
+    MAIL("2"); // 2.電子郵件
 
-	private String code;
+    private String code;
 
-	RemindEnum(String code) {
-		this.code = code;
-	}
+    RemindEnum(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
 }

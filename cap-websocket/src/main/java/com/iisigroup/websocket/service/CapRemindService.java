@@ -9,14 +9,14 @@ import com.iisigroup.cap.security.model.CapUserDetails;
 
 public interface CapRemindService {
 
-	public List<Reminds> getRemindItems(String[] styleTyp, String locale);
+    public List<Reminds> getRemindItems(String[] styleTyp, String locale);
 
-	public void saveReminds(Reminds remind);
+    public void saveReminds(Reminds remind);
 
-	public HashMap<String, CapUserDetails> getCurrentUser();
+    public HashMap<String, CapUserDetails> getCurrentUser();
 
-	public String getUsrEmail(String usrId);
+    public String getUsrEmail(String usrId);
 
-	public Remind findRemind(String pid);
+    public Remind findRemind(String pid);
 
 }

@@ -30,124 +30,124 @@ import com.iisigroup.cap.hg.event.IHGEventAction;
  */
 
 public class NoWaitingHGTxnBean implements IHGTxnBean {
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
-	private IHGTxnBean txnBean;
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    private IHGTxnBean txnBean;
 
-	private IHGEventAction afterAction;
-	private IHGEventAction beforeAction;
+    private IHGEventAction afterAction;
+    private IHGEventAction beforeAction;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
-	 */
-	@Override
-	public void setTxnCd(String txnCd) {
-		txnBean.setTxnCd(txnCd);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#setTxnCd(java.lang.String)
+     */
+    @Override
+    public void setTxnCd(String txnCd) {
+        txnBean.setTxnCd(txnCd);
+    }
 
-	/**
-	 * before action
-	 * 
-	 */
-	public void beforeAction() throws CapException {
-		if (beforeAction != null) {
-			beforeAction.excute(this);
-		}
-	}
+    /**
+     * before action
+     * 
+     */
+    public void beforeAction() throws CapException {
+        if (beforeAction != null) {
+            beforeAction.excute(this);
+        }
+    }
 
-	/**
-	 * after action
-	 * 
-	 * @param resultData
-	 *            resultData
-	 */
-	public void afterAction(Object resultData) throws CapException {
-		if (afterAction != null) {
-			afterAction.excute(resultData);
-		}
-	}
+    /**
+     * after action
+     * 
+     * @param resultData
+     *            resultData
+     */
+    public void afterAction(Object resultData) throws CapException {
+        if (afterAction != null) {
+            afterAction.excute(resultData);
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
-	 */
-	@Override
-	public void setSendData(Object requestData) {
-		txnBean.setSendData(requestData);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#setSendData(java.lang.Object)
+     */
+    @Override
+    public void setSendData(Object requestData) {
+        txnBean.setSendData(requestData);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#execute()
-	 */
-	@Override
-	public void execute() throws CapException {
-		beforeAction();
-		new excuteThread().start();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#execute()
+     */
+    @Override
+    public void execute() throws CapException {
+        beforeAction();
+        new excuteThread().start();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
-	 */
-	@Override
-	public Object getResultData() {
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.bqd.mci.bean.IHGTxnBean#getResultData()
+     */
+    @Override
+    public Object getResultData() {
+        return null;
+    }
 
-	public IHGTxnBean getTxnBean() {
-		return txnBean;
-	}
+    public IHGTxnBean getTxnBean() {
+        return txnBean;
+    }
 
-	public void setTxnBean(IHGTxnBean txnBean) {
-		this.txnBean = txnBean;
-	}
+    public void setTxnBean(IHGTxnBean txnBean) {
+        this.txnBean = txnBean;
+    }
 
-	public IHGEventAction getBeforeAction() {
-		return beforeAction;
-	}
+    public IHGEventAction getBeforeAction() {
+        return beforeAction;
+    }
 
-	public void setBeforeAction(IHGEventAction beforeAction) {
-		this.beforeAction = beforeAction;
-	}
+    public void setBeforeAction(IHGEventAction beforeAction) {
+        this.beforeAction = beforeAction;
+    }
 
-	public IHGEventAction getAfterAction() {
-		return afterAction;
-	}
+    public IHGEventAction getAfterAction() {
+        return afterAction;
+    }
 
-	public void setAfterAction(IHGEventAction afterAction) {
-		this.afterAction = afterAction;
-	}
+    public void setAfterAction(IHGEventAction afterAction) {
+        this.afterAction = afterAction;
+    }
 
-	/**
-	 * <pre>
-	 * 送出後不等待結束
-	 * </pre>
-	 * 
-	 * @since 2012/2/24
-	 * @author rodeschen
-	 * @version <ul>
-	 *          <li>2012/2/24,rodeschen,new
-	 *          </ul>
-	 */
-	private class excuteThread extends Thread {
+    /**
+     * <pre>
+     * 送出後不等待結束
+     * </pre>
+     * 
+     * @since 2012/2/24
+     * @author rodeschen
+     * @version <ul>
+     *          <li>2012/2/24,rodeschen,new
+     *          </ul>
+     */
+    private class excuteThread extends Thread {
 
-		@Override
-		public void run() {
-			try {
-				logger.info("send Message Start");
-				txnBean.execute();
-				afterAction(txnBean.getResultData());
-				logger.info("send Message End");
-			} catch (CapException e) {
-				logger.info("send Message Error", e);
-			}
+        @Override
+        public void run() {
+            try {
+                logger.info("send Message Start");
+                txnBean.execute();
+                afterAction(txnBean.getResultData());
+                logger.info("send Message End");
+            } catch (CapException e) {
+                logger.info("send Message Error", e);
+            }
 
-		}
-	}
+        }
+    }
 
 }

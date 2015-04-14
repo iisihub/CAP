@@ -15,6 +15,7 @@ package com.iisigroup.cap.dao.utils;
 /**
  * <p>
  * Search Mode.
+ * 
  * <pre>
  * <code>
  * List<SearchModeParameter> ors = new ArrayList<SearchModeParameter>(); 
@@ -26,6 +27,7 @@ package com.iisigroup.cap.dao.utils;
  * -->  where xxxx=? and (branchNo like ? or branchNo like ? or branchNo like ?)
  * </code>
  * </pre>
+ * 
  * </p>
  * 
  * @author iristu
@@ -35,59 +37,59 @@ package com.iisigroup.cap.dao.utils;
  *          </ul>
  */
 public enum SearchMode {
-	/** in */
-	IN("in"),
-	/** not in */
-	NOT_IN("in"),
-	/** = */
-	EQUALS("eq"),
-	/** != */
-	NOT_EQUALS("ne"),
-	/** like */
-	LIKE("like"),
-	/** not like */
-	NOT_LIKE("notLike"),
-	/** > */
-	GREATER_THAN("gt"),
-	/** >= */
-	GREATER_EQUALS("ge"),
-	/** < */
-	LESS_THAN("lt"),
-	/** <= */
-	LESS_EQUALS("le"),
-	/** is null */
-	IS_NULL("isNull"),
-	/** is null */
-	IS_NOT_NULL("isNotNull"),
-	/** between and */
-	BETWEEN("between"),
-	/** or */
-	OR("or"),
-	/** and */
-	AND("and");
+    /** in */
+    IN("in"),
+    /** not in */
+    NOT_IN("in"),
+    /** = */
+    EQUALS("eq"),
+    /** != */
+    NOT_EQUALS("ne"),
+    /** like */
+    LIKE("like"),
+    /** not like */
+    NOT_LIKE("notLike"),
+    /** > */
+    GREATER_THAN("gt"),
+    /** >= */
+    GREATER_EQUALS("ge"),
+    /** < */
+    LESS_THAN("lt"),
+    /** <= */
+    LESS_EQUALS("le"),
+    /** is null */
+    IS_NULL("isNull"),
+    /** is null */
+    IS_NOT_NULL("isNotNull"),
+    /** between and */
+    BETWEEN("between"),
+    /** or */
+    OR("or"),
+    /** and */
+    AND("and");
 
-	private String code;
+    private String code;
 
-	SearchMode(String code) {
-		this.code = code;
-	}
+    SearchMode(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public static final SearchMode convert(String code) {
-		for (SearchMode searchMode : SearchMode.values()) {
-			if (searchMode.getCode().equals(code)) {
-				return searchMode;
-			}
-		}
-		return EQUALS; // default
-	}
+    public static final SearchMode convert(String code) {
+        for (SearchMode searchMode : SearchMode.values()) {
+            if (searchMode.getCode().equals(code)) {
+                return searchMode;
+            }
+        }
+        return EQUALS; // default
+    }
 
-	@Override
-	public String toString() {
-		return code;
-	}
+    @Override
+    public String toString() {
+        return code;
+    }
 
 }

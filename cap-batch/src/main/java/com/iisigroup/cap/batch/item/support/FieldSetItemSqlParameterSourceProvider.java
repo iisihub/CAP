@@ -31,16 +31,15 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
  *          <li>2012/11/19,iristu,new
  *          </ul>
  */
-public class FieldSetItemSqlParameterSourceProvider implements
-		ItemSqlParameterSourceProvider<FieldSet> {
+public class FieldSetItemSqlParameterSourceProvider implements ItemSqlParameterSourceProvider<FieldSet> {
 
-	@Override
-	public SqlParameterSource createSqlParameterSource(FieldSet item) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		for (Entry<Object, Object> entry : item.getProperties().entrySet()) {
-			map.put(String.valueOf(entry.getKey()), entry.getValue());
-		}
-		return new MapSqlParameterSource(map);
-	}
+    @Override
+    public SqlParameterSource createSqlParameterSource(FieldSet item) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (Entry<Object, Object> entry : item.getProperties().entrySet()) {
+            map.put(String.valueOf(entry.getKey()), entry.getValue());
+        }
+        return new MapSqlParameterSource(map);
+    }
 
 }

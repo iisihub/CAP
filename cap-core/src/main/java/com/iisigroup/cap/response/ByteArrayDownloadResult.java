@@ -44,100 +44,92 @@ import com.iisigroup.cap.utils.CapWebUtil;
 @SuppressWarnings("serial")
 public class ByteArrayDownloadResult extends FileDownloadResult {
 
-	private byte[] _byteArray = null;
-	private String _outputName;
-	private String _contentType;
+    private byte[] _byteArray = null;
+    private String _outputName;
+    private String _contentType;
 
-	public ByteArrayDownloadResult() {
-	}// ;
+    public ByteArrayDownloadResult() {
+    }// ;
 
-	public ByteArrayDownloadResult(IRequest request, byte[] byteArray,
-			String contentType, String outputName) {
-		this._request = request;
-		this._byteArray = byteArray;
-		this._contentType = contentType;
-		this._outputName = CapWebUtil.encodeFileName(_request, outputName);
-	}// ;
+    public ByteArrayDownloadResult(IRequest request, byte[] byteArray, String contentType, String outputName) {
+        this._request = request;
+        this._byteArray = byteArray;
+        this._contentType = contentType;
+        this._outputName = CapWebUtil.encodeFileName(_request, outputName);
+    }// ;
 
-	public ByteArrayDownloadResult(IRequest request, byte[] byteArray,
-			String contentType) {
-		this._request = request;
-		this._byteArray = byteArray;
-		this._contentType = contentType;
-	}// ;
+    public ByteArrayDownloadResult(IRequest request, byte[] byteArray, String contentType) {
+        this._request = request;
+        this._byteArray = byteArray;
+        this._contentType = contentType;
+    }// ;
 
-	@Override
-	public String getLogMessage() {
-		if (_outputName == null) {
-			return _contentType + " byteArrayDownload complete!!";
-		} else {
-			return new StringBuffer("Download file:").append(_outputName)
-					.toString();
-		}
-	}
+    @Override
+    public String getLogMessage() {
+        if (_outputName == null) {
+            return _contentType + " byteArrayDownload complete!!";
+        } else {
+            return new StringBuffer("Download file:").append(_outputName).toString();
+        }
+    }
 
-	public byte[] getByteArray() {
-		return _byteArray;
-	}
+    public byte[] getByteArray() {
+        return _byteArray;
+    }
 
-	public String getOutputName() {
-		return _outputName;
-	}
+    public String getOutputName() {
+        return _outputName;
+    }
 
-	public String getContentType() {
-		return _contentType;
-	}
+    public String getContentType() {
+        return _contentType;
+    }
 
-	@Override
-	public void add(IResult result) {
-		if (result instanceof ByteArrayDownloadResult) {
-			ByteArrayDownloadResult r = (ByteArrayDownloadResult) result;
-			this._request = r._request;
-			this._contentType = r._contentType;
-			this._byteArray = r._byteArray;
-			this._outputName = CapWebUtil.encodeFileName(_request,
-					r._outputName);
-		}
-	}// ;
+    @Override
+    public void add(IResult result) {
+        if (result instanceof ByteArrayDownloadResult) {
+            ByteArrayDownloadResult r = (ByteArrayDownloadResult) result;
+            this._request = r._request;
+            this._contentType = r._contentType;
+            this._byteArray = r._byteArray;
+            this._outputName = CapWebUtil.encodeFileName(_request, r._outputName);
+        }
+    }// ;
 
-	@Override
-	public void respondResult(ServletResponse response) {
-		int length = -1;
-		InputStream in = null;
-		OutputStream output = null;
-		try {
-			response.setContentType(getContentType());
-			response.setContentLength(_byteArray.length);
-			if (getOutputName() != null
-					&& response instanceof HttpServletResponse) {
-				HttpServletResponse resp = (HttpServletResponse) response;
-				HttpServletRequest req = (HttpServletRequest) _request
-						.getServletRequest();
-				String userAgent = req.getHeader("USER-AGENT");
-				if (StringUtils.contains(userAgent, "MSIE")) {
-					resp.setHeader("Content-Disposition",
-							"attachment; filename=\"" + _outputName + "\"");
-				} else {
-					resp.setHeader("Content-Disposition",
-							"attachment; filename*=UTF-8''" + _outputName);
-				}
-				resp.setHeader("Cache-Control", "public");
-				resp.setHeader("Pragma", "public");
-			}
-			output = response.getOutputStream();
-			// Stream to the requester.
-			byte[] bbuf = new byte[1024 * 1024];
+    @Override
+    public void respondResult(ServletResponse response) {
+        int length = -1;
+        InputStream in = null;
+        OutputStream output = null;
+        try {
+            response.setContentType(getContentType());
+            response.setContentLength(_byteArray.length);
+            if (getOutputName() != null && response instanceof HttpServletResponse) {
+                HttpServletResponse resp = (HttpServletResponse) response;
+                HttpServletRequest req = (HttpServletRequest) _request.getServletRequest();
+                String userAgent = req.getHeader("USER-AGENT");
+                if (StringUtils.contains(userAgent, "MSIE")) {
+                    resp.setHeader("Content-Disposition", "attachment; filename=\"" + _outputName + "\"");
+                } else {
+                    resp.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + _outputName);
+                }
+                resp.setHeader("Cache-Control", "public");
+                resp.setHeader("Pragma", "public");
+            }
+            output = response.getOutputStream();
+            // Stream to the requester.
+            byte[] bbuf = new byte[1024 * 1024];
 
-			in = new ByteArrayInputStream(_byteArray);
-			while ((in != null) && ((length = in.read(bbuf)) != -1)) {
-				output.write(bbuf, 0, length);
-			}
-			output.flush();
-		} catch (IOException e) {
-			e.getMessage();
-		} finally {
-			IOUtils.closeQuietly(in);
-			IOUtils.closeQuietly(output);
-		}
-	}// ;
+            in = new ByteArrayInputStream(_byteArray);
+            while ((in != null) && ((length = in.read(bbuf)) != -1)) {
+                output.write(bbuf, 0, length);
+            }
+            output.flush();
+        } catch (IOException e) {
+            e.getMessage();
+        } finally {
+            IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(output);
+        }
+    }// ;
 }// ~

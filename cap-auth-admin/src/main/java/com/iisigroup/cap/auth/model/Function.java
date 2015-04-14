@@ -99,9 +99,7 @@ public class Function extends GenericBean implements IDataObject {
     }
 
     public String toString() {
-        return "Function [code=" + code + ", sequence=" + sequence + ", level=" + level
-                + ", parent=" + parent + ", name=" + name + ", path=" + path
-                + "]";
+        return "Function [code=" + code + ", sequence=" + sequence + ", level=" + level + ", parent=" + parent + ", name=" + name + ", path=" + path + "]";
     }
 
     public int getParent() {

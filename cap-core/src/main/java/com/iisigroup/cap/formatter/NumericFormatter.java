@@ -31,33 +31,32 @@ import com.iisigroup.cap.utils.CapMath;
 @SuppressWarnings("serial")
 public class NumericFormatter implements IFormatter {
 
-	private DecimalFormat _nf;
+    private DecimalFormat _nf;
 
-	public NumericFormatter() {
-		this._nf = new DecimalFormat("###,##0");
-	}
+    public NumericFormatter() {
+        this._nf = new DecimalFormat("###,##0");
+    }
 
-	public NumericFormatter(String pattern) {
-		this._nf = new DecimalFormat(pattern);
-	}
+    public NumericFormatter(String pattern) {
+        this._nf = new DecimalFormat(pattern);
+    }
 
-	/**
-	 * <pre>
-	 * 數字的Formatter
-	 * </pre>
-	 * 
-	 * @param in
-	 *            input
-	 * @return String
-	 * @throws CapFormatException
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public String reformat(Object in) {
+    /**
+     * <pre>
+     * 數字的Formatter
+     * </pre>
+     * 
+     * @param in
+     *            input
+     * @return String
+     * @throws CapFormatException
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public String reformat(Object in) {
 
-		BigDecimal dec = in instanceof BigDecimal ? (BigDecimal) in : CapMath
-				.getBigDecimal((String) in);
-		return _nf.format(dec);
-	}
+        BigDecimal dec = in instanceof BigDecimal ? (BigDecimal) in : CapMath.getBigDecimal((String) in);
+        return _nf.format(dec);
+    }
 
 }

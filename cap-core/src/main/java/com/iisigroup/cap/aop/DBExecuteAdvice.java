@@ -17,7 +17,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * <pre>
  * DB 執行時間
@@ -31,17 +30,16 @@ import org.slf4j.LoggerFactory;
  */
 @Aspect
 public class DBExecuteAdvice {
-	private static final Logger logger = LoggerFactory.getLogger(DBExecuteAdvice.class);
-	
-	
-	@Around("execution(* com..dao.*.*(..))")
-	public Object spendTime(ProceedingJoinPoint pjp) throws Throwable {
-		String targetName = pjp.getStaticPart().toShortString();
-		long start = System.currentTimeMillis();
-		Object obj = pjp.proceed();
-		long end = System.currentTimeMillis();
-		logger.debug("DB execute time: " + (end - start) + "ms - " + targetName);
-		return obj;
+    private static final Logger logger = LoggerFactory.getLogger(DBExecuteAdvice.class);
 
-	}
+    @Around("execution(* com..dao.*.*(..))")
+    public Object spendTime(ProceedingJoinPoint pjp) throws Throwable {
+        String targetName = pjp.getStaticPart().toShortString();
+        long start = System.currentTimeMillis();
+        Object obj = pjp.proceed();
+        long end = System.currentTimeMillis();
+        logger.debug("DB execute time: " + (end - start) + "ms - " + targetName);
+        return obj;
+
+    }
 }

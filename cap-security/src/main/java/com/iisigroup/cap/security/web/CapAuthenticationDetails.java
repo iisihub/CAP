@@ -34,40 +34,40 @@ import com.iisigroup.cap.security.model.CapUserDetails;
 @SuppressWarnings("serial")
 public class CapAuthenticationDetails extends WebAuthenticationDetails {
 
-	private CapUserDetails userDetails;
+    private CapUserDetails userDetails;
 
-	@SuppressWarnings("rawtypes")
-	private Map parameters = new HashMap();
+    @SuppressWarnings("rawtypes")
+    private Map parameters = new HashMap();
 
-	@SuppressWarnings("unchecked")
-	public CapAuthenticationDetails(HttpServletRequest request) {
-		super(request);
-		this.userDetails = (CapUserDetails) request.getAttribute("userDetails");
-		parameters.putAll(request.getParameterMap());
-	}
+    @SuppressWarnings("unchecked")
+    public CapAuthenticationDetails(HttpServletRequest request) {
+        super(request);
+        this.userDetails = (CapUserDetails) request.getAttribute("userDetails");
+        parameters.putAll(request.getParameterMap());
+    }
 
-	public CapUserDetails getUserDetails() {
-		return userDetails;
-	}
+    public CapUserDetails getUserDetails() {
+        return userDetails;
+    }
 
-	public void setUserDetails(CapUserDetails userDetails) {
-		this.userDetails = userDetails;
-	}
+    public void setUserDetails(CapUserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
 
-	public Map<?, ?> getParameters() {
-		return parameters;
-	}
+    public Map<?, ?> getParameters() {
+        return parameters;
+    }
 
-	public String getString(String key) {
-		Object o = parameters.get(key);
-		if (o == null) {
-			return null;
-		} else if (o instanceof String) {
-			return (String) o;
-		} else if (o instanceof String[]) {
-			return (String) ((String[]) o)[0];
-		}
-		return String.valueOf(o);
-	}
+    public String getString(String key) {
+        Object o = parameters.get(key);
+        if (o == null) {
+            return null;
+        } else if (o instanceof String) {
+            return (String) o;
+        } else if (o instanceof String[]) {
+            return (String) ((String[]) o)[0];
+        }
+        return String.valueOf(o);
+    }
 
 }

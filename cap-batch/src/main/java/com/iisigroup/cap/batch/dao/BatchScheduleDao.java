@@ -8,15 +8,15 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
 
 public interface BatchScheduleDao extends IGenericDao<BatchSchedule> {
-	Page<BatchSchedule> findForPage(ISearch search);
+    Page<BatchSchedule> findForPage(ISearch search);
 
-	List<BatchSchedule> findByHostId(List<String> hostIds);
+    List<BatchSchedule> findByHostId(List<String> hostIds);
 
-	BatchSchedule findById(String id);
+    BatchSchedule findById(String id);
 
-	void update(BatchSchedule schedule);
+    void update(BatchSchedule schedule);
 
-	void create(BatchSchedule schedule);
+    void create(BatchSchedule schedule);
 
-	void deleteById(String id);
+    void deleteById(String id);
 }

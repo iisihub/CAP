@@ -46,29 +46,27 @@ import com.iisigroup.cap.utils.CapBeanUtil;
 @Controller("calendarhandler")
 public class CalendarHandler extends MFormHandler {
 
-	@Resource
-	private CalendarService calendarService;
+    @Resource
+    private CalendarService calendarService;
 
-	public IResult getCalendarData(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
+    public IResult getCalendarData(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
 
-		String start = request.get("start");
-		String end = request.get("end");
-		String userId = CapSecurityContext.getUserId();
+        String start = request.get("start");
+        String end = request.get("end");
+        String userId = CapSecurityContext.getUserId();
 
-		List<Remind> reminds = calendarService.getCalendarData(userId, start,
-				end);
-		List<Map<String, Object>> events = new ArrayList<Map<String, Object>>();
-		for (Remind remind : reminds) {
-			events.add(CapBeanUtil.bean2Map(remind,
-					CapEntityUtil.getColumnName(remind)));
-		}
-		Map<String, Object> reEvents = new HashMap<String, Object>();
-		reEvents.put("events", events);
-		
-		result.putAll(reEvents);
+        List<Remind> reminds = calendarService.getCalendarData(userId, start, end);
+        List<Map<String, Object>> events = new ArrayList<Map<String, Object>>();
+        for (Remind remind : reminds) {
+            events.add(CapBeanUtil.bean2Map(remind, CapEntityUtil.getColumnName(remind)));
+        }
+        Map<String, Object> reEvents = new HashMap<String, Object>();
+        reEvents.put("events", events);
 
-		return result;
-	}
+        result.putAll(reEvents);
+
+        return result;
+    }
 
 }

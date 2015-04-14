@@ -27,11 +27,9 @@ public interface FunctionSetService {
 
     int deleteRfList(String funcCode, List<String> delRole);
 
-    Page<Map<String, Object>> findPage(ISearch search, String sysType,
-            String funcCode);
+    Page<Map<String, Object>> findPage(ISearch search, String sysType, String funcCode);
 
-    Page<Map<String, Object>> findEditPage(ISearch search, String sysType,
-            String funcCode);
+    Page<Map<String, Object>> findEditPage(ISearch search, String sysType, String funcCode);
 
     void save(Function function, IRequest request);
 }

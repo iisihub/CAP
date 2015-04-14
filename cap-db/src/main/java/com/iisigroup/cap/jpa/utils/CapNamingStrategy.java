@@ -27,29 +27,27 @@ import org.hibernate.internal.util.StringHelper;
  */
 public class CapNamingStrategy extends ImprovedNamingStrategy {
 
-	/***/
-	private static final long serialVersionUID = 1L;
+    /***/
+    private static final long serialVersionUID = 1L;
 
-	private static final String TABLE_PREFIX = "";
+    private static final String TABLE_PREFIX = "";
 
-	public CapNamingStrategy() {
-	}
+    public CapNamingStrategy() {
+    }
 
-	public String classToTableName(String className) {
-		return (new StringBuilder()).append(TABLE_PREFIX)
-				.append(StringHelper.unqualify(className)).toString();
-	}
+    public String classToTableName(String className) {
+        return (new StringBuilder()).append(TABLE_PREFIX).append(StringHelper.unqualify(className)).toString();
+    }
 
-	public String tableName(String tableName) {
-		return (new StringBuilder()).append(TABLE_PREFIX).append(tableName)
-				.toString();
-	}
+    public String tableName(String tableName) {
+        return (new StringBuilder()).append(TABLE_PREFIX).append(tableName).toString();
+    }
 
-	public String columnName(String columnName) {
-		return columnName;
-	}
+    public String columnName(String columnName) {
+        return columnName;
+    }
 
-	public String propertyToColumnName(String propertyName) {
-		return propertyName;
-	}
+    public String propertyToColumnName(String propertyName) {
+        return propertyName;
+    }
 }

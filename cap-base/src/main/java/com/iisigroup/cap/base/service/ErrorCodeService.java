@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.iisigroup.cap.base.model.ErrorCode;
 
-
 /**
  * <pre>
  * 訊息代碼表
@@ -18,34 +17,33 @@ import com.iisigroup.cap.base.model.ErrorCode;
  */
 public interface ErrorCodeService {
 
+    /**
+     * 重新載入分行資訊
+     */
+    void reload();
 
-	/**
-	 * 重新載入分行資訊
-	 */
-	void reload();
-	
-	/**
-	 * <pre>
-	 * 新增或修改
-	 * </pre>
-	 * 
-	 * @param entry
-	 *            CBCLCODE
-	 */
-	void save(ErrorCode entry);
+    /**
+     * <pre>
+     * 新增或修改
+     * </pre>
+     * 
+     * @param entry
+     *            CBCLCODE
+     */
+    void save(ErrorCode entry);
 
-	/**
-	 * get the error code by code and locale
-	 * 
-	 * @param ErrorCode
-	 *            代碼類型
-	 * @param locale
-	 *            語系
-	 * @return error code
-	 * 
-	 */
-	ErrorCode getErrorCode(String code, String locale);
+    /**
+     * get the error code by code and locale
+     * 
+     * @param ErrorCode
+     *            代碼類型
+     * @param locale
+     *            語系
+     * @return error code
+     * 
+     */
+    ErrorCode getErrorCode(String code, String locale);
 
-	List<ErrorCode> getErrorCodeListBySysId(String sysId, String locale);
+    List<ErrorCode> getErrorCodeListBySysId(String sysId, String locale);
 
 }

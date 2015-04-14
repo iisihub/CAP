@@ -40,26 +40,26 @@ import com.iisigroup.websocket.service.CapSocketService;
 @Controller("sockethandler")
 public class CapSocketHandler extends MFormHandler {
 
-	@Resource
-	private CapSocketService socketService;
+    @Resource
+    private CapSocketService socketService;
 
-	/**
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult initSession(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String id = request.get("socketId");
+    /**
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult initSession(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String id = request.get("socketId");
 
-		CapUserDetails userDetails = CapSecurityContext.getUser();
-		if (userDetails != null) {
-			userDetails.setSocketClient(socketService.onConnectHandler(id));
-		}
+        CapUserDetails userDetails = CapSecurityContext.getUser();
+        if (userDetails != null) {
+            userDetails.setSocketClient(socketService.onConnectHandler(id));
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

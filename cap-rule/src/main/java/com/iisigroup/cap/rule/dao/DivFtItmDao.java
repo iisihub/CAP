@@ -29,38 +29,38 @@ import com.iisigroup.cap.rule.model.DivFtItm;
  */
 public interface DivFtItmDao extends IGenericDao<DivFtItm> {
 
-	/**
-	 * find by DivFtItm.
-	 * 
-	 * @param divFtItmNo
-	 *            因子代號
-	 * @return T
-	 */
-	public DivFtItm findByDivFtItmNo(String divFtItmNo);
+    /**
+     * find by DivFtItm.
+     * 
+     * @param divFtItmNo
+     *            因子代號
+     * @return T
+     */
+    public DivFtItm findByDivFtItmNo(String divFtItmNo);
 
-	/**
-	 * find by factorNos.
-	 * 
-	 * @param factorNos
-	 *            多個因子代號
-	 * @return T List
-	 */
-	public List<DivFtItm> findByDivFtItmNo(String[] factorNos);
+    /**
+     * find by factorNos.
+     * 
+     * @param factorNos
+     *            多個因子代號
+     * @return T List
+     */
+    public List<DivFtItm> findByDivFtItmNo(String[] factorNos);
 
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return DivFtItm
+     */
+    public DivFtItm findByOid(String oid);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return DivFtItm
-	 */
-	public DivFtItm findByOid(String oid);
-
-	/**
-	 * 取得所有因子項目
-	 * @return List<DivFtItm>
-	 */
-	List<DivFtItm> findAllFtItm();
+    /**
+     * 取得所有因子項目
+     * 
+     * @return List<DivFtItm>
+     */
+    List<DivFtItm> findAllFtItm();
 
 }

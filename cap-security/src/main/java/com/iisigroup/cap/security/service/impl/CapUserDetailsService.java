@@ -42,8 +42,7 @@ import com.iisigroup.cap.utils.CapString;
  */
 public class CapUserDetailsService implements UserDetailsService {
 
-    private static final Log logger = LogFactory
-            .getLog(CapUserDetailsService.class);
+    private static final Log logger = LogFactory.getLog(CapUserDetailsService.class);
 
     /*
      * (non-Javadoc)
@@ -66,8 +65,7 @@ public class CapUserDetailsService implements UserDetailsService {
             if (logger.isInfoEnabled()) {
                 logger.info("Account " + username + " could not be found");
             }
-            throw new UsernameNotFoundException("account " + username
-                    + " could not be found");
+            throw new UsernameNotFoundException("account " + username + " could not be found");
         }
 
         String password = obtainPassword(user);
@@ -83,8 +81,7 @@ public class CapUserDetailsService implements UserDetailsService {
 
     }
 
-    public UserDetails obtainUserDetails(IUser user, String password,
-            Map<String, String> roles) {
+    public UserDetails obtainUserDetails(IUser user, String password, Map<String, String> roles) {
         return new CapUserDetails(user, password, roles);
     }
 

@@ -34,53 +34,50 @@ import java.util.Map;
 @SuppressWarnings("serial")
 public class StrMessageFormatter implements IFormatter {
 
-	String unformatMsg;
+    String unformatMsg;
 
-	public StrMessageFormatter(String unformatMsg) {
-		this.unformatMsg = unformatMsg;
-	}
+    public StrMessageFormatter(String unformatMsg) {
+        this.unformatMsg = unformatMsg;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public String reformat(Object in) {
-		final Map<String, Object> params = (Map<String, Object>) in;
-		final StringBuffer buffer = new StringBuffer();
-		// For each occurrences of "${"
-		int start;
-		int pos = 0;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public String reformat(Object in) {
+        final Map<String, Object> params = (Map<String, Object>) in;
+        final StringBuffer buffer = new StringBuffer();
+        // For each occurrences of "${"
+        int start;
+        int pos = 0;
 
-		while ((start = unformatMsg.indexOf("${", pos)) != -1) {
-			buffer.append(unformatMsg.substring(pos, start));
-			if (unformatMsg.charAt(start + 1) == '$') {
-				buffer.append('$');
-				pos = start + 2;
-				continue;
-			}
-			pos = start;
-			final int startVariableName = start + 2;
-			final int endVariableName = unformatMsg.indexOf('}',
-					startVariableName);
+        while ((start = unformatMsg.indexOf("${", pos)) != -1) {
+            buffer.append(unformatMsg.substring(pos, start));
+            if (unformatMsg.charAt(start + 1) == '$') {
+                buffer.append('$');
+                pos = start + 2;
+                continue;
+            }
+            pos = start;
+            final int startVariableName = start + 2;
+            final int endVariableName = unformatMsg.indexOf('}', startVariableName);
 
-			if (endVariableName != -1) {
-				String variableName = unformatMsg.substring(startVariableName,
-						endVariableName);
-				String value = params.containsKey(variableName) ? params.get(
-						variableName).toString() : "";
-				buffer.append(value);
-				pos = endVariableName + 1;
-			} else {
-				break;
-			}
-		}
-		if (pos < unformatMsg.length()) {
-			buffer.append(unformatMsg.substring(pos));
-		}
-		return buffer.toString();
-	}// ;
+            if (endVariableName != -1) {
+                String variableName = unformatMsg.substring(startVariableName, endVariableName);
+                String value = params.containsKey(variableName) ? params.get(variableName).toString() : "";
+                buffer.append(value);
+                pos = endVariableName + 1;
+            } else {
+                break;
+            }
+        }
+        if (pos < unformatMsg.length()) {
+            buffer.append(unformatMsg.substring(pos));
+        }
+        return buffer.toString();
+    }// ;
 
 }// ~
