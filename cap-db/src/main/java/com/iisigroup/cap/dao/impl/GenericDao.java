@@ -305,7 +305,7 @@ public class GenericDao<T> implements IGenericDao<T> {
 			}
 			query.where(builder.and(aryWhere));
 		}
-
+        query.distinct(search.isDistinct());
 		return query;
 	}// ;
 
