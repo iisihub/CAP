@@ -26,7 +26,7 @@
 		<property name="sqlProvider" ref="userSqlStatement" />
 	</bean>
 
-	<bean id="capJdbcCall" class="org.springframework.jdbc.core.simple.SimpleJdbcCall">
+	<bean id="spJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 	    <constructor-arg><ref bean="cap-db"/></constructor-arg>
 	</bean>
 

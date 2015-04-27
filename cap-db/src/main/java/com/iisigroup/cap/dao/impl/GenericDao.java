@@ -38,6 +38,7 @@ import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -78,8 +79,8 @@ public class GenericDao<T> implements IGenericDao<T> {
 	@Resource(name = "capJdbcTemplate")
 	private CapNamedJdbcTemplate namedJdbcTemplate;
 
-	@Resource(name = "capJdbcCall")
-	private SimpleJdbcCall capJdbcCall;
+    @Resource(name = "spJdbcTemplate")
+    private JdbcTemplate jdbcTemplate;
 
 	@SuppressWarnings("unchecked")
 	public GenericDao() {
@@ -552,6 +553,7 @@ public class GenericDao<T> implements IGenericDao<T> {
 
     public Map<String, Object> callStoredProcedure(String procedureName,
             Map<String, Object> params) {
+        SimpleJdbcCall capJdbcCall= new SimpleJdbcCall(jdbcTemplate);
         capJdbcCall.withProcedureName(procedureName);
         SqlParameterSource in = new MapSqlParameterSource(params);
         return capJdbcCall.execute(in);
@@ -564,9 +566,5 @@ public class GenericDao<T> implements IGenericDao<T> {
 	protected CapNamedJdbcTemplate getNamedJdbcTemplate() {
 		return namedJdbcTemplate;
 	}
-
-	protected SimpleJdbcCall getCapJdbcCall() {
-        return capJdbcCall;
-    }
 
 }
