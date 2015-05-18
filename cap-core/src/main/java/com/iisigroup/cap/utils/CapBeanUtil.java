@@ -339,17 +339,6 @@ public class CapBeanUtil {
             Method method = ReflectionUtils.findMethod(entry.getClass(), setter, new Class[] { field.getType() });
             if (method != null) {
                 try {
-                    if (field.getType() != String.class && "".equals(value)) {
-                        value = null;
-                    } else if (field.getType() == BigDecimal.class) {
-                        value = CapMath.getBigDecimal(String.valueOf(value));
-                    } else if (value instanceof String) {
-                        if (field.getType() == java.util.Date.class || field.getType() == java.sql.Date.class) {
-                            value = CapDate.parseDate((String) value);
-                        } else if (field.getType() == Timestamp.class) {
-                            value = CapDate.convertStringToTimestamp1((String) value);
-                        }
-                    }
                     if (value == null) {
                         method.invoke(entry, new Object[] { null });
                     } else {
