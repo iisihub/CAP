@@ -14,8 +14,6 @@ package com.iisigroup.cap.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -29,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
 
+import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.model.GenericBean;
 
 /**
