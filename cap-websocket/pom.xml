@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.iisigroup.cap</groupId>
 		<artifactId>cap</artifactId>
-		<version>2.2.1-megacol</version>
+		<version>${cap.version}</version>
 	</parent>
 	<artifactId>cap-websocket</artifactId>
 	<dependencies>

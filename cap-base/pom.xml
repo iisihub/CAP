@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>cap</artifactId>
 		<groupId>com.iisigroup.cap</groupId>
-		<version>2.2.1-megacol</version>
+		<version>${cap.version}</version>
 	</parent>
 	<artifactId>cap-base</artifactId>
 	<dependencies>
