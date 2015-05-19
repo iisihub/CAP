@@ -78,10 +78,7 @@ public class CodeTypeFormatter implements IFormatter {
     @SuppressWarnings("unchecked")
     @Override
     public String reformat(Object in) {
-        if (in instanceof BigDecimal) {
-            in = ((BigDecimal) in).toPlainString();
-        }
-        String k = (String) in;
+        String k = in.toString();
         if (codeMap != null && !CapString.isEmpty(k)) {
             String value = "";
             if (codeMap.containsKey(k)) {
