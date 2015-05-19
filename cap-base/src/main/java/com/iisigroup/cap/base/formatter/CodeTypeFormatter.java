@@ -77,22 +77,25 @@ public class CodeTypeFormatter implements IFormatter {
     @SuppressWarnings("unchecked")
     @Override
     public String reformat(Object in) {
-        String k = in.toString();
-        if (codeMap != null && !CapString.isEmpty(k)) {
-            String value = "";
-            if (codeMap.containsKey(k)) {
-                value = codeMap.get(k);
-            }
-            switch (show) {
-            case Key_Value:
-                return new StringBuffer(k).append("-").append(value).toString();
-            case KeySpaceValue:
-                return new StringBuffer(k).append(" ").append(value).toString();
-            default:
-                return value;
+        String result = Constants.EMPTY_STRING;
+        if (in != null) {
+            String k = in.toString();
+            if (codeMap != null && !CapString.isEmpty(k)) {
+                String value = "";
+                if (codeMap.containsKey(k)) {
+                    value = codeMap.get(k);
+                }
+                switch (show) {
+                case Key_Value:
+                    result = new StringBuffer(k).append("-").append(value).toString();
+                case KeySpaceValue:
+                    result = new StringBuffer(k).append(" ").append(value).toString();
+                default:
+                    result = value;
+                }
             }
         }
-        return Constants.EMPTY_STRING;
+        return result;
     }
 
 }
