@@ -31,6 +31,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * @author iristu
  * @version <ul>
  *          <li>2013/2/26,iristu,new
+ *          <li>2015/6/1,sk,update reformat
  *          </ul>
  */
 @SuppressWarnings("serial")
@@ -88,8 +89,10 @@ public class CodeTypeFormatter implements IFormatter {
                 switch (show) {
                 case Key_Value:
                     result = new StringBuffer(k).append("-").append(value).toString();
+                    break;
                 case KeySpaceValue:
                     result = new StringBuffer(k).append(" ").append(value).toString();
+                    break;
                 default:
                     result = value;
                 }
