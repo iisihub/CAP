@@ -6,7 +6,7 @@
 	<version>${cap.version}</version>
 	<packaging>pom</packaging>
 	<properties>
-	    <cap.version>2.2.1-megacol</cap.version>
+	    <cap.version>2.2.1-megacol-15060101</cap.version>
 		<slf4j.version>1.5.8</slf4j.version>
         <localRepositoryPath>src/localRepos</localRepositoryPath>
 	</properties>
