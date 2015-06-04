@@ -41,7 +41,11 @@ public class CapHandleOpStep extends AbstractCustomizeOpStep {
         IAction action = handler.getAction(actionType);
         rtn = action.doWork(params);
         ctx.setGoToStep(NEXT);
-        ctx.setResult(rtn);
+        if (ctx.getResult() == null) {
+            ctx.setResult(rtn);
+        } else {
+            ctx.getResult().add(rtn);
+        }
         return ctx;
     }// ;
 
