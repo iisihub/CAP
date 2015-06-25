@@ -38,6 +38,10 @@ import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.util.Assert;
 
 import com.iisigroup.cap.dao.IGenericDao;
@@ -74,6 +78,9 @@ public class GenericDao<T> implements IGenericDao<T> {
 
     @Resource(name = "capJdbcTemplate")
     private CapNamedJdbcTemplate namedJdbcTemplate;
+
+    @Resource(name = "spJdbcTemplate")
+    private JdbcTemplate jdbcTemplate;
 
     @SuppressWarnings("unchecked")
     public GenericDao() {
@@ -314,6 +321,7 @@ public class GenericDao<T> implements IGenericDao<T> {
      *            SearchSetting
      * @return TypedQuery
      */
+    @SuppressWarnings("rawtypes")
     protected <S> TypedQuery<S> applyPaginationAndOrderToCriteria(Root<S> root, CriteriaQuery<S> query, CriteriaBuilder builder, ISearch search) {
         // set order criteria if available
         if (search.hasOrderBy()) {
@@ -511,6 +519,13 @@ public class GenericDao<T> implements IGenericDao<T> {
 
     public <S> S findById(Class<S> clazz, Serializable pk) {
         return getEntityManager().find(clazz, pk);
+    }
+
+    public Map<String, Object> callStoredProcedure(String procedureName, Map<String, Object> params) {
+        SimpleJdbcCall capJdbcCall = new SimpleJdbcCall(jdbcTemplate);
+        capJdbcCall.withProcedureName(procedureName);
+        SqlParameterSource in = new MapSqlParameterSource(params);
+        return capJdbcCall.execute(in);
     }
 
     protected EntityManager getEntityManager() {
