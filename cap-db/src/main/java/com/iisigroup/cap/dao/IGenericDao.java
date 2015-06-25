@@ -14,6 +14,7 @@ package com.iisigroup.cap.dao;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
@@ -101,4 +102,5 @@ public interface IGenericDao<T> {
 
     <S> S findById(Class<S> clazz, Serializable pk);
 
+    Map<String, Object> callStoredProcedure(String procedureName, Map<String, Object> params);
 }
