@@ -155,7 +155,7 @@ public abstract class MFormHandler extends HandlerPlugin {
         boolean sort = params.containsParamsKey(IGridEnum.SORTCOLUMN.getCode()) && !CapString.isEmpty(params.get(IGridEnum.SORTCOLUMN.getCode()));
         if (sort) {
             String[] sortBy = params.get(IGridEnum.SORTCOLUMN.getCode()).split("\\|");
-            String[] isAscAry = params.get(IGridEnum.SORTTYPE.getCode(), "asc").split("\\|");
+            String[] isAscAry = params.get(IGridEnum.SORTTYPE.getCode(), "asc").split(",");
             for (int i = 0; i < sortBy.length; i++) {
                 String isAsc = (i < isAscAry.length) ? isAscAry[i] : "asc";
                 search.addOrderBy(sortBy[i], !IGridEnum.SORTASC.getCode().equals(isAsc));
