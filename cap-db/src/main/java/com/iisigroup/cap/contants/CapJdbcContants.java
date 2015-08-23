@@ -18,25 +18,29 @@ package com.iisigroup.cap.contants;
  * 
  * @since 2012/9/19
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/19,iristu,new
  *          </ul>
  */
 public interface CapJdbcContants {
 
-    final String SQLQuery_Suffix = "query.suffix";
+    String SQLQuery_Suffix = "query.suffix";
 
-    final String SQLPaging_Query = "paging.querySql";
+    String SQLPaging_Query = "paging.querySql";
 
-    final String SQLPaging_TotalPage = "paging.totalPage";
+    String SQLPaging_TotalPage = "paging.totalPage";
 
-    final String SQLPaging_SourceSQL = "sourceSQL";
+    String SQLPaging_SourceSQL = "sourceSQL";
 
-    final static String EMPTY_STRING = "";
+    String EMPTY_STRING = "";
 
     /**
      * a space string.
      */
-    final static String SPACE = " ";
+    String SPACE = " ";
 
+    String SQLPaging_SourceOrder = "sourceOrder";
+
+    String SQLPaging_DummyOrderBy = "order by TempColumn";
 }

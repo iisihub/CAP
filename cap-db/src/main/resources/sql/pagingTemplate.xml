@@ -67,7 +67,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			<value></value>
 		</entry>
 		<entry key="paging.querySql">
-			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() over (order by TempColumn) ROWNM from (
+			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() over ( @{['sourceOrder']} ) ROWNM from (
 			select 0 TempColumn, ss.* from (@{['sourceSQL']} ) ss ) source ) rows where ROWNM > :startRow and ROWNM <= :endRow]]></value>
 		</entry>
 		<entry key="paging.totalPage">
