@@ -12,9 +12,11 @@
 package com.iisigroup.cap.jdbc.support;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -31,8 +33,10 @@ import com.iisigroup.cap.dao.utils.SearchModeParameter;
  * 
  * @since 2012/11/7
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/7,iristu,new
+ *          <li>2015/09/18,sunkist,update
  *          </ul>
  */
 public class CapSqlSearchQueryProvider {
@@ -58,13 +62,34 @@ public class CapSqlSearchQueryProvider {
                 Object _key = s.getKey();
                 Object _value = s.getValue();
                 if (_key instanceof SearchModeParameter && _value instanceof SearchModeParameter) {
-                    sb.append('(').append(generateItemQuery((SearchModeParameter) _key));
+
+                    String mode = "";
                     if (SearchMode.OR == s.getMode()) {
-                        sb.append(" or ");
+                        mode = " or ";
                     } else if (SearchMode.AND == s.getMode()) {
-                        sb.append(" and ");
+                        mode = " and ";
                     }
-                    sb.append(generateItemQuery((SearchModeParameter) _value)).append(')');
+                    SearchModeParameter k = (SearchModeParameter) _key;
+                    SearchModeParameter v = (SearchModeParameter) _value;
+                    List<SearchModeParameter> mySearchPool = new ArrayList<SearchModeParameter>();
+
+                    // add all of key
+                    getRecursiveSearchModeParameterKey(mySearchPool, k);
+                    getRecursiveSearchModeParameterValue(mySearchPool, v);
+
+                    // append where string
+                    if (!mySearchPool.isEmpty()) {
+                        sb.append('(');
+                    }
+                    for (int i = 0; i < mySearchPool.size(); i++) {
+                        if (i != 0) {
+                            sb.append(mode);
+                        }
+                        sb.append(generateItemQuery(mySearchPool.get(i)));
+                    }
+                    if (!mySearchPool.isEmpty()) {
+                        sb.append(')');
+                    }
 
                 } else {
                     sb.append(generateItemQuery(s));
@@ -79,6 +104,26 @@ public class CapSqlSearchQueryProvider {
 
         return sb.toString();
     }// ;
+
+    private SearchModeParameter getRecursiveSearchModeParameterKey(List<SearchModeParameter> mySearchPool, SearchModeParameter k) {
+        if (k.getKey() instanceof SearchModeParameter) {
+            getRecursiveSearchModeParameterKey(mySearchPool, (SearchModeParameter) k.getKey());
+            getRecursiveSearchModeParameterValue(mySearchPool, (SearchModeParameter) k.getValue());
+        } else {
+            mySearchPool.add(k);
+        }
+        return k;
+    }
+
+    private SearchModeParameter getRecursiveSearchModeParameterValue(List<SearchModeParameter> mySearchPool, SearchModeParameter v) {
+        if (v.getValue() instanceof SearchModeParameter) {
+            getRecursiveSearchModeParameterValue(mySearchPool, (SearchModeParameter) v.getValue());
+            getRecursiveSearchModeParameterKey(mySearchPool, (SearchModeParameter) v.getKey());
+        } else {
+            mySearchPool.add(v);
+        }
+        return v;
+    }
 
     public String generateOrderCause() {
         StringBuffer sb = new StringBuffer();
