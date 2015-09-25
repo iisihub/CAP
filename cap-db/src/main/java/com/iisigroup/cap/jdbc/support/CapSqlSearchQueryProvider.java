@@ -15,7 +15,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -148,7 +147,7 @@ public class CapSqlSearchQueryProvider {
     @SuppressWarnings("incomplete-switch")
     private String generateItemQuery(SearchModeParameter search) {
         String key = search.getKey();
-        String paramKey = key + Long.valueOf(new Date().getTime());
+        String paramKey = key + search.hashCode();
         Object value = search.getValue();
         StringBuffer sb = new StringBuffer();
         switch (search.getMode()) {
