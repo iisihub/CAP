@@ -15,6 +15,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ import com.iisigroup.cap.dao.utils.SearchModeParameter;
  *          <ul>
  *          <li>2012/11/7,iristu,new
  *          <li>2015/09/18,sunkist,update
+ *          <li>2015/09/25,sunkist,避免參數重覆問題
  *          </ul>
  */
 public class CapSqlSearchQueryProvider {
@@ -146,6 +148,7 @@ public class CapSqlSearchQueryProvider {
     @SuppressWarnings("incomplete-switch")
     private String generateItemQuery(SearchModeParameter search) {
         String key = search.getKey();
+        String paramKey = key + Long.valueOf(new Date().getTime());
         Object value = search.getValue();
         StringBuffer sb = new StringBuffer();
         switch (search.getMode()) {
@@ -153,26 +156,26 @@ public class CapSqlSearchQueryProvider {
         case BETWEEN:
             Object[] values = asArray(value);
             if (values != null) {
-                sb.append(key).append(" between :").append(key).append("1 and :").append(key).append('2');
-                params.put(key + "1", values[0]);
-                params.put(key + "2", values[1]);
+                sb.append(key).append(" between :").append(paramKey).append("1 and :").append(paramKey).append('2');
+                params.put(paramKey + "1", values[0]);
+                params.put(paramKey + "2", values[1]);
             }
             break;
         case GREATER_THAN:
-            sb.append(key).append(" < :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" < :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case GREATER_EQUALS:
-            sb.append(key).append(" >= :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" >= :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case LESS_THAN:
-            sb.append(key).append(" < :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" < :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case LESS_EQUALS:
-            sb.append(key).append(" <= :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" <= :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case IS_NULL:
             sb.append(key).append(" is null ");
@@ -181,24 +184,24 @@ public class CapSqlSearchQueryProvider {
             sb.append(key).append(" is not null ");
             break;
         case IN:
-            sb.append(key).append(" in :").append(key);
-            params.put(key, asCollection(value));
+            sb.append(key).append(" in :").append(paramKey);
+            params.put(paramKey, asCollection(value));
             break;
         case LIKE:
-            sb.append(key).append(" like :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" like :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case NOT_LIKE:
-            sb.append(key).append(" not like :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" not like :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case EQUALS:
-            sb.append(key).append(" = :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" = :").append(paramKey);
+            params.put(paramKey, value);
             break;
         case NOT_EQUALS:
-            sb.append(key).append(" != :").append(key);
-            params.put(key, value);
+            sb.append(key).append(" != :").append(paramKey);
+            params.put(paramKey, value);
             break;
         }
         return sb.toString();
