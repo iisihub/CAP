@@ -30,18 +30,23 @@ import org.apache.log4j.helpers.LogLog;
 import org.apache.log4j.helpers.OptionConverter;
 import org.apache.log4j.spi.ErrorCode;
 import org.apache.log4j.spi.LoggingEvent;
+import org.springframework.util.StringUtils;
+
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
  * 可每日並限制單檔大小
  * </pre>
- * 
+ *
  * @since 2013/7/18
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/7/18,rodeschen,new
+ *          <li>2015/10/30,Sk,Update for 「Fortify Security Report-2015/10/26」
  *          </ul>
- * 
+ *
  *          log4j.appender.FILE.encoding=UTF-8
  *          log4j.appender.FILE=com.iisigroup.
  *          cap.log.TimeFolderSizeRollingFileAppender
@@ -54,8 +59,8 @@ import org.apache.log4j.spi.LoggingEvent;
  *          log4j.appender.FILE.layout.ConversionPattern=%d [%X{uuid}] |
  *          %X{login} | %X{reqURI} | %-28.28c{1} [%-5p] %m%n
  *          #log4j.appender.FILE.Threshold = INFO
- * 
- * 
+ *
+ *
  *          output {workpath}/logs/2013-7-18/CapLog.log
  */
 public class TimeFolderSizeRollingFileAppender extends FileAppender implements ErrorCode {
@@ -180,16 +185,23 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements E
     public void setFile(String file) {
         // Trim spaces from both ends. The users probably does not want
         // trailing spaces in file names.
-        sourceFileName = file.trim();
-        String val = file.trim();
-        String tmpfileName = val.replace('/', File.separatorChar);
 
-        fileName = getLogRootPath().replaceAll("[/\\\\]$", "") + File.separator + new SimpleDateFormat(datePattern).format(new Date()) + File.separator + tmpfileName;
+        file = CapString.trimNull(file);
+
+        int lastIndex = file.lastIndexOf("/");
+        LogLog.debug("file: " + file + ", lastIndex: " + lastIndex);
+        if (lastIndex != -1) {
+            setLogRootPath(file.substring(0, lastIndex));
+        }
+
+        sourceFileName = StringUtils.getFilename(file);
+
+        fileName = getLogRootPath().replaceAll("[/\\\\]$", "") + "/" + new SimpleDateFormat(datePattern).format(new Date()) + "/" + sourceFileName;
 
         // create non-exist path
         LogLog.debug("fileName:" + fileName);
 
-        int index = fileName.lastIndexOf(File.separatorChar);
+        int index = fileName.lastIndexOf("/");
         if (index > 0) {
             String sPath = fileName.substring(0, index);
             File path = new File(sPath);
@@ -202,6 +214,8 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements E
     }
 
     public synchronized void setFile(String pFileName, boolean append, boolean bufferedIO, int bufferSize) throws IOException {
+        FileOutputStream fos = null;
+        Writer fw = null;
         try {
             reset();
             this.fileName = pFileName;
@@ -211,7 +225,8 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements E
                 setImmediateFlush(false);
             }
 
-            Writer fw = createWriter(new FileOutputStream(fileName, append));
+            fos = new FileOutputStream(fileName, append);
+            fw = createWriter(fos);
             if (bufferedIO) {
                 fw = new BufferedWriter(fw, bufferSize);
             }
@@ -228,6 +243,9 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements E
             LogLog.debug("setFile ended");
         } catch (IOException e) {
             errorHandler.error("Create log File error", e, FILE_OPEN_FAILURE);
+        } finally {
+            // IOUtils.closeQuietly(fos);
+            // IOUtils.closeQuietly(fw);
         }
     }
 
