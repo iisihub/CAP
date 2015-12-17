@@ -25,7 +25,8 @@ import com.iisigroup.cap.Constants;
  * 
  * @author iristu
  * @version $Revision: 26 $
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/27,iristu,new
  *          <li>2011/8/02,sunkist,update
  *          {@link ADDateTimeFormatter#reformat(Object)} for Calendar.
@@ -36,7 +37,17 @@ import com.iisigroup.cap.Constants;
 @SuppressWarnings("serial")
 public class ADDateFormatter implements IFormatter {
 
-    static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat df;
+
+    private final static String DEF_PATTERN = "yyyy-MM-dd";
+
+    public ADDateFormatter() {
+        df = new SimpleDateFormat(DEF_PATTERN);
+    }
+
+    public ADDateFormatter(String pattern) {
+        df = new SimpleDateFormat(pattern);
+    }
 
     /*
      * (non-Javadoc)
