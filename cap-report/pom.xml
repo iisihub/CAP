@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.iisigroup.cap</groupId>
 		<artifactId>cap</artifactId>
-		<version>2.2.1-citibanking-15121610</version>
+		<version>2.2.1-citibanking-15123018</version>
 	</parent>
 	<artifactId>cap-report</artifactId>
 	<dependencies>
