@@ -21,6 +21,9 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -33,6 +36,7 @@ import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.iisigroup.cap.contants.CapJdbcContants;
@@ -554,5 +558,149 @@ public class CapNamedJdbcTemplate extends NamedParameterJdbcTemplate {
             logger.info("CapNamedJdbcTemplate spend {} ms", (System.currentTimeMillis() - cur));
         }
     }// ;
+
+    @Override
+    public <T> T execute(String sqlId, SqlParameterSource paramSource, PreparedStatementCallback<T> action) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.execute(_sql, paramSource, action);
+    }
+
+    @Override
+    public <T> T execute(String sqlId, Map<String, ?> paramMap, PreparedStatementCallback<T> action) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.execute(_sql, paramMap, action);
+    }
+
+    @Override
+    public <T> T query(String sqlId, SqlParameterSource paramSource, ResultSetExtractor<T> rse) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.query(_sql, paramSource, rse);
+    }
+
+    @Override
+    public <T> T query(String sqlId, Map<String, ?> paramMap, ResultSetExtractor<T> rse) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.query(_sql, paramMap, rse);
+    }
+
+    @Override
+    public void query(String sqlId, SqlParameterSource paramSource, RowCallbackHandler rch) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        super.query(_sql, paramSource, rch);
+    }
+
+    @Override
+    public <T> List<T> query(String sqlId, SqlParameterSource paramSource, RowMapper<T> rowMapper) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.query(_sql, paramSource, rowMapper);
+    }
+
+    @Override
+    public <T> List<T> query(String sqlId, Map<String, ?> paramMap, RowMapper<T> rowMapper) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.query(_sql, paramMap, rowMapper);
+    }
+
+    @Override
+    public <T> T queryForObject(String sqlId, SqlParameterSource paramSource, RowMapper<T> rowMapper) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForObject(_sql, paramSource, rowMapper);
+    }
+
+    @Override
+    public <T> T queryForObject(String sqlId, SqlParameterSource paramSource, Class<T> requiredType) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForObject(_sql, paramSource, requiredType);
+    }
+
+    @Override
+    public <T> T queryForObject(String sqlId, Map<String, ?> paramMap, Class<T> requiredType) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForObject(_sql, paramMap, requiredType);
+    }
+
+    @Override
+    public Map<String, Object> queryForMap(String sqlId, SqlParameterSource paramSource) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForMap(_sql, paramSource);
+    }
+
+    @Override
+    public long queryForLong(String sqlId, SqlParameterSource paramSource) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForLong(_sql, paramSource);
+    }
+
+    @Override
+    public long queryForLong(String sqlId, Map<String, ?> paramMap) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForLong(_sql, paramMap);
+    }
+
+    @Override
+    public int queryForInt(String sqlId, SqlParameterSource paramSource) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForInt(_sql, paramSource);
+    }
+
+    @Override
+    public <T> List<T> queryForList(String sqlId, SqlParameterSource paramSource, Class<T> elementType) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForList(_sql, paramSource, elementType);
+    }
+
+    @Override
+    public <T> List<T> queryForList(String sqlId, Map<String, ?> paramMap, Class<T> elementType) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForList(_sql, paramMap, elementType);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryForList(String sqlId, SqlParameterSource paramSource) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForList(_sql, paramSource);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryForList(String sqlId, Map<String, ?> paramMap) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForList(_sql, paramMap);
+    }
+
+    @Override
+    public SqlRowSet queryForRowSet(String sqlId, SqlParameterSource paramSource) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.queryForRowSet(_sql, paramSource);
+    }
+
+    @Override
+    public int update(String sqlId, SqlParameterSource paramSource) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.update(_sql, paramSource);
+    }
+
+    @Override
+    public int update(String sqlId, SqlParameterSource paramSource, KeyHolder generatedKeyHolder) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.update(_sql, paramSource, generatedKeyHolder);
+    }
+
+    @Override
+    public int update(String sqlId, SqlParameterSource paramSource, KeyHolder generatedKeyHolder, String[] keyColumnNames) throws DataAccessException {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.update(_sql, paramSource, generatedKeyHolder, keyColumnNames);
+    }
+
+    @Override
+    public int[] batchUpdate(String sqlId, Map<String, ?>[] batchValues) {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.batchUpdate(_sql, batchValues);
+    }
+
+    @Override
+    public int[] batchUpdate(String sqlId, SqlParameterSource[] batchArgs) {
+        String _sql = sqlp.getValue(sqlId, sqlId);
+        return super.batchUpdate(_sql, batchArgs);
+    }
 
 }// ~
