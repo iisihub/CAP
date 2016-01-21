@@ -91,6 +91,15 @@ public interface IRequest extends Map<String, Object>, Serializable {
     String getEscapString(String key, String defaultValue);
 
     /**
+     * get escape string with xssEncode
+     * 
+     * @param value
+     *            String
+     * @return escape string
+     */
+    String getEscapeStringFromValue(String value);
+
+    /**
      * set customize parameter
      * 
      * @param key

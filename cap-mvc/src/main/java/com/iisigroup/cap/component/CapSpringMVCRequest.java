@@ -20,7 +20,6 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -129,6 +128,14 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
         }
         logger.trace("can't find request parameter :" + key);
         return defaultValue;
+    }
+
+    public String getEscapeStringFromValue(String value) {
+        if (value != null) {
+            return xssEncode(value);
+        }
+        logger.trace("can't get value of string. ");
+        return null;
     }
 
     private String xssEncode(String s) {
