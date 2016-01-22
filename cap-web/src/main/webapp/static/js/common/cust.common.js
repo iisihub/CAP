@@ -53,18 +53,18 @@ $(document).ready(function() {
         });
 
         navSub.on("click", "li a", function(ev) {
-        	var $this = $(this);
-        	if($this.attr("url")){
-        		router.to($(this).attr("url"));
-        	}else{
-        		if ($this.siblings("ul").size()) {
-                	var sel = $this.siblings("ul");
-                	sel.is(":visible") ? 
-                			sel.hide().parent("li").children("a").removeClass('clicked').children("span").removeClass('icon-5').addClass('icon-1')
-                			: sel.show().parent("li").children("a").addClass('clicked').children("span").removeClass('icon-1').addClass('icon-5');
-                }
-        	}
         	ev.preventDefault();
+            var $this = $(this);
+            if($this.attr("url")){
+                router.to($(this).attr("url"));
+            }else{
+                if ($this.siblings("ul").size()) {
+                    var sel = $this.siblings("ul");
+                    sel.is(":visible") ? 
+                            sel.hide().parent("li").children("a").removeClass('clicked').children("span").removeClass('icon-5').addClass('icon-1')
+                            : sel.show().parent("li").children("a").addClass('clicked').children("span").removeClass('icon-1').addClass('icon-5');
+                }
+            }
             return false;
         });
         
