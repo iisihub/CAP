@@ -1,12 +1,12 @@
-/* 
+/*
  * TimeFolderSizeRollingFileAppender.java
- * 
- * Copyright (c) 2009-2013 International Integrated System, Inc. 
+ *
+ * Copyright (c) 2009-2013 International Integrated System, Inc.
  * All Rights Reserved.
- * 
+ *
  * Licensed Materials - Property of International Integrated System, Inc.
- * 
- * This software is confidential and proprietary information of 
+ *
+ * This software is confidential and proprietary information of
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
 package com.iisigroup.cap.log;
@@ -47,14 +47,14 @@ import com.iisigroup.cap.utils.CapDate;
  * <pre>
  * 可每日並限制單檔大小
  * </pre>
- * 
+ *
  * @since 2013/7/18
  * @author rodeschen
  * @version <ul>
  *          <li>2013/7/18,rodeschen,new
  *          <li>2016/3/17,sunkist,update for zip and remove old directory
  *          </ul>
- *          
+ *
  * log4j.appender.FILE.encoding=UTF-8
  * log4j.appender.FILE=com.iisigroup.cap.log.TimeFolderSizeRollingFileAppender
  * log4j.appender.FILE.logRootPath=./logs
@@ -65,8 +65,8 @@ import com.iisigroup.cap.utils.CapDate;
  * log4j.appender.FILE.layout=org.apache.log4j.PatternLayout
  * log4j.appender.FILE.layout.ConversionPattern=%d [%X{uuid}] | %X{login} | %X{reqURI} | %-28.28c{1} [%-5p] %m%n
  * #log4j.appender.FILE.Threshold = INFO
- * 
- * 
+ *
+ *
  * output
  *    {workpath}/logs/2013-7-18/CapLog.log
  */
@@ -187,7 +187,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 	/**
 	 * Get the maximum size that the output file is allowed to reach before
 	 * being rolled over to backup files.
-	 * 
+	 *
 	 * @since 1.1
 	 */
 	public long getMaximumFileSize() {
@@ -200,7 +200,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 		sourceFileName = file.trim();
 		String val = file.trim();
 		String tmpfileName = val.replace('/', File.separatorChar);
-		
+
 		fileName = getLogRootPath().replaceAll("[/\\\\]$", "") + File.separator
 				+ new SimpleDateFormat(datePattern).format(new Date())
 				+ File.separator + tmpfileName;
@@ -218,13 +218,13 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 		}
 
 		LogLog.debug("File set:" + fileName);
-		
+
 		LogLog.debug("zipfile::zipEnabled=" + zipEnabled);
         if (zipEnabled) {
             try {
                 for (int i = 1; i <= zipDayBefore; i++) {
                     String beforeTheDay = getLogRootPath().replaceAll("[/\\\\]$", "") + File.separator + new SimpleDateFormat(datePattern).format(CapDate.shiftDays(new Date(), -i));
-                    String destUrl = zipPath + File.separator + FilenameUtils.getBaseName(fileName) + "." + new SimpleDateFormat(datePattern).format(CapDate.shiftDays(new Date(), -1)) + ".zip";
+                    String destUrl = zipPath + File.separator + FilenameUtils.getBaseName(fileName) + "." + new SimpleDateFormat(datePattern).format(CapDate.shiftDays(new Date(), -i)) + ".zip";
                     LogLog.debug("zipfile::destUrl=" + destUrl);
                     zipFiles(beforeTheDay, destUrl);
 
@@ -257,7 +257,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 			this.bufferedIO = bufferedIO;
 			this.bufferSize = bufferSize;
 			writeHeader();
-			 
+
 			if (append) {
 				currFile = new File(fileName);
 				((CountingQuietWriter) qw).setCount(currFile.length());
@@ -269,9 +269,9 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 		    errorHandler.error("Create log File error", e, FILE_OPEN_FAILURE);
         }
 	}
-	
+
 	final int BUFFER = 2048;
-	
+
     public void zipFiles(String source, String dest) throws IOException {
         FileUtils.forceMkdir(new File(source));
         List<String> list = new ArrayList<String>();
@@ -339,7 +339,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
             }
         }
     }
-	
+
 	public void activateOptions() {
 		super.activateOptions();
 		if (datePattern != null && fileName != null) {
@@ -530,7 +530,7 @@ public class TimeFolderSizeRollingFileAppender extends FileAppender implements
 	/**
 	 * This method differentiates TimeSizeRollingFileAppender from its super
 	 * class.
-	 * 
+	 *
 	 * <p>
 	 * Before actually logging, this method will check whether it is time to do
 	 * a rollover. If it is, it will schedule the next rollover time and then
