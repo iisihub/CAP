@@ -3,7 +3,7 @@
  */</template><template autoinsert="false" context="filecomment_context" deleted="false" description="Comment for created Java files" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/* 
  * ${file_name}
  * 
- * Copyright (c) 2009-${year} International Integrated System, Inc. 
+ * Copyright (c) ${year} International Integrated System, Inc. 
  * All Rights Reserved.
  * 
  * Licensed Materials - Property of International Integrated System, Inc.
