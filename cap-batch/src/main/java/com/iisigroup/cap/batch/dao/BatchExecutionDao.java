@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.springframework.batch.core.JobParameters;
 
-import com.iisigroup.cap.dao.IGenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
-public interface BatchExecutionDao extends IGenericDao<Object> {
-    Page<Map<String, Object>> findExecutionsForPage(ISearch search);
+public interface BatchExecutionDao extends GenericDao<Object> {
+    Page<Map<String, Object>> findExecutionsForPage(SearchSetting search);
 
     List<Map<String, Object>> findStepsById(String executionId);
 

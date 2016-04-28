@@ -17,10 +17,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.iisigroup.cap.dao.ICommonDao;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.CommonDao;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 
 /**
  * <pre>
@@ -35,10 +35,10 @@ import com.iisigroup.cap.service.ICommonService;
  *          </ul>
  */
 @Service
-public class CommonServiceImpl implements ICommonService {
+public class CommonServiceImpl implements CommonService {
 
     @Resource
-    private ICommonDao commonDao;
+    private CommonDao commonDao;
 
     /*
      * (non-Javadoc)
@@ -46,7 +46,7 @@ public class CommonServiceImpl implements ICommonService {
      * @see com.iisigroup.cap.service.ICommonService#findPage(java.lang.Class, com.iisigroup.cap.dao.utils.ISearch)
      */
     @Override
-    public <T> Page<T> findPage(Class<T> clazz, ISearch search) {
+    public <T> Page<T> findPage(Class<T> clazz, SearchSetting search) {
         return commonDao.findPage(clazz, search);
     }
 

@@ -19,7 +19,6 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.Constants;
@@ -34,7 +33,7 @@ import com.iisigroup.cap.rule.model.DivFtDtl;
 import com.iisigroup.cap.rule.model.DivFtItm;
 import com.iisigroup.cap.rule.service.FactorMntService;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
@@ -54,7 +53,6 @@ import net.sf.json.JSONObject;
  *          <li>2013/12/12,TimChiang,new
  *          </ul>
  */
-@Scope("request")
 @Controller("factorMnthandler")
 public class FactorMntHandler extends MFormHandler {
 
@@ -62,9 +60,9 @@ public class FactorMntHandler extends MFormHandler {
     private FactorMntService factorMntService;
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
-    private static final Logger logger = LoggerFactory.getLogger(FactorMntHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(FactorMntHandler.class);
 
     /**
      * 查詢Factor資料明細
@@ -88,7 +86,7 @@ public class FactorMntHandler extends MFormHandler {
             result.putAll(ftItm.toJSONObject(new String[] { "factorNo", "factorNm", "dataType", "oid", "tableNm", "columnNm" }, null));
         }
         return result;
-    }// ;
+    }
 
     /**
      * modify Factor Item and Detail

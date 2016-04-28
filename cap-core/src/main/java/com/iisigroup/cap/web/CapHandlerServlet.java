@@ -139,7 +139,7 @@ public class CapHandlerServlet extends HttpServlet {
             }
             SimpleContextHolder.resetContext();
         }
-    }// ;
+    }
 
     protected IErrorResult getDefaultErrorResult() {
         return CapAppContext.getBean(DEFAULT_ERROR_RESULT);

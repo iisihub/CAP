@@ -13,7 +13,6 @@ package com.iisigroup.websocket.handler;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.component.IRequest;
@@ -37,7 +36,6 @@ import com.iisigroup.websocket.service.CapSocketService;
  *          <li>2014/1/30,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("sockethandler")
 public class CapSocketHandler extends MFormHandler {
 

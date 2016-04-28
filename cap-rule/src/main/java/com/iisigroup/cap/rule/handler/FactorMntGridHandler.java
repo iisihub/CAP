@@ -18,14 +18,13 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.IBeanFormatter;
@@ -36,7 +35,7 @@ import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.rule.model.DivFtDtl;
 import com.iisigroup.cap.rule.model.DivFtItm;
 import com.iisigroup.cap.rule.service.FactorMntService;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -51,7 +50,6 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2013/12/12,TimChiang,new
  *          </ul>
  */
-@Scope("request")
 @Controller("factorMntGridhandler")
 public class FactorMntGridHandler extends MFormHandler {
 
@@ -59,9 +57,9 @@ public class FactorMntGridHandler extends MFormHandler {
     private FactorMntService factorMntService;
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
-    private static final Logger logger = LoggerFactory.getLogger(FactorMntGridHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(FactorMntGridHandler.class);
 
     /**
      * 查詢Factor Item Grid資料明細
@@ -71,7 +69,7 @@ public class FactorMntGridHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryFactorItmGridByFactorNo(ISearch search, IRequest params) {
+    public GridResult queryFactorItmGridByFactorNo(SearchSetting search, IRequest params) {
         // if (params.containsKey("factorNo") && !CapString.isEmpty(params.get("factorNo"))) {
         // search.addSearchModeParameters(SearchMode.EQUALS, "factorNo",
         // params.get("factorNo"));
@@ -84,7 +82,7 @@ public class FactorMntGridHandler extends MFormHandler {
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("rangeNm", new RangeNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 查詢Factor Detail Grid資料明細
@@ -94,7 +92,7 @@ public class FactorMntGridHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryFactorDtlGridByFactorNo(ISearch search, IRequest params) {
+    public GridResult queryFactorDtlGridByFactorNo(SearchSetting search, IRequest params) {
         if (params.containsKey("factorNo") && !CapString.isEmpty(params.get("factorNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", params.get("factorNo"));
         } else {
@@ -105,7 +103,7 @@ public class FactorMntGridHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("updateTime", new ADDateFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * RangeNmFormatter formatter

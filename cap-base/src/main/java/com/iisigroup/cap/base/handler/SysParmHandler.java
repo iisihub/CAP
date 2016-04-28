@@ -16,15 +16,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
@@ -32,7 +31,7 @@ import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 
@@ -48,15 +47,14 @@ import com.iisigroup.cap.utils.CapDate;
  *          <li>2012/10/25,iristu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("sysparmhandler")
 public class SysParmHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
 
         if (params.containsKey("parmId")) {
             search.addSearchModeParameters(SearchMode.EQUALS, "parmId", params.get("parmId"));
@@ -68,7 +66,7 @@ public class SysParmHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("updateTime", new ADDateFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * modify SysParm

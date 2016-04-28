@@ -10,7 +10,9 @@
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
  */
-package com.iisigroup.cap.dao.utils;
+package com.iisigroup.cap.model;
+
+import com.iisigroup.cap.contants.SearchMode;
 
 /**
  * <pre>

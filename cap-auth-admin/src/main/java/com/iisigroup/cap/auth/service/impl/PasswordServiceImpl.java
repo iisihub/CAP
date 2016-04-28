@@ -21,7 +21,7 @@ import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.dao.ICommonDao;
+import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
@@ -35,7 +35,7 @@ public class PasswordServiceImpl implements IPasswordService {
     @Resource
     private UserDao userDao;
     @Resource
-    private ICommonDao commonDao;
+    private CommonDao commonDao;
     @Resource
     private PwdLogDao userPwdHistoryDao;
     @Resource
@@ -99,7 +99,7 @@ public class PasswordServiceImpl implements IPasswordService {
             throw new CapMessageException(CapAppContext.getMessage("error.008", new Object[] { rule.getCodeDesc() }), getClass());
         }
         return true;
-    }// ;
+    }
 
     @Override
     public boolean validatePassword(String userId, String password) {

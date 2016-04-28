@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.auth.model.Role;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -21,13 +21,13 @@ import com.iisigroup.cap.model.Page;
  */
 public interface RoleSetService {
 
-    Page<Map<String, Object>> findPageUser(ISearch search, String roleCode);
+    Page<Map<String, Object>> findPageUser(SearchSetting search, String roleCode);
 
-    Page<Map<String, Object>> findPageEditUsr(ISearch search, String roleCode, String depCode);
+    Page<Map<String, Object>> findPageEditUsr(SearchSetting search, String roleCode, String depCode);
 
-    Page<Map<String, Object>> findPageFunc(ISearch search, String roleCode);
+    Page<Map<String, Object>> findPageFunc(SearchSetting search, String roleCode);
 
-    Page<Map<String, Object>> findPageEditFunc(ISearch search, String roleCode, String sysType, String parent);
+    Page<Map<String, Object>> findPageEditFunc(SearchSetting search, String roleCode, String sysType, String parent);
 
     Map<String, String> findAllDepartment();
 

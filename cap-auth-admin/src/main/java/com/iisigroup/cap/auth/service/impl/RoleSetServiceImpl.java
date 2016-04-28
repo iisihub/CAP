@@ -19,7 +19,7 @@ import com.iisigroup.cap.auth.model.Department;
 import com.iisigroup.cap.auth.model.Function;
 import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.service.RoleSetService;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.service.AbstractService;
 
@@ -57,24 +57,24 @@ public class RoleSetServiceImpl extends AbstractService implements RoleSetServic
     private UserDao userDao;
 
     @Override
-    public Page<Map<String, Object>> findPageUser(ISearch search, String roleCode) {
+    public Page<Map<String, Object>> findPageUser(SearchSetting search, String roleCode) {
         return userDao.findPageByRoleCode(roleCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
-    public Page<Map<String, Object>> findPageEditUsr(ISearch search, String roleCode, String depCode) {
+    public Page<Map<String, Object>> findPageEditUsr(SearchSetting search, String roleCode, String depCode) {
         return userDao.findPageUnselectedByRoleCodeAndDepCode(roleCode, depCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
-    public Page<Map<String, Object>> findPageEditFunc(ISearch search, String roleCode, String sysType, String parent) {
+    public Page<Map<String, Object>> findPageEditFunc(SearchSetting search, String roleCode, String sysType, String parent) {
         return functionDao.findPageUnselected(roleCode, sysType, parent, search.getFirstResult(), search.getMaxResults());
-    }// ;
+    }
 
     @Override
-    public Page<Map<String, Object>> findPageFunc(ISearch search, String code) {
+    public Page<Map<String, Object>> findPageFunc(SearchSetting search, String code) {
         return functionDao.findPageByRoleCode(code, search.getFirstResult(), search.getMaxResults());
-    }// ;
+    }
 
     @Override
     public Map<String, String> findAllDepartment() {
@@ -100,7 +100,7 @@ public class RoleSetServiceImpl extends AbstractService implements RoleSetServic
             }
         }
         return map;
-    }// ;
+    }
 
     @Override
     public int deleteUrList(String rolCode, List<String> delUsr) {
@@ -115,11 +115,11 @@ public class RoleSetServiceImpl extends AbstractService implements RoleSetServic
     @Override
     public List<Map<String, Object>> findAllRoleWithSelectedByUserCode(String userCode) {
         return roleDao.findAllWithSelectedByUserCode(userCode);
-    }// ;
+    }
 
     @Override
     public Role findRoleByCode(String code) {
         return roleDao.findByCode(code);
-    }// ;
+    }
 
 }

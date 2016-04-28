@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.SequenceDao;
 import com.iisigroup.cap.base.model.Sequence;
-import com.iisigroup.cap.dao.impl.GenericDao;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
 
 @Repository
-public class SequenceDaoImpl extends GenericDao<Sequence> implements SequenceDao {
+public class SequenceDaoImpl extends GenericDaoImpl<Sequence> implements SequenceDao {
 
     @Override
     public Page<Map<String, Object>> listAllForPaging(int start, int fetch) {

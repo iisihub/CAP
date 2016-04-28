@@ -50,20 +50,20 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
     private String _contentType;
 
     public ByteArrayDownloadResult() {
-    }// ;
+    }
 
     public ByteArrayDownloadResult(IRequest request, byte[] byteArray, String contentType, String outputName) {
         this._request = request;
         this._byteArray = byteArray;
         this._contentType = contentType;
         this._outputName = CapWebUtil.encodeFileName(_request, outputName);
-    }// ;
+    }
 
     public ByteArrayDownloadResult(IRequest request, byte[] byteArray, String contentType) {
         this._request = request;
         this._byteArray = byteArray;
         this._contentType = contentType;
-    }// ;
+    }
 
     @Override
     public String getLogMessage() {
@@ -95,7 +95,7 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
             this._byteArray = r._byteArray;
             this._outputName = CapWebUtil.encodeFileName(_request, r._outputName);
         }
-    }// ;
+    }
 
     @Override
     public void respondResult(ServletResponse response) {
@@ -132,5 +132,5 @@ public class ByteArrayDownloadResult extends FileDownloadResult {
             IOUtils.closeQuietly(in);
             IOUtils.closeQuietly(output);
         }
-    }// ;
+    }
 }// ~

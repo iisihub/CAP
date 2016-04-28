@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.RemindsDao;
 import com.iisigroup.cap.base.model.Reminds;
-import com.iisigroup.cap.dao.impl.GenericDao;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>
@@ -33,7 +33,7 @@ import com.iisigroup.cap.dao.impl.GenericDao;
  *          </ul>
  */
 @Repository
-public class RemindsDaoImpl extends GenericDao<Reminds> implements RemindsDao {
+public class RemindsDaoImpl extends GenericDaoImpl<Reminds> implements RemindsDao {
 
     @Override
     @SuppressWarnings("unchecked")

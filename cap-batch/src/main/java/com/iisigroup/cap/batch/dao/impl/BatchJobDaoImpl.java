@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import com.iisigroup.cap.batch.dao.BatchJobDao;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.support.BatchJobRowMapper;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.utils.CapBeanUtil;
 
 @Repository
-public class BatchJobDaoImpl extends GenericDao<BatchJob> implements BatchJobDao {
+public class BatchJobDaoImpl extends GenericDaoImpl<BatchJob> implements BatchJobDao {
 
     @SuppressWarnings("unchecked")
     @Override
@@ -25,7 +25,7 @@ public class BatchJobDaoImpl extends GenericDao<BatchJob> implements BatchJobDao
     }
 
     @Override
-    public Page<BatchJob> findForPage(ISearch search) {
+    public Page<BatchJob> findForPage(SearchSetting search) {
         return getNamedJdbcTemplate().queryForPage("batchJob.findPage", search, new BatchJobRowMapper());
     }
 

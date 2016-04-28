@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivRlItmDao;
 import com.iisigroup.cap.rule.model.DivRlItm;
 
@@ -34,18 +34,18 @@ import com.iisigroup.cap.rule.model.DivRlItm;
  *          </ul>
  */
 @Repository
-public class DivRlItmDaoImpl extends GenericDao<DivRlItm> implements DivRlItmDao {
+public class DivRlItmDaoImpl extends GenericDaoImpl<DivRlItm> implements DivRlItmDao {
 
     @Override
     public DivRlItm findByDivRlNo(String divRlNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
         return findUniqueOrNone(search);
     }
 
     @Override
     public DivRlItm findByDivRlNoAndInputFlg(String divRlNo, String inputFlag) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
         search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
@@ -54,7 +54,7 @@ public class DivRlItmDaoImpl extends GenericDao<DivRlItm> implements DivRlItmDao
 
     @Override
     public List<DivRlItm> findByDivRlNo(String[] divRlNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("codeOrder");
@@ -63,7 +63,7 @@ public class DivRlItmDaoImpl extends GenericDao<DivRlItm> implements DivRlItmDao
 
     @Override
     public List<DivRlItm> findByDivRlNoAndInputFlg(String[] divRlNos, String inputFlag) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
         search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
         return find(search);

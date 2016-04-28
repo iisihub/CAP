@@ -25,5 +25,5 @@ import com.iisigroup.cap.model.IDataObject;
  *          <li>2011/11/30,iristu,new
  *          </ul>
  */
-public interface ICommonDao extends IGenericDao<IDataObject> {
+public interface CommonDao extends GenericDao<IDataObject> {
 }

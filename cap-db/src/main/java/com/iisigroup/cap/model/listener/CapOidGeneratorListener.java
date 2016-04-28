@@ -35,6 +35,6 @@ public class CapOidGeneratorListener {
     public <T extends IDataObject> void perPersist(T entity) {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         entity.setOid(uuid);
-    }// ;
+    }
 
 }

@@ -62,7 +62,7 @@ public class MessageBundleScriptCreator {
     public static String generateJson(String i18nPath) {
         return generateJson(loadProperties(i18nPath), null);
 
-    }// ;
+    }
 
     /**
      * 將properties轉成json格式
@@ -76,7 +76,7 @@ public class MessageBundleScriptCreator {
     public static String generateJson(String i18nPath, Set<String> filterList) {
         return generateJson(loadProperties(i18nPath), filterList);
 
-    }// ;
+    }
 
     /**
      * 將properties轉成json格式
@@ -104,7 +104,7 @@ public class MessageBundleScriptCreator {
             }
         }
         return result.getResult();
-    }// ;
+    }
 
     /**
      * 將properties轉成json格式
@@ -139,7 +139,7 @@ public class MessageBundleScriptCreator {
         StringBuffer script = new StringBuffer();
         script.append("<script type='text/javascript'> require(['cust-common'], function(){i18n.set(\"").append(i18nKeyName).append("\",").append(message).append(");});</script>");
         return script.toString();
-    }// ;
+    }
 
     /**
      * 將properties轉成json格式
@@ -150,7 +150,7 @@ public class MessageBundleScriptCreator {
      */
     public static String createScript(String i18nPath) {
         return createScript(CapString.getRegularMatch(i18nPath, I18NKEY_REG), loadProperties(i18nPath), null);
-    }// ;
+    }
 
     /**
      * 將properties轉成json格式
@@ -163,7 +163,7 @@ public class MessageBundleScriptCreator {
      */
     public static String createScript(String i18nPath, Set<String> filterList) {
         return createScript(CapString.getRegularMatch(i18nPath, I18NKEY_REG), loadProperties(i18nPath), filterList);
-    }// ;
+    }
 
     /**
      * 讀取 i18n 檔案

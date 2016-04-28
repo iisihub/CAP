@@ -42,6 +42,6 @@ public class JobXmlApplicationContextsFactoryBean extends ClasspathXmlApplicatio
     public void setJobXmlResources() {
         List<Resource> resources = jobService.listJobResources();
         setResources(resources.toArray(new Resource[resources.size()]));
-    }// ;
+    }
 
 }// ~

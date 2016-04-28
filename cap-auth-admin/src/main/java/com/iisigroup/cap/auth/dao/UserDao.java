@@ -3,10 +3,10 @@ package com.iisigroup.cap.auth.dao;
 import java.util.Map;
 
 import com.iisigroup.cap.auth.model.User;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.model.Page;
 
-public interface UserDao extends IGenericDao<User> {
+public interface UserDao extends GenericDao<User> {
     User findByCode(String userId);
 
     Page<Map<String, Object>> findPage(String userId, String userName, String[] roleOids, String[] status, int maxResults, int firstResult);

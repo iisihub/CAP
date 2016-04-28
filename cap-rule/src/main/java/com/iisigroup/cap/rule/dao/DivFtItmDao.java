@@ -13,7 +13,7 @@ package com.iisigroup.cap.rule.dao;
 
 import java.util.List;
 
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.rule.model.DivFtItm;
 
 /**
@@ -28,7 +28,7 @@ import com.iisigroup.cap.rule.model.DivFtItm;
  *          <li>2013/12/13,TimChiang,new
  *          </ul>
  */
-public interface DivFtItmDao extends IGenericDao<DivFtItm> {
+public interface DivFtItmDao extends GenericDao<DivFtItm> {
 
     /**
      * find by DivFtItm.

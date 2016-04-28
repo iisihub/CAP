@@ -19,9 +19,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.I18nDao;
 import com.iisigroup.cap.base.model.I18n;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>
@@ -37,11 +37,11 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
+public class I18nDaoImpl extends GenericDaoImpl<I18n> implements I18nDao {
 
     @Override
     public List<I18n> findByCodeType(String codetype, String locale) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", codetype);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
@@ -52,7 +52,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
 
     @Override
     public I18n findByCodeTypeAndCodeValue(String cType, String cValue, String locale) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeValue", cValue);
@@ -62,7 +62,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
 
     @Override
     public List<I18n> findByCodeType(String[] codetypes, String locale) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.IN, "codeType", codetypes);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
@@ -72,7 +72,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
 
     @Override
     public List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeDesc", codeDesc);

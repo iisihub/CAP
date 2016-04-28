@@ -9,16 +9,16 @@ import org.springframework.stereotype.Repository;
 import com.iisigroup.cap.batch.dao.BatchScheduleDao;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.support.BatchScheduleRowMapper;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.utils.CapBeanUtil;
 
 @Repository
-public class BatchScheduleDaoImpl extends GenericDao<BatchSchedule> implements BatchScheduleDao {
+public class BatchScheduleDaoImpl extends GenericDaoImpl<BatchSchedule> implements BatchScheduleDao {
 
     @Override
-    public Page<BatchSchedule> findForPage(ISearch search) {
+    public Page<BatchSchedule> findForPage(SearchSetting search) {
         return getNamedJdbcTemplate().queryForPage("batchSch.findPage", search, new BatchScheduleRowMapper());
     }
 

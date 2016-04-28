@@ -38,7 +38,7 @@ import com.iisigroup.websocket.bean.ChatObject;
  */
 public class CapNettyWebSocketServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(CapNettyWebSocketServer.class);
+    private final Logger logger = LoggerFactory.getLogger(CapNettyWebSocketServer.class);
 
     private final SocketIOServer server;
 

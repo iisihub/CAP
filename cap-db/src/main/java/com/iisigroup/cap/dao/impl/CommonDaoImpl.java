@@ -13,7 +13,7 @@ package com.iisigroup.cap.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.ICommonDao;
+import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.model.IDataObject;
 
 /**
@@ -31,5 +31,5 @@ import com.iisigroup.cap.model.IDataObject;
  *            T extends IDataObject
  */
 @Repository
-public class CommonDao<T extends IDataObject> extends GenericDao<IDataObject> implements ICommonDao {
+public class CommonDaoImpl<T extends IDataObject> extends GenericDaoImpl<IDataObject> implements CommonDao {
 }

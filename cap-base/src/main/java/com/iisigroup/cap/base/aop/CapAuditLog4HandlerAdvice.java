@@ -36,7 +36,7 @@ import com.iisigroup.cap.base.model.AuditLog;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.model.CapUserDetails;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapCommonUtil;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.UUIDGenerator;
@@ -76,7 +76,7 @@ public class CapAuditLog4HandlerAdvice {
     }
 
     @Resource
-    private ICommonService commonSrv;
+    private CommonService commonSrv;
 
     @Resource
     private CapSystemProperties sysProp;

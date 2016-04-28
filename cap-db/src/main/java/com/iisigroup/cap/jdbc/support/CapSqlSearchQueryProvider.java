@@ -20,9 +20,9 @@ import java.util.Map.Entry;
 
 import org.springframework.util.CollectionUtils;
 
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
-import com.iisigroup.cap.dao.utils.SearchModeParameter;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.model.SearchModeParameter;
 
 /**
  * <pre>
@@ -39,14 +39,14 @@ import com.iisigroup.cap.dao.utils.SearchModeParameter;
 public class CapSqlSearchQueryProvider {
 
     Map<String, Object> params;
-    ISearch search;
+    SearchSetting search;
 
-    public CapSqlSearchQueryProvider(ISearch search) {
+    public CapSqlSearchQueryProvider(SearchSetting search) {
         this.search = search;
         this.params = new HashMap<String, Object>();
         params.put("startRow", search.getFirstResult());
         params.put("endRow", search.getFirstResult() + search.getMaxResults());
-    }// ;
+    }
 
     public Map<String, Object> getParams() {
         return params;
@@ -79,7 +79,7 @@ public class CapSqlSearchQueryProvider {
         }
 
         return sb.toString();
-    }// ;
+    }
 
     public String generateOrderCause() {
         StringBuffer sb = new StringBuffer();
@@ -97,7 +97,7 @@ public class CapSqlSearchQueryProvider {
             sb.delete(len - 1, len); // 拿掉最後一個","
         }
         return sb.toString();
-    }// ;
+    }
 
     @SuppressWarnings("incomplete-switch")
     private String generateItemQuery(SearchModeParameter search) {
@@ -158,7 +158,7 @@ public class CapSqlSearchQueryProvider {
             break;
         }
         return sb.toString();
-    }// ;
+    }
 
     private Collection<?> asCollection(Object value) {
         if (value instanceof Collection) {
@@ -167,7 +167,7 @@ public class CapSqlSearchQueryProvider {
             return Arrays.asList(value);
         }
         return Arrays.asList(value);
-    }// ;
+    }
 
     @SuppressWarnings("rawtypes")
     private Object[] asArray(Object value) {
@@ -181,6 +181,6 @@ public class CapSqlSearchQueryProvider {
             return ((Collection) value).toArray();
         }
         return null;
-    }// ;
+    }
 
 }// ~

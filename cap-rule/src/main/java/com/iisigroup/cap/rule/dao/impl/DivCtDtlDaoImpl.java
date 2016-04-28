@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivCtDtlDao;
 import com.iisigroup.cap.rule.model.DivCtDtl;
 
@@ -34,18 +34,18 @@ import com.iisigroup.cap.rule.model.DivCtDtl;
  *          </ul>
  */
 @Repository
-public class DivCtDtlDaoImpl extends GenericDao<DivCtDtl> implements DivCtDtlDao {
+public class DivCtDtlDaoImpl extends GenericDaoImpl<DivCtDtl> implements DivCtDtlDao {
 
     @Override
     public DivCtDtl findByConditionNo(String conditionNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
         return findUniqueOrNone(search);
     }
 
     @Override
     public List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("divCtSor");
@@ -54,7 +54,7 @@ public class DivCtDtlDaoImpl extends GenericDao<DivCtDtl> implements DivCtDtlDao
 
     @Override
     public List<DivCtDtl> findByConditionNos(String[] conditionNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("divCtSor");

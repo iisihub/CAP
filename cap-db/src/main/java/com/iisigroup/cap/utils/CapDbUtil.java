@@ -28,6 +28,8 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
+import com.iisigroup.cap.contants.CapJdbcContants;
+
 /**
  * <pre>
  * CapDbUtil
@@ -42,9 +44,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
  */
 public class CapDbUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(CapDbUtil.class);
-
-    static final String EMPTY_STRING = "";
+    private static final Logger LOGGER = LoggerFactory.getLogger(CapDbUtil.class);
 
     /**
      * <pre>
@@ -60,7 +60,7 @@ public class CapDbUtil {
             return "";
         }
         return in.replaceAll("^[　 ]+", "").replaceAll("[　 ]+$", "");
-    }// ;
+    }
 
     /**
      * trimNull 當傳入值為Null時，則回傳空字串。不為Null時，則回傳trim過的String
@@ -73,9 +73,9 @@ public class CapDbUtil {
         if (o != null && !"".equals(o)) {
             return (o.toString()).trim();
         } else {
-            return EMPTY_STRING;
+            return CapJdbcContants.EMPTY_STRING;
         }
-    }// ;
+    }
 
     /**
      * Convert a prepared statment to standard SQL command Can be used to debug SQL command
@@ -103,10 +103,10 @@ public class CapDbUtil {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return sb.toString();
-    }// ;
+    }
 
     /**
      * Message Format
@@ -152,7 +152,7 @@ public class CapDbUtil {
             buffer.append(pattern.substring(pos));
         }
         return buffer.toString();
-    }// ;
+    }
 
     /**
      * use Spring Expression Language (SpEL) parse
@@ -169,7 +169,7 @@ public class CapDbUtil {
         StandardEvaluationContext context = new StandardEvaluationContext(params);
         ExpressionParser spel = new SpelExpressionParser();
         return spel.parseExpression(expressionStr, parserContext).getValue(context, String.class);
-    }// ;
+    }
 
     @SuppressWarnings("rawtypes")
     protected static String getSqlValue(Object o) {
@@ -206,7 +206,7 @@ public class CapDbUtil {
             }
         }
         return rtn;
-    }// ;
+    }
 
     /**
      * getQuestionPos
@@ -228,6 +228,6 @@ public class CapDbUtil {
             npos++;
         } while (npos > 0 && i < pos.length);
         return pos;
-    }// ;
+    }
 
 }

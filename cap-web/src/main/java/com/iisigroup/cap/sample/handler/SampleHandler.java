@@ -22,7 +22,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,11 +50,10 @@ import com.iisigroup.cap.security.annotation.Captcha;
  *          <li>2012/9/24,iristu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("samplehandler")
 public class SampleHandler extends MFormHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(SampleHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(SampleHandler.class);
 
     @HandlerType(HandlerTypeEnum.FileUpload)
     public IResult upload(IRequest request) throws CapException {
@@ -70,7 +68,7 @@ public class SampleHandler extends MFormHandler {
         String fileName = f.getOriginalFilename();
         result.set(Constants.AJAX_NOTIFY_MESSAGE, fileName + " upload file success!!");
         return result;
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.FileDownload)
     public IResult dwnload(IRequest request) throws CapException {
@@ -88,7 +86,7 @@ public class SampleHandler extends MFormHandler {
         return null;
         // return new FileDownloadResult(request, "logs/CapLog.log", outputName,
         // "text/plain");
-    }// ;
+    }
 
     @Resource
     private SampleRptService sampleRptService;
@@ -107,7 +105,7 @@ public class SampleHandler extends MFormHandler {
         return null;
         // return new FileDownloadResult(request, "logs/CapLog.log", outputName,
         // "text/plain");
-    }// ;
+    }
 
     public IResult queryMenu(IRequest request) {
         return new AjaxFormResult("{'child':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'def/about'}]}"

@@ -22,15 +22,14 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
@@ -48,7 +47,7 @@ import com.iisigroup.cap.rule.model.DivFtItm;
 import com.iisigroup.cap.rule.service.ConditionMntService;
 import com.iisigroup.cap.rule.service.FactorMntService;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
@@ -68,7 +67,6 @@ import net.sf.json.JSONObject;
  *          <li>2013/12/24,TimChiang,new
  *          </ul>
  */
-@Scope("request")
 @Controller("conditionMnthandler")
 public class ConditionMntHandler extends MFormHandler {
 
@@ -78,9 +76,9 @@ public class ConditionMntHandler extends MFormHandler {
     private FactorMntService factorMntService;
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
-    private static final Logger logger = LoggerFactory.getLogger(ConditionMntHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(ConditionMntHandler.class);
 
     /**
      * 查詢Condition資料明細
@@ -133,7 +131,7 @@ public class ConditionMntHandler extends MFormHandler {
         }
 
         return result;
-    }// ;
+    }
 
     /**
      * modify Condition Item and Detail
@@ -255,7 +253,7 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionItmByDivCtNo(ISearch search, IRequest params) {
+    public GridResult queryConditionItmByDivCtNo(SearchSetting search, IRequest params) {
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "divCtNo", "");
 
         Page<DivCtItm> page = commonService.findPage(DivCtItm.class, search);
@@ -263,7 +261,7 @@ public class ConditionMntHandler extends MFormHandler {
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("condVal", new CondValFormatter(factorMntService));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 查詢Condition Detail Grid資料明細
@@ -273,7 +271,7 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionDtlByDivCtNo(ISearch search, IRequest params) {
+    public GridResult queryConditionDtlByDivCtNo(SearchSetting search, IRequest params) {
         if (params.containsKey("divCtNo") && !CapString.isEmpty(params.get("divCtNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", params.get("divCtNo"));
         } else {
@@ -284,7 +282,7 @@ public class ConditionMntHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("updateTime", new ADDateFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 查詢Factor Detail Grid資料明細
@@ -294,7 +292,7 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryFactorDetailByFactorNo(ISearch search, IRequest params) {
+    public GridResult queryFactorDetailByFactorNo(SearchSetting search, IRequest params) {
         if (params.containsKey("factorNo") && !CapString.isEmpty(params.get("factorNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", params.get("factorNo"));
         } else {
@@ -307,7 +305,7 @@ public class ConditionMntHandler extends MFormHandler {
         fmt.put("rangeNm", new RangeNmFormatter());
         fmt.put("factorNm", new FactorNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 查詢Factor Detail Grid資料明細
@@ -317,7 +315,7 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionDtlGridByDivCtNo(ISearch search, IRequest params) {
+    public GridResult queryConditionDtlGridByDivCtNo(SearchSetting search, IRequest params) {
         if (params.containsKey("divCtNo") && !CapString.isEmpty(params.get("divCtNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", params.get("divCtNo"));
         } else {
@@ -328,7 +326,7 @@ public class ConditionMntHandler extends MFormHandler {
         fmt.put("factorNm", new CondFactorNmFormatter());
         fmt.put("rangeNm", new CondRangeNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * RangeNmFormatter formatter

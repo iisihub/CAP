@@ -28,9 +28,6 @@ import com.iisigroup.websocket.service.CapRemindService;
 @Service
 public class CapRemindServiceImpl extends AbstractService implements CapRemindService {
 
-    // private static final Logger logger = LoggerFactory
-    // .getLogger(CapReminderService.class);
-
     @Resource
     RemindDao remindDao;
 

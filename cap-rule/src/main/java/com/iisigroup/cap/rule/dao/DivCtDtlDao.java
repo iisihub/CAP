@@ -13,7 +13,7 @@ package com.iisigroup.cap.rule.dao;
 
 import java.util.List;
 
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.rule.model.DivCtDtl;
 
 /**
@@ -28,7 +28,7 @@ import com.iisigroup.cap.rule.model.DivCtDtl;
  *          <li>2013/12/20,TimChiang,new
  *          </ul>
  */
-public interface DivCtDtlDao extends IGenericDao<DivCtDtl> {
+public interface DivCtDtlDao extends GenericDao<DivCtDtl> {
 
     /**
      * find by conditionNo.

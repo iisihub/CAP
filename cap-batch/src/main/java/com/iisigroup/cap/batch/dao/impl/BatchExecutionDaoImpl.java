@@ -13,15 +13,15 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.batch.dao.BatchExecutionDao;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
 
 @Repository
-public class BatchExecutionDaoImpl extends GenericDao<Object> implements BatchExecutionDao {
+public class BatchExecutionDaoImpl extends GenericDaoImpl<Object> implements BatchExecutionDao {
 
     @Override
-    public Page<Map<String, Object>> findExecutionsForPage(ISearch search) {
+    public Page<Map<String, Object>> findExecutionsForPage(SearchSetting search) {
         return getNamedJdbcTemplate().queryForPage("JobExecution.findPage", search);
     }
 

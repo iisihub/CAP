@@ -19,7 +19,6 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
 
@@ -29,8 +28,8 @@ import com.iisigroup.cap.base.CapFunctionCode;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
@@ -40,7 +39,7 @@ import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
@@ -62,7 +61,6 @@ import com.isigroup.cap.base.annotation.CapAuditLogAction.CapActionTypeEnum;
  *          <li>2012/3/1,rodeschen,增加判斷重覆及更改程式名稱
  *          </ul>
  */
-@Scope("request")
 @Controller("codetypehandler")
 public class CodeTypeHandler extends MFormHandler {
 
@@ -70,11 +68,11 @@ public class CodeTypeHandler extends MFormHandler {
     private CodeTypeService codeTypeService;
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
     @CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
         if (!CapString.isEmpty(params.get("locale"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "locale", params.get("locale"));
         }
@@ -97,7 +95,7 @@ public class CodeTypeHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("updateTime", new ADDateFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * modify codetype
@@ -189,6 +187,6 @@ public class CodeTypeHandler extends MFormHandler {
             }
         }
         return mresult;
-    }// ;
+    }
 
 }// ~

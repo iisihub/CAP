@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.UserRoleDao;
 import com.iisigroup.cap.auth.model.UserRole;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 
 @Repository
-public class UserRoleDaoImpl extends GenericDao<UserRole> implements UserRoleDao {
+public class UserRoleDaoImpl extends GenericDaoImpl<UserRole> implements UserRoleDao {
 
     @Override
     public int deleteByRoleCodeAndUserCodes(String roleCode, List<String> delUsr) {
@@ -25,7 +25,7 @@ public class UserRoleDaoImpl extends GenericDao<UserRole> implements UserRoleDao
 
     @Override
     public UserRole findByUserCodeAndRoleCode(String userCode, String roleCode) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "userCode", userCode);
         search.addSearchModeParameters(SearchMode.EQUALS, "roleCode", roleCode);
         return findUniqueOrNone(search);
@@ -33,7 +33,7 @@ public class UserRoleDaoImpl extends GenericDao<UserRole> implements UserRoleDao
 
     @Override
     public void deleteByUserCode(String userCode) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "userCode", userCode);
         delete(find(search));
     }

@@ -60,5 +60,5 @@ public class SchedulePage extends BaseActionController {
         List<BatchJob> jobs = batchSrv.listJobs();
         model.addObject("batchJob", jobs);
         return model;
-    }// ;
+    }
 }

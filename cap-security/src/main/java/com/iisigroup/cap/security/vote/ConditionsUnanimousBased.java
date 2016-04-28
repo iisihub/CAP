@@ -114,7 +114,7 @@ public class ConditionsUnanimousBased implements AccessDecisionManager, Initiali
             throw new AccessDeniedException(messages.getMessage("AbstractAccessDecisionManager.accessDenied", "Access is denied"));
         }
 
-    }// ;
+    }
 
     @Override
     public boolean supports(ConfigAttribute attribute) {

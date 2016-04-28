@@ -20,7 +20,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -31,22 +30,22 @@ import com.iisigroup.cap.auth.service.FunctionSetService;
 import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.jpa.utils.CapEntityUtil;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapEntityUtil;
 import com.iisigroup.cap.utils.CapString;
 
 import net.sf.json.JSONArray;
@@ -64,12 +63,11 @@ import net.sf.json.JSONObject;
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("functionsethandler")
 public class FunctionSetHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonSrv;
+    private CommonService commonSrv;
 
     @Autowired
     private CodeTypeService codeTypeService;
@@ -78,7 +76,7 @@ public class FunctionSetHandler extends MFormHandler {
     private FunctionSetService functionSetService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
         String sysType = params.get("sysType");
         String level = params.get("level");
         String code = params.get("code");
@@ -102,10 +100,10 @@ public class FunctionSetHandler extends MFormHandler {
 
         Page<Function> page = commonSrv.findPage(Function.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryRole(ISearch search, IRequest params) {
+    public MapGridResult queryRole(SearchSetting search, IRequest params) {
         String sysType = params.get("sysType");
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
@@ -114,10 +112,10 @@ public class FunctionSetHandler extends MFormHandler {
 
         Page<Map<String, Object>> page = functionSetService.findPage(search, sysType, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryAllRole(ISearch search, IRequest params) {
+    public MapGridResult queryAllRole(SearchSetting search, IRequest params) {
         String sysType = params.get("sysType");
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
@@ -126,7 +124,7 @@ public class FunctionSetHandler extends MFormHandler {
 
         Page<Map<String, Object>> page = functionSetService.findEditPage(search, sysType, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     public IResult queryForm(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
@@ -142,7 +140,7 @@ public class FunctionSetHandler extends MFormHandler {
         }
 
         return result;
-    }// ;
+    }
 
     public IResult loadFunc(IRequest request) throws CapException {
         AjaxFormResult result = new AjaxFormResult();
@@ -160,7 +158,7 @@ public class FunctionSetHandler extends MFormHandler {
         }
 
         return result;
-    }// ;
+    }
 
     /**
      * 編輯資料
@@ -184,7 +182,7 @@ public class FunctionSetHandler extends MFormHandler {
         }
         functionSetService.save(function, request);
         return result;
-    }// ;
+    }
 
     /**
      * 編輯資料
@@ -222,7 +220,7 @@ public class FunctionSetHandler extends MFormHandler {
         commonSrv.save(setRole);
 
         return result;
-    }// ;
+    }
 
     /**
      * 刪除資料
@@ -239,7 +237,7 @@ public class FunctionSetHandler extends MFormHandler {
             commonSrv.delete(code);
         }
         return result;
-    }// ;
+    }
 
     /**
      * 刪除資料
@@ -268,6 +266,6 @@ public class FunctionSetHandler extends MFormHandler {
         functionSetService.deleteRfList(code, delRole);
 
         return result;
-    }// ;
+    }
 
 }

@@ -9,7 +9,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.jpa.utils;
+package com.iisigroup.cap.utils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CapEntityUtil {
 
-    public static final Logger logger = LoggerFactory.getLogger(CapEntityUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CapEntityUtil.class);
 
     /**
      * 取得傳入entity所有欄位名稱
@@ -82,7 +82,7 @@ public class CapEntityUtil {
             }
             return cols.toArray(new String[cols.size()]);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return null;
     }
@@ -110,7 +110,7 @@ public class CapEntityUtil {
             }
             return cols;
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return null;
     }

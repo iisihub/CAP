@@ -77,7 +77,7 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
             throw new CapException(e, getClass());
         }
 
-    }// ;
+    }
 
     @Override
     public OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler) {

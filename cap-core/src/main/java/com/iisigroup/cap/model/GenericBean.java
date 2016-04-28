@@ -125,7 +125,7 @@ public class GenericBean {
             throw new CapException(e, getClass());
         }
 
-    }// ;
+    }
 
     private static String SPLIT = "\\|";
 

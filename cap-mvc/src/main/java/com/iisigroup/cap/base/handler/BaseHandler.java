@@ -1,6 +1,5 @@
 package com.iisigroup.cap.base.handler;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -25,7 +24,6 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2012/8/23,RodesChen,add default locale
  *          </ul>
  */
-@Scope("request")
 @Controller("basehandler")
 public class BaseHandler extends MFormHandler {
 
@@ -47,6 +45,6 @@ public class BaseHandler extends MFormHandler {
     public IResult queryJsI18N(IRequest request) {
         String result = MessageBundleScriptCreator.generateJson(request.get("f").replaceAll("/?webroot/page", ""));
         return new AjaxFormResult(result);
-    }// ;
+    }
 
 }

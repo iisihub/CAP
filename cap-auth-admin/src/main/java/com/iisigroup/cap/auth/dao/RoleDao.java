@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.auth.model.Role;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.model.Page;
 
-public interface RoleDao extends IGenericDao<Role> {
+public interface RoleDao extends GenericDao<Role> {
     List<Role> findAll();
 
     Role findByCode(String code);

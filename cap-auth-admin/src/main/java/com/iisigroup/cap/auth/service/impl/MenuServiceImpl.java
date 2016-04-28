@@ -56,7 +56,7 @@ public class MenuServiceImpl implements MenuService {
             pItem.getChild().add(item);
         }
         return root;
-    }// ;
+    }
 
     public static class MenuItem implements Serializable {
 

@@ -37,6 +37,6 @@ public class FieldSetItemPreparedStatementSetter implements ItemPreparedStatemen
             ps.setObject(i + 1, item.getValues()[i]);
         }
 
-    }// ;
+    }
 
 }

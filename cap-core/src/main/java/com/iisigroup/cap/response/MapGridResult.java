@@ -82,7 +82,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
     public MapGridResult setPage(int page) {
         resultMap.put(IGridEnum.PAGE.getCode(), page);
         return this;
-    }// ;
+    }
 
     /**
      * 取得頁碼
@@ -109,7 +109,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
         resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
         resultMap.put(IGridEnum.PAGEROWS.getCode(), pageRows);
         return this;
-    }// ;
+    }
 
     /**
      * 取得每頁筆數
@@ -132,7 +132,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
     public MapGridResult setRecords(int rowCount) {
         resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
         return this;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -144,7 +144,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
     public Integer getRecords() {
         Object o = resultMap.get(IGridEnum.RECORDS.getCode());
         return o == null ? 0 : (Integer) o;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -210,7 +210,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
             }
         }
         return rows;
-    }// ;
+    }
 
     /** column split regularre char **/
     private static String SPLIT = "\\|";
@@ -318,6 +318,6 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
     @Override
     public void respondResult(ServletResponse response) {
         new StringResponse(getContextType(), getEncoding(), getResult()).respond(response);
-    }// ;
+    }
 
 }

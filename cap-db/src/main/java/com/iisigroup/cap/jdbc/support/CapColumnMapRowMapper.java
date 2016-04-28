@@ -59,7 +59,7 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
             mapOfColValues.put(key, obj);
         }
         return mapOfColValues;
-    }// ;
+    }
 
     @Override
     protected Object getColumnValue(ResultSet rs, int index) throws SQLException {
@@ -70,6 +70,6 @@ public class CapColumnMapRowMapper extends ColumnMapRowMapper {
             obj = CapDbUtil.trimFullSpace(str);
         }
         return obj;
-    }// ;
+    }
 
 }// ~

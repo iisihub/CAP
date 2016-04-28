@@ -14,7 +14,6 @@ package com.iisigroup.cap.mvc.page.report;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.component.IRequest;
@@ -31,9 +30,8 @@ import com.iisigroup.cap.component.IRequest;
  *          <li>2012/3/14,rodeschen,new
  *          </ul>
  */
-@Scope("request")
 @Service("SamplePR")
-public class SampilePageReport implements IPageReport {
+public class SamplePageReport implements IPageReport {
 
     @Override
     public Map<String, Object> excute(IRequest request) {

@@ -51,7 +51,7 @@ public class CapWebUtil {
         } catch (UnsupportedEncodingException e) {
             return fileName;
         }
-    }// ;
+    }
 
     /**
      * Gets the request url.

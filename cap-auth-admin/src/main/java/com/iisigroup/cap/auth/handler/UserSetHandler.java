@@ -18,7 +18,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 
@@ -32,8 +31,8 @@ import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
@@ -47,7 +46,7 @@ import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.service.IPasswordService;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapWebUtil;
 
@@ -63,7 +62,6 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          <li>2014/02/13,yunglinliu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("usersethandler")
 public class UserSetHandler extends MFormHandler {
 
@@ -76,10 +74,10 @@ public class UserSetHandler extends MFormHandler {
     @Resource
     private CodeTypeService codeTypeService;
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult query(ISearch search, IRequest params) {
+    public MapGridResult query(SearchSetting search, IRequest params) {
         String code = params.get("code");
         String name = params.get("name");
         String[] roleCodes = params.getParamsAsStringArray("roleCodes");
@@ -91,11 +89,11 @@ public class UserSetHandler extends MFormHandler {
         fmt.put("pwdExpiredTime", new ADDateFormatter());
         fmt.put("status", new CodeTypeFormatter(codeTypeService, "userStatus", (Locale) SimpleContextHolder.get(CapWebUtil.localeKey)));
         return new MapGridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     @SuppressWarnings("rawtypes")
     @HandlerType(HandlerTypeEnum.GRID)
-    public IGridResult findRole(ISearch search, IRequest params) {
+    public IGridResult findRole(SearchSetting search, IRequest params) {
         String type = params.get("type");
         if ("modify".equalsIgnoreCase(type)) {
             List<Map<String, Object>> roleList = null;
@@ -111,7 +109,7 @@ public class UserSetHandler extends MFormHandler {
             Page<Role> page = commonService.findPage(Role.class, search);
             return new GridResult(page.getContent(), page.getTotalRow(), null);
         }
-    }// ;
+    }
 
     public IResult add(IRequest request) {
         String code = request.get("code");
@@ -127,7 +125,7 @@ public class UserSetHandler extends MFormHandler {
         String[] roleCodes = request.getParamsAsStringArray("roleCodes");
         userService.createUser(code, name, password, email, roleCodes);
         return new AjaxFormResult();
-    }// ;
+    }
 
     public IResult modify(IRequest request) {
         String oid = request.get("oid");
@@ -148,41 +146,41 @@ public class UserSetHandler extends MFormHandler {
         String[] roleCodes = request.getParamsAsStringArray("roleCodes");
         userService.updateUserByOid(oid, code, name, reset, password, email, roleCodes);
         return new AjaxFormResult();
-    }// ;
+    }
 
     public IResult delete(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
         userService.deleteUserByOids(oids);
         return new AjaxFormResult();
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryAllRole(ISearch search, IRequest params) {
+    public GridResult queryAllRole(SearchSetting search, IRequest params) {
         search.addOrderBy("code", false);
         Page<Role> page = commonService.findPage(Role.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryAllUserStatus(ISearch search, IRequest params) {
+    public GridResult queryAllUserStatus(SearchSetting search, IRequest params) {
         search.addOrderBy("codeValue", false);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", "userStatus");
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", ((Locale) SimpleContextHolder.get(CapWebUtil.localeKey)).toString());
         Page<CodeType> page = commonService.findPage(CodeType.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     public IResult lock(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
         userService.lockUserByOids(oids);
         return new AjaxFormResult();
-    }// ;
+    }
 
     public IResult unlock(IRequest request) {
         String[] oids = request.getParamsAsStringArray("oids");
         userService.unlockUserByOids(oids);
         return new AjaxFormResult();
-    }// ;
+    }
 
     public IResult changePassword(IRequest request) {
         String password = request.get("password");

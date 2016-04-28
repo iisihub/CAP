@@ -77,11 +77,11 @@ public class CapBeanUtil {
             }
         }
         return destination;
-    }// ;
+    }
 
     public static <T extends GenericBean> T copyBean(T source, T destination) {
         return copyBean(source, destination, CapBeanUtil.getFieldName(destination.getClass(), true));
-    }// ;
+    }
 
     /**
      * bean transform map
@@ -97,7 +97,7 @@ public class CapBeanUtil {
      */
     public static <T extends GenericBean> Map<String, Object> bean2Map(T source, String[] columns) {
         return bean2Map(source, columns, null);
-    }// ;
+    }
 
     /**
      * bean transform map
@@ -117,7 +117,7 @@ public class CapBeanUtil {
      */
     public static <T extends GenericBean> Map<String, Object> bean2Map(T source, String[] columns, String prefix) {
         return bean2Map(source, columns, prefix, true);
-    }// ;
+    }
 
     /**
      * bean transform map
@@ -145,7 +145,7 @@ public class CapBeanUtil {
             map.put(key, s.get(col));
         }
         return map;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -164,7 +164,7 @@ public class CapBeanUtil {
      */
     public static <T extends GenericBean> T map2Bean(String prefix, Map<String, Object> map, T entry) {
         return map2Bean(prefix, map, entry, entry.getClass());
-    }// ;
+    }
 
     /**
      * <pre>
@@ -197,7 +197,7 @@ public class CapBeanUtil {
             }
         }
         return entry;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -226,7 +226,7 @@ public class CapBeanUtil {
             }
         }
         return entry;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -243,7 +243,7 @@ public class CapBeanUtil {
      */
     public static <T extends GenericBean> T map2Bean(Map<String, Object> map, T entry) {
         return map2Bean("", map, entry);
-    }// ;
+    }
 
     /**
      * <pre>
@@ -262,7 +262,7 @@ public class CapBeanUtil {
      */
     public static <T extends GenericBean> T map2Bean(Map<String, Object> map, T entry, Class<T> clazz) {
         return map2Bean("", map, entry, clazz);
-    }// ;
+    }
 
     /**
      * 取得傳入Clazz所有欄位(包含super class)
@@ -281,7 +281,7 @@ public class CapBeanUtil {
             searchClazz = searchClazz.getSuperclass();
         }
         return map;
-    }// ;
+    }
 
     /**
      * 取得傳入Clazz所有欄位(包含super class)
@@ -306,7 +306,7 @@ public class CapBeanUtil {
             searchClazz = containSuperClazz ? searchClazz.getSuperclass() : null;
         }
         return cols.toArray(new String[cols.size()]);
-    }// ;
+    }
 
     /**
      * 取得傳入Clazz所有欄位(包含super class)
@@ -331,7 +331,7 @@ public class CapBeanUtil {
             searchClazz = containSuperClazz ? searchClazz.getSuperclass() : null;
         }
         return cols.toArray(new Field[] {});
-    }// ;
+    }
 
     public static <T> T setField(T entry, String fieldId, Object value) {
         Field field = ReflectionUtils.findField(entry.getClass(), fieldId);

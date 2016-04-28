@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivRlDtlDao;
 import com.iisigroup.cap.rule.model.DivRlDtl;
 
@@ -34,18 +34,18 @@ import com.iisigroup.cap.rule.model.DivRlDtl;
  *          </ul>
  */
 @Repository
-public class DivRlDtlDaoImpl extends GenericDao<DivRlDtl> implements DivRlDtlDao {
+public class DivRlDtlDaoImpl extends GenericDaoImpl<DivRlDtl> implements DivRlDtlDao {
 
     @Override
     public DivRlDtl findByRuleNo(String divRlNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
         return findUniqueOrNone(search);
     }
 
     @Override
     public List<DivRlDtl> findRlDtlsByRlNoAndSort(String divRlNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNo);
         search.addOrderBy("divRlSor");
         return find(search);
@@ -53,7 +53,7 @@ public class DivRlDtlDaoImpl extends GenericDao<DivRlDtl> implements DivRlDtlDao
 
     @Override
     public List<DivRlDtl> findByRuleNos(String[] divRlNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("divRlSor");

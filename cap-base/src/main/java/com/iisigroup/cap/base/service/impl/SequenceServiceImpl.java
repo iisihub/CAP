@@ -81,7 +81,7 @@ public class SequenceServiceImpl implements SequenceService {
             }
             return nSeq.currentSeq * interval + nSeq.nextSeqNo;
         }
-    }// ;
+    }
 
     /**
      * 從DB取得下一個序號
@@ -128,7 +128,7 @@ public class SequenceServiceImpl implements SequenceService {
         }
         // set current seq
         return returnSeq;
-    }// ;
+    }
 
     private int saveSeq(Sequence nextSeq, int oldSeq) {
         int rtn = 0;
@@ -141,12 +141,12 @@ public class SequenceServiceImpl implements SequenceService {
             rtn = sequenceDao.updateByNodeAndNextSeqFromMap(map);
         }
         return rtn;
-    }// ;
+    }
 
     private Sequence getSequence(String seqNode) {
         Sequence thisSeq = sequenceDao.findBySeqNode(seqNode);
         return thisSeq;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -164,6 +164,6 @@ public class SequenceServiceImpl implements SequenceService {
             this.nextSeqNo = 0;
             this.currentSeq = -1;
         }
-    }// ;
+    }
 
 }

@@ -92,7 +92,7 @@ public class CapRequestJSONMapper extends AbstractDecoratorMapper {
             page.addProperty(PROP_KEY, str.toString());
         }
         return super.getDecorator(request, page);
-    }// ;
+    }
 
     private IRequest getDefaultRequest() {
         IRequest cr = CapAppContext.getBean("CapDefaultRequest");

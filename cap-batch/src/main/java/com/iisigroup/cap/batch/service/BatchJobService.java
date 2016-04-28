@@ -19,7 +19,7 @@ import org.springframework.core.io.Resource;
 
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -40,7 +40,7 @@ public interface BatchJobService {
 
     Resource getJobResource(BatchJob job);
 
-    Page<BatchJob> findJobsPage(ISearch search);
+    Page<BatchJob> findJobsPage(SearchSetting search);
 
     List<BatchJob> listJobs();
 
@@ -52,7 +52,7 @@ public interface BatchJobService {
 
     void deleteJob(String jobId);
 
-    Page<BatchSchedule> findSchPage(ISearch search);
+    Page<BatchSchedule> findSchPage(SearchSetting search);
 
     BatchSchedule findSchById(String schId);
 
@@ -64,7 +64,7 @@ public interface BatchJobService {
 
     void deleteSch(String schId);
 
-    Page<Map<String, Object>> findExecutionsPage(ISearch search);
+    Page<Map<String, Object>> findExecutionsPage(SearchSetting search);
 
     List<Map<String, Object>> findSteps(String executionId);
 

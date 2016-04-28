@@ -45,14 +45,14 @@ public class DurationFormatter implements IBeanFormatter {
         this.endCol = endCol;
         _df = new SimpleDateFormat(pattern);
         _df.setTimeZone(TimeZone.getTimeZone("GMT"));
-    }// ;
+    }
 
     public DurationFormatter(String startCol, String endCol) {
         this.startCol = startCol;
         this.endCol = endCol;
         _df = new SimpleDateFormat(DEF_PATTERN);
         _df.setTimeZone(TimeZone.getTimeZone("GMT"));
-    }// ;
+    }
 
     /*
      * (non-Javadoc)
@@ -76,6 +76,6 @@ public class DurationFormatter implements IBeanFormatter {
             return _df.format(new Date(end.getTime() - start.getTime()));
         }
         return Constants.EMPTY_STRING;
-    }// ;
+    }
 
 }

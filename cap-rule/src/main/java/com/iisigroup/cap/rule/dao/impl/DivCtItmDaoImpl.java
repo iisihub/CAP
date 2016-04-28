@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivCtItmDao;
 import com.iisigroup.cap.rule.model.DivCtItm;
 
@@ -34,18 +34,18 @@ import com.iisigroup.cap.rule.model.DivCtItm;
  *          </ul>
  */
 @Repository
-public class DivCtItmDaoImpl extends GenericDao<DivCtItm> implements DivCtItmDao {
+public class DivCtItmDaoImpl extends GenericDaoImpl<DivCtItm> implements DivCtItmDao {
 
     @Override
     public DivCtItm findByDivCtItmNo(String divCtNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNo);
         return findUniqueOrNone(search);
     }
 
     @Override
     public DivCtItm findByDivCtItmNoAndInputFlg(String divCtNo, String inputFlag) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNo);
         search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
@@ -54,7 +54,7 @@ public class DivCtItmDaoImpl extends GenericDao<DivCtItm> implements DivCtItmDao
 
     @Override
     public List<DivCtItm> findByDivCtItmNo(String[] divCtNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("codeOrder");
@@ -63,7 +63,7 @@ public class DivCtItmDaoImpl extends GenericDao<DivCtItm> implements DivCtItmDao
 
     @Override
     public List<DivCtItm> findByDivCtItmNoAndInputFlg(String[] divRlNos, String inputFlag) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
         search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
         return find(search);

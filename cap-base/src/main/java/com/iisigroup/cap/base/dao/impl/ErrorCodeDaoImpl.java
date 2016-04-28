@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.ErrorCodeDao;
 import com.iisigroup.cap.base.model.ErrorCode;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>
@@ -32,11 +32,11 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class ErrorCodeDaoImpl extends GenericDao<ErrorCode> implements ErrorCodeDao {
+public class ErrorCodeDaoImpl extends GenericDaoImpl<ErrorCode> implements ErrorCodeDao {
 
     @Override
     public List<ErrorCode> findByAll() {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("code");
         return find(search);
@@ -44,7 +44,7 @@ public class ErrorCodeDaoImpl extends GenericDao<ErrorCode> implements ErrorCode
 
     @Override
     public ErrorCode findByCode(String code, String locale) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         return findUniqueOrNone(search);
@@ -52,7 +52,7 @@ public class ErrorCodeDaoImpl extends GenericDao<ErrorCode> implements ErrorCode
 
     @Override
     public List<ErrorCode> findListBySysId(String sysId, String locale) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "sysId", sysId);
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);

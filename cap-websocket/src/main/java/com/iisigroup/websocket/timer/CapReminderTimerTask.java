@@ -37,7 +37,7 @@ import com.iisigroup.websocket.service.CapRemindService;
  */
 public class CapReminderTimerTask extends TimerTask {
 
-    private static final Logger logger = LoggerFactory.getLogger(CapReminderTimerTask.class);
+    private final Logger logger = LoggerFactory.getLogger(CapReminderTimerTask.class);
 
     @Resource
     private CapRemindService reminderService;
