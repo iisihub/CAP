@@ -20,12 +20,13 @@ import com.iisigroup.cap.Constants;
  * 
  * @since 2014/1/17
  * @author Sunkist Wang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/17,Sunkist Wang,new
  *          <li>2014/2/6,Sunkist Wang,add CC_VALUES_SEPARATOR
  *          </ul>
  */
 public interface CapConstants extends Constants {
-	public static final String P_FORM_ACTION = "formAction";
-	public static final String C_AUDITLOG_START_TS = "_AuditLogTS";
+    public static final String P_FORM_ACTION = "formAction";
+    public static final String C_AUDITLOG_START_TS = "_AuditLogTS";
 }

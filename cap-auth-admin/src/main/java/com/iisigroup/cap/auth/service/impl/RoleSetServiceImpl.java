@@ -30,13 +30,13 @@ import com.iisigroup.cap.service.AbstractService;
  * 
  * @since 2014/1/16
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
 @Service("roleSetService")
-public class RoleSetServiceImpl extends AbstractService implements
-        RoleSetService {
+public class RoleSetServiceImpl extends AbstractService implements RoleSetService {
 
     @Resource
     private DepartmentDao departmentDao;
@@ -57,30 +57,23 @@ public class RoleSetServiceImpl extends AbstractService implements
     private UserDao userDao;
 
     @Override
-    public Page<Map<String, Object>> findPageUser(ISearch search,
-            String roleCode) {
-        return userDao.findPageByRoleCode(roleCode, search.getFirstResult(),
-                search.getMaxResults());
+    public Page<Map<String, Object>> findPageUser(ISearch search, String roleCode) {
+        return userDao.findPageByRoleCode(roleCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
-    public Page<Map<String, Object>> findPageEditUsr(ISearch search,
-            String roleCode, String depCode) {
-        return userDao.findPageUnselectedByRoleCodeAndDepCode(roleCode,
-                depCode, search.getFirstResult(), search.getMaxResults());
+    public Page<Map<String, Object>> findPageEditUsr(ISearch search, String roleCode, String depCode) {
+        return userDao.findPageUnselectedByRoleCodeAndDepCode(roleCode, depCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
-    public Page<Map<String, Object>> findPageEditFunc(ISearch search,
-            String roleCode, String sysType, String parent) {
-        return functionDao.findPageUnselected(roleCode, sysType, parent,
-                search.getFirstResult(), search.getMaxResults());
+    public Page<Map<String, Object>> findPageEditFunc(ISearch search, String roleCode, String sysType, String parent) {
+        return functionDao.findPageUnselected(roleCode, sysType, parent, search.getFirstResult(), search.getMaxResults());
     }// ;
 
     @Override
     public Page<Map<String, Object>> findPageFunc(ISearch search, String code) {
-        return functionDao.findPageByRoleCode(code,
-                search.getFirstResult(), search.getMaxResults());
+        return functionDao.findPageByRoleCode(code, search.getFirstResult(), search.getMaxResults());
     }// ;
 
     @Override
@@ -120,8 +113,7 @@ public class RoleSetServiceImpl extends AbstractService implements
     }
 
     @Override
-    public List<Map<String, Object>> findAllRoleWithSelectedByUserCode(
-            String userCode) {
+    public List<Map<String, Object>> findAllRoleWithSelectedByUserCode(String userCode) {
         return roleDao.findAllWithSelectedByUserCode(userCode);
     }// ;
 

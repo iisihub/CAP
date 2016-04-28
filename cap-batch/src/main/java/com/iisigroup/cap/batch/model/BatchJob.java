@@ -22,60 +22,61 @@ import com.iisigroup.cap.model.GenericBean;
  * 
  * @since 2012/11/5
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/5,iristu,new
  *          </ul>
  */
 public class BatchJob extends GenericBean {
 
-	private String jobId;
-	/** job說明 */
-	private String jobDesc;
-	/** job設定檔 */
-	private String jobResource;
-	/** 修改操作者 */
-	private String updater;
-	/** 修改時間 */
-	private Timestamp updateTime;
+    private String jobId;
+    /** job說明 */
+    private String jobDesc;
+    /** job設定檔 */
+    private String jobResource;
+    /** 修改操作者 */
+    private String updater;
+    /** 修改時間 */
+    private Timestamp updateTime;
 
-	public String getJobId() {
-		return jobId;
-	}
+    public String getJobId() {
+        return jobId;
+    }
 
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
-	}
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
+    }
 
-	public String getJobDesc() {
-		return jobDesc;
-	}
+    public String getJobDesc() {
+        return jobDesc;
+    }
 
-	public void setJobDesc(String jobDesc) {
-		this.jobDesc = jobDesc;
-	}
+    public void setJobDesc(String jobDesc) {
+        this.jobDesc = jobDesc;
+    }
 
-	public String getJobResource() {
-		return jobResource;
-	}
+    public String getJobResource() {
+        return jobResource;
+    }
 
-	public void setJobResource(String jobResource) {
-		this.jobResource = jobResource;
-	}
+    public void setJobResource(String jobResource) {
+        this.jobResource = jobResource;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
 }

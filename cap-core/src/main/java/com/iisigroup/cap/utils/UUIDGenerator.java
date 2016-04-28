@@ -20,13 +20,14 @@ import java.util.UUID;
  * 
  * @since 2011/7/8
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/7/8,iristu,new
  *          </ul>
  */
 public class UUIDGenerator {
 
-	public static String getUUID() {
-		return UUID.randomUUID().toString().replace("-", "");
-	}
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
 }

@@ -1,336 +1,330 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>cap</artifactId>
-		<groupId>com.iisigroup.cap</groupId>
-		<version>2.2.1</version>
-	</parent>
-	<artifactId>cap-web</artifactId>
-	<packaging>war</packaging>
-	<properties>
-		<spring.version>3.1.3.RELEASE</spring.version>
-		<hibernate.version>4.1.6.Final</hibernate.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-auth-admin</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-config</artifactId>
-			<!-- 包版時不包進 war 中 使用 build plugin copy 進classes -->
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-hg</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-batch</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-websocket</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-report</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-rule</artifactId>
-		</dependency>
-		<dependency>
-                <groupId>com.iisigroup.cap</groupId>
-                <artifactId>cap-captcha</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-		<dependency>
-			<groupId>org.tuckey</groupId>
-			<artifactId>urlrewritefilter</artifactId>
-			<version>4.0.3</version>
-		</dependency>
-		<!-- HIBERNATE DEPENDENCIES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<!-- <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId> 
-			<version>2.2.0</version> </dependency> -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
-		</dependency>
-		<!-- provided：在編譯和測試的過程有效,在最後生成war時不加入 runtime：在運行的時候依賴,在編譯的時候不依賴 -->
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2.2</version>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- H2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.3.153</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<argLine>-Xmx1024m</argLine>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.26</version>
-			</plugin>
-			<!-- 將config copy 至 classes -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>${basedir}/../cap-config/src/main/resources</directory>
-							<targetPath>WEB-INF/classes</targetPath>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<!--  <version>6.1.10</version> -->
-				<configuration>
-					<webAppConfig>
-						<extraClasspath>target/cap-web-2.2.1/WEB-INF/classes</extraClasspath>
-					</webAppConfig>
-					<contextPath>/cap-web</contextPath>
-					<stopKey>foo</stopKey>
-					<stopPort>8080</stopPort>
-					<!-- <systemProperties>
-						<systemProperty>
-							<name>cola.cas.host</name>
-							<value>https://citi/citi-cas</value>
-						</systemProperty>
-						<systemProperty>
-							<name>cola.ap.host</name>
-							<value>http://localhost:8080</value>
-						</systemProperty>
-					</systemProperties> -->
-				</configuration>
-				<executions>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-	<profiles>
-		<profile>
-			<id>req</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<!-- goal => exec:exec =or=> -Preq exec:exec -->
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.1</version>
-						<executions>
-							<execution>
-								<!-- <phase>compile</phase> -->
-								<goals>
-									<goal>exec</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<!-- nodejs(http://nodejs.org) -->
-							<!-- linux , OS X -->
-							<executable>/usr/local/bin/node</executable>
-							<!-- Window -->
-							<!-- <executable>C:\Program Files (x86)\nodejs\node</executable> -->
-							<arguments>
-								<argument>${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js</argument>
-								<argument>-o</argument>
-								<argument>${basedir}/src/main/webapp/static/build.js</argument>
-								<argument>name=main</argument>
-								<argument>out=${basedir}/src/main/webapp/static/build-main.js</argument>
-								<!-- <argument>optimize=none</argument> -->
-							</arguments>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>optimize</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.github.bringking</groupId>
-						<artifactId>requirejs-maven-plugin</artifactId>
-						<version>2.0.4</version>
-						<executions>
-							<execution>
-								<phase>compile</phase>
-								<goals>
-									<goal>optimize</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<!-- optional path to a nodejs executable -->
-							<!-- <nodeExecutable>
-								C:/Program Files/nodejs/node
-							</nodeExecutable> -->
-							<!-- path to optimizer json config file -->
-							<configFile>
-								${basedir}/src/main/webapp/static/build.js
-							</configFile>
-							<!-- optional path to optimizer executable -->
-							<optimizerFile>
-								${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js
-							</optimizerFile>
-							<!-- optional parameters to optimizer executable -->
-							<optimizerParameters>
-								<parameter>optimize=uglify</parameter>
-								<parameter>name=main</parameter>
-								<parameter>baseUrl=${basedir}/src/main/webapp/static</parameter>
-								<parameter>out=${basedir}/src/main/webapp/static/build-main.js</parameter>
-							</optimizerParameters>
-							<!-- Whether or not to process configFile with maven filters. If you use 
-								this option, some options in your configFile must resolve to absolute paths 
-								(see below) -->
-							<filterConfig>
-								false
-							</filterConfig>
-							<!-- Skip requirejs optimization if true -->
-							<skip>
-								false
-							</skip>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>reqOpNone</id>
-			<build>
-				<plugins>
-					<plugin>
-						<!-- goal => -PreqOpNone exec:exec -->
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.1</version>
-						<executions>
-							<execution>
-								<!-- <phase>compile</phase> -->
-								<goals>
-									<goal>exec</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<!-- nodejs(http://nodejs.org) -->
-							<!-- linux , OS X -->
-							<executable>/usr/local/bin/node</executable>
-							<!-- Window -->
-							<!-- <executable>C:\Program Files (x86)\nodejs\node</executable> -->
-							<arguments>
-								<argument>${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js</argument>
-								<argument>-o</argument>
-								<argument>${basedir}/src/main/webapp/static/build.js</argument>
-								<argument>name=main</argument>
-								<argument>out=${basedir}/src/main/webapp/static/build-main.js</argument>
-								<argument>optimize=none</argument>
-							</arguments>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>cabin</id>
-			<build>
-				<plugins>
-					<plugin>
-						<!-- goal => -Pcabin exec:exec -->
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.1</version>
-						<executions>
-							<execution>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<!-- nodejs(http://nodejs.org) -->
-							<!-- npm install grunt-cli -g -->
-							<!-- linux , OS X -->
-							<executable>/usr/local/bin/node</executable>
-							<!-- Window -->
-							<!-- <executable>C:\Program Files (x86)\nodejs\node</executable> -->
-							<arguments>
-								<argument>/usr/local/bin/grunt</argument>
-								<argument>cap</argument>
-								<argument>--no-color</argument>
-							</arguments>
-							<workingDirectory>${basedir}/src/main/cabin</workingDirectory>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>cap</artifactId>
+        <groupId>com.iisigroup.cap</groupId>
+        <version>2.2.1</version>
+    </parent>
+    <artifactId>cap-web</artifactId>
+    <packaging>war</packaging>
+    <properties>
+        <spring.version>3.1.3.RELEASE</spring.version>
+        <hibernate.version>4.1.6.Final</hibernate.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-auth-admin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-config</artifactId>
+            <!-- 包版時不包進 war 中 使用 build plugin copy 進classes -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-hg</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-batch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-report</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-rule</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-captcha</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+        <!-- HIBERNATE DEPENDENCIES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <!-- <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId>
+            <version>2.2.0</version> </dependency> -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+        <!-- provided：在編譯和測試的過程有效,在最後生成war時不加入 runtime：在運行的時候依賴,在編譯的時候不依賴 -->
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.2.2</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- H2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.3.153</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Xmx1024m</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.26</version>
+            </plugin>
+            <!-- 將config copy 至 classes -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/../cap-config/src/main/resources</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <!-- <version>6.1.10</version> -->
+                <configuration>
+                    <webAppConfig>
+                        <extraClasspath>target/cap-web-2.2.1/WEB-INF/classes</extraClasspath>
+                    </webAppConfig>
+                    <contextPath>/cap-web</contextPath>
+                    <stopKey>foo</stopKey>
+                    <stopPort>8080</stopPort>
+                    <!-- <systemProperties>
+                        <systemProperty>
+                        <name>cola.cas.host</name>
+                        <value>https://citi/citi-cas</value>
+                        </systemProperty>
+                        <systemProperty>
+                        <name>cola.ap.host</name>
+                        <value>http://localhost:8080</value>
+                        </systemProperty>
+                        </systemProperties> -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>req</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- goal => exec:exec =or=> -Preq exec:exec -->
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <!-- <phase>compile</phase> -->
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- nodejs(http://nodejs.org) -->
+                            <!-- linux , OS X -->
+                            <executable>/usr/local/bin/node</executable>
+                            <!-- Window -->
+                            <!-- <executable>C:\Program Files (x86)\nodejs\node</executable> -->
+                            <arguments>
+                                <argument>${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js</argument>
+                                <argument>-o</argument>
+                                <argument>${basedir}/src/main/webapp/static/build.js</argument>
+                                <argument>name=main</argument>
+                                <argument>out=${basedir}/src/main/webapp/static/build-main.js</argument>
+                                <!-- <argument>optimize=none</argument> -->
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>optimize</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.bringking</groupId>
+                        <artifactId>requirejs-maven-plugin</artifactId>
+                        <version>2.0.4</version>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>optimize</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- optional path to a nodejs executable -->
+                            <!-- <nodeExecutable>
+                                C:/Program Files/nodejs/node
+                                </nodeExecutable> -->
+                            <!-- path to optimizer json config file -->
+                            <configFile> ${basedir}/src/main/webapp/static/build.js 
+                            </configFile>
+                            <!-- optional path to optimizer executable -->
+                            <optimizerFile> ${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js 
+                            </optimizerFile>
+                            <!-- optional parameters to optimizer executable -->
+                            <optimizerParameters>
+                                <parameter>optimize=uglify</parameter>
+                                <parameter>name=main</parameter>
+                                <parameter>baseUrl=${basedir}/src/main/webapp/static</parameter>
+                                <parameter>out=${basedir}/src/main/webapp/static/build-main.js</parameter>
+                            </optimizerParameters>
+                            <!-- Whether or not to process configFile with maven filters. If you use
+                                this option, some options in your configFile must resolve to absolute paths
+                                (see below) -->
+                            <filterConfig> false 
+                            </filterConfig>
+                            <!-- Skip requirejs optimization if true -->
+                            <skip> false 
+                            </skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>reqOpNone</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- goal => -PreqOpNone exec:exec -->
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <!-- <phase>compile</phase> -->
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- nodejs(http://nodejs.org) -->
+                            <!-- linux , OS X -->
+                            <executable>/usr/local/bin/node</executable>
+                            <!-- Window -->
+                            <!-- <executable>C:\Program Files (x86)\nodejs\node</executable> -->
+                            <arguments>
+                                <argument>${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js</argument>
+                                <argument>-o</argument>
+                                <argument>${basedir}/src/main/webapp/static/build.js</argument>
+                                <argument>name=main</argument>
+                                <argument>out=${basedir}/src/main/webapp/static/build-main.js</argument>
+                                <argument>optimize=none</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>cabin</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- goal => -Pcabin exec:exec -->
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- nodejs(http://nodejs.org) -->
+                            <!-- npm install grunt-cli -g -->
+                            <!-- linux , OS X -->
+                            <executable>/usr/local/bin/node</executable>
+                            <!-- Window -->
+                            <!-- <executable>C:\Program Files (x86)\nodejs\node</executable> -->
+                            <arguments>
+                                <argument>/usr/local/bin/grunt</argument>
+                                <argument>cap</argument>
+                                <argument>--no-color</argument>
+                            </arguments>
+                            <workingDirectory>${basedir}/src/main/cabin</workingDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

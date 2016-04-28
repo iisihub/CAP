@@ -17,7 +17,11 @@ import java.util.List;
 import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.model.IUser;
 
-/**<p> interface IUserDao.</p>
+/**
+ * <p>
+ * interface IUserDao.
+ * </p>
+ * 
  * <pre>
  * $Date: 2010-08-25 11:25:55 +0800 (星期三, 25 八月 2010) $
  * $Author: iris $
@@ -27,14 +31,16 @@ import com.iisigroup.cap.security.model.IUser;
  *
  * @author iristu
  * @version $Revision: 185 $
- * @version <ul>
- *           <li>2010/7/26,iristu,new
+ * @version
+ *          <ul>
+ *          <li>2010/7/26,iristu,new
  *          </ul>
- * @param <T> the model extends IUser
+ * @param <T>
+ *            the model extends IUser
  */
 public interface IUserDao<T extends IUser> {
-	
-	T getUserByLoginId(String loginId,String depCode);
 
-	List<? extends IRole> getRoleByUser(T user);
+    T getUserByLoginId(String loginId, String depCode);
+
+    List<? extends IRole> getRoleByUser(T user);
 }

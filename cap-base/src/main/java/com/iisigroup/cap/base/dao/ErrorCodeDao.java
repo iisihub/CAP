@@ -21,7 +21,8 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2011/08/02
  * @author UFO
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/08/02,UFO,new
  *          </ul>
  */

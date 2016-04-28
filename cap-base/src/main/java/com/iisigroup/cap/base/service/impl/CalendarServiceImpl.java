@@ -16,20 +16,16 @@ import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
 
 @Service
-public class CalendarServiceImpl extends AbstractService implements
-		CalendarService {
+public class CalendarServiceImpl extends AbstractService implements CalendarService {
 
-	@Resource
-	RemindDao remindDao;
+    @Resource
+    RemindDao remindDao;
 
-	@Override
-	public List<Remind> getCalendarData(String userId, String start, String end) {
-		if (CapString.isEmpty(start) || CapString.isEmpty(end)) {
-			return null;
-		}
-		return remindDao.getCalendarData(userId,
-				new Timestamp(Long.parseLong(start)),
-				new Timestamp(Long.parseLong(end)),
-				SimpleContextHolder.get(CapWebUtil.localeKey).toString());
-	}
+    @Override
+    public List<Remind> getCalendarData(String userId, String start, String end) {
+        if (CapString.isEmpty(start) || CapString.isEmpty(end)) {
+            return null;
+        }
+        return remindDao.getCalendarData(userId, new Timestamp(Long.parseLong(start)), new Timestamp(Long.parseLong(end)), SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+    }
 }

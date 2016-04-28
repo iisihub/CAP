@@ -23,12 +23,13 @@ import com.iisigroup.cap.model.IDataObject;
  * 
  * @since 2012/9/21
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/21,iristu,new
  *          </ul>
- * @param <T> T extends IDataObject
+ * @param <T>
+ *            T extends IDataObject
  */
 @Repository
-public class CommonDao<T extends IDataObject> extends GenericDao<IDataObject>
-		implements ICommonDao {
+public class CommonDao<T extends IDataObject> extends GenericDao<IDataObject> implements ICommonDao {
 }

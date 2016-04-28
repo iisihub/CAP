@@ -13,8 +13,7 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
 @Repository
-public class UserRoleDaoImpl extends GenericDao<UserRole> implements
-        UserRoleDao {
+public class UserRoleDaoImpl extends GenericDao<UserRole> implements UserRoleDao {
 
     @Override
     public int deleteByRoleCodeAndUserCodes(String roleCode, List<String> delUsr) {

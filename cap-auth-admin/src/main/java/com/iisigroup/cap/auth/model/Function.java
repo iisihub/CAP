@@ -28,7 +28,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @EntityListeners({ CapOidGeneratorListener.class })
 @Entity
-@Table(name = "DEF_FUNC", uniqueConstraints = @UniqueConstraint(columnNames = { "OID" }))
+@Table(name = "DEF_FUNC", uniqueConstraints = @UniqueConstraint(columnNames = { "OID" }) )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
@@ -99,9 +99,7 @@ public class Function extends GenericBean implements IDataObject {
     }
 
     public String toString() {
-        return "Function [code=" + code + ", sequence=" + sequence + ", level=" + level
-                + ", parent=" + parent + ", name=" + name + ", path=" + path
-                + "]";
+        return "Function [code=" + code + ", sequence=" + sequence + ", level=" + level + ", parent=" + parent + ", name=" + name + ", path=" + path + "]";
     }
 
     public int getParent() {

@@ -29,31 +29,31 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  * 
  * @since 2014/1/27
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/27,tammy,new
  *          </ul>
  */
 @Repository
 public class RemindDaoImpl extends GenericDao<Remind> implements RemindDao {
 
-	@Override
-	public Remind findByPid(String pid) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "oid", pid);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public Remind findByPid(String pid) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "oid", pid);
+        return findUniqueOrNone(search);
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Remind> getCalendarData(String userId,
-			Timestamp start, Timestamp end, String locale) {
-		Query query = getEntityManager()
-				.createNativeQuery(
-						"select distinct r.* from CFG_remind r inner join CFG_reminds s on r.oid = s.pid where r.endDate > :start and r.startDate < :end and (s.scopePid=:userId or r.scopePid=:userId) and r.LOCALE = :locale", Remind.class);
-		query.setParameter("start", start);
-		query.setParameter("end", end);
-		query.setParameter("userId", userId);
-		query.setParameter("locale", locale);
-		return (List<Remind>) query.getResultList();
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Remind> getCalendarData(String userId, Timestamp start, Timestamp end, String locale) {
+        Query query = getEntityManager().createNativeQuery(
+                "select distinct r.* from CFG_remind r inner join CFG_reminds s on r.oid = s.pid where r.endDate > :start and r.startDate < :end and (s.scopePid=:userId or r.scopePid=:userId) and r.LOCALE = :locale",
+                Remind.class);
+        query.setParameter("start", start);
+        query.setParameter("end", end);
+        query.setParameter("userId", userId);
+        query.setParameter("locale", locale);
+        return (List<Remind>) query.getResultList();
+    }
 }

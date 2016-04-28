@@ -25,10 +25,10 @@ import com.iisigroup.cap.Constants;
  * 
  * @author iristu
  * @version $Revision: 26 $
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/27,iristu,new
- *          <li>2011/8/02,sunkist,update
- *          {@link ADDateTimeFormatter#reformat(Object)} for Calendar.
+ *          <li>2011/8/02,sunkist,update {@link ADDateTimeFormatter#reformat(Object)} for Calendar.
  *          <li>2011/9/06,tammychen, handle null Object
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
@@ -36,25 +36,25 @@ import com.iisigroup.cap.Constants;
 @SuppressWarnings("serial")
 public class ADDateFormatter implements IFormatter {
 
-	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	public String reformat(Object in) {
-		if (in != null && !"".equals(in)) {
-			if (in instanceof Calendar) {
-				in = ((Calendar) in).getTime();
-			} else if (in instanceof String) {
-				return df.format(df.parse((String) in, new ParsePosition(0)));
-			}
-			return df.format(in);
-		} else {
-			return Constants.EMPTY_STRING;
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    public String reformat(Object in) {
+        if (in != null && !"".equals(in)) {
+            if (in instanceof Calendar) {
+                in = ((Calendar) in).getTime();
+            } else if (in instanceof String) {
+                return df.format(df.parse((String) in, new ParsePosition(0)));
+            }
+            return df.format(in);
+        } else {
+            return Constants.EMPTY_STRING;
+        }
+    }
 
 }

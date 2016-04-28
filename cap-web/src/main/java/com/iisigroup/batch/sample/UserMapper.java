@@ -15,23 +15,26 @@ import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
 
-/**<pre>
+/**
+ * <pre>
  * TODO Write a short description on the purpose of the program
  * </pre>
- * @since  2012/10/30
+ * 
+ * @since 2012/10/30
  * @author iristu
- * @version <ul>
- *           <li>2012/10/30,iristu,new
+ * @version
+ *          <ul>
+ *          <li>2012/10/30,iristu,new
  *          </ul>
  */
 public class UserMapper implements FieldSetMapper<User> {
 
-	@Override
-	public User mapFieldSet(FieldSet fieldSet) throws BindException {
-		User user = new User();
-		user.setName(fieldSet.readString(0));
-		user.setAge(fieldSet.readInt(1));
-		return user;
-	}
+    @Override
+    public User mapFieldSet(FieldSet fieldSet) throws BindException {
+        User user = new User();
+        user.setName(fieldSet.readString(0));
+        user.setAge(fieldSet.readInt(1));
+        return user;
+    }
 
 }

@@ -26,7 +26,8 @@ import com.iisigroup.cap.component.IRequest;
  * 
  * @since 2012/3/14
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/3/14,rodeschen,new
  *          </ul>
  */
@@ -34,13 +35,11 @@ import com.iisigroup.cap.component.IRequest;
 @Service("SamplePR")
 public class SampilePageReport implements IPageReport {
 
-	
-
-	@Override
-	public Map<String, Object> excute(IRequest request) {
-		Map<String, Object> m = new HashMap<String, Object>();
-		// TODO put data to m
-		return m;
-	}
+    @Override
+    public Map<String, Object> excute(IRequest request) {
+        Map<String, Object> m = new HashMap<String, Object>();
+        // TODO put data to m
+        return m;
+    }
 
 }

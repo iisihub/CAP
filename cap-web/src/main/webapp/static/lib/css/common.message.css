@@ -1,24 +1,114 @@
 /* sysMsgArea --------------------------- */
-#sysMsgArea {display: none;}
-#newSysMsgArea {position: fixed;bottom: 23px;width:98%;z-index:999999;}
-#newSysMsgArea_inner {position: relative;}
-#newSysMsgArea.on{z-index:999999;}
+#sysMsgArea {
+  display: none;
+}
+
+#newSysMsgArea {
+  position: fixed;
+  bottom: 23px;
+  width: 98%;
+  z-index: 999999;
+}
+
+#newSysMsgArea_inner {
+  position: relative;
+}
+
+#newSysMsgArea.on {
+  z-index: 999999;
+}
 /* sysMsgButton ------------------------ */
-#sysMsgButton {z-index: 999999;position:absolute;right:0px;}
-#sysMsgButton .nl {border: 1px solid #DDD;float:right;display: block;height: 23px;width: 23px;cursor: pointer;background:#fff url('./../../images/msg.png') no-repeat;}
-#sysMsgButton .on {border: 1px solid #828282;}
+#sysMsgButton {
+  z-index: 999999;
+  position: absolute;
+  right: 0px;
+}
 
-#msgContainer {font-size:.8em;position:absolute;right:0px;display: none;cursor: pointer;width: 410px;top:-401px;background: #FFF;height: 400px;border: 1px solid #828282;z-index: 999998;}
+#sysMsgButton .nl {
+  border: 1px solid #DDD;
+  float: right;
+  display: block;
+  height: 23px;
+  width: 23px;
+  cursor: pointer;
+  background: #fff url('./../../images/msg.png') no-repeat;
+}
 
-#inner {height: 400px;overflow-y: auto;overflow-x: hidden;}
-#innerShowall {width: 98%;text-align: right;border-bottom: 1px solid #DDD;;margin:0 0 5px 15px;color: #004276;}
-#innerShowall p {margin-right: 20px;margin-top: 5px;}
-.innerTitle {padding:4px 0 4px 2px;}
+#sysMsgButton .on {
+  border: 1px solid #828282;
+}
 
-#logAction {position: fixed;top: 0px;width: 100%;padding-left: 35%;}
-.logmi {background: #eee;}
-.logit {vertical-align: top;margin:-15px 0px 5px 30px;padding-bottom: 5px;width: 90%;border-bottom: 1px solid #DDD;}
-.log_debug,.log_clinet {color: blue;}
-.log_server {color: #D90000;font-size: 13px}
-.notify {color: #C80000;font-size: 13px}
-#sduarea {margin:5px 0px 0px 5px;cursor: pointer;}
+#msgContainer {
+  font-size: .8em;
+  position: absolute;
+  right: 0px;
+  display: none;
+  cursor: pointer;
+  width: 410px;
+  top: -401px;
+  background: #FFF;
+  height: 400px;
+  border: 1px solid #828282;
+  z-index: 999998;
+}
+
+#inner {
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#innerShowall {
+  width: 98%;
+  text-align: right;
+  border-bottom: 1px solid #DDD;;
+  margin: 0 0 5px 15px;
+  color: #004276;
+}
+
+#innerShowall p {
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.innerTitle {
+  padding: 4px 0 4px 2px;
+}
+
+#logAction {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  padding-left: 35%;
+}
+
+.logmi {
+  background: #eee;
+}
+
+.logit {
+  vertical-align: top;
+  margin: -15px 0px 5px 30px;
+  padding-bottom: 5px;
+  width: 90%;
+  border-bottom: 1px solid #DDD;
+}
+
+.log_debug, .log_clinet {
+  color: blue;
+}
+
+.log_server {
+  color: #D90000;
+  font-size: 13px
+}
+
+.notify {
+  color: #C80000;
+  font-size: 13px
+}
+
+#sduarea {
+  margin: 5px 0px 0px 5px;
+  cursor: pointer;
+}

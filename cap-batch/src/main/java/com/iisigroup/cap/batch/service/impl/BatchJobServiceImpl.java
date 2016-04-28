@@ -37,129 +37,128 @@ import com.iisigroup.cap.utils.CapSystemConfig;
  * 
  * @since 2012/11/6
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/6,iristu,new
  *          </ul>
  */
 public class BatchJobServiceImpl implements BatchJobService {
 
-	@Resource
-	private BatchJobDao batchJobDao;
+    @Resource
+    private BatchJobDao batchJobDao;
 
-	@Resource
-	private BatchScheduleDao batchScheduleDao;
+    @Resource
+    private BatchScheduleDao batchScheduleDao;
 
-	@Resource
-	private BatchExecutionDao batchExecutionDao;
+    @Resource
+    private BatchExecutionDao batchExecutionDao;
 
-	@Resource
-	private CapSystemConfig config;
+    @Resource
+    private CapSystemConfig config;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisigroup.cap.batch.service.BatchJobService#listJobResources()
-	 */
-	@Override
-	public List<org.springframework.core.io.Resource> listJobResources() {
-		List<BatchJob> list = listJobs();
-		List<org.springframework.core.io.Resource> resources = new ArrayList<org.springframework.core.io.Resource>(
-				list.size());
-		for (BatchJob job : list) {
-			resources.add(getJobResource(job));
-		}
-		return resources;
-	}// ;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.batch.service.BatchJobService#listJobResources()
+     */
+    @Override
+    public List<org.springframework.core.io.Resource> listJobResources() {
+        List<BatchJob> list = listJobs();
+        List<org.springframework.core.io.Resource> resources = new ArrayList<org.springframework.core.io.Resource>(list.size());
+        for (BatchJob job : list) {
+            resources.add(getJobResource(job));
+        }
+        return resources;
+    }// ;
 
-	@Override
-	public org.springframework.core.io.Resource getJobResource(BatchJob job) {
-		return CapAppContext.getResource(new StringBuffer(config.getProperty(
-				"batch.jobsroot", "")).append(job.getJobResource()).toString());
-	}
+    @Override
+    public org.springframework.core.io.Resource getJobResource(BatchJob job) {
+        return CapAppContext.getResource(new StringBuffer(config.getProperty("batch.jobsroot", "")).append(job.getJobResource()).toString());
+    }
 
-	@Override
-	public Page<BatchJob> findJobsPage(ISearch search) {
-		return batchJobDao.findForPage(search);
-	}
+    @Override
+    public Page<BatchJob> findJobsPage(ISearch search) {
+        return batchJobDao.findForPage(search);
+    }
 
-	@Override
-	public List<BatchJob> listJobs() {
-		return batchJobDao.listAll();
-	}
+    @Override
+    public List<BatchJob> listJobs() {
+        return batchJobDao.listAll();
+    }
 
-	@Override
-	public BatchJob findJobById(String jobId) {
-		return batchJobDao.findByJobId(jobId);
-	}
+    @Override
+    public BatchJob findJobById(String jobId) {
+        return batchJobDao.findByJobId(jobId);
+    }
 
-	@Override
-	public void updateJob(BatchJob job) {
-		batchJobDao.update(job);
-	}
+    @Override
+    public void updateJob(BatchJob job) {
+        batchJobDao.update(job);
+    }
 
-	@Override
-	public void insertJob(BatchJob job) {
-		batchJobDao.create(job);
-	}
+    @Override
+    public void insertJob(BatchJob job) {
+        batchJobDao.create(job);
+    }
 
-	@Override
-	public void deleteJob(String jobId) {
-		batchJobDao.deleteByJobId(jobId);
-	}
+    @Override
+    public void deleteJob(String jobId) {
+        batchJobDao.deleteByJobId(jobId);
+    }
 
-	@Override
-	public Page<BatchSchedule> findSchPage(ISearch search) {
-		return batchScheduleDao.findForPage(search);
-	}
+    @Override
+    public Page<BatchSchedule> findSchPage(ISearch search) {
+        return batchScheduleDao.findForPage(search);
+    }
 
-	@Override
-	public List<BatchSchedule> findSchByHostId(List<String> hostIds) {
-		return batchScheduleDao.findByHostId(hostIds);
-	}
+    @Override
+    public List<BatchSchedule> findSchByHostId(List<String> hostIds) {
+        return batchScheduleDao.findByHostId(hostIds);
+    }
 
-	@Override
-	public BatchSchedule findSchById(String schId) {
-		return batchScheduleDao.findById(schId);
-	}
+    @Override
+    public BatchSchedule findSchById(String schId) {
+        return batchScheduleDao.findById(schId);
+    }
 
-	@Override
-	public void updateSch(BatchSchedule schedule) {
-		batchScheduleDao.update(schedule);
-	}
+    @Override
+    public void updateSch(BatchSchedule schedule) {
+        batchScheduleDao.update(schedule);
+    }
 
-	@Override
-	public void insertSch(BatchSchedule schedule) {
-		batchScheduleDao.create(schedule);
-	}
+    @Override
+    public void insertSch(BatchSchedule schedule) {
+        batchScheduleDao.create(schedule);
+    }
 
-	@Override
-	public void deleteSch(String schId) {
-		batchScheduleDao.deleteById(schId);
-	}
+    @Override
+    public void deleteSch(String schId) {
+        batchScheduleDao.deleteById(schId);
+    }
 
-	@Override
-	public Page<Map<String, Object>> findExecutionsPage(ISearch search) {
-		return batchExecutionDao.findExecutionsForPage(search);
-	}// ;
+    @Override
+    public Page<Map<String, Object>> findExecutionsPage(ISearch search) {
+        return batchExecutionDao.findExecutionsForPage(search);
+    }// ;
 
-	@Override
-	public List<Map<String, Object>> findSteps(String executionId) {
-		return batchExecutionDao.findStepsById(executionId);
-	}// ;
+    @Override
+    public List<Map<String, Object>> findSteps(String executionId) {
+        return batchExecutionDao.findStepsById(executionId);
+    }// ;
 
-	@Override
-	public Map<String, Object> findExecutionDetail(String executionId) {
-		return batchExecutionDao.findExecutionDetailById(executionId);
-	}
+    @Override
+    public Map<String, Object> findExecutionDetail(String executionId) {
+        return batchExecutionDao.findExecutionDetailById(executionId);
+    }
 
-	@Override
-	public JobParameters findJobParams(String executionId) {
-		return batchExecutionDao.findJobParamsById(executionId);
-	}// ;
+    @Override
+    public JobParameters findJobParams(String executionId) {
+        return batchExecutionDao.findJobParamsById(executionId);
+    }// ;
 
-	@Override
-	public void updateExecution(Long executionId, String executor) {
-		batchExecutionDao.updateExecution(executionId, executor);
-	}
+    @Override
+    public void updateExecution(Long executionId, String executor) {
+        batchExecutionDao.updateExecution(executionId, executor);
+    }
 
 }// ~

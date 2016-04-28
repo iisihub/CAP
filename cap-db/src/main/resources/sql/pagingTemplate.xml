@@ -1,86 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
-
-	<!-- db2 paging JDBC template -->
-	<util:map id="db2Template" map-class="java.util.HashMap" key-type="java.lang.String">
-		<entry key="query.suffix">
-			<value>WITH UR</value>
-		</entry>
-		<entry key="paging.querySql">
-			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() OVER() AS ROWNUM from (
+    <!-- db2 paging JDBC template -->
+    <util:map id="db2Template" map-class="java.util.HashMap" key-type="java.lang.String">
+        <entry key="query.suffix">
+            <value>WITH UR</value>
+        </entry>
+        <entry key="paging.querySql">
+            <value><![CDATA[select * from ( select source.*, ROW_NUMBER() OVER() AS ROWNUM from (
 	@{['sourceSQL']} ) source ) rows where ROWNUM > :startRow and ROWNUM <= :endRow]]></value>
-		</entry>
-		<entry key="paging.totalPage">
-			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
-		</entry>
-	</util:map>
-
-	<!-- oracle paging JDBC template -->
-	<util:map id="oracleTemplate" map-class="java.util.HashMap" key-type="java.lang.String">
-		<entry key="query.suffix">
-			<value></value>
-		</entry>
-		<entry key="paging.querySql">
-			<value><![CDATA[select * from ( select source.*, ROWNUM rn from (
+        </entry>
+        <entry key="paging.totalPage">
+            <value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
+        </entry>
+    </util:map>
+    <!-- oracle paging JDBC template -->
+    <util:map id="oracleTemplate" map-class="java.util.HashMap" key-type="java.lang.String">
+        <entry key="query.suffix">
+            <value></value>
+        </entry>
+        <entry key="paging.querySql">
+            <value><![CDATA[select * from ( select source.*, ROWNUM rn from (
 	@{['sourceSQL']} ) source where ROWNUM <= :endRow) where rn > :startRow]]></value>
-		</entry>
-		<entry key="paging.totalPage">
-			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']})]]></value>
-		</entry>
-	</util:map>
-
-	<!-- h2 paging JDBC template -->
-	<util:map id="h2Template" map-class="java.util.HashMap" key-type="java.lang.String">
-		<entry key="query.suffix">
-			<value></value>
-		</entry>
-		<entry key="paging.querySql">
-			<value><![CDATA[select * from ( select source.*, ROWNUM() ROWNM from (
+        </entry>
+        <entry key="paging.totalPage">
+            <value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']})]]></value>
+        </entry>
+    </util:map>
+    <!-- h2 paging JDBC template -->
+    <util:map id="h2Template" map-class="java.util.HashMap" key-type="java.lang.String">
+        <entry key="query.suffix">
+            <value></value>
+        </entry>
+        <entry key="paging.querySql">
+            <value><![CDATA[select * from ( select source.*, ROWNUM() ROWNM from (
 	@{['sourceSQL']} ) source ) rows where ROWNM > :startRow and ROWNUM <= :endRow]]></value>
-		</entry>
-		<entry key="paging.totalPage">
-			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
-		</entry>
-	</util:map>
-		
-	<!-- sqlserver paging JDBC template -->
-	<util:map id="sqlTemplate" map-class="java.util.HashMap" key-type="java.lang.String">
-		<entry key="query.suffix">
-			<value></value>
-		</entry>
-		<entry key="paging.querySql">
-			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() ROWNM from (
+        </entry>
+        <entry key="paging.totalPage">
+            <value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
+        </entry>
+    </util:map>
+    <!-- sqlserver paging JDBC template -->
+    <util:map id="sqlTemplate" map-class="java.util.HashMap" key-type="java.lang.String">
+        <entry key="query.suffix">
+            <value></value>
+        </entry>
+        <entry key="paging.querySql">
+            <value><![CDATA[select * from ( select source.*, ROW_NUMBER() ROWNM from (
 	@{['sourceSQL']} ) source ) rows where ROWNM > :startRow and ROWNUM <= :endRow]]></value>
-		</entry>
-		<entry key="paging.totalPage">
-			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
-		</entry>
-	</util:map>
-
-	<!-- MS SQL Server 2005 paging JDBC template -->
-	<util:map id="msSql2005Template" map-class="java.util.HashMap" key-type="java.lang.String">
-		<entry key="query.suffix">
-			<value></value>
-		</entry>
-		<entry key="paging.querySql">
-			<value><![CDATA[select * from ( select source.*, ROW_NUMBER() over (order by TempColumn) ROWNM from (
+        </entry>
+        <entry key="paging.totalPage">
+            <value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
+        </entry>
+    </util:map>
+    <!-- MS SQL Server 2005 paging JDBC template -->
+    <util:map id="msSql2005Template" map-class="java.util.HashMap" key-type="java.lang.String">
+        <entry key="query.suffix">
+            <value></value>
+        </entry>
+        <entry key="paging.querySql">
+            <value><![CDATA[select * from ( select source.*, ROW_NUMBER() over (order by TempColumn) ROWNM from (
 			select 0 TempColumn, ss.* from (@{['sourceSQL']} ) ss ) source ) rows where ROWNM > :startRow and ROWNM <= :endRow]]></value>
-		</entry>
-		<entry key="paging.totalPage">
-			<value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
-		</entry>
-		
-		<!-- Rewrite baseSQL -->
-		<entry key="Sequence.listAll">
-			<value><![CDATA[select top (@{[countAll]}) * from cfg_Sequence order by seqNode]]></value>
-		</entry>
-		<entry key="Sequence.listAll.countAll()">
-			<value><![CDATA[select count(1) as TOTAL from cfg_Sequence]]></value>
-		</entry>
-	</util:map>
-
+        </entry>
+        <entry key="paging.totalPage">
+            <value><![CDATA[select count(1) as TOTAL from (@{['sourceSQL']}) rows]]></value>
+        </entry>
+        <!-- Rewrite baseSQL -->
+        <entry key="Sequence.listAll">
+            <value><![CDATA[select top (@{[countAll]}) * from cfg_Sequence order by seqNode]]></value>
+        </entry>
+        <entry key="Sequence.listAll.countAll()">
+            <value><![CDATA[select count(1) as TOTAL from cfg_Sequence]]></value>
+        </entry>
+    </util:map>
 </beans>

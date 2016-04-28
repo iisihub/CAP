@@ -19,13 +19,11 @@ public class CapAuthenticationException extends AuthenticationException {
         this(msg, captchaEnabled, false);
     }
 
-    public CapAuthenticationException(String msg, boolean captchaEnabled,
-            boolean forceChangePwd) {
+    public CapAuthenticationException(String msg, boolean captchaEnabled, boolean forceChangePwd) {
         this(msg, captchaEnabled, forceChangePwd, false);
     }
 
-    public CapAuthenticationException(String msg, boolean captchaEnabled,
-            boolean forceChangePwd, boolean askChangePwd) {
+    public CapAuthenticationException(String msg, boolean captchaEnabled, boolean forceChangePwd, boolean askChangePwd) {
         super(msg);
         this.captchaEnabled = captchaEnabled;
         this.forceChangePwd = forceChangePwd;

@@ -21,19 +21,19 @@ import org.springframework.stereotype.Component;
  * 
  * @since 2012/10/30
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/10/30,iristu,new
  *          </ul>
  */
 @Component("messageProcessor")
 public class MessageItemProcessor implements ItemProcessor<User, Message> {
 
-	@Override
-	public Message process(User user) throws Exception {
-		Message m =  new Message();
-		m.setContent("Hello " + user.getName()
-				+ ",please pay promptly at the end of this month.");
-		return m;
-	}
+    @Override
+    public Message process(User user) throws Exception {
+        Message m = new Message();
+        m.setContent("Hello " + user.getName() + ",please pay promptly at the end of this month.");
+        return m;
+    }
 
 }

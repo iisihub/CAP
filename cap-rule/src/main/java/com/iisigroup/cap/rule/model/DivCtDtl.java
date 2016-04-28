@@ -35,7 +35,8 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/19
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/19,TimChiang,new
  *          </ul>
  */
@@ -43,116 +44,114 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DIVCTDTL", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"oid" }))
+@Table(name = "DIVCTDTL", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }) )
 public class DivCtDtl extends GenericBean implements IDataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String divCtNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String divCtNo;
 
-	@Column(length = 10)
-	private String divRlNo;
-	
-	@Column(length = 10)
-	private String factorNo;
-	
-	@Column(length = 10)
-	private String rangeNo;
-	
-	@Column(length = 5000)
-	private String divCtJson;
+    @Column(length = 10)
+    private String divRlNo;
 
-	/**排序*/
-	@Column(length = 3)
-	private BigDecimal divCtSor;
+    @Column(length = 10)
+    private String factorNo;
 
-	// bi-directional many-to-one association to DivCtItm
-	@ManyToOne
-	@JoinColumn(name="divCtNo", referencedColumnName="divCtNo", nullable = false, insertable=false, updatable=false)
-	private DivCtItm divCtItm;
-	
-	// bi-directional many-to-one association to DivFtDtl
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="factorNo", referencedColumnName="factorNo", nullable = false, insertable=false, updatable=false),
-		@JoinColumn(name="rangeNo", referencedColumnName="rangeNo", nullable = false, insertable=false, updatable=false)})
-	private DivFtDtl divFtDtl;
-	
-	public String getOid() {
-		return oid;
-	}
+    @Column(length = 10)
+    private String rangeNo;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    @Column(length = 5000)
+    private String divCtJson;
 
-	public String getDivCtNo() {
-		return divCtNo;
-	}
+    /** 排序 */
+    @Column(length = 3)
+    private BigDecimal divCtSor;
 
-	public void setDivCtNo(String divCtNo) {
-		this.divCtNo = divCtNo;
-	}
+    // bi-directional many-to-one association to DivCtItm
+    @ManyToOne
+    @JoinColumn(name = "divCtNo", referencedColumnName = "divCtNo", nullable = false, insertable = false, updatable = false)
+    private DivCtItm divCtItm;
 
-	public String getDivCtJson() {
-		return divCtJson;
-	}
+    // bi-directional many-to-one association to DivFtDtl
+    @ManyToOne
+    @JoinColumns({ @JoinColumn(name = "factorNo", referencedColumnName = "factorNo", nullable = false, insertable = false, updatable = false),
+            @JoinColumn(name = "rangeNo", referencedColumnName = "rangeNo", nullable = false, insertable = false, updatable = false) })
+    private DivFtDtl divFtDtl;
 
-	public void setDivCtJson(String divCtJson) {
-		this.divCtJson = divCtJson;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public BigDecimal getDivCtSor() {
-		return divCtSor;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public void setDivCtSor(BigDecimal divCtSor) {
-		this.divCtSor = divCtSor;
-	}
+    public String getDivCtNo() {
+        return divCtNo;
+    }
 
-	public DivCtItm getDivCtItm() {
-		return divCtItm;
-	}
+    public void setDivCtNo(String divCtNo) {
+        this.divCtNo = divCtNo;
+    }
 
-	public void setDivCtItm(DivCtItm divCtItm) {
-		this.divCtItm = divCtItm;
-	}
+    public String getDivCtJson() {
+        return divCtJson;
+    }
 
-	public String getDivRlNo() {
-		return divRlNo;
-	}
+    public void setDivCtJson(String divCtJson) {
+        this.divCtJson = divCtJson;
+    }
 
-	public void setDivRlNo(String divRlNo) {
-		this.divRlNo = divRlNo;
-	}
+    public BigDecimal getDivCtSor() {
+        return divCtSor;
+    }
 
-	public String getFactorNo() {
-		return factorNo;
-	}
+    public void setDivCtSor(BigDecimal divCtSor) {
+        this.divCtSor = divCtSor;
+    }
 
-	public void setFactorNo(String factorNo) {
-		this.factorNo = factorNo;
-	}
+    public DivCtItm getDivCtItm() {
+        return divCtItm;
+    }
 
-	public DivFtDtl getDivFtDtl() {
-		return divFtDtl;
-	}
+    public void setDivCtItm(DivCtItm divCtItm) {
+        this.divCtItm = divCtItm;
+    }
 
-	public void setDivFtDtl(DivFtDtl divFtDtl) {
-		this.divFtDtl = divFtDtl;
-	}
+    public String getDivRlNo() {
+        return divRlNo;
+    }
 
-	public String getRangeNo() {
-		return rangeNo;
-	}
+    public void setDivRlNo(String divRlNo) {
+        this.divRlNo = divRlNo;
+    }
 
-	public void setRangeNo(String rangeNo) {
-		this.rangeNo = rangeNo;
-	}
+    public String getFactorNo() {
+        return factorNo;
+    }
+
+    public void setFactorNo(String factorNo) {
+        this.factorNo = factorNo;
+    }
+
+    public DivFtDtl getDivFtDtl() {
+        return divFtDtl;
+    }
+
+    public void setDivFtDtl(DivFtDtl divFtDtl) {
+        this.divFtDtl = divFtDtl;
+    }
+
+    public String getRangeNo() {
+        return rangeNo;
+    }
+
+    public void setRangeNo(String rangeNo) {
+        this.rangeNo = rangeNo;
+    }
 
 }

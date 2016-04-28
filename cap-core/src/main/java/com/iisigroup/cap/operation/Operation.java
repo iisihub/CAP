@@ -23,19 +23,20 @@ import com.iisigroup.cap.handler.IHandler;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/22,iristu,new
  *          </ul>
  */
 public interface Operation {
 
-	String getName();
+    String getName();
 
-	void setName(String name);
+    void setName(String name);
 
-	Map<String, OperationStep> getRuleMap();
+    Map<String, OperationStep> getRuleMap();
 
-	void setRuleMap(Map<String, OperationStep> ruleMap);
+    void setRuleMap(Map<String, OperationStep> ruleMap);
 
-	void execute(OpStepContext ctx, IRequest params, IHandler handler);
+    void execute(OpStepContext ctx, IRequest params, IHandler handler);
 }

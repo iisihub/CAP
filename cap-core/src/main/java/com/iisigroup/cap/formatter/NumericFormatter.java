@@ -14,6 +14,7 @@ package com.iisigroup.cap.formatter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.utils.CapMath;
 
 /**
@@ -23,7 +24,8 @@ import com.iisigroup.cap.utils.CapMath;
  * 
  * @since 2010/11/24
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/11/24,iristu,new
  *          <li>2011/9/06,tammychen, handle BigDecimal
  *          </ul>
@@ -31,33 +33,32 @@ import com.iisigroup.cap.utils.CapMath;
 @SuppressWarnings("serial")
 public class NumericFormatter implements IFormatter {
 
-	private DecimalFormat _nf;
+    private DecimalFormat _nf;
 
-	public NumericFormatter() {
-		this._nf = new DecimalFormat("###,##0");
-	}
+    public NumericFormatter() {
+        this._nf = new DecimalFormat("###,##0");
+    }
 
-	public NumericFormatter(String pattern) {
-		this._nf = new DecimalFormat(pattern);
-	}
+    public NumericFormatter(String pattern) {
+        this._nf = new DecimalFormat(pattern);
+    }
 
-	/**
-	 * <pre>
-	 * 數字的Formatter
-	 * </pre>
-	 * 
-	 * @param in
-	 *            input
-	 * @return String
-	 * @throws CapFormatException
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public String reformat(Object in) {
+    /**
+     * <pre>
+     * 數字的Formatter
+     * </pre>
+     * 
+     * @param in
+     *            input
+     * @return String
+     * @throws CapFormatException
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public String reformat(Object in) {
 
-		BigDecimal dec = in instanceof BigDecimal ? (BigDecimal) in : CapMath
-				.getBigDecimal((String) in);
-		return _nf.format(dec);
-	}
+        BigDecimal dec = in instanceof BigDecimal ? (BigDecimal) in : CapMath.getBigDecimal((String) in);
+        return _nf.format(dec);
+    }
 
 }

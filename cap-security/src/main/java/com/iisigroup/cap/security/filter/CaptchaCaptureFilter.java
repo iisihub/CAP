@@ -17,9 +17,7 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
     private String userCaptchaResponse;
     private HttpServletRequest request;
 
-    public void doFilterInternal(HttpServletRequest req,
-            HttpServletResponse res, FilterChain chain) throws IOException,
-            ServletException {
+    public void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
 
         logger.debug("Captcha capture filter");
 

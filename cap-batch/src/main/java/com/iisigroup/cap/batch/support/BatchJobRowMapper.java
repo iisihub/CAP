@@ -25,21 +25,22 @@ import com.iisigroup.cap.batch.model.BatchJob;
  * 
  * @since 2012/11/8
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/8,iristu,new
  *          </ul>
  */
 public class BatchJobRowMapper implements RowMapper<BatchJob> {
 
-	@Override
-	public BatchJob mapRow(ResultSet rs, int rowNum) throws SQLException {
-		BatchJob job = new BatchJob();
-		job.setJobId(rs.getString("JOBID"));
-		job.setJobDesc(rs.getString("JOBDESC"));
-		job.setJobResource(rs.getString("JOBRESOURCE"));
-		job.setUpdater(rs.getString("UPDATER"));
-		job.setUpdateTime(rs.getTimestamp("UPDATETIME"));
-		return job;
-	}
+    @Override
+    public BatchJob mapRow(ResultSet rs, int rowNum) throws SQLException {
+        BatchJob job = new BatchJob();
+        job.setJobId(rs.getString("JOBID"));
+        job.setJobDesc(rs.getString("JOBDESC"));
+        job.setJobResource(rs.getString("JOBRESOURCE"));
+        job.setUpdater(rs.getString("UPDATER"));
+        job.setUpdateTime(rs.getTimestamp("UPDATETIME"));
+        return job;
+    }
 
 }

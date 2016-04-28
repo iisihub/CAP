@@ -7,7 +7,7 @@ pageInit(function() {
       sortorder : "desc",
       height : 250,
       multiselect : true,
-      colModel : [{
+      colModel : [ {
         name : 'oid',
         hidden : true
       }, {
@@ -127,7 +127,7 @@ pageInit(function() {
           title.text(i18n.userSet.modify);
           var users = grid.getSelRowDatas();
           aDialog.find('#oid').val(users[0].oid);
-          aDialog.find('#code').val(users[0].code).attr("readonly","readonly");
+          aDialog.find('#code').val(users[0].code).attr("readonly", "readonly");
           aDialog.find('#name').val(users[0].name);
           aDialog.find('#email').val(users[0].email);
           aDialog.find('#statusArea').show();

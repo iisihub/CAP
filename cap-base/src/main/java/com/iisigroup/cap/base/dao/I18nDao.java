@@ -24,71 +24,70 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2010/12/15
  * @author eugene
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/12/15,eugene,new
  *          </ul>
  */
 public interface I18nDao extends IGenericDao<I18n> {
 
-	/**
-	 * find by codetype.
-	 * 
-	 * @param codetype
-	 *            代碼類型
-	 * @param locale
-	 *            語言別
-	 * @return T
-	 */
-	List<I18n> findByCodeType(String codetype, String locale);
+    /**
+     * find by codetype.
+     * 
+     * @param codetype
+     *            代碼類型
+     * @param locale
+     *            語言別
+     * @return T
+     */
+    List<I18n> findByCodeType(String codetype, String locale);
 
-	/**
-	 * find by CodeType and CodeValue
-	 * 
-	 * @param cType
-	 *            代碼類型
-	 * @param cValue
-	 *            代碼值
-	 * @param locale
-	 *            語言別
-	 * @return T
-	 */
-	I18n findByCodeTypeAndCodeValue(String cType, String cValue,
-			String locale);
+    /**
+     * find by CodeType and CodeValue
+     * 
+     * @param cType
+     *            代碼類型
+     * @param cValue
+     *            代碼值
+     * @param locale
+     *            語言別
+     * @return T
+     */
+    I18n findByCodeTypeAndCodeValue(String cType, String cValue, String locale);
 
-	/**
-	 * find by codetype.
-	 * 
-	 * @param codetypes
-	 *            多個代碼類型
-	 * @param locale
-	 *            語言別
-	 * @return T List
-	 */
-	List<I18n> findByCodeType(String[] codetypes, String locale);
+    /**
+     * find by codetype.
+     * 
+     * @param codetypes
+     *            多個代碼類型
+     * @param locale
+     *            語言別
+     * @return T List
+     */
+    List<I18n> findByCodeType(String[] codetypes, String locale);
 
-	/**
-	 * find by code Desc
-	 * 
-	 * @param cType
-	 *            代碼類型
-	 * @param codeDesc
-	 *            代碼內容
-	 * @param locale
-	 *            語言別
-	 * @return CodeType
-	 */
-	List<I18n> findByCodeTypeAndCodeDesc(String cType,
-			String codeDesc, String locale);
+    /**
+     * find by code Desc
+     * 
+     * @param cType
+     *            代碼類型
+     * @param codeDesc
+     *            代碼內容
+     * @param locale
+     *            語言別
+     * @return CodeType
+     */
+    List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return CodeType
-	 */
-	I18n findByOid(String oid);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return CodeType
+     */
+    I18n findByOid(String oid);
 
-	Map<String, I18n> findAsMapByCodeType(String codetype, String locale);
+    Map<String, I18n> findAsMapByCodeType(String codetype, String locale);
 
 }

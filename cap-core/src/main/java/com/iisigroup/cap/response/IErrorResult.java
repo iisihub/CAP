@@ -10,24 +10,26 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
- 
+
 package com.iisigroup.cap.response;
 
 import com.iisigroup.cap.component.IRequest;
 
-
-/**<pre>
+/**
+ * <pre>
  * 錯誤訊息處理
  * </pre>
- * @since  2011/1/28
+ * 
+ * @since 2011/1/28
  * @author iristu
- * @version <ul>
- *           <li>2011/1/28,iristu,new
- *           <li>2011/11/1,rodeschen,from cap
+ * @version
+ *          <ul>
+ *          <li>2011/1/28,iristu,new
+ *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
 public interface IErrorResult extends IResult {
-	
-	void putError(IRequest request, Exception e);
+
+    void putError(IRequest request, Exception e);
 
 }

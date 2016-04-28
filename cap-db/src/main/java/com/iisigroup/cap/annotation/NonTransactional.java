@@ -18,16 +18,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**<pre>
+/**
+ * <pre>
  * NonTransactional
  * </pre>
- * @since  2012/10/26
+ * 
+ * @since 2012/10/26
  * @author iristu
- * @version <ul>
- *           <li>2012/10/26,iristu,new
+ * @version
+ *          <ul>
+ *          <li>2012/10/26,iristu,new
  *          </ul>
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented

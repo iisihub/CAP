@@ -18,7 +18,8 @@ package com.iisigroup.cap.formatter;
  * 
  * @since 2011年8月8日
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011年8月8日,iristu,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>

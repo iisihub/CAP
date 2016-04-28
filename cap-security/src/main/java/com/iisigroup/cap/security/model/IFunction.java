@@ -14,8 +14,11 @@ package com.iisigroup.cap.security.model;
 
 import java.io.Serializable;
 
-
-/**<p> 交易資料.</p>
+/**
+ * <p>
+ * 交易資料.
+ * </p>
+ * 
  * <pre>
  * $Date: 2010-09-28 12:08:43 +0800 (星期二, 28 九月 2010) $
  * $Author: iris $
@@ -25,16 +28,17 @@ import java.io.Serializable;
  *
  * @author iristu
  * @version $Revision: 656 $
- * @version <ul>
- *           <li>2010/7/26,iristu,new
+ * @version
+ *          <ul>
+ *          <li>2010/7/26,iristu,new
  *          </ul>
  */
 public interface IFunction extends Serializable {
-	
-	String getFuncUrl();
-	
-	String getFuncParent();
-	
-	int getFuncOrder(); 
-		
+
+    String getFuncUrl();
+
+    String getFuncParent();
+
+    int getFuncOrder();
+
 }

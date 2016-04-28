@@ -39,14 +39,15 @@ import com.iisigroup.cap.security.model.IRole;
  * 
  * @since 2013/12/23
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/23,tammy,new
  *          </ul>
  */
 
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_ROLE", uniqueConstraints = @UniqueConstraint(columnNames = { "CODE" }))
+@Table(name = "DEF_ROLE", uniqueConstraints = @UniqueConstraint(columnNames = { "CODE" }) )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")

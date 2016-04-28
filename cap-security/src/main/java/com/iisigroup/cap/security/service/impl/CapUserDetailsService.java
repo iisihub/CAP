@@ -36,20 +36,19 @@ import com.iisigroup.cap.utils.CapString;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/9,iristu,new
  *          </ul>
  */
 public class CapUserDetailsService implements UserDetailsService {
 
-    private static final Log logger = LogFactory
-            .getLog(CapUserDetailsService.class);
+    private static final Log logger = LogFactory.getLog(CapUserDetailsService.class);
 
     /*
      * (non-Javadoc)
      * 
-     * @seeorg.springframework.security.userdetails.UserDetailsService#
-     * loadUserByUsername(java.lang.String)
+     * @seeorg.springframework.security.userdetails.UserDetailsService# loadUserByUsername(java.lang.String)
      */
     public UserDetails loadUserByUsername(String username) {
         if (CapString.isEmpty(username)) {
@@ -66,8 +65,7 @@ public class CapUserDetailsService implements UserDetailsService {
             if (logger.isInfoEnabled()) {
                 logger.info("Account " + username + " could not be found");
             }
-            throw new UsernameNotFoundException("account " + username
-                    + " could not be found");
+            throw new UsernameNotFoundException("account " + username + " could not be found");
         }
 
         String password = obtainPassword(user);
@@ -83,8 +81,7 @@ public class CapUserDetailsService implements UserDetailsService {
 
     }
 
-    public UserDetails obtainUserDetails(IUser user, String password,
-            Map<String, String> roles) {
+    public UserDetails obtainUserDetails(IUser user, String password, Map<String, String> roles) {
         return new CapUserDetails(user, password, roles);
     }
 
@@ -122,8 +119,7 @@ public class CapUserDetailsService implements UserDetailsService {
     }
 
     /**
-     * Default password encoding algorithm is SHA-256. Subclass may override it
-     * to provide their own password.
+     * Default password encoding algorithm is SHA-256. Subclass may override it to provide their own password.
      */
     protected String obtainPassword(IUser user) {
         return user.getPassword();

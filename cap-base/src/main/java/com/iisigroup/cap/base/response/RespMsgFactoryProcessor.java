@@ -14,20 +14,21 @@ import com.iisigroup.cap.base.service.ErrorCodeService;
  * 
  * @since 2012/3/30
  * @author UFO
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/3/30,UFO,new
  *          </ul>
  */
 public class RespMsgFactoryProcessor implements InitializingBean {
 
-	private ErrorCodeService errCodeService;
+    private ErrorCodeService errCodeService;
 
-	public void setErrorCodeService(ErrorCodeService errCodeService) {
-		this.errCodeService = errCodeService;
-	}
+    public void setErrorCodeService(ErrorCodeService errCodeService) {
+        this.errCodeService = errCodeService;
+    }
 
-	public void afterPropertiesSet() throws Exception {
-		RespMsgFactory.setErrorCodeService(errCodeService);
-	}
+    public void afterPropertiesSet() throws Exception {
+        RespMsgFactory.setErrorCodeService(errCodeService);
+    }
 
 }

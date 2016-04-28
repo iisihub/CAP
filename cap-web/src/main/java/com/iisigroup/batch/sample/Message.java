@@ -11,24 +11,27 @@
  */
 package com.iisigroup.batch.sample;
 
-/**<pre>
+/**
+ * <pre>
  * TODO Write a short description on the purpose of the program
  * </pre>
- * @since  2012/10/30
+ * 
+ * @since 2012/10/30
  * @author iristu
- * @version <ul>
- *           <li>2012/10/30,iristu,new
+ * @version
+ *          <ul>
+ *          <li>2012/10/30,iristu,new
  *          </ul>
  */
 public class Message {
-	private String content;
+    private String content;
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	} 
-	
+    public void setContent(String content) {
+        this.content = content;
+    }
+
 }

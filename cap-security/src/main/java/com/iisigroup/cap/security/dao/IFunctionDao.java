@@ -31,17 +31,18 @@ import com.iisigroup.cap.security.model.IRole;
  * 
  * @author iristu
  * @version $Revision: 656 $
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/26,iristu,new
  *          </ul>
  * @param <T>
  */
 public interface IFunctionDao<T extends IFunction> {
 
-	T getFunctionByURL(String url);
+    T getFunctionByURL(String url);
 
-	List<? extends IRole> getRoleByFunction(T function);
-	
-	T getFunctionByName(String functionName);
-	
+    List<? extends IRole> getRoleByFunction(T function);
+
+    T getFunctionByName(String functionName);
+
 }

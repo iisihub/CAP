@@ -22,30 +22,30 @@ import com.iisigroup.cap.dao.utils.ISearch;
  * 
  * @since 2011/3/28
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/3/28,iristu,new
  *          <li>2011/6/10,RodesChen, add method
  *          </ul>
  */
 class SearchSetting extends AbstractSearchSetting implements ISearch {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public SearchSetting() {
+    public SearchSetting() {
 
-	}
+    }
 
-	/**
-	 * Constructs a new search template and initializes it with the values of
-	 * the passed search template.
-	 * 
-	 * @param searchSetting
-	 *            searchSetting
-	 */
-	public SearchSetting(ISearch searchSetting) {
-		setOrderBy(searchSetting.getOrderBy());
-		setFirstResult(searchSetting.getFirstResult());
-		setMaxResults(searchSetting.getMaxResults());
-	}
+    /**
+     * Constructs a new search template and initializes it with the values of the passed search template.
+     * 
+     * @param searchSetting
+     *            searchSetting
+     */
+    public SearchSetting(ISearch searchSetting) {
+        setOrderBy(searchSetting.getOrderBy());
+        setFirstResult(searchSetting.getFirstResult());
+        setMaxResults(searchSetting.getMaxResults());
+    }
 
 }

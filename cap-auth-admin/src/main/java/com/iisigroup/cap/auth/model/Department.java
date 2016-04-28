@@ -30,14 +30,15 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/26
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/26,tammy,new
  *          <li>2014/5/15, Lancelot, update model/table/variable name
  *          </ul>
  */
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_DEP", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
+@Table(name = "DEF_DEP", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }) )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")

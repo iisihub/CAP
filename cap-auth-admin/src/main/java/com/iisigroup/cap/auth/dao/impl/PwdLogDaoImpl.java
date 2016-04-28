@@ -11,8 +11,7 @@ import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.dao.utils.SearchMode;
 
 @Repository
-public class PwdLogDaoImpl extends GenericDao<PwdLog> implements
-        PwdLogDao {
+public class PwdLogDaoImpl extends GenericDao<PwdLog> implements PwdLogDao {
 
     @Override
     public List<PwdLog> findByUserCode(String userCode, int maxHistory) {

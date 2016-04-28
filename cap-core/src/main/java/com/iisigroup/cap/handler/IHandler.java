@@ -20,18 +20,19 @@ import com.iisigroup.cap.action.IAction;
  * 
  * @since 2012/9/24
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/24,iristu,new
  *          </ul>
  */
 public interface IHandler {
 
-	static final String FORM_ACTION = "formAction";
+    static final String FORM_ACTION = "formAction";
 
-	static final String SIMPLE_OPERATION = "simpleOperation";
-	
-	String getHandlerName();
-	
-	IAction getAction(String actionType);
+    static final String SIMPLE_OPERATION = "simpleOperation";
+
+    String getHandlerName();
+
+    IAction getAction(String actionType);
 
 }

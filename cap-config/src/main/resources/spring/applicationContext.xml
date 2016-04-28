@@ -1,59 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-
-	<bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="ignoreUnresolvablePlaceholders" value="false" />
-		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<property name="ignoreResourceNotFound" value="false" />
-		<property name="locations">
-			<list>
-				<value>classpath:db/database.properties</value>
-				<value>classpath:config.properties</value>
-			</list>
-		</property>
-	</bean>
-
-	<!-- application -->
-	<bean class="com.iisigroup.cap.utils.CapAppContext" />
-
-	<!-- messageSource -->
-	<bean id="messageSource" class="com.iisigroup.cap.message.CapReloadableResourceBundleMessageSource">
-		<property name="languages" value="_zh_CN,_en,_zh_TW" />
-		<property name="basePath" value="classpath:/i18n" />
-		<!-- 設定預設語系 - 如有使用Spring MVC 可省略 -->
-		<!-- <property name="defaultLocale" value="zh_TW" /> -->
-	</bean>
-
-	<!-- Syste config -->
-	<bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
-		<constructor-arg index="0">
-			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="locations">
-					<list>
-						<value>classpath:config.properties</value>
-					</list>
-				</property>
-			</bean>
-		</constructor-arg>
-	</bean>
-
-	<import resource="classpath:db/datasource.xml" />
-	<import resource="classpath:db/jdbcTemplate.xml" />
-	<import resource="classpath:db/jpa.xml" />
-	<import resource="classpath:spring/component.xml" />
-	<import resource="classpath:spring/security.xml" />
-	<import resource="classpath:spring/operation.xml" />
-	<import resource="classpath:batch/batch.xml" />
-	<!-- web socket -->
-	<import resource="classpath:websocket/websocket.xml"/>
-	<!-- captcha -->
-	<import resource="classpath:spring/captcha.xml"/>
-	<!-- report -->
-	<import resource="classpath:report/report.xml"/>
-	<!-- audit log -->
-	<import resource="classpath:spring/auditlog.xml" />
+    <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="false" />
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="ignoreResourceNotFound" value="false" />
+        <property name="locations">
+            <list>
+                <value>classpath:db/database.properties</value>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- application -->
+    <bean class="com.iisigroup.cap.utils.CapAppContext" />
+    <!-- messageSource -->
+    <bean id="messageSource" class="com.iisigroup.cap.message.CapReloadableResourceBundleMessageSource">
+        <property name="languages" value="_zh_CN,_en,_zh_TW" />
+        <property name="basePath" value="classpath:/i18n" />
+        <!-- 設定預設語系 - 如有使用Spring MVC 可省略 -->
+        <!-- <property name="defaultLocale" value="zh_TW" /> -->
+    </bean>
+    <!-- Syste config -->
+    <bean id="systemConfig" class="com.iisigroup.cap.utils.CapSystemConfig">
+        <constructor-arg index="0">
+            <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+                <property name="locations">
+                    <list>
+                        <value>classpath:config.properties</value>
+                    </list>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <import resource="classpath:db/datasource.xml" />
+    <import resource="classpath:db/jdbcTemplate.xml" />
+    <import resource="classpath:db/jpa.xml" />
+    <import resource="classpath:spring/component.xml" />
+    <import resource="classpath:spring/security.xml" />
+    <import resource="classpath:spring/operation.xml" />
+    <import resource="classpath:batch/batch.xml" />
+    <!-- web socket -->
+    <import resource="classpath:websocket/websocket.xml" />
+    <!-- captcha -->
+    <import resource="classpath:spring/captcha.xml" />
+    <!-- report -->
+    <import resource="classpath:report/report.xml" />
+    <!-- audit log -->
+    <import resource="classpath:spring/auditlog.xml" />
 </beans>

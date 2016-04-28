@@ -19,21 +19,23 @@ package com.iisigroup.cap.enums;
  * 
  * @since 2011/11/23
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/11/23,rodeschen,new
  *          </ul>
  */
 public enum MineTypeEnum {
-	JSON("text/plain"), TEXT("text/plain");
+    JSON("text/plain"),
+    TEXT("text/plain");
 
-	private String code;
+    private String code;
 
-	MineTypeEnum(String code) {
-		this.code = code;
-	}
+    MineTypeEnum(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
 }

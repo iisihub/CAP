@@ -7,22 +7,25 @@ package com.iisigroup.cap.report.enums;
  * 
  * @since 2014/4/1
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/4/1,tammy,new
  *          </ul>
  */
 public enum ReportParamEnum {
-	templateName("templateName"), defaultEncoding("defaultEncoding"), encrypt(
-			"encryptPassword"), defaultFont("defaultFont");
+    templateName("templateName"),
+    defaultEncoding("defaultEncoding"),
+    encrypt("encryptPassword"),
+    defaultFont("defaultFont");
 
-	private String code;
+    private String code;
 
-	ReportParamEnum(String code) {
-		this.code = code;
-	}
+    ReportParamEnum(String code) {
+        this.code = code;
+    }
 
-	@Override
-	public String toString() {
-		return code;
-	}
+    @Override
+    public String toString() {
+        return code;
+    }
 }

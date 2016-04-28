@@ -12,29 +12,34 @@ import java.lang.annotation.Target;
  * 
  * @since 2011/11/30
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/11/30,rodeschen,new
  *          </ul>
  */
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HandlerType {
-	HandlerTypeEnum value() default HandlerTypeEnum.FORM;
+    HandlerTypeEnum value() default HandlerTypeEnum.FORM;
 
-	String name() default "";
+    String name() default "";
 
-	/**
-	 * <pre>
-	 * Handler Type Enum
-	 * </pre>
-	 * 
-	 * @since 2011/11/30
-	 * @author rodeschen
-	 * @version <ul>
-	 *          <li>2011/11/30,rodeschen,new
-	 *          </ul>
-	 */
-	public enum HandlerTypeEnum {
-		FORM, GRID, FileUpload, FileDownload;
-	}
+    /**
+     * <pre>
+     * Handler Type Enum
+     * </pre>
+     * 
+     * @since 2011/11/30
+     * @author rodeschen
+     * @version
+     *          <ul>
+     *          <li>2011/11/30,rodeschen,new
+     *          </ul>
+     */
+    public enum HandlerTypeEnum {
+        FORM,
+        GRID,
+        FileUpload,
+        FileDownload;
+    }
 }

@@ -23,7 +23,8 @@ import java.util.Locale;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/26,iristu,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>

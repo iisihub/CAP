@@ -16,23 +16,26 @@ import java.util.List;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
-/**<pre>
+/**
+ * <pre>
  * TODO Write a short description on the purpose of the program
  * </pre>
- * @since  2012/10/30
+ * 
+ * @since 2012/10/30
  * @author iristu
- * @version <ul>
- *           <li>2012/10/30,iristu,new
+ * @version
+ *          <ul>
+ *          <li>2012/10/30,iristu,new
  *          </ul>
  */
 @Component("messageWriter")
-public class MessagesItemWriter implements ItemWriter<Message>{
+public class MessagesItemWriter implements ItemWriter<Message> {
 
-	@Override
-	public void write(List<? extends Message> items) throws Exception {
-		for (Message m : items){
-			System.out.println(m.getContent());
-		}
-	}
+    @Override
+    public void write(List<? extends Message> items) throws Exception {
+        for (Message m : items) {
+            System.out.println(m.getContent());
+        }
+    }
 
 }

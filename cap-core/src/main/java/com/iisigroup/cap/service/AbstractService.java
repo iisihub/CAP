@@ -11,7 +11,6 @@
 
 package com.iisigroup.cap.service;
 
-
 /**
  * <pre>
  * AbstractCapService
@@ -19,12 +18,12 @@ package com.iisigroup.cap.service;
  * 
  * @since 2010/11/25
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/11/25,iristu,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
 public abstract class AbstractService implements IService {
-	
 
 }

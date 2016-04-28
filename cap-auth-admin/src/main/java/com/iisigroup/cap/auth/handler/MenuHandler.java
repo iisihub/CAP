@@ -13,8 +13,6 @@ package com.iisigroup.cap.auth.handler;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONSerializer;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -26,6 +24,8 @@ import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 
+import net.sf.json.JSONSerializer;
+
 /**
  * <pre>
  * Sample Handler
@@ -33,7 +33,8 @@ import com.iisigroup.cap.security.CapSecurityContext;
  * 
  * @since 2012/9/24
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/24,iristu,new
  *          <li>2013/12/26,tammy,前端組menu修改
  *          </ul>
@@ -42,16 +43,16 @@ import com.iisigroup.cap.security.CapSecurityContext;
 @Controller("menuhandler")
 public class MenuHandler extends MFormHandler {
 
-	@Resource
-	private MenuService menuSrv;
+    @Resource
+    private MenuService menuSrv;
 
-	public IResult queryMenu(IRequest request) {
+    public IResult queryMenu(IRequest request) {
 
-		MenuItem menu = menuSrv.getMenuByRoles(CapSecurityContext.getRoleIds());
-		if (menu != null) {
-			return new AjaxFormResult(JSONSerializer.toJSON(menu).toString());
-		}
-		return new AjaxFormResult();
-	}
+        MenuItem menu = menuSrv.getMenuByRoles(CapSecurityContext.getRoleIds());
+        if (menu != null) {
+            return new AjaxFormResult(JSONSerializer.toJSON(menu).toString());
+        }
+        return new AjaxFormResult();
+    }
 
 }

@@ -18,15 +18,16 @@ package com.iisigroup.cap.formatter;
  * 
  * @since 2013/2/26
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/2/26,iristu,new
  *          </ul>
  */
 public enum KeyValueFormatTypeEnum {
-	/**print:key-value*/
-	Key_Value, 
-	/**print:value*/
-	Value, 
-	/**print:key value*/
-	KeySpaceValue
+    /** print:key-value */
+    Key_Value,
+    /** print:value */
+    Value,
+    /** print:key value */
+    KeySpaceValue
 }

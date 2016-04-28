@@ -25,7 +25,8 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2014/01/27
  * @author yunglinliu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/01/27,yunglinliu,new</li>
  *          </ul>
  */

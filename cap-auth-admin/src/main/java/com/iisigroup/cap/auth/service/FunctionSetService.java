@@ -15,7 +15,8 @@ import com.iisigroup.cap.model.Page;
  * 
  * @since 2014/1/16
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
@@ -27,11 +28,9 @@ public interface FunctionSetService {
 
     int deleteRfList(String funcCode, List<String> delRole);
 
-    Page<Map<String, Object>> findPage(ISearch search, String sysType,
-            String funcCode);
+    Page<Map<String, Object>> findPage(ISearch search, String sysType, String funcCode);
 
-    Page<Map<String, Object>> findEditPage(ISearch search, String sysType,
-            String funcCode);
+    Page<Map<String, Object>> findEditPage(ISearch search, String sysType, String funcCode);
 
     void save(Function function, IRequest request);
 }

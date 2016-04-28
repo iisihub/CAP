@@ -26,71 +26,72 @@ import com.iisigroup.cap.formatter.IFormatter;
  * 
  * @since 2011/6/30
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/6/30,iristu,new
  *          </ul>
  */
 public class CapParameter {
 
-	final Map<String, Object> parameter;
+    final Map<String, Object> parameter;
 
-	IFormatter formatter;
+    IFormatter formatter;
 
-	public CapParameter(Map<String, Object> map) {
-		this.parameter = map;
-	}
+    public CapParameter(Map<String, Object> map) {
+        this.parameter = map;
+    }
 
-	public CapParameter(Collection<Map<String, Object>> collection) {
-		this.parameter = new HashMap<String, Object>();
-		for (Map<String, Object> map : collection) {
-			parameter.putAll(map);
-		}
-	}
+    public CapParameter(Collection<Map<String, Object>> collection) {
+        this.parameter = new HashMap<String, Object>();
+        for (Map<String, Object> map : collection) {
+            parameter.putAll(map);
+        }
+    }
 
-	public Map<String, Object> getParameter() {
-		return parameter;
-	}
+    public Map<String, Object> getParameter() {
+        return parameter;
+    }
 
-	public void setFormatter(IFormatter formatter) {
-		this.formatter = formatter;
-	}
+    public void setFormatter(IFormatter formatter) {
+        this.formatter = formatter;
+    }
 
-	@SuppressWarnings("unchecked")
-	public <T> T getValue(String key, T defaultValue) {
-		if (parameter.containsKey(key)) {
-			Object obj = parameter.get(key);
-			if (formatter != null) {
-				try {
-					return (T) formatter.reformat(obj);
-				} catch (CapFormatException e) {
-					return (T) obj;
-				}
-			} else {
-				return (T) obj;
-			}
-		}
-		return defaultValue;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T getValue(String key) {
-		if (parameter.containsKey(key)) {
-			Object obj = parameter.get(key);
-			if (formatter != null) {
-				try {
-					return (T) formatter.reformat(obj);
-				} catch (CapFormatException e) {
-					return (T) obj;
-				}
-			} else {
-				return (T) obj;
-			}
-		}
-		return null;
-	}
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(String key, T defaultValue) {
+        if (parameter.containsKey(key)) {
+            Object obj = parameter.get(key);
+            if (formatter != null) {
+                try {
+                    return (T) formatter.reformat(obj);
+                } catch (CapFormatException e) {
+                    return (T) obj;
+                }
+            } else {
+                return (T) obj;
+            }
+        }
+        return defaultValue;
+    }
 
-	public boolean containsKey(String key) {
-		return parameter.containsKey(key);
-	}
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(String key) {
+        if (parameter.containsKey(key)) {
+            Object obj = parameter.get(key);
+            if (formatter != null) {
+                try {
+                    return (T) formatter.reformat(obj);
+                } catch (CapFormatException e) {
+                    return (T) obj;
+                }
+            } else {
+                return (T) obj;
+            }
+        }
+        return null;
+    }
+
+    public boolean containsKey(String key) {
+        return parameter.containsKey(key);
+    }
 
 }
