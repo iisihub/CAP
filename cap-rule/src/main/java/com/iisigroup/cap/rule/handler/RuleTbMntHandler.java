@@ -59,8 +59,8 @@ import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -670,7 +670,7 @@ public class RuleTbMntHandler extends MFormHandler {
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "divRlNo", "");
 
         Page<DivRlItm> page = commonService.findPage(DivRlItm.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("ruleCont", new RuleValFormatter(this.conditionMntService));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
     }
@@ -692,7 +692,7 @@ public class RuleTbMntHandler extends MFormHandler {
         // }
         // search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", "C000001");
         Page<DivCtItm> page = commonService.findPage(DivCtItm.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("divCtCont", new CondValNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
     }
@@ -713,7 +713,7 @@ public class RuleTbMntHandler extends MFormHandler {
         }
 
         Page<DivRlDtl> page = commonService.findPage(DivRlDtl.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("divCtNm", new ConditionNmFormatter(conditionMntService));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
     }
@@ -723,7 +723,7 @@ public class RuleTbMntHandler extends MFormHandler {
     /**
      * CondValNmFormatter formatter
      */
-    class CondValNmFormatter implements IBeanFormatter {
+    class CondValNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         @SuppressWarnings("unchecked")
@@ -746,7 +746,7 @@ public class RuleTbMntHandler extends MFormHandler {
     /**
      * RuleDetailNmFormatter formatter
      */
-    class RuleValFormatter implements IBeanFormatter {
+    class RuleValFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
         private ConditionMntService conditionMntService;
 
@@ -776,7 +776,7 @@ public class RuleTbMntHandler extends MFormHandler {
     /**
      * ConditionNmFormatter formatter
      */
-    class ConditionNmFormatter implements IBeanFormatter {
+    class ConditionNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
         private ConditionMntService conditionMntService;
 

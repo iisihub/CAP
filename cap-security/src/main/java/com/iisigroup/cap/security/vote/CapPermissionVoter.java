@@ -23,7 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 
 import com.iisigroup.cap.security.model.IRole;
-import com.iisigroup.cap.security.service.IAccessControlService;
+import com.iisigroup.cap.security.service.AccessControlService;
 
 /**
  * <p>
@@ -38,7 +38,7 @@ import com.iisigroup.cap.security.service.IAccessControlService;
  */
 public class CapPermissionVoter extends RoleVoter {
 
-    protected IAccessControlService securityService;
+    protected AccessControlService securityService;
 
     @SuppressWarnings("rawtypes")
     @Override
@@ -75,7 +75,7 @@ public class CapPermissionVoter extends RoleVoter {
         return result;
     }
 
-    public void setSecurityService(IAccessControlService securityService) {
+    public void setSecurityService(AccessControlService securityService) {
         this.securityService = securityService;
     }
 

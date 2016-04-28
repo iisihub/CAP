@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 
 /**
  * <p>
@@ -36,7 +36,7 @@ import com.iisigroup.cap.model.IDataObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "CFG_SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parmId") )
-public class SysParm extends GenericBean implements IDataObject {
+public class SysParm extends GenericBean implements DataObject {
 
     /** 參數id */
     @Id

@@ -25,7 +25,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -45,7 +45,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DIVCTDTL", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }) )
-public class DivCtDtl extends GenericBean implements IDataObject {
+public class DivCtDtl extends GenericBean implements DataObject {
 
     @Id
     @Column(nullable = false, length = 32)

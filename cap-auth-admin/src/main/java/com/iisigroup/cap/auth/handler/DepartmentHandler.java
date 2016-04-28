@@ -25,7 +25,7 @@ import com.iisigroup.cap.auth.service.DepartmentService;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -62,7 +62,7 @@ public class DepartmentHandler extends MFormHandler {
     public GridResult query(SearchSetting search, IRequest params) {
         search.addOrderBy("code");
 
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
 
         Page<Department> page = commonSrv.findPage(Department.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);

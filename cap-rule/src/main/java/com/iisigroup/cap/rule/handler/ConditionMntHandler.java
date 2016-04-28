@@ -33,8 +33,8 @@ import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -257,7 +257,7 @@ public class ConditionMntHandler extends MFormHandler {
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "divCtNo", "");
 
         Page<DivCtItm> page = commonService.findPage(DivCtItm.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("condVal", new CondValFormatter(factorMntService));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -279,7 +279,7 @@ public class ConditionMntHandler extends MFormHandler {
         }
 
         Page<DivCtDtl> page = commonService.findPage(DivCtDtl.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
     }
@@ -300,7 +300,7 @@ public class ConditionMntHandler extends MFormHandler {
         }
 
         Page<DivFtDtl> page = commonService.findPage(DivFtDtl.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("rangeNm", new RangeNmFormatter());
         fmt.put("factorNm", new FactorNmFormatter());
@@ -322,7 +322,7 @@ public class ConditionMntHandler extends MFormHandler {
             return new GridResult();
         }
         Page<DivCtDtl> page = commonService.findPage(DivCtDtl.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("factorNm", new CondFactorNmFormatter());
         fmt.put("rangeNm", new CondRangeNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -331,7 +331,7 @@ public class ConditionMntHandler extends MFormHandler {
     /**
      * RangeNmFormatter formatter
      */
-    class RangeNmFormatter implements IBeanFormatter {
+    class RangeNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         @SuppressWarnings("unchecked")
@@ -350,7 +350,7 @@ public class ConditionMntHandler extends MFormHandler {
     /**
      * RangeNmFormatter formatter
      */
-    class CondValFormatter implements IBeanFormatter {
+    class CondValFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         private FactorMntService factorMntService2;
@@ -379,7 +379,7 @@ public class ConditionMntHandler extends MFormHandler {
     /**
      * factorNmFormatter formatter
      */
-    class FactorNmFormatter implements IBeanFormatter {
+    class FactorNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         @SuppressWarnings("unchecked")
@@ -398,7 +398,7 @@ public class ConditionMntHandler extends MFormHandler {
     /**
      * CondRangeNmFormatter formatter
      */
-    class CondRangeNmFormatter implements IBeanFormatter {
+    class CondRangeNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         @SuppressWarnings("unchecked")
@@ -418,7 +418,7 @@ public class ConditionMntHandler extends MFormHandler {
     /**
      * RangeNmFormatter formatter
      */
-    class CondFactorNmFormatter implements IBeanFormatter {
+    class CondFactorNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         @SuppressWarnings("unchecked")

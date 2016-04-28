@@ -55,7 +55,7 @@ import freemarker.template.Template;
  *          <li>2013/10/24,Sunkist Wang,new
  *          </ul>
  */
-public abstract class AbstractReportPdfService extends AbstractService implements IFreeMarkerReport, IReportService {
+public abstract class AbstractReportPdfService extends AbstractService implements FreeMarkerReport, ReportService {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 

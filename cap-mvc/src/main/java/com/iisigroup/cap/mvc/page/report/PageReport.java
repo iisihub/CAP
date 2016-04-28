@@ -15,7 +15,7 @@ import java.util.Map;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.service.IService;
+import com.iisigroup.cap.service.Service;
 
 /**
  * <pre>
@@ -29,7 +29,7 @@ import com.iisigroup.cap.service.IService;
  *          <li>2012/3/14,rodeschen,new
  *          </ul>
  */
-public interface IPageReport extends IService {
+public interface PageReport extends Service {
 
     /**
      * report action

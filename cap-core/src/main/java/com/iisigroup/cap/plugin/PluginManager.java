@@ -58,7 +58,7 @@ public class PluginManager implements InitializingBean {
         T plugin = null;
 
         long start = System.currentTimeMillis();
-        plugin = (T) context.getBean(plugInBeanName, IPlugin.class);
+        plugin = (T) context.getBean(plugInBeanName, Plugin.class);
         if (logger.isTraceEnabled()) {
             logger.trace("Spring Find {} executed time: {}", plugInBeanName, (System.currentTimeMillis() - start));
         }
@@ -95,7 +95,7 @@ public class PluginManager implements InitializingBean {
      * @return the plugin map
      */
     public String[] getAllPluginName() {
-        return context.getBeanNamesForType(IPlugin.class);
+        return context.getBeanNamesForType(Plugin.class);
     }
 
 }

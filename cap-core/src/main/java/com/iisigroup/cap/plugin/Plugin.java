@@ -27,7 +27,7 @@ import org.springframework.beans.factory.InitializingBean;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public interface IPlugin extends InitializingBean {
+public interface Plugin extends InitializingBean {
 
     /** The Constant PLUGIN_NOT_FOUND_MSG. */
     public static final String PLUGIN_NOT_FOUND_MSG = "cap.core.pluginNotFound";

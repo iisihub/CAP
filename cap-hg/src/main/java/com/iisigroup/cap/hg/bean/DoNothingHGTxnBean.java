@@ -32,7 +32,7 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2012/2/14,rodeschen,new
  *          </ul>
  */
-public class DoNothingHGTxnBean implements IHGTxnBean {
+public class DoNothingHGTxnBean implements HGTxnBean {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     private Document sendData;

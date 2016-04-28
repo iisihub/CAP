@@ -35,7 +35,7 @@ import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
@@ -45,7 +45,7 @@ import com.iisigroup.cap.response.IGridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.service.IPasswordService;
+import com.iisigroup.cap.security.service.PasswordService;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -68,7 +68,7 @@ public class UserSetHandler extends MFormHandler {
     @Resource
     private UserSetService userService;
     @Resource
-    private IPasswordService passwordService;
+    private PasswordService passwordService;
     @Resource
     private RoleSetService roleSetService;
     @Resource
@@ -83,7 +83,7 @@ public class UserSetHandler extends MFormHandler {
         String[] roleCodes = params.getParamsAsStringArray("roleCodes");
         String[] status = params.getParamsAsStringArray("status");
         Page<Map<String, Object>> page = userService.findUser(code, name, roleCodes, status, search.getMaxResults(), search.getFirstResult());
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("createTime", new ADDateFormatter());
         fmt.put("updateTime", new ADDateFormatter());
         fmt.put("pwdExpiredTime", new ADDateFormatter());

@@ -28,7 +28,7 @@ import com.iisigroup.cap.utils.CapString;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class I18NFormatter implements IFormatter {
+public class I18NFormatter implements Formatter {
 
     String prefix;
     boolean hasPrefix = false;

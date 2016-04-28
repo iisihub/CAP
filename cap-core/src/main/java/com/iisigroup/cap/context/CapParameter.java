@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.iisigroup.cap.exception.CapFormatException;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 
 /**
  * <pre>
@@ -35,7 +35,7 @@ public class CapParameter {
 
     final Map<String, Object> parameter;
 
-    IFormatter formatter;
+    Formatter formatter;
 
     public CapParameter(Map<String, Object> map) {
         this.parameter = map;
@@ -52,7 +52,7 @@ public class CapParameter {
         return parameter;
     }
 
-    public void setFormatter(IFormatter formatter) {
+    public void setFormatter(Formatter formatter) {
         this.formatter = formatter;
     }
 

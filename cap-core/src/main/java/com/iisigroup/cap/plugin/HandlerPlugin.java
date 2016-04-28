@@ -15,9 +15,9 @@ package com.iisigroup.cap.plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.action.IAction;
+import com.iisigroup.cap.action.Action;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.handler.Handler;
 import com.iisigroup.cap.response.IResult;
 
 /**
@@ -33,7 +33,7 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public abstract class HandlerPlugin implements IPlugin, IHandler {
+public abstract class HandlerPlugin implements Plugin, Handler {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -68,7 +68,7 @@ public abstract class HandlerPlugin implements IPlugin, IHandler {
      *            action name
      * @return IAction
      */
-    public abstract IAction getAction(String formAction);
+    public abstract Action getAction(String formAction);
 
     /*
      * (non-Javadoc)

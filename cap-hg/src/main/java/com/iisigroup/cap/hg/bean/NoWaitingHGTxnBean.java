@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.hg.event.IHGEventAction;
+import com.iisigroup.cap.hg.event.HGEventAction;
 
 /**
  * <pre>
@@ -30,12 +30,12 @@ import com.iisigroup.cap.hg.event.IHGEventAction;
  *          </ul>
  */
 
-public class NoWaitingHGTxnBean implements IHGTxnBean {
+public class NoWaitingHGTxnBean implements HGTxnBean {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-    private IHGTxnBean txnBean;
+    private HGTxnBean txnBean;
 
-    private IHGEventAction afterAction;
-    private IHGEventAction beforeAction;
+    private HGEventAction afterAction;
+    private HGEventAction beforeAction;
 
     /*
      * (non-Javadoc)
@@ -100,27 +100,27 @@ public class NoWaitingHGTxnBean implements IHGTxnBean {
         return null;
     }
 
-    public IHGTxnBean getTxnBean() {
+    public HGTxnBean getTxnBean() {
         return txnBean;
     }
 
-    public void setTxnBean(IHGTxnBean txnBean) {
+    public void setTxnBean(HGTxnBean txnBean) {
         this.txnBean = txnBean;
     }
 
-    public IHGEventAction getBeforeAction() {
+    public HGEventAction getBeforeAction() {
         return beforeAction;
     }
 
-    public void setBeforeAction(IHGEventAction beforeAction) {
+    public void setBeforeAction(HGEventAction beforeAction) {
         this.beforeAction = beforeAction;
     }
 
-    public IHGEventAction getAfterAction() {
+    public HGEventAction getAfterAction() {
         return afterAction;
     }
 
-    public void setAfterAction(IHGEventAction afterAction) {
+    public void setAfterAction(HGEventAction afterAction) {
         this.afterAction = afterAction;
     }
 

@@ -31,7 +31,7 @@ import com.iisigroup.cap.component.IRequest;
  *          </ul>
  */
 @Service("SamplePR")
-public class SamplePageReport implements IPageReport {
+public class SamplePageReport implements PageReport {
 
     @Override
     public Map<String, Object> excute(IRequest request) {

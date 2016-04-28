@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -42,7 +42,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
-public class Department extends GenericBean implements IDataObject {
+public class Department extends GenericBean implements DataObject {
     private static final long serialVersionUID = 1L;
 
     @Id

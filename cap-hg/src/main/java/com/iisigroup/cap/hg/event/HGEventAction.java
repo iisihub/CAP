@@ -22,7 +22,7 @@ package com.iisigroup.cap.hg.event;
  *          <li>2012/2/24,rodeschen,new
  *          </ul>
  */
-public interface IHGEventAction {
+public interface HGEventAction {
 
     /**
      * excute action

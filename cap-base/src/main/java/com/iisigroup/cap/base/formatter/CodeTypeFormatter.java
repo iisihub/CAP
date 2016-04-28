@@ -17,7 +17,7 @@ import java.util.Map;
 
 import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.base.service.CodeTypeService;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.formatter.KeyValueFormatTypeEnum;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapString;
@@ -36,7 +36,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class CodeTypeFormatter implements IFormatter {
+public class CodeTypeFormatter implements Formatter {
 
     CodeTypeService service;
     String codeType;

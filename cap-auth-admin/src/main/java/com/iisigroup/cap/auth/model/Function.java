@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -32,7 +32,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
-public class Function extends GenericBean implements IDataObject {
+public class Function extends GenericBean implements DataObject {
 
     /** 權限代碼 **/
     @Id

@@ -28,7 +28,7 @@ import com.iisigroup.cap.exception.CapFormatException;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public interface IFormatter extends Serializable {
+public interface Formatter extends Serializable {
 
     /**
      * 重新format傳入的值

@@ -12,9 +12,9 @@
  */
 package com.iisigroup.cap.operation.step;
 
-import com.iisigroup.cap.action.IAction;
+import com.iisigroup.cap.action.Action;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.handler.Handler;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.response.IResult;
 
@@ -34,12 +34,12 @@ import com.iisigroup.cap.response.IResult;
 public class CapHandleOpStep extends AbstractCustomizeOpStep {
 
     @Override
-    public OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler) {
+    public OpStepContext execute(OpStepContext ctx, IRequest params, Handler handler) {
         IResult rtn = null;
         @SuppressWarnings("static-access")
         String actionType = params.get(handler.FORM_ACTION);
         // setName(handler.getHandlerName() + "." + actionType);
-        IAction action = handler.getAction(actionType);
+        Action action = handler.getAction(actionType);
         rtn = action.doWork(params);
         ctx.setGoToStep(NEXT);
         ctx.setResult(rtn);

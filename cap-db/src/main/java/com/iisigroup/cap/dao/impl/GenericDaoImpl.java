@@ -44,7 +44,7 @@ import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.model.SearchModeParameter;
 
@@ -150,8 +150,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     }
 
     public Serializable getPrimaryKey(Object model) {
-        if (model instanceof IDataObject) {
-            return (Serializable) ((IDataObject) model).getOid();
+        if (model instanceof DataObject) {
+            return (Serializable) ((DataObject) model).getOid();
         } else {
             return null;
         }

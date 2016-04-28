@@ -15,7 +15,7 @@ import java.util.UUID;
 
 import javax.persistence.PrePersist;
 
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 
 /**
  * <pre>
@@ -32,7 +32,7 @@ import com.iisigroup.cap.model.IDataObject;
 public class CapOidGeneratorListener {
 
     @PrePersist
-    public <T extends IDataObject> void perPersist(T entity) {
+    public <T extends DataObject> void perPersist(T entity) {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         entity.setOid(uuid);
     }

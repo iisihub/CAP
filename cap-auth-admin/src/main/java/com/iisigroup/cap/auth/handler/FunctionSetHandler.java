@@ -34,7 +34,7 @@ import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -95,7 +95,7 @@ public class FunctionSetHandler extends MFormHandler {
             search.addSearchModeParameters(SearchMode.EQUALS, "name", name);
         }
 
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("SYSNAME", new CodeTypeFormatter(codeTypeService, "authSysId"));
 
         Page<Function> page = commonSrv.findPage(Function.class, search);

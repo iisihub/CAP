@@ -32,7 +32,7 @@ import com.iisigroup.cap.Constants;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class ADDateTimeFormatter implements IFormatter {
+public class ADDateTimeFormatter implements Formatter {
 
     private SimpleDateFormat _df;
 

@@ -22,15 +22,15 @@ import com.iisigroup.cap.security.captcha.servlet.CapCaptchaServlet;
 import com.iisigroup.cap.security.exception.CapAuthenticationException;
 import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.CapUserDetails;
-import com.iisigroup.cap.security.service.IAccessControlService;
-import com.iisigroup.cap.security.service.IPasswordService;
+import com.iisigroup.cap.security.service.AccessControlService;
+import com.iisigroup.cap.security.service.PasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 
 public class CapAuthenticationProvider implements AuthenticationProvider {
 
     private UserDetailsService userService;
-    private IPasswordService passwordService;
-    private IAccessControlService accessControlService;
+    private PasswordService passwordService;
+    private AccessControlService accessControlService;
     private Logger logger = LoggerFactory.getLogger(CapAuthenticationProvider.class);
     private CaptchaCaptureFilter captchaCaptureFilter;
 
@@ -193,11 +193,11 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
         this.userService = userService;
     }
 
-    public IPasswordService getPasswordService() {
+    public PasswordService getPasswordService() {
         return passwordService;
     }
 
-    public void setPasswordService(IPasswordService passwordService) {
+    public void setPasswordService(PasswordService passwordService) {
         this.passwordService = passwordService;
     }
 
@@ -237,11 +237,11 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
         session.setAttribute("captchaEnabled", captchaEnabled);
     }
 
-    public IAccessControlService getAccessControlService() {
+    public AccessControlService getAccessControlService() {
         return accessControlService;
     }
 
-    public void setAccessControlService(IAccessControlService accessControlService) {
+    public void setAccessControlService(AccessControlService accessControlService) {
         this.accessControlService = accessControlService;
     }
 

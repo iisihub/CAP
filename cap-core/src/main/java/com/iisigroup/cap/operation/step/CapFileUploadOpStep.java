@@ -23,7 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.handler.Handler;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.utils.CapMath;
 
@@ -80,7 +80,7 @@ public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
     }
 
     @Override
-    public OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler) {
+    public OpStepContext execute(OpStepContext ctx, IRequest params, Handler handler) {
         MultipartHttpServletRequest req = uploadFile(params);
         params.setRequestObject(req);
         return ctx.setGoToStep(NEXT);

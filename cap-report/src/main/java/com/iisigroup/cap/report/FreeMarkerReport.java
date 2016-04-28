@@ -13,7 +13,7 @@ package com.iisigroup.cap.report;
 
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.iisigroup.cap.mvc.page.report.IPageReport;
+import com.iisigroup.cap.mvc.page.report.PageReport;
 import com.iisigroup.cap.utils.CapSystemConfig;
 
 /**
@@ -28,7 +28,7 @@ import com.iisigroup.cap.utils.CapSystemConfig;
  *          <li>2013/11/12,Sunkist Wang,new
  *          </ul>
  */
-public interface IFreeMarkerReport extends IPageReport {
+public interface FreeMarkerReport extends PageReport {
 
     /**
      * Get configure FreeMarker for web usage

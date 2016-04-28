@@ -34,7 +34,7 @@ import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
@@ -74,7 +74,7 @@ public class RemindHandler extends MFormHandler {
 
     @HandlerType(HandlerTypeEnum.GRID)
     public GridResult query(SearchSetting search, IRequest params) {
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
 
         Page<Remind> page = commonSrv.findPage(Remind.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -89,7 +89,7 @@ public class RemindHandler extends MFormHandler {
         }
         search.addSearchModeParameters(SearchMode.EQUALS, "pid", pid);
 
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("styleTyp", new CodeTypeFormatter(codeTypeService, "styleTyp"));
         fmt.put("unit", new CodeTypeFormatter(codeTypeService, "unitMins"));
 
@@ -107,7 +107,7 @@ public class RemindHandler extends MFormHandler {
         }
 
         if (remind != null) {
-            Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+            Map<String, Formatter> fmt = new HashMap<String, Formatter>();
             fmt.put("startDate", new ADDateFormatter());
             fmt.put("endDate", new ADDateFormatter());
 

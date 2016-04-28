@@ -60,8 +60,8 @@ import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
 import com.iisigroup.cap.formatter.DurationFormatter;
 import com.iisigroup.cap.formatter.I18NFormatter;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -110,9 +110,9 @@ public class BatchHandler extends MFormHandler {
             search.addSearchModeParameters(SearchMode.LIKE, "jobId", params.get("jobId") + "%");
         }
         Page<BatchJob> page = batchSrv.findJobsPage(search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
-        fmt.put("jobStatus", new IBeanFormatter() {
+        fmt.put("jobStatus", new BeanFormatter() {
 
             Collection<String> jobs = jobRegistry.getJobNames();
 
@@ -257,7 +257,7 @@ public class BatchHandler extends MFormHandler {
             search.addSearchModeParameters(SearchMode.LIKE, "schId", params.get("schId") + "%");
         }
         Page<BatchSchedule> page = batchSrv.findSchPage(search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
         fmt.put("schType", new I18NFormatter("sch.schType."));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -354,7 +354,7 @@ public class BatchHandler extends MFormHandler {
         search.addSearchModeParameters(SearchMode.GREATER_EQUALS, "e.start_time", new StringBuffer(startDate).append(" ").append(startTime).append(":00.000"));
 
         Page<Map<String, Object>> page = batchSrv.findExecutionsPage(search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("startDate", new ADDateFormatter());
         fmt.put("START_TIME", new ADDateTimeFormatter("HH:mm:ss"));
         fmt.put("duration", new DurationFormatter("START_TIME", "END_TIME", "HH:mm:ss.SSS"));
@@ -453,7 +453,7 @@ public class BatchHandler extends MFormHandler {
     public MapGridResult stepsQuery(SearchSetting search, IRequest request) {
         String executionId = request.get("jobExeId");
         List<Map<String, Object>> list = batchSrv.findSteps(executionId);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("duration", new DurationFormatter("START_TIME", "END_TIME", "HH:mm:ss.SSS"));
         return new MapGridResult(list, list.size(), fmt);
     }

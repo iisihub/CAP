@@ -28,7 +28,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.security.model.IRole;
 
@@ -51,7 +51,7 @@ import com.iisigroup.cap.security.model.IRole;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
-public class Role extends GenericBean implements IDataObject, IRole {
+public class Role extends GenericBean implements DataObject, IRole {
     private static final long serialVersionUID = 1L;
 
     @Id

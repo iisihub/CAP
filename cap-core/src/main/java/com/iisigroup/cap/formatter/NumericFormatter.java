@@ -31,7 +31,7 @@ import com.iisigroup.cap.utils.CapMath;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class NumericFormatter implements IFormatter {
+public class NumericFormatter implements Formatter {
 
     private DecimalFormat _nf;
 

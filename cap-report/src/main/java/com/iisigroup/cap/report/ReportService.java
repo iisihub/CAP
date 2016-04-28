@@ -15,7 +15,7 @@ import java.io.ByteArrayOutputStream;
 
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.mvc.page.report.IPageReport;
+import com.iisigroup.cap.mvc.page.report.PageReport;
 
 /**
  * <p>
@@ -28,7 +28,7 @@ import com.iisigroup.cap.mvc.page.report.IPageReport;
  *          <li>2011/6/13,Sunkist,new
  *          </ul>
  */
-public interface IReportService extends IPageReport {
+public interface ReportService extends PageReport {
 
     /**
      * 報表產生的共同進入方法，帶入reportParameter，產生ByteArray的報表檔案。

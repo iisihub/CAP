@@ -12,7 +12,7 @@
 package com.iisigroup.cap.hg.bean;
 
 import com.iisigroup.cap.hg.action.ResponseAction;
-import com.iisigroup.cap.hg.service.IHGService;
+import com.iisigroup.cap.hg.service.HGService;
 
 /**
  * <pre>
@@ -27,16 +27,16 @@ import com.iisigroup.cap.hg.service.IHGService;
  *          </ul>
  */
 public class ActionBean {
-    private IHGService service;
+    private HGService service;
     private boolean required;
     private ResponseAction responseAction;
     private int timeout;
 
-    public IHGService getService() {
+    public HGService getService() {
         return service;
     }
 
-    public void setService(IHGService service) {
+    public void setService(HGService service) {
         this.service = service;
     }
 

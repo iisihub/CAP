@@ -33,7 +33,7 @@ import com.iisigroup.cap.model.GenericBean;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class DurationFormatter implements IBeanFormatter {
+public class DurationFormatter implements BeanFormatter {
 
     private String startCol;
     private String endCol;
