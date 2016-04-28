@@ -13,7 +13,7 @@
 package com.iisigroup.cap.operation;
 
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.handler.Handler;
 
 /**
  * <p>
@@ -38,7 +38,7 @@ public interface OperationStep {
 
     void setName(String name);
 
-    OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler);
+    OpStepContext execute(OpStepContext ctx, IRequest params, Handler handler);
 
     OpStepContext handleException(OpStepContext ctx, Exception e);
 

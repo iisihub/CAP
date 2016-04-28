@@ -27,8 +27,8 @@ import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.GridResult;
@@ -78,7 +78,7 @@ public class FactorMntGridHandler extends MFormHandler {
         // "divFtDtls.factorNo", ?);
 
         Page<DivFtItm> page = commonService.findPage(DivFtItm.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("rangeNm", new RangeNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
@@ -100,7 +100,7 @@ public class FactorMntGridHandler extends MFormHandler {
         }
 
         Page<DivFtDtl> page = commonService.findPage(DivFtDtl.class, search);
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
     }
@@ -108,7 +108,7 @@ public class FactorMntGridHandler extends MFormHandler {
     /**
      * RangeNmFormatter formatter
      */
-    class RangeNmFormatter implements IBeanFormatter {
+    class RangeNmFormatter implements BeanFormatter {
         private static final long serialVersionUID = 1L;
 
         /*

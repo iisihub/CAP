@@ -14,7 +14,7 @@ package com.iisigroup.cap.response;
 import java.util.List;
 import java.util.Map;
 
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 
 /**
  * <pre>
@@ -91,8 +91,8 @@ public interface IGridResult<T, E> extends IResult {
 
     void setColumns(String[] columns);
 
-    void setDataReformatter(Map<String, IFormatter> dataReformatter);
+    void setDataReformatter(Map<String, Formatter> dataReformatter);
 
-    Map<String, IFormatter> getDataReformatter();
+    Map<String, Formatter> getDataReformatter();
 
 }

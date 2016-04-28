@@ -26,7 +26,7 @@ import java.io.Serializable;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public interface IDataObject extends Serializable {
+public interface DataObject extends Serializable {
 
     /**
      * Gets the oid.

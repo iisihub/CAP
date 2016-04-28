@@ -9,11 +9,11 @@ import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.dao.IRoleDao;
 import com.iisigroup.cap.security.model.IRole;
-import com.iisigroup.cap.security.service.IAccessControlService;
+import com.iisigroup.cap.security.service.AccessControlService;
 import com.iisigroup.cap.utils.CapDate;
 
 //@Service
-public class AccessControlServiceImpl implements IAccessControlService {
+public class AccessControlServiceImpl implements AccessControlService {
 
     @Resource
     private IRoleDao<IRole> dao;

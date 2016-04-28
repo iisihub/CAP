@@ -26,8 +26,8 @@ import org.springframework.util.ReflectionUtils;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapString;
 
@@ -138,7 +138,7 @@ public class GenericBean {
      *            Map<String, IFormatter>
      * @return String JsonString
      */
-    public String toJSONString(String[] columns, Map<String, IFormatter> reformat) {
+    public String toJSONString(String[] columns, Map<String, Formatter> reformat) {
         JSONArray row = new JSONArray();
         for (String str : columns) {
             Object val = null;
@@ -151,8 +151,8 @@ public class GenericBean {
                     val = "";
                 }
                 if (reformat != null && reformat.containsKey(str)) {
-                    IFormatter callback = reformat.get(str);
-                    if (callback instanceof IBeanFormatter) {
+                    Formatter callback = reformat.get(str);
+                    if (callback instanceof BeanFormatter) {
                         val = callback.reformat(this);
                     } else {
                         val = callback.reformat(val);
@@ -179,7 +179,7 @@ public class GenericBean {
      *            Map<String, IFormatter>
      * @return String JsonString
      */
-    public JSONObject toJSONObject(String[] columns, Map<String, IFormatter> reformat) {
+    public JSONObject toJSONObject(String[] columns, Map<String, Formatter> reformat) {
         JSONObject json = new JSONObject();
         if (columns == null) {
             Field[] cols = CapBeanUtil.getField(this.getClass(), true);// this.getClass().getDeclaredFields();
@@ -197,8 +197,8 @@ public class GenericBean {
                     val = "";
                 }
                 if (reformat != null && reformat.containsKey(str)) {
-                    IFormatter callback = reformat.get(str);
-                    if (callback instanceof IBeanFormatter) {
+                    Formatter callback = reformat.get(str);
+                    if (callback instanceof BeanFormatter) {
                         val = callback.reformat(this);
                     } else {
                         val = callback.reformat(val);

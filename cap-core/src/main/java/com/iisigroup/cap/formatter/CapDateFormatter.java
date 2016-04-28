@@ -27,7 +27,7 @@ import com.iisigroup.cap.utils.CapDate;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class CapDateFormatter implements IFormatter {
+public class CapDateFormatter implements Formatter {
 
     String fromDateFormat;
     String toDateFormat;

@@ -18,7 +18,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -27,14 +26,13 @@ import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.model.RoleFunction;
 import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.service.RoleSetService;
-import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
@@ -70,17 +68,14 @@ public class RoleSetHandler extends MFormHandler {
     @Resource
     private CommonService commonSrv;
 
-    @Autowired
-    private CodeTypeService codeTypeService;
-
     @Resource
     private RoleSetService roleSetService;
 
     @HandlerType(HandlerTypeEnum.GRID)
     public GridResult query(SearchSetting search, IRequest params) {
 
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-        fmt.put("userCount", new IBeanFormatter() {
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
+        fmt.put("userCount", new BeanFormatter() {
             private static final long serialVersionUID = 1L;
 
             @SuppressWarnings("unchecked")

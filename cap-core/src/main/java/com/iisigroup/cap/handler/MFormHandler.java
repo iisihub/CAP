@@ -17,7 +17,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.iisigroup.cap.action.IAction;
+import com.iisigroup.cap.action.Action;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
@@ -70,7 +70,7 @@ public abstract class MFormHandler extends HandlerPlugin {
      * @return IAction
      */
     @Override
-    public IAction getAction(String formAction) {
+    public Action getAction(String formAction) {
         return new MethodExecuteAction(this);
     }
 
@@ -79,7 +79,7 @@ public abstract class MFormHandler extends HandlerPlugin {
      * MethodExecuteAction
      * </pre>
      */
-    private class MethodExecuteAction implements IAction {
+    private class MethodExecuteAction implements Action {
 
         MFormHandler executeHandler;
 

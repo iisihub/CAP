@@ -33,7 +33,7 @@ import java.util.Map;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class StrMessageFormatter implements IFormatter {
+public class StrMessageFormatter implements Formatter {
 
     String unformatMsg;
 

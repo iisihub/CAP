@@ -31,7 +31,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.security.model.IRole;
 import com.iisigroup.cap.security.model.IUser;
@@ -55,7 +55,7 @@ import com.iisigroup.cap.security.model.IUser;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
-public class User extends GenericBean implements IDataObject, IUser {
+public class User extends GenericBean implements DataObject, IUser {
     private static final long serialVersionUID = 1L;
 
     @Id

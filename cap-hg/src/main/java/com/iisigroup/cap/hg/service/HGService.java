@@ -17,7 +17,7 @@ import com.iisigroup.cap.hg.enums.ConnStatusEnum;
  *          <li>2013/1/15,rodeschen,add setHeader,remove CapException
  *          </ul>
  */
-public interface IHGService {
+public interface HGService {
 
     /**
      * set properties

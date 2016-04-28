@@ -19,7 +19,7 @@ import javax.servlet.ServletResponse;
 
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.model.GenericBean;
 
 import net.sf.json.JSONArray;
@@ -49,7 +49,7 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
 
     protected String[] columns;
 
-    protected Map<String, IFormatter> dataReformatter;
+    protected Map<String, Formatter> dataReformatter;
 
     public GridResult() {
         resultMap = new JSONObject();
@@ -59,7 +59,7 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
         this(rowData, records, null);
     }
 
-    public GridResult(List<? extends GenericBean> rowData, int records, Map<String, IFormatter> dataReformatter) {
+    public GridResult(List<? extends GenericBean> rowData, int records, Map<String, Formatter> dataReformatter) {
         resultMap = new JSONObject();
         setRowData(rowData);
         setRecords(records);
@@ -176,9 +176,9 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
         resultMap.putAll(json);
     }
 
-    public GridResult addReformatData(String key, IFormatter formatter) {
+    public GridResult addReformatData(String key, Formatter formatter) {
         if (dataReformatter == null) {
-            dataReformatter = new HashMap<String, IFormatter>();
+            dataReformatter = new HashMap<String, Formatter>();
         }
         dataReformatter.put(key, formatter);
         return this;
@@ -214,12 +214,12 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
      * @param dataReformatter
      *            Map<String, IFormatter>
      */
-    public void setDataReformatter(Map<String, IFormatter> dataReformatter) {
+    public void setDataReformatter(Map<String, Formatter> dataReformatter) {
         this.dataReformatter = dataReformatter;
     }
 
     @Override
-    public Map<String, IFormatter> getDataReformatter() {
+    public Map<String, Formatter> getDataReformatter() {
         return this.dataReformatter;
     }
 

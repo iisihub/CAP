@@ -25,7 +25,7 @@ import com.iisigroup.cap.exception.CapException;
  *          <li>2012/2/14,rodeschen,new
  *          </ul>
  */
-public interface IHGTxnBean {
+public interface HGTxnBean {
 
     void setTxnCd(String txnCd);
 

@@ -11,7 +11,7 @@
  */
 package com.iisigroup.cap.dao;
 
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 
 /**
  * <pre>
@@ -25,5 +25,5 @@ import com.iisigroup.cap.model.IDataObject;
  *          <li>2011/11/30,iristu,new
  *          </ul>
  */
-public interface CommonDao extends GenericDao<IDataObject> {
+public interface CommonDao extends GenericDao<DataObject> {
 }

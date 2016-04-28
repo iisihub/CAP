@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.hg.service.IHGService;
+import com.iisigroup.cap.hg.service.HGService;
 
 /**
  * <pre>
@@ -33,7 +33,7 @@ import com.iisigroup.cap.hg.service.IHGService;
  *          <li>2012/1/15,rodeschen,remove CapException
  *          </ul>
  */
-public abstract class AbstractHGservice implements IHGService {
+public abstract class AbstractHGservice implements HGService {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
     private Map<String, Object> properties;

@@ -27,7 +27,7 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public interface IAction {
+public interface Action {
 
     IResult doWork(IRequest params);
 

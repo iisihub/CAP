@@ -12,7 +12,7 @@
  */
 package com.iisigroup.cap.handler;
 
-import com.iisigroup.cap.action.IAction;
+import com.iisigroup.cap.action.Action;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.operation.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
@@ -47,7 +47,7 @@ public abstract class FormHandler extends HandlerPlugin {
         return null;
     }
 
-    public abstract IAction getAction(String formAction);
+    public abstract Action getAction(String formAction);
 
     public abstract String getOperationName();
 

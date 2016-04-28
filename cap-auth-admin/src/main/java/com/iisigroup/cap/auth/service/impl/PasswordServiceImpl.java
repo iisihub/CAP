@@ -25,12 +25,12 @@ import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
-import com.iisigroup.cap.security.service.IPasswordService;
+import com.iisigroup.cap.security.service.PasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service
-public class PasswordServiceImpl implements IPasswordService {
+public class PasswordServiceImpl implements PasswordService {
 
     @Resource
     private UserDao userDao;

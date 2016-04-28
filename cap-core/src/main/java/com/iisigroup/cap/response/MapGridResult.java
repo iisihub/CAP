@@ -25,8 +25,8 @@ import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -53,7 +53,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
 
     protected String[] columns;
 
-    protected Map<String, IFormatter> dataReformatter;
+    protected Map<String, Formatter> dataReformatter;
 
     public MapGridResult() {
         resultMap = new JSONObject();
@@ -63,7 +63,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
         this(rowData, records, null);
     }
 
-    public MapGridResult(List<Map<String, Object>> rowData, int records, Map<String, IFormatter> dataReformatter) {
+    public MapGridResult(List<Map<String, Object>> rowData, int records, Map<String, Formatter> dataReformatter) {
         resultMap = new JSONObject();
         setRowData(rowData);
         setRecords(records);
@@ -180,9 +180,9 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
         resultMap.putAll(json);
     }
 
-    public MapGridResult addReformatData(String key, IFormatter formatter) {
+    public MapGridResult addReformatData(String key, Formatter formatter) {
         if (dataReformatter == null) {
-            dataReformatter = new HashMap<String, IFormatter>();
+            dataReformatter = new HashMap<String, Formatter>();
         }
         dataReformatter.put(key, formatter);
         return this;
@@ -228,8 +228,8 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
                     val = "";
                 }
                 if (dataReformatter != null && dataReformatter.containsKey(str)) {
-                    IFormatter callback = dataReformatter.get(str);
-                    if (callback instanceof IBeanFormatter) {
+                    Formatter callback = dataReformatter.get(str);
+                    if (callback instanceof BeanFormatter) {
                         val = callback.reformat(data);
                     } else {
                         val = callback.reformat(val);
@@ -256,7 +256,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
      * @param dataReformatter
      *            Map<String, IFormatter>
      */
-    public void setDataReformatter(Map<String, IFormatter> dataReformatter) {
+    public void setDataReformatter(Map<String, Formatter> dataReformatter) {
         this.dataReformatter = dataReformatter;
     }
 
@@ -311,7 +311,7 @@ public class MapGridResult extends AjaxFormResult implements IGridResult<MapGrid
     }
 
     @Override
-    public Map<String, IFormatter> getDataReformatter() {
+    public Map<String, Formatter> getDataReformatter() {
         return this.dataReformatter;
     }
 

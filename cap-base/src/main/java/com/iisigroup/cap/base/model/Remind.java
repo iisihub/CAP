@@ -25,7 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -43,7 +43,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "CFG_REMIND", uniqueConstraints = @UniqueConstraint(columnNames = "oid") )
-public class Remind extends GenericBean implements IDataObject {
+public class Remind extends GenericBean implements DataObject {
 
     /** id */
     @Id

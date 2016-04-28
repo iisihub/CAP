@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
 import org.apache.commons.lang.StringUtils;
 
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
+import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.utils.StrUtils;
 
@@ -40,7 +40,7 @@ import com.iisigroup.cap.utils.StrUtils;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "CFG_ErrorCode", uniqueConstraints = @UniqueConstraint(columnNames = { "code", "locale" }) )
-public class ErrorCode extends GenericBean implements IDataObject {
+public class ErrorCode extends GenericBean implements DataObject {
     private static final long serialVersionUID = 1L;
 
     private static final String SEPARATOR = "|";

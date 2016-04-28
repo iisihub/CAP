@@ -9,30 +9,21 @@
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
 
-package com.iisigroup.cap.security.service;
-
-import java.util.List;
-
-import com.iisigroup.cap.security.model.IRole;
+package com.iisigroup.cap.service;
 
 /**
  * <pre>
- * the interface ISecurityService
+ * TODO Write a short description on the purpose of the program
  * </pre>
  * 
- * @since 2010/11/29
+ * @since 2010/11/25
  * @author iristu
  * @version
  *          <ul>
- *          <li>2010/11/29,iristu,new
+ *          <li>2010/11/25,iristu,new
+ *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public interface IAccessControlService {
-
-    List<IRole> getAuthRolesByUrl(String url);
-
-    void lockUserByUserId(String userId);
-
-    void login(String userId);
+public interface Service {
 
 }

@@ -11,7 +11,7 @@
  */
 package com.iisigroup.cap.handler;
 
-import com.iisigroup.cap.action.IAction;
+import com.iisigroup.cap.action.Action;
 
 /**
  * <pre>
@@ -25,14 +25,14 @@ import com.iisigroup.cap.action.IAction;
  *          <li>2012/9/24,iristu,new
  *          </ul>
  */
-public interface IHandler {
+public interface Handler {
 
-    static final String FORM_ACTION = "formAction";
+    String FORM_ACTION = "formAction";
 
-    static final String SIMPLE_OPERATION = "simpleOperation";
+    String SIMPLE_OPERATION = "simpleOperation";
 
     String getHandlerName();
 
-    IAction getAction(String actionType);
+    Action getAction(String actionType);
 
 }

@@ -34,7 +34,7 @@ import com.iisigroup.cap.Constants;
  *          </ul>
  */
 @SuppressWarnings("serial")
-public class ADDateFormatter implements IFormatter {
+public class ADDateFormatter implements Formatter {
 
     static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 

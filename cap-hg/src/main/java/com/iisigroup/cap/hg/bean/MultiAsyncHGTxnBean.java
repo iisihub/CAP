@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.hg.enums.ConnStatusEnum;
-import com.iisigroup.cap.hg.service.IHGService;
+import com.iisigroup.cap.hg.service.HGService;
 
 /**
  * <pre>
@@ -33,7 +33,7 @@ import com.iisigroup.cap.hg.service.IHGService;
  *          <li>2011/12/12,rodeschen,new
  *          </ul>
  */
-public class MultiAsyncHGTxnBean implements IHGTxnBean {
+public class MultiAsyncHGTxnBean implements HGTxnBean {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     private List<ActionBean> services;
@@ -59,9 +59,9 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
      */
     @Override
     public void execute() throws CapException {
-        List<IHGService> rService = new ArrayList<IHGService>();
-        List<IHGService> nrService = new ArrayList<IHGService>();
-        IHGService ts;
+        List<HGService> rService = new ArrayList<HGService>();
+        List<HGService> nrService = new ArrayList<HGService>();
+        HGService ts;
         long startTime = System.currentTimeMillis();
         for (ActionBean s : services) {
             ts = s.getService();
@@ -102,8 +102,8 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
         }
     }
 
-    private void executeService(long startTime, List<IHGService> service, int timeout) throws CapException {
-        IHGService s;
+    private void executeService(long startTime, List<HGService> service, int timeout) throws CapException {
+        HGService s;
         while (true) {
             for (int i = service.size() - 1; i >= 0; i--) {
                 s = service.get(i);
@@ -112,7 +112,7 @@ public class MultiAsyncHGTxnBean implements IHGTxnBean {
                 }
             }
             if (service.isEmpty() || System.currentTimeMillis() - startTime >= timeout) {
-                for (IHGService s2 : service) {
+                for (HGService s2 : service) {
                     s2.setStatus(ConnStatusEnum.TIMEOUT);
                     logger.error(s2.getClass().getName() + " status: timeout");
                 }
