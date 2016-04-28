@@ -29,48 +29,49 @@ import com.iisigroup.cap.model.Page;
  * 
  * @since 2012/11/6
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/6,iristu,new
  *          </ul>
  */
 public interface BatchJobService {
 
-	List<Resource> listJobResources();
+    List<Resource> listJobResources();
 
-	Resource getJobResource(BatchJob job);
+    Resource getJobResource(BatchJob job);
 
-	Page<BatchJob> findJobsPage(ISearch search);
+    Page<BatchJob> findJobsPage(ISearch search);
 
-	List<BatchJob> listJobs();
+    List<BatchJob> listJobs();
 
-	BatchJob findJobById(String jobId);
+    BatchJob findJobById(String jobId);
 
-	void updateJob(BatchJob job);
+    void updateJob(BatchJob job);
 
-	void insertJob(BatchJob job);
+    void insertJob(BatchJob job);
 
-	void deleteJob(String jobId);
+    void deleteJob(String jobId);
 
-	Page<BatchSchedule> findSchPage(ISearch search);
+    Page<BatchSchedule> findSchPage(ISearch search);
 
-	BatchSchedule findSchById(String schId);
+    BatchSchedule findSchById(String schId);
 
-	List<BatchSchedule> findSchByHostId(List<String> hostId);
+    List<BatchSchedule> findSchByHostId(List<String> hostId);
 
-	void updateSch(BatchSchedule schedule);
+    void updateSch(BatchSchedule schedule);
 
-	void insertSch(BatchSchedule schedule);
+    void insertSch(BatchSchedule schedule);
 
-	void deleteSch(String schId);
+    void deleteSch(String schId);
 
-	Page<Map<String, Object>> findExecutionsPage(ISearch search);
+    Page<Map<String, Object>> findExecutionsPage(ISearch search);
 
-	List<Map<String, Object>> findSteps(String executionId);
+    List<Map<String, Object>> findSteps(String executionId);
 
-	Map<String, Object> findExecutionDetail(String executionId);
+    Map<String, Object> findExecutionDetail(String executionId);
 
-	void updateExecution(Long executionId, String executor);
+    void updateExecution(Long executionId, String executor);
 
-	JobParameters findJobParams(String executionId);
+    JobParameters findJobParams(String executionId);
 
 }

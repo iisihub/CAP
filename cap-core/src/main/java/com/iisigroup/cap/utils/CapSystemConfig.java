@@ -23,39 +23,40 @@ import org.springframework.beans.factory.InitializingBean;
  * 
  * @since 2011/12/26
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/12/26,rodeschen,new
  *          </ul>
  */
 public class CapSystemConfig implements InitializingBean {
 
-	private Properties properties = new Properties();
+    private Properties properties = new Properties();
 
-	public CapSystemConfig() {
-	}
+    public CapSystemConfig() {
+    }
 
-	public CapSystemConfig(Properties properties) throws IOException {
-		this.properties = properties;
-	}
+    public CapSystemConfig(Properties properties) throws IOException {
+        this.properties = properties;
+    }
 
-	public String getProperty(String key) {
-		return properties.getProperty(key);
-	}
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 
-	public String getProperty(String key, String defValue) {
-		return properties.getProperty(key, defValue);
-	}// ;
+    public String getProperty(String key, String defValue) {
+        return properties.getProperty(key, defValue);
+    }// ;
 
-	public boolean containsKey(String key) {
-		return properties.containsKey(key);
-	}// ;
+    public boolean containsKey(String key) {
+        return properties.containsKey(key);
+    }// ;
 
-	public Properties getProperties() {
-		return properties;
-	}
+    public Properties getProperties() {
+        return properties;
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		//do nothing
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        // do nothing
+    }
 }

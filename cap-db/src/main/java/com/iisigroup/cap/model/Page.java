@@ -22,76 +22,77 @@ import java.util.List;
  * 
  * @since 2011/6/20
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/6/20,iristu,new
  *          </ul>
  * @param <T>
  */
 public class Page<T> {
 
-	private final List<T> content = new ArrayList<T>();
-	private final int totalRow;
-	private final int pageSize;
-	private final int pageNumber;
+    private final List<T> content = new ArrayList<T>();
+    private final int totalRow;
+    private final int pageSize;
+    private final int pageNumber;
 
-	/**
-	 * 頁的資料
-	 * 
-	 * @param content
-	 *            頁的資料
-	 * @param totalRow
-	 *            總筆數
-	 * @param pageSize
-	 *            頁的筆數
-	 * @param pageNumber
-	 *            第幾頁
-	 */
-	public Page(List<T> content, int totalRow, int pageSize, int pageNumber) {
+    /**
+     * 頁的資料
+     * 
+     * @param content
+     *            頁的資料
+     * @param totalRow
+     *            總筆數
+     * @param pageSize
+     *            頁的筆數
+     * @param pageNumber
+     *            第幾頁
+     */
+    public Page(List<T> content, int totalRow, int pageSize, int pageNumber) {
 
-		if (null == content) {
-			throw new IllegalArgumentException("Content must not be null!");
-		}
+        if (null == content) {
+            throw new IllegalArgumentException("Content must not be null!");
+        }
 
-		this.content.addAll(content);
-		this.totalRow = totalRow;
-		this.pageSize = pageSize;
-		this.pageNumber = pageNumber;
-	}
+        this.content.addAll(content);
+        this.totalRow = totalRow;
+        this.pageSize = pageSize;
+        this.pageNumber = pageNumber;
+    }
 
-	/**
-	 * 頁的筆數
-	 * 
-	 * @return int
-	 */
-	public int getPageSize() {
-		return pageSize;
-	}
+    /**
+     * 頁的筆數
+     * 
+     * @return int
+     */
+    public int getPageSize() {
+        return pageSize;
+    }
 
-	/**
-	 * 第幾頁
-	 * 
-	 * @return int
-	 */
-	public int getPageNumber() {
-		return pageNumber;
-	}
+    /**
+     * 第幾頁
+     * 
+     * @return int
+     */
+    public int getPageNumber() {
+        return pageNumber;
+    }
 
-	/**
-	 * 頁的資料
-	 * 
-	 * @return List<T>
-	 */
-	public List<T> getContent() {
-		return content;
-	}
+    /**
+     * 頁的資料
+     * 
+     * @return List<T>
+     */
+    public List<T> getContent() {
+        return content;
+    }
 
-	/**
-	 * 總筆數
-	 * 
-	 * @return int
-	 */
-	public int getTotalRow() {
-		return totalRow;
-	}
+    /**
+     * 總筆數
+     * 
+     * @return int
+     */
+    public int getTotalRow() {
+        return totalRow;
+    }
 
 }

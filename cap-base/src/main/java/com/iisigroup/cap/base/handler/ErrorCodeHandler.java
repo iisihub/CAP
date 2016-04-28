@@ -46,7 +46,8 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2013/12/31
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/31,tammy,new
  *          </ul>
  */
@@ -54,90 +55,89 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("errorCodehandler")
 public class ErrorCodeHandler extends MFormHandler {
 
-	@Resource
-	private ICommonService commonSrv;
+    @Resource
+    private ICommonService commonSrv;
 
-	@Resource
-	private ErrorCodeService errorCodeService;
+    @Resource
+    private ErrorCodeService errorCodeService;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(ISearch search, IRequest params) {
-		String code = params.get("code");
-		String locale = params.get("locale");
-		String sysId = params.get("sysId");
+    @HandlerType(HandlerTypeEnum.GRID)
+    public GridResult query(ISearch search, IRequest params) {
+        String code = params.get("code");
+        String locale = params.get("locale");
+        String sysId = params.get("sysId");
 
-		if (!CapString.isEmpty(code)) {
-			search.addSearchModeParameters(SearchMode.LIKE, "code", code);
-		}
-		if (!CapString.isEmpty(locale)) {
-			search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		}
-		if (!CapString.isEmpty(sysId)) {
-			search.addSearchModeParameters(SearchMode.LIKE, "sysId", sysId);
-		}
-		search.addOrderBy("code");
+        if (!CapString.isEmpty(code)) {
+            search.addSearchModeParameters(SearchMode.LIKE, "code", code);
+        }
+        if (!CapString.isEmpty(locale)) {
+            search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        }
+        if (!CapString.isEmpty(sysId)) {
+            search.addSearchModeParameters(SearchMode.LIKE, "sysId", sysId);
+        }
+        search.addOrderBy("code");
 
-		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		// fmt.put("lastModifyBy", new UserNameFormatter(this.userService));
+        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        // fmt.put("lastModifyBy", new UserNameFormatter(this.userService));
 
-		Page<ErrorCode> page = commonSrv.findPage(ErrorCode.class, search);
-		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-	}// ;
+        Page<ErrorCode> page = commonSrv.findPage(ErrorCode.class, search);
+        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+    }// ;
 
-	/**
-	 * 編輯資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult save(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String oid = request.get("oid");
-		String code = request.get("code").toUpperCase();
-		String locale = request.get("locale");
-		ErrorCode errorCode = null;
+    /**
+     * 編輯資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult save(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String oid = request.get("oid");
+        String code = request.get("code").toUpperCase();
+        String locale = request.get("locale");
+        ErrorCode errorCode = null;
 
-		if (CapString.isEmpty(oid)) {
-			errorCode = errorCodeService.getErrorCode(code, locale);
-			if (errorCode != null) {
-				result.set("exist", Boolean.TRUE);
-				return result;
-			}
-		} else {
-			errorCode = commonSrv.findById(ErrorCode.class, oid);
-		}
+        if (CapString.isEmpty(oid)) {
+            errorCode = errorCodeService.getErrorCode(code, locale);
+            if (errorCode != null) {
+                result.set("exist", Boolean.TRUE);
+                return result;
+            }
+        } else {
+            errorCode = commonSrv.findById(ErrorCode.class, oid);
+        }
 
-		if (errorCode == null) {
-			errorCode = new ErrorCode();
-			errorCode.setOid(null);
-		}
-		CapBeanUtil.map2Bean(request, errorCode, ErrorCode.class);
-		errorCode.setCode(errorCode.getCode().toUpperCase());
-		errorCode.setLastModifyBy(CapSecurityContext.getUserId());
-		errorCode.setLastModifyTime(CapDate.getCurrentTimestamp());
-		errorCodeService.save(errorCode);
+        if (errorCode == null) {
+            errorCode = new ErrorCode();
+            errorCode.setOid(null);
+        }
+        CapBeanUtil.map2Bean(request, errorCode, ErrorCode.class);
+        errorCode.setCode(errorCode.getCode().toUpperCase());
+        errorCode.setLastModifyBy(CapSecurityContext.getUserId());
+        errorCode.setLastModifyTime(CapDate.getCurrentTimestamp());
+        errorCodeService.save(errorCode);
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * 刪除資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult delete(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		ErrorCode code = commonSrv
-				.findById(ErrorCode.class, request.get("oid"));
-		if (code != null) {
-			commonSrv.delete(code);
-		}
-		return result;
-	}
+    /**
+     * 刪除資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult delete(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        ErrorCode code = commonSrv.findById(ErrorCode.class, request.get("oid"));
+        if (code != null) {
+            commonSrv.delete(code);
+        }
+        return result;
+    }
 
 }

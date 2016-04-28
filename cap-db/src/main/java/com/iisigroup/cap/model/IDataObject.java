@@ -20,26 +20,27 @@ import java.io.Serializable;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/7,iristu,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
 public interface IDataObject extends Serializable {
 
-	/**
-	 * Gets the oid.
-	 * 
-	 * @return the oid
-	 */
-	String getOid();
+    /**
+     * Gets the oid.
+     * 
+     * @return the oid
+     */
+    String getOid();
 
-	/**
-	 * Sets the oid.
-	 * 
-	 * @param oid
-	 *            the new oid
-	 */
-	void setOid(String oid);
+    /**
+     * Sets the oid.
+     * 
+     * @param oid
+     *            the new oid
+     */
+    void setOid(String oid);
 
 }

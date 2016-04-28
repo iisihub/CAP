@@ -30,60 +30,59 @@ import org.springframework.util.Assert;
  *            T
  * @since 2011/8/4
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/8/4,iristu,new
  *          <li>2011/12/14,sunkistwang,remove ++
  *          </ul>
  */
-public class CapRowMapperResultSetExtractor<T> implements
-		ResultSetExtractor<List<T>> {
+public class CapRowMapperResultSetExtractor<T> implements ResultSetExtractor<List<T>> {
 
-	private final RowMapper<T> rowMapper;
+    private final RowMapper<T> rowMapper;
 
-	private final int startRow;
+    private final int startRow;
 
-	private final int fetchSize;
+    private final int fetchSize;
 
-	/**
-	 * EloanRowMapperResultSetExtractor
-	 * 
-	 * @param rowMapper
-	 *            the RowMapper which creates an object for each row
-	 * @param startRow
-	 *            the start row
-	 * @param fetchSize
-	 *            the fetech size
-	 */
-	public CapRowMapperResultSetExtractor(RowMapper<T> rowMapper, int startRow,
-			int fetchSize) {
-		Assert.notNull(rowMapper, "RowMapper is required");
-		this.rowMapper = rowMapper;
-		this.startRow = startRow;
-		this.fetchSize = fetchSize;
-	}// ;
+    /**
+     * EloanRowMapperResultSetExtractor
+     * 
+     * @param rowMapper
+     *            the RowMapper which creates an object for each row
+     * @param startRow
+     *            the start row
+     * @param fetchSize
+     *            the fetech size
+     */
+    public CapRowMapperResultSetExtractor(RowMapper<T> rowMapper, int startRow, int fetchSize) {
+        Assert.notNull(rowMapper, "RowMapper is required");
+        this.rowMapper = rowMapper;
+        this.startRow = startRow;
+        this.fetchSize = fetchSize;
+    }// ;
 
-	/**
-	 * extractData
-	 * 
-	 * @param rs
-	 *            ResultSet
-	 * @return List<T>
-	 */
-	public List<T> extractData(ResultSet rs) throws SQLException {
-		List<T> results = new ArrayList<T>();
-		// if (startRow > 1) {
-		// for (int i = 0; i < startRow - 1; i++) {
-		// if (!rs.next()) {
-		// break;
-		// }
-		// }
-		// }
-		if (rs.absolute(startRow)) {
-			for (int rows = 0; rows < fetchSize && rs.next(); rows++) {
-				results.add(this.rowMapper.mapRow(rs, rows));
-			}
-		}
-		return results;
-	}// ;
+    /**
+     * extractData
+     * 
+     * @param rs
+     *            ResultSet
+     * @return List<T>
+     */
+    public List<T> extractData(ResultSet rs) throws SQLException {
+        List<T> results = new ArrayList<T>();
+        // if (startRow > 1) {
+        // for (int i = 0; i < startRow - 1; i++) {
+        // if (!rs.next()) {
+        // break;
+        // }
+        // }
+        // }
+        if (rs.absolute(startRow)) {
+            for (int rows = 0; rows < fetchSize && rs.next(); rows++) {
+                results.add(this.rowMapper.mapRow(rs, rows));
+            }
+        }
+        return results;
+    }// ;
 
 }// ~

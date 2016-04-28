@@ -14,6 +14,7 @@ package com.iisigroup.cap.mvc.page.report;
 import java.util.Map;
 
 import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.service.IService;
 
 /**
@@ -23,19 +24,20 @@ import com.iisigroup.cap.service.IService;
  * 
  * @since 2012/3/14
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/3/14,rodeschen,new
  *          </ul>
  */
 public interface IPageReport extends IService {
 
-	/**
-	 * report action
-	 * 
-	 * @param request
-	 *            request
-	 * @return report data
-	 * @throws CapException
-	 */
-	Map<String, Object> excute(IRequest request);
+    /**
+     * report action
+     * 
+     * @param request
+     *            request
+     * @return report data
+     * @throws CapException
+     */
+    Map<String, Object> excute(IRequest request);
 }

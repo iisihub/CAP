@@ -17,13 +17,13 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  * 
  * @since 2011/8/30
  * @author Fantasy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/8/30,Fantasy,new
  *          </ul>
  */
 @Repository
-public class DepartmentDaoImpl extends GenericDao<Department> implements
-        DepartmentDao {
+public class DepartmentDaoImpl extends GenericDao<Department> implements DepartmentDao {
 
     @Override
     public List<Department> findByAllDepartment() {

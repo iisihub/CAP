@@ -20,7 +20,8 @@ import com.iisigroup.cap.model.IDataObject;
  * 
  * @since 2011/11/30
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/11/30,iristu,new
  *          </ul>
  */

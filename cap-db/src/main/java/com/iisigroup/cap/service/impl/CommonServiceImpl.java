@@ -29,60 +29,59 @@ import com.iisigroup.cap.service.ICommonService;
  * 
  * @since 2012/9/21
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/21,iristu,new
  *          </ul>
  */
 @Service
 public class CommonServiceImpl implements ICommonService {
 
-	@Resource
-	private ICommonDao commonDao;
+    @Resource
+    private ICommonDao commonDao;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisigroup.cap.service.ICommonService#findPage(java.lang.Class,
-	 * com.iisigroup.cap.dao.utils.ISearch)
-	 */
-	@Override
-	public <T> Page<T> findPage(Class<T> clazz, ISearch search) {
-		return commonDao.findPage(clazz, search);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.service.ICommonService#findPage(java.lang.Class, com.iisigroup.cap.dao.utils.ISearch)
+     */
+    @Override
+    public <T> Page<T> findPage(Class<T> clazz, ISearch search) {
+        return commonDao.findPage(clazz, search);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisigroup.cap.service.ICommonService#findById(java.lang.Class,
-	 * java.lang.String)
-	 */
-	@Override
-	public <T> T findById(Class<T> clazz, String id) {
-		return (T) commonDao.findById(clazz, id);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.service.ICommonService#findById(java.lang.Class, java.lang.String)
+     */
+    @Override
+    public <T> T findById(Class<T> clazz, String id) {
+        return (T) commonDao.findById(clazz, id);
+    }
 
-	@Override
-	public <T> void save(T model) {
-		commonDao.save(model);
-	}
+    @Override
+    public <T> void save(T model) {
+        commonDao.save(model);
+    }
 
-	@Override
-	public void save(List<?> models) {
-		commonDao.save(models);
-	}
+    @Override
+    public void save(List<?> models) {
+        commonDao.save(models);
+    }
 
-	@Override
-	public <T> void delete(T model) {
-		commonDao.delete(model);
-	}
+    @Override
+    public <T> void delete(T model) {
+        commonDao.delete(model);
+    }
 
-	@Override
-	public void delete(List<?> models) {
-		commonDao.delete(models);
-	}
+    @Override
+    public void delete(List<?> models) {
+        commonDao.delete(models);
+    }
 
-	@Override
-	public <T> List<T> list(Class<T> clazz) {
-		return commonDao.find(clazz, commonDao.createSearchTemplete());
-	}
+    @Override
+    public <T> List<T> list(Class<T> clazz) {
+        return commonDao.find(clazz, commonDao.createSearchTemplete());
+    }
 }

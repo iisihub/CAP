@@ -1,95 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
-	xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+    xsi:schemaLocation="
 	http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
-	<!-- <bean class="org.springframework.batch.core.scope.StepScope" /> -->
-
-	<bean id="transactionManager"
-		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
-
-	<batch:job-repository id="jobRepository"
-		data-source="cap-db" transaction-manager="transactionManager"
-		isolation-level-for-create="SERIALIZABLE" table-prefix="${batch.table-prefix}" />
-
-	<bean id="jobLauncher"
-		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
-		<property name="jobRepository" ref="jobRepository" />
-		<property name="taskExecutor">
-			<bean class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
-		</property>
-	</bean>
-
-	<bean id="autoJobLoader"
-		class="org.springframework.batch.core.configuration.support.AutomaticJobRegistrar">
-		<property name="applicationContextFactories">
-			<bean
-				class="com.iisigroup.cap.batch.core.JobXmlApplicationContextsFactoryBean">
-				<property name="jobService" ref="batchJobService" />
-			</bean>
-		</property>
-		<property name="jobLoader" ref="jobLoader" />
-	</bean>
-
-	<bean id="jobRegistry"
-		class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
-
-	<bean id="jobService"
-		class="org.springframework.batch.admin.service.SimpleJobServiceFactoryBean">
-		<property name="tablePrefix" value="${batch.table-prefix}" />
-		<property name="jobRepository" ref="jobRepository" />
-		<property name="jobLauncher" ref="jobLauncher" />
-		<property name="jobLocator" ref="jobRegistry" />
-		<property name="dataSource" ref="cap-db" />
-	</bean>
-
-	<bean id="jobLoader"
-		class="org.springframework.batch.core.configuration.support.DefaultJobLoader">
-		<property name="jobRegistry" ref="jobRegistry" />
-	</bean>
-
-	<bean id="jobExplorer"
-		class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean">
-		<property name="dataSource" ref="cap-db" />
-	</bean>
-
-	<bean id="batchJobService" class="com.iisigroup.cap.batch.service.impl.BatchJobServiceImpl" />
-
-	<bean id="batchScheduler" class="com.iisigroup.cap.batch.core.CapBatchScheduler"
-		init-method="loadSchedule">
-		<property name="batchService" ref="batchJobService" />
-		<property name="scheduler" ref="quartzScheduler" />
-		<property name="jobLocator" ref="jobRegistry" />
-		<property name="jobLauncher" ref="jobLauncher" />
-		<property name="defaultIncrementer" ref="UUIDIncrementer" />
-		<property name="globalListener" ref="batchNofityListener" />
-	</bean>
-
-	<bean id="UUIDIncrementer" class="com.iisigroup.cap.batch.support.UUIDIncrementer" />
-
-	<!-- ~~~~~~~~~~~~~~~~~~~~~ Scheduler ~~~~~~~~~~~~~~~~~~~~~ -->
-	<bean name="quartzScheduler"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<!-- 延遲x秒啟動Scheduler -->
-		<property name="startupDelay" value="60" />
-		<!-- 是否自動啟動 -->
-		<property name="autoStartup" value="true" />
-		<property name="waitForJobsToCompleteOnShutdown" value="true" />
-		<!-- 外部設定檔 -->
-		<property name="configLocation" value="classpath:batch/quartz.properties" />
-		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
-	</bean>
-
-	<!-- ~~~~~~~~~~~~~~~~~~~~~~~ quartz listener ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<bean id="batchNofityListener"
-		class="com.iisigroup.cap.batch.listener.CapBatchMailNotifyListener">
-		<property name="mailSender" ref="mailSender" />
-		<property name="batchSerivce" ref="batchJobService" />
-		<property name="fmConfg" ref="freemarkerConfig" />
-		<property name="mailSubject" value="${batch.notifySubject}" />
-		<property name="messageTemplate" value="${batch.messageTemplate}" />
-	</bean>
-
+    <!-- <bean class="org.springframework.batch.core.scope.StepScope" /> -->
+    <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+    <batch:job-repository id="jobRepository" data-source="cap-db" transaction-manager="transactionManager" isolation-level-for-create="SERIALIZABLE" table-prefix="${batch.table-prefix}" />
+    <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+        <property name="taskExecutor">
+            <bean class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
+        </property>
+    </bean>
+    <bean id="autoJobLoader" class="org.springframework.batch.core.configuration.support.AutomaticJobRegistrar">
+        <property name="applicationContextFactories">
+            <bean class="com.iisigroup.cap.batch.core.JobXmlApplicationContextsFactoryBean">
+                <property name="jobService" ref="batchJobService" />
+            </bean>
+        </property>
+        <property name="jobLoader" ref="jobLoader" />
+    </bean>
+    <bean id="jobRegistry" class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+    <bean id="jobService" class="org.springframework.batch.admin.service.SimpleJobServiceFactoryBean">
+        <property name="tablePrefix" value="${batch.table-prefix}" />
+        <property name="jobRepository" ref="jobRepository" />
+        <property name="jobLauncher" ref="jobLauncher" />
+        <property name="jobLocator" ref="jobRegistry" />
+        <property name="dataSource" ref="cap-db" />
+    </bean>
+    <bean id="jobLoader" class="org.springframework.batch.core.configuration.support.DefaultJobLoader">
+        <property name="jobRegistry" ref="jobRegistry" />
+    </bean>
+    <bean id="jobExplorer" class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean">
+        <property name="dataSource" ref="cap-db" />
+    </bean>
+    <bean id="batchJobService" class="com.iisigroup.cap.batch.service.impl.BatchJobServiceImpl" />
+    <bean id="batchScheduler" class="com.iisigroup.cap.batch.core.CapBatchScheduler" init-method="loadSchedule">
+        <property name="batchService" ref="batchJobService" />
+        <property name="scheduler" ref="quartzScheduler" />
+        <property name="jobLocator" ref="jobRegistry" />
+        <property name="jobLauncher" ref="jobLauncher" />
+        <property name="defaultIncrementer" ref="UUIDIncrementer" />
+        <property name="globalListener" ref="batchNofityListener" />
+    </bean>
+    <bean id="UUIDIncrementer" class="com.iisigroup.cap.batch.support.UUIDIncrementer" />
+    <!-- ~~~~~~~~~~~~~~~~~~~~~ Scheduler ~~~~~~~~~~~~~~~~~~~~~ -->
+    <bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- 延遲x秒啟動Scheduler -->
+        <property name="startupDelay" value="60" />
+        <!-- 是否自動啟動 -->
+        <property name="autoStartup" value="true" />
+        <property name="waitForJobsToCompleteOnShutdown" value="true" />
+        <!-- 外部設定檔 -->
+        <property name="configLocation" value="classpath:batch/quartz.properties" />
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+    </bean>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~ quartz listener ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <bean id="batchNofityListener" class="com.iisigroup.cap.batch.listener.CapBatchMailNotifyListener">
+        <property name="mailSender" ref="mailSender" />
+        <property name="batchSerivce" ref="batchJobService" />
+        <property name="fmConfg" ref="freemarkerConfig" />
+        <property name="mailSubject" value="${batch.notifySubject}" />
+        <property name="messageTemplate" value="${batch.messageTemplate}" />
+    </bean>
 </beans>

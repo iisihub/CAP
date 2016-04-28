@@ -24,44 +24,44 @@ import com.iisigroup.cap.Constants;
  * 
  * @since 2010/7/27
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/27,iristu,new
- *          <li>2011/8/02,sunkist,update
- *          {@link ADDateTimeFormatter#reformat(Object)} for Calendar.
+ *          <li>2011/8/02,sunkist,update {@link ADDateTimeFormatter#reformat(Object)} for Calendar.
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
 @SuppressWarnings("serial")
 public class ADDateTimeFormatter implements IFormatter {
 
-	private SimpleDateFormat _df;
+    private SimpleDateFormat _df;
 
-	String DEF_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    String DEF_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-	public ADDateTimeFormatter() {
-		_df = new SimpleDateFormat(DEF_PATTERN);
-	}
+    public ADDateTimeFormatter() {
+        _df = new SimpleDateFormat(DEF_PATTERN);
+    }
 
-	public ADDateTimeFormatter(String pattern) {
-		_df = new SimpleDateFormat(pattern);
-	}
+    public ADDateTimeFormatter(String pattern) {
+        _df = new SimpleDateFormat(pattern);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	public String reformat(Object in) {
-		if (in == null) {
-			return Constants.EMPTY_STRING;
-		}
-		if (in instanceof Calendar) {
-			in = ((Calendar) in).getTime();
-		} else if (in instanceof String) {
-			return (String) in;
-		}
-		return _df.format(in);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.formatter.IFormatter#reformat(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    public String reformat(Object in) {
+        if (in == null) {
+            return Constants.EMPTY_STRING;
+        }
+        if (in instanceof Calendar) {
+            in = ((Calendar) in).getTime();
+        } else if (in instanceof String) {
+            return (String) in;
+        }
+        return _df.format(in);
+    }
 
 }

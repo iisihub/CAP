@@ -17,33 +17,34 @@ import com.iisigroup.cap.service.AbstractService;
  * 
  * @since 2012/2/17
  * @author UFOJ
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/2/17,UFOJ,new
  *          </ul>
  */
 @Service
 public class DepartmentServiceImpl extends AbstractService implements DepartmentService {
 
-	@Autowired
-	private DepartmentDao departmentDao;
+    @Autowired
+    private DepartmentDao departmentDao;
 
-	@Override
-	public void save(Department model) {
-		departmentDao.save(model);
-	}
+    @Override
+    public void save(Department model) {
+        departmentDao.save(model);
+    }
 
-	@Override
-	public Department findByBrno(String brNo) {
-		return departmentDao.findByCode(brNo);
-	}
+    @Override
+    public Department findByBrno(String brNo) {
+        return departmentDao.findByCode(brNo);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mega.eloan.adm.service.ADM2050Service#findByAllBranch()
-	 */
-	@Override
-	public List<Department> findByAllBranch() {
-		return departmentDao.findByAllActDepartment();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.mega.eloan.adm.service.ADM2050Service#findByAllBranch()
+     */
+    @Override
+    public List<Department> findByAllBranch() {
+        return departmentDao.findByAllActDepartment();
+    }
 }

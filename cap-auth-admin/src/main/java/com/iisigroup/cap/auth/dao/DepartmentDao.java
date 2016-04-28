@@ -12,7 +12,8 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2011/8/30
  * @author Fantasy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/8/30,Fantasy,new
  *          </ul>
  */

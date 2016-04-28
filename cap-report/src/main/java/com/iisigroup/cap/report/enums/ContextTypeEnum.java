@@ -7,22 +7,26 @@ package com.iisigroup.cap.report.enums;
  * 
  * @since 2014/4/1
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/4/1,tammy,new
  *          </ul>
  */
 public enum ContextTypeEnum {
-	text("text/html"), pdf("application/pdf"), doc("application/msword"), UNKNOW(
-			"application/octet-stream"), xls("application/vnd.ms-excel");
+    text("text/html"),
+    pdf("application/pdf"),
+    doc("application/msword"),
+    UNKNOW("application/octet-stream"),
+    xls("application/vnd.ms-excel");
 
-	private String code;
+    private String code;
 
-	ContextTypeEnum(String code) {
-		this.code = code;
-	}
+    ContextTypeEnum(String code) {
+        this.code = code;
+    }
 
-	@Override
-	public String toString() {
-		return code;
-	}
+    @Override
+    public String toString() {
+        return code;
+    }
 }

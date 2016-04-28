@@ -22,38 +22,39 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2012/11/12
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/12,iristu,new
  *          </ul>
  */
 @SuppressWarnings("serial")
 public class I18NFormatter implements IFormatter {
 
-	String prefix;
-	boolean hasPrefix = false;
+    String prefix;
+    boolean hasPrefix = false;
 
-	public I18NFormatter() {
-		hasPrefix = false;
-	}
+    public I18NFormatter() {
+        hasPrefix = false;
+    }
 
-	public I18NFormatter(String prefix) {
-		this.prefix = prefix;
-		hasPrefix = true;
-	}
+    public I18NFormatter(String prefix) {
+        this.prefix = prefix;
+        hasPrefix = true;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.iisigroup.cap.formatter.IFormatter#reformat(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public String reformat(Object in) {
-		String key = CapString.trimNull(in);
-		if (!CapString.isEmpty(key)) {
-			return CapAppContext.getMessage(hasPrefix ? (prefix + key) : key);
-		}
-		return Constants.EMPTY_STRING;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.formatter.IFormatter#reformat(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public String reformat(Object in) {
+        String key = CapString.trimNull(in);
+        if (!CapString.isEmpty(key)) {
+            return CapAppContext.getMessage(hasPrefix ? (prefix + key) : key);
+        }
+        return Constants.EMPTY_STRING;
+    }
 
 }

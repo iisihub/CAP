@@ -20,16 +20,17 @@ import java.util.Locale;
  * 
  * @since 2012/2/29
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/2/29,rodeschen,new
  *          </ul>
  */
 public class SessionLocaleResolver extends org.springframework.web.servlet.i18n.SessionLocaleResolver {
 
-	@Override
-	public void setDefaultLocale(Locale defaultLocale) {
-		Locale.setDefault(defaultLocale);
-		super.setDefaultLocale(defaultLocale);
-	}
+    @Override
+    public void setDefaultLocale(Locale defaultLocale) {
+        Locale.setDefault(defaultLocale);
+        super.setDefaultLocale(defaultLocale);
+    }
 
 }

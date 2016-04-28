@@ -24,16 +24,17 @@ import com.iisigroup.cap.model.IDataObject;
  * 
  * @since 2012/9/21
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/21,iristu,new
  *          </ul>
  */
 public class CapOidGeneratorListener {
 
-	@PrePersist
-	public <T extends IDataObject> void perPersist(T entity) {
-		String uuid = UUID.randomUUID().toString().replace("-", "");
-		entity.setOid(uuid);
-	}// ;
+    @PrePersist
+    public <T extends IDataObject> void perPersist(T entity) {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        entity.setOid(uuid);
+    }// ;
 
 }

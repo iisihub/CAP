@@ -24,16 +24,16 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
  * 
  * @since 2012/11/19
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/19,iristu,new
  *          </ul>
  */
-public class MapItemSqlParameterSourceProvider implements
-		ItemSqlParameterSourceProvider<Map<String, Object>> {
+public class MapItemSqlParameterSourceProvider implements ItemSqlParameterSourceProvider<Map<String, Object>> {
 
-	@Override
-	public SqlParameterSource createSqlParameterSource(Map<String, Object> item) {
-		return new MapSqlParameterSource(item);
-	}
+    @Override
+    public SqlParameterSource createSqlParameterSource(Map<String, Object> item) {
+        return new MapSqlParameterSource(item);
+    }
 
 }

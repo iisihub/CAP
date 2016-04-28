@@ -20,7 +20,8 @@ import java.io.Serializable;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/26,iristu,new
  *          </ul>
  */

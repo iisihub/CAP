@@ -14,9 +14,7 @@ public interface RoleDao extends IGenericDao<Role> {
 
     List<Map<String, Object>> findAllWithSelectedByUserCode(String userCode);
 
-    Page<Map<String, Object>> findPageBySysTypeAndFuncCode(String sysType,
-            String funcCode, int firstResult, int maxResults);
+    Page<Map<String, Object>> findPageBySysTypeAndFuncCode(String sysType, String funcCode, int firstResult, int maxResults);
 
-    Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(
-            String sysType, String funcCode, int firstResult, int maxResults);
+    Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(String sysType, String funcCode, int firstResult, int maxResults);
 }

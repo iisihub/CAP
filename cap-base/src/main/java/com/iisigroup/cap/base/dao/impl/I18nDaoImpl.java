@@ -30,7 +30,8 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  * 
  * @since 2010/12/9
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/12/9,iristu,new
  *          <li>2011/11/20,RodesChen,from cap
  *          </ul>
@@ -50,8 +51,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
     }
 
     @Override
-    public I18n findByCodeTypeAndCodeValue(String cType, String cValue,
-            String locale) {
+    public I18n findByCodeTypeAndCodeValue(String cType, String cValue, String locale) {
         ISearch search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
@@ -71,8 +71,7 @@ public class I18nDaoImpl extends GenericDao<I18n> implements I18nDao {
     }
 
     @Override
-    public List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc,
-            String locale) {
+    public List<I18n> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale) {
         ISearch search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
         search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);

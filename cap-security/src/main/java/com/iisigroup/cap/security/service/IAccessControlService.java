@@ -22,7 +22,8 @@ import com.iisigroup.cap.security.model.IRole;
  * 
  * @since 2010/11/29
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/11/29,iristu,new
  *          </ul>
  */

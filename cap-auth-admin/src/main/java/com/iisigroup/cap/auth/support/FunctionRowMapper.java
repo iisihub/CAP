@@ -14,7 +14,8 @@ import com.iisigroup.cap.auth.model.Function;
  * 
  * @since 2014/4/30
  * @author Lancelot
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/4/30,Lancelot,new
  *          </ul>
  */

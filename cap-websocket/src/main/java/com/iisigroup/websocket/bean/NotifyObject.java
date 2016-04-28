@@ -11,7 +11,6 @@
  */
 package com.iisigroup.websocket.bean;
 
-
 /**
  * <pre>
  * TODO Write a short description on the purpose of the program
@@ -19,56 +18,57 @@ package com.iisigroup.websocket.bean;
  * 
  * @since 2014/1/27
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/27,tammy,new
  *          </ul>
  */
 public class NotifyObject {
-	private String targetId;
-	private String startTime;
-	private String endTime;
-	private String content;
+    private String targetId;
+    private String startTime;
+    private String endTime;
+    private String content;
 
-	public NotifyObject() {
-	}
+    public NotifyObject() {
+    }
 
-	public NotifyObject(String startTime, String endTime, String content) {
-		super();
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.content = content;
-	}
+    public NotifyObject(String startTime, String endTime, String content) {
+        super();
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.content = content;
+    }
 
-	public String getTargetId() {
-		return targetId;
-	}
+    public String getTargetId() {
+        return targetId;
+    }
 
-	public void setTargetId(String targetId) {
-		this.targetId = targetId;
-	}
+    public void setTargetId(String targetId) {
+        this.targetId = targetId;
+    }
 
-	public String getStartTime() {
-		return startTime;
-	}
+    public String getStartTime() {
+        return startTime;
+    }
 
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
 
-	public String getEndTime() {
-		return endTime;
-	}
+    public String getEndTime() {
+        return endTime;
+    }
 
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
 }

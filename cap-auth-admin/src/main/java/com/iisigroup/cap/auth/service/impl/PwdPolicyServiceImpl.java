@@ -19,8 +19,7 @@ import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service
-public class PwdPolicyServiceImpl extends AbstractService implements
-        PwdPolicyService {
+public class PwdPolicyServiceImpl extends AbstractService implements PwdPolicyService {
 
     @Resource
     ICommonDao commonDao;
@@ -40,19 +39,14 @@ public class PwdPolicyServiceImpl extends AbstractService implements
             }
             parm.setParmId(key);
             parm.setParmValue(data);
-            parm.setParmDesc(CapAppContext.getMessage("pwdpolicy."
-                    + key.substring(4)));
+            parm.setParmDesc(CapAppContext.getMessage("pwdpolicy." + key.substring(4)));
             parm.setUpdater(CapSecurityContext.getUserId());
             parm.setUpdateTime(CapDate.getCurrentTimestamp());
             commonDao.save(parm);
         }
         // 針對 pwd_expired_day, pwd_account_disable, pwd_account_delete 的處理
-        userDao.processUserStatus(policy.get(PwdPloicyKeys.PWD_EXPIRED_DAY
-                .toString().toLowerCase()),
-                policy.get(PwdPloicyKeys.PWD_ACCOUNT_DISABLE.toString()
-                        .toLowerCase()), policy
-                        .get(PwdPloicyKeys.PWD_ACCOUNT_DELETE.toString()
-                                .toLowerCase()));
+        userDao.processUserStatus(policy.get(PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase()), policy.get(PwdPloicyKeys.PWD_ACCOUNT_DISABLE.toString().toLowerCase()),
+                policy.get(PwdPloicyKeys.PWD_ACCOUNT_DELETE.toString().toLowerCase()));
     }
 
 }

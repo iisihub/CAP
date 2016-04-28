@@ -23,7 +23,8 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2010/12/15
  * @author eugene
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/12/15,eugene,new
  *          </ul>
  */
@@ -51,8 +52,7 @@ public interface CodeTypeDao extends IGenericDao<CodeType> {
      *            語言別
      * @return T
      */
-    CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
-            String locale);
+    CodeType findByCodeTypeAndCodeValue(String cType, String cValue, String locale);
 
     /**
      * find by codetype.
@@ -76,8 +76,7 @@ public interface CodeTypeDao extends IGenericDao<CodeType> {
      *            語言別
      * @return CodeType
      */
-    List<CodeType> findByCodeTypeAndCodeDesc(String cType, String codeDesc,
-            String locale);
+    List<CodeType> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale);
 
     /**
      * 查詢OID

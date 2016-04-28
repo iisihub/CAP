@@ -34,105 +34,103 @@ import org.slf4j.LoggerFactory;
  * 
  * @since 2011年8月19日
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011年8月19日,iristu,new
  *          </ul>
  */
 public class CapEntityUtil {
 
-	public static final Logger logger = LoggerFactory
-			.getLogger(CapEntityUtil.class);
+    public static final Logger logger = LoggerFactory.getLogger(CapEntityUtil.class);
 
-	/**
-	 * 取得傳入entity所有欄位名稱
-	 * 
-	 * @param <T>
-	 *            entity
-	 * @param entity
-	 *            jpa entity
-	 * @return String[]
-	 */
-	public static <T> String[] getColumnName(T entity) {
-		Set<Class<? extends Annotation>> ignore = new HashSet<Class<? extends Annotation>>();
-		ignore.add(OneToMany.class);
-		ignore.add(OneToOne.class);
-		ignore.add(ManyToMany.class);
-		ignore.add(ManyToOne.class);
-		return getColumnName(entity, ignore);
-	}
+    /**
+     * 取得傳入entity所有欄位名稱
+     * 
+     * @param <T>
+     *            entity
+     * @param entity
+     *            jpa entity
+     * @return String[]
+     */
+    public static <T> String[] getColumnName(T entity) {
+        Set<Class<? extends Annotation>> ignore = new HashSet<Class<? extends Annotation>>();
+        ignore.add(OneToMany.class);
+        ignore.add(OneToOne.class);
+        ignore.add(ManyToMany.class);
+        ignore.add(ManyToOne.class);
+        return getColumnName(entity, ignore);
+    }
 
-	@SuppressWarnings({ "rawtypes" })
-	public static <T> String[] getColumnName(T entity,
-			Set<Class<? extends Annotation>> ignoreAnnotation) {
-		Set<String> cols = new LinkedHashSet<String>();
-		try {
-			Class searchClazz = getEntityClass(entity);
-			while (!Object.class.equals(searchClazz) && searchClazz != null) {
-				Field[] fields = searchClazz.getDeclaredFields();
-				f: for (Field field : fields) {
-					if (ignoreAnnotation != null) {
-						for (Class<? extends Annotation> ignore : ignoreAnnotation) {
-							if (field.isAnnotationPresent(ignore)) {
-								continue f;
-							}
-						}
-					}
-					cols.add(field.getName());
-				}
-				searchClazz = searchClazz.getSuperclass();
-			}
-			return cols.toArray(new String[cols.size()]);
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		return null;
-	}
+    @SuppressWarnings({ "rawtypes" })
+    public static <T> String[] getColumnName(T entity, Set<Class<? extends Annotation>> ignoreAnnotation) {
+        Set<String> cols = new LinkedHashSet<String>();
+        try {
+            Class searchClazz = getEntityClass(entity);
+            while (!Object.class.equals(searchClazz) && searchClazz != null) {
+                Field[] fields = searchClazz.getDeclaredFields();
+                f: for (Field field : fields) {
+                    if (ignoreAnnotation != null) {
+                        for (Class<? extends Annotation> ignore : ignoreAnnotation) {
+                            if (field.isAnnotationPresent(ignore)) {
+                                continue f;
+                            }
+                        }
+                    }
+                    cols.add(field.getName());
+                }
+                searchClazz = searchClazz.getSuperclass();
+            }
+            return cols.toArray(new String[cols.size()]);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return null;
+    }
 
-	/**
-	 * 取得傳入entity所有欄位名稱及型態
-	 * 
-	 * @param <T>
-	 *            entity
-	 * @param entity
-	 *            jpa entity
-	 * @return Map<String, Class>
-	 */
-	@SuppressWarnings("rawtypes")
-	public static <T> Map<String, Class> getColumnType(T entity) {
-		Map<String, Class> cols = new HashMap<String, Class>();
-		try {
-			Class searchClazz = getEntityClass(entity);
-			while (!Object.class.equals(searchClazz) && searchClazz != null) {
-				Field[] fields = searchClazz.getDeclaredFields();
-				for (Field field : fields) {
-					cols.put(field.getName(), field.getType());
-				}
-				searchClazz = searchClazz.getSuperclass();
-			}
-			return cols;
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-		return null;
-	}
+    /**
+     * 取得傳入entity所有欄位名稱及型態
+     * 
+     * @param <T>
+     *            entity
+     * @param entity
+     *            jpa entity
+     * @return Map<String, Class>
+     */
+    @SuppressWarnings("rawtypes")
+    public static <T> Map<String, Class> getColumnType(T entity) {
+        Map<String, Class> cols = new HashMap<String, Class>();
+        try {
+            Class searchClazz = getEntityClass(entity);
+            while (!Object.class.equals(searchClazz) && searchClazz != null) {
+                Field[] fields = searchClazz.getDeclaredFields();
+                for (Field field : fields) {
+                    cols.put(field.getName(), field.getType());
+                }
+                searchClazz = searchClazz.getSuperclass();
+            }
+            return cols;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return null;
+    }
 
-	/**
-	 * 取得entity class
-	 * 
-	 * @param <T>
-	 *            entity
-	 * @param entity
-	 *            openjpa entity
-	 * @return Class
-	 * @throws ClassNotFoundException
-	 */
-	@SuppressWarnings({ "unchecked" })
-	public static <T> Class<T> getEntityClass(T entity)
-			throws ClassNotFoundException {
-		return (Class<T>) entity.getClass();
-		// String entityName = PCEnhancer.toManagedTypeName(entity.getClass()
-		// .getName());
-		// return (Class<T>) Class.forName(entityName);
-	}
+    /**
+     * 取得entity class
+     * 
+     * @param <T>
+     *            entity
+     * @param entity
+     *            openjpa entity
+     * @return Class
+     * @throws ClassNotFoundException
+     */
+    @SuppressWarnings({ "unchecked" })
+    public static <T> Class<T> getEntityClass(T entity) throws ClassNotFoundException {
+        return (Class<T>) entity.getClass();
+        // String entityName = PCEnhancer.toManagedTypeName(entity.getClass()
+        // .getName());
+        // return (Class<T>) Class.forName(entityName);
+    }
 
 }

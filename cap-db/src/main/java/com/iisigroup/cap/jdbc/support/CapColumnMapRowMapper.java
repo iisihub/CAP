@@ -27,51 +27,49 @@ import com.iisigroup.cap.utils.CapDbUtil;
  * 
  * @since 2011/08/02
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/08/02,iristu,new
- *          <li>2011/08/10,iristu,override
- *          mapRow因取得getColumnKey需為rsmd.getColumnName的方式
+ *          <li>2011/08/10,iristu,override mapRow因取得getColumnKey需為rsmd.getColumnName的方式
  *          </ul>
  */
 public class CapColumnMapRowMapper extends ColumnMapRowMapper {
 
-	private String removePrefix;
+    private String removePrefix;
 
-	public CapColumnMapRowMapper setRemovePrefix(String removePrefix) {
-		this.removePrefix = removePrefix;
-		return this;
-	}
+    public CapColumnMapRowMapper setRemovePrefix(String removePrefix) {
+        this.removePrefix = removePrefix;
+        return this;
+    }
 
-	@Override
-	public Map<String, Object> mapRow(ResultSet rs, int rowNum)
-			throws SQLException {
-		ResultSetMetaData rsmd = rs.getMetaData();
-		int columnCount = rsmd.getColumnCount();
-		Map<String, Object> mapOfColValues = createColumnMap(columnCount);
-		for (int i = 1; i <= columnCount; i++) {
-			String key = getColumnKey(rsmd.getColumnLabel(i));
-			if (removePrefix != null) {
-				key = key.replaceFirst(removePrefix, "");
-			}
-			Object obj = getColumnValue(rs, i);
-			if (obj instanceof String) {
-				obj = CapDbUtil.trimNull(obj);
-			}
-			mapOfColValues.put(key, obj);
-		}
-		return mapOfColValues;
-	}// ;
+    @Override
+    public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        Map<String, Object> mapOfColValues = createColumnMap(columnCount);
+        for (int i = 1; i <= columnCount; i++) {
+            String key = getColumnKey(rsmd.getColumnLabel(i));
+            if (removePrefix != null) {
+                key = key.replaceFirst(removePrefix, "");
+            }
+            Object obj = getColumnValue(rs, i);
+            if (obj instanceof String) {
+                obj = CapDbUtil.trimNull(obj);
+            }
+            mapOfColValues.put(key, obj);
+        }
+        return mapOfColValues;
+    }// ;
 
-	@Override
-	protected Object getColumnValue(ResultSet rs, int index)
-			throws SQLException {
-		Object obj = super.getColumnValue(rs, index);
-		if (obj instanceof String) {
-			String str = (String) obj;
-			str = str.trim();
-			obj = CapDbUtil.trimFullSpace(str);
-		}
-		return obj;
-	}// ;
+    @Override
+    protected Object getColumnValue(ResultSet rs, int index) throws SQLException {
+        Object obj = super.getColumnValue(rs, index);
+        if (obj instanceof String) {
+            String str = (String) obj;
+            str = str.trim();
+            obj = CapDbUtil.trimFullSpace(str);
+        }
+        return obj;
+    }// ;
 
 }// ~

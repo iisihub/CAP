@@ -39,119 +39,110 @@ import org.springframework.util.Assert;
  * 
  * @since 2011/1/20
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/1/20,iristu,new
  *          </ul>
  */
-public class ConditionsUnanimousBased implements AccessDecisionManager,
-		InitializingBean, MessageSourceAware {
+public class ConditionsUnanimousBased implements AccessDecisionManager, InitializingBean, MessageSourceAware {
 
-	private Map<String, AccessDecisionVoter<Object>> conditionVoters;
+    private Map<String, AccessDecisionVoter<Object>> conditionVoters;
 
-	protected MessageSourceAccessor messages = SpringSecurityMessageSource
-			.getAccessor();
+    protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	/**
-	 * <pre>
-	 * 依據Config中所設定的access條件當作Voter進行檢核
-	 * </pre>
-	 * 
-	 * @param authentication
-	 *            使用者登入資訊
-	 * @param object
-	 *            FilterInvocation
-	 * @param configAttributes
-	 *            ConfigAttributeDefinition
-	 */
-	@Override
-	public void decide(Authentication authentication, Object object,
-			Collection<ConfigAttribute> configAttributes) {
-		int grant = 0;
-		int abstain = 0;
+    /**
+     * <pre>
+     * 依據Config中所設定的access條件當作Voter進行檢核
+     * </pre>
+     * 
+     * @param authentication
+     *            使用者登入資訊
+     * @param object
+     *            FilterInvocation
+     * @param configAttributes
+     *            ConfigAttributeDefinition
+     */
+    @Override
+    public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) {
+        int grant = 0;
+        int abstain = 0;
 
-		List<AccessDecisionVoter<Object>> decisionVoters = new ArrayList<AccessDecisionVoter<Object>>();
+        List<AccessDecisionVoter<Object>> decisionVoters = new ArrayList<AccessDecisionVoter<Object>>();
 
-		Iterator<ConfigAttribute> configIter = configAttributes.iterator();
+        Iterator<ConfigAttribute> configIter = configAttributes.iterator();
 
-		while (configIter.hasNext()) {
+        while (configIter.hasNext()) {
 
-			String s = ((ConfigAttribute) configIter.next()).getAttribute();
+            String s = ((ConfigAttribute) configIter.next()).getAttribute();
 
-			if (conditionVoters.containsKey(s)) {
-				AccessDecisionVoter<Object> voter = conditionVoters.get(s);
-				if (voter instanceof RoleVoter) {
-					((RoleVoter) voter).setRolePrefix(s);
-				}
-				decisionVoters.add(voter);
-			}
+            if (conditionVoters.containsKey(s)) {
+                AccessDecisionVoter<Object> voter = conditionVoters.get(s);
+                if (voter instanceof RoleVoter) {
+                    ((RoleVoter) voter).setRolePrefix(s);
+                }
+                decisionVoters.add(voter);
+            }
 
-		}
+        }
 
-		Iterator<AccessDecisionVoter<Object>> voters = decisionVoters.iterator();
+        Iterator<AccessDecisionVoter<Object>> voters = decisionVoters.iterator();
 
-		while (voters.hasNext()) {
-			AccessDecisionVoter<Object> voter = (AccessDecisionVoter<Object>) voters
-					.next();
-			int result = voter.vote(authentication, object, configAttributes);
+        while (voters.hasNext()) {
+            AccessDecisionVoter<Object> voter = (AccessDecisionVoter<Object>) voters.next();
+            int result = voter.vote(authentication, object, configAttributes);
 
-			switch (result) {
-			case AccessDecisionVoter.ACCESS_GRANTED:
-				grant++;
+            switch (result) {
+            case AccessDecisionVoter.ACCESS_GRANTED:
+                grant++;
 
-				break;
+                break;
 
-			case AccessDecisionVoter.ACCESS_DENIED:
-				throw new AccessDeniedException(messages.getMessage(
-						"AbstractAccessDecisionManager.accessDenied",
-						"Access is denied"));
+            case AccessDecisionVoter.ACCESS_DENIED:
+                throw new AccessDeniedException(messages.getMessage("AbstractAccessDecisionManager.accessDenied", "Access is denied"));
 
-			default:
-				abstain++;
+            default:
+                abstain++;
 
-				break;
-			}
-		}
+                break;
+            }
+        }
 
-		// To get this far, there were no deny votes
-		if (grant > 0) {
-			return;
-		} else if (abstain > 0) {
-			throw new AccessDeniedException(messages.getMessage(
-					"AbstractAccessDecisionManager.accessDenied",
-					"Access is denied"));
-		}
+        // To get this far, there were no deny votes
+        if (grant > 0) {
+            return;
+        } else if (abstain > 0) {
+            throw new AccessDeniedException(messages.getMessage("AbstractAccessDecisionManager.accessDenied", "Access is denied"));
+        }
 
-	}// ;
+    }// ;
 
-	@Override
-	public boolean supports(ConfigAttribute attribute) {
-		return (getConditionVoters().containsKey(attribute.toString()));
-	}
+    @Override
+    public boolean supports(ConfigAttribute attribute) {
+        return (getConditionVoters().containsKey(attribute.toString()));
+    }
 
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean supports(Class clazz) {
-		return true;
-	}
+    @SuppressWarnings("rawtypes")
+    @Override
+    public boolean supports(Class clazz) {
+        return true;
+    }
 
-	public Map<String, AccessDecisionVoter<Object>> getConditionVoters() {
-		return conditionVoters;
-	}
+    public Map<String, AccessDecisionVoter<Object>> getConditionVoters() {
+        return conditionVoters;
+    }
 
-	public void setConditionVoters(
-			Map<String, AccessDecisionVoter<Object>> conditionVoters) {
-		this.conditionVoters = conditionVoters;
-	}
+    public void setConditionVoters(Map<String, AccessDecisionVoter<Object>> conditionVoters) {
+        this.conditionVoters = conditionVoters;
+    }
 
-	@Override
-	public void setMessageSource(MessageSource messageSource) {
-		this.messages = new MessageSourceAccessor(messageSource);
-	}
+    @Override
+    public void setMessageSource(MessageSource messageSource) {
+        this.messages = new MessageSourceAccessor(messageSource);
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		Assert.notEmpty(this.conditionVoters,
-				"AccessDecisionVoters is required");
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Assert.notEmpty(this.conditionVoters, "AccessDecisionVoters is required");
+    }
 
 }// ~

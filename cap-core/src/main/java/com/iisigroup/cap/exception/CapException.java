@@ -26,7 +26,8 @@ package com.iisigroup.cap.exception;
  * 
  * @author iristu
  * @version $Revision: 307 $
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/12,iristu,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
@@ -34,89 +35,89 @@ package com.iisigroup.cap.exception;
 @SuppressWarnings({ "serial" })
 public class CapException extends RuntimeException {
 
-	@SuppressWarnings("rawtypes")
-	Class causeClass;
-	private Object extraInformation;
+    @SuppressWarnings("rawtypes")
+    Class causeClass;
+    private Object extraInformation;
 
-	/**
-	 * Instantiates a new cap exception.
-	 */
-	public CapException() {
-		super();
-	}
+    /**
+     * Instantiates a new cap exception.
+     */
+    public CapException() {
+        super();
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapException(String message, Class causeClass) {
-		super(message);
-		this.causeClass = causeClass;
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param message
+     *            the message
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapException(String message, Class causeClass) {
+        super(message);
+        this.causeClass = causeClass;
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param cause
-	 *            the cause
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapException(Throwable cause, Class causeClass) {
-		super(cause);
-		this.causeClass = causeClass;
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param cause
+     *            the cause
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapException(Throwable cause, Class causeClass) {
+        super(cause);
+        this.causeClass = causeClass;
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param cause
-	 *            the cause
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapException(String message, Throwable cause, Class causeClass) {
-		super(message, cause);
-		this.causeClass = causeClass;
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param message
+     *            the message
+     * @param cause
+     *            the cause
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapException(String message, Throwable cause, Class causeClass) {
+        super(message, cause);
+        this.causeClass = causeClass;
+    }
 
-	/**
-	 * get cause class
-	 * 
-	 * @return Class
-	 */
-	@SuppressWarnings("rawtypes")
-	public Class getCauseClass() {
-		return causeClass;
-	}
+    /**
+     * get cause class
+     * 
+     * @return Class
+     */
+    @SuppressWarnings("rawtypes")
+    public Class getCauseClass() {
+        return causeClass;
+    }
 
-	/**
-	 * set cause class
-	 * 
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public void setCauseSource(Class causeClass) {
-		this.causeClass = causeClass;
-	}
+    /**
+     * set cause class
+     * 
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public void setCauseSource(Class causeClass) {
+        this.causeClass = causeClass;
+    }
 
-	public Object getExtraInformation() {
-		return extraInformation;
-	}
+    public Object getExtraInformation() {
+        return extraInformation;
+    }
 
-	public CapException setExtraInformation(Object extraInformation) {
-		this.extraInformation = extraInformation;
-		return this;
-	}
+    public CapException setExtraInformation(Object extraInformation) {
+        this.extraInformation = extraInformation;
+        return this;
+    }
 
 }

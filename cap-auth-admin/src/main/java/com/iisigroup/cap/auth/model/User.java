@@ -43,7 +43,8 @@ import com.iisigroup.cap.security.model.IUser;
  * 
  * @since 2013/12/23
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/23,tammy,new
  *          </ul>
  */

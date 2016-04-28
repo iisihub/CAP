@@ -22,19 +22,20 @@ import com.iisigroup.cap.security.model.IRole;
  * 
  * @since 2013/12/20
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/20,tammy,new
  *          </ul>
  */
 public interface IRoleDao<T extends IRole> {
-	/**
-	 * findByUrl
-	 * 
-	 * @param system
-	 *            系統代碼
-	 * @param url
-	 *            系統代碼
-	 * @return List<IRole>
-	 */
-	public List<T> findBySysTypeAndPath(String system, String url);
+    /**
+     * findByUrl
+     * 
+     * @param system
+     *            系統代碼
+     * @param url
+     *            系統代碼
+     * @return List<IRole>
+     */
+    public List<T> findBySysTypeAndPath(String system, String url);
 }

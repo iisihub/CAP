@@ -31,65 +31,60 @@ import com.iisigroup.cap.base.service.EmailService;
  * 
  * @since 2013/3/7
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/3/7,iristu,new
  *          </ul>
  */
 public class EmailServiceImpl implements EmailService {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(EmailServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
-	private JavaMailSender mailSender;
+    private JavaMailSender mailSender;
 
-	private String sendForm;
+    private String sendForm;
 
-	@Override
-	public void sendEmail(String[] sendTo, String subject, String sendContext) {
-		sendEmail(sendForm, sendTo, subject, sendContext);
-	}// ;
+    @Override
+    public void sendEmail(String[] sendTo, String subject, String sendContext) {
+        sendEmail(sendForm, sendTo, subject, sendContext);
+    }// ;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.iisigroup.cap.base.service.EmailService#sendEmail(java.lang.String,
-	 * java.lang.String, java.lang.String, java.util.Map)
-	 */
-	@Override
-	@Async
-	public void sendEmail(final String sendFrom, final String[] sendTo,
-			final String subject, final String sendContext) {
-		try {
-			MimeMessage mm = mailSender.createMimeMessage();
-			MimeMessageHelper mmh = new MimeMessageHelper(mm, true, "UTF-8");
-			// 寄件人
-			mmh.setFrom(sendFrom);
-			// 收件人
-			mmh.setTo(sendTo);
-			// 主旨
-			mmh.setSubject(subject);
-			// html信件內容
-			mmh.setText(sendContext, true);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.base.service.EmailService#sendEmail(java.lang.String, java.lang.String, java.lang.String, java.util.Map)
+     */
+    @Override
+    @Async
+    public void sendEmail(final String sendFrom, final String[] sendTo, final String subject, final String sendContext) {
+        try {
+            MimeMessage mm = mailSender.createMimeMessage();
+            MimeMessageHelper mmh = new MimeMessageHelper(mm, true, "UTF-8");
+            // 寄件人
+            mmh.setFrom(sendFrom);
+            // 收件人
+            mmh.setTo(sendTo);
+            // 主旨
+            mmh.setSubject(subject);
+            // html信件內容
+            mmh.setText(sendContext, true);
 
-			mailSender.send(mm);
+            mailSender.send(mm);
 
-			logger.debug("send mail from:{} to {} ,{}-{}", new String[] {
-					sendFrom, Arrays.toString(sendTo), subject, sendContext });
-		} catch (MessagingException e) {
-			logger.error("send mail error from:{} to {} ,{}-{}", new String[] {
-					sendFrom, Arrays.toString(sendTo), subject, sendContext });
-			logger.error(e.getMessage(), e);
-		}
+            logger.debug("send mail from:{} to {} ,{}-{}", new String[] { sendFrom, Arrays.toString(sendTo), subject, sendContext });
+        } catch (MessagingException e) {
+            logger.error("send mail error from:{} to {} ,{}-{}", new String[] { sendFrom, Arrays.toString(sendTo), subject, sendContext });
+            logger.error(e.getMessage(), e);
+        }
 
-	}// ;
+    }// ;
 
-	public void setMailSender(JavaMailSender mailSender) {
-		this.mailSender = mailSender;
-	}// ;
+    public void setMailSender(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }// ;
 
-	public void setSendForm(String sendForm) {
-		this.sendForm = sendForm;
-	}
+    public void setSendForm(String sendForm) {
+        this.sendForm = sendForm;
+    }
 
 }

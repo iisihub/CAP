@@ -26,74 +26,72 @@ import com.iisigroup.cap.utils.CapWebUtil;
 import com.iisigroup.websocket.service.CapRemindService;
 
 @Service
-public class CapRemindServiceImpl extends AbstractService implements
-		CapRemindService {
+public class CapRemindServiceImpl extends AbstractService implements CapRemindService {
 
-	// private static final Logger logger = LoggerFactory
-	// .getLogger(CapReminderService.class);
+    // private static final Logger logger = LoggerFactory
+    // .getLogger(CapReminderService.class);
 
-	@Resource
-	RemindDao remindDao;
+    @Resource
+    RemindDao remindDao;
 
-	@Resource
-	RemindsDao remindsDao;
+    @Resource
+    RemindsDao remindsDao;
 
-	@Resource
-	private CapSystemConfig config;
+    @Resource
+    private CapSystemConfig config;
 
-	@Override
-	public List<Reminds> getRemindItems(String[] styleTyp, String locale) {
-		if (CapString.isEmpty(locale)) {
-			locale = getLocale();
-		}
-		return remindsDao.findCurrentRemindItem(styleTyp, locale);
-	}
+    @Override
+    public List<Reminds> getRemindItems(String[] styleTyp, String locale) {
+        if (CapString.isEmpty(locale)) {
+            locale = getLocale();
+        }
+        return remindsDao.findCurrentRemindItem(styleTyp, locale);
+    }
 
-	@Override
-	public void saveReminds(Reminds remind) {
-		remindsDao.merge(remind);
-	}
+    @Override
+    public void saveReminds(Reminds remind) {
+        remindsDao.merge(remind);
+    }
 
-	public String getLocale() {
-		return SimpleContextHolder.get(CapWebUtil.localeKey) == null ? "zh_TW"
-				: SimpleContextHolder.get(CapWebUtil.localeKey).toString();
-	}
+    public String getLocale() {
+        return SimpleContextHolder.get(CapWebUtil.localeKey) == null ? "zh_TW" : SimpleContextHolder.get(CapWebUtil.localeKey).toString();
+    }
 
-	// 當有security 由SessionRegistry取得所有session資料
-	@Autowired
-	@Qualifier("sessionRegistry")
-	private SessionRegistry sessionRegistry;
+    // 當有security 由SessionRegistry取得所有session資料
+    @Autowired
+    @Qualifier("sessionRegistry")
+    private SessionRegistry sessionRegistry;
 
-	@Override
-	public HashMap<String, CapUserDetails> getCurrentUser() {
-		HashMap<String, CapUserDetails> allPrincipal = new HashMap<String, CapUserDetails>();
-		List<Object> principals = sessionRegistry.getAllPrincipals();
-		if (!CollectionUtils.isEmpty(principals)) {
-			for (Object principal : principals) {
-				if (principal instanceof CapUserDetails) {
-					CapUserDetails userDetails = (CapUserDetails) principal;
-					allPrincipal.put(userDetails.getUserId(), userDetails);
-				}
-			}
-		}
-		return allPrincipal;
-	}
+    @Override
+    public HashMap<String, CapUserDetails> getCurrentUser() {
+        HashMap<String, CapUserDetails> allPrincipal = new HashMap<String, CapUserDetails>();
+        List<Object> principals = sessionRegistry.getAllPrincipals();
+        if (!CollectionUtils.isEmpty(principals)) {
+            for (Object principal : principals) {
+                if (principal instanceof CapUserDetails) {
+                    CapUserDetails userDetails = (CapUserDetails) principal;
+                    allPrincipal.put(userDetails.getUserId(), userDetails);
+                }
+            }
+        }
+        return allPrincipal;
+    }
 
-	@Resource
-	IUserDao<User> usrDao;
+    @Resource
+    IUserDao<User> usrDao;
 
-	@Override
-	public String getUsrEmail(String usrId) {
-		User user = usrDao.getUserByLoginId(usrId, null);
-		if (user != null) {
-			return user.getEmail();
-		}
-		return "";
-	}
+    @Override
+    public String getUsrEmail(String usrId) {
+        User user = usrDao.getUserByLoginId(usrId, null);
+        if (user != null) {
+            return user.getEmail();
+        }
+        return "";
+    }
 
-	@Override
-	public Remind findRemind(String pid) {
-		return remindDao.findByPid(pid);
-	}
+    @Override
+    public Remind findRemind(String pid) {
+        return remindDao.findByPid(pid);
+    }
 
 }

@@ -28,41 +28,42 @@ import com.iisigroup.cap.rule.model.DivCtDtl;
  * 
  * @since 2013/12/19
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/19,TimChiang,new
  *          </ul>
  */
 @Repository
 public class DivCtDtlDaoImpl extends GenericDao<DivCtDtl> implements DivCtDtlDao {
 
-	@Override
-	public DivCtDtl findByConditionNo(String conditionNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
-		return findUniqueOrNone(search);
-	}
-	
-	@Override
-	public List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("divCtSor");
-		return find(search);
-	}
+    @Override
+    public DivCtDtl findByConditionNo(String conditionNo) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<DivCtDtl> findByConditionNos(String[] conditionNos) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNos);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("divCtSor");
-		return find(search);
-	}
+    @Override
+    public List<DivCtDtl> findCtDtlsByCtNoAndSort(String conditionNo) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNo);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("divCtSor");
+        return find(search);
+    }
 
-	@Override
-	public DivCtDtl findByOid(String oid) {
-		return find(oid);
-	}
+    @Override
+    public List<DivCtDtl> findByConditionNos(String[] conditionNos) {
+        ISearch search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", conditionNos);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("divCtSor");
+        return find(search);
+    }
+
+    @Override
+    public DivCtDtl findByOid(String oid) {
+        return find(oid);
+    }
 
 }

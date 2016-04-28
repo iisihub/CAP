@@ -30,142 +30,133 @@ import com.iisigroup.cap.utils.StrUtils;
  * 
  * @since 2012/03/29
  * @author UFOJ
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/03/29,UFO,new
  *          </ul>
  */
 @Service("errorCodeService")
-public class ErrorCodeServiceImpl extends AbstractService implements
-		ErrorCodeService {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ErrorCodeServiceImpl.class);
+public class ErrorCodeServiceImpl extends AbstractService implements ErrorCodeService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorCodeServiceImpl.class);
 
-	@Resource
-	ErrorCodeDao errorCodeDao;
+    @Resource
+    ErrorCodeDao errorCodeDao;
 
-	private SoftReferenceCache<String, ErrorCode> errorCodeCache = new SoftReferenceCache<String, ErrorCode>();
+    private SoftReferenceCache<String, ErrorCode> errorCodeCache = new SoftReferenceCache<String, ErrorCode>();
 
-	private boolean cacheMode = true;
+    private boolean cacheMode = true;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mega.sso.service.BranchService#reload()
-	 */
-	@PostConstruct
-	@Override
-	public synchronized void reload() {
-		long t1 = System.currentTimeMillis();
-		MemoryUsage heap1 = ManagementUtils.getCurrentMemUsage();
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.mega.sso.service.BranchService#reload()
+     */
+    @PostConstruct
+    @Override
+    public synchronized void reload() {
+        long t1 = System.currentTimeMillis();
+        MemoryUsage heap1 = ManagementUtils.getCurrentMemUsage();
 
-		errorCodeCache.clear();
-		List<ErrorCode> list = errorCodeDao.findByAll();
-		for (ErrorCode origin : list) {
-			ErrorCode targe = new ErrorCode();
-			try {
-				CapBeanUtil.copyBean(origin, targe);
-				errorCodeCache.put(
-						getCacheKey(origin.getCode(), origin.getLocale()),
-						targe);
-			} catch (CapException ex) {
-				LOGGER.info("[reload] EXCEPTION!", ex);
-			}
-		}
-		LOGGER.info("[reload] ErrorCodeCache size={} ", errorCodeCache.size());
-		LOGGER.info(
-				"[reload] {}",
-				ManagementUtils.formatHeapMemoryUsage(heap1,
-						ManagementUtils.getCurrentMemUsage()));
-		LOGGER.info("[reload] TOTAL COST= {} ms ",
-				(System.currentTimeMillis() - t1));
+        errorCodeCache.clear();
+        List<ErrorCode> list = errorCodeDao.findByAll();
+        for (ErrorCode origin : list) {
+            ErrorCode targe = new ErrorCode();
+            try {
+                CapBeanUtil.copyBean(origin, targe);
+                errorCodeCache.put(getCacheKey(origin.getCode(), origin.getLocale()), targe);
+            } catch (CapException ex) {
+                LOGGER.info("[reload] EXCEPTION!", ex);
+            }
+        }
+        LOGGER.info("[reload] ErrorCodeCache size={} ", errorCodeCache.size());
+        LOGGER.info("[reload] {}", ManagementUtils.formatHeapMemoryUsage(heap1, ManagementUtils.getCurrentMemUsage()));
+        LOGGER.info("[reload] TOTAL COST= {} ms ", (System.currentTimeMillis() - t1));
 
-	}
+    }
 
-	/**
-	 * get the cache key name
-	 * 
-	 * @param code
-	 *            the error code
-	 * @param locale
-	 *            the locale value
-	 * @return key
-	 */
-	private String getCacheKey(String code, String locale) {
-		return StrUtils.concat(StringUtils.trimToEmpty(code), ".",
-				StringUtils.trimToEmpty(locale));
-	}
+    /**
+     * get the cache key name
+     * 
+     * @param code
+     *            the error code
+     * @param locale
+     *            the locale value
+     * @return key
+     */
+    private String getCacheKey(String code, String locale) {
+        return StrUtils.concat(StringUtils.trimToEmpty(code), ".", StringUtils.trimToEmpty(locale));
+    }
 
-	@Override
-	public void save(ErrorCode model) {
-		errorCodeDao.save(model);
-	}
+    @Override
+    public void save(ErrorCode model) {
+        errorCodeDao.save(model);
+    }
 
-	/**
-	 * get the errorcode by code and locale
-	 * 
-	 * @param code
-	 *            代碼類型
-	 * @param locale
-	 *            語言別
-	 * @return Map
-	 * 
-	 */
-	@Override
-	public ErrorCode getErrorCode(String code, String locale) {
-		ErrorCode errorCode = (ErrorCode) errorCodeCache.get(this.getCacheKey(
-				code, locale));
+    /**
+     * get the errorcode by code and locale
+     * 
+     * @param code
+     *            代碼類型
+     * @param locale
+     *            語言別
+     * @return Map
+     * 
+     */
+    @Override
+    public ErrorCode getErrorCode(String code, String locale) {
+        ErrorCode errorCode = (ErrorCode) errorCodeCache.get(this.getCacheKey(code, locale));
 
-		if (errorCode == null) {
-			LOGGER.warn("[getErrorCode]!!! GET_ERRORCODE_FROM_DB !!!");
-			errorCode = errorCodeDao.findByCode(code, locale);
+        if (errorCode == null) {
+            LOGGER.warn("[getErrorCode]!!! GET_ERRORCODE_FROM_DB !!!");
+            errorCode = errorCodeDao.findByCode(code, locale);
 
-			if (cacheMode) {
-				errorCodeCache.put(this.getCacheKey(code, locale), errorCode);
-			}
-		}
+            if (cacheMode) {
+                errorCodeCache.put(this.getCacheKey(code, locale), errorCode);
+            }
+        }
 
-		return errorCode;
-	}
+        return errorCode;
+    }
 
-	@Override
-	public List<ErrorCode> getErrorCodeListBySysId(String sysId, String locale) {
-		return errorCodeDao.findListBySysId(sysId, locale);
-	}
+    @Override
+    public List<ErrorCode> getErrorCodeListBySysId(String sysId, String locale) {
+        return errorCodeDao.findListBySysId(sysId, locale);
+    }
 
-	/**
-	 * @param codeDao
-	 *            the codeDao to set
-	 */
-	public void setErrorCodeDao(ErrorCodeDao codeDao) {
-		this.errorCodeDao = codeDao;
-	}
+    /**
+     * @param codeDao
+     *            the codeDao to set
+     */
+    public void setErrorCodeDao(ErrorCodeDao codeDao) {
+        this.errorCodeDao = codeDao;
+    }
 
-	private class SoftReferenceCache<K extends Comparable<K>, V> {
-		protected Map<K, SoftReference<V>> map = new ConcurrentHashMap<K, SoftReference<V>>();
+    private class SoftReferenceCache<K extends Comparable<K>, V> {
+        protected Map<K, SoftReference<V>> map = new ConcurrentHashMap<K, SoftReference<V>>();
 
-		public V get(K key) {
-			V result = null;
-			SoftReference<V> softRef = map.get(key);
-			if (softRef != null) {
-				result = softRef.get();
-				if (result == null) {
-					map.remove(key);
-				}
-			}
-			return result;
-		}
+        public V get(K key) {
+            V result = null;
+            SoftReference<V> softRef = map.get(key);
+            if (softRef != null) {
+                result = softRef.get();
+                if (result == null) {
+                    map.remove(key);
+                }
+            }
+            return result;
+        }
 
-		public void put(K key, V value) {
-			map.put(key, new SoftReference<V>(value));
-		}
+        public void put(K key, V value) {
+            map.put(key, new SoftReference<V>(value));
+        }
 
-		public int size() {
-			return map.size();
-		}
+        public int size() {
+            return map.size();
+        }
 
-		public synchronized void clear() {
-			this.map.clear();
-		}
-	}
+        public synchronized void clear() {
+            this.map.clear();
+        }
+    }
 
 }

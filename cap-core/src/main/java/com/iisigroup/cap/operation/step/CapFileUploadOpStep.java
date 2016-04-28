@@ -34,7 +34,8 @@ import com.iisigroup.cap.utils.CapMath;
  * 
  * @since 2010/7/23
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/23,iristu,new
  *          <li>2012/2/29,iristu,上傳檔案預設最大size(limitSize)，當接收檔案超出時，則拒絕接收。
  *          <li>2012/9/20,iristu,改用MultipartResolver接收檔用
@@ -42,52 +43,46 @@ import com.iisigroup.cap.utils.CapMath;
  */
 public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 
-	protected static Log logger = LogFactory.getLog(CapFileUploadOpStep.class);
+    protected static Log logger = LogFactory.getLog(CapFileUploadOpStep.class);
 
-	private CommonsMultipartResolver multipartResolver;
+    private CommonsMultipartResolver multipartResolver;
 
-	String fileSizeLimitErrorCode;
+    String fileSizeLimitErrorCode;
 
-	public void setMultipartResolver(CommonsMultipartResolver multipartResolver) {
-		this.multipartResolver = multipartResolver;
-	}
+    public void setMultipartResolver(CommonsMultipartResolver multipartResolver) {
+        this.multipartResolver = multipartResolver;
+    }
 
-	public void setFileSizeLimitErrorCode(String fileSizeLimitErrorCode) {
-		this.fileSizeLimitErrorCode = fileSizeLimitErrorCode;
-	}
+    public void setFileSizeLimitErrorCode(String fileSizeLimitErrorCode) {
+        this.fileSizeLimitErrorCode = fileSizeLimitErrorCode;
+    }
 
-	protected MultipartHttpServletRequest uploadFile(IRequest params) {
-		if (params.containsKey("limitSize")) {
-			multipartResolver.setMaxUploadSize(params
-					.getParamsAsInteger("limitSize"));
-		}
-		if (params.containsKey("fileEncoding")) {
-			multipartResolver.setDefaultEncoding(params.get("fileEncoding"));
-		}
+    protected MultipartHttpServletRequest uploadFile(IRequest params) {
+        if (params.containsKey("limitSize")) {
+            multipartResolver.setMaxUploadSize(params.getParamsAsInteger("limitSize"));
+        }
+        if (params.containsKey("fileEncoding")) {
+            multipartResolver.setDefaultEncoding(params.get("fileEncoding"));
+        }
 
-		try {
-			return multipartResolver
-					.resolveMultipart((HttpServletRequest) params
-							.getServletRequest());
-		} catch (MaxUploadSizeExceededException fe) {
-			CapMessageException me = new CapMessageException(
-					fileSizeLimitErrorCode, getClass());
-			Object[] extra = new Object[] { CapMath.divide(
-					String.valueOf(fe.getMaxUploadSize()), "1048576", 2) };
-			me.setMessageKey(fileSizeLimitErrorCode);
-			me.setExtraInformation(extra);
-			throw me;
-		} catch (MultipartException e) {
-			throw new CapException(e, getClass());
-		}
+        try {
+            return multipartResolver.resolveMultipart((HttpServletRequest) params.getServletRequest());
+        } catch (MaxUploadSizeExceededException fe) {
+            CapMessageException me = new CapMessageException(fileSizeLimitErrorCode, getClass());
+            Object[] extra = new Object[] { CapMath.divide(String.valueOf(fe.getMaxUploadSize()), "1048576", 2) };
+            me.setMessageKey(fileSizeLimitErrorCode);
+            me.setExtraInformation(extra);
+            throw me;
+        } catch (MultipartException e) {
+            throw new CapException(e, getClass());
+        }
 
-	}// ;
+    }// ;
 
-	@Override
-	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) {
-		MultipartHttpServletRequest req = uploadFile(params);
-		params.setRequestObject(req);
-		return ctx.setGoToStep(NEXT);
-	}
+    @Override
+    public OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler) {
+        MultipartHttpServletRequest req = uploadFile(params);
+        params.setRequestObject(req);
+        return ctx.setGoToStep(NEXT);
+    }
 }

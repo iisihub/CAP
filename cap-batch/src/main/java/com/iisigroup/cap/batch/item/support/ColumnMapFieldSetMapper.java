@@ -26,20 +26,19 @@ import org.springframework.validation.BindException;
  * 
  * @since 2012/11/19
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/19,iristu,new
  *          </ul>
  */
-public class ColumnMapFieldSetMapper implements
-		FieldSetMapper<Map<String, Object>> {
+public class ColumnMapFieldSetMapper implements FieldSetMapper<Map<String, Object>> {
 
-	@Override
-	public Map<String, Object> mapFieldSet(FieldSet fieldSet)
-			throws BindException {
-		Map<String, Object> map = new HashMap<String, Object>();
-		for (Entry<Object, Object> entry : fieldSet.getProperties().entrySet()) {
-			map.put(String.valueOf(entry.getKey()), entry.getValue());
-		}
-		return map;
-	}
+    @Override
+    public Map<String, Object> mapFieldSet(FieldSet fieldSet) throws BindException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (Entry<Object, Object> entry : fieldSet.getProperties().entrySet()) {
+            map.put(String.valueOf(entry.getKey()), entry.getValue());
+        }
+        return map;
+    }
 }

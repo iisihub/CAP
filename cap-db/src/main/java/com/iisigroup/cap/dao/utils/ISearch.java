@@ -23,91 +23,89 @@ import java.util.Map;
  * 
  * @since 2011/3/28
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/3/28,iristu,new
  *          <li>2011/6/10,RodesChen, add method
  *          </ul>
  */
 public interface ISearch extends Serializable {
 
-	String getEntityName();
+    String getEntityName();
 
-	ISearch setEntityName(String entityName);
+    ISearch setEntityName(String entityName);
 
-	/**
-	 * <pre>
-	 * 是否distinct result
-	 * </pre>
-	 * 
-	 * @param isDistinct
-	 *            true/false
-	 */
-	void setDistinct(boolean isDistinct);
+    /**
+     * <pre>
+     * 是否distinct result
+     * </pre>
+     * 
+     * @param isDistinct
+     *            true/false
+     */
+    void setDistinct(boolean isDistinct);
 
-	/**
-	 * <pre>
-	 * 是否distinct result
-	 * </pre>
-	 * 
-	 * @return boolean
-	 */
-	boolean isDistinct();
+    /**
+     * <pre>
+     * 是否distinct result
+     * </pre>
+     * 
+     * @return boolean
+     */
+    boolean isDistinct();
 
-	boolean hasOrderBy();
+    boolean hasOrderBy();
 
-	/**
-	 * Specify that results must be ordered by the passed column Null by
-	 * default. 預設為升羃排序
-	 * 
-	 * @param orderBy
-	 *            the order by
-	 * @return T extends ISearch
-	 */
-	ISearch addOrderBy(String orderBy);
+    /**
+     * Specify that results must be ordered by the passed column Null by default. 預設為升羃排序
+     * 
+     * @param orderBy
+     *            the order by
+     * @return T extends ISearch
+     */
+    ISearch addOrderBy(String orderBy);
 
-	/**
-	 * Specify that results must be ordered by the passed column Null by
-	 * default.
-	 * 
-	 * @param orderBy
-	 *            orderBy
-	 * @param orderDesc
-	 *            是否要降羃排序
-	 * @return T extends ISearch
-	 */
-	ISearch addOrderBy(String orderBy, boolean orderDesc);
+    /**
+     * Specify that results must be ordered by the passed column Null by default.
+     * 
+     * @param orderBy
+     *            orderBy
+     * @param orderDesc
+     *            是否要降羃排序
+     * @return T extends ISearch
+     */
+    ISearch addOrderBy(String orderBy, boolean orderDesc);
 
-	ISearch setOrderBy(Map<String, Boolean> orderBy);
+    ISearch setOrderBy(Map<String, Boolean> orderBy);
 
-	Map<String, Boolean> getOrderBy();
+    Map<String, Boolean> getOrderBy();
 
-	/**
-	 * 設定查詢的筆數
-	 * 
-	 * @param maxResults
-	 *            查詢筆數
-	 * @return T extends ISearch
-	 */
-	ISearch setMaxResults(int maxResults);
+    /**
+     * 設定查詢的筆數
+     * 
+     * @param maxResults
+     *            查詢筆數
+     * @return T extends ISearch
+     */
+    ISearch setMaxResults(int maxResults);
 
-	int getMaxResults();
+    int getMaxResults();
 
-	/**
-	 * 設定查詢的頁碼
-	 * 
-	 * @param firstResult
-	 *            查詢的頁碼
-	 * @return T extends ISearch
-	 */
-	ISearch setFirstResult(int firstResult);
+    /**
+     * 設定查詢的頁碼
+     * 
+     * @param firstResult
+     *            查詢的頁碼
+     * @return T extends ISearch
+     */
+    ISearch setFirstResult(int firstResult);
 
-	int getFirstResult();
+    int getFirstResult();
 
-	List<SearchModeParameter> getSearchModeParameters();
+    List<SearchModeParameter> getSearchModeParameters();
 
-	ISearch addSearchModeParameters(SearchMode searchMode, Object key,
-			Object value);
+    ISearch addSearchModeParameters(SearchMode searchMode, Object key, Object value);
 
-	ISearch addSearchModeParameters(ISearch search);
+    ISearch addSearchModeParameters(ISearch search);
 
 }

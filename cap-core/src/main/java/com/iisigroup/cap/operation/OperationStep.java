@@ -21,24 +21,25 @@ import com.iisigroup.cap.handler.IHandler;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/23,iristu,new
  *          </ul>
  */
 public interface OperationStep {
 
-	static final String NEXT = "next";
+    static final String NEXT = "next";
 
-	static final String ERROR = "error";
+    static final String ERROR = "error";
 
-	static final String RETURN = "return";
+    static final String RETURN = "return";
 
-	String getName();
+    String getName();
 
-	void setName(String name);
+    void setName(String name);
 
-	OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler);
+    OpStepContext execute(OpStepContext ctx, IRequest params, IHandler handler);
 
-	OpStepContext handleException(OpStepContext ctx, Exception e);
+    OpStepContext handleException(OpStepContext ctx, Exception e);
 
 }

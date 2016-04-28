@@ -33,39 +33,34 @@ import com.opensymphony.module.sitemesh.mapper.AbstractDecoratorMapper;
  * 
  * @since 2012/9/28
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/9/28,rodeschen,new
  *          <li>2013/1/23,RodesChen,fix weblogic getPath error
  *          </ul>
  */
 public class CapI18nMapper extends AbstractDecoratorMapper {
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
-	private final static String PROP_I18N = "i18n";
-	private String ignorePathReg;
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    private final static String PROP_I18N = "i18n";
+    private String ignorePathReg;
 
-	public void init(Config config, Properties properties, DecoratorMapper parent)
-			throws InstantiationException {
-		super.init(config, properties, parent);
-		ignorePathReg = properties.getProperty("ignorePathReg");
-	}
+    public void init(Config config, Properties properties, DecoratorMapper parent) throws InstantiationException {
+        super.init(config, properties, parent);
+        ignorePathReg = properties.getProperty("ignorePathReg");
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.opensymphony.module.sitemesh.mapper.AbstractDecoratorMapper#getDecorator
-	 * (javax.servlet.http.HttpServletRequest,
-	 * com.opensymphony.module.sitemesh.Page)
-	 */
-	@Override
-	public Decorator getDecorator(HttpServletRequest request,
-			com.opensymphony.module.sitemesh.Page page) {
-		String pathInfo = CapWebUtil.getRequestURL(request);
-		if (!CapString.checkRegularMatch(UrlUtils.buildRequestUrl(request), ignorePathReg)) {
-			page.addProperty(PROP_I18N, MessageBundleScriptCreator.createScript(pathInfo
-					.replaceAll("(^/page/|[.][jJ][sS][pP]$)", "")));
-		}
-		return super.getDecorator(request, page);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.opensymphony.module.sitemesh.mapper.AbstractDecoratorMapper#getDecorator (javax.servlet.http.HttpServletRequest, com.opensymphony.module.sitemesh.Page)
+     */
+    @Override
+    public Decorator getDecorator(HttpServletRequest request, com.opensymphony.module.sitemesh.Page page) {
+        String pathInfo = CapWebUtil.getRequestURL(request);
+        if (!CapString.checkRegularMatch(UrlUtils.buildRequestUrl(request), ignorePathReg)) {
+            page.addProperty(PROP_I18N, MessageBundleScriptCreator.createScript(pathInfo.replaceAll("(^/page/|[.][jJ][sS][pP]$)", "")));
+        }
+        return super.getDecorator(request, page);
+    }
 
 }

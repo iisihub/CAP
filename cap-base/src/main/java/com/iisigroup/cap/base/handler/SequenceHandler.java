@@ -36,7 +36,8 @@ import com.iisigroup.cap.response.MapGridResult;
  * 
  * @since 2012/10/25
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/10/25,iristu,new
  *          </ul>
  */
@@ -44,23 +45,22 @@ import com.iisigroup.cap.response.MapGridResult;
 @Controller("sequencehandler")
 public class SequenceHandler extends MFormHandler {
 
-	@Resource
-	private SequenceService seqSrv;
+    @Resource
+    private SequenceService seqSrv;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public MapGridResult query(ISearch search, IRequest params) {
+    @HandlerType(HandlerTypeEnum.GRID)
+    public MapGridResult query(ISearch search, IRequest params) {
 
-		Page<Map<String, Object>> page = seqSrv.findPage(
-				search.getFirstResult(), search.getMaxResults());
-		return new MapGridResult(page.getContent(), page.getTotalRow());
-	}// ;
+        Page<Map<String, Object>> page = seqSrv.findPage(search.getFirstResult(), search.getMaxResults());
+        return new MapGridResult(page.getContent(), page.getTotalRow());
+    }// ;
 
-	public IResult getNewSeq(IRequest params) {
-		AjaxFormResult result = new AjaxFormResult();
-		String seqNode = params.get("seqNode");
-		int theSeq = seqSrv.getNextSeqNo(seqNode, 1, 1, Integer.MAX_VALUE);
-		result.set("theSeq", theSeq);
-		return result;
-	}// ;
+    public IResult getNewSeq(IRequest params) {
+        AjaxFormResult result = new AjaxFormResult();
+        String seqNode = params.get("seqNode");
+        int theSeq = seqSrv.getNextSeqNo(seqNode, 1, 1, Integer.MAX_VALUE);
+        result.set("theSeq", theSeq);
+        return result;
+    }// ;
 
 }

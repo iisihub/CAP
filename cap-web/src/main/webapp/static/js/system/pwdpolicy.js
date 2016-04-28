@@ -6,7 +6,7 @@ pageInit(function() {
         $(document).injectData(result);
       }
     });
-    $('#confirm').click(function(){
+    $('#confirm').click(function() {
       $.ajax({
         url : url("pwdpolicyhandler/modify"),
         data : $('#mform').serializeData(),

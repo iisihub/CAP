@@ -45,7 +45,8 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2014/1/13
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/13,tammy,new
  *          </ul>
  */
@@ -53,74 +54,73 @@ import com.iisigroup.cap.utils.CapString;
 @Controller("departmenthandler")
 public class DepartmentHandler extends MFormHandler {
 
-	@Resource
-	private ICommonService commonSrv;
+    @Resource
+    private ICommonService commonSrv;
 
-	@Resource
-	private DepartmentService departmentService;
+    @Resource
+    private DepartmentService departmentService;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(ISearch search, IRequest params) {
-		search.addOrderBy("code");
+    @HandlerType(HandlerTypeEnum.GRID)
+    public GridResult query(ISearch search, IRequest params) {
+        search.addOrderBy("code");
 
-		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
 
-		Page<Department> page = commonSrv.findPage(Department.class, search);
-		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-	}// ;
+        Page<Department> page = commonSrv.findPage(Department.class, search);
+        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+    }// ;
 
-	/**
-	 * 編輯資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult save(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String oid = request.get("oid");
-		String brNo = request.get("code");
-		Department branch = null;
+    /**
+     * 編輯資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult save(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String oid = request.get("oid");
+        String brNo = request.get("code");
+        Department branch = null;
 
-		if (CapString.isEmpty(oid)) {
-			branch = departmentService.findByBrno(brNo);
-			if (branch != null) {
-				result.set("exist", Boolean.TRUE);
-				return result;
-			}
-		} else {
-			branch = commonSrv.findById(Department.class, oid);
-		}
+        if (CapString.isEmpty(oid)) {
+            branch = departmentService.findByBrno(brNo);
+            if (branch != null) {
+                result.set("exist", Boolean.TRUE);
+                return result;
+            }
+        } else {
+            branch = commonSrv.findById(Department.class, oid);
+        }
 
-		if (branch == null) {
-			branch = new Department();
-			branch.setOid(null);
-		}
-		CapBeanUtil.map2Bean(request, branch, Department.class);
-		branch.setUpdater(CapSecurityContext.getUserId());
-		branch.setUpdateTime(CapDate.getCurrentTimestamp());
-		departmentService.save(branch);
+        if (branch == null) {
+            branch = new Department();
+            branch.setOid(null);
+        }
+        CapBeanUtil.map2Bean(request, branch, Department.class);
+        branch.setUpdater(CapSecurityContext.getUserId());
+        branch.setUpdateTime(CapDate.getCurrentTimestamp());
+        departmentService.save(branch);
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * 刪除資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult delete(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		Department code = commonSrv
-				.findById(Department.class, request.get("oid"));
-		if (code != null) {
-			commonSrv.delete(code);
-		}
-		return result;
-	}
+    /**
+     * 刪除資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public IResult delete(IRequest request) {
+        AjaxFormResult result = new AjaxFormResult();
+        Department code = commonSrv.findById(Department.class, request.get("oid"));
+        if (code != null) {
+            commonSrv.delete(code);
+        }
+        return result;
+    }
 
 }

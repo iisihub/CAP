@@ -17,17 +17,18 @@ package com.iisigroup.cap.hg.event;
  * 
  * @since 2012/2/24
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/2/24,rodeschen,new
  *          </ul>
  */
 public interface IHGEventAction {
 
-	/**
-	 * excute action
-	 * 
-	 * @param object
-	 *            object
-	 */
-	void excute(Object object);
+    /**
+     * excute action
+     * 
+     * @param object
+     *            object
+     */
+    void excute(Object object);
 }

@@ -20,17 +20,18 @@ import com.iisigroup.cap.exception.CapException;
  * 
  * @since 2012/2/14
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/2/14,rodeschen,new
  *          </ul>
  */
 public interface IHGTxnBean {
 
-	void setTxnCd(String txnCd);
+    void setTxnCd(String txnCd);
 
-	void setSendData(Object requestData);
+    void setSendData(Object requestData);
 
-	void execute() throws CapException;
+    void execute() throws CapException;
 
-	Object getResultData();
+    Object getResultData();
 }

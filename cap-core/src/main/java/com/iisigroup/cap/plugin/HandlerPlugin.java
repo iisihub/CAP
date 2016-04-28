@@ -27,56 +27,56 @@ import com.iisigroup.cap.response.IResult;
  * 
  * @since 2011/11/22
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/11/22,rodeschen,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
 public abstract class HandlerPlugin implements IPlugin, IHandler {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	/**
-	 * execute
-	 * 
-	 * @param params
-	 *            Client 參數
-	 * @return String
-	 */
-	public abstract IResult execute(IRequest params) ;
+    /**
+     * execute
+     * 
+     * @param params
+     *            Client 參數
+     * @return String
+     */
+    public abstract IResult execute(IRequest params);
 
-	IRequest request;
+    IRequest request;
 
-	public IRequest getRequest() {
-		return request;
-	}
+    public IRequest getRequest() {
+        return request;
+    }
 
-	public void setRequest(IRequest request) {
-		this.request = request;
-	}
+    public void setRequest(IRequest request) {
+        this.request = request;
+    }
 
-	@Override
-	public String getPluginName() {
-		return this.getClass().getSimpleName();
-	}
+    @Override
+    public String getPluginName() {
+        return this.getClass().getSimpleName();
+    }
 
-	/**
-	 * get action
-	 * 
-	 * @param formAction
-	 *            action name
-	 * @return IAction
-	 */
-	public abstract IAction getAction(String formAction);
+    /**
+     * get action
+     * 
+     * @param formAction
+     *            action name
+     * @return IAction
+     */
+    public abstract IAction getAction(String formAction);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	public void afterPropertiesSet() throws Exception {
-		// do nothing
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
+    public void afterPropertiesSet() throws Exception {
+        // do nothing
+    }
 
 }

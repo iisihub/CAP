@@ -11,12 +11,10 @@ import org.springframework.stereotype.Component;
 import com.iisigroup.cap.utils.CapDate;
 
 @Component
-public class PwdExpiredProcessor implements
-        ItemProcessor<Map<String, Object>, Map<String, Object>> {
+public class PwdExpiredProcessor implements ItemProcessor<Map<String, Object>, Map<String, Object>> {
 
     @Override
-    public Map<String, Object> process(Map<String, Object> item)
-            throws Exception {
+    public Map<String, Object> process(Map<String, Object> item) throws Exception {
         String userCode = (String) item.get("code");
         Timestamp lastpwd = (Timestamp) item.get("pwdexpiredtime");
         if (CapDate.calculateDays(lastpwd, new Date()) < 0) {
