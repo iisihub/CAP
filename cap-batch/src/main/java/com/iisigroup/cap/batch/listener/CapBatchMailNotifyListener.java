@@ -83,7 +83,7 @@ public class CapBatchMailNotifyListener implements JobListener, InitializingBean
                 }
             }
         }
-    }// ;
+    }
 
     protected String buildText(JobExecution job) {
         Map<String, Object> result = getExecutionResult(job);
@@ -94,7 +94,7 @@ public class CapBatchMailNotifyListener implements JobListener, InitializingBean
             logger.error(e.getMessage(), e);
         }
         return new StringBuffer("<html><body>").append(result.toString().replace(",", ",<br/>")).append("</body></html>").toString();
-    }// ;
+    }
 
     private DurationFormatter durationFmt = new DurationFormatter("START_TIME", "END_TIME", "HH:mm:ss.SSS");
 
@@ -111,7 +111,7 @@ public class CapBatchMailNotifyListener implements JobListener, InitializingBean
         }
         map.put("stepInfos", steps);
         return map;
-    }// ;
+    }
 
     /*
      * (non-Javadoc)

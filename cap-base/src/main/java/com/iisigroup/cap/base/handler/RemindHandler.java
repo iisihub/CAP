@@ -19,7 +19,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -29,25 +28,25 @@ import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.model.Reminds;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.ADDateTimeFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.jpa.utils.CapEntityUtil;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapEntityUtil;
 import com.iisigroup.cap.utils.CapMath;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -64,26 +63,25 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          <li>2014/2/1,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("remindhandler")
 public class RemindHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonSrv;
+    private CommonService commonSrv;
 
     @Autowired
     private CodeTypeService codeTypeService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
 
         Page<Remind> page = commonSrv.findPage(Remind.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryDetail(ISearch search, IRequest params) {
+    public GridResult queryDetail(SearchSetting search, IRequest params) {
 
         String pid = params.get("oid");
         if (CapString.isEmpty(pid)) {
@@ -97,7 +95,7 @@ public class RemindHandler extends MFormHandler {
 
         Page<Reminds> page = commonSrv.findPage(Reminds.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     public IResult queryForm(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();

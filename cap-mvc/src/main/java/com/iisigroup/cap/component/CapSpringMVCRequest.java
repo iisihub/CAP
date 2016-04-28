@@ -76,7 +76,7 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
             hm.put(field, value);
         }
         return hm;
-    } // ;
+    }
 
     /*
      * (non-Javadoc)

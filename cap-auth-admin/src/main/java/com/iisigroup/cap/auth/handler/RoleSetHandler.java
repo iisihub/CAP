@@ -19,7 +19,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -30,24 +29,24 @@ import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.service.RoleSetService;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.IBeanFormatter;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.jpa.utils.CapEntityUtil;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
+import com.iisigroup.cap.utils.CapEntityUtil;
 import com.iisigroup.cap.utils.CapString;
 
 import net.sf.json.JSONArray;
@@ -65,12 +64,11 @@ import net.sf.json.JSONObject;
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("rolesethandler")
 public class RoleSetHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonSrv;
+    private CommonService commonSrv;
 
     @Autowired
     private CodeTypeService codeTypeService;
@@ -79,7 +77,7 @@ public class RoleSetHandler extends MFormHandler {
     private RoleSetService roleSetService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
 
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("userCount", new IBeanFormatter() {
@@ -96,10 +94,10 @@ public class RoleSetHandler extends MFormHandler {
 
         Page<Role> page = commonSrv.findPage(Role.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryGridUser(ISearch search, IRequest params) {
+    public MapGridResult queryGridUser(SearchSetting search, IRequest params) {
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
             return new MapGridResult();
@@ -110,7 +108,7 @@ public class RoleSetHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryGridFunc(ISearch search, IRequest params) {
+    public MapGridResult queryGridFunc(SearchSetting search, IRequest params) {
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
             return new MapGridResult();
@@ -118,10 +116,10 @@ public class RoleSetHandler extends MFormHandler {
 
         Page<Map<String, Object>> page = roleSetService.findPageFunc(search, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryEditUsr(ISearch search, IRequest params) throws CapException {
+    public MapGridResult queryEditUsr(SearchSetting search, IRequest params) throws CapException {
         String depCode = params.get("depCode");
         String roleCode = params.get("roleCode");
 
@@ -130,14 +128,14 @@ public class RoleSetHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryEditFunc(ISearch search, IRequest params) throws CapException {
+    public MapGridResult queryEditFunc(SearchSetting search, IRequest params) throws CapException {
         String parent = params.get("parent");
         String code = params.get("code");
         String sysType = params.get("sysType");
 
         Page<Map<String, Object>> page = roleSetService.findPageEditFunc(search, code, sysType, parent);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     public IResult queryForm(IRequest request) {
         AjaxFormResult result = new AjaxFormResult();
@@ -153,7 +151,7 @@ public class RoleSetHandler extends MFormHandler {
         }
 
         return result;
-    }// ;
+    }
 
     public IResult getAllDepartment(IRequest request) throws CapException {
         AjaxFormResult result = new AjaxFormResult();
@@ -174,7 +172,7 @@ public class RoleSetHandler extends MFormHandler {
         result.putAll(roleSetService.findAllFunc(sysType));
 
         return result;
-    }// ;
+    }
 
     /**
      * 編輯資料
@@ -208,7 +206,7 @@ public class RoleSetHandler extends MFormHandler {
         commonSrv.save(role);
 
         return result;
-    }// ;
+    }
 
     /**
      * 編輯資料
@@ -284,7 +282,7 @@ public class RoleSetHandler extends MFormHandler {
         commonSrv.save(list);
 
         return result;
-    }// ;
+    }
 
     /**
      * 刪除資料
@@ -302,7 +300,7 @@ public class RoleSetHandler extends MFormHandler {
             commonSrv.delete(role);
         }
         return result;
-    }// ;
+    }
 
     /**
      * 刪除資料
@@ -360,6 +358,6 @@ public class RoleSetHandler extends MFormHandler {
         roleSetService.deleteRfList(code, delFunc);
 
         return result;
-    }// ;
+    }
 
 }

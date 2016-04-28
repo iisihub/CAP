@@ -77,7 +77,7 @@ public class FileDownloadResult implements IResult {
     @Override
     public String getResult() {
         return "";
-    }// ;
+    }
 
     @Override
     public String getLogMessage() {
@@ -146,6 +146,6 @@ public class FileDownloadResult implements IResult {
             IOUtils.closeQuietly(output);
         }
 
-    }// ;
+    }
 
 }

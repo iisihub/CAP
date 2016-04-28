@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivFtDtlDao;
 import com.iisigroup.cap.rule.model.DivFtDtl;
 import com.iisigroup.cap.utils.CapString;
@@ -35,18 +35,18 @@ import com.iisigroup.cap.utils.CapString;
  *          </ul>
  */
 @Repository
-public class DivFtDtlDaoImpl extends GenericDao<DivFtDtl> implements DivFtDtlDao {
+public class DivFtDtlDaoImpl extends GenericDaoImpl<DivFtDtl> implements DivFtDtlDao {
 
     @Override
     public DivFtDtl findByFactorNo(String factorNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
         return findUniqueOrNone(search);
     }
 
     @Override
     public List<DivFtDtl> findByFactorNos(String[] factorNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("codeOrder");
@@ -60,7 +60,7 @@ public class DivFtDtlDaoImpl extends GenericDao<DivFtDtl> implements DivFtDtlDao
 
     @Override
     public DivFtDtl findByFactorNoAndRangeNo(String factorNo, String rangeNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
         search.addSearchModeParameters(SearchMode.EQUALS, "rangeNo", rangeNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
@@ -70,7 +70,7 @@ public class DivFtDtlDaoImpl extends GenericDao<DivFtDtl> implements DivFtDtlDao
 
     @Override
     public List<DivFtDtl> findByFactorNoAndRangeNos(String factorNo, String[] rangeNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
         search.addSearchModeParameters(SearchMode.EQUALS, "rangeNo", rangeNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);

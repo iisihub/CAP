@@ -14,7 +14,7 @@ package com.iisigroup.cap.base.dao;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.CodeType;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 
 /**
  * <pre>
@@ -28,7 +28,7 @@ import com.iisigroup.cap.dao.IGenericDao;
  *          <li>2010/12/15,eugene,new
  *          </ul>
  */
-public interface CodeTypeDao extends IGenericDao<CodeType> {
+public interface CodeTypeDao extends GenericDao<CodeType> {
 
     /**
      * find by codetype.

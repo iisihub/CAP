@@ -15,7 +15,7 @@ import com.iisigroup.cap.auth.service.FunctionSetService;
 import com.iisigroup.cap.base.dao.I18nDao;
 import com.iisigroup.cap.base.model.I18n;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.security.CapSecurityContext;
@@ -55,27 +55,27 @@ public class FunctionSetServiceImpl extends AbstractService implements FunctionS
             return functionDao.findByCode(Integer.parseInt(code));
         }
         return null;
-    }// ;
+    }
 
     @Override
     public List<Function> findFunctionBySysTypeAndLevel(String sysType, String level) {
         return functionDao.findBySysTypeAndLevel(sysType, level);
-    }// ;
+    }
 
     @Override
-    public Page<Map<String, Object>> findPage(ISearch search, String sysType, String funcCode) {
+    public Page<Map<String, Object>> findPage(SearchSetting search, String sysType, String funcCode) {
         return roleDao.findPageBySysTypeAndFuncCode(sysType, funcCode, search.getFirstResult(), search.getMaxResults());
-    }// ;
+    }
 
     @Override
-    public Page<Map<String, Object>> findEditPage(ISearch search, String sysType, String funcCode) {
+    public Page<Map<String, Object>> findEditPage(SearchSetting search, String sysType, String funcCode) {
         return roleDao.findPageUnselectedBySysTypeAndFuncCode(sysType, funcCode, search.getFirstResult(), search.getMaxResults());
-    }// ;
+    }
 
     @Override
     public int deleteRfList(String funcCode, List<String> delRole) {
         return roleFunctionDao.deleteByFuncCodeAndRoleCodes(funcCode, delRole);
-    }// ;
+    }
 
     @Override
     public void save(Function function, IRequest request) {
@@ -100,5 +100,5 @@ public class FunctionSetServiceImpl extends AbstractService implements FunctionS
         i18n.setUpdater(CapSecurityContext.getUserId());
         i18n.setUpdateTime(CapDate.getCurrentTimestamp());
         i18nDao.save(i18n);
-    }// ;
+    }
 }

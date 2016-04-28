@@ -46,7 +46,6 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatelessKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 
@@ -55,8 +54,8 @@ import com.iisigroup.cap.DroolsConstants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
@@ -79,7 +78,7 @@ import com.iisigroup.cap.rule.service.ConditionMntService;
 import com.iisigroup.cap.rule.service.FactorMntService;
 import com.iisigroup.cap.rule.service.RuleTbMntService;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
@@ -110,7 +109,6 @@ import net.sf.json.JSONObject;
  *          <li>2013/12/24,TimChiang,new
  *          </ul>
  */
-@Scope("request")
 @Controller("ruleTbMnthandler")
 public class RuleTbMntHandler extends MFormHandler {
 
@@ -122,9 +120,9 @@ public class RuleTbMntHandler extends MFormHandler {
     private RuleTbMntService ruleTbMntService;
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
-    private static final Logger logger = LoggerFactory.getLogger(RuleTbMntHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(RuleTbMntHandler.class);
 
     /**
      * 查詢Condition資料明細
@@ -150,7 +148,7 @@ public class RuleTbMntHandler extends MFormHandler {
         }
 
         return result;
-    }// ;
+    }
 
     /**
      * modify Condition Item and Detail
@@ -278,7 +276,7 @@ public class RuleTbMntHandler extends MFormHandler {
             IOUtils.closeQuietly(is);
         }
         return new AjaxFormResult();
-    }// ;
+    }
 
     public File createDecisionTable(IRequest request) {
         // String packageName = "com.iisigroup.cap.service";
@@ -668,14 +666,14 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryRuleItmByDivRlNo(ISearch search, IRequest params) {
+    public GridResult queryRuleItmByDivRlNo(SearchSetting search, IRequest params) {
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "divRlNo", "");
 
         Page<DivRlItm> page = commonService.findPage(DivRlItm.class, search);
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("ruleCont", new RuleValFormatter(this.conditionMntService));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 查詢Condition Detail Grid資料明細
@@ -685,7 +683,7 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionDetail(ISearch search, IRequest params) {
+    public GridResult queryConditionDetail(SearchSetting search, IRequest params) {
         // if (params.containsKey("divRlNo") && !CapString.isEmpty(params.get("divRlNo"))) {
         // search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo",
         // params.get("divRlNo"));
@@ -697,7 +695,7 @@ public class RuleTbMntHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("divCtCont", new CondValNmFormatter());
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 查詢Rule Detail Grid資料明細
@@ -707,7 +705,7 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryRuleTbDetailByDivRlNo(ISearch search, IRequest params) {
+    public GridResult queryRuleTbDetailByDivRlNo(SearchSetting search, IRequest params) {
         if (params.containsKey("divRlNo") && !CapString.isEmpty(params.get("divRlNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", params.get("divRlNo"));
         } else {
@@ -718,7 +716,7 @@ public class RuleTbMntHandler extends MFormHandler {
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("divCtNm", new ConditionNmFormatter(conditionMntService));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /********* Grid Formatter **********/
 

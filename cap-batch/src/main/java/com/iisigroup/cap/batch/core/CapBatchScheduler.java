@@ -90,7 +90,7 @@ public class CapBatchScheduler implements CapBatchConstants {
         }
         scheduler.scheduleJobs(triggersAndJobs, true);
         scheduler.start();
-    }// ;
+    }
 
     /**
      * 重新排程
@@ -127,7 +127,7 @@ public class CapBatchScheduler implements CapBatchConstants {
             }
         }
 
-    }// ;
+    }
 
     public void deleteSchedule(BatchSchedule sch) throws SchedulerException {
         JobKey jobKey = JobKey.jobKey(sch.getSchId());
@@ -135,7 +135,7 @@ public class CapBatchScheduler implements CapBatchConstants {
             scheduler.deleteJob(jobKey);
             logger.debug("deleteSchedule:" + sch.toTriggerString());
         }
-    }// ;
+    }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     protected Trigger buildTrigger(BatchSchedule sch) {
@@ -148,7 +148,7 @@ public class CapBatchScheduler implements CapBatchConstants {
             tirggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(sch.getCronExpression()).inTimeZone(TimeZone.getTimeZone(sch.getTimeZoneId())));
         }
         return tirggerBuilder.build();
-    }// ;
+    }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     protected JobDetail buildJobDetail(BatchSchedule sch) {
@@ -168,7 +168,7 @@ public class CapBatchScheduler implements CapBatchConstants {
         jobFactory.setJobDataAsMap(map);
         jobFactory.afterPropertiesSet();
         return jobFactory.getObject();
-    }// ;
+    }
 
     public void setBatchService(BatchJobService batchService) {
         this.batchService = batchService;
@@ -189,7 +189,7 @@ public class CapBatchScheduler implements CapBatchConstants {
             }
         }
         return this.hostId;
-    }// ;
+    }
 
     public void setScheduler(Scheduler scheduler) {
         this.scheduler = scheduler;

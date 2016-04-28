@@ -16,7 +16,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -24,7 +23,7 @@ import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.auth.model.Department;
 import com.iisigroup.cap.auth.service.DepartmentService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
@@ -33,7 +32,7 @@ import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
@@ -50,25 +49,24 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2014/1/13,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("departmenthandler")
 public class DepartmentHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonSrv;
+    private CommonService commonSrv;
 
     @Resource
     private DepartmentService departmentService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
         search.addOrderBy("code");
 
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
 
         Page<Department> page = commonSrv.findPage(Department.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 編輯資料

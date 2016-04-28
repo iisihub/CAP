@@ -25,7 +25,7 @@ import com.iisigroup.cap.batch.dao.BatchScheduleDao;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapSystemConfig;
@@ -69,7 +69,7 @@ public class BatchJobServiceImpl implements BatchJobService {
             resources.add(getJobResource(job));
         }
         return resources;
-    }// ;
+    }
 
     @Override
     public org.springframework.core.io.Resource getJobResource(BatchJob job) {
@@ -77,7 +77,7 @@ public class BatchJobServiceImpl implements BatchJobService {
     }
 
     @Override
-    public Page<BatchJob> findJobsPage(ISearch search) {
+    public Page<BatchJob> findJobsPage(SearchSetting search) {
         return batchJobDao.findForPage(search);
     }
 
@@ -107,7 +107,7 @@ public class BatchJobServiceImpl implements BatchJobService {
     }
 
     @Override
-    public Page<BatchSchedule> findSchPage(ISearch search) {
+    public Page<BatchSchedule> findSchPage(SearchSetting search) {
         return batchScheduleDao.findForPage(search);
     }
 
@@ -137,14 +137,14 @@ public class BatchJobServiceImpl implements BatchJobService {
     }
 
     @Override
-    public Page<Map<String, Object>> findExecutionsPage(ISearch search) {
+    public Page<Map<String, Object>> findExecutionsPage(SearchSetting search) {
         return batchExecutionDao.findExecutionsForPage(search);
-    }// ;
+    }
 
     @Override
     public List<Map<String, Object>> findSteps(String executionId) {
         return batchExecutionDao.findStepsById(executionId);
-    }// ;
+    }
 
     @Override
     public Map<String, Object> findExecutionDetail(String executionId) {
@@ -154,7 +154,7 @@ public class BatchJobServiceImpl implements BatchJobService {
     @Override
     public JobParameters findJobParams(String executionId) {
         return batchExecutionDao.findJobParamsById(executionId);
-    }// ;
+    }
 
     @Override
     public void updateExecution(Long executionId, String executor) {

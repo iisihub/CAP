@@ -249,7 +249,7 @@ public class AjaxFormResult implements IResult {
             AjaxFormResult form = m.get(key);
             resultMap.put(key, form.toString());
         }
-    }// ;
+    }
 
     /**
      * 取值
@@ -311,6 +311,6 @@ public class AjaxFormResult implements IResult {
     @Override
     public void respondResult(ServletResponse response) {
         new StringResponse(getContextType(), getEncoding(), getResult()).respond(response);
-    }// ;
+    }
 
 }

@@ -73,7 +73,7 @@ public class CapPermissionVoter extends RoleVoter {
             }
         }
         return result;
-    }// ;
+    }
 
     public void setSecurityService(IAccessControlService securityService) {
         this.securityService = securityService;

@@ -30,9 +30,9 @@ import org.springframework.stereotype.Repository;
 import com.iisigroup.cap.auth.dao.FunctionDao;
 import com.iisigroup.cap.auth.model.Function;
 import com.iisigroup.cap.auth.support.FunctionRowMapper;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.utils.StringUtil;
 
@@ -49,13 +49,13 @@ import com.iisigroup.cap.utils.StringUtil;
  *          </ul>
  */
 @Repository
-public class FunctionDaoImpl extends GenericDao<Function> implements FunctionDao {
+public class FunctionDaoImpl extends GenericDaoImpl<Function> implements FunctionDao {
 
     private static final int NO_PARENT = -1;
 
     @Override
     public List<Function> findAll(String system) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "sysType", system);
         search.addSearchModeParameters(SearchMode.EQUALS, "status", "1"); // 啟用
         search.addOrderBy("level");
@@ -66,18 +66,18 @@ public class FunctionDaoImpl extends GenericDao<Function> implements FunctionDao
 
     @Override
     public List<Function> findBySysTypeAndLevel(String sysType, String level) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "sysType", sysType);
         search.addSearchModeParameters(SearchMode.EQUALS, "level", level);
         return find(search);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findPageByRoleCode(String roleCode, int firstResult, int maxResults) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
         return getNamedJdbcTemplate().queryForPage("function_getFuncByRoldCode", param, firstResult, maxResults);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findPageUnselected(String roleCode, String sysType, String parent, int firstResult, int maxResults) {
@@ -86,7 +86,7 @@ public class FunctionDaoImpl extends GenericDao<Function> implements FunctionDao
         param.put("parent", parent);
         param.put("sysType", sysType);
         return getNamedJdbcTemplate().queryForPage("function_getEditFuncByRole", param, firstResult, maxResults);
-    }// ;
+    }
 
     @Override
     public Function findByCodeAndSysType(int code, String sysType) {
@@ -243,9 +243,9 @@ public class FunctionDaoImpl extends GenericDao<Function> implements FunctionDao
 
     @Override
     public Function findByCode(int code) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);
-    }// ;
+    }
 
 }

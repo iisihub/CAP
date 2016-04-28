@@ -45,11 +45,11 @@ public class CapSystemConfig implements InitializingBean {
 
     public String getProperty(String key, String defValue) {
         return properties.getProperty(key, defValue);
-    }// ;
+    }
 
     public boolean containsKey(String key) {
         return properties.containsKey(key);
-    }// ;
+    }
 
     public Properties getProperties() {
         return properties;

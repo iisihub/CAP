@@ -162,7 +162,7 @@ public class CapString {
             }
         }
         return sb.toString();
-    }// ;
+    }
 
     /**
      * fill specify character to string. 對字串補特殊字元.
@@ -221,7 +221,7 @@ public class CapString {
         } else {
             return Constants.EMPTY_STRING;
         }
-    }// ;
+    }
 
     /**
      * <pre>
@@ -237,7 +237,7 @@ public class CapString {
             return "";
         }
         return in.replaceAll("^[　 ]+", "").replaceAll("[　 ]+$", "");
-    }// ;
+    }
 
     /**
      * 判斷字串是否為空白.
@@ -285,7 +285,7 @@ public class CapString {
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
         return (m.find()) ? m.group() : Constants.EMPTY_STRING;
-    }// ;
+    }
 
     /**
      * 
@@ -338,7 +338,7 @@ public class CapString {
             }
         }
         return new String(rtn);
-    }// ;
+    }
 
     /**
      * trim Left
@@ -362,7 +362,7 @@ public class CapString {
             }
         }
         return index != 0 ? source.substring(index) : source;
-    }// ;
+    }
 
     /**
      * 將字串中有斷行的符號去除
@@ -441,7 +441,7 @@ public class CapString {
         } else {
             return name;
         }
-    }// ;
+    }
 
     /**
      * Array transform String
@@ -461,7 +461,7 @@ public class CapString {
             }
         }
         return sb.toString();
-    }// ;
+    }
 
     /**
      * 解析每行數據獲取數據庫每個欄位對應的數據集合

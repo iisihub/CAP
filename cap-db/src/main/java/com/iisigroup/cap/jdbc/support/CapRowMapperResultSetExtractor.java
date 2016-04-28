@@ -59,7 +59,7 @@ public class CapRowMapperResultSetExtractor<T> implements ResultSetExtractor<Lis
         this.rowMapper = rowMapper;
         this.startRow = startRow;
         this.fetchSize = fetchSize;
-    }// ;
+    }
 
     /**
      * extractData
@@ -83,6 +83,6 @@ public class CapRowMapperResultSetExtractor<T> implements ResultSetExtractor<Lis
             }
         }
         return results;
-    }// ;
+    }
 
 }// ~

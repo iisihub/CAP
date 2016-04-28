@@ -16,7 +16,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
@@ -24,8 +23,8 @@ import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.ErrorCode;
 import com.iisigroup.cap.base.service.ErrorCodeService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.IFormatter;
 import com.iisigroup.cap.handler.MFormHandler;
@@ -34,7 +33,7 @@ import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
@@ -51,18 +50,17 @@ import com.iisigroup.cap.utils.CapString;
  *          <li>2013/12/31,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("errorCodehandler")
 public class ErrorCodeHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonSrv;
+    private CommonService commonSrv;
 
     @Resource
     private ErrorCodeService errorCodeService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public GridResult query(SearchSetting search, IRequest params) {
         String code = params.get("code");
         String locale = params.get("locale");
         String sysId = params.get("sysId");
@@ -83,7 +81,7 @@ public class ErrorCodeHandler extends MFormHandler {
 
         Page<ErrorCode> page = commonSrv.findPage(ErrorCode.class, search);
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * 編輯資料

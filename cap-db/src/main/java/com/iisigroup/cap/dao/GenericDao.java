@@ -15,7 +15,6 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import com.iisigroup.cap.dao.utils.ISearch;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -33,7 +32,7 @@ import com.iisigroup.cap.model.Page;
  * @param <T>
  *            the model
  */
-public interface IGenericDao<T> {
+public interface GenericDao<T> {
 
     void save(Object models);
 
@@ -65,13 +64,13 @@ public interface IGenericDao<T> {
      */
     T find(Serializable pk);
 
-    <S> List<S> find(Class<S> clazz, ISearch search);
+    <S> List<S> find(Class<S> clazz, SearchSetting search);
 
     T find(T entity);
 
-    T findUniqueOrNone(ISearch search);
+    T findUniqueOrNone(SearchSetting search);
 
-    List<T> find(ISearch search);
+    List<T> find(SearchSetting search);
 
     /**
      * Count.
@@ -80,20 +79,20 @@ public interface IGenericDao<T> {
      *            SearchSetting
      * @return the int
      */
-    int count(ISearch search);
+    int count(SearchSetting search);
 
     Iterator<T> list(int first, int count);
 
-    Page<T> findPage(ISearch search);
+    Page<T> findPage(SearchSetting search);
 
-    <S> Page<S> findPage(Class<S> clazz, ISearch search);
+    <S> Page<S> findPage(Class<S> clazz, SearchSetting search);
 
     /**
      * create new search requirement
      * 
      * @return ISearch
      */
-    ISearch createSearchTemplete();
+    SearchSetting createSearchTemplete();
 
     /**
      * flush

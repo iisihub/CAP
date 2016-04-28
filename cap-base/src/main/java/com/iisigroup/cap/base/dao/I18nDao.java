@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.base.model.I18n;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 
 /**
  * <pre>
@@ -29,7 +29,7 @@ import com.iisigroup.cap.dao.IGenericDao;
  *          <li>2010/12/15,eugene,new
  *          </ul>
  */
-public interface I18nDao extends IGenericDao<I18n> {
+public interface I18nDao extends GenericDao<I18n> {
 
     /**
      * find by codetype.

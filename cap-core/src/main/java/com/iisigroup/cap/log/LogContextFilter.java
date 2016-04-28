@@ -84,7 +84,7 @@ public class LogContextFilter implements Filter {
         }
         chain.doFilter(request, response);
         LogContext.resetLogContext();
-    }// ;
+    }
 
     public void init(FilterConfig filterConfig) throws ServletException {
         // do nothing

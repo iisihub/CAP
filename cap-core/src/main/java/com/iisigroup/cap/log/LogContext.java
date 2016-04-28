@@ -27,9 +27,9 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author gabriellalau
  * @version
- * <ul>
- *              <li>2011-11-23,gabriella,new
- *              </ul>
+ *          <ul>
+ *          <li>2011-11-23,gabriella,new
+ *          </ul>
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class LogContext extends InheritableThreadLocal {

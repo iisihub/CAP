@@ -44,6 +44,6 @@ public class CapHandleOpStep extends AbstractCustomizeOpStep {
         ctx.setGoToStep(NEXT);
         ctx.setResult(rtn);
         return ctx;
-    }// ;
+    }
 
 }// ~

@@ -58,7 +58,7 @@ public class CapColumnMapRowSetMapper {
             mapOfColValues.put(key, obj);
         }
         return mapOfColValues;
-    }// ;
+    }
 
     protected Object getColumnValue(SqlRowSet rs, int index) {
         Object obj = rs.getObject(index);
@@ -68,6 +68,6 @@ public class CapColumnMapRowSetMapper {
             obj = CapDbUtil.trimFullSpace(str);
         }
         return obj;
-    }// ;
+    }
 
 }// ~

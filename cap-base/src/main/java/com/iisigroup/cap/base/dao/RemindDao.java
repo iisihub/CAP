@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.Remind;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 
 /**
  * <pre>
@@ -27,7 +27,7 @@ import com.iisigroup.cap.dao.IGenericDao;
  *          <li>2014/1/27,tammy,new
  *          </ul>
  */
-public interface RemindDao extends IGenericDao<Remind> {
+public interface RemindDao extends GenericDao<Remind> {
 
     public Remind findByPid(String pid);
 

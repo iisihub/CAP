@@ -12,7 +12,7 @@ package com.iisigroup.cap.base.dao;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.ErrorCode;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 
 /**
  * <pre>
@@ -26,7 +26,7 @@ import com.iisigroup.cap.dao.IGenericDao;
  *          <li>2011/08/02,UFO,new
  *          </ul>
  */
-public interface ErrorCodeDao extends IGenericDao<ErrorCode> {
+public interface ErrorCodeDao extends GenericDao<ErrorCode> {
 
     List<ErrorCode> findByAll();
 

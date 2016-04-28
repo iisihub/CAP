@@ -79,6 +79,6 @@ public class StrMessageFormatter implements IFormatter {
             buffer.append(unformatMsg.substring(pos));
         }
         return buffer.toString();
-    }// ;
+    }
 
 }// ~

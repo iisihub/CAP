@@ -40,13 +40,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import com.iisigroup.cap.dao.IGenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
-import com.iisigroup.cap.dao.utils.SearchModeParameter;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
 import com.iisigroup.cap.model.IDataObject;
 import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.model.SearchModeParameter;
 
 /**
  * <pre>
@@ -65,7 +65,7 @@ import com.iisigroup.cap.model.Page;
  *          </ul>
  * @param <T>
  */
-public class GenericDao<T> implements IGenericDao<T> {
+public class GenericDaoImpl<T> implements GenericDao<T> {
 
     protected Class<T> type;
     protected Logger logger;
@@ -77,7 +77,7 @@ public class GenericDao<T> implements IGenericDao<T> {
     private CapNamedJdbcTemplate namedJdbcTemplate;
 
     @SuppressWarnings("unchecked")
-    public GenericDao() {
+    public GenericDaoImpl() {
         try {
             type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         } catch (ClassCastException e) {
@@ -85,7 +85,7 @@ public class GenericDao<T> implements IGenericDao<T> {
             type = (Class<T>) ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
         }
         logger = LoggerFactory.getLogger(getClass());
-    }// ;
+    }
 
     /**
      * Insert.
@@ -98,19 +98,19 @@ public class GenericDao<T> implements IGenericDao<T> {
         if (!getEntityManager().contains(entity)) {
             getEntityManager().persist(entity);
         }
-    }// ;
+    }
 
     public void save(List<?> entries) {
         for (Object entity : entries) {
             Assert.notNull(entity, "The List must not contain null element");
             save(entity);
         }
-    }// ;
+    }
 
     public void merge(T entity) {
         Assert.notNull(entity, "The entity to save cannot be null element");
         getEntityManager().merge(entity);
-    }// ;
+    }
 
     /**
      * Delete.
@@ -129,13 +129,13 @@ public class GenericDao<T> implements IGenericDao<T> {
                 getEntityManager().remove(entityRef);
             }
         }
-    }// ;
+    }
 
     public void delete(List<?> entries) {
         for (Object entity : entries) {
             delete(entity);
         }
-    }// ;
+    }
 
     /**
      * Find.
@@ -147,7 +147,7 @@ public class GenericDao<T> implements IGenericDao<T> {
      */
     public T find(Serializable pk) {
         return getEntityManager().find(type, pk);
-    }// ;
+    }
 
     public Serializable getPrimaryKey(Object model) {
         if (model instanceof IDataObject) {
@@ -163,31 +163,31 @@ public class GenericDao<T> implements IGenericDao<T> {
             return null;
         }
         return (T) getEntityManager().find(type, pk);
-    }// ;
+    }
 
-    public T findUniqueOrNone(ISearch search) {
+    public T findUniqueOrNone(SearchSetting search) {
         search.setFirstResult(0).setMaxResults(1);
         List<T> models = find(getType(), search);
         if (models != null && !models.isEmpty()) {
             return models.iterator().next();
         }
         return null;
-    }// ;
+    }
 
     public Iterator<T> list(int first, int count) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.setFirstResult(first).setMaxResults(count);
         return createQuery(getType(), search).getResultList().iterator();
-    }// ;
+    }
 
     @Override
-    public int count(ISearch search) {
+    public int count(SearchSetting search) {
         return count(getType(), search);
     }
 
-    public List<T> find(final ISearch search) {
+    public List<T> find(final SearchSetting search) {
         return createQuery(getType(), search).getResultList();
-    }// ;
+    }
 
     /**
      * 查詢頁的資料
@@ -196,9 +196,9 @@ public class GenericDao<T> implements IGenericDao<T> {
      *            SearchSetting
      * @return Page<S>
      */
-    public Page<T> findPage(ISearch search) {
+    public Page<T> findPage(SearchSetting search) {
         return findPage(getType(), search);
-    }// ;
+    }
 
     /**
      * find by SearchSetting
@@ -211,9 +211,9 @@ public class GenericDao<T> implements IGenericDao<T> {
      *            Class<S>
      * @return List<S>
      */
-    public <S> List<S> find(Class<S> clazz, final ISearch search) {
+    public <S> List<S> find(Class<S> clazz, final SearchSetting search) {
         return createQuery(clazz, search).getResultList();
-    }// ;
+    }
 
     /**
      * 取得筆數
@@ -226,7 +226,7 @@ public class GenericDao<T> implements IGenericDao<T> {
      *            SearchSetting
      * @return int
      */
-    public <S> int count(Class<S> clazz, ISearch search) {
+    public <S> int count(Class<S> clazz, SearchSetting search) {
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Long> query = builder.createQuery(Long.class);
         Root<S> root = query.from(clazz);
@@ -234,7 +234,7 @@ public class GenericDao<T> implements IGenericDao<T> {
         query.select(builder.count(root));
         Long count = getEntityManager().createQuery(query).getSingleResult();
         return count.intValue();
-    }// ;
+    }
 
     /**
      * 查詢頁的資料
@@ -247,12 +247,12 @@ public class GenericDao<T> implements IGenericDao<T> {
      *            SearchSetting
      * @return Page<S>
      */
-    public <S> Page<S> findPage(Class<S> clazz, ISearch search) {
+    public <S> Page<S> findPage(Class<S> clazz, SearchSetting search) {
         return new Page<S>(find(clazz, search), count(clazz, search), search.getMaxResults(), search.getFirstResult());
-    }// ;
+    }
 
-    protected <S> TypedQuery<S> createQuery(Class<S> clazz, ISearch search) {
-        ISearch thisSearch = (search != null) ? search : createSearchTemplete();
+    protected <S> TypedQuery<S> createQuery(Class<S> clazz, SearchSetting search) {
+        SearchSetting thisSearch = (search != null) ? search : createSearchTemplete();
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<S> query = builder.createQuery(clazz);
         Root<S> root = query.from(clazz);
@@ -260,10 +260,10 @@ public class GenericDao<T> implements IGenericDao<T> {
         query = applySpecificationToCriteria(root, query, builder, thisSearch);
         TypedQuery<S> tquery = applyPaginationAndOrderToCriteria(root, query, builder, thisSearch);
         return tquery;
-    }// ;
+    }
 
-    protected TypedQuery<T> createQuery(ISearch search) {
-        ISearch thisSearch = (search != null) ? search : createSearchTemplete();
+    protected TypedQuery<T> createQuery(SearchSetting search) {
+        SearchSetting thisSearch = (search != null) ? search : createSearchTemplete();
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(getType());
         Root<T> root = query.from(getType());
@@ -271,7 +271,7 @@ public class GenericDao<T> implements IGenericDao<T> {
         query = applySpecificationToCriteria(root, query, builder, thisSearch);
         TypedQuery<T> tquery = applyPaginationAndOrderToCriteria(root, query, builder, thisSearch);
         return tquery;
-    }// ;
+    }
 
     /**
      * 設定查詢條件
@@ -288,7 +288,7 @@ public class GenericDao<T> implements IGenericDao<T> {
      * @return CriteriaQuery
      */
     @SuppressWarnings({ "rawtypes" })
-    protected <S> CriteriaQuery<S> applySpecificationToCriteria(Root root, CriteriaQuery<S> query, CriteriaBuilder builder, ISearch search) {
+    protected <S> CriteriaQuery<S> applySpecificationToCriteria(Root root, CriteriaQuery<S> query, CriteriaBuilder builder, SearchSetting search) {
         if (search.getSearchModeParameters() != null) {
             Predicate[] aryWhere = new Predicate[search.getSearchModeParameters().size()];
             int i = 0;
@@ -300,7 +300,7 @@ public class GenericDao<T> implements IGenericDao<T> {
         }
 
         return query;
-    }// ;
+    }
 
     /**
      * 設定查詢筆數及欄位排列順序
@@ -315,7 +315,7 @@ public class GenericDao<T> implements IGenericDao<T> {
      *            SearchSetting
      * @return TypedQuery
      */
-    protected <S> TypedQuery<S> applyPaginationAndOrderToCriteria(Root<S> root, CriteriaQuery<S> query, CriteriaBuilder builder, ISearch search) {
+    protected <S> TypedQuery<S> applyPaginationAndOrderToCriteria(Root<S> root, CriteriaQuery<S> query, CriteriaBuilder builder, SearchSetting search) {
         // set order criteria if available
         if (search.hasOrderBy()) {
 
@@ -329,7 +329,7 @@ public class GenericDao<T> implements IGenericDao<T> {
                 if (pathSize > 1) {
                     Path<?> path = root.get(pathElements[0]);
                     for (int i = 1; i <= pathElements.length - 1; i++) {
-                        Join join = root.join(pathElements[i - 1]);
+                        Join<?, ?> join = root.join(pathElements[i - 1]);
                         path = join.get(pathElements[i]);
                     }
                     expression = path;
@@ -348,7 +348,7 @@ public class GenericDao<T> implements IGenericDao<T> {
             tQuery.setMaxResults(search.getMaxResults());
         }
         return tQuery;
-    }// ;
+    }
 
     // -------------------------------------------------------
     /**
@@ -496,13 +496,13 @@ public class GenericDao<T> implements IGenericDao<T> {
     }
 
     @SuppressWarnings("rawtypes")
-    public GenericDao setType(Class<T> type) {
+    public GenericDaoImpl setType(Class<T> type) {
         this.type = type;
         return this;
     }
 
-    public ISearch createSearchTemplete() {
-        return new SearchSetting();
+    public SearchSetting createSearchTemplete() {
+        return new SearchSettingImpl();
     }
 
     public void flush() {

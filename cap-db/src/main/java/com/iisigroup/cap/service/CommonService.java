@@ -13,7 +13,7 @@ package com.iisigroup.cap.service;
 
 import java.util.List;
 
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -28,9 +28,9 @@ import com.iisigroup.cap.model.Page;
  *          <li>2012/9/21,iristu,new
  *          </ul>
  */
-public interface ICommonService {
+public interface CommonService {
 
-    <T> Page<T> findPage(Class<T> clazz, ISearch search);
+    <T> Page<T> findPage(Class<T> clazz, SearchSetting search);
 
     <T> List<T> list(Class<T> clazz);
 

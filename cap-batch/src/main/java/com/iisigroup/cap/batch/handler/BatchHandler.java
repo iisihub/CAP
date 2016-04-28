@@ -41,7 +41,6 @@ import org.springframework.batch.core.repository.JobExecutionAlreadyRunningExcep
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -53,8 +52,8 @@ import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.ADDateFormatter;
@@ -88,7 +87,6 @@ import com.iisigroup.cap.utils.CapSystemConfig;
  *          <li>2012/11/5,iristu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("batchshandler")
 public class BatchHandler extends MFormHandler {
 
@@ -107,7 +105,7 @@ public class BatchHandler extends MFormHandler {
 
     @SuppressWarnings("serial")
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult jobQuery(ISearch search, IRequest params) {
+    public GridResult jobQuery(SearchSetting search, IRequest params) {
         if (params.containsKey("jobId")) {
             search.addSearchModeParameters(SearchMode.LIKE, "jobId", params.get("jobId") + "%");
         }
@@ -135,7 +133,7 @@ public class BatchHandler extends MFormHandler {
             }
         });
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     /**
      * modify BatchJob
@@ -166,7 +164,7 @@ public class BatchHandler extends MFormHandler {
             batchSrv.updateJob(job);
         }
         return result;
-    }// ;
+    }
 
     /**
      * delete BatchJob
@@ -183,7 +181,7 @@ public class BatchHandler extends MFormHandler {
             batchSrv.deleteJob(job.getJobId());
         }
         return result;
-    }// ;
+    }
 
     /**
      * 重新註冊
@@ -199,7 +197,7 @@ public class BatchHandler extends MFormHandler {
             jobRegistryLoad(job);
         }
         return result;
-    }// ;
+    }
 
     /**
      * 手動執行
@@ -218,7 +216,7 @@ public class BatchHandler extends MFormHandler {
             throw new CapMessageException("msg.job.noSuchJob", getClass());
         }
         return result;
-    }// ;
+    }
 
     /**
      * 手動執行
@@ -251,10 +249,10 @@ public class BatchHandler extends MFormHandler {
             }
         }
         return new AjaxFormResult();
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult schQuery(ISearch search, IRequest params) {
+    public GridResult schQuery(SearchSetting search, IRequest params) {
         if (params.containsKey("schId")) {
             search.addSearchModeParameters(SearchMode.LIKE, "schId", params.get("schId") + "%");
         }
@@ -263,7 +261,7 @@ public class BatchHandler extends MFormHandler {
         fmt.put("updateTime", new ADDateFormatter());
         fmt.put("schType", new I18NFormatter("sch.schType."));
         return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     public IResult schDetail(IRequest params) {
         AjaxFormResult result = new AjaxFormResult();
@@ -272,7 +270,7 @@ public class BatchHandler extends MFormHandler {
         map.put("notifyStatus", MapUtils.getString(map, "notifyStatus", "").split(","));
         result.putAll(map);
         return result;
-    }// ;
+    }
 
     /**
      * modify BatchSchedule
@@ -312,7 +310,7 @@ public class BatchHandler extends MFormHandler {
         }
         capScheduler.reSchedule(oldSch, newSch);
         return result;
-    }// ;
+    }
 
     /**
      * delete BatchSchedule
@@ -333,10 +331,10 @@ public class BatchHandler extends MFormHandler {
             }
         }
         return result;
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult executinsQuery(ISearch search, IRequest request) {
+    public MapGridResult executinsQuery(SearchSetting search, IRequest request) {
 
         if (!CapString.isEmpty(request.get("jobId"))) {
             search.addSearchModeParameters(SearchMode.LIKE, "i.job_name", request.get("jobId") + "%");
@@ -361,7 +359,7 @@ public class BatchHandler extends MFormHandler {
         fmt.put("START_TIME", new ADDateTimeFormatter("HH:mm:ss"));
         fmt.put("duration", new DurationFormatter("START_TIME", "END_TIME", "HH:mm:ss.SSS"));
         return new MapGridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     public IResult executionDetail(IRequest request) {
         String executionId = request.get("jobExeId");
@@ -380,7 +378,7 @@ public class BatchHandler extends MFormHandler {
         result.set("EXECUTOR", (String) map.get("EXECUTOR"));
         result.set("JOB_INSTANCE_ID", String.valueOf(map.get("JOB_INSTANCE_ID")));
         return result;
-    }// ;
+    }
 
     /**
      * 中斷執行
@@ -408,7 +406,7 @@ public class BatchHandler extends MFormHandler {
             throw new CapMessageException("msg.job.noRunnigJob", getClass()).setExtraInformation(new Object[] { jobExecutionId });
         }
         return result;
-    }// ;
+    }
 
     /**
      * 重新啟動
@@ -449,16 +447,16 @@ public class BatchHandler extends MFormHandler {
             throw new CapMessageException("msg.job.noSuchJob", getClass());
         }
         return result;
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult stepsQuery(ISearch search, IRequest request) {
+    public MapGridResult stepsQuery(SearchSetting search, IRequest request) {
         String executionId = request.get("jobExeId");
         List<Map<String, Object>> list = batchSrv.findSteps(executionId);
         Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
         fmt.put("duration", new DurationFormatter("START_TIME", "END_TIME", "HH:mm:ss.SSS"));
         return new MapGridResult(list, list.size(), fmt);
-    }// ;
+    }
 
     private void jobRegistryLoad(BatchJob job) {
         org.springframework.core.io.Resource resource = batchSrv.getJobResource(job);
@@ -470,7 +468,7 @@ public class BatchHandler extends MFormHandler {
         } catch (DuplicateJobException e) {
             e.getMessage();
         }
-    }// ;
+    }
 
     protected ApplicationContext createApplicationContextFactory(ApplicationContext parent, org.springframework.core.io.Resource resource) {
         ClassPathXmlApplicationContextFactory applicationContextFactory = new ClassPathXmlApplicationContextFactory();
@@ -497,6 +495,6 @@ public class BatchHandler extends MFormHandler {
         } catch (Exception e1) {
             throw new CapException(e1, getClass());
         }
-    }// ;
+    }
 
 }// ~

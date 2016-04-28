@@ -21,7 +21,7 @@ import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.service.UserSetService;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.dao.ICommonDao;
+import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
@@ -33,7 +33,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     @Resource
     private UserDao userDao;
     @Resource
-    private ICommonDao commonDao;
+    private CommonDao commonDao;
     @Resource
     private PwdLogDao userPwdHistoryDao;
     @Resource
@@ -43,7 +43,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         for (String oid : oids) {
             changeUserStatus(oid, "9");
         }
-    }// ;
+    }
 
     public void createUser(String userId, String userName, String password, String email, String[] roleOids) {
         User user = new User();
@@ -56,7 +56,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         user.setUrList(createUserRoleData(userId, roleOids));
         userDao.save(user);
         createUserPwdHistory(user.getCode(), encodePassword(userId, password));
-    }// ;
+    }
 
     public void updateUserByOid(String oid, String code, String name, boolean reset, String password, String email, String[] roleCodes) {
         User user = userDao.find(oid);
@@ -66,7 +66,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         user.setUrList(createUserRoleData(code, roleCodes));
         userDao.save(setUserFields(user, code, name, password, email));
         createUserPwdHistory(user.getCode(), encodePassword(code, password));
-    }// ;
+    }
 
     private User setUserFields(User user, String code, String name, String password, String email) {
         Date now = Calendar.getInstance().getTime();
@@ -82,7 +82,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         user.setUpdateTime(new Timestamp(now.getTime()));
         user.setUpdater(CapSecurityContext.getUserId());
         return user;
-    }// ;
+    }
 
     private List<UserRole> createUserRoleData(String userCode, String[] roleCodes) {
         roleSetDao.deleteByUserCode(userCode);
@@ -99,7 +99,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
             rlSet.add(userRole);
         }
         return rlSet;
-    }// ;
+    }
 
     private void createUserPwdHistory(String userCode, String encodedPassword) {
         if (!StringUtils.isBlank(encodedPassword)) {
@@ -109,17 +109,17 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
             h.setUpdateTime(CapDate.getCurrentTimestamp());
             userPwdHistoryDao.save(h);
         }
-    }// ;
+    }
 
     @Override
     public User findUserByUserCode(String code) {
         return userDao.findByCode(code);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findUser(String userId, String userName, String[] roleCodes, String[] status, int maxResult, int firstResult) {
         return userDao.findPage(userId, userName, roleCodes, status, maxResult, firstResult);
-    }// ;
+    }
 
     @Override
     public void unlockUserByOids(String[] oids) {
@@ -130,7 +130,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
             user.setUpdater(CapSecurityContext.getUserId());
             userDao.save(user);
         }
-    }// ;
+    }
 
     private void changeUserStatus(String oid, String status) {
         User user = userDao.find(oid);
@@ -138,12 +138,12 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         user.setUpdateTime(CapDate.getCurrentTimestamp());
         user.setUpdater(CapSecurityContext.getUserId());
         userDao.save(user);
-    }// ;
+    }
 
     private String encodePassword(String userId, String password) {
         StandardPasswordEncoder spe = new StandardPasswordEncoder(userId);
         return spe.encode(password);
-    }// ;
+    }
 
     @Override
     public void lockUserByOids(String[] oids) {
@@ -157,6 +157,6 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
                 userDao.save(user);
             }
         }
-    }// ;
+    }
 
 }

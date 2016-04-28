@@ -1,5 +1,5 @@
 /*
- * SearchSetting.java
+ * SearchSettingImpl.java
  *
  * Copyright (c) 2009-2011 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
@@ -10,7 +10,7 @@
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
  */
-package com.iisigroup.cap.dao.utils;
+package com.iisigroup.cap.dao.impl;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -19,9 +19,13 @@ import java.util.Map;
 
 import org.springframework.util.Assert;
 
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.model.SearchModeParameter;
+
 /**
  * <p>
- * SearchSetting .
+ * SearchSettingImpl .
  * </p>
  * 
  * @author iristu
@@ -32,11 +36,11 @@ import org.springframework.util.Assert;
  *          <li>2011/6/10,RodesChen, add method
  *          </ul>
  */
-public abstract class AbstractSearchSetting implements ISearch {
+public class SearchSettingImpl implements SearchSetting {
 
     private static final long serialVersionUID = 1L;
 
-    public AbstractSearchSetting() {
+    public SearchSettingImpl() {
 
     }
 
@@ -46,7 +50,7 @@ public abstract class AbstractSearchSetting implements ISearch {
      * @param searchSetting
      *            searchSetting
      */
-    public AbstractSearchSetting(AbstractSearchSetting searchSetting) {
+    public SearchSettingImpl(SearchSettingImpl searchSetting) {
         setOrderBy(searchSetting.getOrderBy());
         setFirstResult(searchSetting.getFirstResult());
         setMaxResults(searchSetting.getMaxResults());
@@ -58,7 +62,7 @@ public abstract class AbstractSearchSetting implements ISearch {
         return entityName;
     }
 
-    public AbstractSearchSetting setEntityName(String entityName) {
+    public SearchSettingImpl setEntityName(String entityName) {
         this.entityName = entityName;
         return this;
     }
@@ -104,7 +108,7 @@ public abstract class AbstractSearchSetting implements ISearch {
      *            the order by
      * @return SearchSetting
      */
-    public AbstractSearchSetting addOrderBy(String orderBy) {
+    public SearchSettingImpl addOrderBy(String orderBy) {
         if (this.orderBy == null) {
             this.orderBy = new LinkedHashMap<String, Boolean>();
         }
@@ -121,7 +125,7 @@ public abstract class AbstractSearchSetting implements ISearch {
      *            是否要降羃排序
      * @return SearchSetting
      */
-    public AbstractSearchSetting addOrderBy(String orderBy, boolean orderDesc) {
+    public SearchSettingImpl addOrderBy(String orderBy, boolean orderDesc) {
         if (this.orderBy == null) {
             this.orderBy = new LinkedHashMap<String, Boolean>();
         }
@@ -129,7 +133,7 @@ public abstract class AbstractSearchSetting implements ISearch {
         return this;
     }
 
-    public AbstractSearchSetting setOrderBy(Map<String, Boolean> orderBy) {
+    public SearchSettingImpl setOrderBy(Map<String, Boolean> orderBy) {
         this.orderBy = orderBy;
         return this;
     }
@@ -151,7 +155,7 @@ public abstract class AbstractSearchSetting implements ISearch {
      *            查詢的筆數
      * @return this
      */
-    public AbstractSearchSetting setMaxResults(int maxResults) {
+    public SearchSettingImpl setMaxResults(int maxResults) {
         Assert.isTrue(maxResults > 0, "maxResults must be > 0");
         // this.maxResults = Math.min(maxResults, maxResultsLimit);
         this.maxResults = maxResults;
@@ -172,7 +176,7 @@ public abstract class AbstractSearchSetting implements ISearch {
      *            查詢的頁碼
      * @return this
      */
-    public AbstractSearchSetting setFirstResult(int firstResult) {
+    public SearchSettingImpl setFirstResult(int firstResult) {
         Assert.isTrue(firstResult >= 0, "maxResults must be >= 0");
         this.firstResult = firstResult;
         return this;
@@ -191,13 +195,13 @@ public abstract class AbstractSearchSetting implements ISearch {
         return this.searchModeParameters;
     }
 
-    public AbstractSearchSetting addSearchModeParameters(SearchMode searchMode, Object key, Object value) {
+    public SearchSettingImpl addSearchModeParameters(SearchMode searchMode, Object key, Object value) {
         Assert.notNull(searchMode, "search mode must not be null");
         searchModeParameters.add(new SearchModeParameter(searchMode, key, value));
         return this;
     }
 
-    public AbstractSearchSetting addSearchModeParameters(ISearch search) {
+    public SearchSettingImpl addSearchModeParameters(SearchSetting search) {
         this.searchModeParameters.addAll(search.getSearchModeParameters());
         return this;
     }

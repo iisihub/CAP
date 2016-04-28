@@ -18,9 +18,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.RemindDao;
 import com.iisigroup.cap.base.model.Remind;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>
@@ -35,11 +35,11 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  *          </ul>
  */
 @Repository
-public class RemindDaoImpl extends GenericDao<Remind> implements RemindDao {
+public class RemindDaoImpl extends GenericDaoImpl<Remind> implements RemindDao {
 
     @Override
     public Remind findByPid(String pid) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "oid", pid);
         return findUniqueOrNone(search);
     }

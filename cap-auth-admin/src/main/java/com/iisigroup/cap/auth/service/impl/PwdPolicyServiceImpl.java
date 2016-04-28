@@ -11,7 +11,7 @@ import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.service.PwdPolicyService;
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.ICommonDao;
+import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.service.AbstractService;
@@ -22,7 +22,7 @@ import com.iisigroup.cap.utils.CapDate;
 public class PwdPolicyServiceImpl extends AbstractService implements PwdPolicyService {
 
     @Resource
-    ICommonDao commonDao;
+    CommonDao commonDao;
     @Resource
     UserDao userDao;
 

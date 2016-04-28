@@ -111,7 +111,7 @@ public class ErrorResult implements IErrorResult {
             logMessage = e.getLocalizedMessage();
             errorMessage.put(AJAX_HANDLER_EXCEPTION, logMessage);
         }
-    }// ;
+    }
 
     @Override
     public void add(IResult result) {
@@ -151,12 +151,12 @@ public class ErrorResult implements IErrorResult {
     @Override
     public void respondResult(ServletResponse response) {
         new StringResponse(getContextType(), getEncoding(), getResult()).respond(response);
-    }// ;
+    }
 
     public Locale getLocale(IRequest request) {
         return (Locale) SimpleContextHolder.get(CapWebUtil.localeKey);
 
-    }// ;
+    }
 
     /**
      * 格式化訊息

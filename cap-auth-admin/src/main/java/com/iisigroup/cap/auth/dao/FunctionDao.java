@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.iisigroup.cap.auth.model.Function;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -31,7 +31,7 @@ import com.iisigroup.cap.model.Page;
  *          <li>2013/12/20,tammy,new
  *          </ul>
  */
-public interface FunctionDao extends IGenericDao<Function> {
+public interface FunctionDao extends GenericDao<Function> {
     /**
      * find All
      * 

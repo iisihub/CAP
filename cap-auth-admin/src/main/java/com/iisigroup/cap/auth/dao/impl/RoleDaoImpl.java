@@ -19,9 +19,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.RoleDao;
 import com.iisigroup.cap.auth.model.Role;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.dao.IRoleDao;
 
@@ -38,7 +38,7 @@ import com.iisigroup.cap.security.dao.IRoleDao;
  *          </ul>
  */
 @Repository
-public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>, RoleDao {
+public class RoleDaoImpl extends GenericDaoImpl<Role> implements IRoleDao<Role>, RoleDao {
 
     @SuppressWarnings("unchecked")
     @Override
@@ -53,7 +53,7 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>, Rol
 
     @Override
     public List<Role> findAll() {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("code");
         List<Role> list = find(search);
@@ -62,17 +62,17 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>, Rol
 
     @Override
     public Role findByCode(String code) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);
-    }// ;
+    }
 
     @Override
     public List<Map<String, Object>> findAllWithSelectedByUserCode(String userCode) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("userCode", userCode);
         return getNamedJdbcTemplate().query("role_findAllWithSelectedByUserCode", params);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findPageUnselectedBySysTypeAndFuncCode(String sysType, String funcCode, int firstResult, int maxResults) {
@@ -80,7 +80,7 @@ public class RoleDaoImpl extends GenericDao<Role> implements IRoleDao<Role>, Rol
         param.put("sysType", sysType);
         param.put("funcCode", funcCode);
         return getNamedJdbcTemplate().queryForPage("role_findUnSelectedRoleByFuncCode", param, firstResult, maxResults);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findPageBySysTypeAndFuncCode(String sysType, String funcCode, int firstResult, int maxResults) {

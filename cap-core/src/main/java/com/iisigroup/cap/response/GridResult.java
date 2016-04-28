@@ -78,7 +78,7 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
     public GridResult setPage(int page) {
         resultMap.put(IGridEnum.PAGE.getCode(), page);
         return this;
-    }// ;
+    }
 
     /**
      * 取得頁碼
@@ -105,7 +105,7 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
         resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
         resultMap.put(IGridEnum.PAGEROWS.getCode(), pageRows);
         return this;
-    }// ;
+    }
 
     /**
      * 取得每頁筆數
@@ -128,7 +128,7 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
     public GridResult setRecords(int rowCount) {
         resultMap.put(IGridEnum.RECORDS.getCode(), rowCount);
         return this;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -140,7 +140,7 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
     public Integer getRecords() {
         Object o = resultMap.get(IGridEnum.RECORDS.getCode());
         return o == null ? 0 : (Integer) o;
-    }// ;
+    }
 
     /**
      * <pre>
@@ -226,6 +226,6 @@ public class GridResult extends AjaxFormResult implements IGridResult<GridResult
     @Override
     public void respondResult(ServletResponse response) {
         new StringResponse(getContextType(), getEncoding(), getResult()).respond(response);
-    }// ;
+    }
 
 }// ~

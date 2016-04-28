@@ -18,18 +18,17 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.service.CalendarService;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.jpa.utils.CapEntityUtil;
 import com.iisigroup.cap.response.AjaxFormResult;
 import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
+import com.iisigroup.cap.utils.CapEntityUtil;
 
 /**
  * <pre>
@@ -43,7 +42,6 @@ import com.iisigroup.cap.utils.CapBeanUtil;
  *          <li>2014/1/30,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("calendarhandler")
 public class CalendarHandler extends MFormHandler {
 

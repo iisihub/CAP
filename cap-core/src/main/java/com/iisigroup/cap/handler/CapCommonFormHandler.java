@@ -11,7 +11,6 @@
 
 package com.iisigroup.cap.handler;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.component.IRequest;
@@ -30,7 +29,6 @@ import com.iisigroup.cap.response.IResult;
  *          <li>2011/3/22,RodesChen,new
  *          </ul>
  */
-@Scope("request")
 @Controller("commonformhandler")
 public class CapCommonFormHandler extends MFormHandler {
 

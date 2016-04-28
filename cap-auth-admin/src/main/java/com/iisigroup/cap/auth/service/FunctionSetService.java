@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.iisigroup.cap.auth.model.Function;
 import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -28,9 +28,9 @@ public interface FunctionSetService {
 
     int deleteRfList(String funcCode, List<String> delRole);
 
-    Page<Map<String, Object>> findPage(ISearch search, String sysType, String funcCode);
+    Page<Map<String, Object>> findPage(SearchSetting search, String sysType, String funcCode);
 
-    Page<Map<String, Object>> findEditPage(ISearch search, String sysType, String funcCode);
+    Page<Map<String, Object>> findEditPage(SearchSetting search, String sysType, String funcCode);
 
     void save(Function function, IRequest request);
 }

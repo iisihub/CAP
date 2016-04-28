@@ -13,7 +13,7 @@ package com.iisigroup.cap.rule.dao;
 
 import java.util.List;
 
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.rule.model.DivRlDtl;
 
 /**
@@ -28,7 +28,7 @@ import com.iisigroup.cap.rule.model.DivRlDtl;
  *          <li>2013/12/20,TimChiang,new
  *          </ul>
  */
-public interface DivRlDtlDao extends IGenericDao<DivRlDtl> {
+public interface DivRlDtlDao extends GenericDao<DivRlDtl> {
 
     /**
      * find by ruleNo.

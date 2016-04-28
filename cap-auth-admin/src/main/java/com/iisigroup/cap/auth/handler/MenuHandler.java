@@ -13,7 +13,6 @@ package com.iisigroup.cap.auth.handler;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.auth.service.MenuService;
@@ -39,7 +38,6 @@ import net.sf.json.JSONSerializer;
  *          <li>2013/12/26,tammy,前端組menu修改
  *          </ul>
  */
-@Scope("request")
 @Controller("menuhandler")
 public class MenuHandler extends MFormHandler {
 

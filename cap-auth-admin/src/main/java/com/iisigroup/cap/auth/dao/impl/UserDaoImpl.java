@@ -13,14 +13,14 @@ import org.springframework.stereotype.Repository;
 import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.model.User;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.jdbc.support.CapSqlStatement;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.dao.IUserDao;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
-import com.iisigroup.cap.utils.CapSqlStatement;
 
 /**
  * <pre>
@@ -35,11 +35,11 @@ import com.iisigroup.cap.utils.CapSqlStatement;
  *          </ul>
  */
 @Repository
-public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>, UserDao {
+public class UserDaoImpl extends GenericDaoImpl<User> implements IUserDao<User>, UserDao {
 
     @Override
     public User getUserByLoginId(String loginId, String depCode) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", loginId);
         return findUniqueOrNone(search);
     }
@@ -56,14 +56,14 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>, Use
 
     @Override
     public User findByCode(String code) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findPage(String code, String name, String[] roleCodes, String[] status, int maxResults, int firstResult) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.setFirstResult(firstResult);
         search.setMaxResults(maxResults);
         search.addOrderBy("code");
@@ -83,7 +83,7 @@ public class UserDaoImpl extends GenericDao<User> implements IUserDao<User>, Use
             search.addSearchModeParameters(SearchMode.NOT_EQUALS, "u.status", "9");
         }
         return getNamedJdbcTemplate().queryForPage("user_find", search);
-    }// ;
+    }
 
     @Override
     public Page<Map<String, Object>> findPageByRoleCode(String roleCode, int firstResult, int maxResults) {

@@ -3,14 +3,14 @@ package com.iisigroup.cap.batch.dao;
 import java.util.List;
 
 import com.iisigroup.cap.batch.model.BatchJob;
-import com.iisigroup.cap.dao.IGenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
-public interface BatchJobDao extends IGenericDao<BatchJob> {
+public interface BatchJobDao extends GenericDao<BatchJob> {
     List<BatchJob> listAll();
 
-    Page<BatchJob> findForPage(ISearch search);
+    Page<BatchJob> findForPage(SearchSetting search);
 
     BatchJob findByJobId(String jobId);
 

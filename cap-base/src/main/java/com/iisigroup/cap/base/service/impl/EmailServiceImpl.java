@@ -47,7 +47,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendEmail(String[] sendTo, String subject, String sendContext) {
         sendEmail(sendForm, sendTo, subject, sendContext);
-    }// ;
+    }
 
     /*
      * (non-Javadoc)
@@ -77,11 +77,11 @@ public class EmailServiceImpl implements EmailService {
             logger.error(e.getMessage(), e);
         }
 
-    }// ;
+    }
 
     public void setMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
-    }// ;
+    }
 
     public void setSendForm(String sendForm) {
         this.sendForm = sendForm;

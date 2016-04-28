@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivFtItmDao;
 import com.iisigroup.cap.rule.model.DivFtItm;
 
@@ -34,18 +34,18 @@ import com.iisigroup.cap.rule.model.DivFtItm;
  *          </ul>
  */
 @Repository
-public class DivFtItmDaoImpl extends GenericDao<DivFtItm> implements DivFtItmDao {
+public class DivFtItmDaoImpl extends GenericDaoImpl<DivFtItm> implements DivFtItmDao {
 
     @Override
     public DivFtItm findByDivFtItmNo(String factorNo) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", factorNo);
         return findUniqueOrNone(search);
     }
 
     @Override
     public List<DivFtItm> findByDivFtItmNo(String[] divFtItmNos) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", divFtItmNos);
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("codeOrder");
@@ -59,7 +59,7 @@ public class DivFtItmDaoImpl extends GenericDao<DivFtItm> implements DivFtItmDao
 
     @Override
     public List<DivFtItm> findAllFtItm() {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addOrderBy("factorNo");
         search.setDistinct(true);
         return find(search);

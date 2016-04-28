@@ -22,8 +22,8 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.context.CapParameter;
-import com.iisigroup.cap.dao.utils.AbstractSearchSetting;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.dao.impl.SearchSettingImpl;
 import com.iisigroup.cap.enums.IGridEnum;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
@@ -140,11 +140,11 @@ public abstract class MFormHandler extends HandlerPlugin {
             return rtn;
         }
 
-    }// ;
+    }
 
     @SuppressWarnings({ "rawtypes" })
     private IResult getGridData(Method method, IRequest params) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         boolean pages = params.containsParamsKey(IGridEnum.PAGE.getCode());
         int page = 0, pageRows = 0, startRow = 0;
         if (pages) {
@@ -180,7 +180,7 @@ public abstract class MFormHandler extends HandlerPlugin {
             throw new CapException(t, this.getClass());
         }
         return result;
-    }// ;
+    }
 
     /**
      * 取得iGrid中的Column Name
@@ -226,7 +226,7 @@ public abstract class MFormHandler extends HandlerPlugin {
             return ctx.getResult();
         }
         return null;
-    }// ;
+    }
 
     protected String getOperationName(IRequest params) {
         String methodId = params.get(FORM_ACTION);
@@ -242,13 +242,13 @@ public abstract class MFormHandler extends HandlerPlugin {
             }
         }
         return SIMPLE_OPERATION;
-    }// ;
+    }
 
     protected Operation getOperation(IRequest params) {
         return (Operation) CapAppContext.getApplicationContext().getBean(getOperationName(params));
-    }// ;
+    }
 
-    private ISearch createSearchTemplete() {
+    private SearchSetting createSearchTemplete() {
         return new GridSearch();
     }
 
@@ -257,7 +257,7 @@ public abstract class MFormHandler extends HandlerPlugin {
      * GridSearch extends AbstractSearchSetting
      * </pre>
      */
-    private class GridSearch extends AbstractSearchSetting {
+    private class GridSearch extends SearchSettingImpl {
 
         private static final long serialVersionUID = 1L;
 

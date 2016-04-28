@@ -213,7 +213,7 @@ public class CapCommonUtil {
         StandardEvaluationContext context = new StandardEvaluationContext(params);
         ExpressionParser spel = new SpelExpressionParser();
         return spel.parseExpression(expressionStr, parserContext).getValue(context, String.class);
-    }// ;
+    }
 
     final static ParserContext defParser = new TemplateParserContext();
 
@@ -228,6 +228,6 @@ public class CapCommonUtil {
      */
     public static String spelParser(String expressionStr, Map<String, Object> params) {
         return spelParser(expressionStr, params, defParser);
-    }// ;
+    }
 
 }

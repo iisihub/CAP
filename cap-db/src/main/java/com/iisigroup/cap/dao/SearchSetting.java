@@ -10,11 +10,14 @@
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
  */
-package com.iisigroup.cap.dao.utils;
+package com.iisigroup.cap.dao;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import com.iisigroup.cap.contants.SearchMode;
+import com.iisigroup.cap.model.SearchModeParameter;
 
 /**
  * <pre>
@@ -29,11 +32,11 @@ import java.util.Map;
  *          <li>2011/6/10,RodesChen, add method
  *          </ul>
  */
-public interface ISearch extends Serializable {
+public interface SearchSetting extends Serializable {
 
     String getEntityName();
 
-    ISearch setEntityName(String entityName);
+    SearchSetting setEntityName(String entityName);
 
     /**
      * <pre>
@@ -63,7 +66,7 @@ public interface ISearch extends Serializable {
      *            the order by
      * @return T extends ISearch
      */
-    ISearch addOrderBy(String orderBy);
+    SearchSetting addOrderBy(String orderBy);
 
     /**
      * Specify that results must be ordered by the passed column Null by default.
@@ -74,9 +77,9 @@ public interface ISearch extends Serializable {
      *            是否要降羃排序
      * @return T extends ISearch
      */
-    ISearch addOrderBy(String orderBy, boolean orderDesc);
+    SearchSetting addOrderBy(String orderBy, boolean orderDesc);
 
-    ISearch setOrderBy(Map<String, Boolean> orderBy);
+    SearchSetting setOrderBy(Map<String, Boolean> orderBy);
 
     Map<String, Boolean> getOrderBy();
 
@@ -87,7 +90,7 @@ public interface ISearch extends Serializable {
      *            查詢筆數
      * @return T extends ISearch
      */
-    ISearch setMaxResults(int maxResults);
+    SearchSetting setMaxResults(int maxResults);
 
     int getMaxResults();
 
@@ -98,14 +101,14 @@ public interface ISearch extends Serializable {
      *            查詢的頁碼
      * @return T extends ISearch
      */
-    ISearch setFirstResult(int firstResult);
+    SearchSetting setFirstResult(int firstResult);
 
     int getFirstResult();
 
     List<SearchModeParameter> getSearchModeParameters();
 
-    ISearch addSearchModeParameters(SearchMode searchMode, Object key, Object value);
+    SearchSetting addSearchModeParameters(SearchMode searchMode, Object key, Object value);
 
-    ISearch addSearchModeParameters(ISearch search);
+    SearchSetting addSearchModeParameters(SearchSetting search);
 
 }
