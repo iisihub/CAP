@@ -4,8 +4,8 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
     <bean id="CapPluginManager" class="com.iisigroup.cap.plugin.PluginManager" />
-    <bean id="CapDefaultRequest" class="com.iisigroup.cap.component.CapSpringMVCRequest" scope="prototype" />
-    <bean id="CapDefaultErrorResult" class="com.iisigroup.cap.base.response.CapErrorResult" scope="prototype" />
+    <bean id="CapDefaultRequest" class="com.iisigroup.cap.component.impl.CapSpringMVCRequest" scope="prototype" />
+    <bean id="CapDefaultErrorResult" class="com.iisigroup.cap.component.impl.DefaultErrorResult" scope="prototype" />
     <bean id="simpleOperation" class="com.iisigroup.cap.operation.simple.SimpleOperation">
         <property name="name" value="simpleOperation" />
         <property name="ruleMap">

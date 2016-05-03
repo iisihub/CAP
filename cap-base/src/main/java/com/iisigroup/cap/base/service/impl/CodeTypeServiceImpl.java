@@ -21,9 +21,8 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.service.CodeTypeService;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapWebUtil;
 
 /**
@@ -40,7 +39,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          </ul>
  */
 @Service
-public class CodeTypeServiceImpl extends AbstractService implements CodeTypeService {
+public class CodeTypeServiceImpl implements CodeTypeService {
 
     @Resource
     private CodeTypeDao dao;

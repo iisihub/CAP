@@ -1,6 +1,6 @@
 package com.iisigroup.cap.security;
 
-import com.iisigroup.cap.Constants;
+import com.iisigroup.cap.constants.Constants;
 
 public interface SecConstants extends Constants {
     public enum PwdPloicyKeys {

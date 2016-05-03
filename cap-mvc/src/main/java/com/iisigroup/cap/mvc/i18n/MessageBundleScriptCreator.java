@@ -24,8 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 
-import com.iisigroup.cap.Constants;
-import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;

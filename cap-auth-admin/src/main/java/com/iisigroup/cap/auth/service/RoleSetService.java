@@ -3,7 +3,7 @@ package com.iisigroup.cap.auth.service;
 import java.util.List;
 import java.util.Map;
 
-import com.iisigroup.cap.auth.model.Role;
+import com.iisigroup.cap.auth.model.DefaultRole;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
@@ -39,5 +39,5 @@ public interface RoleSetService {
 
     List<Map<String, Object>> findAllRoleWithSelectedByUserCode(String userCode);
 
-    Role findRoleByCode(String code);
+    DefaultRole findRoleByCode(String code);
 }

@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.iisigroup.cap.base.CapFunctionCode;
+import com.iisigroup.cap.base.constants.CapFunctionCode;
 
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

@@ -24,8 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.web.util.UrlUtils;
 
-import com.iisigroup.cap.component.CapSpringMVCRequest;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.CapSpringMVCRequest;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 import com.opensymphony.module.sitemesh.Config;
@@ -76,7 +76,7 @@ public class CapRequestJSONMapper extends AbstractDecoratorMapper {
     public Decorator getDecorator(HttpServletRequest request, Page page) {
         if ((decoratorFile == null || decoratorFile.contains(page.getProperties().get("meta.decorator")))
                 && (ignorePathReg == null || !CapString.checkRegularMatch(UrlUtils.buildRequestUrl(request), ignorePathReg))) {
-            IRequest req = getDefaultRequest();
+            Request req = getDefaultRequest();
             req.setRequestObject(request);
             Enumeration<String> fids = request.getParameterNames();
             HashMap<String, String> hm = new HashMap<String, String>();
@@ -94,8 +94,8 @@ public class CapRequestJSONMapper extends AbstractDecoratorMapper {
         return super.getDecorator(request, page);
     }
 
-    private IRequest getDefaultRequest() {
-        IRequest cr = CapAppContext.getBean("CapDefaultRequest");
+    private Request getDefaultRequest() {
+        Request cr = CapAppContext.getBean("CapDefaultRequest");
         return cr != null ? cr : new CapSpringMVCRequest();
     }
 

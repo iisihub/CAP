@@ -19,7 +19,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.iisigroup.cap.Constants;
+import com.iisigroup.cap.constants.Constants;
 
 /**
  * 

@@ -22,15 +22,15 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.auth.model.Department;
 import com.iisigroup.cap.auth.service.DepartmentService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
@@ -59,13 +59,13 @@ public class DepartmentHandler extends MFormHandler {
     private DepartmentService departmentService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(SearchSetting search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
         search.addOrderBy("code");
 
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
 
         Page<Department> page = commonSrv.findPage(Department.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -73,10 +73,10 @@ public class DepartmentHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link Result.com.iisi.cap.response.IResult}
      * @throws CapException
      */
-    public IResult save(IRequest request) {
+    public Result save(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String oid = request.get("oid");
         String brNo = request.get("code");
@@ -109,10 +109,10 @@ public class DepartmentHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link Result.com.iisi.cap.response.IResult}
      * @throws CapException
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         Department code = commonSrv.findById(Department.class, request.get("oid"));
         if (code != null) {

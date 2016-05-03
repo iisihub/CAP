@@ -24,20 +24,19 @@ import org.springframework.util.ReflectionUtils;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.base.CapFunctionCode;
+import com.iisigroup.cap.base.constants.CapFunctionCode;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.service.CodeTypeService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -72,7 +71,7 @@ public class CodeTypeHandler extends MFormHandler {
 
     @CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(SearchSetting search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
         if (!CapString.isEmpty(params.get("locale"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "locale", params.get("locale"));
         }
@@ -94,7 +93,7 @@ public class CodeTypeHandler extends MFormHandler {
         Page<CodeType> page = commonService.findPage(CodeType.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -105,7 +104,7 @@ public class CodeTypeHandler extends MFormHandler {
      * @return IResult
      */
     @CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Update)
-    public IResult modify(IRequest request) {
+    public Result modify(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String type = request.get("type");
         String locale = CapSecurityContext.getLocale().toString();
@@ -143,7 +142,7 @@ public class CodeTypeHandler extends MFormHandler {
      * @return IResult
      */
     @CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Delete)
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         codeTypeService.deleteById(request.get("oid"));
         return result;
@@ -158,7 +157,7 @@ public class CodeTypeHandler extends MFormHandler {
      */
     @CapAuditLogAction(functionCode = CapFunctionCode.F101, actionType = CapActionTypeEnum.Query)
     @SuppressWarnings("rawtypes")
-    public IResult queryByKeys(IRequest request) {
+    public Result queryByKeys(Request request) {
         String locale = CapSecurityContext.getLocale().toString();
         String[] keys = request.getParamsAsStringArray("keys");
         String[] aKeys = request.getParamsAsStringArray("akeys");
@@ -169,8 +168,8 @@ public class CodeTypeHandler extends MFormHandler {
             mresult.setResultMap(m);
         }
         if (aKeys.length > 0 && !CapString.isEmpty(aKeys[0])) {
-            Class[] paramTypes = { IRequest.class };
-            IResult rtn = null;
+            Class[] paramTypes = { Request.class };
+            Result rtn = null;
             for (String key : aKeys) {
                 if (mresult.containsKey(key)) {
                     continue;
@@ -178,7 +177,7 @@ public class CodeTypeHandler extends MFormHandler {
                 Method method = ReflectionUtils.findMethod(this.getClass(), key, paramTypes);
                 if (method != null) {
                     try {
-                        rtn = (IResult) method.invoke(this, request);
+                        rtn = (Result) method.invoke(this, request);
                     } catch (Exception e) {
                         logger.error("load ComboBox error : key = " + key, e);
                     }

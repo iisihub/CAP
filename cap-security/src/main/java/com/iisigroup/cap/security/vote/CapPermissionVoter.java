@@ -22,7 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 
-import com.iisigroup.cap.security.model.IRole;
+import com.iisigroup.cap.security.model.Role;
 import com.iisigroup.cap.security.service.AccessControlService;
 
 /**
@@ -57,12 +57,12 @@ public class CapPermissionVoter extends RoleVoter {
 
                 String url = getRequestURL(filterInvocation);
 
-                List<IRole> roles = securityService.getAuthRolesByUrl(url);
+                List<Role> roles = securityService.getAuthRolesByUrl(url);
 
                 if (roles != null && !roles.isEmpty()) {
 
                     // Attempt to find a matching granted authority
-                    for (IRole role : roles) {
+                    for (Role role : roles) {
                         for (GrantedAuthority auth : authorities) {
                             if (auth.getAuthority().equals(role.getCode())) {
                                 return ACCESS_GRANTED;

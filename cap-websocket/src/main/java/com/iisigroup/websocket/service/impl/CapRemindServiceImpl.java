@@ -11,22 +11,21 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.iisigroup.cap.auth.model.User;
+import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.base.dao.RemindDao;
 import com.iisigroup.cap.base.dao.RemindsDao;
 import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.model.Reminds;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
-import com.iisigroup.cap.security.dao.IUserDao;
+import com.iisigroup.cap.security.dao.SecUserDao;
 import com.iisigroup.cap.security.model.CapUserDetails;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapSystemConfig;
 import com.iisigroup.cap.utils.CapWebUtil;
 import com.iisigroup.websocket.service.CapRemindService;
 
 @Service
-public class CapRemindServiceImpl extends AbstractService implements CapRemindService {
+public class CapRemindServiceImpl implements CapRemindService {
 
     @Resource
     RemindDao remindDao;
@@ -75,11 +74,11 @@ public class CapRemindServiceImpl extends AbstractService implements CapRemindSe
     }
 
     @Resource
-    IUserDao<User> usrDao;
+    SecUserDao<DefaultUser> usrDao;
 
     @Override
     public String getUsrEmail(String usrId) {
-        User user = usrDao.getUserByLoginId(usrId, null);
+        DefaultUser user = usrDao.getUserByLoginId(usrId, null);
         if (user != null) {
             return user.getEmail();
         }

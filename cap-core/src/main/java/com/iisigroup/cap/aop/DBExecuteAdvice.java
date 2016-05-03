@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  */
 @Aspect
 public class DBExecuteAdvice {
-    private static final Logger logger = LoggerFactory.getLogger(DBExecuteAdvice.class);
+    private final Logger logger = LoggerFactory.getLogger(DBExecuteAdvice.class);
 
     @Around("execution(* com..dao.*.*(..))")
     public Object spendTime(ProceedingJoinPoint pjp) throws Throwable {

@@ -24,23 +24,23 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.auth.model.Function;
+import com.iisigroup.cap.auth.model.DefaultFunction;
 import com.iisigroup.cap.auth.model.RoleFunction;
 import com.iisigroup.cap.auth.service.FunctionSetService;
-import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
+import com.iisigroup.cap.base.formatter.impl.CodeTypeFormatter;
+import com.iisigroup.cap.base.handler.MFormHandler;
 import com.iisigroup.cap.base.service.CodeTypeService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.component.impl.MapGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -76,7 +76,7 @@ public class FunctionSetHandler extends MFormHandler {
     private FunctionSetService functionSetService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(SearchSetting search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
         String sysType = params.get("sysType");
         String level = params.get("level");
         String code = params.get("code");
@@ -98,12 +98,12 @@ public class FunctionSetHandler extends MFormHandler {
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("SYSNAME", new CodeTypeFormatter(codeTypeService, "authSysId"));
 
-        Page<Function> page = commonSrv.findPage(Function.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        Page<DefaultFunction> page = commonSrv.findPage(DefaultFunction.class, search);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryRole(SearchSetting search, IRequest params) {
+    public MapGridResult queryRole(SearchSetting search, Request params) {
         String sysType = params.get("sysType");
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
@@ -115,7 +115,7 @@ public class FunctionSetHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryAllRole(SearchSetting search, IRequest params) {
+    public MapGridResult queryAllRole(SearchSetting search, Request params) {
         String sysType = params.get("sysType");
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
@@ -126,10 +126,10 @@ public class FunctionSetHandler extends MFormHandler {
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }
 
-    public IResult queryForm(IRequest request) {
+    public Result queryForm(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
-        Function function = null;
+        DefaultFunction function = null;
 
         if (!CapString.isEmpty(code)) {
             function = functionSetService.findFunctionByCode(code);
@@ -142,16 +142,16 @@ public class FunctionSetHandler extends MFormHandler {
         return result;
     }
 
-    public IResult loadFunc(IRequest request) throws CapException {
+    public Result loadFunc(Request request) throws CapException {
         AjaxFormResult result = new AjaxFormResult();
         String sysType = request.get("sysType");
         String level = request.get("level");
 
-        List<Function> functions = functionSetService.findFunctionBySysTypeAndLevel(sysType, level);
+        List<DefaultFunction> functions = functionSetService.findFunctionBySysTypeAndLevel(sysType, level);
 
         if (!CollectionUtils.isEmpty(functions)) {
             JSONArray funcArray = new JSONArray();
-            for (Function func : functions) {
+            for (DefaultFunction func : functions) {
                 funcArray.add(func.toJSONObject(CapEntityUtil.getColumnName(func), null));
             }
             result.set("functions", funcArray.toString());
@@ -165,14 +165,14 @@ public class FunctionSetHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult save(IRequest request) {
+    public Result save(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         String isNew = request.get("isNew");
-        Function function = null;
+        DefaultFunction function = null;
 
         if (!CapString.isEmpty(code)) {
             function = functionSetService.findFunctionByCode(code);
@@ -189,14 +189,14 @@ public class FunctionSetHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult saveRfList(IRequest request) {
+    public Result saveRfList(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         JSONArray roleItem = JSONArray.fromObject(request.get("roleItem"));
-        Function codeItem = null;
+        DefaultFunction codeItem = null;
 
         if (!CapString.isEmpty(code)) {
             codeItem = functionSetService.findFunctionByCode(code);
@@ -227,12 +227,12 @@ public class FunctionSetHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
-        Function code = functionSetService.findFunctionByCode(request.get("code"));
+        DefaultFunction code = functionSetService.findFunctionByCode(request.get("code"));
         if (code != null) {
             commonSrv.delete(code);
         }
@@ -244,10 +244,10 @@ public class FunctionSetHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult deleteRfList(IRequest request) {
+    public Result deleteRfList(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         JSONArray roleItem = JSONArray.fromObject(request.get("roleItem"));

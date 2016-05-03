@@ -16,7 +16,7 @@
             <ref bean="cap-db" />
         </constructor-arg>
         <property name="sqltemp">
-            <bean class="com.iisigroup.cap.utils.CapSqlStatement">
+            <bean class="com.iisigroup.cap.jdbc.support.CapSqlStatement">
                 <constructor-arg index="0" ref="${jdbc.paging.default.template}" />
                 <property name="parserContext" ref="sqlParserContext" />
             </bean>

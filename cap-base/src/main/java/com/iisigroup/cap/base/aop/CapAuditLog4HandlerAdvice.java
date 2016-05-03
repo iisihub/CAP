@@ -30,10 +30,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
-import com.iisigroup.cap.base.CapConstants;
 import com.iisigroup.cap.base.CapSystemProperties;
+import com.iisigroup.cap.base.constants.CapConstants;
 import com.iisigroup.cap.base.model.AuditLog;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.service.CommonService;
@@ -98,7 +98,7 @@ public class CapAuditLog4HandlerAdvice {
      * @throws Throwable
      * @return Object
      */
-    public Object logAroundAjaxHandlerExecute(ProceedingJoinPoint pjp, IRequest params) throws Throwable {
+    public Object logAroundAjaxHandlerExecute(ProceedingJoinPoint pjp, Request params) throws Throwable {
         long start = System.currentTimeMillis();
         params.put(CapConstants.C_AUDITLOG_START_TS, String.valueOf(System.currentTimeMillis()));
         final String TITLE = StrUtils.concat("#[AL_AROUND][", System.nanoTime(), "]");
@@ -141,7 +141,7 @@ public class CapAuditLog4HandlerAdvice {
      * @param parent
      *            the parent
      */
-    public void logAfterAjaxHandlerExecute(JoinPoint joinPoint, IRequest params, Object reVal) {
+    public void logAfterAjaxHandlerExecute(JoinPoint joinPoint, Request params, Object reVal) {
         long t1 = System.currentTimeMillis();
         final String sno = String.valueOf(System.nanoTime());
         final String TITLE = StrUtils.concat("##[AL_AFTER][", sno, "]");
@@ -179,7 +179,7 @@ public class CapAuditLog4HandlerAdvice {
      * @param exception
      *            the exception
      */
-    public void logAfterAjaxHandlerThrowingException(JoinPoint joinPoint, IRequest params, Exception exception) {
+    public void logAfterAjaxHandlerThrowingException(JoinPoint joinPoint, Request params, Exception exception) {
         long t1 = System.currentTimeMillis();
         final String TITLE = StrUtils.concat("###[AL_AFTER_EXCEPTION][", System.nanoTime(), "]");
 
@@ -205,7 +205,7 @@ public class CapAuditLog4HandlerAdvice {
         }
     }
 
-    private AuditLog loggedFunction(String TITLE, String targetName, Class clazz, IRequest params) {
+    private AuditLog loggedFunction(String TITLE, String targetName, Class clazz, Request params) {
 
         // 判斷是否不需要記錄(放 SysParm)
         String sysparmDisableData = sysProp.get(targetName + "." + DISABLE_TYPE);

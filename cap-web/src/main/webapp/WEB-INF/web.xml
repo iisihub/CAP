@@ -75,7 +75,7 @@
     <!-- log4j MDC -->
     <filter>
         <filter-name>set log4j MDC for SessionId</filter-name>
-        <filter-class>com.iisigroup.cap.log.LogContextFilter</filter-class>
+        <filter-class>com.iisigroup.cap.web.LogContextFilter</filter-class>
     </filter>
     <filter>
         <description><![CDATA[

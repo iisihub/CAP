@@ -21,16 +21,15 @@ import org.springframework.stereotype.Controller;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
@@ -54,7 +53,7 @@ public class SysParmHandler extends MFormHandler {
     private CommonService commonService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(SearchSetting search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
 
         if (params.containsKey("parmId")) {
             search.addSearchModeParameters(SearchMode.EQUALS, "parmId", params.get("parmId"));
@@ -65,7 +64,7 @@ public class SysParmHandler extends MFormHandler {
         Page<SysParm> page = commonService.findPage(SysParm.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -75,7 +74,7 @@ public class SysParmHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult modify(IRequest request) {
+    public Result modify(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
         if (parm == null) {
@@ -94,7 +93,7 @@ public class SysParmHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
         if (parm != null) {

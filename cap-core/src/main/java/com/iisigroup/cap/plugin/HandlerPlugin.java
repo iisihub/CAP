@@ -16,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.action.Action;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.handler.Handler;
-import com.iisigroup.cap.response.IResult;
 
 /**
  * <pre>
@@ -44,15 +44,15 @@ public abstract class HandlerPlugin implements Plugin, Handler {
      *            Client 參數
      * @return String
      */
-    public abstract IResult execute(IRequest params);
+    public abstract Result execute(Request params);
 
-    IRequest request;
+    Request request;
 
-    public IRequest getRequest() {
+    public Request getRequest() {
         return request;
     }
 
-    public void setRequest(IRequest request) {
+    public void setRequest(Request request) {
         this.request = request;
     }
 

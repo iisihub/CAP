@@ -11,14 +11,14 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.UserDao;
-import com.iisigroup.cap.auth.model.Role;
-import com.iisigroup.cap.auth.model.User;
+import com.iisigroup.cap.auth.model.DefaultRole;
+import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.jdbc.support.CapSqlStatement;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.security.dao.IUserDao;
+import com.iisigroup.cap.security.dao.SecUserDao;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 
@@ -35,10 +35,10 @@ import com.iisigroup.cap.utils.CapDate;
  *          </ul>
  */
 @Repository
-public class UserDaoImpl extends GenericDaoImpl<User> implements IUserDao<User>, UserDao {
+public class UserDaoImpl extends GenericDaoImpl<DefaultUser> implements SecUserDao<DefaultUser>, UserDao {
 
     @Override
-    public User getUserByLoginId(String loginId, String depCode) {
+    public DefaultUser getUserByLoginId(String loginId, String depCode) {
         SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", loginId);
         return findUniqueOrNone(search);
@@ -46,16 +46,16 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements IUserDao<User>,
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Role> getRoleByUser(User user) {
+    public List<DefaultRole> getRoleByUser(DefaultUser user) {
         Query query = getEntityManager().createNativeQuery(
-                "select r.* from DEF_ROLE r inner join DEF_USERROLE ur inner join DEF_USER u on u.code=ur.USERCODE on r.CODE=ur.ROLECODE where r.STATUS='0' and u.code=?1", Role.class);
+                "select r.* from DEF_ROLE r inner join DEF_USERROLE ur inner join DEF_USER u on u.code=ur.USERCODE on r.CODE=ur.ROLECODE where r.STATUS='0' and u.code=?1", DefaultRole.class);
         // TODO: systemtype
         query.setParameter(1, user.getCode());
         return query.getResultList();
     }
 
     @Override
-    public User findByCode(String code) {
+    public DefaultUser findByCode(String code) {
         SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);

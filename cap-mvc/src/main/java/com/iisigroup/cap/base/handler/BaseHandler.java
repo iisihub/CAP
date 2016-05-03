@@ -4,12 +4,11 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.mvc.i18n.MessageBundleScriptCreator;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
 
 /**
  * <pre>
@@ -37,12 +36,12 @@ public class BaseHandler extends MFormHandler {
      * @return IResult
      * @throws CapException
      */
-    public IResult fileSuccess(IRequest params) {
+    public Result fileSuccess(Request params) {
         return new AjaxFormResult();
     }
 
     @HandlerType(HandlerTypeEnum.FORM)
-    public IResult queryJsI18N(IRequest request) {
+    public Result queryJsI18N(Request request) {
         String result = MessageBundleScriptCreator.generateJson(request.get("f").replaceAll("/?webroot/page", ""));
         return new AjaxFormResult(result);
     }

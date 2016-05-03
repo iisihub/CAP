@@ -19,8 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.model.GenericBean;
 
 /**
  * <p>
@@ -35,7 +35,7 @@ import com.iisigroup.cap.model.DataObject;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "CFG_SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parmId") )
+@Table(name = "CFG_SYSPARM", uniqueConstraints = @UniqueConstraint(columnNames = "parmId"))
 public class SysParm extends GenericBean implements DataObject {
 
     /** 參數id */

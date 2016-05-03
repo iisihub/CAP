@@ -22,16 +22,15 @@ import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.ErrorCode;
 import com.iisigroup.cap.base.service.ErrorCodeService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
@@ -60,7 +59,7 @@ public class ErrorCodeHandler extends MFormHandler {
     private ErrorCodeService errorCodeService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(SearchSetting search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
         String code = params.get("code");
         String locale = params.get("locale");
         String sysId = params.get("sysId");
@@ -80,7 +79,7 @@ public class ErrorCodeHandler extends MFormHandler {
         // fmt.put("lastModifyBy", new UserNameFormatter(this.userService));
 
         Page<ErrorCode> page = commonSrv.findPage(ErrorCode.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -88,10 +87,10 @@ public class ErrorCodeHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link Result.com.iisi.cap.response.IResult}
      * @throws CapException
      */
-    public IResult save(IRequest request) {
+    public Result save(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String oid = request.get("oid");
         String code = request.get("code").toUpperCase();
@@ -126,10 +125,10 @@ public class ErrorCodeHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link Result.com.iisi.cap.response.IResult}
      * @throws CapException
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         ErrorCode code = commonSrv.findById(ErrorCode.class, request.get("oid"));
         if (code != null) {

@@ -49,11 +49,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 
-import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.DroolsConstants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.component.impl.ByteArrayDownloadResult;
+import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
@@ -61,12 +66,7 @@ import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.BeanFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.ByteArrayDownloadResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.rule.model.CaseInfo;
 import com.iisigroup.cap.rule.model.DivCtDtl;
 import com.iisigroup.cap.rule.model.DivCtItm;
@@ -132,7 +132,7 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.FORM)
-    public IResult query(IRequest request) {
+    public Result query(Request request) {
         String oid = request.get("mainOid");
         String divCtNo = request.get("divRlNo");
         AjaxFormResult result = new AjaxFormResult();
@@ -157,7 +157,7 @@ public class RuleTbMntHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult saveRuleTbDtl(IRequest request) {
+    public Result saveRuleTbDtl(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String type = request.get("type");
         String divCtNo = request.get("divRlNo");
@@ -243,14 +243,14 @@ public class RuleTbMntHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         ruleTbMntService.deleteById(request.get("oid"));
         result.set(Constants.AJAX_NOTIFY_MESSAGE, CapAppContext.getMessage("ruleTb.0003"));
         return result;
     }
 
-    public IResult getFtSelOption(IRequest request) {
+    public Result getFtSelOption(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         List<DivFtItm> ftItms = factorMntService.findAllDivFtItm();
         if (ftItms != null) {
@@ -263,7 +263,7 @@ public class RuleTbMntHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.FileDownload)
-    public IResult dwnload(IRequest request) throws CapException {
+    public Result dwnload(Request request) throws CapException {
         File file = createDecisionTable(request);
         FileInputStream is = null;
         try {
@@ -278,7 +278,7 @@ public class RuleTbMntHandler extends MFormHandler {
         return new AjaxFormResult();
     }
 
-    public File createDecisionTable(IRequest request) {
+    public File createDecisionTable(Request request) {
         // String packageName = "com.iisigroup.cap.service";
         // String importClass = "com.iisigroup.cap.base.model.CaseInfo,com.iisigroup.cap.utils.CapDroolsUtil";r
         // String variablesName = "com.iisigroup.cap.utils.CapDroolsUtil comUtil";
@@ -603,7 +603,7 @@ public class RuleTbMntHandler extends MFormHandler {
      * @param request
      * @return IResult
      */
-    public IResult testDrools(IRequest request) {
+    public Result testDrools(Request request) {
 
         File ruleXls = new File("/Volumes/RamDisk/rule_export.xls");
         AjaxFormResult result = new AjaxFormResult();
@@ -666,13 +666,13 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryRuleItmByDivRlNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryRuleItmByDivRlNo(SearchSetting search, Request params) {
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "divRlNo", "");
 
         Page<DivRlItm> page = commonService.findPage(DivRlItm.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("ruleCont", new RuleValFormatter(this.conditionMntService));
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -683,7 +683,7 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionDetail(SearchSetting search, IRequest params) {
+    public BeanGridResult queryConditionDetail(SearchSetting search, Request params) {
         // if (params.containsKey("divRlNo") && !CapString.isEmpty(params.get("divRlNo"))) {
         // search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo",
         // params.get("divRlNo"));
@@ -694,7 +694,7 @@ public class RuleTbMntHandler extends MFormHandler {
         Page<DivCtItm> page = commonService.findPage(DivCtItm.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("divCtCont", new CondValNmFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -705,17 +705,17 @@ public class RuleTbMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryRuleTbDetailByDivRlNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryRuleTbDetailByDivRlNo(SearchSetting search, Request params) {
         if (params.containsKey("divRlNo") && !CapString.isEmpty(params.get("divRlNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", params.get("divRlNo"));
         } else {
-            return new GridResult();
+            return new BeanGridResult();
         }
 
         Page<DivRlDtl> page = commonService.findPage(DivRlDtl.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("divCtNm", new ConditionNmFormatter(conditionMntService));
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /********* Grid Formatter **********/

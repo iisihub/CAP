@@ -22,16 +22,16 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapFormatException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.BeanFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.GridResult;
 import com.iisigroup.cap.rule.model.DivFtDtl;
 import com.iisigroup.cap.rule.model.DivFtItm;
 import com.iisigroup.cap.rule.service.FactorMntService;
@@ -69,7 +69,7 @@ public class FactorMntGridHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryFactorItmGridByFactorNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryFactorItmGridByFactorNo(SearchSetting search, Request params) {
         // if (params.containsKey("factorNo") && !CapString.isEmpty(params.get("factorNo"))) {
         // search.addSearchModeParameters(SearchMode.EQUALS, "factorNo",
         // params.get("factorNo"));
@@ -81,7 +81,7 @@ public class FactorMntGridHandler extends MFormHandler {
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("rangeNm", new RangeNmFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -92,17 +92,17 @@ public class FactorMntGridHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryFactorDtlGridByFactorNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryFactorDtlGridByFactorNo(SearchSetting search, Request params) {
         if (params.containsKey("factorNo") && !CapString.isEmpty(params.get("factorNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", params.get("factorNo"));
         } else {
-            return new GridResult();
+            return new BeanGridResult();
         }
 
         Page<DivFtDtl> page = commonService.findPage(DivFtDtl.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**

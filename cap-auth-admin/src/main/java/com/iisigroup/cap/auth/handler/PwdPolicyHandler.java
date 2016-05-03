@@ -15,11 +15,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.auth.service.PwdPolicyService;
+import com.iisigroup.cap.base.handler.MFormHandler;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.service.CommonService;
 
@@ -43,7 +43,7 @@ public class PwdPolicyHandler extends MFormHandler {
     @Resource
     private PwdPolicyService pwdPolicyService;
 
-    public IResult query(IRequest request) {
+    public Result query(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
             SysParm parm = commonService.findById(SysParm.class, value.toString().toLowerCase());
@@ -54,7 +54,7 @@ public class PwdPolicyHandler extends MFormHandler {
         return result;
     }
 
-    public IResult modify(IRequest request) {
+    public Result modify(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         pwdPolicyService.updatePwdPolicy(request);
         return result;

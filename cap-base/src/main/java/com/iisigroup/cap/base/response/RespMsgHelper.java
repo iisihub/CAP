@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.iisigroup.cap.base.model.ErrorCode;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -77,7 +77,7 @@ public class RespMsgHelper {
      *            i18n key
      * @return 回應訊息
      */
-    public static String getMessage(IRequest request, String key) {
+    public static String getMessage(Request request, String key) {
         return getMessage(request, key, (Object[]) null);
     }
 
@@ -120,7 +120,7 @@ public class RespMsgHelper {
      *            自訂的參數組(沒有設null)
      * @return 回應訊息
      */
-    public static String getMessage(IRequest request, String key, Object[] params) {
+    public static String getMessage(Request request, String key, Object[] params) {
 
         String value = getMsgString(key, request, params);
         return format(key, value, null);
@@ -135,7 +135,7 @@ public class RespMsgHelper {
      *            !=null則使用本參數當作回傳的錯誤訊息
      * @return 回應訊息
      */
-    public static String getMessage(IRequest request, String key, String custMessage) {
+    public static String getMessage(Request request, String key, String custMessage) {
 
         String value = getMsgString(key, request, null);
         return format(key, value, custMessage);
@@ -173,8 +173,8 @@ public class RespMsgHelper {
             }
 
         } else {
-            if (workComp instanceof IRequest) {
-                IRequest request = (IRequest) workComp;
+            if (workComp instanceof Request) {
+                Request request = (Request) workComp;
                 if (params == null) {
                     msgstr = CapAppContext.getMessage(key);
                 } else {
@@ -277,34 +277,6 @@ public class RespMsgHelper {
         }
     }
 
-    public static ErrorCode splitMessage(String msg) {
-        ErrorCode errorCode = null;
-        try {
-            if (msg != null) {
-                int idx = msg.indexOf("EFD");
-                if (idx != -1) {
-                    errorCode = new ErrorCode();
-                    errorCode.setSeverity(msg.substring(0, idx));
-                    errorCode.setCode(msg.substring(idx, idx + 7));
-                    int idx2 = msg.indexOf(OUT_SEPARATOR, idx);
-                    int idx3 = msg.indexOf("|", idx2);
-                    if (idx2 != -1) {
-                        if (idx3 != -1) {
-                            errorCode.setMessage(msg.substring(idx2 + 1, idx3));
-                            errorCode.setSuggestion(msg.substring(idx3 + OUT_SUG_SEPARATOR.length()));
-                        } else {
-                            errorCode.setMessage(msg.substring(idx2 + 1));
-                            errorCode.setSuggestion("");
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return errorCode;
-    }
-
     /**
      * <pre>
      * 格式化回應訊息(取得主要訊息)
@@ -319,7 +291,7 @@ public class RespMsgHelper {
      *            i18n key
      * @return 回應訊息
      */
-    public static String getMainMessage(IRequest request, String key) {
+    public static String getMainMessage(Request request, String key) {
         String temp = getMessage(request, key);
         if (!StringUtils.isEmpty(temp)) {
             String[] values = temp.split(OUT_SEPARATOR);

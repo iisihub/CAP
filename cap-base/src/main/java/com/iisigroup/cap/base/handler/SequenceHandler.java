@@ -20,13 +20,12 @@ import org.springframework.stereotype.Controller;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.service.SequenceService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.MapGridResult;
 import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.response.MapGridResult;
 
 /**
  * <pre>
@@ -47,13 +46,13 @@ public class SequenceHandler extends MFormHandler {
     private SequenceService seqSrv;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult query(SearchSetting search, IRequest params) {
+    public MapGridResult query(SearchSetting search, Request params) {
 
         Page<Map<String, Object>> page = seqSrv.findPage(search.getFirstResult(), search.getMaxResults());
         return new MapGridResult(page.getContent(), page.getTotalRow());
     }
 
-    public IResult getNewSeq(IRequest params) {
+    public Result getNewSeq(Request params) {
         AjaxFormResult result = new AjaxFormResult();
         String seqNode = params.get("seqNode");
         int theSeq = seqSrv.getNextSeqNo(seqNode, 1, 1, Integer.MAX_VALUE);

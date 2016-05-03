@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.iisigroup.cap.auth.model.Function;
+import com.iisigroup.cap.auth.model.DefaultFunction;
 import com.iisigroup.cap.dao.GenericDao;
 import com.iisigroup.cap.model.Page;
 
@@ -31,7 +31,7 @@ import com.iisigroup.cap.model.Page;
  *          <li>2013/12/20,tammy,new
  *          </ul>
  */
-public interface FunctionDao extends GenericDao<Function> {
+public interface FunctionDao extends GenericDao<DefaultFunction> {
     /**
      * find All
      * 
@@ -39,9 +39,9 @@ public interface FunctionDao extends GenericDao<Function> {
      *            系統代碼
      * @return List<CodeItem>
      */
-    List<Function> findAll(String system);
+    List<DefaultFunction> findAll(String system);
 
-    List<Function> findBySysTypeAndLevel(String sysType, String level);
+    List<DefaultFunction> findBySysTypeAndLevel(String sysType, String level);
 
     Page<Map<String, Object>> findPageByRoleCode(String roleCode, int firstResult, int maxResults);
 
@@ -53,7 +53,7 @@ public interface FunctionDao extends GenericDao<Function> {
      * @since 2011/05/31
      * @author Fantasy
      */
-    Function findByCodeAndSysType(int code, String sysType);
+    DefaultFunction findByCodeAndSysType(int code, String sysType);
 
     /**
      * findByParentAndSteps
@@ -61,7 +61,7 @@ public interface FunctionDao extends GenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findByParentAndLevels(String pgmDept, Set<String> roles, int parent, String sysType, int... levels);
+    List<DefaultFunction> findByParentAndLevels(String pgmDept, Set<String> roles, int parent, String sysType, int... levels);
 
     /**
      * findByStep
@@ -69,7 +69,7 @@ public interface FunctionDao extends GenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findByLevels(Set<String> roles, String sysType, int... levels);
+    List<DefaultFunction> findByLevels(Set<String> roles, String sysType, int... levels);
 
     /**
      * findByParent
@@ -77,7 +77,7 @@ public interface FunctionDao extends GenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findBySysTypeAndParent(Set<String> roles, int parent, String sysType);
+    List<DefaultFunction> findBySysTypeAndParent(Set<String> roles, int parent, String sysType);
 
     /**
      * findByParentAndSteps
@@ -85,10 +85,10 @@ public interface FunctionDao extends GenericDao<Function> {
      * @since 2011/05/10
      * @author Fantasy
      */
-    List<Function> findByParentAndLevels(Set<String> roles, int parent, String sysType, int... levels);
+    List<DefaultFunction> findByParentAndLevels(Set<String> roles, int parent, String sysType, int... levels);
 
-    List<Function> findMenuDataByRoles(Set<String> roles, String sysType);
+    List<DefaultFunction> findMenuDataByRoles(Set<String> roles, String sysType);
 
-    Function findByCode(int code);
+    DefaultFunction findByCode(int code);
 
 }

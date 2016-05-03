@@ -12,8 +12,8 @@
  */
 package com.iisigroup.cap.action;
 
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
 
 /**
  * <p>
@@ -29,6 +29,6 @@ import com.iisigroup.cap.response.IResult;
  */
 public interface Action {
 
-    IResult doWork(IRequest params);
+    Result doWork(Request params);
 
 }

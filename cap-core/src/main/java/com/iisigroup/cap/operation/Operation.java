@@ -14,8 +14,9 @@ package com.iisigroup.cap.operation;
 
 import java.util.Map;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.handler.Handler;
+import com.iisigroup.cap.model.OpStepContext;
 
 /**
  * <p>
@@ -38,5 +39,5 @@ public interface Operation {
 
     void setRuleMap(Map<String, OperationStep> ruleMap);
 
-    void execute(OpStepContext ctx, IRequest params, Handler handler);
+    void execute(OpStepContext ctx, Request params, Handler handler);
 }

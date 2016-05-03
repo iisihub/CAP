@@ -24,10 +24,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.iisigroup.cap.security.dao.IUserDao;
+import com.iisigroup.cap.security.dao.SecUserDao;
 import com.iisigroup.cap.security.model.CapUserDetails;
-import com.iisigroup.cap.security.model.IRole;
-import com.iisigroup.cap.security.model.IUser;
+import com.iisigroup.cap.security.model.Role;
+import com.iisigroup.cap.security.model.User;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -59,7 +59,7 @@ public class CapUserDetailsService implements UserDetailsService {
             logger.debug("Security verification for user '" + username + "'");
         }
 
-        IUser user = obtainAccount(username);
+        User user = obtainAccount(username);
 
         if (user == null) {
             if (logger.isInfoEnabled()) {
@@ -81,37 +81,29 @@ public class CapUserDetailsService implements UserDetailsService {
 
     }
 
-    public UserDetails obtainUserDetails(IUser user, String password, Map<String, String> roles) {
+    public UserDetails obtainUserDetails(User user, String password, Map<String, String> roles) {
         return new CapUserDetails(user, password, roles);
     }
 
     @Resource
-    private IUserDao<IUser> userDao;
-
-    public void setUserDao(IUserDao<IUser> userDao) {
-        this.userDao = userDao;
-    }
-
-    public IUserDao<IUser> getUserDao() {
-        return userDao;
-    }
+    private SecUserDao<User> userDao;
 
     /**
      * Return the user depending on the login provided by spring security.
      * 
      * @return the user if found
      */
-    protected IUser obtainAccount(String login) {
+    protected User obtainAccount(String login) {
         return userDao.getUserByLoginId(login, null);
     }
 
     @SuppressWarnings("unchecked")
-    protected Map<String, String> obtainRole(IUser user) {
+    protected Map<String, String> obtainRole(User user) {
         Map<String, String> mRoles = new HashMap<String, String>();
-        List<IRole> roles = (List<IRole>) userDao.getRoleByUser(user);
+        List<Role> roles = (List<Role>) userDao.getRoleByUser(user);
         if (roles != null) {
             for (int i = 0; i < roles.size(); i++) {
-                IRole role = roles.get(i);
+                Role role = roles.get(i);
                 mRoles.put(role.getCode(), role.getName());
             }
         }
@@ -121,7 +113,7 @@ public class CapUserDetailsService implements UserDetailsService {
     /**
      * Default password encoding algorithm is SHA-256. Subclass may override it to provide their own password.
      */
-    protected String obtainPassword(IUser user) {
+    protected String obtainPassword(User user) {
         return user.getPassword();
     }
 

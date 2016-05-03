@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.rule.dao.CaseInfoDao;
 import com.iisigroup.cap.rule.dao.DivCtDtlDao;
 import com.iisigroup.cap.rule.dao.DivCtItmDao;
@@ -28,7 +28,6 @@ import com.iisigroup.cap.rule.model.CaseInfo;
 import com.iisigroup.cap.rule.model.DivRlDtl;
 import com.iisigroup.cap.rule.model.DivRlItm;
 import com.iisigroup.cap.rule.service.RuleTbMntService;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -44,7 +43,7 @@ import com.iisigroup.cap.utils.CapString;
  *          </ul>
  */
 @Service
-public class RuleTbMntServiceImpl extends AbstractService implements RuleTbMntService {
+public class RuleTbMntServiceImpl implements RuleTbMntService {
 
     @Resource
     private DivRlItmDao rlItmDao;

@@ -15,13 +15,12 @@ import com.iisigroup.cap.auth.dao.RoleDao;
 import com.iisigroup.cap.auth.dao.RoleFunctionDao;
 import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.dao.UserRoleDao;
+import com.iisigroup.cap.auth.model.DefaultFunction;
+import com.iisigroup.cap.auth.model.DefaultRole;
 import com.iisigroup.cap.auth.model.Department;
-import com.iisigroup.cap.auth.model.Function;
-import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.service.RoleSetService;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.service.AbstractService;
 
 /**
  * <pre>
@@ -36,7 +35,7 @@ import com.iisigroup.cap.service.AbstractService;
  *          </ul>
  */
 @Service("roleSetService")
-public class RoleSetServiceImpl extends AbstractService implements RoleSetService {
+public class RoleSetServiceImpl implements RoleSetService {
 
     @Resource
     private DepartmentDao departmentDao;
@@ -92,10 +91,10 @@ public class RoleSetServiceImpl extends AbstractService implements RoleSetServic
     @Override
     public Map<String, String> findAllFunc(String sysType) {
         Map<String, String> map = new LinkedHashMap<String, String>();
-        List<Function> funcs = functionDao.findBySysTypeAndLevel(sysType, "1");
+        List<DefaultFunction> funcs = functionDao.findBySysTypeAndLevel(sysType, "1");
 
         if (!CollectionUtils.isEmpty(funcs)) {
-            for (Function func : funcs) {
+            for (DefaultFunction func : funcs) {
                 map.put(Integer.toString(func.getCode()), func.getName());
             }
         }
@@ -118,7 +117,7 @@ public class RoleSetServiceImpl extends AbstractService implements RoleSetServic
     }
 
     @Override
-    public Role findRoleByCode(String code) {
+    public DefaultRole findRoleByCode(String code) {
         return roleDao.findByCode(code);
     }
 

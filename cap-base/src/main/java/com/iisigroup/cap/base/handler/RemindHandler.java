@@ -23,24 +23,23 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
+import com.iisigroup.cap.base.formatter.impl.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.model.Reminds;
 import com.iisigroup.cap.base.service.CodeTypeService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.ADDateTimeFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
+import com.iisigroup.cap.formatter.impl.ADDateTimeFormatter;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.service.CommonService;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -73,15 +72,15 @@ public class RemindHandler extends MFormHandler {
     private CodeTypeService codeTypeService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(SearchSetting search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
 
         Page<Remind> page = commonSrv.findPage(Remind.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryDetail(SearchSetting search, IRequest params) {
+    public BeanGridResult queryDetail(SearchSetting search, Request params) {
 
         String pid = params.get("oid");
         if (CapString.isEmpty(pid)) {
@@ -94,10 +93,10 @@ public class RemindHandler extends MFormHandler {
         fmt.put("unit", new CodeTypeFormatter(codeTypeService, "unitMins"));
 
         Page<Reminds> page = commonSrv.findPage(Reminds.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
-    public IResult queryForm(IRequest request) {
+    public Result queryForm(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String oid = request.get("oid");
         Remind remind = null;
@@ -124,10 +123,10 @@ public class RemindHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult save(IRequest request) {
+    public Result save(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String oid = request.get("oid");
         Remind remind = null;
@@ -172,10 +171,10 @@ public class RemindHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult saveDetail(IRequest request) {
+    public Result saveDetail(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String pid = request.get("pid");
         Remind remind = null;
@@ -204,10 +203,10 @@ public class RemindHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String oid = request.get("oid");
         if (CapString.isEmpty(oid)) {
@@ -225,10 +224,10 @@ public class RemindHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult deleteDetail(IRequest request) {
+    public Result deleteDetail(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String[] oids = (String[]) request.getParamsAsStringArray("oids");
         List<Reminds> models = new ArrayList<Reminds>();

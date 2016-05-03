@@ -17,11 +17,10 @@ import java.lang.reflect.Method;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.handler.FormHandler;
 import com.iisigroup.cap.handler.Handler;
-import com.iisigroup.cap.operation.OpStepContext;
+import com.iisigroup.cap.model.OpStepContext;
 import com.iisigroup.cap.security.annotation.Captcha;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha.CaptchaStatus;
@@ -46,8 +45,8 @@ public class CapCaptchaOpStep extends AbstractCustomizeOpStep {
     protected static Log logger = LogFactory.getLog(CapCaptchaOpStep.class);
 
     @Override
-    public OpStepContext execute(OpStepContext ctx, IRequest params, Handler handler) {
-        String methodId = params.get(FormHandler.FORM_ACTION, "");
+    public OpStepContext execute(OpStepContext ctx, Request params, Handler handler) {
+        String methodId = params.get(Handler.FORM_ACTION, "");
         if (!CapString.isEmpty(methodId)) {
             for (Method method : handler.getClass().getDeclaredMethods()) {
                 if (methodId.equals(method.getName())) {

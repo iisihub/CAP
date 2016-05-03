@@ -3,12 +3,12 @@
     <persistence-unit name="pu-cap">
         <mapping-file>META-INF/orm-cap.xml</mapping-file>
         <!-- base -->
-        <class>com.iisigroup.cap.auth.model.User</class>
+        <class>com.iisigroup.cap.auth.model.DefaultUser</class>
         <class>com.iisigroup.cap.auth.model.Department</class>
-        <class>com.iisigroup.cap.auth.model.Role</class>
+        <class>com.iisigroup.cap.auth.model.DefaultRole</class>
         <class>com.iisigroup.cap.auth.model.RoleFunction</class>
         <class>com.iisigroup.cap.auth.model.UserRole</class>
-        <class>com.iisigroup.cap.auth.model.Function</class>
+        <class>com.iisigroup.cap.auth.model.DefaultFunction</class>
         <class>com.iisigroup.cap.base.model.CodeType</class>
         <class>com.iisigroup.cap.base.model.SysParm</class>
         <class>com.iisigroup.cap.base.model.ErrorCode</class>

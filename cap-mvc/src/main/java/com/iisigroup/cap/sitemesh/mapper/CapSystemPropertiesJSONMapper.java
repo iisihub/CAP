@@ -14,6 +14,7 @@ package com.iisigroup.cap.sitemesh.mapper;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -24,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.base.CapSystemProperties;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 import com.opensymphony.module.sitemesh.Config;
@@ -57,7 +57,7 @@ public class CapSystemPropertiesJSONMapper extends AbstractDecoratorMapper {
     private final static String PROP_KEY = "prop";
     private Set<String> searchKeys;
     private Set<String> decoratorFile;
-    private CapSystemProperties sysProp;
+    private Map<String, Object> sysProp;
 
     public void init(Config config, Properties properties, DecoratorMapper parent) throws InstantiationException {
         super.init(config, properties, parent);

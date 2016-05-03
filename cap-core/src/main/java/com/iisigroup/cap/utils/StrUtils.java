@@ -10,8 +10,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-
 /**
  * <pre>
  * TODO Write a short description on the purpose of the program
@@ -141,13 +139,4 @@ public class StrUtils {
         return strgrp.toString();
     }
 
-    @SuppressWarnings("rawtypes")
-    public static int getEntityFileldLegth(Class clazz, String filedName, int defValue) {
-        try {
-            return clazz.getDeclaredField(filedName).getAnnotation(Column.class).length();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return defValue;
-        }
-    }
 }

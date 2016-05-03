@@ -12,7 +12,7 @@ package com.iisigroup.cap.base.service;
 import java.util.Map;
 
 import com.iisigroup.cap.base.model.CodeType;
-import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 
 /**
  * <pre>

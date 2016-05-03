@@ -22,8 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -42,7 +42,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "CASEINFO", uniqueConstraints = @UniqueConstraint(columnNames = { "casNo" }) )
+@Table(name = "CASEINFO", uniqueConstraints = @UniqueConstraint(columnNames = { "casNo" }))
 public class CaseInfo extends GenericBean implements DataObject {
 
     @Id

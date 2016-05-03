@@ -12,7 +12,11 @@
     <dependencies>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-base</artifactId>
+            <artifactId>cap-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-db</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>

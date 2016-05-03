@@ -22,10 +22,9 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.service.CalendarService;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapEntityUtil;
@@ -48,7 +47,7 @@ public class CalendarHandler extends MFormHandler {
     @Resource
     private CalendarService calendarService;
 
-    public IResult getCalendarData(IRequest request) {
+    public Result getCalendarData(Request request) {
         AjaxFormResult result = new AjaxFormResult();
 
         String start = request.get("start");

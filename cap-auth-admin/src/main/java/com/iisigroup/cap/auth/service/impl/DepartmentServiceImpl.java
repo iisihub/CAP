@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.auth.dao.DepartmentDao;
 import com.iisigroup.cap.auth.model.Department;
 import com.iisigroup.cap.auth.service.DepartmentService;
-import com.iisigroup.cap.service.AbstractService;
 
 /**
  * <pre>
@@ -23,7 +22,7 @@ import com.iisigroup.cap.service.AbstractService;
  *          </ul>
  */
 @Service
-public class DepartmentServiceImpl extends AbstractService implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     private DepartmentDao departmentDao;
