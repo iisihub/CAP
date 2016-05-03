@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.auth.dao.PwdLogDao;
 import com.iisigroup.cap.auth.dao.UserDao;
+import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.auth.model.PwdLog;
-import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.model.SysParm;
@@ -62,7 +62,7 @@ public class PasswordServiceImpl implements PasswordService {
             throw new CapMessageException(CapAppContext.getMessage("error.004", new Object[] { minLen }), getClass());
         }
         // pwd history validate
-        User user = userDao.findByCode(userId);
+        DefaultUser user = userDao.findByCode(userId);
         if (user != null) {
             List<PwdLog> list = userPwdHistoryDao.findByUserCode(user.getOid(), maxHistory);
             int i = 0;
@@ -103,7 +103,7 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public boolean validatePassword(String userId, String password) {
-        User user = userDao.findByCode(userId);
+        DefaultUser user = userDao.findByCode(userId);
         PasswordEncoder passwordEncoder = new StandardPasswordEncoder(userId);
         return passwordEncoder.matches(password, user.getPassword());
     }
@@ -113,7 +113,7 @@ public class PasswordServiceImpl implements PasswordService {
         SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
         int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
         Date now = Calendar.getInstance().getTime();
-        User user = userDao.findByCode(userId);
+        DefaultUser user = userDao.findByCode(userId);
         String pwdHash = encodePassword(user.getCode(), password);
         user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now, expiredDay).getTime()));
         user.setPassword(pwdHash);
@@ -150,7 +150,7 @@ public class PasswordServiceImpl implements PasswordService {
         SysParm parmPwdNotifyDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_NOTIFY_DAY.toString().toLowerCase());
         int notifyDay = Integer.parseInt(parmPwdNotifyDay.getParmValue());
         int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
-        User user = userDao.findByCode(userId);
+        DefaultUser user = userDao.findByCode(userId);
         List<PwdLog> list = userPwdHistoryDao.findByUserCode(user.getOid(), 1);
         for (PwdLog h : list) {
             int diff = CapDate.calculateDays(Calendar.getInstance().getTime(), h.getUpdateTime());

@@ -47,27 +47,27 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
+import com.iisigroup.cap.base.handler.MFormHandler;
 import com.iisigroup.cap.batch.core.CapBatchScheduler;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.component.impl.MapGridResult;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.ADDateTimeFormatter;
-import com.iisigroup.cap.formatter.DurationFormatter;
-import com.iisigroup.cap.formatter.I18NFormatter;
 import com.iisigroup.cap.formatter.BeanFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
+import com.iisigroup.cap.formatter.impl.ADDateTimeFormatter;
+import com.iisigroup.cap.formatter.impl.DurationFormatter;
+import com.iisigroup.cap.formatter.impl.I18NFormatter;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
@@ -105,7 +105,7 @@ public class BatchHandler extends MFormHandler {
 
     @SuppressWarnings("serial")
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult jobQuery(SearchSetting search, IRequest params) {
+    public BeanGridResult jobQuery(SearchSetting search, Request params) {
         if (params.containsKey("jobId")) {
             search.addSearchModeParameters(SearchMode.LIKE, "jobId", params.get("jobId") + "%");
         }
@@ -132,7 +132,7 @@ public class BatchHandler extends MFormHandler {
                 }
             }
         });
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -142,7 +142,7 @@ public class BatchHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult jobModify(IRequest request) {
+    public Result jobModify(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         BatchJob job = batchSrv.findJobById(request.get("jobId"));
         boolean isnew = false;
@@ -173,7 +173,7 @@ public class BatchHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult jobDelete(IRequest request) {
+    public Result jobDelete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         BatchJob job = batchSrv.findJobById(request.get("jobId"));
         if (job != null) {
@@ -190,7 +190,7 @@ public class BatchHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult jobLoad(IRequest request) {
+    public Result jobLoad(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         BatchJob job = batchSrv.findJobById(request.get("jobId"));
         if (job != null) {
@@ -206,7 +206,7 @@ public class BatchHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult jobGetParam(IRequest request) {
+    public Result jobGetParam(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String jobId = request.get("jobId");
         try {
@@ -225,7 +225,7 @@ public class BatchHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult jobExecute(IRequest request) {
+    public Result jobExecute(Request request) {
         String params = request.get("jobParams");
         JobParameters jobParameters = jobParametersExtractor.fromString(params);
 
@@ -252,7 +252,7 @@ public class BatchHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult schQuery(SearchSetting search, IRequest params) {
+    public BeanGridResult schQuery(SearchSetting search, Request params) {
         if (params.containsKey("schId")) {
             search.addSearchModeParameters(SearchMode.LIKE, "schId", params.get("schId") + "%");
         }
@@ -260,10 +260,10 @@ public class BatchHandler extends MFormHandler {
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
         fmt.put("schType", new I18NFormatter("sch.schType."));
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
-    public IResult schDetail(IRequest params) {
+    public Result schDetail(Request params) {
         AjaxFormResult result = new AjaxFormResult();
         BatchSchedule sch = batchSrv.findSchById(params.get("schId"));
         Map<String, Object> map = CapBeanUtil.bean2Map(sch, CapBeanUtil.getFieldName(BatchSchedule.class, false));
@@ -280,7 +280,7 @@ public class BatchHandler extends MFormHandler {
      * @return IResult
      * @throws SchedulerException
      */
-    public IResult schModify(IRequest request) throws SchedulerException {
+    public Result schModify(Request request) throws SchedulerException {
         AjaxFormResult result = new AjaxFormResult();
         BatchSchedule oldSch = batchSrv.findSchById(request.get("schId"));
         BatchSchedule newSch = new BatchSchedule();
@@ -320,7 +320,7 @@ public class BatchHandler extends MFormHandler {
      * @return IResult
      * @throws SchedulerException
      */
-    public IResult schDelete(IRequest request) throws SchedulerException {
+    public Result schDelete(Request request) throws SchedulerException {
         AjaxFormResult result = new AjaxFormResult();
         String[] ids = request.getParamsAsStringArray("schId");
         for (String id : ids) {
@@ -334,7 +334,7 @@ public class BatchHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult executinsQuery(SearchSetting search, IRequest request) {
+    public MapGridResult executinsQuery(SearchSetting search, Request request) {
 
         if (!CapString.isEmpty(request.get("jobId"))) {
             search.addSearchModeParameters(SearchMode.LIKE, "i.job_name", request.get("jobId") + "%");
@@ -361,7 +361,7 @@ public class BatchHandler extends MFormHandler {
         return new MapGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
-    public IResult executionDetail(IRequest request) {
+    public Result executionDetail(Request request) {
         String executionId = request.get("jobExeId");
         String instancId = request.get("jobInstId");
         Map<String, Object> map = batchSrv.findExecutionDetail(executionId);
@@ -387,7 +387,7 @@ public class BatchHandler extends MFormHandler {
      *            IRequest
      * @return IResult
      */
-    public IResult executionStop(IRequest request) {
+    public Result executionStop(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         long jobExecutionId = Long.parseLong(request.get("jobExeId"));
         try {
@@ -415,7 +415,7 @@ public class BatchHandler extends MFormHandler {
      *            IRequest
      * @return IResult
      */
-    public IResult executionRestart(IRequest request) {
+    public Result executionRestart(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         try {
             String jobName = request.get("jobId");
@@ -450,7 +450,7 @@ public class BatchHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult stepsQuery(SearchSetting search, IRequest request) {
+    public MapGridResult stepsQuery(SearchSetting search, Request request) {
         String executionId = request.get("jobExeId");
         List<Map<String, Object>> list = batchSrv.findSteps(executionId);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();

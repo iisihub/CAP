@@ -3,8 +3,8 @@ package com.iisigroup.cap.auth.service;
 import java.util.List;
 import java.util.Map;
 
-import com.iisigroup.cap.auth.model.Function;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.auth.model.DefaultFunction;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.model.Page;
 
@@ -22,9 +22,9 @@ import com.iisigroup.cap.model.Page;
  */
 public interface FunctionSetService {
 
-    Function findFunctionByCode(String code);
+    DefaultFunction findFunctionByCode(String code);
 
-    List<Function> findFunctionBySysTypeAndLevel(String sysType, String level);
+    List<DefaultFunction> findFunctionBySysTypeAndLevel(String sysType, String level);
 
     int deleteRfList(String funcCode, List<String> delRole);
 
@@ -32,5 +32,5 @@ public interface FunctionSetService {
 
     Page<Map<String, Object>> findEditPage(SearchSetting search, String sysType, String funcCode);
 
-    void save(Function function, IRequest request);
+    void save(DefaultFunction function, Request request);
 }

@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 
 /**
  * <pre>
@@ -44,7 +44,7 @@ public class CapWebUtil {
      *            前端要顯示的檔案名稱
      * @return String
      */
-    public static String encodeFileName(IRequest request, String fileName) {
+    public static String encodeFileName(Request request, String fileName) {
         try {
             fileName = URLDecoder.decode(fileName, "utf-8");
             return URLEncoder.encode(fileName, "UTF8");

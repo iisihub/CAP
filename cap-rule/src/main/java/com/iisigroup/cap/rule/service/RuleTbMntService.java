@@ -12,7 +12,7 @@ package com.iisigroup.cap.rule.service;
 import java.util.List;
 import java.util.Map;
 
-import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.rule.model.CaseInfo;
 import com.iisigroup.cap.rule.model.DivRlDtl;
 import com.iisigroup.cap.rule.model.DivRlItm;

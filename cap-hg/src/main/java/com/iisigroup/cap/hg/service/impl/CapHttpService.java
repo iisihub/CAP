@@ -27,7 +27,7 @@ import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.Constants;
+import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.hg.enums.ConnStatusEnum;
 import com.iisigroup.cap.utils.CapString;

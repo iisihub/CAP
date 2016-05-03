@@ -15,11 +15,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.websocket.service.CapSocketService;
@@ -46,10 +46,10 @@ public class CapSocketHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link Result.com.iisi.cap.response.IResult}
      * @throws CapException
      */
-    public IResult initSession(IRequest request) {
+    public Result initSession(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String id = request.get("socketId");
 

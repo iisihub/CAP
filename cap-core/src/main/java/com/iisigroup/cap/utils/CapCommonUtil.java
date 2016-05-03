@@ -24,7 +24,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.Assert;
 
-import com.iisigroup.cap.Constants;
+import com.iisigroup.cap.constants.Constants;
 
 /**
  * <pre>

@@ -25,17 +25,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.ByteArrayDownloadResult;
+import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.handler.MFormHandler;
 import com.iisigroup.cap.report.enums.ContextTypeEnum;
 import com.iisigroup.cap.report.service.SampleRptService;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.ByteArrayDownloadResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.security.annotation.Captcha;
 
 /**
@@ -56,7 +56,7 @@ public class SampleHandler extends MFormHandler {
     private final Logger logger = LoggerFactory.getLogger(SampleHandler.class);
 
     @HandlerType(HandlerTypeEnum.FileUpload)
-    public IResult upload(IRequest request) throws CapException {
+    public Result upload(Request request) throws CapException {
         AjaxFormResult result = new AjaxFormResult();
         // String str = request.get("testStr");
         MultipartFile f = request.getFile("ufile");
@@ -71,7 +71,7 @@ public class SampleHandler extends MFormHandler {
     }
 
     @HandlerType(HandlerTypeEnum.FileDownload)
-    public IResult dwnload(IRequest request) throws CapException {
+    public Result dwnload(Request request) throws CapException {
         // String outputName = request.get("fileName", "CapLog.log");
         File file = new File("logs/CapLog.log");
         FileInputStream is = null;
@@ -92,7 +92,7 @@ public class SampleHandler extends MFormHandler {
     private SampleRptService sampleRptService;
 
     @HandlerType(HandlerTypeEnum.FileDownload)
-    public IResult dwnloadPdf(IRequest request) throws CapException {
+    public Result dwnloadPdf(Request request) throws CapException {
         ByteArrayOutputStream file = null;
         try {
             file = sampleRptService.generateReport(request);
@@ -107,7 +107,7 @@ public class SampleHandler extends MFormHandler {
         // "text/plain");
     }
 
-    public IResult queryMenu(IRequest request) {
+    public Result queryMenu(Request request) {
         return new AjaxFormResult("{'child':[{'name':'關於我們','url':'def','child':[{'name':'公司簡介','url':'def/about'}]}"
                 + ",{'name':'系統設定','url':'system','child':[{'name':'代碼設定','url':'system/codetype'}" + ",{'name':'參數設定','url':'system/sysparm'},{'name':'流水號檢視','url':'system/sequence'}]}"
                 + ",{'name':'系统功能','url':'sample','child':[{'name':'檔案上下傳','url':'sample/fileUpdDwn'},{'name':'WebSocket','url':'sample/webSocket'}]}"
@@ -122,7 +122,7 @@ public class SampleHandler extends MFormHandler {
      * @return IResult
      */
     @Captcha
-    public IResult checkCaptcha(IRequest request) {
+    public Result checkCaptcha(Request request) {
         return new AjaxFormResult().set(Constants.AJAX_NOTIFY_MESSAGE, "check ok!");
     }
 

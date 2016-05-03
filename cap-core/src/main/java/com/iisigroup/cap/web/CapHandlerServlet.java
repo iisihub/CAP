@@ -21,16 +21,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.ErrorResult;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.DefaultErrorResult;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.handler.FormHandler;
+import com.iisigroup.cap.handler.Handler;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.plugin.PluginManager;
-import com.iisigroup.cap.response.ErrorResult;
-import com.iisigroup.cap.response.IErrorResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -102,11 +102,11 @@ public class CapHandlerServlet extends HttpServlet {
         } else {
             SimpleContextHolder.put(CapWebUtil.localeKey, Locale.getDefault());
         }
-        IResult result = null;
+        Result result = null;
         Logger pluginlogger = logger;
-        IRequest request = getDefaultRequest(req);
+        Request request = getDefaultRequest(req);
         try {
-            request.setParameter(FormHandler.FORM_ACTION, action);
+            request.setParameter(Handler.FORM_ACTION, action);
             HandlerPlugin plugin = pluginMgr.getPlugin(handler);
             logger.info("plugin:" + handler + " - " + plugin.getClass().getSimpleName() + " action:" + action);
             plugin.setRequest(request);
@@ -114,9 +114,9 @@ public class CapHandlerServlet extends HttpServlet {
             result = plugin.execute(request);
 
         } catch (Exception e) {
-            IErrorResult errorResult = getDefaultErrorResult();
+            ErrorResult errorResult = getDefaultErrorResult();
             if (errorResult == null) {
-                result = new ErrorResult(request, e);
+                result = new DefaultErrorResult(request, e);
             } else {
                 errorResult.putError(request, e);
                 result = errorResult;
@@ -141,12 +141,12 @@ public class CapHandlerServlet extends HttpServlet {
         }
     }
 
-    protected IErrorResult getDefaultErrorResult() {
+    protected ErrorResult getDefaultErrorResult() {
         return CapAppContext.getBean(DEFAULT_ERROR_RESULT);
     }
 
-    protected IRequest getDefaultRequest(HttpServletRequest req) {
-        IRequest cr = CapAppContext.getBean(DEFAULT_REQUEST);
+    protected Request getDefaultRequest(HttpServletRequest req) {
+        Request cr = CapAppContext.getBean(DEFAULT_REQUEST);
         cr.setRequestObject(req);
         return cr;
     }

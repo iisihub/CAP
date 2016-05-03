@@ -23,8 +23,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -42,7 +42,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_ROLEFUNC", uniqueConstraints = @UniqueConstraint(columnNames = { "ROLECODE", "FUNCCODE" }) )
+@Table(name = "DEF_ROLEFUNC", uniqueConstraints = @UniqueConstraint(columnNames = { "ROLECODE", "FUNCCODE" }))
 public class RoleFunction extends GenericBean implements DataObject {
 
     private static final long serialVersionUID = 1L;
@@ -65,11 +65,11 @@ public class RoleFunction extends GenericBean implements DataObject {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumns({ @JoinColumn(name = "ROLECODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false) })
-    private Role role;
+    private DefaultRole role;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumns({ @JoinColumn(name = "FUNCCODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false) })
-    private Function function;
+    private DefaultFunction function;
 
     public String getUpdater() {
         return updater;
@@ -79,19 +79,19 @@ public class RoleFunction extends GenericBean implements DataObject {
         this.updater = updater;
     }
 
-    public Role getRole() {
+    public DefaultRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(DefaultRole role) {
         this.role = role;
     }
 
-    public Function getFunction() {
+    public DefaultFunction getFunction() {
         return function;
     }
 
-    public void setFunction(Function function) {
+    public void setFunction(DefaultFunction function) {
         this.function = function;
     }
 

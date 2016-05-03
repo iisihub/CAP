@@ -13,7 +13,6 @@ package com.iisigroup.cap.report;
 
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.iisigroup.cap.mvc.page.report.PageReport;
 import com.iisigroup.cap.utils.CapSystemConfig;
 
 /**

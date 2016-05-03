@@ -25,7 +25,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.model.Reminds;
 import com.iisigroup.cap.base.service.EmailService;
-import com.iisigroup.cap.formatter.ADDateTimeFormatter;
+import com.iisigroup.cap.formatter.impl.ADDateTimeFormatter;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;

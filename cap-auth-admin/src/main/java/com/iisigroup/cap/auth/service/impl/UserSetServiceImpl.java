@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.auth.dao.PwdLogDao;
 import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.dao.UserRoleDao;
+import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.auth.model.PwdLog;
-import com.iisigroup.cap.auth.model.User;
 import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.service.UserSetService;
 import com.iisigroup.cap.base.model.SysParm;
@@ -25,11 +25,10 @@ import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service
-public class UserSetServiceImpl extends AbstractService implements UserSetService {
+public class UserSetServiceImpl implements UserSetService {
     @Resource
     private UserDao userDao;
     @Resource
@@ -46,7 +45,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     }
 
     public void createUser(String userId, String userName, String password, String email, String[] roleOids) {
-        User user = new User();
+        DefaultUser user = new DefaultUser();
         user.setStatus("1");
         // 建立使用者時就塞 last login time，方便排程篩選資料
         user.setLastLoginTime(CapDate.getCurrentTimestamp());
@@ -59,7 +58,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     }
 
     public void updateUserByOid(String oid, String code, String name, boolean reset, String password, String email, String[] roleCodes) {
-        User user = userDao.find(oid);
+        DefaultUser user = userDao.find(oid);
         if (reset) {
             user.setStatus("1");
         }
@@ -68,7 +67,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
         createUserPwdHistory(user.getCode(), encodePassword(code, password));
     }
 
-    private User setUserFields(User user, String code, String name, String password, String email) {
+    private DefaultUser setUserFields(DefaultUser user, String code, String name, String password, String email) {
         Date now = Calendar.getInstance().getTime();
         user.setCode(code);
         user.setName(name);
@@ -112,7 +111,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     }
 
     @Override
-    public User findUserByUserCode(String code) {
+    public DefaultUser findUserByUserCode(String code) {
         return userDao.findByCode(code);
     }
 
@@ -124,7 +123,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     @Override
     public void unlockUserByOids(String[] oids) {
         for (String oid : oids) {
-            User user = userDao.find(oid);
+            DefaultUser user = userDao.find(oid);
             user.setStatus(user.getPreStatus());
             user.setUpdateTime(CapDate.getCurrentTimestamp());
             user.setUpdater(CapSecurityContext.getUserId());
@@ -133,7 +132,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     }
 
     private void changeUserStatus(String oid, String status) {
-        User user = userDao.find(oid);
+        DefaultUser user = userDao.find(oid);
         user.setStatus(status);
         user.setUpdateTime(CapDate.getCurrentTimestamp());
         user.setUpdater(CapSecurityContext.getUserId());
@@ -148,7 +147,7 @@ public class UserSetServiceImpl extends AbstractService implements UserSetServic
     @Override
     public void lockUserByOids(String[] oids) {
         for (String oid : oids) {
-            User user = userDao.find(oid);
+            DefaultUser user = userDao.find(oid);
             if (!"2".equals(user.getStatus())) {
                 user.setPreStatus(user.getStatus());
                 user.setStatus("2");

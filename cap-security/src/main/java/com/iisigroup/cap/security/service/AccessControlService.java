@@ -13,7 +13,7 @@ package com.iisigroup.cap.security.service;
 
 import java.util.List;
 
-import com.iisigroup.cap.security.model.IRole;
+import com.iisigroup.cap.security.model.Role;
 
 /**
  * <pre>
@@ -29,7 +29,7 @@ import com.iisigroup.cap.security.model.IRole;
  */
 public interface AccessControlService {
 
-    List<IRole> getAuthRolesByUrl(String url);
+    List<Role> getAuthRolesByUrl(String url);
 
     void lockUserByUserId(String userId);
 

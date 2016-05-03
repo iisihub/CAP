@@ -11,10 +11,12 @@
         <slf4j.version>1.5.8</slf4j.version>
     </properties>
     <dependencies>
+    <!-- 
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-db</artifactId>
         </dependency>
+     -->
         <!-- Utils ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
             <groupId>log4j</groupId>

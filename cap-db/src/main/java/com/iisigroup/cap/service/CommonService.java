@@ -12,8 +12,10 @@
 package com.iisigroup.cap.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.Page;
 
 /**
@@ -44,4 +46,5 @@ public interface CommonService {
 
     void delete(List<?> models);
 
+    Map findMapById(Class<? extends GenericBean> clazz, String id);
 }

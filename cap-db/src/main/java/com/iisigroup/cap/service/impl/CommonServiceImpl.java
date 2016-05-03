@@ -12,6 +12,7 @@
 package com.iisigroup.cap.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -19,8 +20,11 @@ import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.dao.CommonDao;
 import com.iisigroup.cap.dao.SearchSetting;
+import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.Page;
 import com.iisigroup.cap.service.CommonService;
+import com.iisigroup.cap.utils.CapBeanUtil;
+import com.iisigroup.cap.utils.CapEntityUtil;
 
 /**
  * <pre>
@@ -83,5 +87,11 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public <T> List<T> list(Class<T> clazz) {
         return commonDao.find(clazz, commonDao.createSearchTemplete());
+    }
+
+    @Override
+    public Map findMapById(Class<? extends GenericBean> clazz, String id) {
+        GenericBean bean = this.findById(clazz, id);
+        return CapBeanUtil.bean2Map(bean, CapEntityUtil.getColumnName(bean));
     }
 }

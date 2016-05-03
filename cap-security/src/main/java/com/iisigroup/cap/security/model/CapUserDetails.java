@@ -56,7 +56,7 @@ public class CapUserDetails implements UserDetails {
     public CapUserDetails() {
     }
 
-    public CapUserDetails(IUser user, String password, Map<String, String> roles) {
+    public CapUserDetails(User user, String password, Map<String, String> roles) {
         this.password = password;
         this.userId = user.getCode();
         this.userName = user.getName();

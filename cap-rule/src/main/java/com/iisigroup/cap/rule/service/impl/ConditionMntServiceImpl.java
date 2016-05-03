@@ -18,13 +18,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.rule.dao.DivCtDtlDao;
 import com.iisigroup.cap.rule.dao.DivCtItmDao;
 import com.iisigroup.cap.rule.model.DivCtDtl;
 import com.iisigroup.cap.rule.model.DivCtItm;
 import com.iisigroup.cap.rule.service.ConditionMntService;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -40,7 +39,7 @@ import com.iisigroup.cap.utils.CapString;
  *          </ul>
  */
 @Service
-public class ConditionMntServiceImpl extends AbstractService implements ConditionMntService {
+public class ConditionMntServiceImpl implements ConditionMntService {
 
     @Resource
     private DivCtItmDao ctItmDao;

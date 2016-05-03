@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.websocket.server.CapNettyWebSocketServer;
 import com.iisigroup.websocket.service.CapSocketService;
 
 @Service
-public class CapSocketServiceImpl extends AbstractService implements CapSocketService {
+public class CapSocketServiceImpl implements CapSocketService {
 
     @Resource
     private CapNettyWebSocketServer server;

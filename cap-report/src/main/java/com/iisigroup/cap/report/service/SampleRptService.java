@@ -5,22 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.report.AbstractReportPdfService;
 import com.iisigroup.cap.report.enums.ReportParamEnum;
 import com.iisigroup.cap.utils.CapDate;
 import com.itextpdf.text.pdf.PdfWriter;
 
-@Scope("request")
 @Service
 public class SampleRptService extends AbstractReportPdfService {
 
     @Override
-    public Map<String, Object> excute(IRequest request) {
+    public Map<String, Object> excute(Request request) {
         Map<String, Object> reportData = new HashMap<String, Object>();
         /* 建立資料模型 */
         reportData.put("userId", "userId");

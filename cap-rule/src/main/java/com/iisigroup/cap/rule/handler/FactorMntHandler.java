@@ -21,14 +21,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
-import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.rule.model.DivFtDtl;
 import com.iisigroup.cap.rule.model.DivFtItm;
 import com.iisigroup.cap.rule.service.FactorMntService;
@@ -72,7 +72,7 @@ public class FactorMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.FORM)
-    public IResult query(IRequest request) {
+    public Result query(Request request) {
         String oid = request.get("mainOid");
         String factorNo = request.get("factorNo");
         AjaxFormResult result = new AjaxFormResult();
@@ -95,7 +95,7 @@ public class FactorMntHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult saveFactorDtl(IRequest request) {
+    public Result saveFactorDtl(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String type = request.get("type");
         String divFtItmNo = request.get("factorNo");
@@ -166,14 +166,14 @@ public class FactorMntHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         factorMntService.deleteById(request.get("oid"));
         result.set(Constants.AJAX_NOTIFY_MESSAGE, CapAppContext.getMessage("factorMntPage.0003"));
         return result;
     }
 
-    public IResult insertTestCases(IRequest request) {
+    public Result insertTestCases(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         factorMntService.insertTestCaseInfoData();
         return result;

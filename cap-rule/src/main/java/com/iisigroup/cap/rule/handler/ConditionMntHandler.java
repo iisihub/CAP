@@ -24,22 +24,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
-import com.iisigroup.cap.Constants;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
 import com.iisigroup.cap.formatter.BeanFormatter;
 import com.iisigroup.cap.formatter.Formatter;
-import com.iisigroup.cap.handler.MFormHandler;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
 import com.iisigroup.cap.rule.model.DivCtDtl;
 import com.iisigroup.cap.rule.model.DivCtItm;
 import com.iisigroup.cap.rule.model.DivFtDtl;
@@ -88,7 +88,7 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.FORM)
-    public IResult query(IRequest request) {
+    public Result query(Request request) {
         String oid = request.get("mainOid");
         String divCtNo = request.get("divCtNo");
         AjaxFormResult result = new AjaxFormResult();
@@ -140,7 +140,7 @@ public class ConditionMntHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult saveConditionDtl(IRequest request) {
+    public Result saveConditionDtl(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String type = request.get("type");
         String divCtNo = request.get("divCtNo");
@@ -225,14 +225,14 @@ public class ConditionMntHandler extends MFormHandler {
      *            request
      * @return IResult
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         conditionMntService.deleteById(request.get("oid"));
         result.set(Constants.AJAX_NOTIFY_MESSAGE, CapAppContext.getMessage("condition.0003"));
         return result;
     }
 
-    public IResult getFtSelOption(IRequest request) {
+    public Result getFtSelOption(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         List<DivFtItm> ftItms = factorMntService.findAllDivFtItm();
         if (ftItms != null) {
@@ -253,14 +253,14 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionItmByDivCtNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryConditionItmByDivCtNo(SearchSetting search, Request params) {
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "divCtNo", "");
 
         Page<DivCtItm> page = commonService.findPage(DivCtItm.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("condVal", new CondValFormatter(factorMntService));
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -271,17 +271,17 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionDtlByDivCtNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryConditionDtlByDivCtNo(SearchSetting search, Request params) {
         if (params.containsKey("divCtNo") && !CapString.isEmpty(params.get("divCtNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", params.get("divCtNo"));
         } else {
-            return new GridResult();
+            return new BeanGridResult();
         }
 
         Page<DivCtDtl> page = commonService.findPage(DivCtDtl.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("updateTime", new ADDateFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -292,11 +292,11 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryFactorDetailByFactorNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryFactorDetailByFactorNo(SearchSetting search, Request params) {
         if (params.containsKey("factorNo") && !CapString.isEmpty(params.get("factorNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "factorNo", params.get("factorNo"));
         } else {
-            return new GridResult();
+            return new BeanGridResult();
         }
 
         Page<DivFtDtl> page = commonService.findPage(DivFtDtl.class, search);
@@ -304,7 +304,7 @@ public class ConditionMntHandler extends MFormHandler {
         // fmt.put("updateTime", new ADDateFormatter());
         fmt.put("rangeNm", new RangeNmFormatter());
         fmt.put("factorNm", new FactorNmFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**
@@ -315,17 +315,17 @@ public class ConditionMntHandler extends MFormHandler {
      * @return
      */
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryConditionDtlGridByDivCtNo(SearchSetting search, IRequest params) {
+    public BeanGridResult queryConditionDtlGridByDivCtNo(SearchSetting search, Request params) {
         if (params.containsKey("divCtNo") && !CapString.isEmpty(params.get("divCtNo"))) {
             search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", params.get("divCtNo"));
         } else {
-            return new GridResult();
+            return new BeanGridResult();
         }
         Page<DivCtDtl> page = commonService.findPage(DivCtDtl.class, search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("factorNm", new CondFactorNmFormatter());
         fmt.put("rangeNm", new CondRangeNmFormatter());
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
     }
 
     /**

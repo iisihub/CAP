@@ -25,8 +25,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -43,7 +43,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "CFG_REMINDS", uniqueConstraints = @UniqueConstraint(columnNames = "oid") )
+@Table(name = "CFG_REMINDS", uniqueConstraints = @UniqueConstraint(columnNames = "oid"))
 public class Reminds extends GenericBean implements DataObject {
 
     /** id */

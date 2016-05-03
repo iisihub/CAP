@@ -18,7 +18,6 @@ import com.iisigroup.cap.base.dao.ErrorCodeDao;
 import com.iisigroup.cap.base.model.ErrorCode;
 import com.iisigroup.cap.base.service.ErrorCodeService;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.ManagementUtils;
 import com.iisigroup.cap.utils.StrUtils;
@@ -36,7 +35,7 @@ import com.iisigroup.cap.utils.StrUtils;
  *          </ul>
  */
 @Service("errorCodeService")
-public class ErrorCodeServiceImpl extends AbstractService implements ErrorCodeService {
+public class ErrorCodeServiceImpl implements ErrorCodeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ErrorCodeServiceImpl.class);
 
     @Resource

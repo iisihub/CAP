@@ -19,6 +19,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -133,4 +134,13 @@ public class CapEntityUtil {
         // return (Class<T>) Class.forName(entityName);
     }
 
+    @SuppressWarnings("rawtypes")
+    public static int getEntityFieldLength(Class clazz, String filedName, int defValue) {
+        try {
+            return clazz.getDeclaredField(filedName).getAnnotation(Column.class).length();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defValue;
+        }
+    }
 }

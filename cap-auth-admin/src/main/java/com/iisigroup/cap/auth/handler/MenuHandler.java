@@ -17,10 +17,10 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.auth.service.MenuService;
 import com.iisigroup.cap.auth.service.impl.MenuServiceImpl.MenuItem;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.base.handler.MFormHandler;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.security.CapSecurityContext;
 
 import net.sf.json.JSONSerializer;
@@ -44,7 +44,7 @@ public class MenuHandler extends MFormHandler {
     @Resource
     private MenuService menuSrv;
 
-    public IResult queryMenu(IRequest request) {
+    public Result queryMenu(Request request) {
 
         MenuItem menu = menuSrv.getMenuByRoles(CapSecurityContext.getRoleIds());
         if (menu != null) {

@@ -23,7 +23,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.ibm.icu.util.Calendar;
-import com.iisigroup.cap.response.AjaxFormResult;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.rule.dao.CaseInfoDao;
 import com.iisigroup.cap.rule.dao.DivFtDtlDao;
 import com.iisigroup.cap.rule.dao.DivFtItmDao;
@@ -31,7 +31,6 @@ import com.iisigroup.cap.rule.model.CaseInfo;
 import com.iisigroup.cap.rule.model.DivFtDtl;
 import com.iisigroup.cap.rule.model.DivFtItm;
 import com.iisigroup.cap.rule.service.FactorMntService;
-import com.iisigroup.cap.service.AbstractService;
 
 /**
  * <pre>
@@ -46,7 +45,7 @@ import com.iisigroup.cap.service.AbstractService;
  *          </ul>
  */
 @Service
-public class FactorMntServiceImpl extends AbstractService implements FactorMntService {
+public class FactorMntServiceImpl implements FactorMntService {
 
     @Resource
     private DivFtItmDao ftItmDao;

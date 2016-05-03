@@ -31,11 +31,10 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xhtmlrenderer.pdf.PDFEncryption;
 import org.xhtmlrenderer.resource.XMLResource;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.report.enums.ReportParamEnum;
 import com.iisigroup.cap.report.factory.ItextFontFactory;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapSystemConfig;
 import com.itextpdf.text.pdf.BaseFont;
@@ -55,7 +54,7 @@ import freemarker.template.Template;
  *          <li>2013/10/24,Sunkist Wang,new
  *          </ul>
  */
-public abstract class AbstractReportPdfService extends AbstractService implements FreeMarkerReport, ReportService {
+public abstract class AbstractReportPdfService implements FreeMarkerReport, ReportService {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -68,7 +67,7 @@ public abstract class AbstractReportPdfService extends AbstractService implement
     @Resource
     private ServletContext servletContext;
 
-    public ByteArrayOutputStream generateReport(IRequest request) throws CapException {
+    public ByteArrayOutputStream generateReport(Request request) throws CapException {
         ByteArrayOutputStream templateOut = null;
         ByteArrayOutputStream out = null;
         Writer writer = null;

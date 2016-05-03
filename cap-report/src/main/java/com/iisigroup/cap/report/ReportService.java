@@ -13,9 +13,8 @@ package com.iisigroup.cap.report;
 
 import java.io.ByteArrayOutputStream;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.mvc.page.report.PageReport;
 
 /**
  * <p>
@@ -40,7 +39,7 @@ public interface ReportService extends PageReport {
      * @return ByteArrayOutputStream
      * @throws CapException
      */
-    ByteArrayOutputStream generateReport(IRequest request) throws CapException;
+    ByteArrayOutputStream generateReport(Request request) throws CapException;
 
     /**
      * Gets the report definition.從ReportDirectory之後的完整路徑 如：batch/jobExecutionResult

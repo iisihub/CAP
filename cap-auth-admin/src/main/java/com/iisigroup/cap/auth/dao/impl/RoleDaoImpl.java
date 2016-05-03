@@ -18,12 +18,12 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.RoleDao;
-import com.iisigroup.cap.auth.model.Role;
+import com.iisigroup.cap.auth.model.DefaultRole;
 import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.security.dao.IRoleDao;
+import com.iisigroup.cap.security.model.Role;
 
 /**
  * <pre>
@@ -38,30 +38,30 @@ import com.iisigroup.cap.security.dao.IRoleDao;
  *          </ul>
  */
 @Repository
-public class RoleDaoImpl extends GenericDaoImpl<Role> implements IRoleDao<Role>, RoleDao {
+public class RoleDaoImpl extends GenericDaoImpl<DefaultRole> implements RoleDao {
 
     @SuppressWarnings("unchecked")
     @Override
     public List<Role> findBySysTypeAndPath(String sysType, String path) {
         Query query = getEntityManager().createNativeQuery(
                 "select r.* from DEF_ROLE r inner join DEF_ROLEFUNC rf on rf.ROLECODE=r.CODE inner join DEF_FUNC func on rf.FUNCCODE=func.CODE where r.SYSTYPE= ?1 and r.STATUS='0' and func.PATH= ?2",
-                Role.class);
+                DefaultRole.class);
         query.setParameter(1, sysType);
         query.setParameter(2, path);
         return (List<Role>) query.getResultList();
     }
 
     @Override
-    public List<Role> findAll() {
+    public List<DefaultRole> findAll() {
         SearchSetting search = createSearchTemplete();
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("code");
-        List<Role> list = find(search);
+        List<DefaultRole> list = find(search);
         return list;
     }
 
     @Override
-    public Role findByCode(String code) {
+    public DefaultRole findByCode(String code) {
         SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);

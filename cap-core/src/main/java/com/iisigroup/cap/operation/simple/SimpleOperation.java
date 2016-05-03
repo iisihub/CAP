@@ -19,10 +19,10 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.handler.Handler;
-import com.iisigroup.cap.operation.OpStepContext;
+import com.iisigroup.cap.model.OpStepContext;
 import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
 
@@ -49,7 +49,7 @@ public class SimpleOperation implements Operation {
      * 
      * @see tw.com.iisi.cap.flow.Operation#execute()
      */
-    public void execute(OpStepContext ctx, IRequest params, Handler handler) {
+    public void execute(OpStepContext ctx, Request params, Handler handler) {
         OperationStep step = getStartStep();
         long startOperation = System.currentTimeMillis();
         try {

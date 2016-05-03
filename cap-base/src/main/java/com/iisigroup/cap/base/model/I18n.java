@@ -21,8 +21,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
@@ -40,7 +40,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_I18N", uniqueConstraints = @UniqueConstraint(columnNames = { "locale", "codeType", "codeValue" }) )
+@Table(name = "DEF_I18N", uniqueConstraints = @UniqueConstraint(columnNames = { "locale", "codeType", "codeValue" }))
 public class I18n extends GenericBean implements DataObject {
 
     @Id

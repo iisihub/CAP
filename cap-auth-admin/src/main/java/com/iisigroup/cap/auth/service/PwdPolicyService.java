@@ -1,7 +1,7 @@
 package com.iisigroup.cap.auth.service;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 
 public interface PwdPolicyService {
-    void updatePwdPolicy(IRequest request);
+    void updatePwdPolicy(Request request);
 }

@@ -2,7 +2,7 @@ package com.iisigroup.cap.auth.service;
 
 import java.util.Map;
 
-import com.iisigroup.cap.auth.model.User;
+import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.model.Page;
 
 public interface UserSetService {
@@ -14,7 +14,7 @@ public interface UserSetService {
 
     Page<Map<String, Object>> findUser(String userId, String userName, String[] roleOids, String[] status, int maxResult, int firstResult);
 
-    User findUserByUserCode(String userId);
+    DefaultUser findUserByUserCode(String userId);
 
     void unlockUserByOids(String[] oids);
 

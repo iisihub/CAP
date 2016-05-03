@@ -19,8 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.model.GenericBean;
 
 /**
  * <pre>
@@ -36,7 +36,7 @@ import com.iisigroup.cap.model.DataObject;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "AUDIT_LOG", uniqueConstraints = @UniqueConstraint(columnNames = "id") )
+@Table(name = "AUDIT_LOG", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class AuditLog extends GenericBean implements DataObject {
     /** unique id */
     @Id
