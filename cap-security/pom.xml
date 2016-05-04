@@ -13,14 +13,6 @@
         <!-- Project ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-db</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-captcha</artifactId>
         </dependency>
         <!-- Spring security ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

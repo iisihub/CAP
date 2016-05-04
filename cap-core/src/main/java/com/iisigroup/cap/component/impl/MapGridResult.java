@@ -12,6 +12,7 @@
 package com.iisigroup.cap.component.impl;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -20,7 +21,6 @@ import java.util.Map;
 
 import javax.servlet.ServletResponse;
 
-import com.ibm.icu.util.Calendar;
 import com.iisigroup.cap.component.GridResult;
 import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.constants.GridEnum;
