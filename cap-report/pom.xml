@@ -6,14 +6,18 @@
         <version>2.2.1</version>
     </parent>
     <artifactId>cap-report</artifactId>
+    <properties>
+        <spring.version>3.1.3.RELEASE</spring.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-mvc</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
