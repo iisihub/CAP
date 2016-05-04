@@ -36,6 +36,7 @@ import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -401,8 +402,7 @@ public class CapNamedJdbcTemplate extends NamedParameterJdbcTemplate {
     }// ;
 
     /**
-     * wrapper SqlRowSet queryForRowSet(String sql, Object[] args) from
-     * org.springframework.jdbc.core.JdbcTemplate
+     * wrapper SqlRowSet queryForRowSet(String sql, Object[] args) from org.springframework.jdbc.core.JdbcTemplate
      * 
      * @param sqlId
      *            sqlId
@@ -703,4 +703,9 @@ public class CapNamedJdbcTemplate extends NamedParameterJdbcTemplate {
         return super.batchUpdate(_sql, batchArgs);
     }
 
+    public long insertAndReturnKey(String tableName, String generatedKeyColumns, Map<String, Object> args) {
+        SimpleJdbcInsert sji = new SimpleJdbcInsert(dataSource).withTableName(tableName).usingGeneratedKeyColumns(generatedKeyColumns);
+        Number id = sji.executeAndReturnKey(args);
+        return id.longValue();
+    }
 }// ~
