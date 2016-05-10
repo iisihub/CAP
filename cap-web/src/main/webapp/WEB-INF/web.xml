@@ -175,7 +175,7 @@
     <!-- captcha sample Servelt start -->
     <servlet>
         <servlet-name>captcha</servlet-name>
-        <servlet-class>com.iisigroup.cap.security.captcha.servlet.CapCaptchaServlet</servlet-class>
+        <servlet-class>com.iisigroup.cap.security.captcha.web.CapCaptchaServlet</servlet-class>
         <init-param>
             <!-- spring bean key -->
             <param-name>captchaBean</param-name>

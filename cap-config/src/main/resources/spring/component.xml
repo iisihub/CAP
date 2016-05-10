@@ -85,4 +85,8 @@
             </props>
         </property>
     </bean>
+    <!--itext config -->
+    <bean id="itextFontFactory" class="com.iisigroup.cap.report.factory.ItextFontFactory">
+        <property name="basePath" value="${fontDir}" />
+    </bean>
 </beans>

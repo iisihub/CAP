@@ -1,4 +1,4 @@
-package com.iisigroup.cap.report.enums;
+package com.iisigroup.cap.report.constants;
 
 /**
  * <pre>
