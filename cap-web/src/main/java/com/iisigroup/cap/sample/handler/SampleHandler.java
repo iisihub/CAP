@@ -34,8 +34,8 @@ import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.component.impl.ByteArrayDownloadResult;
 import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.report.enums.ContextTypeEnum;
-import com.iisigroup.cap.report.service.SampleRptService;
+import com.iisigroup.cap.report.constants.ContextTypeEnum;
+import com.iisigroup.cap.report.service.impl.SampleRptService;
 import com.iisigroup.cap.security.annotation.Captcha;
 
 /**

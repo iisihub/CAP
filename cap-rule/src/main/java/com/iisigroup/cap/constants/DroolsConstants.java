@@ -10,7 +10,7 @@
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
  */
-package com.iisigroup.cap;
+package com.iisigroup.cap.constants;
 
 /**
  * <p>

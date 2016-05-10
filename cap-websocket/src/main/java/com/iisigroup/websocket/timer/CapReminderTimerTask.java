@@ -29,8 +29,8 @@ import com.iisigroup.cap.formatter.impl.ADDateTimeFormatter;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
-import com.iisigroup.websocket.RemindEnum;
-import com.iisigroup.websocket.bean.NotifyObject;
+import com.iisigroup.websocket.constants.RemindEnum;
+import com.iisigroup.websocket.model.NotifyObject;
 import com.iisigroup.websocket.service.CapRemindService;
 
 /**

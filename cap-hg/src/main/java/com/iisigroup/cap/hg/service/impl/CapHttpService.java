@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.hg.enums.ConnStatusEnum;
+import com.iisigroup.cap.hg.constants.ConnStatus;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -61,7 +61,7 @@ public class CapHttpService extends AbstractHGservice {
     /** default encode **/
     private String defaultEncode = HTTP.UTF_8;
     /** connection status **/
-    private ConnStatusEnum status;
+    private ConnStatus status;
     /** async **/
     private boolean isAsync;
 
@@ -83,12 +83,12 @@ public class CapHttpService extends AbstractHGservice {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public ConnStatusEnum getStatus() {
+    public ConnStatus getStatus() {
         return status;
     }
 
     @Override
-    public void setStatus(ConnStatusEnum status) {
+    public void setStatus(ConnStatus status) {
         this.status = status;
     }
 
@@ -230,7 +230,7 @@ public class CapHttpService extends AbstractHGservice {
             logger.trace("host response:" + new String(responseData));
         }
         logger.debug("Send Host spand time2: " + (System.currentTimeMillis() - st) + "ms");
-        setStatus(ConnStatusEnum.COMPLETE);
+        setStatus(ConnStatus.COMPLETE);
 
     }
 
@@ -241,10 +241,10 @@ public class CapHttpService extends AbstractHGservice {
      */
     @Override
     public void execute() throws Exception {
-        if (!ConnStatusEnum.INIT.equals(status)) {
+        if (!ConnStatus.INIT.equals(status)) {
             throw new CapException("init error", getClass());
         }
-        setStatus(ConnStatusEnum.RUNNING);
+        setStatus(ConnStatus.RUNNING);
         if (isAsync) {
             new Async().start();
         } else {
@@ -324,7 +324,7 @@ public class CapHttpService extends AbstractHGservice {
         httpClient.getParams().setParameter(HttpConnectionParams.SO_TIMEOUT, st);
         defaultEncode = encode != null ? encode : defaultEncode;
         isAsync = (async != null ? Boolean.valueOf(async) : false);
-        setStatus(ConnStatusEnum.INIT);
+        setStatus(ConnStatus.INIT);
     }
 
     /*
@@ -337,14 +337,14 @@ public class CapHttpService extends AbstractHGservice {
     public String errorHandle(Exception e) {
         logger.error(e.getMessage(), e);
         if (e instanceof HttpHostConnectException) {
-            setStatus(ConnStatusEnum.CONNECT_ERROR);
-            return "{rc:'" + ConnStatusEnum.CONNECT_ERROR + "',msg:'connect error'}";
+            setStatus(ConnStatus.CONNECT_ERROR);
+            return "{rc:'" + ConnStatus.CONNECT_ERROR + "',msg:'connect error'}";
         } else if (e instanceof SocketTimeoutException) {
-            setStatus(ConnStatusEnum.TIMEOUT);
-            return "{rc:'" + ConnStatusEnum.TIMEOUT + "',msg:'connect timeout'}";
+            setStatus(ConnStatus.TIMEOUT);
+            return "{rc:'" + ConnStatus.TIMEOUT + "',msg:'connect timeout'}";
         } else {
-            setStatus(ConnStatusEnum.ERROR);
-            return "{rc:'" + ConnStatusEnum.ERROR + "',msg:'" + e.getMessage() + "'}";
+            setStatus(ConnStatus.ERROR);
+            return "{rc:'" + ConnStatus.ERROR + "',msg:'" + e.getMessage() + "'}";
         }
     }
 

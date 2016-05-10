@@ -1,4 +1,4 @@
-package com.iisigroup.cap.hg.enums;
+package com.iisigroup.cap.hg.constants;
 
 /**
  * <pre>
@@ -12,7 +12,7 @@ package com.iisigroup.cap.hg.enums;
  *          <li>2011/11/25,rodeschen,new
  *          </ul>
  */
-public enum ConnStatusEnum {
+public enum ConnStatus {
 
     INIT("0"),
     RUNNING("1"),
@@ -23,7 +23,7 @@ public enum ConnStatusEnum {
 
     private String code;
 
-    ConnStatusEnum(String code) {
+    ConnStatus(String code) {
         this.code = code;
     }
 

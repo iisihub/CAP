@@ -33,7 +33,7 @@ import org.xhtmlrenderer.resource.XMLResource;
 
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.report.enums.ReportParamEnum;
+import com.iisigroup.cap.report.constants.ReportParamEnum;
 import com.iisigroup.cap.report.factory.ItextFontFactory;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapSystemConfig;
@@ -54,7 +54,7 @@ import freemarker.template.Template;
  *          <li>2013/10/24,Sunkist Wang,new
  *          </ul>
  */
-public abstract class AbstractReportPdfService implements FreeMarkerReport, ReportService {
+public abstract class AbstractReportPdfService implements ReportService {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 

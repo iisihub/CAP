@@ -1,4 +1,4 @@
-package com.iisigroup.cap.report.service;
+package com.iisigroup.cap.report.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.report.AbstractReportPdfService;
-import com.iisigroup.cap.report.enums.ReportParamEnum;
+import com.iisigroup.cap.report.constants.ReportParamEnum;
 import com.iisigroup.cap.utils.CapDate;
 import com.itextpdf.text.pdf.PdfWriter;
 

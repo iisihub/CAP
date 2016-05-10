@@ -22,7 +22,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
-import com.iisigroup.websocket.bean.ChatObject;
+import com.iisigroup.websocket.model.ChatObject;
 
 /**
  * <pre>

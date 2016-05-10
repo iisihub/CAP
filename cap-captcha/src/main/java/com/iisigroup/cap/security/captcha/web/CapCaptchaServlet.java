@@ -9,7 +9,7 @@
  * This software is confidential and proprietary information of 
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
-package com.iisigroup.cap.security.captcha.servlet;
+package com.iisigroup.cap.security.captcha.web;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -41,16 +41,16 @@ import com.iisigroup.cap.utils.CapAppContext;
 @SuppressWarnings("serial")
 public class CapCaptchaServlet extends HttpServlet {
 
-    public static String DEF_RENDERER = "capCaptcha";
+    public static String defaultRender = "capCaptcha";
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        DEF_RENDERER = config.getInitParameter("captchaBean");
+        defaultRender = config.getInitParameter("captchaBean");
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CapSecurityCaptcha captcha = CapAppContext.getBean(DEF_RENDERER);
+        CapSecurityCaptcha captcha = CapAppContext.getBean(defaultRender);
         BufferedImage img = captcha.crateImage();
         resp.setContentType("image/jpeg");
         OutputStream os = resp.getOutputStream();

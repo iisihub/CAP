@@ -2,7 +2,7 @@ package com.iisigroup.cap.hg.service;
 
 import java.util.Map;
 
-import com.iisigroup.cap.hg.enums.ConnStatusEnum;
+import com.iisigroup.cap.hg.constants.ConnStatus;
 
 /**
  * <pre>
@@ -71,7 +71,7 @@ public interface HGService {
      * @param status
      *            stauts
      */
-    void setStatus(ConnStatusEnum status);
+    void setStatus(ConnStatus status);
 
     /**
      * set send data

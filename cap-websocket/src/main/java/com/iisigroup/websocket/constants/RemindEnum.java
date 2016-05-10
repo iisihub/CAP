@@ -1,4 +1,4 @@
-package com.iisigroup.websocket;
+package com.iisigroup.websocket.constants;
 
 /**
  * <pre>
