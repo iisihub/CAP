@@ -13,6 +13,7 @@ package com.iisigroup.cap.rule.service.impl;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,6 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.ibm.icu.util.Calendar;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.rule.dao.CaseInfoDao;
 import com.iisigroup.cap.rule.dao.DivFtDtlDao;

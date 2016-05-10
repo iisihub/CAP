@@ -33,10 +33,6 @@
         </dependency>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-batch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-websocket</artifactId>
         </dependency>
         <dependency>
@@ -46,11 +42,6 @@
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-rule</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-captcha</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tuckey</groupId>
