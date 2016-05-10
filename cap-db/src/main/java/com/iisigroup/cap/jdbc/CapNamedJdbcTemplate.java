@@ -76,6 +76,7 @@ public class CapNamedJdbcTemplate extends NamedParameterJdbcTemplate {
 
     public CapNamedJdbcTemplate(DataSource dataSource) {
         super(dataSource);
+        this.dataSource = dataSource;
     }
 
     public void setSqltemp(CapSqlStatement sqltemp) {
