@@ -1,10 +1,10 @@
-/*
+/* 
  * ManagementUtils.java
  *
  * IBM Confidential
  * GBS Source Materials
- *
- * Copyright (c) 2012 IBM Corp.
+ * 
+ * Copyright (c) 2012 IBM Corp. 
  * All Rights Reserved.
  */
 package com.iisigroup.cap.utils;
@@ -17,7 +17,7 @@ import java.lang.management.MemoryUsage;
  * <pre>
  * ManagementUtils
  * </pre>
- *
+ * 
  * @since 2012/3/8
  * @author UFO
  * @version

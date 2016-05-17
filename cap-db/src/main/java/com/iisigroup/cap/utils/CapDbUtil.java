@@ -24,8 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
-import com.iisigroup.cap.contants.CapJdbcContants;
-
 /**
  * <pre>
  * CapDbUtil
