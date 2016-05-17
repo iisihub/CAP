@@ -16,21 +16,23 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.beanutils.ConvertUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.model.GenericBean;
-
-import net.sf.json.JSONObject;
 
 /**
  * <p>
@@ -46,6 +48,7 @@ import net.sf.json.JSONObject;
  *          <li>2011/9/21, CP, 增加 JSONObject map2Json(Map<String, Object> map, String[] keyAry)</li>
  *          <li>2011/9/29,iristu,getField修改convert Date及Timestamp問題
  *          <li>2011/11/1,rodeschen,from cap
+ *          <li>2016/5/17,TimChiang,moveCapCommonUtil.findMethod(Class<?> clazz, String name, Class<?>... paramTypes)
  *          </ul>
  */
 public class CapBeanUtil {
@@ -405,6 +408,22 @@ public class CapBeanUtil {
         }
 
         return JSONObject.fromObject(tmpMap);
+    }
+
+    public static Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
+        Assert.notNull(clazz, "Class must not be null");
+        Assert.notNull(name, "Method name must not be null");
+        Class<?> searchType = clazz;
+        while (searchType != null) {
+            Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
+            for (Method method : methods) {
+                if (name.equals(method.getName()) && (paramTypes == null || paramTypes.length == 0 || paramTypes[0] == null || Arrays.equals(paramTypes, method.getParameterTypes()))) {
+                    return method;
+                }
+            }
+            searchType = searchType.getSuperclass();
+        }
+        return null;
     }
 
 }

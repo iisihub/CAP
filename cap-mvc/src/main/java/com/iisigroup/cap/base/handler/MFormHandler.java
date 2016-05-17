@@ -17,12 +17,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
+
 import com.iisigroup.cap.action.Action;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.GridResult;
-import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.constants.GridEnum;
 import com.iisigroup.cap.context.CapParameter;
 import com.iisigroup.cap.dao.SearchSetting;
@@ -34,10 +36,8 @@ import com.iisigroup.cap.operation.Operation;
 import com.iisigroup.cap.operation.OperationStep;
 import com.iisigroup.cap.plugin.HandlerPlugin;
 import com.iisigroup.cap.utils.CapAppContext;
-import com.iisigroup.cap.utils.CapCommonUtil;
+import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapString;
-
-import net.sf.json.JSONArray;
 
 /**
  * <pre>
@@ -96,7 +96,7 @@ public abstract class MFormHandler extends HandlerPlugin {
             }
             boolean hasMethod = false;
             try {
-                Method method = CapCommonUtil.findMethod(executeHandler.getClass(), methodId, (Class<?>) null);
+                Method method = CapBeanUtil.findMethod(executeHandler.getClass(), methodId, (Class<?>) null);
                 if (method != null) {
                     HandlerType type = method.getAnnotation(HandlerType.class);
                     if (type != null && HandlerTypeEnum.GRID.equals(type.value())) {
@@ -230,7 +230,7 @@ public abstract class MFormHandler extends HandlerPlugin {
 
     protected String getOperationName(Request params) {
         String methodId = params.get(FORM_ACTION);
-        Method method = CapCommonUtil.findMethod(this.getClass(), methodId, (Class<?>) null);
+        Method method = CapBeanUtil.findMethod(this.getClass(), methodId, (Class<?>) null);
         if (method != null) {
             HandlerType type = method.getAnnotation(HandlerType.class);
             if (type != null) {
