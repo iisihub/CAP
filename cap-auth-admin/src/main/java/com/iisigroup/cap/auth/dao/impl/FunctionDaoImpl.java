@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2009-2012 International Integrated System, Inc. 
+ * Copyright (c) 2009-2012 International Integrated System, Inc.
  * 11F, No.133, Sec.4, Minsheng E. Rd., Taipei, 10574, Taiwan, R.O.C.
  * All Rights Reserved.
- * 
+ *
  * Licensed Materials - Property of International Integrated System, Inc.
- * 
- * This software is confidential and proprietary information of 
+ *
+ * This software is confidential and proprietary information of
  * International Integrated System, Inc. (&quot;Confidential Information&quot;).
  */
 
@@ -34,13 +34,13 @@ import com.iisigroup.cap.contants.SearchMode;
 import com.iisigroup.cap.dao.SearchSetting;
 import com.iisigroup.cap.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.utils.StringUtil;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
  * DAO
  * </pre>
- * 
+ *
  * @since 2013/12/20
  * @author tammy
  * @version
@@ -197,8 +197,9 @@ public class FunctionDaoImpl extends GenericDaoImpl<DefaultFunction> implements 
         param.put("sysType", sysType);
 
         getNamedJdbcTemplate().query("function_auth", param, new RowCallbackHandler() {
+            @Override
             public void processRow(ResultSet rs) throws SQLException {
-                String role = StringUtil.trim(rs.getString("ROLE"));
+                String role = CapString.trimNull(rs.getString("ROLE"));
                 Map<Integer, Integer> authes = roleAuthes.get(role);
                 if (authes == null) {
                     authes = new HashMap<Integer, Integer>();

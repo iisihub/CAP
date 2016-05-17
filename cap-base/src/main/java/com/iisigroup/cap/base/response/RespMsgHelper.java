@@ -1,10 +1,10 @@
-/* 
+/*
  * RespMsgHelper.java
  *
  * IBM Confidential
  * GBS Source Materials
- * 
- * Copyright (c) 2011 IBM Corp. 
+ *
+ * Copyright (c) 2011 IBM Corp.
  * All Rights Reserved.
  */
 package com.iisigroup.cap.base.response;
@@ -13,19 +13,20 @@ import java.text.MessageFormat;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 
 import com.iisigroup.cap.base.model.ErrorCode;
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
-import com.iisigroup.cap.utils.StrUtils;
 
 /**
  * <pre>
  * 格式化回傳訊息工具程式
  * </pre>
- * 
+ *
  * @since 2011/07/29
  * @author UFO
  * @version
@@ -57,7 +58,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param plugin
      *            AjaxHandlerPlugin
      * @param key
@@ -70,7 +71,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param parent
      *            IRequest
      * @param key
@@ -83,7 +84,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param key
      *            i18n key
      * @param params
@@ -143,7 +144,7 @@ public class RespMsgHelper {
 
     /**
      * 取得訊息字串
-     * 
+     *
      * @param key
      *            訊息代碼
      * @param workComp
@@ -162,14 +163,14 @@ public class RespMsgHelper {
             ErrorCode errorCode = RespMsgFactory.getInstance().getErrorCode(key, localeStr);
 
             if (errorCode == null) {
-                msgstr = StrUtils.concat("WARN", SEPARATOR, key, SEPARATOR, "");
+                msgstr = CapString.concat("WARN", SEPARATOR, key, SEPARATOR, "");
             } else {
                 String msg = errorCode.getMessage();
                 if (params != null) {
                     msg = msg.replace("$\\{", "${").replace("\\}", "}");
                     msg = MessageFormat.format(msg, params);
                 }
-                msgstr = StrUtils.concat(errorCode.getSeverity(), SEPARATOR, msg, SEPARATOR, errorCode.getSuggestion());
+                msgstr = CapString.concat(errorCode.getSeverity(), SEPARATOR, msg, SEPARATOR, errorCode.getSuggestion());
             }
 
         } else {
@@ -187,7 +188,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param key
      *            i18n key
      * @param value
@@ -219,7 +220,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param params
      *            自定義訊息欄位陣列,size=4,[0]=錯誤代碼, [1]=等級,[2]=訊息內容,[3]=建議處理作法
      * @return 回應訊息
@@ -233,7 +234,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param severty
      *            等級
      * @param code
@@ -264,7 +265,7 @@ public class RespMsgHelper {
 
     /**
      * 格式化回應訊息
-     * 
+     *
      * @param errorCode
      *            {@link com.mega.eloan.common.model.ErrorCode}
      * @return 回應訊息
@@ -280,11 +281,11 @@ public class RespMsgHelper {
     /**
      * <pre>
      * 格式化回應訊息(取得主要訊息)
-     * 
+     *
      *  EX: [INFO]EFD0025-執行有誤 -> 執行有誤
-     * 
+     *
      * </pre>
-     * 
+     *
      * @param parent
      *            IRequest
      * @param key
@@ -304,7 +305,7 @@ public class RespMsgHelper {
 
     /**
      * 將Exception stack trace指定長度輸出
-     * 
+     *
      * @param ex
      *            Exception
      * @param maxLen
@@ -318,11 +319,8 @@ public class RespMsgHelper {
             return "";
         }
 
-        String exTrace = (obj instanceof Throwable) ? StringEscapeUtils.escapeHtml(StrUtils.getStackTrace((Throwable) obj)) : obj.toString();
-
+        String exTrace = (obj instanceof Throwable) ? StringEscapeUtils.escapeHtml(ExceptionUtils.getStackTrace((Throwable) obj)) : obj.toString();
         exTrace = exTrace.getBytes().length > EX_MAX_LEN ? new String(exTrace.getBytes(), 0, EX_MAX_LEN) + "..." : exTrace;
-
-        return StrUtils.addStrByFixedLength(exTrace, EX_MAX_LINE_LEN, "<BR>");
+        return CapString.addStrByFixedLength(exTrace, EX_MAX_LINE_LEN, "<BR>");
     }
-
 }
