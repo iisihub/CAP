@@ -39,7 +39,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 public class CapDbUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CapDbUtil.class);
-    
+
     /**
      * Convert a prepared statment to standard SQL command Can be used to debug SQL command
      * 
