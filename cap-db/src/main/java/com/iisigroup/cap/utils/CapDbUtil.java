@@ -22,11 +22,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.ParserContext;
-import org.springframework.expression.common.TemplateParserContext;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 
 import com.iisigroup.cap.contants.CapJdbcContants;
@@ -47,39 +42,6 @@ public class CapDbUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CapDbUtil.class);
     
-    final static ParserContext defParser = new TemplateParserContext();
-
-    /**
-     * <pre>
-     * trim全形空白
-     * </pre>
-     * 
-     * @param in
-     *            the input
-     * @return String
-     */
-    public static String trimFullSpace(String in) {
-        if (in == null) {
-            return "";
-        }
-        return in.replaceAll("^[　 ]+", "").replaceAll("[　 ]+$", "");
-    }
-
-    /**
-     * trimNull 當傳入值為Null時，則回傳空字串。不為Null時，則回傳trim過的String
-     * 
-     * @param o
-     *            the input
-     * @return string
-     */
-    public static String trimNull(Object o) {
-        if (o != null && !"".equals(o)) {
-            return (o.toString()).trim();
-        } else {
-            return CapJdbcContants.EMPTY_STRING;
-        }
-    }
-
     /**
      * Convert a prepared statment to standard SQL command Can be used to debug SQL command
      * 
@@ -109,82 +71,6 @@ public class CapDbUtil {
             LOGGER.error(e.getMessage());
         }
         return sb.toString();
-    }
-
-    /**
-     * Message Format
-     * 
-     * String pattern = "An ${key1} a day keeps the ${key2} away!"; Map<String, Map<String, Object> params = {key1=Apple,key2=doctor} new
-     * 
-     * return An Apple a day keep the doctor away!
-     * 
-     * @param pattern
-     *            string
-     * @param params
-     *            參數
-     * @return String
-     */
-    @Deprecated
-    public static String messageFormat(String pattern, Map<String, Object> params) {
-        final StringBuffer buffer = new StringBuffer();
-        // For each occurrences of "${"
-        int start;
-        int pos = 0;
-
-        while ((start = pattern.indexOf("${", pos)) != -1) {
-            buffer.append(pattern.substring(pos, start));
-            if (pattern.charAt(start + 1) == '$') {
-                buffer.append('$');
-                pos = start + 2;
-                continue;
-            }
-            pos = start;
-            final int startVariableName = start + 2;
-            final int endVariableName = pattern.indexOf('}', startVariableName);
-
-            if (endVariableName != -1) {
-                String variableName = pattern.substring(startVariableName, endVariableName);
-                String value = params.containsKey(variableName) ? params.get(variableName).toString() : "";
-                buffer.append(value);
-                pos = endVariableName + 1;
-            } else {
-                break;
-            }
-        }
-        if (pos < pattern.length()) {
-            buffer.append(pattern.substring(pos));
-        }
-        return buffer.toString();
-    }
-
-    /**
-     * use Spring Expression Language (SpEL) parse
-     * 
-     * @param expressionStr
-     *            expression string
-     * @param params
-     *            parameters
-     * @return String
-     */
-    public static String spelParser(String expressionStr, Map<String, Object> params) {
-        return spelParser(expressionStr, params, defParser);
-    }
-
-    /**
-     * use Spring Expression Language (SpEL) parse
-     * 
-     * @param expressionStr
-     *            expression string
-     * @param params
-     *            parameters
-     * @param parserContext
-     *            parserContext
-     * @return String
-     */
-    public static String spelParser(String expressionStr, Map<String, Object> params, ParserContext parserContext) {
-        StandardEvaluationContext context = new StandardEvaluationContext(params);
-        ExpressionParser spel = new SpelExpressionParser();
-        return spel.parseExpression(expressionStr, parserContext).getValue(context, String.class);
     }
 
     @SuppressWarnings("rawtypes")
