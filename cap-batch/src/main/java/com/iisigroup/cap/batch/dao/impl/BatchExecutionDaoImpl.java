@@ -13,9 +13,9 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.batch.dao.BatchExecutionDao;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.model.Page;
 
 @Repository
 public class BatchExecutionDaoImpl extends GenericDaoImpl<Object> implements BatchExecutionDao {

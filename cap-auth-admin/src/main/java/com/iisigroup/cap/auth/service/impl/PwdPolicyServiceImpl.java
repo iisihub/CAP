@@ -11,7 +11,7 @@ import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.service.PwdPolicyService;
 import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.component.Request;
-import com.iisigroup.cap.dao.CommonDao;
+import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.utils.CapAppContext;

@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.iisigroup.cap.auth.model.DefaultFunction;
-import com.iisigroup.cap.dao.GenericDao;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.GenericDao;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>

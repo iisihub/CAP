@@ -3,8 +3,8 @@ package com.iisigroup.cap.auth.dao;
 import java.util.Map;
 
 import com.iisigroup.cap.auth.model.DefaultUser;
-import com.iisigroup.cap.dao.GenericDao;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.GenericDao;
+import com.iisigroup.cap.db.model.Page;
 
 public interface UserDao extends GenericDao<DefaultUser> {
     DefaultUser findByCode(String userId);

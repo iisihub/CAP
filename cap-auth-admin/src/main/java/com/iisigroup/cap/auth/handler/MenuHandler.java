@@ -17,10 +17,10 @@ import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.auth.service.MenuService;
 import com.iisigroup.cap.auth.service.impl.MenuServiceImpl.MenuItem;
-import com.iisigroup.cap.base.handler.MFormHandler;
 import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.security.CapSecurityContext;
 
 import net.sf.json.JSONSerializer;

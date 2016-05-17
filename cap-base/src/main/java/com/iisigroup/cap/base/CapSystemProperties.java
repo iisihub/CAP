@@ -17,7 +17,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.service.CommonService;
+import com.iisigroup.cap.db.service.CommonService;
 import com.iisigroup.cap.utils.CapString;
 
 /**

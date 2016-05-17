@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.UserRoleDao;
 import com.iisigroup.cap.auth.model.UserRole;
-import com.iisigroup.cap.contants.SearchMode;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 @Repository
 public class UserRoleDaoImpl extends GenericDaoImpl<UserRole> implements UserRoleDao {

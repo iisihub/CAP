@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.RemindsDao;
 import com.iisigroup.cap.base.model.Reminds;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>

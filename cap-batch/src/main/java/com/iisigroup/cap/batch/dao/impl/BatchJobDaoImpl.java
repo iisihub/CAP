@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.iisigroup.cap.batch.dao.BatchJobDao;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.support.BatchJobRowMapper;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.utils.CapBeanUtil;
 
 @Repository

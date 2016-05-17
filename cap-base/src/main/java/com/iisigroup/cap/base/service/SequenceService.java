@@ -13,7 +13,7 @@ package com.iisigroup.cap.base.service;
 
 import java.util.Map;
 
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>

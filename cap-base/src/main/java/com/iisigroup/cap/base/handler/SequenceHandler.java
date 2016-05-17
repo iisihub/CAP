@@ -24,8 +24,9 @@ import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.component.impl.MapGridResult;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 
 /**
  * <pre>

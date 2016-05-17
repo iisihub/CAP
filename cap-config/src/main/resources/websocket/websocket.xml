@@ -3,14 +3,14 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:annotation-config />
-    <bean class="com.iisigroup.websocket.server.CapNettyWebSocketServer"></bean>
+    <bean class="com.iisigroup.cap.websocket.server.CapNettyWebSocketServer"></bean>
     <!-- Reminder -->
     <!-- @Controller -->
-    <context:component-scan base-package="com.iisigroup.websocket.handler" />
+    <context:component-scan base-package="com.iisigroup.cap.websocket.handler" />
     <!-- @Controller @Service -->
-    <context:component-scan base-package="com.iisigroup.websocket.service" />
+    <context:component-scan base-package="com.iisigroup.cap.websocket.service" />
     <!-- @Task -->
-    <bean id="reminderTask" class="com.iisigroup.websocket.timer.CapReminderTimerTask"></bean>
+    <bean id="reminderTask" class="com.iisigroup.cap.websocket.timer.CapReminderTimerTask"></bean>
     <bean id="scheduledTimerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
         <property name="timerTask" ref="reminderTask"></property>
         <property name="period" value="30000"></property>

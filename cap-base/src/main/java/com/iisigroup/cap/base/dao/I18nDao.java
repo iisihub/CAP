@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.base.model.I18n;
-import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 
 /**
  * <pre>

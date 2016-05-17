@@ -20,9 +20,9 @@ import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.utils.CapString;
 
 /**

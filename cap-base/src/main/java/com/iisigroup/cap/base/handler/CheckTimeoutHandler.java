@@ -22,6 +22,7 @@ import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.exception.CapException;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
 

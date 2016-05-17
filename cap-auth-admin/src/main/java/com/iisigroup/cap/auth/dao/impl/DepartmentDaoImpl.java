@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.DepartmentDao;
 import com.iisigroup.cap.auth.model.Department;
-import com.iisigroup.cap.contants.SearchMode;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>

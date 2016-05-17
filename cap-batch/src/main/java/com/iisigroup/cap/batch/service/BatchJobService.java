@@ -19,8 +19,8 @@ import org.springframework.core.io.Resource;
 
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>
