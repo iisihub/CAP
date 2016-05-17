@@ -1,10 +1,10 @@
-/* 
+/*
  * ManagementUtils.java
  *
  * IBM Confidential
  * GBS Source Materials
- * 
- * Copyright (c) 2012 IBM Corp. 
+ *
+ * Copyright (c) 2012 IBM Corp.
  * All Rights Reserved.
  */
 package com.iisigroup.cap.utils;
@@ -17,7 +17,7 @@ import java.lang.management.MemoryUsage;
  * <pre>
  * ManagementUtils
  * </pre>
- * 
+ *
  * @since 2012/3/8
  * @author UFO
  * @version
@@ -34,13 +34,13 @@ public class ManagementUtils {
     }
 
     public static String formatHeapMemoryUsage(MemoryUsage beforHeap, MemoryUsage afterHeap) {
-        return afterHeap != null ? StrUtils.concat("Heap Usage: Committed=", bytesToMegabytes(beforHeap.getCommitted()), "->", bytesToMegabytes(afterHeap.getCommitted()), " MB, Init=",
+        return afterHeap != null ? CapString.concat("Heap Usage: Committed=", bytesToMegabytes(beforHeap.getCommitted()), "->", bytesToMegabytes(afterHeap.getCommitted()), " MB, Init=",
                 bytesToMegabytes(beforHeap.getInit()), "->", bytesToMegabytes(afterHeap.getInit()), " MB, Max=", bytesToMegabytes(beforHeap.getMax()), "->", bytesToMegabytes(afterHeap.getMax()),
                 " MB, Used=", bytesToMegabytes(beforHeap.getUsed()), "->", bytesToMegabytes(afterHeap.getUsed()), "=", (bytesToMegabytes(afterHeap.getUsed() - beforHeap.getUsed())), " MB ") : "";
     }
 
     public static String formatHeapMemoryUsage(MemoryUsage heap) {
-        return heap != null ? StrUtils.concat("Heap Usage: Committed=", bytesToMegabytes(heap.getCommitted()), "->", bytesToMegabytes(heap.getCommitted()), " MB, Init=",
+        return heap != null ? CapString.concat("Heap Usage: Committed=", bytesToMegabytes(heap.getCommitted()), "->", bytesToMegabytes(heap.getCommitted()), " MB, Init=",
                 bytesToMegabytes(heap.getInit()), " MB, Max=", bytesToMegabytes(heap.getMax()), " MB, Used=", bytesToMegabytes(heap.getUsed()), " MB ") : "";
     }
 
