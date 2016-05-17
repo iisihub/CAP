@@ -3,9 +3,9 @@ package com.iisigroup.cap.batch.dao;
 import java.util.List;
 
 import com.iisigroup.cap.batch.model.BatchSchedule;
-import com.iisigroup.cap.dao.GenericDao;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.GenericDao;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 
 public interface BatchScheduleDao extends GenericDao<BatchSchedule> {
     Page<BatchSchedule> findForPage(SearchSetting search);

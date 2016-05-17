@@ -20,9 +20,9 @@ import java.util.Map.Entry;
 
 import org.springframework.util.CollectionUtils;
 
-import com.iisigroup.cap.contants.SearchMode;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.SearchModeParameter;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.SearchModeParameter;
 
 /**
  * <pre>

@@ -14,9 +14,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>

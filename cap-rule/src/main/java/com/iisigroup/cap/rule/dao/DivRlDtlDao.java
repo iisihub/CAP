@@ -13,7 +13,7 @@ package com.iisigroup.cap.rule.dao;
 
 import java.util.List;
 
-import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 import com.iisigroup.cap.rule.model.DivRlDtl;
 
 /**

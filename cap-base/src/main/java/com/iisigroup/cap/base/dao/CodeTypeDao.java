@@ -14,7 +14,7 @@ package com.iisigroup.cap.base.dao;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.CodeType;
-import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 
 /**
  * <pre>

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.base.dao.SequenceDao;
 import com.iisigroup.cap.base.model.Sequence;
 import com.iisigroup.cap.base.service.SequenceService;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.utils.CapDate;
 
 /**

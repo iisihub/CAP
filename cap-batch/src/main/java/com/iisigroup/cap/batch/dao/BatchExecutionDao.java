@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.springframework.batch.core.JobParameters;
 
-import com.iisigroup.cap.dao.GenericDao;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.GenericDao;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 
 public interface BatchExecutionDao extends GenericDao<Object> {
     Page<Map<String, Object>> findExecutionsForPage(SearchSetting search);

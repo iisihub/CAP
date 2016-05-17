@@ -19,8 +19,8 @@ import com.iisigroup.cap.auth.model.DefaultFunction;
 import com.iisigroup.cap.auth.model.DefaultRole;
 import com.iisigroup.cap.auth.model.Department;
 import com.iisigroup.cap.auth.service.RoleSetService;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>

@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.Remind;
-import com.iisigroup.cap.dao.GenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 
 /**
  * <pre>

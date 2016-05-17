@@ -19,10 +19,10 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.RoleDao;
 import com.iisigroup.cap.auth.model.DefaultRole;
-import com.iisigroup.cap.contants.SearchMode;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.security.model.Role;
 
 /**

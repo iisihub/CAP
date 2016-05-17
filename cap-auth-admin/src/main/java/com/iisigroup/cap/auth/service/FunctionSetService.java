@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.iisigroup.cap.auth.model.DefaultFunction;
 import com.iisigroup.cap.component.Request;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>

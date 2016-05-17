@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.RoleFunctionDao;
 import com.iisigroup.cap.auth.model.RoleFunction;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 @Repository
 public class RoleFunctionDaoImpl extends GenericDaoImpl<RoleFunction> implements RoleFunctionDao {

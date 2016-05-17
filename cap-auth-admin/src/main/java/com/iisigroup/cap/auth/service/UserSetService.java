@@ -3,7 +3,7 @@ package com.iisigroup.cap.auth.service;
 import java.util.Map;
 
 import com.iisigroup.cap.auth.model.DefaultUser;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.model.Page;
 
 public interface UserSetService {
     void deleteUserByOids(String[] oids);

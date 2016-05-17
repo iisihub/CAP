@@ -30,10 +30,10 @@ import org.springframework.stereotype.Repository;
 import com.iisigroup.cap.auth.dao.FunctionDao;
 import com.iisigroup.cap.auth.model.DefaultFunction;
 import com.iisigroup.cap.auth.support.FunctionRowMapper;
-import com.iisigroup.cap.contants.SearchMode;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.dao.impl.GenericDaoImpl;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.utils.CapString;
 
 /**

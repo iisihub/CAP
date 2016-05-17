@@ -25,8 +25,8 @@ import com.iisigroup.cap.batch.dao.BatchScheduleDao;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
-import com.iisigroup.cap.dao.SearchSetting;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapSystemConfig;
 

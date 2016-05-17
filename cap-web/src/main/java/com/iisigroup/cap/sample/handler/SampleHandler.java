@@ -27,13 +27,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.base.handler.MFormHandler;
 import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.component.impl.ByteArrayDownloadResult;
 import com.iisigroup.cap.constants.Constants;
 import com.iisigroup.cap.exception.CapException;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.report.constants.ContextTypeEnum;
 import com.iisigroup.cap.report.service.impl.SampleRptService;
 import com.iisigroup.cap.security.annotation.Captcha;

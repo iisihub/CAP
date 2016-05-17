@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.iisigroup.cap.auth.model.DefaultRole;
-import com.iisigroup.cap.dao.GenericDao;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.dao.GenericDao;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.security.model.Role;
 
 public interface RoleDao extends GenericDao<DefaultRole> {

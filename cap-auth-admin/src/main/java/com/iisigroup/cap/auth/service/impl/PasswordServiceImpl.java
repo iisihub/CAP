@@ -21,7 +21,7 @@ import com.iisigroup.cap.auth.model.PwdLog;
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.dao.CommonDao;
+import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;

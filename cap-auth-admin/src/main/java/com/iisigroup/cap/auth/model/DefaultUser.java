@@ -30,9 +30,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.iisigroup.cap.model.DataObject;
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.security.model.Role;
 import com.iisigroup.cap.security.model.User;
 
