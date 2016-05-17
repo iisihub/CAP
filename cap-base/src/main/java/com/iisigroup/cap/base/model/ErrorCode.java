@@ -1,10 +1,10 @@
-/* 
+/*
  * ErrorCode.java
  *
  * IBM Confidential
  * GBS Source Materials
- * 
- * Copyright (c) 2011 IBM Corp. 
+ *
+ * Copyright (c) 2011 IBM Corp.
  * All Rights Reserved.
  */
 package com.iisigroup.cap.base.model;
@@ -23,13 +23,13 @@ import org.apache.commons.lang.StringUtils;
 import com.iisigroup.cap.model.DataObject;
 import com.iisigroup.cap.model.GenericBean;
 import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
-import com.iisigroup.cap.utils.StrUtils;
+import com.iisigroup.cap.utils.CapString;
 
 /**
  * <pre>
  * 訊息代碼
  * </pre>
- * 
+ *
  * @since 2011/08/02
  * @author UFO
  * @version
@@ -111,7 +111,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the code
-     * 
+     *
      * @return the code
      */
     public String getCode() {
@@ -120,7 +120,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the code
-     * 
+     *
      * @param code
      *            the code to set
      */
@@ -130,7 +130,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the locale
-     * 
+     *
      * @return the locale
      */
     public String getLocale() {
@@ -139,7 +139,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the locale
-     * 
+     *
      * @param locale
      *            the locale to set
      */
@@ -149,7 +149,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the severity
-     * 
+     *
      * @return the severity
      */
     public String getSeverity() {
@@ -158,7 +158,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the severity
-     * 
+     *
      * @param severity
      *            the severity to set
      */
@@ -168,7 +168,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the message
-     * 
+     *
      * @return the message
      */
     public String getMessage() {
@@ -177,7 +177,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the message
-     * 
+     *
      * @param message
      *            the message to set
      */
@@ -187,7 +187,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the suggestion
-     * 
+     *
      * @return the suggestion
      */
     public String getSuggestion() {
@@ -196,7 +196,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the suggestion
-     * 
+     *
      * @param suggestion
      *            the suggestion to set
      */
@@ -206,7 +206,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the lastmodif
-     * 
+     *
      * @return the lastModifyTime
      */
     public Timestamp getLastModifyTime() {
@@ -215,7 +215,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the lastModifyTime
-     * 
+     *
      * @param lastModifyTime
      *            the lastModiryTime to set
      */
@@ -225,7 +225,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * get the lastModifyBy
-     * 
+     *
      * @return the lastModifyBy
      */
     public String getLastModifyBy() {
@@ -234,7 +234,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the lastModifyBy
-     * 
+     *
      * @param lastModifyBy
      *            the lastModifyBy to set
      */
@@ -244,25 +244,27 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see tw.com.iisi.cap.model.IDataObject#getOid()
      */
+    @Override
     public String getOid() {
         return this.oid;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see tw.com.iisi.cap.model.IDataObject#setOid(java.lang.String)
      */
+    @Override
     public void setOid(String oid) {
         this.oid = oid;
     }
 
     /**
      * get the sysId
-     * 
+     *
      * @return the sysId
      */
     public String getSysId() {
@@ -305,7 +307,7 @@ public class ErrorCode extends GenericBean implements DataObject {
 
     /**
      * set the sysId
-     * 
+     *
      * @param sysId
      *            the sysId to set
      */
@@ -324,7 +326,7 @@ public class ErrorCode extends GenericBean implements DataObject {
     }
 
     public String getI18nPropString() {
-        return StrUtils.concat(this.severity, SEPARATOR, this.message, SEPARATOR, StringUtils.trimToEmpty(this.suggestion));
+        return CapString.concat(this.severity, SEPARATOR, this.message, SEPARATOR, StringUtils.trimToEmpty(this.suggestion));
     }
 
 }

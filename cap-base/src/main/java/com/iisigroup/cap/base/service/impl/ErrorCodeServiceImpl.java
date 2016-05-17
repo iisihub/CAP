@@ -19,14 +19,14 @@ import com.iisigroup.cap.base.model.ErrorCode;
 import com.iisigroup.cap.base.service.ErrorCodeService;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.utils.CapBeanUtil;
+import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.ManagementUtils;
-import com.iisigroup.cap.utils.StrUtils;
 
 /**
  * <pre>
  * 訊息代碼表
  * </pre>
- * 
+ *
  * @since 2012/03/29
  * @author UFOJ
  * @version
@@ -47,7 +47,7 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.mega.sso.service.BranchService#reload()
      */
     @PostConstruct
@@ -75,7 +75,7 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
 
     /**
      * get the cache key name
-     * 
+     *
      * @param code
      *            the error code
      * @param locale
@@ -83,7 +83,7 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
      * @return key
      */
     private String getCacheKey(String code, String locale) {
-        return StrUtils.concat(StringUtils.trimToEmpty(code), ".", StringUtils.trimToEmpty(locale));
+        return CapString.concat(StringUtils.trimToEmpty(code), ".", StringUtils.trimToEmpty(locale));
     }
 
     @Override
@@ -93,17 +93,17 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
 
     /**
      * get the errorcode by code and locale
-     * 
+     *
      * @param code
      *            代碼類型
      * @param locale
      *            語言別
      * @return Map
-     * 
+     *
      */
     @Override
     public ErrorCode getErrorCode(String code, String locale) {
-        ErrorCode errorCode = (ErrorCode) errorCodeCache.get(this.getCacheKey(code, locale));
+        ErrorCode errorCode = errorCodeCache.get(this.getCacheKey(code, locale));
 
         if (errorCode == null) {
             LOGGER.warn("[getErrorCode]!!! GET_ERRORCODE_FROM_DB !!!");

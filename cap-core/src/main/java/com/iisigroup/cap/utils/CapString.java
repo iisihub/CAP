@@ -10,6 +10,10 @@
  */
 package com.iisigroup.cap.utils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +26,12 @@ import java.util.regex.Pattern;
 import com.iisigroup.cap.constants.Constants;
 
 /**
- * 
+ *
  * <p>
  * 字串處理.
  * </p>
- * 
- * 
+ *
+ *
  * @author malo
  * @version
  *          <ul>
@@ -36,20 +40,23 @@ import com.iisigroup.cap.constants.Constants;
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public class CapString {
+public final class CapString {
 
     public final static char[] hexChar = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
+    private CapString() {
+    }
+
     /**
      * 將byte陣列轉為十六進位字串 如{0x01, 0x02} => 0102 (Move from tw.com.iisi.ettk.api.API.java)
-     * 
+     *
      * @param ba
      *            傳入byte陣列
      * @return 轉換後的字串陣列
      */
     public static String byteArrayToHexString(byte[] ba) {
         if (ba == null) {
-            return "";
+            return Constants.EMPTY_STRING;
         }
         char[] ca = new char[2 * ba.length];
         for (int i = 0; i < ca.length; i += 2) {
@@ -62,7 +69,7 @@ public class CapString {
 
     /**
      * hex string to byte array ex. 6364 -> [c][d]
-     * 
+     *
      * @param s
      *            input string
      * @return output byte array
@@ -78,7 +85,7 @@ public class CapString {
 
     /**
      * 在字串前面補空白.
-     * 
+     *
      * @param in
      *            the input string
      * @param length
@@ -91,7 +98,7 @@ public class CapString {
 
     /**
      * 在字串前面補0.
-     * 
+     *
      * @param in
      *            the input
      * @param length
@@ -104,7 +111,7 @@ public class CapString {
 
     /**
      * fill space character to tail of string to length.
-     * 
+     *
      * @param in
      *            the input string
      * @param length
@@ -117,7 +124,7 @@ public class CapString {
 
     /**
      * 在字串後面補0
-     * 
+     *
      * @param in
      *            the input
      * @param length
@@ -130,7 +137,7 @@ public class CapString {
 
     /**
      * fill specify character to string. 對字串補特殊字元.
-     * 
+     *
      * @param in
      *            the input string. 輸入字串.
      * @param length
@@ -145,7 +152,7 @@ public class CapString {
 
         StringBuffer sb = new StringBuffer();
         if (in == null) {
-            in = ""; //$NON-NLS-1$
+            in = Constants.EMPTY_STRING; //$NON-NLS-1$
         }
         int inLength = in.getBytes().length;
         if (inLength >= length) {
@@ -166,7 +173,7 @@ public class CapString {
 
     /**
      * fill specify character to string. 對字串補特殊字元.
-     * 
+     *
      * @param rStr
      *            the input string. 輸入字串.
      * @param length
@@ -210,13 +217,13 @@ public class CapString {
 
     /**
      * trimNull 當傳入值為Null時，則回傳空字串。不為Null時，則回傳trim過的String
-     * 
+     *
      * @param o
      *            the input
      * @return string
      */
     public static String trimNull(Object o) {
-        if (o != null && !"".equals(o)) {
+        if (o != null && !Constants.EMPTY_STRING.equals(o)) {
             return (o.toString()).trim();
         } else {
             return Constants.EMPTY_STRING;
@@ -227,21 +234,21 @@ public class CapString {
      * <pre>
      * trim全形空白
      * </pre>
-     * 
+     *
      * @param in
      *            the input
      * @return String
      */
     public static String trimFullSpace(String in) {
         if (isEmpty(in)) {
-            return "";
+            return Constants.EMPTY_STRING;
         }
-        return in.replaceAll("^[　 ]+", "").replaceAll("[　 ]+$", "");
+        return in.replaceAll("^[　 ]+", Constants.EMPTY_STRING).replaceAll("[　 ]+$", Constants.EMPTY_STRING);
     }
 
     /**
      * 判斷字串是否為空白.
-     * 
+     *
      * @param s
      *            字串
      * @return boolean
@@ -251,9 +258,9 @@ public class CapString {
     }
 
     /**
-     * 
+     *
      * 判斷字串是否與正規表示式相同
-     * 
+     *
      * @param str
      *            字串
      * @param regEx
@@ -273,13 +280,13 @@ public class CapString {
      * <pre>
      * 最得第一個符合條件之字串
      * </pre>
-     * 
+     *
      * @param str
      *            the input
      * @param regEx
      *            正規式表示式
      * @return String
-     * 
+     *
      */
     public static String getRegularMatch(String str, String regEx) {
         Pattern p = Pattern.compile(regEx);
@@ -288,9 +295,9 @@ public class CapString {
     }
 
     /**
-     * 
+     *
      * 判斷傳入之字串是否為數字
-     * 
+     *
      * @param str
      *            input string
      * @return boolean
@@ -316,7 +323,7 @@ public class CapString {
 
     /**
      * 轉全型
-     * 
+     *
      * @param str
      *            the input string
      * @return 全型String
@@ -342,7 +349,7 @@ public class CapString {
 
     /**
      * trim Left
-     * 
+     *
      * @param source
      *            source
      * @return String
@@ -352,7 +359,7 @@ public class CapString {
             return source;
         }
         if (source.trim().length() == 0)
-            return "";
+            return Constants.EMPTY_STRING;
         int index = 0;
         for (int i = 0; i < source.length(); i++) {
             if (Character.isWhitespace(source.charAt(i))) {
@@ -366,7 +373,7 @@ public class CapString {
 
     /**
      * 將字串中有斷行的符號去除
-     * 
+     *
      * @param source
      *            String
      * @return String
@@ -375,14 +382,14 @@ public class CapString {
         if (isEmpty(source)) {
             return source;
         }
-        source = source.replaceAll("\r\n", "");
-        source = source.replaceAll("\n", "");
+        source = source.replaceAll("\r\n", Constants.EMPTY_STRING);
+        source = source.replaceAll("\n", Constants.EMPTY_STRING);
         return source;
     }
 
     public static String flattenArrayAsString(Object[] objects) {
         if (objects != null) {
-            StringBuilder builder = new StringBuilder("");
+            StringBuilder builder = new StringBuilder(Constants.EMPTY_STRING);
             for (Object o : objects) {
                 if (o != null) {
                     builder.append(o.toString());
@@ -393,16 +400,16 @@ public class CapString {
             }
             return builder.toString();
         }
-        return "";
+        return Constants.EMPTY_STRING;
     }
 
     public static String getUUIDString() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+        return UUID.randomUUID().toString().replaceAll("-", Constants.EMPTY_STRING);
     }
 
     /**
      * 截取所需長度字串
-     * 
+     *
      * @param in
      *            字串
      * @param encoding
@@ -428,7 +435,7 @@ public class CapString {
 
     /**
      * trimNull 當傳入值為Null時，則回傳為指定name字串。不為Null時，則回傳trim 過的String
-     * 
+     *
      * @param o
      *            the input
      * @param name
@@ -436,7 +443,7 @@ public class CapString {
      * @return string
      */
     public static String trimNull(Object o, String name) {
-        if (o != null && !"".equals(o)) {
+        if (o != null && !Constants.EMPTY_STRING.equals(o)) {
             return (o.toString()).trim();
         } else {
             return name;
@@ -445,7 +452,7 @@ public class CapString {
 
     /**
      * Array transform String
-     * 
+     *
      * @param ary
      *            String[]
      * @return String
@@ -465,7 +472,7 @@ public class CapString {
 
     /**
      * 解析每行數據獲取數據庫每個欄位對應的數據集合
-     * 
+     *
      * @param dataString
      *            一行數據
      * @param delimit
@@ -485,4 +492,101 @@ public class CapString {
         return list;
     }
 
+    /**
+     * 取得組合字串
+     *
+     * @param params
+     *            字串片斷
+     * @return 組合字串
+     */
+    public final static String concat(Object... params) {
+        StringBuffer strBuf = new StringBuffer();
+        for (Object o : params) {
+            if (o instanceof byte[]) {
+                strBuf.append(new String((byte[]) o));
+            } else {
+                strBuf.append(String.valueOf(o));
+            }
+        }
+        return strBuf.toString();
+    }
+
+    /**
+     * convert InputStream to String
+     *
+     * @param is
+     *            InputStream object
+     * @return String
+     */
+    public static String stream2String(InputStream is) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                if (sb.length() > 0) {
+                    sb.append("\n");
+                }
+                sb.append(line);
+            }
+        } catch (Exception ex) {
+            sb.append("<<Exception>>:" + ex.getLocalizedMessage());
+        } finally {
+            try {
+                is.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 依指定長度分割字串
+     *
+     * @param str
+     *            原始字串
+     * @param len
+     *            指定長
+     * @return 分割後字串陣列
+     */
+    public static String[] splitFixedLength(String str, final int len) {
+        // return str.split("(?<=\\G.{" + len + "})");
+        List<String> tempList = new ArrayList<String>();
+        int idx = 0;
+        byte[] bmsg = str.getBytes();
+        int blen = bmsg.length;
+        while (idx < blen) {
+            String tmp = new String(bmsg, idx, idx + len < blen ? len : blen - idx);
+            tempList.add(tmp);
+            idx += len;
+
+        }
+        return tempList.toArray(new String[tempList.size()]);
+    }
+
+    /**
+     * 在指定長度的字串後面附加指定的字串
+     *
+     * @param str
+     *            原始字串
+     * @param len
+     *            指定長度
+     * @param addstr
+     *            欲附加的字串
+     * @return 組合後字串
+     */
+    public static String addStrByFixedLength(String str, int len, String addstr) {
+        String[] tempStr = splitFixedLength(str, len);
+        StringBuilder strgrp = new StringBuilder();
+        if (tempStr.length == 1) {
+            strgrp.append(tempStr[0]);
+        } else {
+            for (int i = 0; i < tempStr.length; i++) {
+                strgrp.append(tempStr[i]).append(addstr);
+            }
+        }
+        return strgrp.toString();
+    }
 }
