@@ -37,8 +37,9 @@ import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.service.CommonService;
-import com.iisigroup.cap.utils.CapCommonUtil;
+import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapWebUtil;
 import com.iisigroup.cap.utils.UUIDGenerator;
 import com.isigroup.cap.base.annotation.CapAuditLogAction;
 
@@ -58,7 +59,7 @@ import com.isigroup.cap.base.annotation.CapAuditLogAction;
  */
 public class CapAuditLog4HandlerAdvice {
 
-    private static String HOST_NAME = CapCommonUtil.getHostName();
+    private static String HOST_NAME = CapWebUtil.getHostName();
     private static String HOST_ID = HOST_NAME.trim().substring(HOST_NAME.length() - 1);
     private static final String DEF_PROP = "def";
     private static final String MENU_PREFIX = "menu.";
@@ -105,7 +106,7 @@ public class CapAuditLog4HandlerAdvice {
 
         String targetName = pjp.getTarget().getClass().getName();
 
-        Method method = CapCommonUtil.findMethod(pjp.getTarget().getClass(), params.get(CapConstants.P_FORM_ACTION), (Class<?>) null);
+        Method method = CapBeanUtil.findMethod(pjp.getTarget().getClass(), params.get(CapConstants.P_FORM_ACTION), (Class<?>) null);
         String logAuditInfo = "none";
         if (method != null) {
             String action = null, function = null;
@@ -218,7 +219,7 @@ public class CapAuditLog4HandlerAdvice {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        Method method = CapCommonUtil.findMethod(clazz, params.get(CapConstants.P_FORM_ACTION), (Class<?>) null);
+        Method method = CapBeanUtil.findMethod(clazz, params.get(CapConstants.P_FORM_ACTION), (Class<?>) null);
         String action = null, function = null;
         boolean haveToAudit = false;
         if (method != null) {

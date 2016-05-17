@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.ParserContext;
+import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
@@ -45,6 +46,8 @@ import com.iisigroup.cap.contants.CapJdbcContants;
 public class CapDbUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CapDbUtil.class);
+    
+    final static ParserContext defParser = new TemplateParserContext();
 
     /**
      * <pre>
@@ -152,6 +155,19 @@ public class CapDbUtil {
             buffer.append(pattern.substring(pos));
         }
         return buffer.toString();
+    }
+
+    /**
+     * use Spring Expression Language (SpEL) parse
+     * 
+     * @param expressionStr
+     *            expression string
+     * @param params
+     *            parameters
+     * @return String
+     */
+    public static String spelParser(String expressionStr, Map<String, Object> params) {
+        return spelParser(expressionStr, params, defParser);
     }
 
     /**
