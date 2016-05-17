@@ -20,7 +20,7 @@ import com.iisigroup.cap.base.service.ErrorCodeService;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapString;
-import com.iisigroup.cap.utils.ManagementUtils;
+import com.iisigroup.cap.utils.ManagementUtil;
 
 /**
  * <pre>
@@ -54,7 +54,7 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
     @Override
     public synchronized void reload() {
         long t1 = System.currentTimeMillis();
-        MemoryUsage heap1 = ManagementUtils.getCurrentMemUsage();
+        MemoryUsage heap1 = ManagementUtil.getCurrentMemUsage();
 
         errorCodeCache.clear();
         List<ErrorCode> list = errorCodeDao.findByAll();
@@ -68,7 +68,7 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
             }
         }
         LOGGER.info("[reload] ErrorCodeCache size={} ", errorCodeCache.size());
-        LOGGER.info("[reload] {}", ManagementUtils.formatHeapMemoryUsage(heap1, ManagementUtils.getCurrentMemUsage()));
+        LOGGER.info("[reload] {}", ManagementUtil.formatHeapMemoryUsage(heap1, ManagementUtil.getCurrentMemUsage()));
         LOGGER.info("[reload] TOTAL COST= {} ms ", (System.currentTimeMillis() - t1));
 
     }

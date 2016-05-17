@@ -24,7 +24,7 @@ import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
+import com.iisigroup.cap.security.constatns.SecConstants.PwdPloicyKeys;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service

@@ -21,7 +21,7 @@ import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.db.service.CommonService;
 import com.iisigroup.cap.mvc.handler.MFormHandler;
-import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
+import com.iisigroup.cap.security.constatns.SecConstants.PwdPloicyKeys;
 
 /**
  * <pre>

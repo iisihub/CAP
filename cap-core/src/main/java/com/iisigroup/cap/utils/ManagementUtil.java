@@ -1,5 +1,5 @@
 /* 
- * ManagementUtils.java
+ * ManagementUtil.java
  *
  * IBM Confidential
  * GBS Source Materials
@@ -15,7 +15,7 @@ import java.lang.management.MemoryUsage;
 
 /**
  * <pre>
- * ManagementUtils
+ * ManagementUtil
  * </pre>
  * 
  * @since 2012/3/8
@@ -25,7 +25,7 @@ import java.lang.management.MemoryUsage;
  *          <li>2012/3/8,UFO,new
  *          </ul>
  */
-public class ManagementUtils {
+public class ManagementUtil {
     private static final long MEGABYTE = 1024L * 1024L;
 
     public static MemoryUsage getCurrentMemUsage() {
