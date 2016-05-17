@@ -86,7 +86,6 @@ public class CapWebUtil {
         return url;
     }
 
-
     private static String hostName;
 
     /**

@@ -22,7 +22,8 @@ import com.iisigroup.cap.constants.Constants;
  * </p>
  * 
  * @author iristu
- * @since  <li>2016/5/17,TimChiang,moveCapCommonUtil.formatAmount() & toChineseUpperAmount()
+ * @since
+ *        <li>2016/5/17,TimChiang,moveCapCommonUtil.formatAmount() & toChineseUpperAmount()
  * 
  */
 public class CapMath implements Constants {
@@ -476,7 +477,7 @@ public class CapMath implements Constants {
         tmpValue = sampleValue.subtract(sampleMean).divide(tmpValue, scale, rm);
         return tmpValue;
     }
-    
+
     /**
      * <pre>
      * 數字轉國字大寫

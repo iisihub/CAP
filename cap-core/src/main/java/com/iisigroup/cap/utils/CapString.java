@@ -152,7 +152,7 @@ public final class CapString {
 
         StringBuffer sb = new StringBuffer();
         if (in == null) {
-            in = Constants.EMPTY_STRING; //$NON-NLS-1$
+            in = Constants.EMPTY_STRING; // $NON-NLS-1$
         }
         int inLength = in.getBytes().length;
         if (inLength >= length) {
