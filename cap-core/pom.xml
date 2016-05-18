@@ -4,12 +4,12 @@
 	<parent>
 		<artifactId>cap</artifactId>
 		<groupId>com.iisigroup.cap</groupId>
-		<version>2.2.1-citibanking-16050418</version>
+		<version>2.2.1-citibanking-16051819</version>
 	</parent>
 	<artifactId>cap-core</artifactId>
 	<properties>
 		<spring.version>3.1.3.RELEASE</spring.version>
-		<slf4j.version>1.5.8</slf4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.iisigroup.cap</groupId>
 	<artifactId>cap</artifactId>
-	<version>2.2.1-citibanking-16050418</version>
+	<version>2.2.1-citibanking-16051819</version>
 	<packaging>pom</packaging>
 	<properties>
-	    <cap.version>2.2.1-citibanking-16050418</cap.version>
-		<slf4j.version>1.5.8</slf4j.version>
+	    <cap.version>2.2.1-citibanking-16051819</cap.version>
+		<slf4j.version>1.7.5</slf4j.version>
         <localRepositoryPath>src/localRepos</localRepositoryPath>
 	</properties>
     <repositories>

@@ -4,13 +4,26 @@
 	<parent>
 		<artifactId>cap</artifactId>
 		<groupId>com.iisigroup.cap</groupId>
-		<version>2.2.1-citibanking-16050418</version>
+		<version>2.2.1-citibanking-16051819</version>
 	</parent>
 	<artifactId>cap-auth-admin</artifactId>
+    <properties>
+        <spring.batch.version>2.1.9.RELEASE</spring.batch.version>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.iisigroup.cap</groupId>
-			<artifactId>cap-batch</artifactId>
+			<artifactId>cap-mvc</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.iisigroup.cap</groupId>
+			<artifactId>cap-base</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-core</artifactId>
+            <version>${spring.batch.version}</version>
+            <scope>compile</scope>
+        </dependency>
 	</dependencies>
 </project>
