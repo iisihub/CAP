@@ -57,12 +57,15 @@ import freemarker.template.Template;
 public abstract class AbstractReportPdfService implements ReportService {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-
-    public static final String fileUrlPrefix = "file:///";
-
+    public final static String FIL_URL_PREFIX = "file:///";
     public final static String REPORT_SUFFIX = ".ftl";
-
-    final String DEFAULT_ENCORDING = "utf-8";
+    private final static String DEFAULT_ENCORDING = "utf-8";
+    @Resource
+    private FreeMarkerConfigurer fmConfg;
+    @Resource
+    private CapSystemConfig sysConfig;
+    @Resource
+    private ItextFontFactory fontFactory;
 
     @Resource
     private ServletContext servletContext;
@@ -110,7 +113,7 @@ public abstract class AbstractReportPdfService implements ReportService {
             }
             iTextRenderer.setPDFEncryption(pdfEncryption);
 
-            iTextRenderer.setDocument(document, fileUrlPrefix + servletContext.getRealPath("").replace("\\", "/") + "/");
+            iTextRenderer.setDocument(document, FIL_URL_PREFIX + servletContext.getRealPath("").replace("\\", "/") + "/");
 
             iTextRenderer.layout();
             iTextRenderer.createPDF(out);
@@ -143,13 +146,6 @@ public abstract class AbstractReportPdfService implements ReportService {
         }
         return out;
     }
-
-    @Resource
-    private FreeMarkerConfigurer fmConfg;
-    @Resource
-    private CapSystemConfig sysConfig;
-    @Resource
-    private ItextFontFactory fontFactory;
 
     public FreeMarkerConfigurer getFmConfg() {
         return fmConfg;

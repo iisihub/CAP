@@ -19,11 +19,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.14</version>
-        </dependency>
         <!-- PDF LIB -->
         <dependency>
             <groupId>com.lowagie</groupId>

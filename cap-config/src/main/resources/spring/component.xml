@@ -71,11 +71,10 @@
             </list>
         </property>
     </bean>
-    <!-- freemarker config -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPaths">
             <list>
-                <value>${batch.freemarkDir}</value>
+                <value>${freemarkDir}</value>
             </list>
         </property>
         <property name="freemarkerSettings">
@@ -84,9 +83,5 @@
                 <prop key="locale">${defaultLocale}</prop>
             </props>
         </property>
-    </bean>
-    <!--itext config -->
-    <bean id="itextFontFactory" class="com.iisigroup.cap.report.factory.ItextFontFactory">
-        <property name="basePath" value="${fontDir}" />
     </bean>
 </beans>

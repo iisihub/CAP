@@ -17,6 +17,7 @@
         <class>com.iisigroup.cap.base.model.I18n</class>
         <class>com.iisigroup.cap.base.model.Remind</class>
         <class>com.iisigroup.cap.base.model.Reminds</class>
+        <!-- cap-rule -->
         <class>com.iisigroup.cap.rule.model.CaseInfo</class>
         <class>com.iisigroup.cap.rule.model.DivFtItm</class>
         <class>com.iisigroup.cap.rule.model.DivFtDtl</class>
