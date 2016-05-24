@@ -24,7 +24,7 @@ import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPloicyKeys;
+import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.utils.CapDate;
 
 @Service
@@ -73,7 +73,7 @@ public class UserSetServiceImpl implements UserSetService {
         user.setName(name);
         user.setEmail(email);
         if (!StringUtils.isBlank(password)) {
-            SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+            SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
             int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
             user.setPwdExpiredTime(new Timestamp(CapDate.shiftDays(now, expiredDay).getTime()));
             user.setPassword(encodePassword(user.getCode(), password));

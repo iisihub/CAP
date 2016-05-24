@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha.CaptchaStatus;
 import com.iisigroup.cap.security.captcha.web.CapCaptchaServlet;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPloicyKeys;
+import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.security.exception.CapAuthenticationException;
 import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.CapUserDetails;
@@ -52,7 +52,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             Integer wrongCount = getWrountCount(username);
             logger.debug("wrongCount-{}: {}", username, wrongCount);
             // 密碼連錯 PWD_ACCOUNT_LOCK 次 lock user
-            if (wrongCount >= Integer.parseInt(policy.get(PwdPloicyKeys.PWD_ACCOUNT_LOCK.toString().toLowerCase()))) {
+            if (wrongCount >= Integer.parseInt(policy.get(PwdPolicyKeys.PWD_ACCOUNT_LOCK.toString().toLowerCase()))) {
                 accessControlService.lockUserByUserId(username);
                 throw new CapAuthenticationException("User locked.", captchaEnabled);
             }
@@ -86,7 +86,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
                 } else {
                     setWrountCount(username, getWrountCount(username) + 1);
                     // 連錯 N 次，enable captcha
-                    if (wrongCount >= Integer.parseInt(policy.get(PwdPloicyKeys.PWD_CAPTCHA_ENABLE.toString().toLowerCase()))) {
+                    if (wrongCount >= Integer.parseInt(policy.get(PwdPolicyKeys.PWD_CAPTCHA_ENABLE.toString().toLowerCase()))) {
                         setCaptchaEnabled(true);
                     }
                     throw new CapAuthenticationException("Invalid Password.", isCaptchaEnabled(), forceChangePwd);
@@ -108,7 +108,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             break;
         case 1:// 初始
                // 若「首次登入是否強制更換密碼」為1，則強制更換密碼，否則用原密碼登入。
-            if ("1".equals(policy.get(PwdPloicyKeys.PWD_FORCE_CHANGE_PWD.toString().toLowerCase()))) {
+            if ("1".equals(policy.get(PwdPolicyKeys.PWD_FORCE_CHANGE_PWD.toString().toLowerCase()))) {
                 authedPwd = forceChangePassword(username, captchaEnabled, forceChangePwd, CapAppContext.getMessage("error.011"));
             } else {
                 authedPwd = password;
