@@ -15,6 +15,8 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobListener;
@@ -33,6 +35,7 @@ import com.iisigroup.cap.batch.service.BatchJobService;
 import com.iisigroup.cap.formatter.impl.ADDateTimeFormatter;
 import com.iisigroup.cap.formatter.impl.DurationFormatter;
 import com.iisigroup.cap.utils.CapString;
+import com.iisigroup.cap.utils.CapSystemConfig;
 
 import freemarker.template.Template;
 
@@ -55,6 +58,8 @@ public class CapBatchMailNotifyListener implements JobListener, InitializingBean
     private BatchJobService batchSerivce;
     private EmailService mailSender;
     private JobParametersExtractor jobParametersExtractor;
+    @Resource
+    private CapSystemConfig config;
 
     private FreeMarkerConfigurer fmConfg;
     private String messageTemplate;
@@ -88,6 +93,7 @@ public class CapBatchMailNotifyListener implements JobListener, InitializingBean
     protected String buildText(JobExecution job) {
         Map<String, Object> result = getExecutionResult(job);
         try {
+            fmConfg.setTemplateLoaderPath(config.getProperty("batch.freemarkDir"));
             Template t = fmConfg.getConfiguration().getTemplate(messageTemplate);
             return FreeMarkerTemplateUtils.processTemplateIntoString(t, result);
         } catch (Exception e) {

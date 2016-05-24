@@ -16,7 +16,7 @@ public enum ReportParamEnum {
     templateName("templateName"),
     defaultEncoding("defaultEncoding"),
     encrypt("encryptPassword"),
-    defaultFont("defaultFont");
+    defaultFont("report.defaultFont");
 
     private String code;
 
