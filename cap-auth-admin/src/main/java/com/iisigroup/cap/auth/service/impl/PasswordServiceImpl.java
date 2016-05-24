@@ -24,7 +24,7 @@ import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPloicyKeys;
+import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.security.service.PasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
@@ -43,10 +43,10 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public boolean checkPasswordRule(String userId, String password, String password2, boolean forcePwdChange) {
-        SysParm parmPwdRule = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_RULE.toString().toLowerCase());
-        SysParm parmPwdMinLen = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_MIN_LENGTH.toString().toLowerCase());
-        SysParm parmPwdMaxHistory = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_MAX_HISTORY.toString().toLowerCase());
-        SysParm parmPwdChangeInteval = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_CHANGE_INTERVAL.toString().toLowerCase());
+        SysParm parmPwdRule = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_RULE.toString().toLowerCase());
+        SysParm parmPwdMinLen = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_MIN_LENGTH.toString().toLowerCase());
+        SysParm parmPwdMaxHistory = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_MAX_HISTORY.toString().toLowerCase());
+        SysParm parmPwdChangeInteval = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_CHANGE_INTERVAL.toString().toLowerCase());
         int minLen = Integer.parseInt(parmPwdMinLen.getParmValue());
         int maxHistory = Integer.parseInt(parmPwdMaxHistory.getParmValue());
         int changeInteval = Integer.parseInt(parmPwdChangeInteval.getParmValue());
@@ -110,7 +110,7 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public void changeUserPassword(String userId, String password) {
-        SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+        SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
         int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
         Date now = Calendar.getInstance().getTime();
         DefaultUser user = userDao.findByCode(userId);
@@ -130,7 +130,7 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public Map<String, String> getPasswordPolicy() {
         Map<String, String> result = new HashMap<String, String>();
-        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
+        for (PwdPolicyKeys value : PwdPolicyKeys.values()) {
             SysParm parm = commonDao.findById(SysParm.class, value.toString().toLowerCase());
             if (parm != null) {
                 result.put(parm.getParmId(), parm.getParmValue());
@@ -146,8 +146,8 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public int getPasswordChangeNotifyDay(String userId) {
-        SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
-        SysParm parmPwdNotifyDay = commonDao.findById(SysParm.class, PwdPloicyKeys.PWD_NOTIFY_DAY.toString().toLowerCase());
+        SysParm parmPwdExpiredDay = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_EXPIRED_DAY.toString().toLowerCase());
+        SysParm parmPwdNotifyDay = commonDao.findById(SysParm.class, PwdPolicyKeys.PWD_NOTIFY_DAY.toString().toLowerCase());
         int notifyDay = Integer.parseInt(parmPwdNotifyDay.getParmValue());
         int expiredDay = Integer.parseInt(parmPwdExpiredDay.getParmValue());
         DefaultUser user = userDao.findByCode(userId);

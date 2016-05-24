@@ -3,7 +3,7 @@ package com.iisigroup.cap.security.constatns;
 import com.iisigroup.cap.constants.Constants;
 
 public interface SecConstants extends Constants {
-    public enum PwdPloicyKeys {
+    public enum PwdPolicyKeys {
         PWD_EXPIRED_DAY,
         PWD_MIN_LENGTH,
         PWD_RULE,

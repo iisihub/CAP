@@ -21,7 +21,7 @@ import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.db.service.CommonService;
 import com.iisigroup.cap.mvc.handler.MFormHandler;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPloicyKeys;
+import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
 
 /**
  * <pre>
@@ -45,7 +45,7 @@ public class PwdPolicyHandler extends MFormHandler {
 
     public Result query(Request request) {
         AjaxFormResult result = new AjaxFormResult();
-        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
+        for (PwdPolicyKeys value : PwdPolicyKeys.values()) {
             SysParm parm = commonService.findById(SysParm.class, value.toString().toLowerCase());
             if (parm != null) {
                 result.set(parm.getParmId().substring(4), parm.getParmValue());
