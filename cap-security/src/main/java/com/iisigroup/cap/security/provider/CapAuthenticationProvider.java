@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
 import com.iisigroup.cap.security.captcha.CapSecurityCaptcha.CaptchaStatus;
 import com.iisigroup.cap.security.captcha.web.CapCaptchaServlet;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
+import com.iisigroup.cap.security.constants.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.security.exception.CapAuthenticationException;
 import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.CapUserDetails;

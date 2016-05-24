@@ -24,7 +24,7 @@ import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
+import com.iisigroup.cap.security.constants.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.security.service.PasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;

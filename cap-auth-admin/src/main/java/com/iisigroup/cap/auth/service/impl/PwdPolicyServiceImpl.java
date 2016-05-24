@@ -13,7 +13,7 @@ import com.iisigroup.cap.base.model.SysParm;
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.db.dao.CommonDao;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.constatns.SecConstants.PwdPolicyKeys;
+import com.iisigroup.cap.security.constants.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 

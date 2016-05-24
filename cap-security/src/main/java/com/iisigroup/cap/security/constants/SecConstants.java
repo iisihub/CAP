@@ -1,4 +1,4 @@
-package com.iisigroup.cap.security.constatns;
+package com.iisigroup.cap.security.constants;
 
 import com.iisigroup.cap.constants.Constants;
 
