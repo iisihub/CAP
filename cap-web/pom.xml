@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-batch</artifactId>
+            <artifactId>cap-websocket</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
@@ -31,13 +31,14 @@
             <!-- 包版時不包進 war 中 使用 build plugin copy 進classes -->
             <scope>provided</scope>
         </dependency>
+        <!-- optional -->
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-hg</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-websocket</artifactId>
+            <artifactId>cap-captcha</artifactId>
         </dependency>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
@@ -225,10 +226,10 @@
                                 C:/Program Files/nodejs/node
                                 </nodeExecutable> -->
                             <!-- path to optimizer json config file -->
-                            <configFile> ${basedir}/src/main/webapp/static/build.js 
+                            <configFile> ${basedir}/src/main/webapp/static/build.js
                             </configFile>
                             <!-- optional path to optimizer executable -->
-                            <optimizerFile> ${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js 
+                            <optimizerFile> ${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js
                             </optimizerFile>
                             <!-- optional parameters to optimizer executable -->
                             <optimizerParameters>
@@ -240,10 +241,10 @@
                             <!-- Whether or not to process configFile with maven filters. If you use
                                 this option, some options in your configFile must resolve to absolute paths
                                 (see below) -->
-                            <filterConfig> false 
+                            <filterConfig> false
                             </filterConfig>
                             <!-- Skip requirejs optimization if true -->
-                            <skip> false 
+                            <skip> false
                             </skip>
                         </configuration>
                     </plugin>
