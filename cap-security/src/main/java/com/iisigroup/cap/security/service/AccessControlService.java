@@ -35,4 +35,6 @@ public interface AccessControlService {
 
     void login(String userId);
 
+    boolean checkCaptcha();
+
 }

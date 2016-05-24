@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
+import com.iisigroup.cap.security.service.CheckCodeService;
 import com.iisigroup.cap.utils.CapAppContext;
 
 /**
@@ -50,8 +50,8 @@ public class CapCaptchaServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CapSecurityCaptcha captcha = CapAppContext.getBean(defaultRender);
-        BufferedImage img = captcha.crateImage();
+        CheckCodeService captcha = CapAppContext.getBean(defaultRender);
+        BufferedImage img = captcha.createCheckCode();
         resp.setContentType("image/jpeg");
         OutputStream os = resp.getOutputStream();
         ImageIO.write(img, "jpg", os);

@@ -13,7 +13,7 @@
         <!-- Project ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-captcha</artifactId>
+            <artifactId>cap-core</artifactId>
         </dependency>
         <!-- Spring security ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>

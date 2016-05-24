@@ -15,9 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
-import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
-import com.iisigroup.cap.security.captcha.CapSecurityCaptcha.CaptchaStatus;
-import com.iisigroup.cap.security.captcha.web.CapCaptchaServlet;
 import com.iisigroup.cap.security.constants.SecConstants.PwdPolicyKeys;
 import com.iisigroup.cap.security.exception.CapAuthenticationException;
 import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
@@ -58,9 +55,7 @@ public class CapAuthenticationProvider implements AuthenticationProvider {
             }
             // 驗證 captcha
             if (captchaEnabled) {
-                String cpatchaData = captchaCaptureFilter.getRequest().getParameter("captcha");
-                CapSecurityCaptcha captcha = CapAppContext.getBean(CapCaptchaServlet.defaultRender);
-                captchaPassed = CaptchaStatus.SUCCESS.equals(captcha.valid(cpatchaData));
+                captchaPassed = accessControlService.checkCaptcha();
                 logger.debug("Is captcha valid: " + captchaPassed);
             } else {
                 captchaPassed = true;

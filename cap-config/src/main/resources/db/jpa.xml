@@ -28,9 +28,6 @@
     </bean>
     <!-- setup spring support Clob and Blob -->
     <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
-    <bean id="capEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
     <!-- Enable exception translation for beans annotated with @Repository <bean
         class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />

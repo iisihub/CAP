@@ -1,9 +1,10 @@
 package com.iisigroup.cap.security.captcha;
 
 import java.awt.image.BufferedImage;
-import java.util.EnumSet;
 import java.util.List;
 
+import com.iisigroup.cap.security.constants.CheckStatus;
+import com.iisigroup.cap.security.service.CheckCodeService;
 import com.iisigroup.cap.utils.CapString;
 
 import nl.captcha.Captcha;
@@ -26,7 +27,7 @@ import nl.captcha.text.renderer.WordRenderer;
  *          <li>2013/3/13,rodeschen,new
  *          </ul>
  */
-public class CapSecurityCaptcha {
+public class CapSecurityCaptcha implements CheckCodeService {
 
     private int height;
     private int width;
@@ -109,6 +110,11 @@ public class CapSecurityCaptcha {
         this.timeout = timeout;
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> T createCheckCode() {
+        return (T) crateImage();
+    }
+
     public BufferedImage crateImage() {
         Builder captcha = new Captcha.Builder(width, height);
         if (this.wordRenderer == null) {
@@ -137,51 +143,17 @@ public class CapSecurityCaptcha {
         return captcha.build().getImage();
     }
 
-    public CaptchaStatus valid(String answer) {
-        CaptchaStatus status = CaptchaStatus.FAIL;
+    public CheckStatus valid(String answer) {
+        CheckStatus status = CheckStatus.FAIL;
         if (this.captcha != null && !CapString.isEmpty(answer)) {
             if ((System.currentTimeMillis() - this.captcha.getTimeStamp().getTime()) > timeout) {
-                status = CaptchaStatus.TIMEOUT;
+                status = CheckStatus.TIMEOUT;
             } else {
-                status = this.captcha.getAnswer().toLowerCase().equals(answer.toLowerCase()) ? CaptchaStatus.SUCCESS : CaptchaStatus.FAIL;
+                status = this.captcha.getAnswer().toLowerCase().equals(answer.toLowerCase()) ? CheckStatus.SUCCESS : CheckStatus.FAIL;
             }
         }
         this.captcha = null;
         return status;
-    }
-
-    public static enum CaptchaStatus {
-        // 成功
-        SUCCESS("01"),
-        // 失敗
-        FAIL("02"),
-        // 超時
-        TIMEOUT("03");
-
-        private String code;
-
-        CaptchaStatus(String code) {
-            this.code = code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public static CaptchaStatus getByCode(String code) {
-            CaptchaStatus returnValue = null;
-            for (final CaptchaStatus element : EnumSet.allOf(CaptchaStatus.class)) {
-                if (element.getCode().equals(code)) {
-                    returnValue = element;
-                    break;
-                }
-            }
-            return returnValue;
-        }
     }
 
 }

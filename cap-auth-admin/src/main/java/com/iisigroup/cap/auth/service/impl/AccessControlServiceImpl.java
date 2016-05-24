@@ -8,8 +8,12 @@ import com.iisigroup.cap.auth.dao.RoleDao;
 import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.security.CapSecurityContext;
+import com.iisigroup.cap.security.constants.CheckStatus;
+import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.Role;
 import com.iisigroup.cap.security.service.AccessControlService;
+import com.iisigroup.cap.security.service.CheckCodeService;
+import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 
 //@Service
@@ -58,6 +62,12 @@ public class AccessControlServiceImpl implements AccessControlService {
         DefaultUser user = userDao.findByCode(userId);
         user.setLastLoginTime(CapDate.getCurrentTimestamp());
         userDao.save(user);
+    }
+
+    public boolean checkCaptcha() {
+        String captchaData = ((CaptchaCaptureFilter) CapAppContext.getBean("captchaCaptureFilter")).getRequest().getParameter("captcha");
+        CheckCodeService captcha = CapAppContext.getBean("capCaptcha");
+        return CheckStatus.SUCCESS.equals(captcha.valid(captchaData));
     }
 
 }
