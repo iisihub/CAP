@@ -10,7 +10,7 @@
     <dependencies>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-security</artifactId>
+            <artifactId>cap-base</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jhlabs</groupId>
