@@ -10,7 +10,7 @@
  * This software is confidential and proprietary information of
  * International Integrated System, Inc. ("Confidential Information").
  */
-package com.iisigroup.cap.security.service.impl;
+package com.iisigroup.cap.auth.service.impl;
 
 import java.util.HashMap;
 import java.util.List;

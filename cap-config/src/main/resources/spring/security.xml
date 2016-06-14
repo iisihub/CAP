@@ -25,15 +25,22 @@
             <concurrency-control max-sessions="1" expired-url="/page/login?error" session-registry-alias="sessionRegistry" /> <!-- exception-if-maximum-exceeded="true" -->
         </session-management>
         <logout logout-url="/j_spring_security_logout" logout-success-url="/page/login" />
-        <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER" />
+        <!-- <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER" /> -->
     </http>
-    <beans:bean id="captchaCaptureFilter" class="com.iisigroup.cap.security.filter.CaptchaCaptureFilter"></beans:bean>
-    <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.security.service.impl.CapUserDetailsService">
+    <!-- <beans:bean id="captchaCaptureFilter" class="com.iisigroup.cap.security.filter.CaptchaCaptureFilter"></beans:bean> -->
+    <!-- <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.auth.service.impl.CapUserDetailsService">
     </beans:bean>
-    <beans:bean id="customAuthenticationProvider" class="com.iisigroup.cap.security.provider.CapAuthenticationProvider" p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
+    <beans:bean id="customAuthenticationProvider" class="com.iisigroup.cap.auth.provider.CapAuthenticationProvider" p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
         p:passwordService-ref="passwordService" p:accessControlService-ref="accessControlService" />
     <authentication-manager>
         <authentication-provider ref="customAuthenticationProvider" />
+    </authentication-manager> -->
+    <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.security.service.impl.CapDefaultUserDetailsService">
+    </beans:bean>
+    <authentication-manager>
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder hash="plaintext"/>
+        </authentication-provider>
     </authentication-manager>
     <beans:bean id="capAuthenticationEntryPoint" class="com.iisigroup.cap.security.web.CapAuthenticationEntryPoint">
         <beans:property name="loginFormUrl" value="/page/login" />
@@ -45,11 +52,11 @@
         <beans:property name="allowIfAllAbstainDecisions" value="false" />
         <beans:property name="decisionVoters">
             <beans:list>
-                <beans:bean class="com.iisigroup.cap.security.vote.CapPermissionVoter">
+                <!-- <beans:bean class="com.iisigroup.cap.security.vote.CapPermissionVoter">
                     <beans:property name="rolePrefix" value="${systemType}" />
                     <beans:property name="securityService" ref="accessControlService" />
                     <beans:property name="stripQueryStringFromUrls" value="true" />
-                </beans:bean>
+                </beans:bean> -->
                 <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
             </beans:list>
         </beans:property>
