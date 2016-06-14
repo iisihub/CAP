@@ -1,4 +1,4 @@
-package com.iisigroup.cap.security.provider;
+package com.iisigroup.cap.auth.provider;
 
 import java.util.Map;
 
