@@ -47,7 +47,7 @@ public class CodeTypeServiceImpl implements CodeTypeService {
     /*
      * (non-Javadoc)
      * 
-     * @see com.bqd.mci.service.CodeTypeService#saveCodeType(com.bqd.mci.model.CodeType )
+     * @see com.iisigroup.cap.base.service.CodeTypeService#saveCodeType(com.iisigroup.cap.base.model.CodeType)
      */
     @Override
     public void saveCodeType(CodeType codeType) {
