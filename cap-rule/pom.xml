@@ -9,7 +9,7 @@
     <dependencies>
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-mvc</artifactId>
+            <artifactId>cap-base</artifactId>
         </dependency>
         <!-- ******************** JExcelApi(jxl) LIB BEGIN ******************** -->
         <dependency>
