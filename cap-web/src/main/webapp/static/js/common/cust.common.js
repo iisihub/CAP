@@ -1,43 +1,43 @@
 // init
-// var menu = {
-// "menu" : [{
-// 
-// "name" : "系統設定",
-// "url" : "system",
-// "child" : [{
-// "name" : "代碼設定",
-// "url" : "codetype"
-// },{
-// "name" : "參數設定",
-// "url" : "sysparm"
-// },{
-// "name" : "流水號檢視",
-// "url" : "sequence"
-// }]
-// }, {
-// 
-// "name" : "系统功能",
-// "url" : "sample",
-// "child" : [{
-// "name" : "檔案上下傳",
-// "url" : "fileUpdDwn"
-// }]
-// },{
-// "name" : "排程管理",
-// "url" : "batch",
-// "child" : [{
-// "name" : "排程設定",
-// "url" : "schedule"
-// }, {
-// "name" : "排程Job清單",
-// "url" : "jobs"
-// }, {
-// "name" : "排程監控",
-// "url" : "jobexecution"
-// }]
-// 
-// }]
-// }
+ var menu = {
+ "child" : [{
+ 
+ "name" : "系統設定",
+ "url" : "system",
+ "child" : [{
+ "name" : "代碼設定",
+ "url" : "system/codetype"
+ },{
+ "name" : "參數設定",
+ "url" : "system/sysparm"
+ },{
+ "name" : "流水號檢視",
+ "url" : "system/sequence"
+ }]
+ }, {
+ 
+ "name" : "系统功能",
+ "url" : "sample",
+ "child" : [{
+ "name" : "檔案上下傳",
+ "url" : "sample/fileUpdDwn"
+ }]
+ },{
+ "name" : "排程管理",
+ "url" : "batch",
+ "child" : [{
+ "name" : "排程設定",
+ "url" : "batch/schedule"
+ }, {
+ "name" : "排程Job清單",
+ "url" : "batch/jobs"
+ }, {
+ "name" : "排程監控",
+ "url" : "batch/jobexecution"
+ }]
+ 
+ }]
+ }
 
 // init
 $(document).ready(
@@ -45,7 +45,7 @@ $(document).ready(
       logDebug("cust common ready init");
       var navTop = $("nav.top"), navSub = $("nav.sub ol");
       navTop.length
-          && $.get(url("menuhandler/queryMenu")).done(
+          && (
               function(res) {
                 var _menu = res.child, ul = $("nav.top ul.navmenu");
                 // $("#userName").val(res.userName);
@@ -178,7 +178,7 @@ $(document).ready(
                     }
                   }
                 });
-              });
+              })(menu);
 
       $("a[href='#language']").click(function() {
         var o = $(this).parents("ol");
