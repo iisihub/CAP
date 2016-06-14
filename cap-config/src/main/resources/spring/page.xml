@@ -5,7 +5,6 @@
  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
     <!-- ①：對web包中的所有類進行掃描，以完成Bean創建和自動依賴注入的功能 -->
-    <!--<context:component-scan base-package="com.bqd.mci.base.page"/> -->
     <context:component-scan base-package="com.iisigroup.cap.**.page" />
     <bean class="com.iisigroup.cap.mvc.action.PageAction" />
     <!-- ②：啓動Spring MVC的註解功能，完成請求和註解POJO的映射 -->
