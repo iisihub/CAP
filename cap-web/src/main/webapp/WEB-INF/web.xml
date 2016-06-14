@@ -173,11 +173,11 @@
         <url-pattern>/handler/*</url-pattern>
     </servlet-mapping>
     <!-- captcha sample Servelt start -->
-    <servlet>
+    <!-- <servlet>
         <servlet-name>captcha</servlet-name>
         <servlet-class>com.iisigroup.cap.security.captcha.web.CapCaptchaServlet</servlet-class>
         <init-param>
-            <!-- spring bean key -->
+            spring bean key
             <param-name>captchaBean</param-name>
             <param-value>capCaptcha</param-value>
         </init-param>
@@ -185,7 +185,7 @@
     <servlet-mapping>
         <servlet-name>captcha</servlet-name>
         <url-pattern>/captcha.png</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
     <!-- captcha sample Servelt end -->
     <!-- resource -->
     <resource-ref>

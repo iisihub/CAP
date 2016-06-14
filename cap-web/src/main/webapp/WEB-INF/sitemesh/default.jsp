@@ -24,7 +24,7 @@
 </head>
 <body>
     <script>
-          loadScript('js/common/cust.socket');
+          // loadScript('js/common/cust.socket');
         </script>
     <div class="mainBody">
         <header>
