@@ -26,8 +26,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
@@ -100,7 +100,7 @@ public class LogContextFilter implements Filter {
 
 class LogContext extends InheritableThreadLocal {
 
-    private static final Log logger = LogFactory.getLog(LogContext.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogContext.class);
 
     private static ThreadLocal<Map> logContext = new InheritableThreadLocal<Map>();
 
@@ -123,8 +123,8 @@ class LogContext extends InheritableThreadLocal {
             Class.forName("org.apache.log4j.MDC");
             useMDC = true;
         } catch (Throwable t) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("org.apache.log4j.MDC was not found on the classpath, continue without");
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("org.apache.log4j.MDC was not found on the classpath, continue without");
             }
         }
     }

@@ -49,7 +49,7 @@ import com.iisigroup.cap.batch.service.BatchJobService;
  */
 public class JobLauncherDetail extends QuartzJobBean implements CapBatchConstants {
 
-    private static Logger logger = LoggerFactory.getLogger(JobLauncherDetail.class);
+    private final Logger logger = LoggerFactory.getLogger(JobLauncherDetail.class);
 
     private JobLocator jobLocator;
     private JobLauncher jobLauncher;

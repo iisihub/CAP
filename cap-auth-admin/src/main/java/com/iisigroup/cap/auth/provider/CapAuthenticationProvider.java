@@ -15,9 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
+import com.iisigroup.cap.auth.exception.CapAuthenticationException;
+import com.iisigroup.cap.security.captcha.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.constants.SecConstants.PwdPolicyKeys;
-import com.iisigroup.cap.security.exception.CapAuthenticationException;
-import com.iisigroup.cap.security.filter.CaptchaCaptureFilter;
 import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.security.service.AccessControlService;
 import com.iisigroup.cap.security.service.PasswordService;
@@ -25,10 +25,10 @@ import com.iisigroup.cap.utils.CapAppContext;
 
 public class CapAuthenticationProvider implements AuthenticationProvider {
 
+    private final Logger logger = LoggerFactory.getLogger(CapAuthenticationProvider.class);
     private UserDetailsService userService;
     private PasswordService passwordService;
     private AccessControlService accessControlService;
-    private Logger logger = LoggerFactory.getLogger(CapAuthenticationProvider.class);
     private CaptchaCaptureFilter captchaCaptureFilter;
 
     @Override

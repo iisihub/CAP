@@ -13,8 +13,8 @@ package com.iisigroup.cap.operation.step;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -43,7 +43,7 @@ import com.iisigroup.cap.utils.CapMath;
  */
 public class CapFileUploadOpStep extends AbstractCustomizeOpStep {
 
-    protected static Log logger = LogFactory.getLog(CapFileUploadOpStep.class);
+    protected final Logger logger = LoggerFactory.getLogger(CapFileUploadOpStep.class);
 
     private CommonsMultipartResolver multipartResolver;
 

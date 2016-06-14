@@ -42,7 +42,7 @@ import com.iisigroup.cap.utils.CapDate;
 @Service
 public class SequenceServiceImpl implements SequenceService {
 
-    private final static Logger logger = LoggerFactory.getLogger(SequenceServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(SequenceServiceImpl.class);
 
     @Resource
     private SequenceDao sequenceDao;

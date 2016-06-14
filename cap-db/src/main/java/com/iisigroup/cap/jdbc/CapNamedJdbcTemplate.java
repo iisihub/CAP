@@ -61,7 +61,7 @@ import com.iisigroup.cap.utils.CapCommonUtil;
 public class CapNamedJdbcTemplate extends NamedParameterJdbcTemplate {
 
     // default
-    private Logger logger = LoggerFactory.getLogger(CapNamedJdbcTemplate.class);
+    private final Logger logger = LoggerFactory.getLogger(CapNamedJdbcTemplate.class);
 
     private CapSqlStatement sqlp;
     private CapSqlStatement sqltemp;

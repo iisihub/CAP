@@ -53,7 +53,7 @@ import com.iisigroup.cap.model.GenericBean;
  */
 public class CapBeanUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(CapBeanUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CapBeanUtil.class);
 
     /**
      * Copy Bean
@@ -360,10 +360,10 @@ public class CapBeanUtil {
                         method.invoke(entry, ConvertUtils.convert(value, field.getType()));
                     }
                 } catch (Exception e) {
-                    if (logger.isTraceEnabled()) {
-                        logger.trace(e.getMessage());
+                    if (LOGGER.isTraceEnabled()) {
+                        LOGGER.trace(e.getMessage());
                     } else {
-                        logger.warn(e.getMessage(), e);
+                        LOGGER.warn(e.getMessage(), e);
                     }
                 }
             }

@@ -2,8 +2,8 @@ package com.iisigroup.cap.utils;
 
 import java.util.Locale;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.NoSuchMessageException;
@@ -25,7 +25,7 @@ import com.iisigroup.cap.operation.simple.SimpleContextHolder;
  *          </ul>
  */
 public class CapAppContext implements ApplicationContextAware {
-    protected static Log logger = LogFactory.getLog(CapAppContext.class);
+    protected final static Logger LOGGER = LoggerFactory.getLogger(CapAppContext.class);
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) {
@@ -70,7 +70,7 @@ public class CapAppContext implements ApplicationContextAware {
         try {
             return applicationContext.getMessage(key, args, locale);
         } catch (NoSuchMessageException e) {
-            logger.warn("can't find message key:" + key);
+            LOGGER.warn("can't find message key:" + key);
             return key;
         }
 

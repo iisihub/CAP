@@ -42,7 +42,7 @@ import com.iisigroup.cap.utils.CapString;
  *          </ul>
  */
 public class MessageBundleScriptCreator {
-    protected final static Logger logger = LoggerFactory.getLogger(MessageBundleScriptCreator.class);
+    protected final static Logger LOGGER = LoggerFactory.getLogger(MessageBundleScriptCreator.class);
 
     protected final static String I18NKEY_REG = "\\w+$";
     protected static Set<String> defaultFilter;
@@ -201,7 +201,7 @@ public class MessageBundleScriptCreator {
             }
 
         } catch (Exception e) {
-            logger.error("can't load " + i18nPath);
+            LOGGER.error("can't load " + i18nPath);
         } finally {
             IOUtils.closeQuietly(is);
         }
