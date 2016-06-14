@@ -36,7 +36,7 @@ import com.iisigroup.cap.utils.ManagementUtil;
  */
 @Service("errorCodeService")
 public class ErrorCodeServiceImpl implements ErrorCodeService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorCodeServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ErrorCodeServiceImpl.class);
 
     @Resource
     ErrorCodeDao errorCodeDao;
@@ -64,12 +64,12 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
                 CapBeanUtil.copyBean(origin, targe);
                 errorCodeCache.put(getCacheKey(origin.getCode(), origin.getLocale()), targe);
             } catch (CapException ex) {
-                LOGGER.info("[reload] EXCEPTION!", ex);
+                logger.info("[reload] EXCEPTION!", ex);
             }
         }
-        LOGGER.info("[reload] ErrorCodeCache size={} ", errorCodeCache.size());
-        LOGGER.info("[reload] {}", ManagementUtil.formatHeapMemoryUsage(heap1, ManagementUtil.getCurrentMemUsage()));
-        LOGGER.info("[reload] TOTAL COST= {} ms ", (System.currentTimeMillis() - t1));
+        logger.info("[reload] ErrorCodeCache size={} ", errorCodeCache.size());
+        logger.info("[reload] {}", ManagementUtil.formatHeapMemoryUsage(heap1, ManagementUtil.getCurrentMemUsage()));
+        logger.info("[reload] TOTAL COST= {} ms ", (System.currentTimeMillis() - t1));
 
     }
 
@@ -106,7 +106,7 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
         ErrorCode errorCode = errorCodeCache.get(this.getCacheKey(code, locale));
 
         if (errorCode == null) {
-            LOGGER.warn("[getErrorCode]!!! GET_ERRORCODE_FROM_DB !!!");
+            logger.warn("[getErrorCode]!!! GET_ERRORCODE_FROM_DB !!!");
             errorCode = errorCodeDao.findByCode(code, locale);
 
             if (cacheMode) {

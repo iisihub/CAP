@@ -14,8 +14,8 @@ package com.iisigroup.cap.operation.step;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapMessageException;
@@ -42,7 +42,7 @@ import com.iisigroup.cap.utils.CapString;
  */
 public class CapCaptchaOpStep extends AbstractCustomizeOpStep {
 
-    protected static Log logger = LogFactory.getLog(CapCaptchaOpStep.class);
+    protected final Logger logger = LoggerFactory.getLogger(CapCaptchaOpStep.class);
 
     @Override
     public OpStepContext execute(OpStepContext ctx, Request params, Handler handler) {

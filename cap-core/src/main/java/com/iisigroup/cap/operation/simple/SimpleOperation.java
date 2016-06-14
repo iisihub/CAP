@@ -39,7 +39,7 @@ import com.iisigroup.cap.operation.OperationStep;
  */
 public class SimpleOperation implements Operation {
 
-    private static Logger logger = LoggerFactory.getLogger(SimpleOperation.class);
+    private final Logger logger = LoggerFactory.getLogger(SimpleOperation.class);
 
     String operName;
     Map<String, OperationStep> ruleMap;

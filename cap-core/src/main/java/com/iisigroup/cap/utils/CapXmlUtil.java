@@ -46,7 +46,7 @@ import net.sf.json.JSONObject;
  *          </ul>
  */
 public class CapXmlUtil {
-    protected static final Logger logger = LoggerFactory.getLogger(CapXmlUtil.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CapXmlUtil.class);
 
     /**
      * 取得 xPath 節點 text
@@ -66,7 +66,7 @@ public class CapXmlUtil {
                 return null;
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
             return null;
         }
     }

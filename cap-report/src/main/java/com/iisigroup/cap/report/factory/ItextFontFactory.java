@@ -13,8 +13,8 @@ package com.iisigroup.cap.report.factory;
 
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.iisigroup.cap.utils.CapAppContext;
@@ -38,7 +38,7 @@ import com.itextpdf.text.FontFactory;
 @Service
 public class ItextFontFactory {
 
-    protected static Log logger = LogFactory.getLog(ItextFontFactory.class);
+    protected final Logger logger = LoggerFactory.getLogger(ItextFontFactory.class);
 
     private String basePath;
 

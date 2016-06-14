@@ -34,7 +34,7 @@ import com.iisigroup.cap.exception.CapPlugInNotFoundException;
  */
 public class PluginManager implements InitializingBean {
 
-    private final static Logger logger = LoggerFactory.getLogger(PluginManager.class);
+    private final Logger logger = LoggerFactory.getLogger(PluginManager.class);
 
     private ApplicationContext context;
 

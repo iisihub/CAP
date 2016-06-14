@@ -66,7 +66,7 @@ public class CapAuditLog4HandlerAdvice {
     private static final String ACTION_PREFIX = "btn.";
     private static final String DISABLE_TYPE = "DisableType";
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CapAuditLog4HandlerAdvice.class);
+    private final Logger logger = LoggerFactory.getLogger(CapAuditLog4HandlerAdvice.class);
 
     protected static Set<String> capFilter;
 
@@ -119,13 +119,13 @@ public class CapAuditLog4HandlerAdvice {
                         auditLogAction.functionCode().getUrlPath());
             }
         }
-        if (LOGGER.isTraceEnabled()) {
-            LOGGER.trace("{} ENTRY: {} Start Time: {} Audit Information: {}", new Object[] { TITLE, targetName, new Date(start), logAuditInfo });
+        if (logger.isTraceEnabled()) {
+            logger.trace("{} ENTRY: {} Start Time: {} Audit Information: {}", new Object[] { TITLE, targetName, new Date(start), logAuditInfo });
         }
 
         Object obj = pjp.proceed();
 
-        LOGGER.info("{} TOTAL_COST= {} ms", TITLE, (System.currentTimeMillis() - start));
+        logger.info("{} TOTAL_COST= {} ms", TITLE, (System.currentTimeMillis() - start));
 
         return obj;
     }
@@ -147,8 +147,8 @@ public class CapAuditLog4HandlerAdvice {
         final String sno = String.valueOf(System.nanoTime());
         final String TITLE = StrUtils.concat("##[AL_AFTER][", sno, "]");
         String targetName = joinPoint.getTarget().getClass().getName();
-        if (LOGGER.isTraceEnabled()) {
-            LOGGER.trace("{} ENTRY: targetName:{} JoinPoint:{}\n IRequest:{}\n Object:{} ", new Object[] { TITLE, targetName, joinPoint, params, reVal });
+        if (logger.isTraceEnabled()) {
+            logger.trace("{} ENTRY: targetName:{} JoinPoint:{}\n IRequest:{}\n Object:{} ", new Object[] { TITLE, targetName, joinPoint, params, reVal });
         }
 
         try {
@@ -162,9 +162,9 @@ public class CapAuditLog4HandlerAdvice {
             }
 
         } catch (Exception ex) {
-            LOGGER.error(StrUtils.concat(TITLE, "DO_LOG_EXCEPTION_OCCURED!!"), ex);
+            logger.error(StrUtils.concat(TITLE, "DO_LOG_EXCEPTION_OCCURED!!"), ex);
         } finally {
-            LOGGER.info("{} TOTAL_COST= {} ms", TITLE, (System.currentTimeMillis() - t1));
+            logger.info("{} TOTAL_COST= {} ms", TITLE, (System.currentTimeMillis() - t1));
         }
     }
 
@@ -186,8 +186,8 @@ public class CapAuditLog4HandlerAdvice {
 
         String targetName = joinPoint.getTarget().getClass().getName();
 
-        if (LOGGER.isTraceEnabled()) {
-            LOGGER.trace("{} ENTRY: targetName:{} JoinPoint:{}\n IRequest:{}\n Exception:{} ", new Object[] { TITLE, targetName, joinPoint, params, exception });
+        if (logger.isTraceEnabled()) {
+            logger.trace("{} ENTRY: targetName:{} JoinPoint:{}\n IRequest:{}\n Exception:{} ", new Object[] { TITLE, targetName, joinPoint, params, exception });
         }
 
         try {
@@ -200,9 +200,9 @@ public class CapAuditLog4HandlerAdvice {
             }
 
         } catch (Exception ex) {
-            LOGGER.error(StrUtils.concat(TITLE, "DO_LOG_EXCEPTION_OCCURED!!"), ex);
+            logger.error(StrUtils.concat(TITLE, "DO_LOG_EXCEPTION_OCCURED!!"), ex);
         } finally {
-            LOGGER.info("{} TOTAL_COST= {} ms", TITLE, (System.currentTimeMillis() - t1));
+            logger.info("{} TOTAL_COST= {} ms", TITLE, (System.currentTimeMillis() - t1));
         }
     }
 
@@ -213,7 +213,7 @@ public class CapAuditLog4HandlerAdvice {
         String dtype = CapString.trimNull(sysparmDisableData, DisableType.CANCEL.getCode());
         sysProp.put(targetName + "." + DISABLE_TYPE, dtype);
         if (DisableType.ALL.isEquals(dtype)) {
-            LOGGER.trace("{} {} DISABLE_AUDITLOG ALL!!", TITLE, targetName);
+            logger.trace("{} {} DISABLE_AUDITLOG ALL!!", TITLE, targetName);
             return null;
         }
 
@@ -265,8 +265,8 @@ public class CapAuditLog4HandlerAdvice {
             long tstart = NumberUtils.toLong(CapString.trimNull(params.get(CapConstants.C_AUDITLOG_START_TS)));
             if (tstart > 0) {
                 auditLog.setExecuteDate(new Timestamp(tstart));
-                if (LOGGER.isTraceEnabled()) {
-                    LOGGER.trace("{} AuditLog={}", TITLE, auditLog);
+                if (logger.isTraceEnabled()) {
+                    logger.trace("{} AuditLog={}", TITLE, auditLog);
                 }
             }
         }
