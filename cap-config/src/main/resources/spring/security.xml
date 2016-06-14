@@ -19,8 +19,8 @@
         <intercept-url pattern="/page/**" access="${systemType}" />
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
         <anonymous enabled="false" />
-        <form-login always-use-default-target="true" login-page="/page/login" default-target-url="/page/index" authentication-failure-handler-ref="ajaxAuthenticationFailureHandler" />
-        <!-- authentication-details-source-ref="capWebAuthenticationDetailsSource" -->
+        <form-login always-use-default-target="true" login-page="/page/login" default-target-url="/page/index" />
+        <!-- authentication-failure-handler-ref="ajaxAuthenticationFailureHandler" -->
         <session-management>
             <concurrency-control max-sessions="1" expired-url="/page/login?error" session-registry-alias="sessionRegistry" /> <!-- exception-if-maximum-exceeded="true" -->
         </session-management>
@@ -29,17 +29,17 @@
     </http>
     <!-- <beans:bean id="captchaCaptureFilter" class="com.iisigroup.cap.security.filter.CaptchaCaptureFilter"></beans:bean> -->
     <!-- <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.auth.service.impl.CapUserDetailsService">
-    </beans:bean>
-    <beans:bean id="customAuthenticationProvider" class="com.iisigroup.cap.auth.provider.CapAuthenticationProvider" p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
+        </beans:bean>
+        <beans:bean id="customAuthenticationProvider" class="com.iisigroup.cap.auth.provider.CapAuthenticationProvider" p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
         p:passwordService-ref="passwordService" p:accessControlService-ref="accessControlService" />
-    <authentication-manager>
+        <authentication-manager>
         <authentication-provider ref="customAuthenticationProvider" />
-    </authentication-manager> -->
+        </authentication-manager> -->
     <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.security.service.impl.CapDefaultUserDetailsService">
     </beans:bean>
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsServiceImpl">
-            <password-encoder hash="plaintext"/>
+            <password-encoder hash="plaintext" />
         </authentication-provider>
     </authentication-manager>
     <beans:bean id="capAuthenticationEntryPoint" class="com.iisigroup.cap.security.web.CapAuthenticationEntryPoint">
@@ -56,7 +56,7 @@
                     <beans:property name="rolePrefix" value="${systemType}" />
                     <beans:property name="securityService" ref="accessControlService" />
                     <beans:property name="stripQueryStringFromUrls" value="true" />
-                </beans:bean> -->
+                    </beans:bean> -->
                 <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
             </beans:list>
         </beans:property>

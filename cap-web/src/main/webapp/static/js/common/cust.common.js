@@ -1,184 +1,188 @@
 // init
- var menu = {
- "child" : [{
- 
- "name" : "系統設定",
- "url" : "system",
- "child" : [{
- "name" : "代碼設定",
- "url" : "system/codetype"
- },{
- "name" : "參數設定",
- "url" : "system/sysparm"
- },{
- "name" : "流水號檢視",
- "url" : "system/sequence"
- }]
- }, {
- 
- "name" : "系统功能",
- "url" : "sample",
- "child" : [{
- "name" : "檔案上下傳",
- "url" : "sample/fileUpdDwn"
- }]
- },{
- "name" : "排程管理",
- "url" : "batch",
- "child" : [{
- "name" : "排程設定",
- "url" : "batch/schedule"
- }, {
- "name" : "排程Job清單",
- "url" : "batch/jobs"
- }, {
- "name" : "排程監控",
- "url" : "batch/jobexecution"
- }]
- 
- }]
- }
+// var menu = false;
+var menu = {
+  "child" : [ {
+
+    "name" : "系統設定",
+    "url" : "system",
+    "child" : [ {
+      "name" : "代碼設定",
+      "url" : "system/codetype"
+    }, {
+      "name" : "參數設定",
+      "url" : "system/sysparm"
+    }, {
+      "name" : "流水號檢視",
+      "url" : "system/sequence"
+    } ]
+  }, {
+
+    "name" : "系统功能",
+    "url" : "sample",
+    "child" : [ {
+      "name" : "檔案上下傳",
+      "url" : "sample/fileUpdDwn"
+    } ]
+  }, {
+    "name" : "排程管理",
+    "url" : "batch",
+    "child" : [ {
+      "name" : "排程設定",
+      "url" : "batch/schedule"
+    }, {
+      "name" : "排程Job清單",
+      "url" : "batch/jobs"
+    }, {
+      "name" : "排程監控",
+      "url" : "batch/jobexecution"
+    } ]
+
+  } ]
+}
 
 // init
 $(document).ready(
     function() {
       logDebug("cust common ready init");
       var navTop = $("nav.top"), navSub = $("nav.sub ol");
-      navTop.length
-          && (
-              function(res) {
-                var _menu = res.child, ul = $("nav.top ul.navmenu");
-                // $("#userName").val(res.userName);
-                navTop.on("click", "li a", function(ev) {
-                  ev.preventDefault();
-                  router.to($(this).attr("url"));
-                  $("article").empty();
-                });
+      function render(res) {
+        var _menu = res.child, ul = $("nav.top ul.navmenu");
+        // $("#userName").val(res.userName);
+        navTop.on("click", "li a", function(ev) {
+          ev.preventDefault();
+          router.to($(this).attr("url"));
+          $("article").empty();
+        });
 
-                navSub.on("click", "li a", function(ev) {
-                  var $this = $(this);
-                  if ($this.attr("url")) {
-                    router.to($(this).attr("url"));
-                  } else {
-                    if ($this.siblings("ul").size()) {
-                      var sel = $this.siblings("ul");
-                      sel.is(":visible") ? sel.hide().parent("li").children("a").removeClass('clicked').children("span").removeClass('icon-5').addClass('icon-1') : sel.show().parent("li").children(
-                          "a").addClass('clicked').children("span").removeClass('icon-1').addClass('icon-5');
-                    }
-                  }
-                  ev.preventDefault();
-                  return false;
-                });
+        navSub.on("click", "li a", function(ev) {
+          var $this = $(this);
+          if ($this.attr("url")) {
+            router.to($(this).attr("url"));
+          } else {
+            if ($this.siblings("ul").size()) {
+              var sel = $this.siblings("ul");
+              sel.is(":visible") ? sel.hide().parent("li").children("a").removeClass('clicked').children("span").removeClass('icon-5').addClass('icon-1') : sel.show().parent("li").children("a")
+                  .addClass('clicked').children("span").removeClass('icon-1').addClass('icon-5');
+            }
+          }
+          ev.preventDefault();
+          return false;
+        });
 
-                // render menu
-                for ( var m in _menu) {
-                  ul.append($("<li/>").append($("<a/>", {
-                    href : "#",
-                    url : _menu[m].url,
+        // render menu
+        for ( var m in _menu) {
+          ul.append($("<li/>").append($("<a/>", {
+            href : "#",
+            url : _menu[m].url,
+            data : {
+              smenu : _menu[m].child,
+              url : _menu[m].url
+            },
+            text : _menu[m].name
+          })));
+        }
+
+        router.set({
+          routes : {
+            "" : "loadfirst", // default route
+            ":page" : "loadsub", // http://xxxxx/xxx/#page
+            ":page/:page2" : "loadpage" // http://xxxxx/xxx/#page/page2
+          },
+          loadfirst : function() {
+            ul.find("li a:first").click();
+          },
+          loadsub : function(folder) {
+            var tlink = navTop.find("a").removeClass("select").filter("a[url=" + folder + "]").addClass("select");
+            var smenu = tlink.data("smenu");
+            if (navSub.find('a').size()) {
+              navSub.animate({
+                opacity : 0.01
+              }, 200, _f);
+            } else {
+              navSub.css("opacity", "0.01");
+              _f();
+            }
+
+            function _s(root, s_menu) {
+              for ( var sm in s_menu) {
+                if (s_menu[sm].child && s_menu[sm].child.length != 0) {
+                  root.append($("<li/>").append($("<a/>", {
+                    url : "",
                     data : {
-                      smenu : _menu[m].child,
-                      url : _menu[m].url
+                      url : ""
                     },
-                    text : _menu[m].name
+                    text : s_menu[sm].name
+                  }).prepend("<span class='menu-icon icon-1'></span>")).append("<ul class='menu_sub'></ul>"));
+
+                  _s(root.find("li ul").last(), s_menu[sm].child);
+                } else if (s_menu[sm].url) {
+                  root.append($("<li/>").append($("<a/>", {
+                    url : s_menu[sm].url || "",
+                    data : {
+                      url : s_menu[sm].url || ""
+
+                    },
+                    text : s_menu[sm].name
+                  }).prepend("<span class='menu-icon icon-4'></span>")));
+                } else {
+                  root.append($("<li/>").append($("<a/>", {
+                    url : '#',
+                    data : {
+                      url : '#'
+                    },
+                    text : s_menu[sm].name
                   })));
                 }
+              }
+            }
 
-                router.set({
-                  routes : {
-                    "" : "loadfirst", // default route
-                    ":page" : "loadsub", // http://xxxxx/xxx/#page
-                    ":page/:page2" : "loadpage" // http://xxxxx/xxx/#page/page2
-                  },
-                  loadfirst : function() {
-                    ul.find("li a:first").click();
-                  },
-                  loadsub : function(folder) {
-                    var tlink = navTop.find("a").removeClass("select").filter("a[url=" + folder + "]").addClass("select");
-                    var smenu = tlink.data("smenu");
-                    if (navSub.find('a').size()) {
-                      navSub.animate({
-                        opacity : 0.01
-                      }, 200, _f);
-                    } else {
-                      navSub.css("opacity", "0.01");
-                      _f();
-                    }
+            function _f() {
+              navSub.empty().data("cmenu", folder);
+              _s(navSub, smenu);
+              navSub.animate({
+                opacity : 1
+              });
+            }
+          },
+          // router method
+          loadpage : function(folder, page) {
+            var topMenu = navTop.find("a").filter(function() {
+              return filter($(this).data("smenu"), folder + "/" + page);
+            });
+            var topFolder = topMenu.attr("url");
+            var refresh = !(navSub.data("cmenu") == topFolder);
+            if (refresh) {
+              this.loadsub(topFolder);
+            }
+            navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
+            if (refresh) {
+              navSub.find('.selected').parents(".menu_sub").siblings("a").click();
+            }
 
-                    function _s(root, s_menu) {
-                      for ( var sm in s_menu) {
-                        if (s_menu[sm].child && s_menu[sm].child.length != 0) {
-                          root.append($("<li/>").append($("<a/>", {
-                            url : "",
-                            data : {
-                              url : ""
-                            },
-                            text : s_menu[sm].name
-                          }).prepend("<span class='menu-icon icon-1'></span>")).append("<ul class='menu_sub'></ul>"));
+            API.loadPage(folder + '/' + page);
 
-                          _s(root.find("li ul").last(), s_menu[sm].child);
-                        } else if (s_menu[sm].url) {
-                          root.append($("<li/>").append($("<a/>", {
-                            url : s_menu[sm].url || "",
-                            data : {
-                              url : s_menu[sm].url || ""
-
-                            },
-                            text : s_menu[sm].name
-                          }).prepend("<span class='menu-icon icon-4'></span>")));
-                        } else {
-                          root.append($("<li/>").append($("<a/>", {
-                            url : '#',
-                            data : {
-                              url : '#'
-                            },
-                            text : s_menu[sm].name
-                          })));
-                        }
-                      }
-                    }
-
-                    function _f() {
-                      navSub.empty().data("cmenu", folder);
-                      _s(navSub, smenu);
-                      navSub.animate({
-                        opacity : 1
-                      });
-                    }
-                  },
-                  // router method
-                  loadpage : function(folder, page) {
-                    var topMenu = navTop.find("a").filter(function() {
-                      return filter($(this).data("smenu"), folder + "/" + page);
-                    });
-                    var topFolder = topMenu.attr("url");
-                    var refresh = !(navSub.data("cmenu") == topFolder);
-                    if (refresh) {
-                      this.loadsub(topFolder);
-                    }
-                    navSub.find('.selected').removeClass('selected').end().find("a[url='" + folder + '/' + page + "']").addClass("selected");
-                    if (refresh) {
-                      navSub.find('.selected').parents(".menu_sub").siblings("a").click();
-                    }
-
-                    API.loadPage(folder + '/' + page);
-
-                    function filter(topSmenu, target) {
-                      for ( var m in topSmenu) {
-                        if (topSmenu[m].url == target) {
-                          return true;
-                        }
-                        if (topSmenu[m].child) {
-                          if (filter(topSmenu[m].child, target)) {
-                            return true;
-                          }
-                          ;
-                        }
-                      }
-                      return false;
-                    }
+            function filter(topSmenu, target) {
+              for ( var m in topSmenu) {
+                if (topSmenu[m].url == target) {
+                  return true;
+                }
+                if (topSmenu[m].child) {
+                  if (filter(topSmenu[m].child, target)) {
+                    return true;
                   }
-                });
-              })(menu);
+                  ;
+                }
+              }
+              return false;
+            }
+          }
+        });
+        return true;
+      }
+
+      navTop.length && (menu && render(menu)) || $.get(url("menuhandler/queryMenu")).done(function(res) {
+        render(res);
+      });
 
       $("a[href='#language']").click(function() {
         var o = $(this).parents("ol");

@@ -13,6 +13,7 @@ package com.iisigroup.cap.security.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -20,8 +21,6 @@ import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.corundumstudio.socketio.SocketIOClient;
 
 import net.sf.json.JSONArray;
 
@@ -49,7 +48,7 @@ public class CapUserDetails implements UserDetails {
     private JSONArray menu;
     private Locale locale;
     private String status;
-    private SocketIOClient socketClient;
+    private Map<String, Object> extraAttrib;
 
     private Collection<GrantedAuthority> authorities;
 
@@ -65,6 +64,7 @@ public class CapUserDetails implements UserDetails {
         this.roles.putAll(roles);
         this.locale = user.getLocale();
         this.status = user.getStatus();
+        this.extraAttrib = new HashMap<String, Object>();
         setAuthorities(roles);
     }
 
@@ -165,12 +165,12 @@ public class CapUserDetails implements UserDetails {
         this.status = status;
     }
 
-    public SocketIOClient getSocketClient() {
-        return socketClient;
+    public Map<String, Object> getExtraAttrib() {
+        return extraAttrib == null ? new HashMap<String, Object>() : extraAttrib;
     }
 
-    public void setSocketClient(SocketIOClient socketClient) {
-        this.socketClient = socketClient;
+    public void setExtraAttrib(Map<String, Object> extraAttrib) {
+        this.extraAttrib = extraAttrib;
     }
 
 }

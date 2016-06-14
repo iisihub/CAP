@@ -1,4 +1,4 @@
-package com.iisigroup.cap.security.filter;
+package com.iisigroup.cap.security.captcha.filter;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public class CaptchaCaptureFilter extends OncePerRequestFilter {
 
-    private Logger logger = LoggerFactory.getLogger(CaptchaCaptureFilter.class);
+    private final Logger logger = LoggerFactory.getLogger(CaptchaCaptureFilter.class);
     private String userCaptchaResponse;
     private HttpServletRequest request;
 
