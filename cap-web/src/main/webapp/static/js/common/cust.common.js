@@ -1,5 +1,4 @@
 // init
-// var menu = false;
 var menu = {
   "child" : [ {
 
@@ -180,6 +179,9 @@ $(document).ready(
         return true;
       }
 
+      // whit menuhandler start
+      menu = false;
+      // whit menuhandler end
       navTop.length && (menu && render(menu)) || $.get(url("menuhandler/queryMenu")).done(function(res) {
         render(res);
       });

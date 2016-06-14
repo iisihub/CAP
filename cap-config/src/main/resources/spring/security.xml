@@ -19,44 +19,54 @@
         <intercept-url pattern="/page/**" access="${systemType}" />
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
         <anonymous enabled="false" />
-        <form-login always-use-default-target="true" login-page="/page/login" default-target-url="/page/index" />
-        <!-- authentication-failure-handler-ref="ajaxAuthenticationFailureHandler" -->
+        <!-- cap-auth-admin start -->
+        <form-login always-use-default-target="true" login-page="/page/login" default-target-url="/page/index" authentication-failure-handler-ref="ajaxAuthenticationFailureHandler" />
+        <!-- cap-auth-admin end -->
+        <!-- without cap-auth-admin start -->
+        <!-- <form-login always-use-default-target="true" login-page="/page/login" default-target-url="/page/index" /> -->
+        <!-- without cap-auth-admin end -->
         <session-management>
             <concurrency-control max-sessions="1" expired-url="/page/login?error" session-registry-alias="sessionRegistry" /> <!-- exception-if-maximum-exceeded="true" -->
         </session-management>
         <logout logout-url="/j_spring_security_logout" logout-success-url="/page/login" />
-        <!-- <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER" /> -->
+        <!-- cap-captcha start -->
+        <custom-filter ref="captchaCaptureFilter" before="FORM_LOGIN_FILTER" />
+        <!-- cap-captcha end -->
     </http>
-    <!-- <beans:bean id="captchaCaptureFilter" class="com.iisigroup.cap.security.filter.CaptchaCaptureFilter"></beans:bean> -->
-    <!-- <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.auth.service.impl.CapUserDetailsService">
-        </beans:bean>
-        <beans:bean id="customAuthenticationProvider" class="com.iisigroup.cap.auth.provider.CapAuthenticationProvider" p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
+    <!-- cap-captcha start -->
+    <beans:bean id="captchaCaptureFilter" class="com.iisigroup.cap.security.captcha.filter.CaptchaCaptureFilter"></beans:bean>
+    <!-- cap-captcha end -->
+    <!-- cap-auth-admin start -->
+    <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.auth.service.impl.UserDetailsServiceImpl" />
+    <beans:bean id="customAuthenticationProvider" class="com.iisigroup.cap.auth.provider.CapAuthenticationProvider" p:captchaCaptureFilter-ref="captchaCaptureFilter" p:userService-ref="userDetailsServiceImpl"
         p:passwordService-ref="passwordService" p:accessControlService-ref="accessControlService" />
-        <authentication-manager>
+    <authentication-manager>
         <authentication-provider ref="customAuthenticationProvider" />
-        </authentication-manager> -->
-    <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.security.service.impl.CapDefaultUserDetailsService">
-    </beans:bean>
+    </authentication-manager>
+    <!-- cap-auth-admin end -->
+    <!-- without cap-auth-admin start -->
+    <!-- <beans:bean id="userDetailsServiceImpl" class="com.iisigroup.cap.security.service.impl.CapDefaultUserDetailsService" />
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder hash="plaintext" />
         </authentication-provider>
-    </authentication-manager>
+    </authentication-manager> -->
+    <!-- without cap-auth-admin end -->
     <beans:bean id="capAuthenticationEntryPoint" class="com.iisigroup.cap.security.web.CapAuthenticationEntryPoint">
         <beans:property name="loginFormUrl" value="/page/login" />
         <beans:property name="forceHttps" value="false" />
     </beans:bean>
-    <!-- <beans:bean id="capWebAuthenticationDetailsSource" class="com.iisigroup.cap.security.web.CapWebAuthenticationDetailsSource">
-        </beans:bean> -->
     <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
         <beans:property name="allowIfAllAbstainDecisions" value="false" />
         <beans:property name="decisionVoters">
             <beans:list>
-                <!-- <beans:bean class="com.iisigroup.cap.security.vote.CapPermissionVoter">
+                <!-- cap-auth-admin start -->
+                <beans:bean class="com.iisigroup.cap.auth.vote.CapPermissionVoter">
                     <beans:property name="rolePrefix" value="${systemType}" />
                     <beans:property name="securityService" ref="accessControlService" />
                     <beans:property name="stripQueryStringFromUrls" value="true" />
-                    </beans:bean> -->
+                </beans:bean>
+                <!-- cap-auth-admin end -->
                 <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
             </beans:list>
         </beans:property>

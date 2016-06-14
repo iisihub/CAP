@@ -11,7 +11,9 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="ruleMap">
             <util:map map-class="java.util.LinkedHashMap" key-type="java.lang.String" value-type="com.iisigroup.cap.operation.OperationStep">
                 <!-- 加上 doCaptchaStep 可增加動態驗証碼機制(需加上 cap-captcha ) -->
-                <!-- <entry key="doCaptchaStep" value-ref="doCaptchaStep" /> -->
+                <!-- cap-captcha start -->
+                <entry key="doCaptchaStep" value-ref="doCaptchaStep" />
+                <!-- cap-captcha end -->
                 <entry key="doActionStep" value-ref="doActionStep" />
             </util:map>
         </property>

@@ -3,13 +3,6 @@
     <persistence-unit name="pu-cap">
         <mapping-file>META-INF/orm-cap.xml</mapping-file>
         <!-- base -->
-        <!-- <class>com.iisigroup.cap.auth.model.DefaultUser</class>
-        <class>com.iisigroup.cap.auth.model.Department</class>
-        <class>com.iisigroup.cap.auth.model.DefaultRole</class>
-        <class>com.iisigroup.cap.auth.model.RoleFunction</class>
-        <class>com.iisigroup.cap.auth.model.UserRole</class>
-        <class>com.iisigroup.cap.auth.model.DefaultFunction</class>
-        <class>com.iisigroup.cap.auth.model.PwdLog</class> -->
         <class>com.iisigroup.cap.base.model.CodeType</class>
         <class>com.iisigroup.cap.base.model.SysParm</class>
         <class>com.iisigroup.cap.base.model.ErrorCode</class>
@@ -17,14 +10,24 @@
         <class>com.iisigroup.cap.base.model.I18n</class>
         <class>com.iisigroup.cap.base.model.Remind</class>
         <class>com.iisigroup.cap.base.model.Reminds</class>
-        <!-- cap-rule -->
-       <!--  <class>com.iisigroup.cap.rule.model.CaseInfo</class>
+        <!-- cap-auth-admin start -->
+        <class>com.iisigroup.cap.auth.model.DefaultUser</class>
+        <class>com.iisigroup.cap.auth.model.Department</class>
+        <class>com.iisigroup.cap.auth.model.DefaultRole</class>
+        <class>com.iisigroup.cap.auth.model.RoleFunction</class>
+        <class>com.iisigroup.cap.auth.model.UserRole</class>
+        <class>com.iisigroup.cap.auth.model.DefaultFunction</class>
+        <class>com.iisigroup.cap.auth.model.PwdLog</class>
+        <!-- cap-auth-admin end -->
+        <!-- cap-rule start -->
+        <class>com.iisigroup.cap.rule.model.CaseInfo</class>
         <class>com.iisigroup.cap.rule.model.DivFtItm</class>
         <class>com.iisigroup.cap.rule.model.DivFtDtl</class>
         <class>com.iisigroup.cap.rule.model.DivCtItm</class>
         <class>com.iisigroup.cap.rule.model.DivCtDtl</class>
         <class>com.iisigroup.cap.rule.model.DivRlItm</class>
-        <class>com.iisigroup.cap.rule.model.DivRlDtl</class> -->
+        <class>com.iisigroup.cap.rule.model.DivRlDtl</class>
+        <!-- cap-rule end -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
     </persistence-unit>
 </persistence>

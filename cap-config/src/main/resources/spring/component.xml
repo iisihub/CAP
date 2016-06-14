@@ -16,11 +16,13 @@
     <bean class="com.iisigroup.cap.base.response.RespMsgFactoryProcessor">
         <property name="errorCodeService" ref="errorCodeService" />
     </bean>
-    <!-- <bean id="accessControlService" class="com.iisigroup.cap.auth.service.impl.AccessControlServiceImpl">
+    <!-- cap-auth-admin start -->
+    <bean id="accessControlService" class="com.iisigroup.cap.auth.service.impl.AccessControlServiceImpl">
         <property name="systemType" value="${systemType}" />
     </bean>
     <bean id="passwordService" class="com.iisigroup.cap.auth.service.impl.PasswordServiceImpl">
-    </bean> -->
+    </bean>
+    <!-- cap-auth-admin end -->
     <bean id="mailSender" class="com.iisigroup.cap.base.service.impl.EmailServiceImpl">
         <property name="sendForm" value="${mail.sender}" />
         <property name="mailSender">
