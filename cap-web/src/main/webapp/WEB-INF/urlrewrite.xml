@@ -23,6 +23,13 @@
         <set name="Expires" type="response-header">5 days</set>
         <to>/basehandler/queryJsI18N</to>
     </rule>
+    <!-- forward captcha.png -->
+    <rule match-type="regex">
+        <note>redirect handler</note>
+        <from>/captcha.png</from>
+        <set name="Expires" type="response-header">5 days</set>
+        <to>/captchahandler/doWork</to>
+    </rule>
     <!-- api mode -->
     <rule match-type="regex">
         <note>redirect api to handler</note>

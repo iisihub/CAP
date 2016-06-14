@@ -22,7 +22,7 @@ import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.handler.Handler;
 import com.iisigroup.cap.model.OpStepContext;
 import com.iisigroup.cap.security.annotation.Captcha;
-import com.iisigroup.cap.security.captcha.web.CapCaptchaServlet;
+import com.iisigroup.cap.security.captcha.handler.CaptchaHandler;
 import com.iisigroup.cap.security.constants.CheckStatus;
 import com.iisigroup.cap.security.service.CheckCodeService;
 import com.iisigroup.cap.utils.CapAppContext;
@@ -52,7 +52,7 @@ public class CapCaptchaOpStep extends AbstractCustomizeOpStep {
                 if (methodId.equals(method.getName())) {
                     if (method.isAnnotationPresent(Captcha.class)) {
                         String key = method.getAnnotation(Captcha.class).value();
-                        CheckCodeService captcha = CapAppContext.getBean(CapCaptchaServlet.defaultRender);
+                        CheckCodeService captcha = CapAppContext.getBean(CaptchaHandler.DEFAULT_RENDER);
                         if (captcha == null || !CheckStatus.SUCCESS.equals(captcha.valid(params.get(key)))) {
                             // 驗証碼無效請重新輸入
                             throw new CapMessageException(CapAppContext.getMessage(captcha.getErrorMessage()), getClass());
