@@ -1,4 +1,4 @@
-package com.iisigroup.cap.security.handler;
+package com.iisigroup.cap.auth.handler;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import com.iisigroup.cap.security.exception.CapAuthenticationException;
+import com.iisigroup.cap.auth.exception.CapAuthenticationException;
 
 import net.sf.json.JSONObject;
 

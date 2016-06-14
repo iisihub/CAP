@@ -22,6 +22,7 @@ import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.security.model.CapUserDetails;
+import com.iisigroup.cap.websocket.constants.WebSocketConstants;
 import com.iisigroup.cap.websocket.service.CapSocketService;
 
 /**
@@ -55,7 +56,7 @@ public class CapSocketHandler extends MFormHandler {
 
         CapUserDetails userDetails = CapSecurityContext.getUser();
         if (userDetails != null) {
-            userDetails.setSocketClient(socketService.onConnectHandler(id));
+            userDetails.getExtraAttrib().put(WebSocketConstants.SOCKET_CLIENT, socketService.onConnectHandler(id));
         }
 
         return result;

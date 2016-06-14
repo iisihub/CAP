@@ -51,4 +51,5 @@ public interface User extends Serializable {
 
     String getStatus();
 
+    String getEmail();
 }

@@ -1,4 +1,4 @@
-package com.iisigroup.cap.security.exception;
+package com.iisigroup.cap.auth.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

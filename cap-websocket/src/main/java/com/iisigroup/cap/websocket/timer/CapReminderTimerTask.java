@@ -30,17 +30,17 @@ import com.iisigroup.cap.security.model.CapUserDetails;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.websocket.constants.RemindEnum;
+import com.iisigroup.cap.websocket.constants.WebSocketConstants;
 import com.iisigroup.cap.websocket.model.NotifyObject;
-import com.iisigroup.cap.websocket.service.CapRemindService;
+import com.iisigroup.cap.websocket.service.RemindService;
 
 /**
  */
 public class CapReminderTimerTask extends TimerTask {
 
     private final Logger logger = LoggerFactory.getLogger(CapReminderTimerTask.class);
-
     @Resource
-    private CapRemindService reminderService;
+    private RemindService reminderService;
     @Resource
     private EmailService emailService;
 
@@ -81,7 +81,7 @@ public class CapReminderTimerTask extends TimerTask {
 
                 CapUserDetails userDetail = allPrincipal.get(data.getTargetId());
                 if (userDetail != null) {
-                    SocketIOClient client = userDetail.getSocketClient();
+                    SocketIOClient client = (SocketIOClient) userDetail.getExtraAttrib().get(WebSocketConstants.SOCKET_CLIENT);
                     if (client != null) {
                         String event = remind.getStyleTyp().equals(RemindEnum.TEXT.getCode()) ? "textEvent" : "popUpEvent";
                         client.sendEvent(event, data);

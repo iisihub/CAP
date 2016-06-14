@@ -11,7 +11,6 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.base.dao.RemindDao;
 import com.iisigroup.cap.base.dao.RemindsDao;
 import com.iisigroup.cap.base.model.Remind;
@@ -19,19 +18,28 @@ import com.iisigroup.cap.base.model.Reminds;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.security.dao.SecUserDao;
 import com.iisigroup.cap.security.model.CapUserDetails;
+import com.iisigroup.cap.security.model.User;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapSystemConfig;
 import com.iisigroup.cap.utils.CapWebUtil;
-import com.iisigroup.cap.websocket.service.CapRemindService;
+import com.iisigroup.cap.websocket.service.RemindService;
 
 @Service
-public class CapRemindServiceImpl implements CapRemindService {
+public class RemindServiceImpl implements RemindService {
 
     @Resource
-    RemindDao remindDao;
+    private RemindDao remindDao;
 
     @Resource
-    RemindsDao remindsDao;
+    private RemindsDao remindsDao;
+
+    // 當有security 由SessionRegistry取得所有session資料
+    @Autowired
+    @Qualifier("sessionRegistry")
+    private SessionRegistry sessionRegistry;
+
+    @Resource
+    private SecUserDao<User> usrDao;
 
     @Resource
     private CapSystemConfig config;
@@ -53,11 +61,6 @@ public class CapRemindServiceImpl implements CapRemindService {
         return SimpleContextHolder.get(CapWebUtil.localeKey) == null ? "zh_TW" : SimpleContextHolder.get(CapWebUtil.localeKey).toString();
     }
 
-    // 當有security 由SessionRegistry取得所有session資料
-    @Autowired
-    @Qualifier("sessionRegistry")
-    private SessionRegistry sessionRegistry;
-
     @Override
     public HashMap<String, CapUserDetails> getCurrentUser() {
         HashMap<String, CapUserDetails> allPrincipal = new HashMap<String, CapUserDetails>();
@@ -73,12 +76,9 @@ public class CapRemindServiceImpl implements CapRemindService {
         return allPrincipal;
     }
 
-    @Resource
-    SecUserDao<DefaultUser> usrDao;
-
     @Override
     public String getUsrEmail(String usrId) {
-        DefaultUser user = usrDao.getUserByLoginId(usrId, null);
+        User user = usrDao.getUserByLoginId(usrId, null);
         if (user != null) {
             return user.getEmail();
         }

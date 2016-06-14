@@ -15,6 +15,10 @@
             <artifactId>cap-base</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-captcha</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-core</artifactId>
             <version>${spring.batch.version}</version>
