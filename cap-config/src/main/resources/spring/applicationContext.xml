@@ -41,18 +41,14 @@
     <import resource="classpath:spring/component.xml" />
     <import resource="classpath:spring/security.xml" />
     <import resource="classpath:spring/operation.xml" />
-    <!-- batch
-    <import resource="classpath:batch/batch.xml" />
-     -->
-    <!-- web socket
-    <import resource="classpath:websocket/websocket.xml" />
-     -->
-    <!-- captcha
-    <import resource="classpath:spring/captcha.xml" />
-     -->
     <!-- audit log -->
     <import resource="classpath:spring/auditlog.xml" />
-    <!-- report
+    <!-- batch -->
+    <import resource="classpath:batch/batch.xml" />
+    <!-- web socket -->
+    <import resource="classpath:websocket/websocket.xml" />
+    <!-- captcha -->
+    <import resource="classpath:spring/captcha.xml" />
+    <!-- report -->
     <import resource="classpath:report/report.xml" />
-     -->
 </beans>

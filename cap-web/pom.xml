@@ -21,18 +21,6 @@
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-base</artifactId>
         </dependency>
-        <!-- <dependency>
-            <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-batch</artifactId>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-auth-admin</artifactId>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>com.iisigroup.cap</groupId>
-            <artifactId>cap-websocket</artifactId>
-        </dependency> -->
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-config</artifactId>
@@ -40,7 +28,19 @@
             <scope>provided</scope>
         </dependency>
         <!-- optional -->
-        <!-- <dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-batch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-auth-admin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iisigroup.cap</groupId>
+            <artifactId>cap-websocket</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-hg</artifactId>
         </dependency>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>com.iisigroup.cap</groupId>
             <artifactId>cap-rule</artifactId>
-        </dependency> -->
+        </dependency>
         <dependency>
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
