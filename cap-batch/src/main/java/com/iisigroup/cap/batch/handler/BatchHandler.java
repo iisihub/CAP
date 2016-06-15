@@ -32,7 +32,7 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.configuration.DuplicateJobException;
 import org.springframework.batch.core.configuration.JobRegistry;
-import org.springframework.batch.core.configuration.support.ClassPathXmlApplicationContextFactory;
+import org.springframework.batch.core.configuration.support.GenericApplicationContextFactory;
 import org.springframework.batch.core.configuration.support.ReferenceJobFactory;
 import org.springframework.batch.core.launch.JobExecutionNotRunningException;
 import org.springframework.batch.core.launch.NoSuchJobException;
@@ -51,8 +51,8 @@ import com.iisigroup.cap.batch.core.CapBatchScheduler;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.model.BatchSchedule;
 import com.iisigroup.cap.batch.service.BatchJobService;
-import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
 import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.component.impl.MapGridResult;
@@ -471,8 +471,7 @@ public class BatchHandler extends MFormHandler {
     }
 
     protected ApplicationContext createApplicationContextFactory(ApplicationContext parent, org.springframework.core.io.Resource resource) {
-        ClassPathXmlApplicationContextFactory applicationContextFactory = new ClassPathXmlApplicationContextFactory();
-        applicationContextFactory.setResource(resource);
+        GenericApplicationContextFactory applicationContextFactory = new GenericApplicationContextFactory(resource);
         if (parent != null) {
             applicationContextFactory.setApplicationContext(parent);
         }

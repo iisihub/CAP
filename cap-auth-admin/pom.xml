@@ -7,7 +7,7 @@
     </parent>
     <artifactId>cap-auth-admin</artifactId>
     <properties>
-        <spring.batch.version>2.1.9.RELEASE</spring.batch.version>
+        <spring.batch.version>2.2.7.RELEASE</spring.batch.version>
     </properties>
     <dependencies>
         <dependency>
