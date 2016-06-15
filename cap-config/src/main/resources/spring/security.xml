@@ -16,7 +16,12 @@
         <intercept-url pattern="/page/home/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/page/index" access="IS_AUTHENTICATED_FULLY" />
         <intercept-url pattern="/page/common/*" access="IS_AUTHENTICATED_FULLY" />
+        <!-- cap-auth-admin start -->
         <intercept-url pattern="/page/**" access="${systemType}" />
+        <!-- cap-auth-admin end -->
+        <!-- without cap-auth-admin start -->
+        <!-- <intercept-url pattern="/page/**" access="IS_AUTHENTICATED_FULLY" /> -->
+        <!-- without cap-auth-admin end -->
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
         <anonymous enabled="false" />
         <!-- cap-auth-admin start -->
