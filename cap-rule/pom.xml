@@ -17,14 +17,8 @@
             <artifactId>jxl</artifactId>
             <version>2.6.12</version>
             <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <!-- ******************** JExcelApi(jxl) LIB END ******************** -->
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4</version>
-        </dependency>
         <!-- ******************** Drools ************************* -->
         <dependency>
             <groupId>org.drools</groupId>
