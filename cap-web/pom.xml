@@ -3,7 +3,7 @@
     <parent>
         <artifactId>cap</artifactId>
         <groupId>com.iisigroup.cap</groupId>
-        <version>2.2.1</version>
+        <version>3.0.0b</version>
     </parent>
     <artifactId>cap-web</artifactId>
     <packaging>war</packaging>
