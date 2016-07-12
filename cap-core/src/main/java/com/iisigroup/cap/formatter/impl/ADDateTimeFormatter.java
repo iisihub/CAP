@@ -30,12 +30,13 @@ import com.iisigroup.cap.formatter.Formatter;
  *          <li>2010/7/27,iristu,new
  *          <li>2011/8/02,sunkist,update {@link ADDateTimeFormatter#reformat(Object)} for Calendar.
  *          <li>2011/11/1,rodeschen,from cap
+ *          <li>2016/07/12,yunglin,#1451 fix multi-thread issue
  *          </ul>
  */
 @SuppressWarnings("serial")
 public class ADDateTimeFormatter implements Formatter {
 
-    private SimpleDateFormat _df;
+    private static SimpleDateFormat _df;
 
     String DEF_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
