@@ -62,6 +62,7 @@ import com.iisigroup.cap.jdbc.CapNamedJdbcTemplate;
  *          <li>2012/2/14,RodesChen,add resource name
  *          <li>2012/6/29,RodesChen,add findUniqueOrNone setMaxResults 1
  *          <li>2013/5/21,增加SearchMode or & and 的查詢設定
+ *          <li>2016/07/12,yunglin,#521 apply distinct from searchsetting
  *          </ul>
  * @param <T>
  */
@@ -298,7 +299,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
             }
             query.where(builder.and(aryWhere));
         }
-
+        query.distinct(search.isDistinct());
         return query;
     }
 
