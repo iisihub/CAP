@@ -38,7 +38,7 @@ import com.iisigroup.cap.utils.CapAppContext;
  *          <li>2016年6月14日,Sunkist Wang,new
  *          </ul>
  */
-@Controller("captcha.png")
+@Controller("captchahandler")
 public class CaptchaHandler extends MFormHandler {
 
     public static String DEFAULT_RENDER = "capCaptcha";
