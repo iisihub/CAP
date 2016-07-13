@@ -10,7 +10,7 @@
     <!-- ②：啓動Spring MVC的註解功能，完成請求和註解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
     <!-- ③：對模型視圖名稱的解析，即在模型視圖名稱添加前後綴 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/viewpage/" p:suffix=".jsp" />
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/viewpage" p:suffix=".jsp" />
     <!--配置國際化i18N信息 -->
     <bean id="messageSource" class="com.iisigroup.cap.message.CapReloadableResourceBundleMessageSource">
         <property name="languages" value="_zh_CN,_en,_zh_TW" />
