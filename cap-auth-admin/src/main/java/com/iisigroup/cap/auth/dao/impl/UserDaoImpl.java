@@ -19,6 +19,7 @@ import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.jdbc.support.CapSqlStatement;
 import com.iisigroup.cap.security.dao.SecUserDao;
+import com.iisigroup.cap.security.model.User;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapDate;
 
@@ -46,7 +47,7 @@ public class UserDaoImpl extends GenericDaoImpl<DefaultUser> implements SecUserD
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<DefaultRole> getRoleByUser(DefaultUser user) {
+    public List<DefaultRole> getRoleByUser(User user) {
         Query query = getEntityManager().createNativeQuery(
                 "select r.* from DEF_ROLE r inner join DEF_USERROLE ur inner join DEF_USER u on u.code=ur.USERCODE on r.CODE=ur.ROLECODE where r.STATUS='0' and u.code=?1", DefaultRole.class);
         // TODO: systemtype
