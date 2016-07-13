@@ -1,5 +1,5 @@
-<Configure class="org.mortbay.jetty.webapp.WebAppContext">
-    <New id="comdb" class="org.mortbay.jetty.plus.naming.Resource">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="comdb" class="org.eclipse.jetty.plus.jndi.Resource">
         <Arg>jdbc/capdb</Arg>
         <Arg>
             <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -14,10 +14,10 @@
     </Call>
     <Call name="addServlet">
         <Arg>
-            <New class="org.mortbay.jetty.servlet.ServletHolder">
+            <New class="org.eclipse.jetty.servlet.ServletHolder">
                 <Arg>
                     <Call class="java.lang.Class" name="forName">
-                        <Arg>org.mortbay.jetty.servlet.DefaultServlet</Arg>
+                        <Arg>org.eclipse.jetty.servlet.DefaultServlet</Arg>
                     </Call>
                 </Arg>
                 <Call name="setInitParameter">
