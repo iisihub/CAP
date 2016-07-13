@@ -37,7 +37,17 @@ import com.iisigroup.cap.formatter.Formatter;
 @SuppressWarnings("serial")
 public class ADDateFormatter implements Formatter {
 
-    static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat df;
+
+    private final static String DEF_PATTERN = "yyyy-MM-dd";
+
+    public ADDateFormatter() {
+        df = new SimpleDateFormat(DEF_PATTERN);
+    }
+
+    public ADDateFormatter(String pattern) {
+        df = new SimpleDateFormat(pattern);
+    }
 
     /*
      * (non-Javadoc)
