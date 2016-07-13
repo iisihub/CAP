@@ -42,5 +42,5 @@ public interface SecUserDao<T extends User> {
 
     T getUserByLoginId(String loginId, String depCode);
 
-    List<? extends Role> getRoleByUser(T user);
+    List<? extends Role> getRoleByUser(User user);
 }
