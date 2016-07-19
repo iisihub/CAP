@@ -1,0 +1,582 @@
+body {
+    background: url(../images/bg.png) #f7f7f7 top repeat-x;
+    font-size: 12px;
+    font-family: Verdana, "新細明體", PMingLiu, Geneva, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.mainBody {
+    margin: auto;
+    width: 950px;
+    background-color: #FFF;
+    /* background-image: url("../images/body_bg.jpg"); */
+    background-repeat: no-repeat;
+    background-position: center top;
+	position:relative;
+}
+
+input {
+    height: 20px;
+    border: #CCCCCC 1px solid;
+    &[disabled] {
+    background-color: #FFF;
+    border: 0px;
+    color: #000;
+  }
+}
+
+select, textarea {
+  border: #CCCCCC 1px solid;
+}
+
+input.date {
+  width: 85px;
+}
+
+.clear {
+  clear: both;
+}
+
+nav.top {
+  border: 0px;
+  position: relative;
+}
+
+.ui-datepicker {
+  font-size: 14px;
+  .ui-datepicker-title {
+    color: #080808;
+  }
+}
+
+/** override jqeury ui css start **/
+
+.tabs .ui-tabs-nav li a {
+  font-size: 14px;
+  padding: .3em 1em;
+}
+
+button.ui-widget {
+  font-size: 12px;
+}
+
+.r-grid {
+  margin-top: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+/* row data css*/
+
+table.row-data {
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid #AAAAAA;
+  margin: 5px 0px 5px;
+  padding: 3px;
+  tr th {
+    border: #AAA 1px solid;
+    padding: 5px 10px 5px 0px;
+    text-align: right;
+    width: 30%;
+    background-color: #fafafa;
+  }
+  &.column-4 th {
+    width: 20%;
+  }
+  tr {
+    border: #AAA 1px solid;
+    padding: 5px 10px 5px 0px;
+    text-align: right;
+    td {
+      border: #AAA 1px solid;
+      padding: 3px 10px;
+      text-align: left;
+    }
+  }
+}
+
+fieldset.row .row-tr .row-td.c2 {
+  display: inline-block;
+  text-align: left;
+}
+
+.numeric {
+  text-align: right;
+  padding-right: 2px;
+}
+
+.lang {
+  background-image: url("../images/icon-right.png");
+}
+
+/** menu **/
+nav {
+  &.top {
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    background: none repeat scroll 0 0 #C2C2C2;
+    height: 37px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    margin: 0px;
+    padding: 0px;
+    float: left;
+  }
+  &.top ul {
+    margin: auto;
+    list-style-type: none;
+    &.block {
+      height: 35px;
+      width: 278px;
+    }
+    &.navmenu {
+      position: absolute;
+      /*right: 0px;*/
+      li {
+        float: left;
+        margin-right: 2px;
+        text-align: center;
+        width: 150px;
+        a {
+          background: none repeat scroll 0 0 #6F6F6F;
+          border: 1px solid #656565;
+          color: #FFFFFF;
+          display: block;
+          font-size: 15px;
+          height: 15px;
+          letter-spacing: 2px;
+          margin-top: 3px;
+          padding: 5px 0 9px;
+          text-align: center;
+          text-decoration: none;
+          &:hover {
+            background: none repeat scroll 0 0 #C90915;
+            border-color: #B90000;
+            text-decoration: none;
+          }
+          &.select {
+            background: none repeat scroll 0 0 #FFFFFF;
+            border: medium none;
+            color: #000000;
+            font-weight: bold;
+            margin-top: 0;
+            padding: 9px 1px 13px;
+          }
+        }
+        ul {
+          display: none;
+        }
+        &:hover ul {
+          display: block;
+          position: absolute;
+          top: 30px;
+          left: 0;
+          li a {
+            display: block;
+            color: #ffffff;
+            width: 90px;
+            text-align: center;
+            border-bottom: 1px solid #f2f2f2;
+            /*底线的白色*/
+          }
+        }
+      }
+    }
+  }
+}
+
+/*图片相接位置的白色*/
+
+.top {
+  border-top: 1px solid #f2f2f2;
+}
+
+/*menu button设置*/
+
+.menu .button {
+  width: 176px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  background-image: url(../pic/buttonBackground.jpg);
+  border: 0px;
+  &.select, &:hover {
+    color: #0000C7;
+    font-weight: bold;
+  }
+  &.select, a {
+    color: #000000;
+    text-decoration: none;
+  }
+  &.select, a:hover, &.select, &:hover a, &.select, a:hover {
+    color: #0000C7;
+    font-weight: bold;
+  }
+  &.select {
+    color: #0000C7;
+    font-weight: bold;
+    a {
+      color: #0000C7;
+      font-weight: bold;
+    }
+  }
+}
+
+/*左下DIV设置*/
+nav.sub {
+  background: url("../images/sidebar-bg.png") no-repeat scroll right top transparent;
+  width: 180px;
+  min-height: 180px;
+  height: 400px;
+  float: left;
+  left: 0px;
+  overflow: auto;
+  padding-bottom: 10px;
+  padding-top: 30px;
+  ol {
+    border-top: 1px solid #D5D5D5;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    background: none repeat scroll 0 0 #C90915;
+    border-bottom: 1px solid #D5D5D5;
+    padding-left: 4px;
+    a {
+      background: none repeat scroll 0 0 #FFFFFF;
+      color: #717171;
+      display: block;
+      padding: 9px 10px;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        background: none repeat scroll 0 0 #C90915;
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+      &.selected {
+        background: none repeat scroll 0 0 #C90915;
+        color: #FFFFFF;
+        text-decoration: none;
+        background: none repeat scroll 0 0 #454545;
+        color: #FFFFFF;
+        margin-left: -4px;
+        padding-left: 14px;
+      }
+    }
+  }
+  ul {
+    background: none repeat scroll 0 0 #454545;
+    border-bottom: 0px solid #454545;
+    display: none;
+    list-style: none outside none;
+    margin: 0 0 0 -4px;
+    padding: 0 0 0 4px;
+    width: 100%;
+    li {
+      background: none repeat scroll 0 0 #DDDDDD;
+      border-bottom: 1px dotted #ADADAD;
+      padding: 0 0 0 4px;
+      &.last {
+        border-bottom: medium none;
+      }
+      a {
+        background: none repeat scroll 0 0 #F4F4F4;
+        color: #454545;
+        display: block;
+        padding: 9px 0 9px 25px;
+        &:hover {
+          background: none repeat scroll 0 0 #DDDDDD;
+          color: #000000;
+        }
+        &.selected {
+          background: none repeat scroll 0 0 #717171;
+          color: #FFFFFF;
+          padding: 9px 0 9px 29px;
+        }
+      }
+    }
+    ul {
+      background: none repeat scroll 0 0 #717171;
+      padding-right: 4px;
+      li a {
+        line-height: 1.45em;
+        margin-right: -4px;
+        padding-left: 20px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+/*右边的DIV*/
+
+article {
+  width: 740px;
+  float: left;
+  padding-left: 10px;
+}
+
+.main {
+  background: #ffffff;
+  padding: 12px 0 0 10px;
+  min-height: 400px;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+  div {
+    padding-top: 15px;
+  }
+  .logo {
+    left: 20px;
+    position: absolute;
+  }
+}
+
+.bg-left, .bg-right {
+  height: 460px;
+  position: absolute;
+  top: 0;
+  width: 10px;
+}
+
+.bg-left {
+  background: url("../images/bg-left.png") no-repeat scroll right top transparent;
+  left: -10px;
+}
+
+.bg-right {
+  background: url("../images/bg-right.png") no-repeat scroll left top transparent;
+  right: -10px;
+}
+
+header {
+  li a:hover {
+    color: #CC0000;
+    text-decoration: none;
+  }
+  ol, ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+  }
+  ol {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #DDDDDD;
+    height: 18px;
+    overflow: hidden;
+    padding-left: 8px;
+    position: absolute;
+    right: 20px;
+    top: 8px;
+    width: 100px;
+    z-index: 999;
+    li {
+      font-size: 11px;
+      padding: 5px 0;
+      a {
+        color: #000000;
+      }
+      &.lang {
+        background: url("../images/icon-right.png") no-repeat scroll 83px center transparent;
+        font-weight: 900;
+        margin-bottom: 6px;
+        padding: 2px 0;
+        a {
+          color: #6E6E6E;
+        }
+      }
+    }
+  }
+  ul {
+    padding-top: 68px;
+    li {
+      background: url("../images/icon-head.png") no-repeat scroll right center transparent;
+      float: right;
+      padding-right: 19px;
+      &.last {
+        background: none repeat scroll 0 0 transparent;
+        padding: 0;
+      }
+      a {
+        color: #434343;
+      }
+    }
+  }
+  div.user-info {
+    font-size: 12px;
+    padding: 2px 8px !important;
+    float: right;
+    position: absolute;
+    right: 20px;
+    top: 8px;
+    div {
+      padding-top: 0px !important;
+    }
+  }
+}
+
+/* footer */
+
+footer {
+  background: url(../images/bg-foot.png) top no-repeat;
+  padding: 16px 0;
+  color: #8B8B8B;
+  text-align: right;
+}
+
+.bg-around{
+	top: 0;
+	width: 10px;
+	height: 460px;
+	position: absolute;
+	&.right{
+		background: url(../images/bg-right.png) left top no-repeat;
+		right: -10px;
+	}
+	&.left{
+		background: url(../images/bg-left.png) right top no-repeat;
+		left: -10px;
+	}
+}
+
+
+
+.menuspan {
+  display: inline-block;
+  text-align: left;
+  width: 20%;
+}
+
+.border-change {
+  border: 0px;
+}
+
+/** override jqGrid **/
+
+.r-grid {
+  .ui-jqgrid-title {
+    line-height: 25px;
+  }
+  .ui-jqgrid {
+    font-size: 12px;
+  }
+  .ui-jqgrid-view tr {
+    height: 25px;
+  }
+  .ui-th-div-ie {
+    line-height: 20px;
+  }
+  .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #d8dcdf;
+    background: url("../images/centercontent_tr001.jpg");
+    background-repeat: repeat-x;
+  }
+  .ui-jqgrid tr {
+    &.ui-row-ltr td, &.jqgrow td {
+      border-color: #CCC;
+    }
+    &.ui-row-ltr.ui-state-hover td, &.jqgrow.ui-state-hover td {
+      font-weight: bolder;
+    }
+  }
+}
+
+.ui-state-hover td {
+  font-weight: bolder;
+}
+
+/** button **/
+
+.btn1, .ui-dialog-buttonset .ui-button {
+  background: url("../images/button001.jpg") scroll center center no-repeat !important;
+}
+
+.btn1.ui-button-text-only .ui-button-text, .ui-dialog-buttonset button.ui-button-text-only .ui-button-text {
+  padding: 0px;
+  font-size: 12px;
+}
+
+.btn1.ui-button, .ui-dialog-buttonset button.ui-button {
+  width: 65px;
+  height: 24px;
+  line-height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  color: #005BA1;
+  cursor: pointer;
+  border: #AAA 1px solid;
+}
+
+.btn1:hover, .ui-dialog-buttonset button:hover {
+  color: #333333;
+}
+
+/** dialog **/
+
+.ui-dialog {
+  padding: 0px;
+  background: #fafafa;
+  .ui-dialog-buttonpane {
+    border: 0px;
+    background: #fafafa;
+  }
+}
+
+.defDialogCss {
+  .ui-dialog-titlebar, .ui-state-default {
+    background: #005BA1;
+    border: 1px solid #005BA1;
+  }
+  .ui-state-hover {
+    background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;
+    border: 1px solid #cdd5da;
+  }
+}
+
+.errorDialogCss .ui-dialog-titlebar {
+  background: #CC0000;
+  border: 1px solid #CC0000;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-breakAll {
+  word-break: break-all;
+}
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {
+  display: none;
+  /*sorry for IE5*/
+  display/**/: block;
+  /*sorry for IE5*/
+  position: absolute;
+  /*must have*/
+  z-index: -1;
+  /*must have*/
+  filter: mask();
+  /*must have*/
+  top: -4px;
+  /*must have*/
+  left: -4px;
+  /*must have*/
+  width: 200px;
+  /*must have*/
+  height: 200px;
+  /*must have*/
+}
