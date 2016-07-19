@@ -1,4 +1,4 @@
-package com.isigroup.cap.base.annotation;
+package com.iisigroup.cap.base.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

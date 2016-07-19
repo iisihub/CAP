@@ -31,6 +31,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 import com.iisigroup.cap.base.CapSystemProperties;
+import com.iisigroup.cap.base.annotation.CapAuditLogAction;
 import com.iisigroup.cap.base.constants.CapConstants;
 import com.iisigroup.cap.base.model.AuditLog;
 import com.iisigroup.cap.component.Request;
@@ -41,7 +42,6 @@ import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapWebUtil;
 import com.iisigroup.cap.utils.UUIDGenerator;
-import com.isigroup.cap.base.annotation.CapAuditLogAction;
 
 /**
  * <pre>
