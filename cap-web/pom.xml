@@ -234,10 +234,10 @@
                                 C:/Program Files/nodejs/node
                                 </nodeExecutable> -->
                             <!-- path to optimizer json config file -->
-                            <configFile> ${basedir}/src/main/webapp/static/build.js
+                            <configFile> ${basedir}/src/main/webapp/static/build.js 
                             </configFile>
                             <!-- optional path to optimizer executable -->
-                            <optimizerFile> ${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js
+                            <optimizerFile> ${basedir}/src/main/webapp/static/requirejs/2.1.2/r.js 
                             </optimizerFile>
                             <!-- optional parameters to optimizer executable -->
                             <optimizerParameters>
@@ -249,10 +249,10 @@
                             <!-- Whether or not to process configFile with maven filters. If you use
                                 this option, some options in your configFile must resolve to absolute paths
                                 (see below) -->
-                            <filterConfig> false
+                            <filterConfig> false 
                             </filterConfig>
                             <!-- Skip requirejs optimization if true -->
-                            <skip> false
+                            <skip> false 
                             </skip>
                         </configuration>
                     </plugin>
@@ -325,6 +325,38 @@
                                 <argument>--no-color</argument>
                             </arguments>
                             <workingDirectory>${basedir}/src/main/cabin</workingDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>css</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jasig.maven</groupId>
+                        <artifactId>sass-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                        <configuration>
+                            <sassOptions>
+                                <always_update>true</always_update>
+                                <style>:compressed</style>
+                                <debug_info>false</debug_info>
+                            </sassOptions>
+                            <resources>
+                                <resource>
+                                    <source>
+                                        <directory>${basedir}/src/WebDev/compass/sass</directory>
+                                        <includes>
+                                            <include>*.scss</include>
+                                        </includes>
+                                        <excludes />
+                                    </source>
+                                    <destination>${basedir}/src/main/webapp/static/css</destination>
+                                </resource>
+                            </resources>
+                            <useCompass>false</useCompass>
                         </configuration>
                     </plugin>
                 </plugins>
