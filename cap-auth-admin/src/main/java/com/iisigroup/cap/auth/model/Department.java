@@ -19,9 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -30,7 +30,8 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/26
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/26,tammy,new
  *          <li>2014/5/15, Lancelot, update model/table/variable name
  *          </ul>
@@ -41,7 +42,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
-public class Department extends GenericBean implements IDataObject {
+public class Department extends GenericBean implements DataObject {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -94,7 +95,7 @@ public class Department extends GenericBean implements IDataObject {
     private Timestamp updateTime;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private List<User> users;
+    private List<DefaultUser> users;
 
     public Department() {
     }
@@ -119,7 +120,7 @@ public class Department extends GenericBean implements IDataObject {
         this.updater = updater;
     }
 
-    public List<User> getUsers() {
+    public List<DefaultUser> getUsers() {
         return this.users;
     }
 

@@ -15,13 +15,12 @@ import com.iisigroup.cap.auth.dao.RoleDao;
 import com.iisigroup.cap.auth.dao.RoleFunctionDao;
 import com.iisigroup.cap.auth.dao.UserDao;
 import com.iisigroup.cap.auth.dao.UserRoleDao;
+import com.iisigroup.cap.auth.model.DefaultFunction;
+import com.iisigroup.cap.auth.model.DefaultRole;
 import com.iisigroup.cap.auth.model.Department;
-import com.iisigroup.cap.auth.model.Function;
-import com.iisigroup.cap.auth.model.Role;
 import com.iisigroup.cap.auth.service.RoleSetService;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.service.AbstractService;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>
@@ -30,13 +29,13 @@ import com.iisigroup.cap.service.AbstractService;
  * 
  * @since 2014/1/16
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
 @Service("roleSetService")
-public class RoleSetServiceImpl extends AbstractService implements
-        RoleSetService {
+public class RoleSetServiceImpl implements RoleSetService {
 
     @Resource
     private DepartmentDao departmentDao;
@@ -57,31 +56,24 @@ public class RoleSetServiceImpl extends AbstractService implements
     private UserDao userDao;
 
     @Override
-    public Page<Map<String, Object>> findPageUser(ISearch search,
-            String roleCode) {
-        return userDao.findPageByRoleCode(roleCode, search.getFirstResult(),
-                search.getMaxResults());
+    public Page<Map<String, Object>> findPageUser(SearchSetting search, String roleCode) {
+        return userDao.findPageByRoleCode(roleCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
-    public Page<Map<String, Object>> findPageEditUsr(ISearch search,
-            String roleCode, String depCode) {
-        return userDao.findPageUnselectedByRoleCodeAndDepCode(roleCode,
-                depCode, search.getFirstResult(), search.getMaxResults());
+    public Page<Map<String, Object>> findPageEditUsr(SearchSetting search, String roleCode, String depCode) {
+        return userDao.findPageUnselectedByRoleCodeAndDepCode(roleCode, depCode, search.getFirstResult(), search.getMaxResults());
     }
 
     @Override
-    public Page<Map<String, Object>> findPageEditFunc(ISearch search,
-            String roleCode, String sysType, String parent) {
-        return functionDao.findPageUnselected(roleCode, sysType, parent,
-                search.getFirstResult(), search.getMaxResults());
-    }// ;
+    public Page<Map<String, Object>> findPageEditFunc(SearchSetting search, String roleCode, String sysType, String parent) {
+        return functionDao.findPageUnselected(roleCode, sysType, parent, search.getFirstResult(), search.getMaxResults());
+    }
 
     @Override
-    public Page<Map<String, Object>> findPageFunc(ISearch search, String code) {
-        return functionDao.findPageByRoleCode(code,
-                search.getFirstResult(), search.getMaxResults());
-    }// ;
+    public Page<Map<String, Object>> findPageFunc(SearchSetting search, String code) {
+        return functionDao.findPageByRoleCode(code, search.getFirstResult(), search.getMaxResults());
+    }
 
     @Override
     public Map<String, String> findAllDepartment() {
@@ -99,15 +91,15 @@ public class RoleSetServiceImpl extends AbstractService implements
     @Override
     public Map<String, String> findAllFunc(String sysType) {
         Map<String, String> map = new LinkedHashMap<String, String>();
-        List<Function> funcs = functionDao.findBySysTypeAndLevel(sysType, "1");
+        List<DefaultFunction> funcs = functionDao.findBySysTypeAndLevel(sysType, "1");
 
         if (!CollectionUtils.isEmpty(funcs)) {
-            for (Function func : funcs) {
+            for (DefaultFunction func : funcs) {
                 map.put(Integer.toString(func.getCode()), func.getName());
             }
         }
         return map;
-    }// ;
+    }
 
     @Override
     public int deleteUrList(String rolCode, List<String> delUsr) {
@@ -120,14 +112,13 @@ public class RoleSetServiceImpl extends AbstractService implements
     }
 
     @Override
-    public List<Map<String, Object>> findAllRoleWithSelectedByUserCode(
-            String userCode) {
+    public List<Map<String, Object>> findAllRoleWithSelectedByUserCode(String userCode) {
         return roleDao.findAllWithSelectedByUserCode(userCode);
-    }// ;
+    }
 
     @Override
-    public Role findRoleByCode(String code) {
+    public DefaultRole findRoleByCode(String code) {
         return roleDao.findByCode(code);
-    }// ;
+    }
 
 }

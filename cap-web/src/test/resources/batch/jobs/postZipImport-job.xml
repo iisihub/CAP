@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch" xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="
+	http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+    <batch:job id="postZipImportJob" restartable="true">
+        <batch:step id="deletePostStep" next="insertPostStep">
+            <batch:tasklet>
+                <batch:chunk reader="deletePostItemReader" writer="deletePostItemWriter" commit-interval="1" />
+            </batch:tasklet>
+        </batch:step>
+        <batch:step id="insertPostStep">
+            <batch:tasklet>
+                <batch:chunk reader="postItemReader" writer="postItemWriter" commit-interval="500" />
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+    <bean id="deletePostItemReader" scope="step" class="org.springframework.batch.item.database.JdbcCursorItemReader">
+        <property name="dataSource" ref="cap-db" />
+        <property name="sql">
+            <value><![CDATA[select zipCode from PostZip group by zipCode]]></value>
+        </property>
+        <property name="rowMapper">
+            <bean class="com.iisigroup.cap.jdbc.support.CapColumnMapRowMapper" />
+        </property>
+    </bean>
+    <bean id="deletePostItemWriter" scope="step" class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+        <property name="dataSource" ref="cap-db" />
+        <property name="sql">
+            <value><![CDATA[delete from PostZip where zipCode=:ZIPCODE]]></value>
+        </property>
+        <property name="itemSqlParameterSourceProvider">
+            <bean class="com.iisigroup.cap.batch.item.support.MapItemSqlParameterSourceProvider" />
+        </property>
+    </bean>
+    <bean id="postItemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+        <property name="encoding" value="UTF-8" />
+        <!-- input.file=classpath:/Zip32_10108.TXT -->
+        <property name="resource" value="#{jobParameters['input.file']}" />
+        <property name="lineMapper">
+            <bean id="postZiplineMapper" class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property name="lineTokenizer">
+                    <bean class="com.iisigroup.cap.batch.item.support.CapFixedLengthTokenizer">
+                        <property name="encoding" value="utf-8" />
+                        <property name="strict" value="false" />
+                        <property name="names" value="ZipCode,AreaCode,City,CityArea,Space,Road,Space,Scoop" />
+                        <property name="columns" value="3,2,9,9,2,22,3,46" />
+                    </bean>
+                </property>
+                <property name="fieldSetMapper">
+                    <bean class="org.springframework.batch.item.file.mapping.PassThroughFieldSetMapper" />
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="postItemWriter" scope="step" class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+        <property name="dataSource" ref="cap-db" />
+        <property name="sql">
+            <value><![CDATA[insert into PostZip(ZipCode,AreaCode,City,CityArea,Road,Scoop) 
+			values(:ZipCode,:AreaCode,:City,:CityArea,:Road,:Scoop)]]></value>
+        </property>
+        <property name="itemSqlParameterSourceProvider">
+            <bean class="com.iisigroup.cap.batch.item.support.FieldSetItemSqlParameterSourceProvider" />
+        </property>
+    </bean>
+</beans>

@@ -12,17 +12,16 @@ package com.iisigroup.cap.auth.handler;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.auth.service.PwdPolicyService;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.security.SecConstants.PwdPloicyKeys;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.db.service.CommonService;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
+import com.iisigroup.cap.security.constants.SecConstants.PwdPolicyKeys;
 
 /**
  * <pre>
@@ -31,24 +30,23 @@ import com.iisigroup.cap.service.ICommonService;
  * 
  * @since 2014/02/11
  * @author yunglinliu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/02/11,yunglinliu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("pwdpolicyhandler")
 public class PwdPolicyHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
     @Resource
     private PwdPolicyService pwdPolicyService;
 
-    public IResult query(IRequest request) {
+    public Result query(Request request) {
         AjaxFormResult result = new AjaxFormResult();
-        for (PwdPloicyKeys value : PwdPloicyKeys.values()) {
-            SysParm parm = commonService.findById(SysParm.class, value
-                    .toString().toLowerCase());
+        for (PwdPolicyKeys value : PwdPolicyKeys.values()) {
+            SysParm parm = commonService.findById(SysParm.class, value.toString().toLowerCase());
             if (parm != null) {
                 result.set(parm.getParmId().substring(4), parm.getParmValue());
             }
@@ -56,7 +54,7 @@ public class PwdPolicyHandler extends MFormHandler {
         return result;
     }
 
-    public IResult modify(IRequest request) {
+    public Result modify(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         pwdPolicyService.updatePwdPolicy(request);
         return result;

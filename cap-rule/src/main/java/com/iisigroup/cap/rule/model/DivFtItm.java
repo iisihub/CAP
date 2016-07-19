@@ -25,9 +25,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -36,153 +36,152 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/13
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/13,TimChiang,new
  *          </ul>
  */
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DIVFTITM", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"oid" }))
-public class DivFtItm extends GenericBean implements IDataObject {
+@Table(name = "DIVFTITM", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
+public class DivFtItm extends GenericBean implements DataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String factorNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String factorNo;
 
-	@Column(length = 60)
-	private String factorNm;
+    @Column(length = 60)
+    private String factorNm;
 
-	/** 屬性 */
-	@Column(length = 1)
-	private String dataType;
+    /** 屬性 */
+    @Column(length = 1)
+    private String dataType;
 
-//	/** 摘要 */
-//	@Column(length = 200)
-//	private String factorEm;
+    // /** 摘要 */
+    // @Column(length = 200)
+    // private String factorEm;
 
-//	/** 值域 */
-//	@Column(length = 60)
-//	private String factJson;
+    // /** 值域 */
+    // @Column(length = 60)
+    // private String factJson;
 
-	@Column(length = 6)
-	private String updater;
+    @Column(length = 6)
+    private String updater;
 
-	@Column
-	private Timestamp updateTime;
-	
-	@Column(length = 20)
-	private String tableNm;
-	
-	@Column(length = 20)
-	private String columnNm;
-	
-	@Column(length = 200)
-	private String factorRem;
-	
-	
-	// bi-directional many-to-one association to DivFtDtl
-	@OneToMany(mappedBy = "divFtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private List<DivFtDtl> divFtDtls;
+    @Column
+    private Timestamp updateTime;
 
-	public String getOid() {
-		return oid;
-	}
+    @Column(length = 20)
+    private String tableNm;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    @Column(length = 20)
+    private String columnNm;
 
-	public String getFactorNo() {
-		return factorNo;
-	}
+    @Column(length = 200)
+    private String factorRem;
 
-	public void setFactorNo(String factorNo) {
-		this.factorNo = factorNo;
-	}
+    // bi-directional many-to-one association to DivFtDtl
+    @OneToMany(mappedBy = "divFtItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<DivFtDtl> divFtDtls;
 
-	public String getFactorNm() {
-		return factorNm;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public void setFactorNm(String factorNm) {
-		this.factorNm = factorNm;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public String getDataType() {
-		return dataType;
-	}
+    public String getFactorNo() {
+        return factorNo;
+    }
 
-	public void setDataType(String dataType) {
-		this.dataType = dataType;
-	}
+    public void setFactorNo(String factorNo) {
+        this.factorNo = factorNo;
+    }
 
-//	/**
-//	 * @return 值域JSON
-//	 */
-//	public String getFactJson() {
-//		return factJson;
-//	}
+    public String getFactorNm() {
+        return factorNm;
+    }
 
-//	/**
-//	 * 值域JSON
-//	 * @param factJson
-//	 */
-//	public void setFactJson(String factJson) {
-//		this.factJson = factJson;
-//	}
-	
-	public String getUpdater() {
-		return updater;
-	}
+    public void setFactorNm(String factorNm) {
+        this.factorNm = factorNm;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public String getDataType() {
+        return dataType;
+    }
 
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
+    // /**
+    // * @return 值域JSON
+    // */
+    // public String getFactJson() {
+    // return factJson;
+    // }
 
-	public List<DivFtDtl> getDivFtDtls() {
-		return divFtDtls;
-	}
+    // /**
+    // * 值域JSON
+    // * @param factJson
+    // */
+    // public void setFactJson(String factJson) {
+    // this.factJson = factJson;
+    // }
 
-	public void setDivFtDtls(List<DivFtDtl> divFtDtls) {
-		this.divFtDtls = divFtDtls;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public String getTableNm() {
-		return tableNm;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public void setTableNm(String tableNm) {
-		this.tableNm = tableNm;
-	}
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
 
-	public String getColumnNm() {
-		return columnNm;
-	}
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public void setColumnNm(String columnNm) {
-		this.columnNm = columnNm;
-	}
+    public List<DivFtDtl> getDivFtDtls() {
+        return divFtDtls;
+    }
 
-	public String getFactorRem() {
-		return factorRem;
-	}
+    public void setDivFtDtls(List<DivFtDtl> divFtDtls) {
+        this.divFtDtls = divFtDtls;
+    }
 
-	public void setFactorRem(String factorRem) {
-		this.factorRem = factorRem;
-	}
+    public String getTableNm() {
+        return tableNm;
+    }
+
+    public void setTableNm(String tableNm) {
+        this.tableNm = tableNm;
+    }
+
+    public String getColumnNm() {
+        return columnNm;
+    }
+
+    public void setColumnNm(String columnNm) {
+        this.columnNm = columnNm;
+    }
+
+    public String getFactorRem() {
+        return factorRem;
+    }
+
+    public void setFactorRem(String factorRem) {
+        this.factorRem = factorRem;
+    }
 
 }

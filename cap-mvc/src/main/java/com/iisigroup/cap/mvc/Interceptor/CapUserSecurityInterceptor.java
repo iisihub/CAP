@@ -28,43 +28,41 @@ import com.iisigroup.cap.security.model.CapUserDetails;
  * 
  * @since 2011/11/30
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/11/30,rodeschen,new
  *          </ul>
  */
 public class CapUserSecurityInterceptor extends HandlerInterceptorAdapter {
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.web.servlet.HandlerInterceptor#preHandle(javax.servlet
-	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
-	 * java.lang.Object)
-	 */
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
-		CapUserDetails user = CapSecurityContext.getUser();
-		// try {
-		if (user == null) {
-			user = new CapUserDetails();
-			//user.setUnitNo("XXX");
-			//user.setUserId("testUser");
-			//user.setUserName("測試使用者");
-		}
-		// } catch (CapException e) {
-		// Map<String, String> mapMessage = new HashMap<String, String>();
-		// mapMessage.put("ERRMSG", e.getMessage());
-		// throw new ModelAndViewDefiningException(new ModelAndView("/error",
-		// mapMessage));
-		// }
-		if (user != null && request.getRequestURI().equals(request.getContextPath() + "/")) {
-			response.sendRedirect(request.getContextPath() + "/page/index");
-			return false;
-		}
-		return true;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.springframework.web.servlet.HandlerInterceptor#preHandle(javax.servlet .http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+     */
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+        CapUserDetails user = CapSecurityContext.getUser();
+        // try {
+        if (user == null) {
+            user = new CapUserDetails();
+            // user.setUnitNo("XXX");
+            // user.setUserId("testUser");
+            // user.setUserName("測試使用者");
+        }
+        // } catch (CapException e) {
+        // Map<String, String> mapMessage = new HashMap<String, String>();
+        // mapMessage.put("ERRMSG", e.getMessage());
+        // throw new ModelAndViewDefiningException(new ModelAndView("/error",
+        // mapMessage));
+        // }
+        if (user != null && request.getRequestURI().equals(request.getContextPath() + "/")) {
+            response.sendRedirect(request.getContextPath() + "/page/index");
+            return false;
+        }
+        return true;
 
-	}
+    }
 
 }

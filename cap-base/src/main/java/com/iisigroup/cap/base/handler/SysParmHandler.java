@@ -16,23 +16,22 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
-import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.db.service.CommonService;
+import com.iisigroup.cap.formatter.Formatter;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 
@@ -43,66 +42,65 @@ import com.iisigroup.cap.utils.CapDate;
  * 
  * @since 2012/10/25
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/10/25,iristu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("sysparmhandler")
 public class SysParmHandler extends MFormHandler {
 
-	@Resource
-	private ICommonService commonService;
+    @Resource
+    private CommonService commonService;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(ISearch search, IRequest params) {
+    @HandlerType(HandlerTypeEnum.GRID)
+    public BeanGridResult query(SearchSetting search, Request params) {
 
-		if (params.containsKey("parmId")) {
-			search.addSearchModeParameters(SearchMode.EQUALS, "parmId",
-					params.get("parmId"));
-		}
-		if (!search.hasOrderBy()) {
-			search.addOrderBy("parmId");
-		}
-		Page<SysParm> page = commonService.findPage(SysParm.class, search);
-		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-		fmt.put("updateTime", new ADDateFormatter());
-		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-	}// ;
+        if (params.containsKey("parmId")) {
+            search.addSearchModeParameters(SearchMode.EQUALS, "parmId", params.get("parmId"));
+        }
+        if (!search.hasOrderBy()) {
+            search.addOrderBy("parmId");
+        }
+        Page<SysParm> page = commonService.findPage(SysParm.class, search);
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
+        fmt.put("updateTime", new ADDateFormatter());
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
+    }
 
-	/**
-	 * modify SysParm
-	 * 
-	 * @param request
-	 *            request
-	 * @return IResult
-	 */
-	public IResult modify(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
-		if (parm == null) {
-			parm = new SysParm();
-		}
-		CapBeanUtil.map2Bean(request, parm, SysParm.class);
-		parm.setUpdateTime(CapDate.getCurrentTimestamp());
-		commonService.save(parm);
-		return result;
-	}
+    /**
+     * modify SysParm
+     * 
+     * @param request
+     *            request
+     * @return IResult
+     */
+    public Result modify(Request request) {
+        AjaxFormResult result = new AjaxFormResult();
+        SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
+        if (parm == null) {
+            parm = new SysParm();
+        }
+        CapBeanUtil.map2Bean(request, parm, SysParm.class);
+        parm.setUpdateTime(CapDate.getCurrentTimestamp());
+        commonService.save(parm);
+        return result;
+    }
 
-	/**
-	 * delete SysParm
-	 * 
-	 * @param request
-	 *            request
-	 * @return IResult
-	 */
-	public IResult delete(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
-		if (parm != null) {
-			commonService.delete(parm);
-		}
-		return result;
-	}
+    /**
+     * delete SysParm
+     * 
+     * @param request
+     *            request
+     * @return IResult
+     */
+    public Result delete(Request request) {
+        AjaxFormResult result = new AjaxFormResult();
+        SysParm parm = commonService.findById(SysParm.class, request.get("parmId"));
+        if (parm != null) {
+            commonService.delete(parm);
+        }
+        return result;
+    }
 
 }

@@ -25,9 +25,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -36,100 +36,100 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/13
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/13,TimChiang,new
  *          </ul>
  */
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DIVRLITM", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"divRlNo" }))
-public class DivRlItm extends GenericBean implements IDataObject {
+@Table(name = "DIVRLITM", uniqueConstraints = @UniqueConstraint(columnNames = { "divRlNo" }))
+public class DivRlItm extends GenericBean implements DataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String divRlNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String divRlNo;
 
-	@NotNull
-	@Column(length = 60, nullable = false)
-	private String divRlNm;
+    @NotNull
+    @Column(length = 60, nullable = false)
+    private String divRlNm;
 
-	/** 均分量化方式 */
-	@Column(length = 1)
-	private String divRlTyp;
+    /** 均分量化方式 */
+    @Column(length = 1)
+    private String divRlTyp;
 
-//	@Column(length = 1)
-//	private String inputFlg;
+    // @Column(length = 1)
+    // private String inputFlg;
 
-	@Column(length = 6)
-	private String updater;
+    @Column(length = 6)
+    private String updater;
 
-	@Column
-	private Timestamp updateTime;
-	
-	// bi-directional many-to-one association to DivRlDtl
-	@OneToMany(mappedBy = "divRlItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private List<DivRlDtl> divRlDtls;
+    @Column
+    private Timestamp updateTime;
 
-	public String getOid() {
-		return oid;
-	}
+    // bi-directional many-to-one association to DivRlDtl
+    @OneToMany(mappedBy = "divRlItm", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<DivRlDtl> divRlDtls;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public String getDivRlNo() {
-		return divRlNo;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public void setDivRlNo(String divRlNo) {
-		this.divRlNo = divRlNo;
-	}
+    public String getDivRlNo() {
+        return divRlNo;
+    }
 
-	public String getDivRlNm() {
-		return divRlNm;
-	}
+    public void setDivRlNo(String divRlNo) {
+        this.divRlNo = divRlNo;
+    }
 
-	public void setDivRlNm(String divRlNm) {
-		this.divRlNm = divRlNm;
-	}
+    public String getDivRlNm() {
+        return divRlNm;
+    }
 
-	public String getDivRlTyp() {
-		return divRlTyp;
-	}
+    public void setDivRlNm(String divRlNm) {
+        this.divRlNm = divRlNm;
+    }
 
-	public void setDivRlTyp(String divRlTyp) {
-		this.divRlTyp = divRlTyp;
-	}
+    public String getDivRlTyp() {
+        return divRlTyp;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    public void setDivRlTyp(String divRlTyp) {
+        this.divRlTyp = divRlTyp;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public Timestamp getUpdateTime() {
-		return updateTime;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
 
-	public List<DivRlDtl> getDivRlDtls() {
-		return divRlDtls;
-	}
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public void setDivRlDtls(List<DivRlDtl> divRlDtls) {
-		this.divRlDtls = divRlDtls;
-	}
+    public List<DivRlDtl> getDivRlDtls() {
+        return divRlDtls;
+    }
+
+    public void setDivRlDtls(List<DivRlDtl> divRlDtls) {
+        this.divRlDtls = divRlDtls;
+    }
 
 }

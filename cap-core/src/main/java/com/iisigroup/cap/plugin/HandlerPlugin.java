@@ -15,10 +15,10 @@ package com.iisigroup.cap.plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.action.IAction;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.IHandler;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.action.Action;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.handler.Handler;
 
 /**
  * <pre>
@@ -27,56 +27,56 @@ import com.iisigroup.cap.response.IResult;
  * 
  * @since 2011/11/22
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/11/22,rodeschen,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
  */
-public abstract class HandlerPlugin implements IPlugin, IHandler {
+public abstract class HandlerPlugin implements Plugin, Handler {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	/**
-	 * execute
-	 * 
-	 * @param params
-	 *            Client 參數
-	 * @return String
-	 */
-	public abstract IResult execute(IRequest params) ;
+    /**
+     * execute
+     * 
+     * @param params
+     *            Client 參數
+     * @return String
+     */
+    public abstract Result execute(Request params);
 
-	IRequest request;
+    Request request;
 
-	public IRequest getRequest() {
-		return request;
-	}
+    public Request getRequest() {
+        return request;
+    }
 
-	public void setRequest(IRequest request) {
-		this.request = request;
-	}
+    public void setRequest(Request request) {
+        this.request = request;
+    }
 
-	@Override
-	public String getPluginName() {
-		return this.getClass().getSimpleName();
-	}
+    @Override
+    public String getPluginName() {
+        return this.getClass().getSimpleName();
+    }
 
-	/**
-	 * get action
-	 * 
-	 * @param formAction
-	 *            action name
-	 * @return IAction
-	 */
-	public abstract IAction getAction(String formAction);
+    /**
+     * get action
+     * 
+     * @param formAction
+     *            action name
+     * @return IAction
+     */
+    public abstract Action getAction(String formAction);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	public void afterPropertiesSet() throws Exception {
-		// do nothing
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
+    public void afterPropertiesSet() throws Exception {
+        // do nothing
+    }
 
 }

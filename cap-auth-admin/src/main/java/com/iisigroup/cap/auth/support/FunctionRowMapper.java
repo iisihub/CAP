@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.iisigroup.cap.auth.model.Function;
+import com.iisigroup.cap.auth.model.DefaultFunction;
 
 /**
  * <pre>
@@ -14,15 +14,16 @@ import com.iisigroup.cap.auth.model.Function;
  * 
  * @since 2014/4/30
  * @author Lancelot
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/4/30,Lancelot,new
  *          </ul>
  */
-public class FunctionRowMapper implements RowMapper<Function> {
+public class FunctionRowMapper implements RowMapper<DefaultFunction> {
 
     @Override
-    public Function mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Function item = new Function();
+    public DefaultFunction mapRow(ResultSet rs, int rowNum) throws SQLException {
+        DefaultFunction item = new DefaultFunction();
         item.setCode(rs.getInt("CODE"));
         item.setSysType(rs.getString("SYSTYPE"));
         item.setSequence(rs.getInt("SEQUENCE"));

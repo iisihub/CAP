@@ -18,36 +18,35 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.auth.model.Role;
-import com.iisigroup.cap.auth.model.User;
+import com.iisigroup.cap.auth.model.DefaultRole;
+import com.iisigroup.cap.auth.model.DefaultUser;
 import com.iisigroup.cap.auth.service.RoleSetService;
 import com.iisigroup.cap.auth.service.UserSetService;
-import com.iisigroup.cap.base.formatter.CodeTypeFormatter;
+import com.iisigroup.cap.base.formatter.impl.CodeTypeFormatter;
 import com.iisigroup.cap.base.model.CodeType;
 import com.iisigroup.cap.base.service.CodeTypeService;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.component.GridResult;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.component.impl.MapGridResult;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.db.service.CommonService;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.ADDateFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.formatter.Formatter;
+import com.iisigroup.cap.formatter.impl.ADDateFormatter;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IGridResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.response.MapGridResult;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.security.service.IPasswordService;
-import com.iisigroup.cap.service.ICommonService;
+import com.iisigroup.cap.security.service.PasswordService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapWebUtil;
 
@@ -58,46 +57,43 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * 
  * @since 2014/02/13
  * @author yunglinliu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/02/13,yunglinliu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("usersethandler")
 public class UserSetHandler extends MFormHandler {
 
     @Resource
     private UserSetService userService;
     @Resource
-    private IPasswordService passwordService;
+    private PasswordService passwordService;
     @Resource
     private RoleSetService roleSetService;
     @Resource
     private CodeTypeService codeTypeService;
     @Resource
-    private ICommonService commonService;
+    private CommonService commonService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult query(ISearch search, IRequest params) {
+    public MapGridResult query(SearchSetting search, Request params) {
         String code = params.get("code");
         String name = params.get("name");
         String[] roleCodes = params.getParamsAsStringArray("roleCodes");
         String[] status = params.getParamsAsStringArray("status");
-        Page<Map<String, Object>> page = userService.findUser(code, name,
-                roleCodes, status, search.getMaxResults(),
-                search.getFirstResult());
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Page<Map<String, Object>> page = userService.findUser(code, name, roleCodes, status, search.getMaxResults(), search.getFirstResult());
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
         fmt.put("createTime", new ADDateFormatter());
         fmt.put("updateTime", new ADDateFormatter());
         fmt.put("pwdExpiredTime", new ADDateFormatter());
-        fmt.put("status", new CodeTypeFormatter(codeTypeService, "userStatus",
-                (Locale) SimpleContextHolder.get(CapWebUtil.localeKey)));
+        fmt.put("status", new CodeTypeFormatter(codeTypeService, "userStatus", (Locale) SimpleContextHolder.get(CapWebUtil.localeKey)));
         return new MapGridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+    }
 
     @SuppressWarnings("rawtypes")
     @HandlerType(HandlerTypeEnum.GRID)
-    public IGridResult findRole(ISearch search, IRequest params) {
+    public GridResult findRole(SearchSetting search, Request params) {
         String type = params.get("type");
         if ("modify".equalsIgnoreCase(type)) {
             List<Map<String, Object>> roleList = null;
@@ -110,17 +106,16 @@ public class UserSetHandler extends MFormHandler {
             return gridResult;
         } else {
             search.addOrderBy("code", false);
-            Page<Role> page = commonService.findPage(Role.class, search);
-            return new GridResult(page.getContent(), page.getTotalRow(), null);
+            Page<DefaultRole> page = commonService.findPage(DefaultRole.class, search);
+            return new BeanGridResult(page.getContent(), page.getTotalRow(), null);
         }
-    }// ;
+    }
 
-    public IResult add(IRequest request) {
+    public Result add(Request request) {
         String code = request.get("code");
-        User user = userService.findUserByUserCode(code);
+        DefaultUser user = userService.findUserByUserCode(code);
         if (user != null) {
-            throw new CapMessageException(CapAppContext.getMessage(
-                    "users.exist", new Object[] { code }), getClass());
+            throw new CapMessageException(CapAppContext.getMessage("users.exist", new Object[] { code }), getClass());
         }
         String name = request.get("name");
         String password = request.get("password");
@@ -130,9 +125,9 @@ public class UserSetHandler extends MFormHandler {
         String[] roleCodes = request.getParamsAsStringArray("roleCodes");
         userService.createUser(code, name, password, email, roleCodes);
         return new AjaxFormResult();
-    }// ;
+    }
 
-    public IResult modify(IRequest request) {
+    public Result modify(Request request) {
         String oid = request.get("oid");
         String code = request.get("code");
         String password = request.get("password");
@@ -142,57 +137,52 @@ public class UserSetHandler extends MFormHandler {
             // 代表要修改密碼
             passwordService.checkPasswordRule(code, password, confirm, true);
         }
-        User user = userService.findUserByUserCode(code);
+        DefaultUser user = userService.findUserByUserCode(code);
         if (user != null && !user.getOid().equals(oid)) {
-            throw new CapMessageException(CapAppContext.getMessage(
-                    "users.exist", new Object[] { code }), getClass());
+            throw new CapMessageException(CapAppContext.getMessage("users.exist", new Object[] { code }), getClass());
         }
         String name = request.get("name");
         String email = request.get("email");
         String[] roleCodes = request.getParamsAsStringArray("roleCodes");
-        userService.updateUserByOid(oid, code, name, reset, password,
-                email, roleCodes);
+        userService.updateUserByOid(oid, code, name, reset, password, email, roleCodes);
         return new AjaxFormResult();
-    }// ;
+    }
 
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         String[] oids = request.getParamsAsStringArray("oids");
         userService.deleteUserByOids(oids);
         return new AjaxFormResult();
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryAllRole(ISearch search, IRequest params) {
+    public BeanGridResult queryAllRole(SearchSetting search, Request params) {
         search.addOrderBy("code", false);
-        Page<Role> page = commonService.findPage(Role.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+        Page<DefaultRole> page = commonService.findPage(DefaultRole.class, search);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), null);
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult queryAllUserStatus(ISearch search, IRequest params) {
+    public BeanGridResult queryAllUserStatus(SearchSetting search, Request params) {
         search.addOrderBy("codeValue", false);
-        search.addSearchModeParameters(SearchMode.EQUALS, "codeType",
-                "userStatus");
-        search.addSearchModeParameters(SearchMode.EQUALS, "locale",
-                ((Locale) SimpleContextHolder.get(CapWebUtil.localeKey))
-                        .toString());
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", "userStatus");
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", ((Locale) SimpleContextHolder.get(CapWebUtil.localeKey)).toString());
         Page<CodeType> page = commonService.findPage(CodeType.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), null);
+    }
 
-    public IResult lock(IRequest request) {
+    public Result lock(Request request) {
         String[] oids = request.getParamsAsStringArray("oids");
         userService.lockUserByOids(oids);
         return new AjaxFormResult();
-    }// ;
+    }
 
-    public IResult unlock(IRequest request) {
+    public Result unlock(Request request) {
         String[] oids = request.getParamsAsStringArray("oids");
         userService.unlockUserByOids(oids);
         return new AjaxFormResult();
-    }// ;
+    }
 
-    public IResult changePassword(IRequest request) {
+    public Result changePassword(Request request) {
         String password = request.get("password");
         String newPwd = request.get("newPwd");
         String confirm = request.get("confirm");
@@ -201,8 +191,7 @@ public class UserSetHandler extends MFormHandler {
             passwordService.checkPasswordRule(userId, newPwd, confirm, false);
             passwordService.changeUserPassword(userId, newPwd);
         } else {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("error.009"), getClass());
+            throw new CapMessageException(CapAppContext.getMessage("error.009"), getClass());
         }
         return new AjaxFormResult();
     }

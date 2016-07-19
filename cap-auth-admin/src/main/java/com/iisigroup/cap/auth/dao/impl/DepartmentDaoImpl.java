@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.DepartmentDao;
 import com.iisigroup.cap.auth.model.Department;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>
@@ -17,17 +17,17 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  * 
  * @since 2011/8/30
  * @author Fantasy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/8/30,Fantasy,new
  *          </ul>
  */
 @Repository
-public class DepartmentDaoImpl extends GenericDao<Department> implements
-        DepartmentDao {
+public class DepartmentDaoImpl extends GenericDaoImpl<Department> implements DepartmentDao {
 
     @Override
     public List<Department> findByAllDepartment() {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("code");
         return find(search);
@@ -35,7 +35,7 @@ public class DepartmentDaoImpl extends GenericDao<Department> implements
 
     @Override
     public List<Department> findByAllActDepartment() {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.NOT_EQUALS, "status", "Y");
         search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
         search.addOrderBy("code");
@@ -44,7 +44,7 @@ public class DepartmentDaoImpl extends GenericDao<Department> implements
 
     @Override
     public Department findByCode(String code) {
-        ISearch search = createSearchTemplete();
+        SearchSetting search = createSearchTemplete();
         search.addSearchModeParameters(SearchMode.EQUALS, "code", code);
         return findUniqueOrNone(search);
     }

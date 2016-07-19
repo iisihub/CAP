@@ -13,7 +13,7 @@ package com.iisigroup.cap.rule.dao;
 
 import java.util.List;
 
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 import com.iisigroup.cap.rule.model.DivRlDtl;
 
 /**
@@ -23,44 +23,47 @@ import com.iisigroup.cap.rule.model.DivRlDtl;
  * 
  * @since 2013/12/20
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/20,TimChiang,new
  *          </ul>
  */
-public interface DivRlDtlDao extends IGenericDao<DivRlDtl> {
+public interface DivRlDtlDao extends GenericDao<DivRlDtl> {
 
-	/**
-	 * find by ruleNo.
-	 * 
-	 * @param ruleNo
-	 *            規則代號
-	 * @return T
-	 */
-	public DivRlDtl findByRuleNo(String ruleNo);
+    /**
+     * find by ruleNo.
+     * 
+     * @param ruleNo
+     *            規則代號
+     * @return T
+     */
+    public DivRlDtl findByRuleNo(String ruleNo);
 
-	/**
-	 * find by ruleNos.
-	 * 
-	 * @param ruleNos
-	 *            多個規則代號
-	 * @return T List
-	 */
-	public List<DivRlDtl> findByRuleNos(String[] ruleNos);
+    /**
+     * find by ruleNos.
+     * 
+     * @param ruleNos
+     *            多個規則代號
+     * @return T List
+     */
+    public List<DivRlDtl> findByRuleNos(String[] ruleNos);
 
-	/**
-	 * 查詢OID
-	 * 
-	 * @param oid
-	 *            OID
-	 * @return DivFtItm
-	 */
-	public DivRlDtl findByOid(String oid);
+    /**
+     * 查詢OID
+     * 
+     * @param oid
+     *            OID
+     * @return DivFtItm
+     */
+    public DivRlDtl findByOid(String oid);
 
-	/**
-	 * 使用RuleNo查詢Details，並且排序divRlSor
-	 * @param ruleNo String
-	 * @return
-	 */
-	List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
+    /**
+     * 使用RuleNo查詢Details，並且排序divRlSor
+     * 
+     * @param ruleNo
+     *            String
+     * @return
+     */
+    List<DivRlDtl> findRlDtlsByRlNoAndSort(String ruleNo);
 
 }

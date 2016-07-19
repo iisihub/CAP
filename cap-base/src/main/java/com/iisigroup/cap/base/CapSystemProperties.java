@@ -17,8 +17,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.iisigroup.cap.base.model.SysParm;
-import com.iisigroup.cap.service.ICommonService;
-import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.db.service.CommonService;
 import com.iisigroup.cap.utils.CapString;
 
 /**
@@ -30,7 +29,8 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2013/11/6
  * @author Sunkist Wang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/11/6,Sunkist Wang,new
  *          <li>2014/1/17,Sunkist Wang,update
  *          <li>2014/4/18,Sunkist Wang,update get commonSrv
@@ -39,38 +39,38 @@ import com.iisigroup.cap.utils.CapString;
 @SuppressWarnings("serial")
 public class CapSystemProperties extends HashMap<String, String> {
 
-	private List<String> ignoreCache;
+    private List<String> ignoreCache;
 
-	@Resource
-	private ICommonService commonSrv;
+    @Resource
+    private CommonService commonSrv;
 
-	@Override
-	public String get(Object key) {
+    @Override
+    public String get(Object key) {
 
-		if (super.get(key) != null && (ignoreCache == null || !ignoreCache.contains(key))) {
-			return super.get(key);
-		}
+        if (super.get(key) != null && (ignoreCache == null || !ignoreCache.contains(key))) {
+            return super.get(key);
+        }
 
-		String sKey = key != null ? key.toString() : null;
-		if (CapString.isEmpty(sKey)) {
-			return null;
-		}
+        String sKey = key != null ? key.toString() : null;
+        if (CapString.isEmpty(sKey)) {
+            return null;
+        }
 
-		String val = null;
-		val = System.getProperty(sKey);
+        String val = null;
+        val = System.getProperty(sKey);
 
-		if (!CapString.isEmpty(val)) {
-			put(sKey, val);
-			return val;
-		}
+        if (!CapString.isEmpty(val)) {
+            put(sKey, val);
+            return val;
+        }
 
-		SysParm sysParm = commonSrv.findById(SysParm.class, sKey);
-		val = sysParm != null ? sysParm.getParmValue() : null;
-		put(sKey, val);
-		return val;
-	}
+        SysParm sysParm = commonSrv.findById(SysParm.class, sKey);
+        val = sysParm != null ? sysParm.getParmValue() : null;
+        put(sKey, val);
+        return val;
+    }
 
-	public void setIgnoreCache(List<String> ignoreCache) {
-		this.ignoreCache = ignoreCache;
-	}
+    public void setIgnoreCache(List<String> ignoreCache) {
+        this.ignoreCache = ignoreCache;
+    }
 }

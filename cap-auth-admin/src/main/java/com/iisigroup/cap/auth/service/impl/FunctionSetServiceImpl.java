@@ -10,16 +10,15 @@ import org.springframework.stereotype.Service;
 import com.iisigroup.cap.auth.dao.FunctionDao;
 import com.iisigroup.cap.auth.dao.RoleDao;
 import com.iisigroup.cap.auth.dao.RoleFunctionDao;
-import com.iisigroup.cap.auth.model.Function;
+import com.iisigroup.cap.auth.model.DefaultFunction;
 import com.iisigroup.cap.auth.service.FunctionSetService;
 import com.iisigroup.cap.base.dao.I18nDao;
 import com.iisigroup.cap.base.model.I18n;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
@@ -32,13 +31,13 @@ import com.iisigroup.cap.utils.CapWebUtil;
  * 
  * @since 2014/1/16
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
 @Service
-public class FunctionSetServiceImpl extends AbstractService implements
-        FunctionSetService {
+public class FunctionSetServiceImpl implements FunctionSetService {
 
     @Resource
     private FunctionDao functionDao;
@@ -50,50 +49,45 @@ public class FunctionSetServiceImpl extends AbstractService implements
     private I18nDao i18nDao;
 
     @Override
-    public Function findFunctionByCode(String code) {
+    public DefaultFunction findFunctionByCode(String code) {
         if (!CapString.isEmpty(code)) {
             return functionDao.findByCode(Integer.parseInt(code));
         }
         return null;
-    }// ;
+    }
 
     @Override
-    public List<Function> findFunctionBySysTypeAndLevel(String sysType, String level) {
+    public List<DefaultFunction> findFunctionBySysTypeAndLevel(String sysType, String level) {
         return functionDao.findBySysTypeAndLevel(sysType, level);
-    }// ;
+    }
 
     @Override
-    public Page<Map<String, Object>> findPage(ISearch search, String sysType,
-            String funcCode) {
-        return roleDao.findPageBySysTypeAndFuncCode(sysType, funcCode,
-                search.getFirstResult(), search.getMaxResults());
-    }// ;
+    public Page<Map<String, Object>> findPage(SearchSetting search, String sysType, String funcCode) {
+        return roleDao.findPageBySysTypeAndFuncCode(sysType, funcCode, search.getFirstResult(), search.getMaxResults());
+    }
 
     @Override
-    public Page<Map<String, Object>> findEditPage(ISearch search,
-            String sysType, String funcCode) {
-        return roleDao.findPageUnselectedBySysTypeAndFuncCode(sysType, funcCode,
-                search.getFirstResult(), search.getMaxResults());
-    }// ;
+    public Page<Map<String, Object>> findEditPage(SearchSetting search, String sysType, String funcCode) {
+        return roleDao.findPageUnselectedBySysTypeAndFuncCode(sysType, funcCode, search.getFirstResult(), search.getMaxResults());
+    }
 
     @Override
     public int deleteRfList(String funcCode, List<String> delRole) {
         return roleFunctionDao.deleteByFuncCodeAndRoleCodes(funcCode, delRole);
-    }// ;
+    }
 
     @Override
-    public void save(Function function, IRequest request) {
+    public void save(DefaultFunction function, Request request) {
         if (function == null) {
-            function = new Function();
+            function = new DefaultFunction();
         }
-        CapBeanUtil.map2Bean(request, function, Function.class);
+        CapBeanUtil.map2Bean(request, function, DefaultFunction.class);
         function.setUpdater(CapSecurityContext.getUserId());
         function.setUpdateTime(CapDate.getCurrentTimestamp());
         functionDao.save(function);
         // insert menu i18n
         String i18nKey = "menu." + function.getCode();
-        I18n i18n = i18nDao.findByCodeTypeAndCodeValue("menu", i18nKey,
-                SimpleContextHolder.get(CapWebUtil.localeKey).toString());
+        I18n i18n = i18nDao.findByCodeTypeAndCodeValue("menu", i18nKey, SimpleContextHolder.get(CapWebUtil.localeKey).toString());
         if (i18n == null) {
             i18n = new I18n();
         }
@@ -105,5 +99,5 @@ public class FunctionSetServiceImpl extends AbstractService implements
         i18n.setUpdater(CapSecurityContext.getUserId());
         i18n.setUpdateTime(CapDate.getCurrentTimestamp());
         i18nDao.save(i18n);
-    }// ;
+    }
 }

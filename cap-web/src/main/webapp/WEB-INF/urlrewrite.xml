@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ! (c) Copyright 2005-2012 JAXIO, www.jaxio.com ! Source code generated 
-	by Celerio, a Jaxio product ! Want to use Celerio within your company? email 
-	us at info@jaxio.com ! Follow us on twitter: @springfuse ! Template pack-mvc-3-sd:src/main/webapp/WEB-INF/urlrewrite.p.vm.xml 
-	<!DOCTYPE urlrewrite PUBLIC "-//www.tuckey.org//DTD UrlRewrite 3.2//EN" "http://www.tuckey.org/res/dtds/urlrewrite3.2.dtd"> -->
-
+<!-- ! (c) Copyright 2005-2012 JAXIO, www.jaxio.com ! Source code generated
+    by Celerio, a Jaxio product ! Want to use Celerio within your company? email
+    us at info@jaxio.com ! Follow us on twitter: @springfuse ! Template pack-mvc-3-sd:src/main/webapp/WEB-INF/urlrewrite.p.vm.xml
+    <!DOCTYPE urlrewrite PUBLIC "-//www.tuckey.org//DTD UrlRewrite 3.2//EN" "http://www.tuckey.org/res/dtds/urlrewrite3.2.dtd"> -->
 <!-- https://urlrewrite.dev.java.net/manual/3.0 -->
 <urlrewrite>
-	<!-- 系統圖示 -->
-	<rule>
-		<from>^/favicon.ico$</from>
-		<to last="true">/static/images/favicon.ico</to>
-	</rule>
-	
-	<!-- 轉換靜態網頁位址並加入Cache設定 -->
-	<rule match-type="regex">
-		<note>Serve static content directly from the filesystem and add
-			caching instruction</note>
-		<from>/static/(.*)</from>
-		<set type="expires">14 days</set>
-	</rule>
-	<!-- forward i18n url -->
-	<rule match-type="regex">
-		<note>redirect handler</note>
-		<from>/i18njs</from>
-		<set name="Expires" type="response-header">5 days</set>
-		<to>/basehandler/queryJsI18N</to>
-	</rule>
-	<!-- api mode -->
-	<rule match-type="regex">
-		<note>redirect api to  handler</note>
-		<from>^/api/([a-zA-Z0-9]+)/(.*)</from>
-		<set name="Cache-Control" type="response-header">no-cache, no-store, max-age=0</set>
-		<set name="Pragma" type="response-header">no-cache</set>
-		<set name="Expires" type="response-header">0</set>
-		<set name="_handler">$1handler</set>
-		<set name="_action">$2</set>
-		<to>/handler/$1handler/$2</to>
-	</rule>
-	<!--- parser handler url -->
-	<rule match-type="regex">
-		<note>redirect handler</note>
-		<from>^/([a-zA-Z0-9]+)handler/(.*)</from>
-		<set name="Cache-Control" type="response-header">no-cache, no-store, max-age=0</set>
-		<set name="Pragma" type="response-header">no-cache</set>
-		<set name="Expires" type="response-header">0</set>
-		<set name="_handler">$1handler</set>
-		<set name="_action">$2</set>
-		<to>/handler/$1handler/$2</to>
-	</rule>
-	
+    <!-- 系統圖示 -->
+    <rule>
+        <from>^/favicon.ico$</from>
+        <to last="true">/static/images/favicon.ico</to>
+    </rule>
+    <!-- 轉換靜態網頁位址並加入Cache設定 -->
+    <rule match-type="regex">
+        <note>Serve static content directly from the filesystem and add caching instruction</note>
+        <from>/static/(.*)</from>
+        <set type="expires">14 days</set>
+    </rule>
+    <!-- forward i18n url -->
+    <rule match-type="regex">
+        <note>redirect handler</note>
+        <from>/i18njs</from>
+        <set name="Expires" type="response-header">5 days</set>
+        <to>/basehandler/queryJsI18N</to>
+    </rule>
+    <!-- forward captcha.png -->
+    <rule match-type="regex">
+        <note>redirect handler</note>
+        <from>/captcha.png</from>
+        <set name="Expires" type="response-header">5 days</set>
+        <to>/captchahandler/doWork</to>
+    </rule>
+    <!-- api mode -->
+    <rule match-type="regex">
+        <note>redirect api to handler</note>
+        <from>^/api/([a-zA-Z0-9]+)/(.*)</from>
+        <set name="Cache-Control" type="response-header">no-cache, no-store, max-age=0</set>
+        <set name="Pragma" type="response-header">no-cache</set>
+        <set name="Expires" type="response-header">0</set>
+        <set name="_handler">$1handler</set>
+        <set name="_action">$2</set>
+        <to>/handler/$1handler/$2</to>
+    </rule>
+    <!--- parser handler url -->
+    <rule match-type="regex">
+        <note>redirect handler</note>
+        <from>^/([a-zA-Z0-9]+)handler/(.*)</from>
+        <set name="Cache-Control" type="response-header">no-cache, no-store, max-age=0</set>
+        <set name="Pragma" type="response-header">no-cache</set>
+        <set name="Expires" type="response-header">0</set>
+        <set name="_handler">$1handler</set>
+        <set name="_action">$2</set>
+        <to>/handler/$1handler/$2</to>
+    </rule>
 </urlrewrite>
-

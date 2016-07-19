@@ -27,9 +27,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -38,7 +38,8 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/20
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/20,TimChiang,new
  *          </ul>
  */
@@ -46,113 +47,113 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
 @Table(name = "DIVFTDTL", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
-public class DivFtDtl extends GenericBean implements IDataObject {
+public class DivFtDtl extends GenericBean implements DataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String factorNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String factorNo;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String rangeNo;
-	
-	@Column(length = 60)
-	private String rangeNm;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String rangeNo;
 
-	/** 值域1 */
-	@Column(length = 100)
-	private String range1;
+    @Column(length = 60)
+    private String rangeNm;
 
-	/** 值域2 */
-	@Column(length = 100)
-	private String range2;
-	
-	@Column(precision=2, scale=0)
-	private BigDecimal rangeSor;
-	
-	// bi-directional many-to-one association to DivFtItm
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "factorNo", referencedColumnName = "factorNo", nullable = false, insertable=false, updatable=false)
-	private DivFtItm divFtItm;
-	
-	// bi-directional many-to-one association to DivCtDtl
-	@OneToMany(mappedBy = "divFtDtl", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	private List<DivCtDtl> divCtDtls;
+    /** 值域1 */
+    @Column(length = 100)
+    private String range1;
 
-	public String getOid() {
-		return oid;
-	}
+    /** 值域2 */
+    @Column(length = 100)
+    private String range2;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    @Column(precision = 2, scale = 0)
+    private BigDecimal rangeSor;
 
-	public String getFactorNo() {
-		return factorNo;
-	}
+    // bi-directional many-to-one association to DivFtItm
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "factorNo", referencedColumnName = "factorNo", nullable = false, insertable = false, updatable = false)
+    private DivFtItm divFtItm;
 
-	public void setFactorNo(String factorNo) {
-		this.factorNo = factorNo;
-	}
+    // bi-directional many-to-one association to DivCtDtl
+    @OneToMany(mappedBy = "divFtDtl", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<DivCtDtl> divCtDtls;
 
-	public String getRangeNo() {
-		return rangeNo;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public void setRangeNo(String rangeNo) {
-		this.rangeNo = rangeNo;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public String getRangeNm() {
-		return rangeNm;
-	}
+    public String getFactorNo() {
+        return factorNo;
+    }
 
-	public void setRangeNm(String rangeNm) {
-		this.rangeNm = rangeNm;
-	}
+    public void setFactorNo(String factorNo) {
+        this.factorNo = factorNo;
+    }
 
-	public String getRange1() {
-		return range1;
-	}
+    public String getRangeNo() {
+        return rangeNo;
+    }
 
-	public void setRange1(String range1) {
-		this.range1 = range1;
-	}
+    public void setRangeNo(String rangeNo) {
+        this.rangeNo = rangeNo;
+    }
 
-	public String getRange2() {
-		return range2;
-	}
+    public String getRangeNm() {
+        return rangeNm;
+    }
 
-	public void setRange2(String range2) {
-		this.range2 = range2;
-	}
+    public void setRangeNm(String rangeNm) {
+        this.rangeNm = rangeNm;
+    }
 
-	public BigDecimal getRangeSor() {
-		return rangeSor;
-	}
+    public String getRange1() {
+        return range1;
+    }
 
-	public void setRangeSor(BigDecimal rangeSor) {
-		this.rangeSor = rangeSor;
-	}
+    public void setRange1(String range1) {
+        this.range1 = range1;
+    }
 
-	public DivFtItm getDivFtItm() {
-		return divFtItm;
-	}
+    public String getRange2() {
+        return range2;
+    }
 
-	public void setDivFtItm(DivFtItm divFtItm) {
-		this.divFtItm = divFtItm;
-	}
+    public void setRange2(String range2) {
+        this.range2 = range2;
+    }
 
-	public List<DivCtDtl> getDivCtDtls() {
-		return divCtDtls;
-	}
+    public BigDecimal getRangeSor() {
+        return rangeSor;
+    }
 
-	public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
-		this.divCtDtls = divCtDtls;
-	}
+    public void setRangeSor(BigDecimal rangeSor) {
+        this.rangeSor = rangeSor;
+    }
+
+    public DivFtItm getDivFtItm() {
+        return divFtItm;
+    }
+
+    public void setDivFtItm(DivFtItm divFtItm) {
+        this.divFtItm = divFtItm;
+    }
+
+    public List<DivCtDtl> getDivCtDtls() {
+        return divCtDtls;
+    }
+
+    public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
+        this.divCtDtls = divCtDtls;
+    }
 
 }

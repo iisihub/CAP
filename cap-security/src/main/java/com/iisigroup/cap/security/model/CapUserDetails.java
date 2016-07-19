@@ -13,17 +13,16 @@ package com.iisigroup.cap.security.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import net.sf.json.JSONArray;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.corundumstudio.socketio.SocketIOClient;
+import net.sf.json.JSONArray;
 
 /**
  * <pre>
@@ -32,7 +31,8 @@ import com.corundumstudio.socketio.SocketIOClient;
  * 
  * @since 2012/5/15
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/5/15,rodeschen,new
  *          <li>2013/3/6,rodeschen,add set method
  *          </ul>
@@ -48,14 +48,14 @@ public class CapUserDetails implements UserDetails {
     private JSONArray menu;
     private Locale locale;
     private String status;
-    private SocketIOClient socketClient;
+    private Map<String, Object> extraAttrib;
 
     private Collection<GrantedAuthority> authorities;
 
     public CapUserDetails() {
     }
 
-    public CapUserDetails(IUser user, String password, Map<String, String> roles) {
+    public CapUserDetails(User user, String password, Map<String, String> roles) {
         this.password = password;
         this.userId = user.getCode();
         this.userName = user.getName();
@@ -64,6 +64,7 @@ public class CapUserDetails implements UserDetails {
         this.roles.putAll(roles);
         this.locale = user.getLocale();
         this.status = user.getStatus();
+        this.extraAttrib = new HashMap<String, Object>();
         setAuthorities(roles);
     }
 
@@ -164,12 +165,12 @@ public class CapUserDetails implements UserDetails {
         this.status = status;
     }
 
-    public SocketIOClient getSocketClient() {
-        return socketClient;
+    public Map<String, Object> getExtraAttrib() {
+        return extraAttrib == null ? new HashMap<String, Object>() : extraAttrib;
     }
 
-    public void setSocketClient(SocketIOClient socketClient) {
-        this.socketClient = socketClient;
+    public void setExtraAttrib(Map<String, Object> extraAttrib) {
+        this.extraAttrib = extraAttrib;
     }
 
 }

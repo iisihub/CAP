@@ -12,11 +12,11 @@
  */
 package com.iisigroup.cap.operation.step;
 
-import com.iisigroup.cap.action.IAction;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.IHandler;
-import com.iisigroup.cap.operation.OpStepContext;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.action.Action;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.handler.Handler;
+import com.iisigroup.cap.model.OpStepContext;
 
 /**
  * <pre>
@@ -25,25 +25,25 @@ import com.iisigroup.cap.response.IResult;
  * 
  * @since 2010/7/23
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/23,iristu,new
  *          <li>2013/1/28,RodesChen,remove setName
  *          </ul>
  */
 public class CapHandleOpStep extends AbstractCustomizeOpStep {
 
-	@Override
-	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) {
-		IResult rtn = null;
-		@SuppressWarnings("static-access")
-		String actionType = params.get(handler.FORM_ACTION);
-		//setName(handler.getHandlerName() + "." + actionType);
-		IAction action = handler.getAction(actionType);
-		rtn = action.doWork(params);
-		ctx.setGoToStep(NEXT);
-		ctx.setResult(rtn);
-		return ctx;
-	}// ;
+    @Override
+    public OpStepContext execute(OpStepContext ctx, Request params, Handler handler) {
+        Result rtn = null;
+        @SuppressWarnings("static-access")
+        String actionType = params.get(handler.FORM_ACTION);
+        // setName(handler.getHandlerName() + "." + actionType);
+        Action action = handler.getAction(actionType);
+        rtn = action.doWork(params);
+        ctx.setGoToStep(NEXT);
+        ctx.setResult(rtn);
+        return ctx;
+    }
 
 }// ~

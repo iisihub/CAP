@@ -11,7 +11,6 @@
  */
 package com.iisigroup.cap.base.service;
 
-
 /**
  * <pre>
  * send email
@@ -19,15 +18,15 @@ package com.iisigroup.cap.base.service;
  * 
  * @since 2013/3/7
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/3/7,iristu,new
  *          </ul>
  */
 public interface EmailService {
 
-	void sendEmail(String[] sendTo, String subject, String sendContext);
+    void sendEmail(String[] sendTo, String subject, String sendContext);
 
-	void sendEmail(String sendFrom, String[] sendTo, String subject,
-			String sendContext);
+    void sendEmail(String sendFrom, String[] sendTo, String subject, String sendContext);
 
 }

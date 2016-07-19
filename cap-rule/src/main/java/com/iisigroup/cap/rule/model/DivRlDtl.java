@@ -20,14 +20,13 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -36,108 +35,108 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/19
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/19,TimChiang,new
  *          </ul>
  */
 @SuppressWarnings("serial")
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DIVRLDTL", uniqueConstraints = @UniqueConstraint(columnNames = {
-		"oid" }))
-public class DivRlDtl extends GenericBean implements IDataObject {
+@Table(name = "DIVRLDTL", uniqueConstraints = @UniqueConstraint(columnNames = { "oid" }))
+public class DivRlDtl extends GenericBean implements DataObject {
 
-	@Id
-	@Column(nullable = false, length = 32)
-	private String oid;
+    @Id
+    @Column(nullable = false, length = 32)
+    private String oid;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String divRlNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String divRlNo;
 
-	@NotNull
-	@Column(length = 10, nullable = false)
-	private String divCtNo;
+    @NotNull
+    @Column(length = 10, nullable = false)
+    private String divCtNo;
 
-	@Column(length = 5000)
-	private String divRlJson;
+    @Column(length = 5000)
+    private String divRlJson;
 
-	/**排序*/
-	@Column(length = 3)
-	private BigDecimal divRlSor;
+    /** 排序 */
+    @Column(length = 3)
+    private BigDecimal divRlSor;
 
-	// bi-directional many-to-one association to DivRlItm
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "divRlNo", referencedColumnName = "divRlNo", nullable = false, insertable=false, updatable=false)
-	private DivRlItm divRlItm;
+    // bi-directional many-to-one association to DivRlItm
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "divRlNo", referencedColumnName = "divRlNo", nullable = false, insertable = false, updatable = false)
+    private DivRlItm divRlItm;
 
-	// bi-directional many-to-one association to DivRlItm
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "divCtNo", referencedColumnName = "divCtNo", nullable = false, insertable=false, updatable=false)
-//	private DivCtItm divCtItm;
-	
-	public String getOid() {
-		return oid;
-	}
+    // bi-directional many-to-one association to DivRlItm
+    // @OneToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "divCtNo", referencedColumnName = "divCtNo", nullable = false, insertable=false, updatable=false)
+    // private DivCtItm divCtItm;
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+    public String getOid() {
+        return oid;
+    }
 
-	public String getDivRlNo() {
-		return divRlNo;
-	}
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
 
-	public void setDivRlNo(String divRlNo) {
-		this.divRlNo = divRlNo;
-	}
+    public String getDivRlNo() {
+        return divRlNo;
+    }
 
-	public String getDivCtNo() {
-		return divCtNo;
-	}
+    public void setDivRlNo(String divRlNo) {
+        this.divRlNo = divRlNo;
+    }
 
-	public void setDivCtNo(String divCtNo) {
-		this.divCtNo = divCtNo;
-	}
+    public String getDivCtNo() {
+        return divCtNo;
+    }
 
-	public DivRlItm getDivRlItm() {
-		return divRlItm;
-	}
+    public void setDivCtNo(String divCtNo) {
+        this.divCtNo = divCtNo;
+    }
 
-	public void setDivRlItm(DivRlItm divRlItm) {
-		this.divRlItm = divRlItm;
-	}
+    public DivRlItm getDivRlItm() {
+        return divRlItm;
+    }
 
-	public BigDecimal getDivRlSor() {
-		return divRlSor;
-	}
+    public void setDivRlItm(DivRlItm divRlItm) {
+        this.divRlItm = divRlItm;
+    }
 
-	public void setDivRlSor(BigDecimal divRlSor) {
-		this.divRlSor = divRlSor;
-	}
+    public BigDecimal getDivRlSor() {
+        return divRlSor;
+    }
 
-	public String getDivRlJson() {
-		return divRlJson;
-	}
+    public void setDivRlSor(BigDecimal divRlSor) {
+        this.divRlSor = divRlSor;
+    }
 
-	public void setDivRlJson(String divRlJson) {
-		this.divRlJson = divRlJson;
-	}
+    public String getDivRlJson() {
+        return divRlJson;
+    }
 
-//	public DivCtItm getDivCtItm() {
-//		return divCtItm;
-//	}
-//
-//	public void setDivCtItm(DivCtItm divCtItm) {
-//		this.divCtItm = divCtItm;
-//	}
+    public void setDivRlJson(String divRlJson) {
+        this.divRlJson = divRlJson;
+    }
 
-//	public List<DivCtDtl> getDivCtDtls() {
-//		return divCtDtls;
-//	}
-//
-//	public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
-//		this.divCtDtls = divCtDtls;
-//	}
+    // public DivCtItm getDivCtItm() {
+    // return divCtItm;
+    // }
+    //
+    // public void setDivCtItm(DivCtItm divCtItm) {
+    // this.divCtItm = divCtItm;
+    // }
+
+    // public List<DivCtDtl> getDivCtDtls() {
+    // return divCtDtls;
+    // }
+    //
+    // public void setDivCtDtls(List<DivCtDtl> divCtDtls) {
+    // this.divCtDtls = divCtDtls;
+    // }
 
 }

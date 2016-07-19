@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 import com.iisigroup.cap.rule.dao.DivCtItmDao;
 import com.iisigroup.cap.rule.model.DivCtItm;
 
@@ -28,50 +28,50 @@ import com.iisigroup.cap.rule.model.DivCtItm;
  * 
  * @since 2013/12/13
  * @author TimChiang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/13,TimChiang,new
  *          </ul>
  */
 @Repository
-public class DivCtItmDaoImpl extends GenericDao<DivCtItm> implements DivCtItmDao {
+public class DivCtItmDaoImpl extends GenericDaoImpl<DivCtItm> implements DivCtItmDao {
 
-	@Override
-	public DivCtItm findByDivCtItmNo(String divCtNo) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNo);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public DivCtItm findByDivCtItmNo(String divCtNo) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNo);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public DivCtItm findByDivCtItmNoAndInputFlg(String divCtNo, String inputFlag) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNo);
-		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public DivCtItm findByDivCtItmNoAndInputFlg(String divCtNo, String inputFlag) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNo);
+        search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<DivCtItm> findByDivCtItmNo(String[] divCtNos) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNos);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
-		return find(search);
-	}
+    @Override
+    public List<DivCtItm> findByDivCtItmNo(String[] divCtNos) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divCtNo", divCtNos);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("codeOrder");
+        return find(search);
+    }
 
-	@Override
-	public List<DivCtItm> findByDivCtItmNoAndInputFlg(String[] divRlNos,
-			String inputFlag) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
-		search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
-		return find(search);
-	}
+    @Override
+    public List<DivCtItm> findByDivCtItmNoAndInputFlg(String[] divRlNos, String inputFlag) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "divRlNo", divRlNos);
+        search.addSearchModeParameters(SearchMode.EQUALS, "inputFlag", inputFlag);
+        return find(search);
+    }
 
-	@Override
-	public DivCtItm findByOid(String oid) {
-		return find(oid);
-	}
+    @Override
+    public DivCtItm findByOid(String oid) {
+        return find(oid);
+    }
 
 }

@@ -24,7 +24,8 @@ import java.lang.annotation.Target;
  * 
  * @since 2013/3/27
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/3/27,rodeschen,new
  *          </ul>
  */
@@ -32,5 +33,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Captcha {
-	String value() default "captcha";
+    String value() default "captcha";
 }

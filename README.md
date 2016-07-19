@@ -1,4 +1,4 @@
 CAP
 ===
 
-Common Application Platform
+3.0.0b 2016/07/19

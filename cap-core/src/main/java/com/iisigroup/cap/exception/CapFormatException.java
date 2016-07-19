@@ -26,7 +26,8 @@ package com.iisigroup.cap.exception;
  * 
  * @author iristu
  * @version $Revision: 307 $
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/12,iristu,new
  *          <li>2011/11/1,rodeschen,from cap
  *          </ul>
@@ -34,51 +35,51 @@ package com.iisigroup.cap.exception;
 @SuppressWarnings({ "serial" })
 public class CapFormatException extends CapException {
 
-	/**
-	 * Instantiates a new cap exception.
-	 */
-	public CapFormatException() {
-		super();
-	}
+    /**
+     * Instantiates a new cap exception.
+     */
+    public CapFormatException() {
+        super();
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapFormatException(String message, Class causeClass) {
-		super(message, causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param message
+     *            the message
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapFormatException(String message, Class causeClass) {
+        super(message, causeClass);
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param cause
-	 *            the cause
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapFormatException(Throwable cause, Class causeClass) {
-		super(cause, causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param cause
+     *            the cause
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapFormatException(Throwable cause, Class causeClass) {
+        super(cause, causeClass);
+    }
 
-	/**
-	 * Instantiates a new cap exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param cause
-	 *            the cause
-	 * @param causeClass
-	 *            the cause class
-	 */
-	@SuppressWarnings("rawtypes")
-	public CapFormatException(String message, Throwable cause, Class causeClass) {
-		super(message, cause, causeClass);
-	}
+    /**
+     * Instantiates a new cap exception.
+     * 
+     * @param message
+     *            the message
+     * @param cause
+     *            the cause
+     * @param causeClass
+     *            the cause class
+     */
+    @SuppressWarnings("rawtypes")
+    public CapFormatException(String message, Throwable cause, Class causeClass) {
+        super(message, cause, causeClass);
+    }
 }

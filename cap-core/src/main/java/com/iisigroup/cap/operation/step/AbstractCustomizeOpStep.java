@@ -26,7 +26,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.operation.OpStepContext;
+import com.iisigroup.cap.model.OpStepContext;
 import com.iisigroup.cap.operation.OperationStep;
 
 /**
@@ -36,63 +36,63 @@ import com.iisigroup.cap.operation.OperationStep;
  * 
  * @since 2010/11/24
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/11/24,iristu,new
  *          </ul>
  */
 public abstract class AbstractCustomizeOpStep implements OperationStep {
-	
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	String name;
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	Map<String, String> ruleMap;
+    String name;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.OperationStep#getName()
-	 */
-	public String getName() {
-		return name;
-	}
+    Map<String, String> ruleMap;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.OperationStep#getRuleMap()
-	 */
-	public Map<String, String> getRuleMap() {
-		return ruleMap;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.OperationStep#getName()
+     */
+    public String getName() {
+        return name;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tw.com.iisi.cap.flow.OperationStep#handleException(java.lang.Exception)
-	 */
-	public OpStepContext handleException(OpStepContext ctx, Exception e) {
-		ctx.setGoToStep(ERROR);
-		return ctx;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.OperationStep#getRuleMap()
+     */
+    public Map<String, String> getRuleMap() {
+        return ruleMap;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.OperationStep#setName(java.lang.String)
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.OperationStep#handleException(java.lang.Exception)
+     */
+    public OpStepContext handleException(OpStepContext ctx, Exception e) {
+        ctx.setGoToStep(ERROR);
+        return ctx;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tw.com.iisi.cap.flow.OperationStep#setRuleMap(java.util.Map)
-	 */
-	public void setRuleMap(Map<String, String> ruleMap) {
-		this.ruleMap = ruleMap;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.OperationStep#setName(java.lang.String)
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tw.com.iisi.cap.flow.OperationStep#setRuleMap(java.util.Map)
+     */
+    public void setRuleMap(Map<String, String> ruleMap) {
+        this.ruleMap = ruleMap;
+    }
 
 }

@@ -18,40 +18,37 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
-import com.iisigroup.cap.auth.model.Role;
+import com.iisigroup.cap.auth.model.DefaultRole;
 import com.iisigroup.cap.auth.model.RoleFunction;
 import com.iisigroup.cap.auth.model.UserRole;
 import com.iisigroup.cap.auth.service.RoleSetService;
-import com.iisigroup.cap.base.service.CodeTypeService;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.component.impl.MapGridResult;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.db.service.CommonService;
+import com.iisigroup.cap.db.utils.CapEntityUtil;
 import com.iisigroup.cap.exception.CapException;
 import com.iisigroup.cap.exception.CapFormatException;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.formatter.IBeanFormatter;
-import com.iisigroup.cap.formatter.IFormatter;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.jpa.utils.CapEntityUtil;
-import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.response.MapGridResult;
+import com.iisigroup.cap.formatter.BeanFormatter;
+import com.iisigroup.cap.formatter.Formatter;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * <pre>
@@ -60,108 +57,98 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2014/1/16
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/16,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("rolesethandler")
 public class RoleSetHandler extends MFormHandler {
 
     @Resource
-    private ICommonService commonSrv;
-
-    @Autowired
-    private CodeTypeService codeTypeService;
+    private CommonService commonSrv;
 
     @Resource
     private RoleSetService roleSetService;
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public GridResult query(ISearch search, IRequest params) {
+    public BeanGridResult query(SearchSetting search, Request params) {
 
-        Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
-        fmt.put("userCount", new IBeanFormatter() {
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
+        fmt.put("userCount", new BeanFormatter() {
             private static final long serialVersionUID = 1L;
 
             @SuppressWarnings("unchecked")
             public Integer reformat(Object in) throws CapFormatException {
-                if (in instanceof Role) {
-                    return ((Role) in).getUrList().size();
+                if (in instanceof DefaultRole) {
+                    return ((DefaultRole) in).getUrList().size();
                 }
                 return 0;
             }
         });
 
-        Page<Role> page = commonSrv.findPage(Role.class, search);
-        return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-    }// ;
+        Page<DefaultRole> page = commonSrv.findPage(DefaultRole.class, search);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryGridUser(ISearch search, IRequest params) {
+    public MapGridResult queryGridUser(SearchSetting search, Request params) {
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
             return new MapGridResult();
         }
 
-        Page<Map<String, Object>> page = roleSetService.findPageUser(search,
-                code);
+        Page<Map<String, Object>> page = roleSetService.findPageUser(search, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryGridFunc(ISearch search, IRequest params) {
+    public MapGridResult queryGridFunc(SearchSetting search, Request params) {
         String code = params.get("code");
         if (CapString.isEmpty(code)) {
             return new MapGridResult();
         }
 
-        Page<Map<String, Object>> page = roleSetService.findPageFunc(search,
-                code);
+        Page<Map<String, Object>> page = roleSetService.findPageFunc(search, code);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryEditUsr(ISearch search, IRequest params)
-            throws CapException {
+    public MapGridResult queryEditUsr(SearchSetting search, Request params) throws CapException {
         String depCode = params.get("depCode");
         String roleCode = params.get("roleCode");
 
-        Page<Map<String, Object>> page = roleSetService.findPageEditUsr(search,
-                roleCode, depCode);
+        Page<Map<String, Object>> page = roleSetService.findPageEditUsr(search, roleCode, depCode);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
     }
 
     @HandlerType(HandlerTypeEnum.GRID)
-    public MapGridResult queryEditFunc(ISearch search, IRequest params)
-            throws CapException {
+    public MapGridResult queryEditFunc(SearchSetting search, Request params) throws CapException {
         String parent = params.get("parent");
         String code = params.get("code");
         String sysType = params.get("sysType");
 
-        Page<Map<String, Object>> page = roleSetService.findPageEditFunc(
-                search, code, sysType, parent);
+        Page<Map<String, Object>> page = roleSetService.findPageEditFunc(search, code, sysType, parent);
         return new MapGridResult(page.getContent(), page.getTotalRow(), null);
-    }// ;
+    }
 
-    public IResult queryForm(IRequest request) {
+    public Result queryForm(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
-        Role role = null;
+        DefaultRole role = null;
 
         if (!CapString.isEmpty(code)) {
             role = roleSetService.findRoleByCode(code);
         }
 
         if (role != null) {
-            result.putAll(new AjaxFormResult(role.toJSONObject(
-                    CapEntityUtil.getColumnName(role), null)));
+            result.putAll(new AjaxFormResult(role.toJSONObject(CapEntityUtil.getColumnName(role), null)));
         }
 
         return result;
-    }// ;
+    }
 
-    public IResult getAllDepartment(IRequest request) throws CapException {
+    public Result getAllDepartment(Request request) throws CapException {
         AjaxFormResult result = new AjaxFormResult();
         result.set("All", CapAppContext.getMessage("All"));
         result.putAll(roleSetService.findAllDepartment());
@@ -169,7 +156,7 @@ public class RoleSetHandler extends MFormHandler {
         return result;
     }
 
-    public IResult getAllFunc(IRequest request) throws CapException {
+    public Result getAllFunc(Request request) throws CapException {
         AjaxFormResult result = new AjaxFormResult();
         String sysType = request.get("sysType");
         if (CapString.isEmpty(sysType)) {
@@ -180,67 +167,61 @@ public class RoleSetHandler extends MFormHandler {
         result.putAll(roleSetService.findAllFunc(sysType));
 
         return result;
-    }// ;
+    }
 
     /**
      * 編輯資料
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult save(IRequest request) {
+    public Result save(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         String isNew = request.get("isNew");
-        Role role = null;
+        DefaultRole role = null;
 
         if (!CapString.isEmpty(code)) {
             role = roleSetService.findRoleByCode(code);
             if (isNew.equals("true") && role != null) {
-                throw new CapMessageException(
-                        CapAppContext.getMessage("js.data.exists"),
-                        RoleSetHandler.class);
+                throw new CapMessageException(CapAppContext.getMessage("js.data.exists"), RoleSetHandler.class);
             }
         } else {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
         if (role == null) {
-            role = new Role();
+            role = new DefaultRole();
         }
-        CapBeanUtil.map2Bean(request, role, Role.class);
+        CapBeanUtil.map2Bean(request, role, DefaultRole.class);
         role.setUpdater(CapSecurityContext.getUserId());
         role.setUpdateTime(CapDate.getCurrentTimestamp());
 
         commonSrv.save(role);
 
         return result;
-    }// ;
+    }
 
     /**
      * 編輯資料
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult saveUrList(IRequest request) {
+    public Result saveUrList(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         JSONArray users = JSONArray.fromObject(request.get("users"));
-        Role role = null;
+        DefaultRole role = null;
 
         if (!CapString.isEmpty(code)) {
             role = roleSetService.findRoleByCode(code);
         }
         if (role == null) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<UserRole> list = new ArrayList<UserRole>();
@@ -265,22 +246,20 @@ public class RoleSetHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult saveRfList(IRequest request) {
+    public Result saveRfList(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
-        Role role = null;
+        DefaultRole role = null;
 
         if (!CapString.isEmpty(code)) {
             role = roleSetService.findRoleByCode(code);
         }
         if (role == null) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<RoleFunction> list = new ArrayList<RoleFunction>();
@@ -298,43 +277,41 @@ public class RoleSetHandler extends MFormHandler {
         commonSrv.save(list);
 
         return result;
-    }// ;
+    }
 
     /**
      * 刪除資料
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult delete(IRequest request) {
+    public Result delete(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
-        Role role = roleSetService.findRoleByCode(code);
+        DefaultRole role = roleSetService.findRoleByCode(code);
         if (role != null) {
             commonSrv.delete(role);
         }
         return result;
-    }// ;
+    }
 
     /**
      * 刪除資料
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult deleteUrList(IRequest request) {
+    public Result deleteUrList(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         JSONArray users = JSONArray.fromObject(request.get("users"));
 
         if (CapString.isEmpty(code)) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<String> delUsr = new ArrayList<String>();
@@ -354,18 +331,16 @@ public class RoleSetHandler extends MFormHandler {
      * 
      * @param request
      *            IRequest
-     * @return {@link tw.com.iisi.cap.response.IResult}
+     * @return {@link tw.com.iisi.cap.response.Result}
      * @throws CapException
      */
-    public IResult deleteRfList(IRequest request) {
+    public Result deleteRfList(Request request) {
         AjaxFormResult result = new AjaxFormResult();
         String code = request.get("code");
         JSONArray funcItem = JSONArray.fromObject(request.get("funcItem"));
 
         if (CapString.isEmpty(code)) {
-            throw new CapMessageException(
-                    CapAppContext.getMessage("EXCUE_ERROR"),
-                    RoleSetHandler.class);
+            throw new CapMessageException(CapAppContext.getMessage("EXCUE_ERROR"), RoleSetHandler.class);
         }
 
         List<String> delFunc = new ArrayList<String>();
@@ -378,6 +353,6 @@ public class RoleSetHandler extends MFormHandler {
         roleSetService.deleteRfList(code, delFunc);
 
         return result;
-    }// ;
+    }
 
 }

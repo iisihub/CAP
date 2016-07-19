@@ -23,9 +23,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -34,16 +34,16 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2013/12/23
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/12/23,tammy,new
  *          </ul>
  */
 
 @Entity
 @EntityListeners({ CapOidGeneratorListener.class })
-@Table(name = "DEF_USERROLE", uniqueConstraints = @UniqueConstraint(columnNames = {
-        "USERCODE", "ROLECODE" }))
-public class UserRole extends GenericBean implements IDataObject {
+@Table(name = "DEF_USERROLE", uniqueConstraints = @UniqueConstraint(columnNames = { "USERCODE", "ROLECODE" }))
+public class UserRole extends GenericBean implements DataObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,17 +65,17 @@ public class UserRole extends GenericBean implements IDataObject {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumns({ @JoinColumn(name = "ROLECODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false) })
-    private Role role;
+    private DefaultRole role;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumns({ @JoinColumn(name = "USERCODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false) })
-    private User user;
+    private DefaultUser user;
 
-    public User getUser() {
+    public DefaultUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(DefaultUser user) {
         this.user = user;
     }
 
@@ -95,11 +95,11 @@ public class UserRole extends GenericBean implements IDataObject {
         this.updateTime = updateTime;
     }
 
-    public Role getRole() {
+    public DefaultRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(DefaultRole role) {
         this.role = role;
     }
 

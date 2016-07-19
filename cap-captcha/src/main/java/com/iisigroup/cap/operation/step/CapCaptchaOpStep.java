@@ -14,18 +14,17 @@ package com.iisigroup.cap.operation.step;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapMessageException;
-import com.iisigroup.cap.handler.FormHandler;
-import com.iisigroup.cap.handler.IHandler;
-import com.iisigroup.cap.operation.OpStepContext;
+import com.iisigroup.cap.handler.Handler;
+import com.iisigroup.cap.model.OpStepContext;
 import com.iisigroup.cap.security.annotation.Captcha;
-import com.iisigroup.cap.security.captcha.CapSecurityCaptcha;
-import com.iisigroup.cap.security.captcha.CapSecurityCaptcha.CaptchaStatus;
-import com.iisigroup.cap.security.captcha.servlet.CapCaptchaServlet;
+import com.iisigroup.cap.security.captcha.handler.CaptchaHandler;
+import com.iisigroup.cap.security.constants.CheckStatus;
+import com.iisigroup.cap.security.service.CheckCodeService;
 import com.iisigroup.cap.utils.CapAppContext;
 import com.iisigroup.cap.utils.CapString;
 
@@ -36,38 +35,32 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2014/2/12
  * @author RodesChen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/2/12,RodesChen,new
  *          </ul>
  */
 public class CapCaptchaOpStep extends AbstractCustomizeOpStep {
 
-	protected static Log logger = LogFactory.getLog(CapCaptchaOpStep.class);
+    protected final Logger logger = LoggerFactory.getLogger(CapCaptchaOpStep.class);
 
-	@Override
-	public OpStepContext execute(OpStepContext ctx, IRequest params,
-			IHandler handler) {
-		String methodId = params.get(FormHandler.FORM_ACTION, "");
-		if (!CapString.isEmpty(methodId)) {
-			for (Method method : handler.getClass().getDeclaredMethods()) {
-				if (methodId.equals(method.getName())) {
-					if (method.isAnnotationPresent(Captcha.class)) {
-						String key = method.getAnnotation(Captcha.class)
-								.value();
-						CapSecurityCaptcha captcha = CapAppContext
-								.getBean(CapCaptchaServlet.DEF_RENDERER);
-						if (captcha == null
-								|| !CaptchaStatus.SUCCESS.equals(captcha
-										.valid(params.get(key)))) {
-							// 驗証碼無效請重新輸入
-							throw new CapMessageException(
-									CapAppContext.getMessage(captcha.getErrorMessage()),
-									getClass());
-						}
-					}
-				}
-			}
-		}
-		return ctx.setGoToStep(NEXT);
-	}
+    @Override
+    public OpStepContext execute(OpStepContext ctx, Request params, Handler handler) {
+        String methodId = params.get(Handler.FORM_ACTION, "");
+        if (!CapString.isEmpty(methodId)) {
+            for (Method method : handler.getClass().getDeclaredMethods()) {
+                if (methodId.equals(method.getName())) {
+                    if (method.isAnnotationPresent(Captcha.class)) {
+                        String key = method.getAnnotation(Captcha.class).value();
+                        CheckCodeService captcha = CapAppContext.getBean(CaptchaHandler.DEFAULT_RENDER);
+                        if (captcha == null || !CheckStatus.SUCCESS.equals(captcha.valid(params.get(key)))) {
+                            // 驗証碼無效請重新輸入
+                            throw new CapMessageException(CapAppContext.getMessage(captcha.getErrorMessage()), getClass());
+                        }
+                    }
+                }
+            }
+        }
+        return ctx.setGoToStep(NEXT);
+    }
 }

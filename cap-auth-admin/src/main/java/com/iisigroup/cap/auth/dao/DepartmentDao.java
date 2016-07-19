@@ -3,7 +3,7 @@ package com.iisigroup.cap.auth.dao;
 import java.util.List;
 
 import com.iisigroup.cap.auth.model.Department;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 
 /**
  * <pre>
@@ -12,11 +12,12 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2011/8/30
  * @author Fantasy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/8/30,Fantasy,new
  *          </ul>
  */
-public interface DepartmentDao extends IGenericDao<Department> {
+public interface DepartmentDao extends GenericDao<Department> {
 
     /**
      * 取得所有單位資訊(含已停業)

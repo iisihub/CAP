@@ -31,11 +31,10 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xhtmlrenderer.pdf.PDFEncryption;
 import org.xhtmlrenderer.resource.XMLResource;
 
-import com.iisigroup.cap.component.IRequest;
+import com.iisigroup.cap.component.Request;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.report.enums.ReportParamEnum;
+import com.iisigroup.cap.report.constants.ReportParamEnum;
 import com.iisigroup.cap.report.factory.ItextFontFactory;
-import com.iisigroup.cap.service.AbstractService;
 import com.iisigroup.cap.utils.CapString;
 import com.iisigroup.cap.utils.CapSystemConfig;
 import com.itextpdf.text.pdf.BaseFont;
@@ -50,151 +49,130 @@ import freemarker.template.Template;
  * 
  * @since 2013/10/24
  * @author Sunkist Wang
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2013/10/24,Sunkist Wang,new
  *          </ul>
  */
-public abstract class AbstractReportPdfService extends AbstractService
-		implements IFreeMarkerReport, IReportService {
+public abstract class AbstractReportPdfService implements ReportService {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    public final static String FIL_URL_PREFIX = "file:///";
+    public final static String REPORT_SUFFIX = ".ftl";
+    private final static String DEFAULT_ENCORDING = "utf-8";
+    @Resource
+    private FreeMarkerConfigurer fmConfg;
+    @Resource
+    private CapSystemConfig sysConfig;
+    @Resource
+    private ItextFontFactory fontFactory;
 
-	public static final String fileUrlPrefix = "file:///";
+    @Resource
+    private ServletContext servletContext;
 
-	public final static String REPORT_SUFFIX = ".ftl";
+    public ByteArrayOutputStream generateReport(Request request) throws CapException {
+        ByteArrayOutputStream templateOut = null;
+        ByteArrayOutputStream out = null;
+        Writer writer = null;
+        OutputStreamWriter wr = null;
+        try {
+            Template t = getFmConfg().getConfiguration().getTemplate(getReportDefinition() + REPORT_SUFFIX);
+            Map<String, Object> reportData = excute(request);
 
-	final String DEFAULT_ENCORDING = "utf-8";
+            templateOut = new ByteArrayOutputStream();
+            wr = new OutputStreamWriter(templateOut, getSysConfig().getProperty(ReportParamEnum.defaultEncoding.toString(), DEFAULT_ENCORDING));
+            writer = new BufferedWriter(wr);
+            t.process(reportData, writer);
 
-	@Resource
-	private ServletContext servletContext;
+            /**
+             * 1.FOR 非使用 JDK 1.7 避免找不到TransformerFactoryImpl 所以指定org.apache.xalanz裡的實作 2.當使用 org.apache.xalan.processor.TransformerFactoryImpl 會發生org.w3c.dom.DOMException: NAMESPACE_ERR:
+             */
+            System.setProperty("javax.xml.transform.TransformerFactory", "org.apache.xalan.xsltc.trax.TransformerFactoryImpl");
 
-	public ByteArrayOutputStream generateReport(IRequest request)
-			throws CapException {
-		ByteArrayOutputStream templateOut = null;
-		ByteArrayOutputStream out = null;
-		Writer writer = null;
-		OutputStreamWriter wr = null;
-		try {
-			Template t = getFmConfg().getConfiguration().getTemplate(
-					getReportDefinition() + REPORT_SUFFIX);
-			Map<String, Object> reportData = excute(request);
+            // process core-render
+            Document document = XMLResource.load(new ByteArrayInputStream(templateOut.toByteArray())).getDocument();
 
-			templateOut = new ByteArrayOutputStream();
-			wr = new OutputStreamWriter(templateOut, getSysConfig()
-					.getProperty(ReportParamEnum.defaultEncoding.toString(),
-							DEFAULT_ENCORDING));
-			writer = new BufferedWriter(wr);
-			t.process(reportData, writer);
+            ITextRenderer iTextRenderer = new ITextRenderer();
+            out = new ByteArrayOutputStream();
 
-			/**
-			 * 1.FOR 非使用 JDK 1.7 避免找不到TransformerFactoryImpl
-			 * 所以指定org.apache.xalanz裡的實作 2.當使用
-			 * org.apache.xalan.processor.TransformerFactoryImpl
-			 * 會發生org.w3c.dom.DOMException: NAMESPACE_ERR:
-			 */
-			System.setProperty("javax.xml.transform.TransformerFactory",
-					"org.apache.xalan.xsltc.trax.TransformerFactoryImpl");
+            // 設定字型
+            ITextFontResolver fontResolver = iTextRenderer.getFontResolver();
+            fontResolver.addFont(getFontPath(), BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
-			// process core-render
-			Document document = XMLResource.load(
-					new ByteArrayInputStream(templateOut.toByteArray()))
-					.getDocument();
+            PDFEncryption pdfEncryption = new PDFEncryption();
+            // 設定加密
+            if (reportData.containsKey(ReportParamEnum.encrypt.toString())) {
+                String password = (String) reportData.get(ReportParamEnum.encrypt.toString());
+                if (!CapString.isEmpty(password)) {
+                    pdfEncryption.setUserPassword(password.getBytes());
+                }
+            }
+            // 設定權限
+            if (getAllowedPrivileges() != -1) {
+                pdfEncryption.setAllowedPrivileges(getAllowedPrivileges());
+            }
+            iTextRenderer.setPDFEncryption(pdfEncryption);
 
-			ITextRenderer iTextRenderer = new ITextRenderer();
-			out = new ByteArrayOutputStream();
+            iTextRenderer.setDocument(document, FIL_URL_PREFIX + servletContext.getRealPath("").replace("\\", "/") + "/");
 
-			// 設定字型
-			ITextFontResolver fontResolver = iTextRenderer.getFontResolver();
-			fontResolver.addFont(getFontPath(), BaseFont.IDENTITY_H,
-					BaseFont.NOT_EMBEDDED);
+            iTextRenderer.layout();
+            iTextRenderer.createPDF(out);
 
-			PDFEncryption pdfEncryption = new PDFEncryption();
-			// 設定加密
-			if (reportData.containsKey(ReportParamEnum.encrypt.toString())) {
-				String password = (String) reportData
-						.get(ReportParamEnum.encrypt.toString());
-				if (!CapString.isEmpty(password)) {
-					pdfEncryption.setUserPassword(password.getBytes());
-				}
-			}
-			// 設定權限
-			if (getAllowedPrivileges() != -1) {
-				pdfEncryption.setAllowedPrivileges(getAllowedPrivileges());
-			}
-			iTextRenderer.setPDFEncryption(pdfEncryption);
+        } catch (Exception e) {
+            if (e.getCause() != null) {
+                throw new CapException(e.getCause(), e.getClass());
+            } else {
+                throw new CapException(e, e.getClass());
+            }
+        } finally {
+            if (templateOut != null) {
+                try {
+                    templateOut.close();
+                } catch (IOException e) {
+                    if (logger.isErrorEnabled()) {
+                        logger.error(e.getMessage());
+                    }
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    if (logger.isErrorEnabled()) {
+                        logger.error(e.getMessage());
+                    }
+                }
+            }
+        }
+        return out;
+    }
 
-			iTextRenderer.setDocument(document, fileUrlPrefix
-					+ servletContext.getRealPath("").replace("\\", "/") + "/");
+    public FreeMarkerConfigurer getFmConfg() {
+        return fmConfg;
+    }
 
-			iTextRenderer.layout();
-			iTextRenderer.createPDF(out);
+    public CapSystemConfig getSysConfig() {
+        return sysConfig;
+    }
 
-		} catch (Exception e) {
-			if (e.getCause() != null) {
-				throw new CapException(e.getCause(), e.getClass());
-			} else {
-				throw new CapException(e, e.getClass());
-			}
-		} finally {
-			if (templateOut != null) {
-				try {
-					templateOut.close();
-				} catch (IOException e) {
-					if (logger.isErrorEnabled()) {
-						logger.error(e.getMessage());
-					}
-				}
-			}
-			if (out != null) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					if (logger.isErrorEnabled()) {
-						logger.error(e.getMessage());
-					}
-				}
-			}
-		}
-		return out;
-	}
+    public ItextFontFactory getFontFactory() {
+        return fontFactory;
+    }
 
-	@Resource
-	private FreeMarkerConfigurer fmConfg;
-	@Resource
-	private CapSystemConfig sysConfig;
-	@Resource
-	private ItextFontFactory fontFactory;
+    // 設定PDF權限
+    protected int getAllowedPrivileges() {
+        return -1;
+        // return PdfWriter.ALLOW_ASSEMBLY; //全禁止
+    }
 
-	public FreeMarkerConfigurer getFmConfg() {
-		return fmConfg;
-	}
+    // 設定PDF權限
+    protected String getFontPath() throws IOException {
+        return getFontFactory().getFontPath(getSysConfig().getProperty(ReportParamEnum.defaultFont.toString(), "MSJH.TTF"), "");
+    }
 
-	public CapSystemConfig getSysConfig() {
-		return sysConfig;
-	}
-
-	public ItextFontFactory getFontFactory() {
-		return fontFactory;
-	}
-
-	// 設定PDF權限
-	protected int getAllowedPrivileges() {
-		return -1;
-		// return PdfWriter.ALLOW_ASSEMBLY; //全禁止
-	}
-
-	// 設定PDF權限
-	protected String getFontPath() throws IOException {
-		return getFontFactory()
-				.getFontPath(
-						getSysConfig().getProperty(
-								ReportParamEnum.defaultFont.toString(),
-								"MSJH.TTF"), "");
-	}
-
-	@Override
-	public boolean isWriteToFile() {
-		return false; // PDF預設不寫檔
-	}
+    @Override
+    public boolean isWriteToFile() {
+        return false; // PDF預設不寫檔
+    }
 
 }

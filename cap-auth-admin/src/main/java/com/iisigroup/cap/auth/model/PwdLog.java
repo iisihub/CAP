@@ -14,9 +14,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.iisigroup.cap.db.model.DataObject;
+import com.iisigroup.cap.db.model.listener.CapOidGeneratorListener;
 import com.iisigroup.cap.model.GenericBean;
-import com.iisigroup.cap.model.IDataObject;
-import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 
 /**
  * <pre>
@@ -25,7 +25,8 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
  * 
  * @since 2014/01/27
  * @author yunglinliu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/01/27,yunglinliu,new</li>
  *          </ul>
  */
@@ -36,7 +37,7 @@ import com.iisigroup.cap.model.listener.CapOidGeneratorListener;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "P")
-public class PwdLog extends GenericBean implements IDataObject {
+public class PwdLog extends GenericBean implements DataObject {
 
     @Id
     @Column(nullable = false, length = 32)

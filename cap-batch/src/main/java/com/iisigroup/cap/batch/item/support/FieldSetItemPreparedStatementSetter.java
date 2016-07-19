@@ -24,20 +24,19 @@ import org.springframework.batch.item.file.transform.FieldSet;
  * 
  * @since 2012/11/19
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/19,iristu,new
  *          </ul>
  */
-public class FieldSetItemPreparedStatementSetter implements
-		ItemPreparedStatementSetter<FieldSet> {
+public class FieldSetItemPreparedStatementSetter implements ItemPreparedStatementSetter<FieldSet> {
 
-	@Override
-	public void setValues(FieldSet item, PreparedStatement ps)
-			throws SQLException {
-		for (int i = 0; i < item.getValues().length; i++) {
-			ps.setObject(i + 1, item.getValues()[i]);
-		}
+    @Override
+    public void setValues(FieldSet item, PreparedStatement ps) throws SQLException {
+        for (int i = 0; i < item.getValues().length; i++) {
+            ps.setObject(i + 1, item.getValues()[i]);
+        }
 
-	}// ;
+    }
 
 }

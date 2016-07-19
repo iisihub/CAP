@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ehcache>
-	<diskStore path="java.io.tmpdir" />
-	<defaultCache maxElementsInMemory="30000" eternal="false"
-		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" />
-	<!-- 
-	<cache name="com.bqd.mci.model.TxnParm" maxElementsInMemory="500"
-		eternal="false" timeToIdleSeconds="60" timeToLiveSeconds="60"
-		overflowToDisk="false" />
-	 -->
-
-	<cache name="org.hibernate.cache.StandardQueryCache"
-		maxElementsInMemory="500" eternal="false" timeToLiveSeconds="120"
-		overflowToDisk="true" />
-	<cache name="org.hibernate.cache.UpdateTimestampsCache"
-		maxElementsInMemory="5000" eternal="false" overflowToDisk="true" />
-
+    <diskStore path="java.io.tmpdir" />
+    <defaultCache maxElementsInMemory="30000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" />
+    <cache name="org.hibernate.cache.StandardQueryCache" maxElementsInMemory="500" eternal="false" timeToLiveSeconds="120" overflowToDisk="true" />
+    <cache name="org.hibernate.cache.UpdateTimestampsCache" maxElementsInMemory="5000" eternal="false" overflowToDisk="true" />
 </ehcache>

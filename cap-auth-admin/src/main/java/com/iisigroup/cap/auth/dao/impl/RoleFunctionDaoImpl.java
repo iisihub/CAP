@@ -8,14 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.auth.dao.RoleFunctionDao;
 import com.iisigroup.cap.auth.model.RoleFunction;
-import com.iisigroup.cap.dao.impl.GenericDao;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 @Repository
-public class RoleFunctionDaoImpl extends GenericDao<RoleFunction> implements
-        RoleFunctionDao {
+public class RoleFunctionDaoImpl extends GenericDaoImpl<RoleFunction> implements RoleFunctionDao {
     @Override
-    public int deleteByRoleCodeAndFuncCodes(String roleCode,
-            List<String> delFunc) {
+    public int deleteByRoleCodeAndFuncCodes(String roleCode, List<String> delFunc) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("roleCode", roleCode);
         param.put("delFunc", delFunc);
@@ -23,13 +21,11 @@ public class RoleFunctionDaoImpl extends GenericDao<RoleFunction> implements
     }
 
     @Override
-    public int deleteByFuncCodeAndRoleCodes(String funcCode,
-            List<String> delRole) {
+    public int deleteByFuncCodeAndRoleCodes(String funcCode, List<String> delRole) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("funcCode", funcCode);
         param.put("delRole", delRole);
-        return getNamedJdbcTemplate().update(
-                "roleFunc_deleteRoleFuncByFuncCodeAndRoleCodes", param);
-    }// ;
+        return getNamedJdbcTemplate().update("roleFunc_deleteRoleFuncByFuncCodeAndRoleCodes", param);
+    }
 
 }

@@ -36,31 +36,29 @@ import com.iisigroup.cap.mvc.action.BaseActionController;
  * 
  * @since 2012/11/15
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/15,iristu,new
  *          </ul>
  */
 @Controller
 public class SchedulePage extends BaseActionController {
 
-	@Autowired
-	private CodeTypeService codeTypeSrv;
-	@Autowired
-	private BatchJobService batchSrv;
+    @Autowired
+    private CodeTypeService codeTypeSrv;
+    @Autowired
+    private BatchJobService batchSrv;
 
-	@RequestMapping(value = { "/batch/schedule" })
-	public ModelAndView notifyStatus(Locale locale, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String path = request.getPathInfo();
-		Map<String, Map<String, String>> codes = codeTypeSrv.findByCodeTypes(
-				new String[] { "jobExitCode", "timeZoneId", "schExeHost" },
-				locale.toString());
-		ModelAndView model = new ModelAndView(path);
-		for (Entry<String, Map<String, String>> c : codes.entrySet()) {
-			model.addObject(c.getKey(), c.getValue());
-		}
-		List<BatchJob> jobs = batchSrv.listJobs();
-		model.addObject("batchJob",jobs);
-		return model;
-	}// ;
+    @RequestMapping(value = { "/batch/schedule" })
+    public ModelAndView notifyStatus(Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String path = request.getPathInfo();
+        Map<String, Map<String, String>> codes = codeTypeSrv.findByCodeTypes(new String[] { "jobExitCode", "timeZoneId", "schExeHost" }, locale.toString());
+        ModelAndView model = new ModelAndView(path);
+        for (Entry<String, Map<String, String>> c : codes.entrySet()) {
+            model.addObject(c.getKey(), c.getValue());
+        }
+        List<BatchJob> jobs = batchSrv.listJobs();
+        model.addObject("batchJob", jobs);
+        return model;
+    }
 }

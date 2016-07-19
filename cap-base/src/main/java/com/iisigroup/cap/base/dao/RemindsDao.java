@@ -12,7 +12,7 @@ package com.iisigroup.cap.base.dao;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.Reminds;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 
 /**
  * <pre>
@@ -21,15 +21,15 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2014/1/27
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/27,tammy,new
  *          </ul>
  */
-public interface RemindsDao extends IGenericDao<Reminds> {
+public interface RemindsDao extends GenericDao<Reminds> {
 
-	public List<Reminds> findCurrentRemindItem(String[] styleTyp,
-			String locale);
-	
-	public void merge(Reminds entity);
+    public List<Reminds> findCurrentRemindItem(String[] styleTyp, String locale);
+
+    public void merge(Reminds entity);
 
 }

@@ -14,8 +14,9 @@ package com.iisigroup.cap.operation;
 
 import java.util.Map;
 
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.IHandler;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.handler.Handler;
+import com.iisigroup.cap.model.OpStepContext;
 
 /**
  * <p>
@@ -23,19 +24,20 @@ import com.iisigroup.cap.handler.IHandler;
  * </p>
  * 
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/7/22,iristu,new
  *          </ul>
  */
 public interface Operation {
 
-	String getName();
+    String getName();
 
-	void setName(String name);
+    void setName(String name);
 
-	Map<String, OperationStep> getRuleMap();
+    Map<String, OperationStep> getRuleMap();
 
-	void setRuleMap(Map<String, OperationStep> ruleMap);
+    void setRuleMap(Map<String, OperationStep> ruleMap);
 
-	void execute(OpStepContext ctx, IRequest params, IHandler handler);
+    void execute(OpStepContext ctx, Request params, Handler handler);
 }

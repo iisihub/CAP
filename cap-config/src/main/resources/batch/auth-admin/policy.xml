@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/batch" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
-
     <beans:bean id="itemSqlParameterSourceProvider" class="com.iisigroup.cap.batch.item.support.MapItemSqlParameterSourceProvider" />
-    
     <beans:bean id="pwdLogReader" class="org.springframework.batch.item.database.JdbcCursorItemReader">
         <beans:property name="dataSource" ref="cap-db"></beans:property>
         <beans:property name="sql" value="SELECT CODE, PWDEXPIREDTIME FROM DEF_USER"></beans:property>
@@ -11,15 +9,12 @@
             <beans:bean class="com.iisigroup.cap.jdbc.support.CapColumnMapRowMapper"></beans:bean>
         </beans:property>
     </beans:bean>
-
-    <beans:bean id="pwdExpiredProcessor" class="com.iisigroup.cap.auth.batch.processor.PwdExpiredProcessor"/>
-
+    <beans:bean id="pwdExpiredProcessor" class="com.iisigroup.cap.auth.batch.processor.PwdExpiredProcessor" />
     <beans:bean id="expiredTimeDbWriter" class="org.springframework.batch.item.database.JdbcBatchItemWriter">
         <beans:property name="dataSource" ref="cap-db"></beans:property>
         <beans:property name="sql" value="UPDATE DEF_USER SET STATUS = '3' WHERE CODE = :userCode"></beans:property>
         <beans:property name="itemSqlParameterSourceProvider" ref="itemSqlParameterSourceProvider"></beans:property>
     </beans:bean>
-
     <job id="policyJob">
         <step id="passwordExpired" next="accountDisabled">
             <description>設定密碼過期的使用者狀態為 3 (密碼過期)</description>
@@ -58,5 +53,4 @@
             </tasklet>
         </step>
     </job>
-
 </beans:beans>

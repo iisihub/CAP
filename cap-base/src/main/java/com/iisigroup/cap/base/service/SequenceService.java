@@ -13,7 +13,7 @@ package com.iisigroup.cap.base.service;
 
 import java.util.Map;
 
-import com.iisigroup.cap.model.Page;
+import com.iisigroup.cap.db.model.Page;
 
 /**
  * <pre>
@@ -22,27 +22,28 @@ import com.iisigroup.cap.model.Page;
  * 
  * @since 2011/9/19
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2011/9/19,iristu,new
  *          </ul>
  */
 public interface SequenceService {
 
-	Page<Map<String, Object>> findPage(int start, int fetch);
+    Page<Map<String, Object>> findPage(int start, int fetch);
 
-	/**
-	 * 取得序號
-	 * 
-	 * @param seqNode
-	 *            序號key值
-	 * @param interval
-	 *            序號區間值
-	 * @param startSeq
-	 *            序號起啟值
-	 * @param maxSeq
-	 *            最大序號
-	 * @return next seq
-	 */
-	int getNextSeqNo(String seqNode, int interval, int startSeq, int maxSeq);
+    /**
+     * 取得序號
+     * 
+     * @param seqNode
+     *            序號key值
+     * @param interval
+     *            序號區間值
+     * @param startSeq
+     *            序號起啟值
+     * @param maxSeq
+     *            最大序號
+     * @return next seq
+     */
+    int getNextSeqNo(String seqNode, int interval, int startSeq, int maxSeq);
 
 }

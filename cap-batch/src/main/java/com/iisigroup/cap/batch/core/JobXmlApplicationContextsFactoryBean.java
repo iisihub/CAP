@@ -25,23 +25,23 @@ import com.iisigroup.cap.batch.service.BatchJobService;
  * 
  * @since 2012/11/6
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/6,iristu,new
  *          </ul>
  */
-public class JobXmlApplicationContextsFactoryBean extends
-		ClasspathXmlApplicationContextsFactoryBean {
+public class JobXmlApplicationContextsFactoryBean extends ClasspathXmlApplicationContextsFactoryBean {
 
-	private BatchJobService jobService;
+    private BatchJobService jobService;
 
-	public void setJobService(BatchJobService jobService) {
-		this.jobService = jobService;
-		setJobXmlResources();
-	}
+    public void setJobService(BatchJobService jobService) {
+        this.jobService = jobService;
+        setJobXmlResources();
+    }
 
-	public void setJobXmlResources() {
-		List<Resource> resources = jobService.listJobResources();
-		setResources(resources.toArray(new Resource[resources.size()]));
-	}// ;
+    public void setJobXmlResources() {
+        List<Resource> resources = jobService.listJobResources();
+        setResources(resources.toArray(new Resource[resources.size()]));
+    }
 
 }// ~

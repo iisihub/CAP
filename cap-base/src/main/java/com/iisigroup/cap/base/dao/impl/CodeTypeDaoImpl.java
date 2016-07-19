@@ -17,9 +17,9 @@ import org.springframework.stereotype.Repository;
 
 import com.iisigroup.cap.base.dao.CodeTypeDao;
 import com.iisigroup.cap.base.model.CodeType;
-import com.iisigroup.cap.dao.impl.GenericDao;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.dao.utils.SearchMode;
+import com.iisigroup.cap.db.constants.SearchMode;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.dao.impl.GenericDaoImpl;
 
 /**
  * <pre>
@@ -28,59 +28,58 @@ import com.iisigroup.cap.dao.utils.SearchMode;
  * 
  * @since 2010/12/9
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/12/9,iristu,new
  *          <li>2011/11/20,RodesChen,from cap
  *          </ul>
  */
 @Repository
-public class CodeTypeDaoImpl extends GenericDao<CodeType> implements CodeTypeDao {
+public class CodeTypeDaoImpl extends GenericDaoImpl<CodeType> implements CodeTypeDao {
 
-	@Override
-	public List<CodeType> findByCodeType(String codetype, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeType", codetype);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
-		List<CodeType> list = find(search);
-		return list;
-	}
+    @Override
+    public List<CodeType> findByCodeType(String codetype, String locale) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", codetype);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("codeOrder");
+        List<CodeType> list = find(search);
+        return list;
+    }
 
-	@Override
-	public CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
-			String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeValue", cValue);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		return findUniqueOrNone(search);
-	}
+    @Override
+    public CodeType findByCodeTypeAndCodeValue(String cType, String cValue, String locale) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeValue", cValue);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        return findUniqueOrNone(search);
+    }
 
-	@Override
-	public List<CodeType> findByCodeType(String[] codetypes, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.IN, "codeType", codetypes);
-		search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
-		search.addOrderBy("codeOrder");
-		return find(search);
-	}
+    @Override
+    public List<CodeType> findByCodeType(String[] codetypes, String locale) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.IN, "codeType", codetypes);
+        search.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
+        search.addOrderBy("codeOrder");
+        return find(search);
+    }
 
-	@Override
-	public List<CodeType> findByCodeTypeAndCodeDesc(String cType,
-			String codeDesc, String locale) {
-		ISearch search = createSearchTemplete();
-		search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
-		search.addSearchModeParameters(SearchMode.EQUALS, "codeDesc", codeDesc);
-		return find(search);
-	}
+    @Override
+    public List<CodeType> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale) {
+        SearchSetting search = createSearchTemplete();
+        search.addSearchModeParameters(SearchMode.EQUALS, "locale", locale);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeType", cType);
+        search.addSearchModeParameters(SearchMode.EQUALS, "codeDesc", codeDesc);
+        return find(search);
+    }
 
-	@Override
-	public CodeType findByOid(String oid) {
-		return find(oid);
-	}
+    @Override
+    public CodeType findByOid(String oid) {
+        return find(oid);
+    }
 
 }

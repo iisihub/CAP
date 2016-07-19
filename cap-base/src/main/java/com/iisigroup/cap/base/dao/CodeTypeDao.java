@@ -14,7 +14,7 @@ package com.iisigroup.cap.base.dao;
 import java.util.List;
 
 import com.iisigroup.cap.base.model.CodeType;
-import com.iisigroup.cap.dao.IGenericDao;
+import com.iisigroup.cap.db.dao.GenericDao;
 
 /**
  * <pre>
@@ -23,11 +23,12 @@ import com.iisigroup.cap.dao.IGenericDao;
  * 
  * @since 2010/12/15
  * @author eugene
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2010/12/15,eugene,new
  *          </ul>
  */
-public interface CodeTypeDao extends IGenericDao<CodeType> {
+public interface CodeTypeDao extends GenericDao<CodeType> {
 
     /**
      * find by codetype.
@@ -51,8 +52,7 @@ public interface CodeTypeDao extends IGenericDao<CodeType> {
      *            語言別
      * @return T
      */
-    CodeType findByCodeTypeAndCodeValue(String cType, String cValue,
-            String locale);
+    CodeType findByCodeTypeAndCodeValue(String cType, String cValue, String locale);
 
     /**
      * find by codetype.
@@ -76,8 +76,7 @@ public interface CodeTypeDao extends IGenericDao<CodeType> {
      *            語言別
      * @return CodeType
      */
-    List<CodeType> findByCodeTypeAndCodeDesc(String cType, String codeDesc,
-            String locale);
+    List<CodeType> findByCodeTypeAndCodeDesc(String cType, String codeDesc, String locale);
 
     /**
      * 查詢OID

@@ -15,19 +15,18 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.base.service.SequenceService;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
-import com.iisigroup.cap.response.MapGridResult;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.MapGridResult;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 
 /**
  * <pre>
@@ -36,31 +35,30 @@ import com.iisigroup.cap.response.MapGridResult;
  * 
  * @since 2012/10/25
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/10/25,iristu,new
  *          </ul>
  */
-@Scope("request")
 @Controller("sequencehandler")
 public class SequenceHandler extends MFormHandler {
 
-	@Resource
-	private SequenceService seqSrv;
+    @Resource
+    private SequenceService seqSrv;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public MapGridResult query(ISearch search, IRequest params) {
+    @HandlerType(HandlerTypeEnum.GRID)
+    public MapGridResult query(SearchSetting search, Request params) {
 
-		Page<Map<String, Object>> page = seqSrv.findPage(
-				search.getFirstResult(), search.getMaxResults());
-		return new MapGridResult(page.getContent(), page.getTotalRow());
-	}// ;
+        Page<Map<String, Object>> page = seqSrv.findPage(search.getFirstResult(), search.getMaxResults());
+        return new MapGridResult(page.getContent(), page.getTotalRow());
+    }
 
-	public IResult getNewSeq(IRequest params) {
-		AjaxFormResult result = new AjaxFormResult();
-		String seqNode = params.get("seqNode");
-		int theSeq = seqSrv.getNextSeqNo(seqNode, 1, 1, Integer.MAX_VALUE);
-		result.set("theSeq", theSeq);
-		return result;
-	}// ;
+    public Result getNewSeq(Request params) {
+        AjaxFormResult result = new AjaxFormResult();
+        String seqNode = params.get("seqNode");
+        int theSeq = seqSrv.getNextSeqNo(seqNode, 1, 1, Integer.MAX_VALUE);
+        result.set("theSeq", theSeq);
+        return result;
+    }
 
 }

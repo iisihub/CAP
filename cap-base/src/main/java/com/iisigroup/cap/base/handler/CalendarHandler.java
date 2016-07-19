@@ -18,16 +18,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.base.model.Remind;
 import com.iisigroup.cap.base.service.CalendarService;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.jpa.utils.CapEntityUtil;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.db.utils.CapEntityUtil;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.security.CapSecurityContext;
 import com.iisigroup.cap.utils.CapBeanUtil;
 
@@ -38,37 +37,35 @@ import com.iisigroup.cap.utils.CapBeanUtil;
  * 
  * @since 2014/1/30
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/30,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("calendarhandler")
 public class CalendarHandler extends MFormHandler {
 
-	@Resource
-	private CalendarService calendarService;
+    @Resource
+    private CalendarService calendarService;
 
-	public IResult getCalendarData(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
+    public Result getCalendarData(Request request) {
+        AjaxFormResult result = new AjaxFormResult();
 
-		String start = request.get("start");
-		String end = request.get("end");
-		String userId = CapSecurityContext.getUserId();
+        String start = request.get("start");
+        String end = request.get("end");
+        String userId = CapSecurityContext.getUserId();
 
-		List<Remind> reminds = calendarService.getCalendarData(userId, start,
-				end);
-		List<Map<String, Object>> events = new ArrayList<Map<String, Object>>();
-		for (Remind remind : reminds) {
-			events.add(CapBeanUtil.bean2Map(remind,
-					CapEntityUtil.getColumnName(remind)));
-		}
-		Map<String, Object> reEvents = new HashMap<String, Object>();
-		reEvents.put("events", events);
-		
-		result.putAll(reEvents);
+        List<Remind> reminds = calendarService.getCalendarData(userId, start, end);
+        List<Map<String, Object>> events = new ArrayList<Map<String, Object>>();
+        for (Remind remind : reminds) {
+            events.add(CapBeanUtil.bean2Map(remind, CapEntityUtil.getColumnName(remind)));
+        }
+        Map<String, Object> reEvents = new HashMap<String, Object>();
+        reEvents.put("events", events);
 
-		return result;
-	}
+        result.putAll(reEvents);
+
+        return result;
+    }
 
 }

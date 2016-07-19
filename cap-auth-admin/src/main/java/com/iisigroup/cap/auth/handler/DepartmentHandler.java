@@ -16,24 +16,23 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.auth.model.Department;
 import com.iisigroup.cap.auth.service.DepartmentService;
-import com.iisigroup.cap.component.IRequest;
-import com.iisigroup.cap.dao.utils.ISearch;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
+import com.iisigroup.cap.component.impl.BeanGridResult;
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.db.service.CommonService;
 import com.iisigroup.cap.exception.CapException;
-import com.iisigroup.cap.formatter.IFormatter;
-import com.iisigroup.cap.handler.MFormHandler;
-import com.iisigroup.cap.model.Page;
-import com.iisigroup.cap.response.AjaxFormResult;
-import com.iisigroup.cap.response.GridResult;
-import com.iisigroup.cap.response.IResult;
+import com.iisigroup.cap.formatter.Formatter;
+import com.iisigroup.cap.mvc.handler.MFormHandler;
 import com.iisigroup.cap.security.CapSecurityContext;
-import com.iisigroup.cap.service.ICommonService;
 import com.iisigroup.cap.utils.CapBeanUtil;
 import com.iisigroup.cap.utils.CapDate;
 import com.iisigroup.cap.utils.CapString;
@@ -45,82 +44,81 @@ import com.iisigroup.cap.utils.CapString;
  * 
  * @since 2014/1/13
  * @author tammy
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2014/1/13,tammy,new
  *          </ul>
  */
-@Scope("request")
 @Controller("departmenthandler")
 public class DepartmentHandler extends MFormHandler {
 
-	@Resource
-	private ICommonService commonSrv;
+    @Resource
+    private CommonService commonSrv;
 
-	@Resource
-	private DepartmentService departmentService;
+    @Resource
+    private DepartmentService departmentService;
 
-	@HandlerType(HandlerTypeEnum.GRID)
-	public GridResult query(ISearch search, IRequest params) {
-		search.addOrderBy("code");
+    @HandlerType(HandlerTypeEnum.GRID)
+    public BeanGridResult query(SearchSetting search, Request params) {
+        search.addOrderBy("code");
 
-		Map<String, IFormatter> fmt = new HashMap<String, IFormatter>();
+        Map<String, Formatter> fmt = new HashMap<String, Formatter>();
 
-		Page<Department> page = commonSrv.findPage(Department.class, search);
-		return new GridResult(page.getContent(), page.getTotalRow(), fmt);
-	}// ;
+        Page<Department> page = commonSrv.findPage(Department.class, search);
+        return new BeanGridResult(page.getContent(), page.getTotalRow(), fmt);
+    }
 
-	/**
-	 * 編輯資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult save(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		String oid = request.get("oid");
-		String brNo = request.get("code");
-		Department branch = null;
+    /**
+     * 編輯資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link Result.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public Result save(Request request) {
+        AjaxFormResult result = new AjaxFormResult();
+        String oid = request.get("oid");
+        String brNo = request.get("code");
+        Department branch = null;
 
-		if (CapString.isEmpty(oid)) {
-			branch = departmentService.findByBrno(brNo);
-			if (branch != null) {
-				result.set("exist", Boolean.TRUE);
-				return result;
-			}
-		} else {
-			branch = commonSrv.findById(Department.class, oid);
-		}
+        if (CapString.isEmpty(oid)) {
+            branch = departmentService.findByBrno(brNo);
+            if (branch != null) {
+                result.set("exist", Boolean.TRUE);
+                return result;
+            }
+        } else {
+            branch = commonSrv.findById(Department.class, oid);
+        }
 
-		if (branch == null) {
-			branch = new Department();
-			branch.setOid(null);
-		}
-		CapBeanUtil.map2Bean(request, branch, Department.class);
-		branch.setUpdater(CapSecurityContext.getUserId());
-		branch.setUpdateTime(CapDate.getCurrentTimestamp());
-		departmentService.save(branch);
+        if (branch == null) {
+            branch = new Department();
+            branch.setOid(null);
+        }
+        CapBeanUtil.map2Bean(request, branch, Department.class);
+        branch.setUpdater(CapSecurityContext.getUserId());
+        branch.setUpdateTime(CapDate.getCurrentTimestamp());
+        departmentService.save(branch);
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * 刪除資料
-	 * 
-	 * @param request
-	 *            IRequest
-	 * @return {@link tw.com.iisi.cap.response.IResult}
-	 * @throws CapException
-	 */
-	public IResult delete(IRequest request) {
-		AjaxFormResult result = new AjaxFormResult();
-		Department code = commonSrv
-				.findById(Department.class, request.get("oid"));
-		if (code != null) {
-			commonSrv.delete(code);
-		}
-		return result;
-	}
+    /**
+     * 刪除資料
+     * 
+     * @param request
+     *            IRequest
+     * @return {@link Result.com.iisi.cap.response.IResult}
+     * @throws CapException
+     */
+    public Result delete(Request request) {
+        AjaxFormResult result = new AjaxFormResult();
+        Department code = commonSrv.findById(Department.class, request.get("oid"));
+        if (code != null) {
+            commonSrv.delete(code);
+        }
+        return result;
+    }
 
 }
