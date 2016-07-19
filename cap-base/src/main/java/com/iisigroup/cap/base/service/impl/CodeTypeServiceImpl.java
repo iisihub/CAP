@@ -10,6 +10,7 @@
  */
 package com.iisigroup.cap.base.service.impl;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.operation.simple.SimpleContextHolder;
 import com.iisigroup.cap.utils.CapWebUtil;
 
+import net.sf.json.JSONArray;
+
 /**
  * <pre>
  * CodeType Service
@@ -36,6 +39,7 @@ import com.iisigroup.cap.utils.CapWebUtil;
  *          <ul>
  *          <li>2011/11/28,rodeschen,new
  *          <li>2013/4/10,rodeschen,增加預設語系
+ *          <li>2015/1/29,sunkist,調整JSON格式
  *          </ul>
  */
 @Service
@@ -84,17 +88,21 @@ public class CodeTypeServiceImpl implements CodeTypeService {
         return m;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public Map<String, AjaxFormResult> getCodeTypeByTypes(String[] types, String locale) {
         List<CodeType> codes = dao.findByCodeType(types, locale);
         Map<String, AjaxFormResult> m = new LinkedHashMap<String, AjaxFormResult>();
         for (CodeType c : codes) {
             String type = c.getCodeType();
+            Map ssm = new HashMap();
+            ssm.put(c.getCodeValue(), c.getCodeDesc());
             AjaxFormResult sm = m.get(type);
             if (sm == null) {
                 sm = new AjaxFormResult();
+                sm.set("_", new JSONArray());
             }
-            sm.set(c.getCodeValue(), c.getCodeDesc());
+            ((JSONArray) sm.get("_")).add(ssm);
             m.put(type, sm);
         }
         return m;

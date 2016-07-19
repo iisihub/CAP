@@ -156,7 +156,7 @@ $.holdReady(true);
               if (form.find(".data-error,.item-data-error").size()) {
                 return false;
               }
-              //                    if (!form.valid()) {
+              // if (!form.valid()) {
               if (!form.validationEngine('validate')) {
                 return false;
               }
@@ -271,11 +271,11 @@ $.holdReady(true);
               },
               /**
                * 產生對話框
-               *
+               * 
                * @param {Object}
-               *            settings
+               *          settings
                * @param {String}
-               *            action
+               *          action
                */
               _showConfirmMessage : function(settings, action) {
                 settings = settings || {};
@@ -351,15 +351,13 @@ $.holdReady(true);
               },
               /**
                * 產生提示對話框
-               *
+               * 
                * @param {String}
-               *            title title
+               *          title title
                * @param {Object}
-               *            message
-               *            message
+               *          message message
                * @param {Object}
-               *            action
-               *            關閉對話框後動作
+               *          action 關閉對話框後動作
                */
               showPopMessage : function(title, message, action, cls) {
                 var randomID = "sysMessage" + parseInt(Math.random() * 1000, 10);
@@ -387,34 +385,28 @@ $.holdReady(true);
               },
 
               /**
-               * 產生提示對話框(預設與showPopMessage同
-               * 提供給予各專案replace使用)
-               *
+               * 產生提示對話框(預設與showPopMessage同 提供給予各專案replace使用)
+               * 
                * @param {String}
-               *            title title
+               *          title title
                * @param {Object}
-               *            message
-               *            message
+               *          message message
                * @param {Object}
-               *            action
-               *            關閉對話框後動作
+               *          action 關閉對話框後動作
                */
               showMessage : function(title, message, action) {
                 return API.showPopMessage(title, message, action);
               },
 
               /**
-               * 產生提示對話框(預設與showPopMessage同
-               * 提供給予各專案replace使用)
-               *
+               * 產生提示對話框(預設與showPopMessage同 提供給予各專案replace使用)
+               * 
                * @param {String}
-               *            title title
+               *          title title
                * @param {Object}
-               *            message
-               *            message
+               *          message message
                * @param {Object}
-               *            action
-               *            關閉對話框後動作
+               *          action 關閉對話框後動作
                */
               showErrorMessage : function(title, message, action) {
                 return API.showPopMessage(title, message, action, "xxxxxxx");
@@ -430,24 +422,20 @@ $.holdReady(true);
               },
 
               /**
-               * ajax
-               * 動作完成後錯誤訊息顯示方式(預設與showPopMessage同
-               * 提供給予各專案replace使用)
-               *
+               * ajax 動作完成後錯誤訊息顯示方式(預設與showPopMessage同 提供給予各專案replace使用)
+               * 
                * @param {String}
-               *            msg
+               *          msg
                */
               ajaxErrorMessage : function(msg) {
                 CommonAPI.showPopMessage(msg);
               },
 
               /**
-               * ajax
-               * 動作完成後通知訊息顯示方式(預設與showPopMessage同
-               * 提供給予各專案replace使用)
-               *
+               * ajax 動作完成後通知訊息顯示方式(預設與showPopMessage同 提供給予各專案replace使用)
+               * 
                * @param {String}
-               *            msg
+               *          msg
                */
               ajaxNotifyMessage : function(msg) {
                 CommonAPI.showPopMessage(msg);
@@ -462,16 +450,15 @@ $.holdReady(true);
 
               /**
                * 補滿字串
-               *
+               * 
                * @param {string}
-               *            data 轉入資料
+               *          data 轉入資料
                * @param {integer}
-               *            length 長度
+               *          length 長度
                * @param {boolean}
-               *            rightAlign
-               *            是否補字串後方
+               *          rightAlign 是否補字串後方
                * @param {char}
-               *            ch 補足字元
+               *          ch 補足字元
                */
               fillString : function(data, length, rightAlign, ch) {
                 var inlength = data.length;
@@ -483,11 +470,11 @@ $.holdReady(true);
                 return data;
               },
               /**
-               *
+               * 
                * @param {String}
-               *            id
+               *          id
                * @param {String}
-               *            action
+               *          action
                */
               triggerOpener : function(id, action) {
                 id = id || 'gridview';
@@ -500,9 +487,9 @@ $.holdReady(true);
               },
               /**
                * 建立i18n or key為變數之 JSON
-               *
+               * 
                * @param {Object}
-               *            array
+               *          array
                */
               createJSON : function(array) {
                 var json = {};
@@ -564,12 +551,9 @@ $.holdReady(true);
               },
               /**
                * 於後端取得下拉選單資料
-               *
+               * 
                * @param {Array ||
-               *            String}
-               *            updatekeys
-               *            reutrn {JSON}
-               *            comboList
+               *          String} updatekeys reutrn {JSON} comboList
                */
               loadCombos : function(updateKeys, comboaction) {
                 if (updateKeys === "")
@@ -798,7 +782,7 @@ $.holdReady(true);
                   }
                 }
                 var uploadMsg = CommonAPI.showMessage(s.uploadMsg);
-                //remove settings action , all action to complete monitor
+                // remove settings action , all action to complete monitor
                 var temp = {
                   successMsg : s.successMsg,
                   success : s.success,
@@ -837,10 +821,10 @@ $.holdReady(true);
                     $.isFunction(uploadMsg) && uploadMsg.dialog('close');
                     CommonAPI.showErrorMessage(i18n.def.fileUploadError);
                   }
-                //                            ,
-                //                            data : $.extend(s.data || {}, {
-                //                                iframe : true  // ie error access denied
-                //                            })
+                // ,
+                // data : $.extend(s.data || {}, {
+                // iframe : true // ie error access denied
+                // })
                 }));
 
               }
@@ -1039,11 +1023,10 @@ $.holdReady(true);
               return this;
             },
             /**
-             * 將JSON內值放入 selector
-             * 所選之subitem(input,radio,checkbox,textarea,div,span)
-             *
+             * 將JSON內值放入 selector 所選之subitem(input,radio,checkbox,textarea,div,span)
+             * 
              * @param {JSON}
-             *            json
+             *          json
              */
             injectData : function(rjson) {
               var json = $.extend({}, rjson);
@@ -1138,10 +1121,9 @@ $.holdReady(true);
 
             /**
              * 將dom內之輸入欄位轉成Json
-             *
+             * 
              * @param {boolean}
-             *            noHide 無需Hidden 欄位 預設為
-             *            false (全取)
+             *          noHide 無需Hidden 欄位 預設為 false (全取)
              */
             serializeData : function(noHide) {
               var result = {}, self = $(this);
@@ -1210,11 +1192,11 @@ $.holdReady(true);
             },
             /**
              * 設定 Selector's subitem readonly 狀態
-             *
+             * 
              * @param {boolean}
-             *            b 預設為 true (readOnly)
+             *          b 預設為 true (readOnly)
              * @param {String}
-             *            jquerySelector
+             *          jquerySelector
              */
             readOnlyChilds : function(b, excludeSelector) {
               b = (b == undefined) ? true : b;
@@ -1225,9 +1207,9 @@ $.holdReady(true);
             },
             /**
              * 設定欄位Readonly 狀態
-             *
+             * 
              * @param {boolean}
-             *            f 預設為 true (readOnly)
+             *          f 預設為 true (readOnly)
              */
             readOnly : function(b) {
               b = (b == undefined) ? true : b;
@@ -1256,11 +1238,11 @@ $.holdReady(true);
             },
             /**
              * 動態新增Select 選單
-             *
+             * 
              * @param {JSON}
-             *            options
+             *          options
              * @param {boolean}
-             *            append
+             *          append
              */
             setOptions : function(options, append) {
               return !this[0] ? $(this) : this[0].nodeName.toLowerCase() != 'select' ? $(this) : (function(o, a) {
@@ -1270,36 +1252,46 @@ $.holdReady(true);
                   o = CommonAPI.loadCombos(o)[o];
                 }
                 var to = {}, s = $(this), defalutValue = s.attr("defaultValue") || "", ops = ""/*
-                 * (s.attr("space") ==
-                 * "true" &&
-                 * (!s.find('option').size() ||
-                 * !append)) ? "<option
-                 * value=''></option>" : ""
-                 */, type = s.attr("comboType");
+                                                                                                 * (s.attr("space") == "true" && (!s.find('option').size() || !append)) ? "<option value=''></option>" : ""
+                                                                                                 */, type = s.attr("comboType");
                 if (append) {
                   o = $.extend(s.data('realOptions') || {}, o);
                   options && (delete options[i18n.def.newData]);
                 } else {
                   s.empty();
                 }
-                for ( var key in o || {}) {
-                  ops += ("<option key='" + key + "' value='" + (type == '3' ? o[key] : key) + "' showValue='" + o[key] + "'>" + (function(k, v, t) {
+                var po = o["_"];
+                if (!po) {
+                  var a = [];
+                  for ( var pp in o) {
+                    var t = {};
+                    t[pp] = o[pp];
+                    logDebug(t);
+                    a.push(t);
+                  }
+                  po = a;
+                }
+                for ( var pkey in po || {}) {
+                  o = po[pkey];
+                  for ( var key in o || {}) {
+                    ops += ("<option key='" + key + "' value='" + (type == '3' ? o[key] : key) + "' showValue='" + o[key] + "'>" + (function(k, v, t) {
 
-                    switch (t) {
-                    case '1':
-                      to[k] = k;
-                      return k;
-                    case '2':
-                      to[k] = v;
-                      return v;
-                    case '3':
-                      to[v] = v;
-                      return v;
-                    default:
-                      to[k] = k + ' - ' + v;
-                      return k + ' - ' + v;
-                    }
-                  })(key, o[key], type) + "</option>");
+                      switch (t) {
+                      case '1':
+                        to[k] = k;
+                        return k;
+                      case '2':
+                        to[k] = v;
+                        return v;
+                      case '3':
+                        to[v] = v;
+                        return v;
+                      default:
+                        to[k] = k + ' - ' + v;
+                        return k + ' - ' + v;
+                      }
+                    })(key, o[key], type) + "</option>");
+                  }
                 }
                 if (s.attr("addNew") == 'true') {
                   !ops.match("'>" + i18n.def.newData + "</option>") && (ops += ("<option value='" + i18n.def.newData + "'>" + i18n.def.newData + "</option>"));
@@ -1314,7 +1306,7 @@ $.holdReady(true);
                           subtitle : s.attr("addTitle") || i18n.def.selectOption,
                           buttonName : i18n.def.sure,
                           buttonAction : function() {
-                            //                                                if ($("#searchForm").valid()) {
+                            // if ($("#searchForm").valid()) {
                             if ($("#searchForm").validationEngine('validate')) {
                               var options = s.data("viewOptions") || {};
                               options[$("#sseid").val()] = $("#sseid").val();
@@ -1338,9 +1330,9 @@ $.holdReady(true);
 
             /**
              * 移除options (多個 or 單一 選項)
-             *
+             * 
              * @param {Array ||
-             *            string} options
+             *          string} options
              */
             removeOptions : function(options) {
               return !this[0] ? $(this) : this[0].nodeName.toLowerCase() != 'select' ? $(this) : (function(o) {
