@@ -10,6 +10,7 @@
     <http pattern="/**/**.js" security="none" />
     <http pattern="/i18njs" security="none" />
     <http pattern="/captcha.png*" security="none" />
+    <http pattern="/api/**" security="none" />
     <http pattern="/app/error/message*" security="none" />
     <http pattern="/page/login*" security="none" />
     <http auto-config="false" access-decision-manager-ref="accessDecisionManager" entry-point-ref="capAuthenticationEntryPoint" access-denied-page="/page/login?error">
