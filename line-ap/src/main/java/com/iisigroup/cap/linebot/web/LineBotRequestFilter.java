@@ -27,9 +27,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.iisigroup.cap.linebot.client.LineResource;
 import com.linecorp.bot.client.LineBotAPIHeaders;
-import com.linecorp.bot.client.LineBotClient;
-import com.linecorp.bot.client.LineBotClientBuilder;
 import com.linecorp.bot.client.exception.LineBotAPIException;
 
 /**
@@ -46,7 +45,6 @@ import com.linecorp.bot.client.exception.LineBotAPIException;
  */
 public class LineBotRequestFilter implements Filter {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private LineBotClient lineBotClient;
 
     @Override
     public void destroy() {
@@ -57,6 +55,11 @@ public class LineBotRequestFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String signature = req.getHeader(LineBotAPIHeaders.X_LINE_CHANNEL_SIGNATURE);
+        // for test
+        // String dummyReq =
+        // "{\"result\":[{\"content\":{\"toType\":1,\"createdTime\":1469088009354,\"from\":\"u7864630bc83a3308ab529e55f9142d5b\",\"location\":null,\"id\":\"4639897076146\",\"to\":[\"uf4d14d3d43b707adf996a6bd6b581118\"],\"text\":\"A123456789\",\"contentMetadata\":{\"AT_RECV_MODE\":\"2\",\"SKIP_BADGE_COUNT\":\"true\"},\"deliveredTime\":0,\"contentType\":1,\"seq\":null},\"createdTime\":1469088009382,\"eventType\":\"138311609000106303\",\"from\":\"u206d25c2ea6bd87c17655609a1c37cb8\",\"fromChannel\":1341301815,\"id\":\"WB1519-3658724674\",\"to\":[\"uf4d14d3d43b707adf996a6bd6b581118\"],\"toChannel\":1461968250}]}";
+        // request.setAttribute("lineBot", dummyReq);
+        // chain.doFilter(request, response);
         if (signature != null && signature.length() != 0) {
             final byte[] json = IOUtils.toByteArray(req.getInputStream());
             String lineReq = new String(json, StandardCharsets.UTF_8);
@@ -64,7 +67,7 @@ public class LineBotRequestFilter implements Filter {
                 logger.debug("got: {}", lineReq);
             }
             try {
-                if (!lineBotClient.validateSignature(json, signature)) {
+                if (!LineResource.getLineBotClient().validateSignature(json, signature)) {
                     sendError(resp, "Invalid API signature");
                     return;
                 } else {
@@ -84,8 +87,6 @@ public class LineBotRequestFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        LineBotClientBuilder lbcb = LineBotClientBuilder.create("1461968250", "8b40651e023e9b296c12196d5675cf45", "uf4d14d3d43b707adf996a6bd6b581118");
-        lineBotClient = lbcb.build();
     }
 
     private void sendError(HttpServletResponse resp, String message) throws IOException {

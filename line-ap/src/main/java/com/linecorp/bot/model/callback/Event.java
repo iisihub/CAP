@@ -62,4 +62,24 @@ public abstract class Event {
         this.id = id;
         this.content = content;
     }
+
+    public String getFromChannel() {
+        return fromChannel;
+    }
+
+    public List<String> getTo() {
+        return to;
+    }
+
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Content getContent() {
+        return content;
+    }
 }

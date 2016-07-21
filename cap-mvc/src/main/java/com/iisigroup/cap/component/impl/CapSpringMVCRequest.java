@@ -76,6 +76,12 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements Requ
             String[] value = req.getParameterValues(field);
             hm.put(field, value);
         }
+        Enumeration<String> attrs = req.getAttributeNames();
+        while (attrs.hasMoreElements()) {
+            String field = (String) attrs.nextElement();
+            Object value = req.getAttribute(field);
+            hm.put(field, value);
+        }
         return hm;
     }
 

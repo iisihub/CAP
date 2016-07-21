@@ -75,4 +75,8 @@ public class SendingMessagesRequest<T extends AbstractContent> implements EventR
     public String getEventType() {
         return eventType;
     }
+
+    public T getContent() {
+        return content;
+    }
 }

@@ -43,4 +43,8 @@ public class TextContent extends AbstractContent {
     public TextContent(RecipientType toType, String message) {
         this(null, null, ContentType.TEXT, toType, message);
     }
+
+    public String getText() {
+        return text;
+    }
 }
