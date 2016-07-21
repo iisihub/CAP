@@ -81,6 +81,11 @@
                 <artifactId>cap-websocket</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.iisigroup.cap</groupId>
+                <artifactId>line-ap</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <modules>
@@ -98,6 +103,7 @@
         <module>cap-websocket</module>
         <module>cap-captcha</module>
         <module>cap-report</module>
+        <module>line-ap</module>
     </modules>
     <profiles>
         <profile>
@@ -112,8 +118,8 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.5.1</version>
                         <configuration>
-                            <source>1.6</source>
-                            <target>1.6</target>
+                            <source>1.8</source>
+                            <target>1.8</target>
                             <encoding>UTF-8</encoding>
                         </configuration>
                     </plugin>
@@ -134,8 +140,8 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.5.1</version>
                         <configuration>
-                            <source>1.6</source>
-                            <target>1.6</target>
+                            <source>1.8</source>
+                            <target>1.8</target>
                             <encoding>UTF-8</encoding>
                         </configuration>
                     </plugin>
