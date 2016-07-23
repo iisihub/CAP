@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.iisigroup.cap.db.dao.SearchSetting;
+import com.iisigroup.cap.db.model.Page;
 import com.iisigroup.cap.linebot.client.LineResource;
 import com.iisigroup.cap.linebot.dao.LineContactDao;
 import com.iisigroup.cap.linebot.model.LineContact;
@@ -236,11 +238,8 @@ public class LineMessageServiceImpl implements LineMessageService {
         OpType opType = operation.getOpType();
         long revision = operation.getRevision();
         logger.debug("==== AddedAsFriendOperation: " + mid + ", " + opType.name() + ", " + revision);
-        LineContact c = lineContactDao.findByMid(mid);
-        c.setAddTime(CapDate.getCurrentTimestamp());
-        lineContactDao.save(c);
         // 回傳 Welcome 或服務訊息 (ex. 花旗傳送兩個連結，綁定 LINE 和申辦信用卡)
-        String displayName = getDisplayNameByMid(operation.getMid());
+        String displayName = getDisplayNameByMid(operation.getMid(), true);
         String response = "歡迎您的加入" + (StringUtils.isBlank(displayName) ? "" : "，" + displayName) + "！";
         LineResource.getLineBotClient().sendText(operation.getMid(), response);
     }
@@ -267,7 +266,7 @@ public class LineMessageServiceImpl implements LineMessageService {
      *            訊息來源的 mid
      * @return
      */
-    private List<UserProfileResponseContact> getUserProfileByMid(String mid) {
+    private List<UserProfileResponseContact> getUserProfileByMid(String mid, boolean add) {
         List<UserProfileResponseContact> contacts = new ArrayList<UserProfileResponseContact>();
         try {
             List<String> mids = new ArrayList<String>();
@@ -304,6 +303,9 @@ public class LineMessageServiceImpl implements LineMessageService {
                 // 再次收到訊息
                 c.setBlocked("0");
                 c.setBlockedTime(null);
+                if (add) {
+                    c.setAddTime(CapDate.getCurrentTimestamp());
+                }
                 lineContactDao.save(c);
             }
         } catch (LineBotAPIException e) {
@@ -318,9 +320,9 @@ public class LineMessageServiceImpl implements LineMessageService {
      * @param mid
      * @return
      */
-    private String getDisplayNameByMid(String mid) {
+    private String getDisplayNameByMid(String mid, boolean add) {
         String displayName = "";
-        List<UserProfileResponseContact> contacts = getUserProfileByMid(mid);
+        List<UserProfileResponseContact> contacts = getUserProfileByMid(mid, add);
         if (contacts.size() == 1) {
             displayName = contacts.get(0).getDisplayName();
         }
@@ -339,7 +341,7 @@ public class LineMessageServiceImpl implements LineMessageService {
     }
 
     private void sendTextMessage(String from, String msg) throws Exception {
-        String displayName = getDisplayNameByMid(from);
+        String displayName = getDisplayNameByMid(from, false);
         String response = (StringUtils.isBlank(displayName) ? "" : "@" + displayName + "，") + msg;
         LineResource.getLineBotClient().sendText(from, response);
         logger.debug("send text to " + from + ": " + response);
@@ -367,5 +369,15 @@ public class LineMessageServiceImpl implements LineMessageService {
             IOUtils.closeQuietly(is);
         }
         return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.linebot.service.LineMessageService#findLineContactForPage(com.iisigroup.cap.db.dao.SearchSetting)
+     */
+    @Override
+    public Page<LineContact> findLineContactForPage(SearchSetting search) {
+        return lineContactDao.findPage(search);
     }
 }
