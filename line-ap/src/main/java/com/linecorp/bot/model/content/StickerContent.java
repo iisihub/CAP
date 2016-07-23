@@ -49,4 +49,8 @@ public class StickerContent extends AbstractContent {
                           String stkver, String stktxt) {
         this(null, null, ContentType.STICKER, toType, new StickerContentMetadata(stkpkgid, stkid, stkver, stktxt));
     }
+
+    public StickerContentMetadata getContentMetadata() {
+        return contentMetadata;
+    }
 }

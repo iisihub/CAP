@@ -68,4 +68,24 @@ public class UserProfileResponse {
         this.start = start;
         this.display = display;
     }
+
+    public List<UserProfileResponseContact> getContacts() {
+        return contacts;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public Long getStart() {
+        return start;
+    }
+
+    public Long getDisplay() {
+        return display;
+    }
 }

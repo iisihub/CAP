@@ -28,6 +28,9 @@
         <class>com.iisigroup.cap.rule.model.DivRlItm</class>
         <class>com.iisigroup.cap.rule.model.DivRlDtl</class>
         <!-- cap-rule end -->
+        <!-- line-app start -->
+        <class>com.iisigroup.cap.linebot.model.LineContact</class>
+        <!-- line-app end -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
     </persistence-unit>
 </persistence>

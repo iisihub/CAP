@@ -54,4 +54,12 @@ public class VideoContent extends AbstractContent {
     public VideoContent(RecipientType toType, String originalContentUrl, String previewImageUrl) {
         this(null, null, ContentType.VIDEO, toType, originalContentUrl, previewImageUrl);
     }
+
+    public String getOriginalContentUrl() {
+        return originalContentUrl;
+    }
+
+    public String getPreviewImageUrl() {
+        return previewImageUrl;
+    }
 }

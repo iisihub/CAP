@@ -35,4 +35,8 @@ public class AudioContentMetadata {
     public AudioContentMetadata(@JsonProperty("AUDLEN") String audlen) {
         this.audlen = audlen;
     }
+
+    public String getAudlen() {
+        return audlen;
+    }
 }

@@ -58,4 +58,20 @@ public class UserProfileResponseContact {
         this.pictureUrl = pictureUrl;
         this.statusMessage = statusMessage;
     }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
 }

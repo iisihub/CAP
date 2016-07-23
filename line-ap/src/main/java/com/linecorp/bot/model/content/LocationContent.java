@@ -59,4 +59,12 @@ public class LocationContent extends AbstractContent {
                 new LocationContentLocation(title, address, latitude, longitude)
         );
     }
+
+    public LocationContentLocation getLocation() {
+        return location;
+    }
+
+    public String getText() {
+        return text;
+    }
 }

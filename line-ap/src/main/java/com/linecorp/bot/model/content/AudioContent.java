@@ -25,9 +25,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * To send a voice message, place the audio file on your BOT API server, then relay the audio file to the LINE
- * platform.
- * The required values are as follows.
+ * To send a voice message, place the audio file on your BOT API server, then relay the audio file to the LINE platform. The required values are as follows.
  */
 
 @ToString
@@ -40,20 +38,22 @@ public class AudioContent extends AbstractContent {
     private final AudioContentMetadata contentMetadata;
 
     @JsonCreator
-    public AudioContent(@JsonProperty("id") String id,
-                        @JsonProperty("from") String from,
-                        @JsonProperty("contentType") ContentType contentType,
-                        @JsonProperty("toType") RecipientType toType,
-                        @JsonProperty("originalContentUrl") String originalContentUrl,
-                        @JsonProperty("contentMetadata") AudioContentMetadata contentMetadata) {
+    public AudioContent(@JsonProperty("id") String id, @JsonProperty("from") String from, @JsonProperty("contentType") ContentType contentType, @JsonProperty("toType") RecipientType toType,
+            @JsonProperty("originalContentUrl") String originalContentUrl, @JsonProperty("contentMetadata") AudioContentMetadata contentMetadata) {
         super(id, from, contentType, toType);
         this.originalContentUrl = originalContentUrl;
         this.contentMetadata = contentMetadata;
     }
 
-    public AudioContent(RecipientType toType,
-                        String originalContentUrl,
-                        String audlen) {
+    public AudioContent(RecipientType toType, String originalContentUrl, String audlen) {
         this(null, null, ContentType.AUDIO, toType, originalContentUrl, new AudioContentMetadata(audlen));
+    }
+
+    public String getOriginalContentUrl() {
+        return originalContentUrl;
+    }
+
+    public AudioContentMetadata getContentMetadata() {
+        return contentMetadata;
     }
 }

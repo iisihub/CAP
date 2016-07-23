@@ -41,4 +41,12 @@ public class ContactContentMetadata {
         this.mid = mid;
         this.displayName = displayName;
     }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
 }

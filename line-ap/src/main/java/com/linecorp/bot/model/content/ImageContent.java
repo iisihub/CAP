@@ -56,4 +56,12 @@ public class ImageContent extends AbstractContent {
     public ImageContent(RecipientType toType, String originalContentUrl, String previewImageUrl) {
         this(null, null, ContentType.IMAGE, toType, originalContentUrl, previewImageUrl);
     }
+
+    public String getOriginalContentUrl() {
+        return originalContentUrl;
+    }
+
+    public String getPreviewImageUrl() {
+        return previewImageUrl;
+    }
 }

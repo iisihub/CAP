@@ -38,4 +38,8 @@ public class ContactContent extends AbstractContent {
         super(id, from, contentType, toType);
         this.contentMetadata = contentMetadata;
     }
+
+    public ContactContentMetadata getContentMetadata() {
+        return contentMetadata;
+    }
 }

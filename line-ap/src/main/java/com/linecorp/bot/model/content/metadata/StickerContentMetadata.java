@@ -57,4 +57,20 @@ public class StickerContentMetadata {
         this.stkver = stkver;
         this.stktxt = stktxt;
     }
+
+    public String getStkpkgid() {
+        return stkpkgid;
+    }
+
+    public String getStkid() {
+        return stkid;
+    }
+
+    public String getStkver() {
+        return stkver;
+    }
+
+    public String getStktxt() {
+        return stktxt;
+    }
 }
