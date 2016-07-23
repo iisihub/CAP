@@ -8,6 +8,10 @@ public interface LineMessageService {
     void processRequest(byte[] req);
 
     Page<LineContact> findLineContactForPage(SearchSetting search);
-    
+
     void sendMessage(String mid, String msg) throws Exception;
+
+    void retrive(String mid) throws Exception;
+
+    void broadcast(String msg) throws Exception;
 }

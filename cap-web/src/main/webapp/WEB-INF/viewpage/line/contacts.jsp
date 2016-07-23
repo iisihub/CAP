@@ -18,6 +18,8 @@
                     <!--傳送訊息-->
                 </spring:message>
             </button>
+            <button id="broadcast" type="button" class="btn1">廣播</button>
+            <button id="retrive" type="button" class="btn1">重新取得資訊</button>
         </div>
         <div id="gridview"></div>
         <!-- dialog start-->

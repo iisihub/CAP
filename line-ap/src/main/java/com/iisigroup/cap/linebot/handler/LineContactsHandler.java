@@ -89,4 +89,26 @@ public class LineContactsHandler extends MFormHandler {
         }
         return new AjaxFormResult();
     }
+
+    public Result retrive(Request param) {
+        String mid = param.get("mid");
+        try {
+            lineMessageService.retrive(mid);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new CapMessageException("重新取得聯絡人資訊錯誤" + e.getMessage(), getClass());
+        }
+        return new AjaxFormResult();
+    }
+
+    public Result broadcast(Request param) {
+        String msg = param.get("msg");
+        try {
+            lineMessageService.broadcast(msg);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new CapMessageException("廣播訊息錯誤" + e.getMessage(), getClass());
+        }
+        return new AjaxFormResult();
+    }
 }

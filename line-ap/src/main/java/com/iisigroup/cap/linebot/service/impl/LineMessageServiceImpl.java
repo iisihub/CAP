@@ -291,7 +291,7 @@ public class LineMessageServiceImpl implements LineMessageService {
                 }
                 // 判斷是否要更新頭像
                 if (!StringUtils.isBlank(pictureUrl)) {
-                    if (c.getPictureUrl() == null || !pictureUrl.equalsIgnoreCase(c.getPictureUrl())) {
+                    if (c.getPictureUrl() == null || !pictureUrl.equalsIgnoreCase(c.getPictureUrl()) || add) {
                         // update picture
                         String picture = getBase64ImageFromUrl(pictureUrl);
                         c.setPicture(picture);
@@ -385,6 +385,34 @@ public class LineMessageServiceImpl implements LineMessageService {
     @Override
     public Page<LineContact> findLineContactForPage(SearchSetting search) {
         return lineContactDao.findPage(search);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.linebot.service.LineMessageService#retrive(java.lang.String)
+     */
+    @Override
+    public void retrive(String mid) throws Exception {
+        getUserProfileByMid(mid, true);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.linebot.service.LineMessageService#broadcast(java.lang.String)
+     */
+    @Override
+    public void broadcast(String msg) throws Exception {
+        List<LineContact> list = lineContactDao.find(lineContactDao.createSearchTemplete());
+        for (LineContact c : list) {
+            try {
+                logger.debug("will broadcast send text to " + c.getMid() + ": " + msg);
+                LineResource.getLineBotClient().sendText(c.getMid(), "廣播訊息：" + msg);
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
     }
 
 }

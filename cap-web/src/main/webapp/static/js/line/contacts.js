@@ -1,6 +1,7 @@
 pageInit(function() {
   $(document).ready(function() {
     var mform = $("#sendForm");
+    var action;
     var grid = $("#gridview").jqGrid({
       url : url('linecontactshandler/query'),
       height : "380",
@@ -11,11 +12,14 @@ pageInit(function() {
       localFirst : false,
       colModel : [ {
         header : i18n['contacts']['picture'],
-        name : 'picture',
+        // name : 'picture',
+        name : 'pictureUrl',
         align : "center",
         width : 5,
+        sortable : false,
         formatter : function(cellvalue, options, rowObject) {
-          return "<img src='data:image/png;base64, " + cellvalue + "' height='45' width='45' />";
+          return "<img src='" + cellvalue + "' height='45' width='45' />";
+          // return "<img src='data:image/png;base64, " + cellvalue + "' height='45' width='45' />";
         }
       }, {
         header : i18n['contacts']['displayName'],// "單位名稱",
@@ -37,7 +41,7 @@ pageInit(function() {
         header : i18n['contacts']['blocked'],// "地址",
         name : 'status',
         align : 'left',
-        width : 15,
+        width : 20,
         sortable : false
       }, {
         name : 'mid',
@@ -59,7 +63,7 @@ pageInit(function() {
         value : function() {
           if (mform.validationEngine('validate')) {
             $.ajax({
-              url : url('linecontactshandler/sendMsg'),
+              url : url('linecontactshandler/' + action),
               data : mform.serializeData(),
               success : function(responseData) {
                 API.showMessage('傳送成功');
@@ -84,11 +88,30 @@ pageInit(function() {
           API.showErrorMessage("用戶已封鎖此帳號，無法發送 LINE 訊息。");
         } else {
           mform.find("#mid").val(sel.mid);
+          action = 'sendMsg';
           sendDialog.dialog('open');
         }
       } else {
         API.showErrorMessage(i18n.def.grid_selector);
       }
+    }).end().find("#retrive").click(function() {
+      var sel = grid.getSelRowDatas();
+      if (sel) {
+        $.ajax({
+          url : url('linecontactshandler/retrive'),
+          data : {
+            mid : sel.mid
+          },
+          success : function(responseData) {
+            grid.trigger("reloadGrid");
+          }
+        });
+      } else {
+        API.showErrorMessage(i18n.def.grid_selector);
+      }
+    }).end().find("#broadcast").click(function() {
+      action = 'broadcast';
+      sendDialog.dialog('open');
     });
   });
 });
