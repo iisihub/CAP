@@ -13,7 +13,7 @@
         </script>
     <div>
         <div class="btns">
-            <button id="delete" type="button" class="btn1">
+            <button id="sendMsg" type="button" class="btn1">
                 <spring:message code="btn.sendmsg">
                     <!--傳送訊息-->
                 </spring:message>
@@ -24,8 +24,13 @@
         <!--Start : send-->
         <div id="send" style="display: none">
             <form id="sendForm">
-                <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
+                <input type="hidden" id="mid" name="mid" />
+                <table class="tb2">
                     <tbody>
+                        <tr>
+                            <td width="30%" class="hd1"><span class="color-red">＊</span>訊息</td>
+                            <td width="70%"><textarea rows="4" cols="50" id="msg" name="msg" class="validate[required]" data-prompt-position="bottomLeft:0"></textarea></td>
+                        </tr>
                     </tbody>
                 </table>
             </form>

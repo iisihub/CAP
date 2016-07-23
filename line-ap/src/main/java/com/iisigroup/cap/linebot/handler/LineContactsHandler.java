@@ -24,9 +24,12 @@ import org.springframework.stereotype.Controller;
 import com.iisigroup.cap.annotation.HandlerType;
 import com.iisigroup.cap.annotation.HandlerType.HandlerTypeEnum;
 import com.iisigroup.cap.component.Request;
+import com.iisigroup.cap.component.Result;
+import com.iisigroup.cap.component.impl.AjaxFormResult;
 import com.iisigroup.cap.component.impl.BeanGridResult;
 import com.iisigroup.cap.db.dao.SearchSetting;
 import com.iisigroup.cap.db.model.Page;
+import com.iisigroup.cap.exception.CapMessageException;
 import com.iisigroup.cap.formatter.BeanFormatter;
 import com.iisigroup.cap.formatter.Formatter;
 import com.iisigroup.cap.formatter.impl.ADDateTimeFormatter;
@@ -56,7 +59,7 @@ public class LineContactsHandler extends MFormHandler {
     public BeanGridResult query(SearchSetting search, Request param) {
         Page<LineContact> list = lineMessageService.findLineContactForPage(search);
         Map<String, Formatter> fmt = new HashMap<String, Formatter>();
-        fmt.put("blocked", new BeanFormatter() {
+        fmt.put("status", new BeanFormatter() {
             @Override
             public String reformat(Object in) {
                 // TODO Auto-generated method stub
@@ -73,5 +76,17 @@ public class LineContactsHandler extends MFormHandler {
         });
         fmt.put("addTime", new ADDateTimeFormatter());
         return new BeanGridResult(list.getContent(), list.getPageSize(), fmt);
+    }
+
+    public Result sendMsg(Request param) {
+        String mid = param.get("mid");
+        String msg = param.get("msg");
+        try {
+            lineMessageService.sendMessage(mid, msg);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new CapMessageException("發送訊息錯誤" + e.getMessage(), getClass());
+        }
+        return new AjaxFormResult();
     }
 }

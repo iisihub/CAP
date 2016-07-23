@@ -25,7 +25,6 @@ public class LineBotHandler extends MFormHandler {
         logger.info("========= LINE BOT END =========");
         String lineReq = request.get("lineBot");
         lineMessageService.processRequest(lineReq.getBytes());
-        AjaxFormResult result = new AjaxFormResult();
-        return result;
+        return new AjaxFormResult();
     }
 }

@@ -112,7 +112,7 @@ public class LineMessageServiceImpl implements LineMessageService {
         String logMsg = url + ", " + metadata.getAudlen() + "," + contentType.name() + ", " + from + ", " + id + ", " + recipientType.name();
         logger.debug("==== AudioContent: " + logMsg);
         // TODO
-        sendTextMessage(from, logMsg);
+        sendMessage(from, logMsg);
     }
 
     /**
@@ -130,7 +130,7 @@ public class LineMessageServiceImpl implements LineMessageService {
         String logMsg = metadata.getMid() + "," + contentType.name() + ", " + from + ", " + id + ", " + recipientType.name();
         logger.debug("==== ContactContent: " + logMsg);
         // TODO
-        sendTextMessage(from, logMsg);
+        sendMessage(from, logMsg);
     }
 
     /**
@@ -149,7 +149,7 @@ public class LineMessageServiceImpl implements LineMessageService {
         String logMsg = url + ", " + preview + "," + contentType.name() + ", " + from + ", " + id + ", " + recipientType.name();
         logger.debug("==== ImageContent: " + logMsg);
         // TODO
-        sendTextMessage(from, logMsg);
+        sendMessage(from, logMsg);
     }
 
     /**
@@ -169,7 +169,7 @@ public class LineMessageServiceImpl implements LineMessageService {
                 + ", " + id + ", " + recipientType.name();
         logger.debug("==== LocationContent: " + logMsg);
         // TODO
-        sendTextMessage(from, logMsg);
+        sendMessage(from, logMsg);
     }
 
     /**
@@ -198,7 +198,7 @@ public class LineMessageServiceImpl implements LineMessageService {
                 + recipientType.name();
         logger.debug("==== StickerContent: " + logMsg);
         // TODO
-        sendTextMessage(from, logMsg);
+        sendMessage(from, logMsg);
     }
 
     private void processContent(TextContent content) throws Exception {
@@ -210,7 +210,7 @@ public class LineMessageServiceImpl implements LineMessageService {
         String logMsg = text + ", " + contentType.name() + ", " + from + ", " + id + ", " + recipientType.name();
         logger.debug("==== TextContent: " + logMsg);
 
-        sendTextMessage(from, getTextResponse(text));
+        sendMessage(from, getTextResponse(text));
     }
 
     /**
@@ -229,7 +229,7 @@ public class LineMessageServiceImpl implements LineMessageService {
         String logMsg = url + ", " + preview + "," + contentType.name() + ", " + from + ", " + id + ", " + recipientType.name();
         logger.debug("==== VideoContent: " + logMsg);
         // TODO
-        sendTextMessage(from, logMsg);
+        sendMessage(from, logMsg);
     }
 
     private void processOperation(AddedAsFriendOperation operation) throws Exception {
@@ -340,7 +340,13 @@ public class LineMessageServiceImpl implements LineMessageService {
         return msg;
     }
 
-    private void sendTextMessage(String from, String msg) throws Exception {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.iisigroup.cap.linebot.service.LineMessageService#sendMessage(java.lang.String, java.lang.String)
+     */
+    @Override
+    public void sendMessage(String from, String msg) throws Exception {
         String displayName = getDisplayNameByMid(from, false);
         String response = (StringUtils.isBlank(displayName) ? "" : "@" + displayName + "，") + msg;
         LineResource.getLineBotClient().sendText(from, response);
@@ -380,4 +386,5 @@ public class LineMessageServiceImpl implements LineMessageService {
     public Page<LineContact> findLineContactForPage(SearchSetting search) {
         return lineContactDao.findPage(search);
     }
+
 }
