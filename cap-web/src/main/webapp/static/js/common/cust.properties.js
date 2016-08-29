@@ -19,7 +19,7 @@ $.extend(Properties || {}, {
         this.find(".captcha").each(function() {
             var dom = $(this);
             var img = $("<img />", {
-                src : url("captcha.png?cc=" + parseInt(Math.random() * 1000)),
+                src : url("captcha.png?cc=" + API.getTimestamp()),
                 css : {
                     height : 24,
                     weight : 60
@@ -27,7 +27,7 @@ $.extend(Properties || {}, {
             });
             dom.bind("refresh", function() {
             	dom.val("");
-                img.attr("src", url("captcha.png?cc=" + parseInt(Math.random() * 1000)));
+                img.attr("src", url("captcha.png?cc=" + API.getTimestamp()));
             });
             var refresh = $("<img />", {
                 src : url("static/images/refresh.png"),

@@ -73,7 +73,12 @@ $.holdReady(true);
                     dataType : 'json',
                     data : {
                         f : f,
-                        _ : Math.random()
+                        _ : (function() {
+                          if (Date.now) {
+                            return Date.now();
+                          }
+                          return new Date().getTime();
+                        })()
                     },
                     success : function(res) {
                         i18n.set(f.match("\\w+$")[0], res);
@@ -318,7 +323,7 @@ $.holdReady(true);
                         }
                     },
                     showConfirmMessage : function(title, message, action, cls) {
-                        var randomID = "sysCMessage" + parseInt(Math.random() * 1000, 10);
+                        var randomID = "sysCMessage" + CommonAPI.getTimestamp();
                         action = $.isFunction(message) ? message : action;
                         var closeBtn = {};
                         var dfd = $.Deferred();
@@ -359,7 +364,7 @@ $.holdReady(true);
                      *            關閉對話框後動作
                      */
                     showPopMessage : function(title, message, action, cls) {
-                        var randomID = "sysMessage" + parseInt(Math.random() * 1000, 10);
+                        var randomID = "sysMessage" + CommonAPI.getTimestamp();
                         // var closeBtn = {};
                         // closeBtn[i18n.def.close]
                         // = function(){
@@ -592,6 +597,12 @@ $.holdReady(true);
                         })();
 
                         return icombos;
+                    },
+                    getTimestamp : function() {
+                      if (Date.now) {
+                        return Date.now();
+                      }
+                      return new Date().getTime();
                     }
                 }
             });

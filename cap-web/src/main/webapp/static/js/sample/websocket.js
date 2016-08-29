@@ -1,7 +1,7 @@
 pageInit(function() {
     $(document).ready(function() {"use strict";
 
-        var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+        var userName = 'user' + API.getTimestamp();
 
         window.socket = io.connect('http://' + window.location.hostname);
 
