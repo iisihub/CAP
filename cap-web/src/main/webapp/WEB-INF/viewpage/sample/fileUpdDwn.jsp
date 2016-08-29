@@ -11,7 +11,7 @@
 	<script>
 		loadScript('js/sample/ifile');
 	</script>
-	<spring:message code="fileInput"><!--檔案名稱--></spring:message>:<input type="file" id="ufile" name="ufile" />
+	<spring:message code="fileInput"><!--檔案名稱--></spring:message>:<input type="file" id="ufile" name="ufile" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
 	<button id="upload" type="button" class="btn1">
 		<spring:message code="btn.upload">
 			<!--上傳-->

@@ -35,7 +35,7 @@
     <div id="gridview"></div>
   </div>
   <div id="addDialog" class="hide">
-    <form id="mform" onsubmit="return false;">
+    <form method="post" autocomplete="off"  id="mform" onsubmit="return false;">
       <input type="text" id="oid" name="oid" class="hide" /><input type="text"
         id="mtype" name="mtype" class="hide" />
       <table class="row-data">
@@ -72,7 +72,7 @@
     </form>
   </div>
   <div id="qryDailog">
-    <form id="qform" onsubmit="return false;">
+    <form method="post" autocomplete="off"  id="qform" onsubmit="return false;">
       <table class="row-data">
         <tr>
           <th><spring:message code="js.usercode" /></th>

@@ -25,7 +25,7 @@
 
 
 
-	<form onsubmit="return false;">      
+	<form method="post" autocomplete="off"  onsubmit="return false;">      
 		<input id="captcha" name="captcha" class="captcha" type="text" />
 		<button id="submit">
 			<spring:message code="captcha.001">

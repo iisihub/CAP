@@ -24,7 +24,7 @@
       <div class="line"></div>
       <div class="item">
         <br>
-        <form onsubmit="return false;">
+        <form method="post" autocomplete="off"  onsubmit="return false;">
           <table class="row">
             <tr>
               <th width="30%" style="text-align: right; padding: 5px;">帳號</th>

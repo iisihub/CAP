@@ -33,7 +33,7 @@
 			</table>
 		</div>
 	</div> -->
-	<form id="mform" onsubmit="return false;">
+	<form method="post" autocomplete="off"  id="mform" onsubmit="return false;">
 	<div class="button-menu funcContainer">
 		<button type="button" id="save_btn">
 			<span class="ui-icon ui-icon-jcs-04"></span>儲存
@@ -132,7 +132,7 @@
 		<!--Start : 新增修改值域-->
 		<div id="factorVal_Dialog" title="編輯因子值域明細" class="popup_cont"
 			style="display: none">
-			<form id="facform" onsubmit="return false;">
+			<form method="post" autocomplete="off"  id="facform" onsubmit="return false;">
 			<fieldset>
 				<legend>值域資訊</legend>
 				<table class="tb2" border="0" cellpadding="0" cellspacing="0"

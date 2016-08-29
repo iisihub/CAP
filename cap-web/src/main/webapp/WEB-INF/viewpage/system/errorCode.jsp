@@ -38,7 +38,7 @@
 		<!-- dialog start-->
 		<!--Start : 查詢-->
 		<div id="SEARCH" style="display:none">
-            <form id="searchForm">
+            <form method="post" autocomplete="off"  id="searchForm">
                 <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0" id="searchTable">
                     <tbody>
                         <tr>
@@ -67,7 +67,7 @@
         </div>
 		<!--Start : 編輯-->
 		<div id="EDIT" style="display:none">
-            <form id="JForm">
+            <form method="post" autocomplete="off"  id="JForm">
                 <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr>

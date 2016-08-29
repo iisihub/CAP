@@ -39,7 +39,7 @@
 		<div id="gridview"></div>
 		<div id="qryDailog" class="hide"
 			title="<spring:message code="btn.query" />">
-			<form id="qform" onsubmit="return false;">
+			<form method="post" autocomplete="off"  id="qform" onsubmit="return false;">
 				<table class="row-data">
 					<tr>
 						<th><spring:message code="js.jobId">
@@ -65,7 +65,7 @@
 		</div>
 		<div id="exeDetailDialog" class="hide"
 			title="<spring:message code="btn.viewDetail" />">
-			<form id="jdform" onsubmit="return false;">
+			<form method="post" autocomplete="off"  id="jdform" onsubmit="return false;">
 				<table class="row-data">
 					<tr>
 						<th><spring:message code="js.jobId"><!--排程代碼--></spring:message></th>

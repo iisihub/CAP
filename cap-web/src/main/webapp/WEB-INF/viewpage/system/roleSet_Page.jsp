@@ -22,7 +22,7 @@
 	<div class="clear"></div>
 		<!--Start : 編輯-->
 		<div id="EDIT">
-            <form id="JForm">
+            <form method="post" autocomplete="off"  id="JForm">
 	            <fieldset>
 					<legend><spring:message code="role"></spring:message></legend>
 	                <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
@@ -94,7 +94,7 @@
             </form>
         </div>
         <div id="editUsr" style="display:none">
-            <form id="mform">
+            <form method="post" autocomplete="off"  id="mform">
 	            <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
 	            	<tr>
 	                	<td width="40%" class="hd1">
@@ -113,7 +113,7 @@
             </form>
         </div>
         <div id="editFunc" style="display:none">
-            <form id="mform">
+            <form method="post" autocomplete="off"  id="mform">
             	<table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
 	            	<tr>
 	                	<td width="20%" class="hd1">

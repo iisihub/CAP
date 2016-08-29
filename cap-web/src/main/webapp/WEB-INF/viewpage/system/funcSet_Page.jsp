@@ -22,7 +22,7 @@
 	<div class="clear"></div>
 		<!--Start : 編輯-->
 		<div id="EDIT">
-            <form id="JForm">
+            <form method="post" autocomplete="off"  id="JForm">
 	            <fieldset>
 					<legend><spring:message code="func"></spring:message></legend>
 	                <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
@@ -112,7 +112,7 @@
             </form>
         </div>
         <div id="editRole" style="display:none">
-            <form id="mform">
+            <form method="post" autocomplete="off"  id="mform">
             	<div id="gridviewRole"></div>
             </form>
         </div>

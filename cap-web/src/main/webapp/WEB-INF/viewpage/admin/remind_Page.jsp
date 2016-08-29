@@ -22,7 +22,7 @@
 	<div class="clear"></div>
 		<!--Start : 提醒通知登錄-->
 		<div id="EDIT">
-            <form id="mForm">
+            <form method="post" autocomplete="off"  id="mForm">
 	            <fieldset>
 					<legend><spring:message code="event.title"><!--提醒通知登錄--></spring:message></legend>
 	                <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
@@ -75,7 +75,7 @@
 		<!-- dialog end-->
 		<!--Start : 新增通知方式-->
 		<div id="DETAIL" style="display:none">
-            <form id="dForm">
+            <form method="post" autocomplete="off"  id="dForm">
                 <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr>

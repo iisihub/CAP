@@ -14,7 +14,7 @@
 		loadScript('js/system/sequence');
 	</script>
 	<div>
-		<form id="mform" onsubmit="return false;">
+		<form method="post" autocomplete="off"  id="mform" onsubmit="return false;">
 			<table class="row-data">
 				<tr>
 					<th><spring:message code="js.seqNode">

@@ -12,7 +12,7 @@
 	</script>
 	<h1>ValidationEngine Demo</h1>
 	<br/>
-	<form onsubmit="return false;">
+	<form method="post" autocomplete="off"  onsubmit="return false;">
 	<div>
 		<div>
 			<span>My name</span>

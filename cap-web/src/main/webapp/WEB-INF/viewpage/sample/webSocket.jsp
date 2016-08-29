@@ -80,7 +80,7 @@ body {
 
 	<div id="console" class="well"></div>
 
-	<form onsubmit="return false;">
+	<form method="post" autocomplete="off"  onsubmit="return false;">
 		<input id="msg" class="input-xlarge" type="text"
 			placeholder="Type something..." />
 		<button type="button" id="send" class="btn">Send</button>

@@ -33,7 +33,7 @@
 		<!-- dialog start-->
 		<!--Start : 編輯-->
 		<div id="EDIT" style="display:none">
-            <form id="JForm">
+            <form method="post" autocomplete="off"  id="JForm">
                 <table class="tb2" width="99%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
                         <tr>
