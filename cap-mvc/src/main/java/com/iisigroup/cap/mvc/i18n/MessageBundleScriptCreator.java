@@ -216,7 +216,7 @@ public class MessageBundleScriptCreator {
 			}
 
 		} catch (Exception e) {
-			logger.error("can't load " + i18nPath);
+			logger.error("can't load " + CapString.trimLineSeparator(i18nPath));
 		}finally{
 			IOUtils.closeQuietly(is);
 		}

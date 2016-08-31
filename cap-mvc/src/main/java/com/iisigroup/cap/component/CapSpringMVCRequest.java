@@ -100,7 +100,7 @@ public class CapSpringMVCRequest extends HashMap<String, Object> implements IReq
         value = super.containsKey(key) ? super.get(key) : request.getParameter(key);
 
         if (value == null) {
-            logger.trace("can't find request parameter :" + key);
+            logger.trace("can't find request parameter :" + CapString.trimLineSeparator(key));
             return defaultValue;
         } else {
             if (value instanceof String[] && ((String[]) value).length > 0) {
