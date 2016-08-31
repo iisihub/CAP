@@ -17,13 +17,13 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.corundumstudio.socketio.SocketIOClient;
+
+import net.sf.json.JSONArray;
 
 /**
  * <pre>
@@ -32,7 +32,8 @@ import com.corundumstudio.socketio.SocketIOClient;
  * 
  * @since 2012/5/15
  * @author rodeschen
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/5/15,rodeschen,new
  *          <li>2013/3/6,rodeschen,add set method
  *          </ul>
@@ -49,6 +50,7 @@ public class CapUserDetails implements UserDetails {
     private Locale locale;
     private String status;
     private SocketIOClient socketClient;
+    private Map<String, Object> data;
 
     private Collection<GrantedAuthority> authorities;
 
@@ -170,6 +172,24 @@ public class CapUserDetails implements UserDetails {
 
     public void setSocketClient(SocketIOClient socketClient) {
         this.socketClient = socketClient;
+    }
+
+    public Map<String, Object> getData() {
+        return data;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
+
+    public Map<String, Object> put(String k, Object v) {
+        this.data.put(k, v);
+        return data;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T get(String k) {
+        return (T) this.data.get(k);
     }
 
 }
