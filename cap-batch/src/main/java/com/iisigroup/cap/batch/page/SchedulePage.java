@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.iisigroup.cap.base.service.CodeTypeService;
 import com.iisigroup.cap.batch.model.BatchJob;
 import com.iisigroup.cap.batch.service.BatchJobService;
+import com.iisigroup.cap.component.CapSpringMVCRequest;
+import com.iisigroup.cap.component.IRequest;
 import com.iisigroup.cap.mvc.action.BaseActionController;
+import com.iisigroup.cap.utils.CapAppContext;
+import com.iisigroup.cap.utils.CapFileUtils;
 
 /**
  * <pre>
@@ -36,31 +41,44 @@ import com.iisigroup.cap.mvc.action.BaseActionController;
  * 
  * @since 2012/11/15
  * @author iristu
- * @version <ul>
+ * @version
+ *          <ul>
  *          <li>2012/11/15,iristu,new
  *          </ul>
  */
 @Controller
 public class SchedulePage extends BaseActionController {
 
-	@Autowired
-	private CodeTypeService codeTypeSrv;
-	@Autowired
-	private BatchJobService batchSrv;
+    @Autowired
+    private CodeTypeService codeTypeSrv;
+    @Autowired
+    private BatchJobService batchSrv;
 
-	@RequestMapping(value = { "/batch/schedule" })
-	public ModelAndView notifyStatus(Locale locale, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String path = request.getPathInfo();
-		Map<String, Map<String, String>> codes = codeTypeSrv.findByCodeTypes(
-				new String[] { "jobExitCode", "timeZoneId", "schExeHost" },
-				locale.toString());
-		ModelAndView model = new ModelAndView(path);
-		for (Entry<String, Map<String, String>> c : codes.entrySet()) {
-			model.addObject(c.getKey(), c.getValue());
-		}
-		List<BatchJob> jobs = batchSrv.listJobs();
-		model.addObject("batchJob",jobs);
-		return model;
-	}// ;
+    @RequestMapping(value = { "/batch/schedule" })
+    public ModelAndView notifyStatus(Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String path = request.getPathInfo();
+        Map<String, Map<String, String>> codes = codeTypeSrv.findByCodeTypes(new String[] { "jobExitCode", "timeZoneId", "schExeHost" }, locale.toString());
+        ModelAndView model = null;
+        IRequest ireq = getDefaultRequest();
+        if (ireq.getEscapeStringFromValue(path).length() > 0) {
+            path = "/" + path.replaceAll("^/|applicationContext|WEB-INF", "");
+            model = new ModelAndView(CapFileUtils.getValidPath(FilenameUtils.getPath(path), FilenameUtils.getName(path)));
+        }
+        for (Entry<String, Map<String, String>> c : codes.entrySet()) {
+            model.addObject(c.getKey(), c.getValue());
+        }
+        List<BatchJob> jobs = batchSrv.listJobs();
+        model.addObject("batchJob", jobs);
+        return model;
+    }// ;
+
+    /**
+     * Get CapDefaultRequst
+     * 
+     * @return IRequest
+     */
+    private IRequest getDefaultRequest() {
+        IRequest cr = CapAppContext.getBean("CapDefaultRequest");
+        return cr != null ? cr : new CapSpringMVCRequest();
+    }
 }
