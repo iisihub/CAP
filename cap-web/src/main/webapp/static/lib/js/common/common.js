@@ -196,7 +196,7 @@ $.holdReady(true);
                             // ilog.debug(json.AJAX_CLOSE_PAGE_HANDLER_EXCEPTION);
                             // ilog.debug(encodeURIComponent(json.AJAX_CLOSE_PAGE_HANDLER_EXCEPTION));
                             API.showErrorMessage(json.AJAX_CLOSE_PAGE_HANDLER_EXCEPTION, function() {
-                                window.location = window.location.href.replace(/#$/, '');
+                                window.location = encodeURIComponent(window.location.href.replace(/#$/, ''));
                                 window.close();
                             });
                             // API.loadPage("../error/errormsg?errorMsg="
@@ -227,13 +227,13 @@ $.holdReady(true);
                             // ilog.server(json.AJAX_HANDLER_TIMEOUT);
                             window.setCloseConfirm(false);
                             alert(i18n.def.sessionTimeout);
-                            window.location = window.location.href.replace(/#$/, '');
+                            window.location = encodeURIComponent(window.location.href.replace(/#$/, ''));
                             return false;
                         },
                         AJAX_SESSION_EXPIRE_EXCEPTION : function(xhr, action, json) {
                             window.setCloseConfirm(false);
                             API.showErrorMessage(json.AJAX_SESSION_EXPIRE_EXCEPTION, function() {
-                                window.location = window.location.href.replace(/#$/, '');
+                                window.location = encodeURIComponent(window.location.href.replace(/#$/, ''));
                             });
                             return false;
                         }
