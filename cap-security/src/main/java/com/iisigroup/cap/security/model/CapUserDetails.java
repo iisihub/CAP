@@ -13,6 +13,7 @@ package com.iisigroup.cap.security.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class CapUserDetails implements UserDetails {
     private Locale locale;
     private String status;
     private SocketIOClient socketClient;
-    private Map<String, Object> data;
+    private Map<String, Object> data = new HashMap<String, Object>();
 
     private Collection<GrantedAuthority> authorities;
 
